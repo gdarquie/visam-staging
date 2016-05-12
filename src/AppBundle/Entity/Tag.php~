@@ -1,0 +1,70 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Tag
+ *
+ * @ORM\Table(name="tag")
+ * @ORM\Entity
+ */
+class Tag
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="string", length=255, nullable=true)
+     */
+    private $nom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", length=65535, nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="tag_id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $tagId;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Formation", inversedBy="tag")
+     * @ORM\JoinTable(name="tag_has_formation",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="tag_id", referencedColumnName="tag_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="formation_id", referencedColumnName="formation_id")
+     *   }
+     * )
+     */
+    private $formation;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Axe", mappedBy="tag")
+     */
+    private $axe;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->formation = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->axe = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
+

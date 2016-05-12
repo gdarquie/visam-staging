@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Etablissement</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Nom</th>
+                <td>{{ etablissement.nom }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ etablissement.description }}</td>
+            </tr>
+            <tr>
+                <th>Code</th>
+                <td>{{ etablissement.code }}</td>
+            </tr>
+            <tr>
+                <th>Sigle</th>
+                <td>{{ etablissement.sigle }}</td>
+            </tr>
+            <tr>
+                <th>Lien</th>
+                <td>{{ etablissement.lien }}</td>
+            </tr>
+            <tr>
+                <th>Ministere</th>
+                <td>{{ etablissement.ministere }}</td>
+            </tr>
+            <tr>
+                <th>Statut</th>
+                <td>{{ etablissement.statut }}</td>
+            </tr>
+            <tr>
+                <th>Fc</th>
+                <td>{{ etablissement.fc }}</td>
+            </tr>
+            <tr>
+                <th>Fclien</th>
+                <td>{{ etablissement.fcLien }}</td>
+            </tr>
+            <tr>
+                <th>Etudiants</th>
+                <td>{{ etablissement.etudiants }}</td>
+            </tr>
+            <tr>
+                <th>Chercheurs</th>
+                <td>{{ etablissement.chercheurs }}</td>
+            </tr>
+            <tr>
+                <th>Lien2</th>
+                <td>{{ etablissement.lien2 }}</td>
+            </tr>
+            <tr>
+                <th>Lien3</th>
+                <td>{{ etablissement.lien3 }}</td>
+            </tr>
+            <tr>
+                <th>Etablissementid</th>
+                <td>{{ etablissement.etablissementId }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('etab_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('etab_edit', { 'id': etablissement.etablissementId }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

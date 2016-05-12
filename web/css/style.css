@@ -1,0 +1,32 @@
+/*  body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }*/
+
+.number {
+	font-size: 2.6em;
+}
+
+.number-label {
+	font-size: 1.4em;
+}
+
+.max-height {
+	max-height: 230px;
+    overflow: hidden;
+}
+
+.card a {
+	color: black;
+}
+
+.chip {
+	border:1px solid #ffab40;
+	background-color: white;
+	color: #ffab40;
+}

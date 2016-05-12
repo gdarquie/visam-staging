@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1>{{ed.nom}}</h1>
+
+
+	<ul>
+		<li>Code : {{ed.code}}</li>
+		<li>Lien : <a target='_blank' href="{{ed.lien}}">{{ed.lien}}</a></li>
+		<li>Laboratoires : {{ed.laboExt}}</li>
+		<li>Etablissements : {{ed.etabExt}}</li>
+		<li>Contact : {{ed.contact}}</li>
+		<li>Effectif : {{ed.effectif}}</li>
+		<li>Liste des établissement(s) lié(s):
+		<ul>
+			<!-- une boucle pour tous les étab -->
+			{% for etablissement in ed.etablissement %}
+			<li>{{etablissement.nom}}</li>
+			{% endfor %}
+		</ul>
+		</li>
+	</ul>
+{% endblock %}

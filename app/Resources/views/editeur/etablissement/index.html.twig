@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Etablissement list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Code</th>
+                <th>Sigle</th>
+                <th>Lien</th>
+                <th>Ministere</th>
+                <th>Statut</th>
+                <th>Fc</th>
+                <th>Fclien</th>
+                <th>Etudiants</th>
+                <th>Chercheurs</th>
+                <th>Lien2</th>
+                <th>Lien3</th>
+                <th>Etablissementid</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for etablissement in etablissements %}
+            <tr>
+                <td><a href="{{ path('etab_show', { 'id': etablissement.etablissementId }) }}">{{ etablissement.nom }}</a></td>
+                <td>{{ etablissement.description }}</td>
+                <td>{{ etablissement.code }}</td>
+                <td>{{ etablissement.sigle }}</td>
+                <td>{{ etablissement.lien }}</td>
+                <td>{{ etablissement.ministere }}</td>
+                <td>{{ etablissement.statut }}</td>
+                <td>{{ etablissement.fc }}</td>
+                <td>{{ etablissement.fcLien }}</td>
+                <td>{{ etablissement.etudiants }}</td>
+                <td>{{ etablissement.chercheurs }}</td>
+                <td>{{ etablissement.lien2 }}</td>
+                <td>{{ etablissement.lien3 }}</td>
+                <td>{{ etablissement.etablissementId }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('etab_show', { 'id': etablissement.etablissementId }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('etab_edit', { 'id': etablissement.etablissementId }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('etab_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Formation</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Nom</th>
+                <td>{{ formation.nom }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ formation.description }}</td>
+            </tr>
+            <tr>
+                <th>Url</th>
+                <td>{{ formation.url }}</td>
+            </tr>
+            <tr>
+                <th>Annee</th>
+                <td>{{ formation.annee }}</td>
+            </tr>
+            <tr>
+                <th>Niveau</th>
+                <td>{{ formation.niveau }}</td>
+            </tr>
+            <tr>
+                <th>Typediplome</th>
+                <td>{{ formation.typediplome }}</td>
+            </tr>
+            <tr>
+                <th>Effectif</th>
+                <td>{{ formation.effectif }}</td>
+            </tr>
+            <tr>
+                <th>Lien2</th>
+                <td>{{ formation.lien2 }}</td>
+            </tr>
+            <tr>
+                <th>Lien3</th>
+                <td>{{ formation.lien3 }}</td>
+            </tr>
+            <tr>
+                <th>Responsable</th>
+                <td>{{ formation.responsable }}</td>
+            </tr>
+            <tr>
+                <th>Formationid</th>
+                <td>{{ formation.formationId }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('formation_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('formation_edit', { 'id': formation.formationId }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,152 @@
+{% extends 'base.html.twig' %}
+
+{% block fos_user_content %}{% endblock %}
+{% block stylesheets %}
+<link rel="stylesheet" href="../css/mononoke.css"/>
+{% endblock %}
+
+
+{% block body %}
+
+<section class='container'>
+    <header>
+        <h1>vi<span class='rouge'>S</span>am</h1>
+        <h2><span class="rouge">Vi</span>sualisation des compétences de la COMUE he<span class="rouge">Sam</span> Université</h2>
+    </header>
+
+
+    <h1>Statistiques</h1>
+
+
+    <p>Retour sur la page d'accueil : <a href="/">cliquer ici</a>.</p>
+
+    <section>
+        <article> 
+            <h2>Les effectifs</h2>
+            <p>Selon les données entrées dans la base de données ViSam, HeSam compte :
+                <ul>
+                    <li>{{nbEtud}} étudiants</li>
+                    <li>enseignants et chercheurs</li>
+                </ul></p>
+        </article>
+
+
+    </section>
+
+    <section>
+
+        <article>
+        <h2>Introduction</h2>
+
+        <p>Dans cette partie nous allons essayer de montrer les relations entre entités. Nous nous concentrons sur les liens entre ED et établissements.</p>
+
+        <p>Visam compte <strong>{{eds|length}}</strong> ED réparties sur <strong>{{etabs|length}}</strong> établissements.</p>
+        </article>
+
+        <article>
+        <h2>Les ED d'un établissement</h2>
+
+        <p>Si je fais un focus sur un établissement, par exemple {{etabs[1].nom}}, ses ED sont :
+            <ul>
+            {% for eds in etabs[1].ed %}
+            <li>{{eds.nom}}, {{eds.code}}</li>
+            {% endfor %}
+            </ul>
+        </p>
+        </article>
+
+
+        <article>
+        <h2>Les ED par établissement</h2>
+        <p>J'essaye de faire la même chose pour toutes les écoles doctorales de tous les établissements. D'abord toutes les ED:</p>
+
+        
+
+        <ul>
+        {% for etab in etabs %}
+            <li>{{etab.nom}} ({{etab.ed|length}})
+                <ul>
+                {% for eds in etab.ed %}
+                    <li>{{eds.nom}}</li>
+                {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+        </ul>
+
+        </article>
+
+        <article>
+            <h2>Test pour les visualisations</h2>
+            <p>Pour réaliser les visualisations, il faut que je puisse faire communiquer les données de Visam avec JS (ce que Twig ne permet pas).</p>
+            <p>Pour y parvenir je dois exporter le code contenant le contenu des visualisations en JSON.</p>
+            <div id="piechart"></div>
+        </article>
+
+        <article>
+            <h2>Second test avec une boucle</h2>
+
+            <div id="piechart2"></div>
+        </article>
+
+    </section>
+
+
+
+    <script   src="https://code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>  
+    <script src="{{ asset('js/function.js') }}"></script>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Etablissement', "Nombre d'étudiants"],
+          ['{{etabs[0].nom}}',     {{etabs[0].etudiants}}],
+          ['{{etabs[1].nom}}',     {{etabs[1].etudiants}}],
+          ['{{etabs[2].nom}}',      {{etabs[2].etudiants}}],
+          ['{{etabs[3].nom}}',  {{etabs[3].etudiants}}],
+          ['{{etabs[4].nom}}', {{etabs[4].etudiants}}],
+          ['{{etabs[5].nom}}',    {{etabs[5].etudiants}}],
+          ['{{etabs[6].nom}}',    {{etabs[6].etudiants}}],
+          ['{{etabs[7].nom}}',    {{etabs[7].etudiants}}],
+          ['{{etabs[8].nom}}',    {{etabs[8].etudiants}}],
+          ['{{etabs[9].nom}}',    {{etabs[9].etudiants}}],
+          ['{{etabs[10].nom}}',    {{etabs[10].etudiants}}],
+          ['{{etabs[11].nom}}',    {{etabs[11].etudiants}}],
+          ['{{etabs[12].nom}}',    {{etabs[12].etudiants}}],
+        ]);
+
+        var options = {
+          title: 'Répartition des étudiants par établissement'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+
+        //Deuxième essai de visualisation
+
+        var chart2 = new google.visualization.PieChart(document.getElementById('piechart2'));
+
+        var data2 = google.visualization.arrayToDataTable([
+          ['Etablissement', "Nombre d'étudiants"],
+            {% for etab in etabs %}
+                ['{{etab.nom}}',{{etab.chercheurs}}],
+            {% endfor %}
+        ]);
+
+        var options = {
+          title: 'Répartition des chercheurs par établissement'
+        };
+
+        chart2.draw(data2, options);
+      }
+    </script>
+
+    
+</section>
+{% endblock %}

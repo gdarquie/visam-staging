@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block fos_user_content %}{% endblock %}
+{% block stylesheets %}
+    
+{% endblock %}
+
+
+{% block body %}
+
+<section class='container'>
+    <header>
+        <h1>vi<span class='rouge'>S</span>am</h1>
+        <h2><span class="rouge">Vis</span>ualisation des compétences de la COMUE he<span class="rouge">Sam</span> Université</h2>
+    </header>
+
+
+        <form action="#" id='log'>
+            <div><input type="text" class="text" id='login' /><label for="login"> : login</label></div>
+            <div><input type="text" class="text" id='mdp' /><label for="mdp"> : mot de passe</label> </div>
+        </form>
+
+        <p>L'éditeur Visam permet aux éditeurs de la COMUE et des établissements rattachés de pouvoir ajouter ou modifier des données de la base de données Visam.</p>
+
+        <p>Cette page est une page en accès restreint. Si vous ne pouvez pas vous connecter vous pouvez accéder à l'<a href="#">explorateur Visam</a> qui cartographie les compétences de la COMUE.</p>
+
+</section>
+{% endblock %}

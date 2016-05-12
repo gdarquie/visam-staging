@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block fos_user_content %}{% endblock %}
+{% block stylesheets %}
+<link rel="stylesheet" href="../css/mononoke.css"/>
+{% endblock %}
+
+
+{% block body %}
+
+<section class='container'>
+    <header>
+        <h1>vi<span class='rouge'>S</span>am</h1>
+        <h2><span class="rouge">Vi</span>sualisation des compétences de la COMUE he<span class="rouge">Sam</span> Université</h2>
+        <h3>Version <i>Mononoke</i></h3>
+    </header>
+
+    <form action="#">
+        <input type="text" placeholder="Chercher">
+        <button>Valider</button>
+    </form>
+
+    <p>Bienvenue sur la page d'acceuil de l'application ViSam.</p>
+    
+    <p>Exemples: </p>
+    <ul>
+        <li><a href="/stats">Statistiques HESAM</a></li>
+        <li><a href="/etablissement/1">1 Etablissement</a></li>
+        <li><a href="/formation/1">1 Formation</a></li>
+        <li><a href="/recherche/1">1 Laboratoire</a></li>
+        <li><a href="/ed/1">1 Ecole doctorale</a></li>
+        <li><a href="/editeur">Editeur</a></li>
+    </ul>
+</section>
+
+<script src="{{ asset('js/function.js') }}"></script>
+
+{% endblock %}

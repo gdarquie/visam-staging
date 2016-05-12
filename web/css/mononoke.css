@@ -1,0 +1,121 @@
+/*
+* Webfonts served by Typotheque.com
+*
+* To make the font files as small as possible,
+* most glyphs and OpenType features were removed.
+* To edit the fonts, add more language support,
+* log it to your Typotheque account:
+* http://www.typotheque.com/my_account/webfonts
+*
+* The Typotheque Font Software is protected under domestic
+* and international trademark and copyright law.
+* Modifying, reverse engineering or otherwise copying
+* of Typotheque Font Software is illegal.
+* http://www.typotheque.com/licensing/
+*
+* (c) 2014, Typotheque
+* Generated: 2014-01-14 15:25:12
+*/
+
+@font-face {
+    font-family: "Greta Sans Hairline";
+    src: url("https://s3-eu-west-1.amazonaws.com/fonts-ireland.typotheque.com/WF-021582-003347-001027-1389713128.eot");
+    src: url("https://s3-eu-west-1.amazonaws.com/fonts-ireland.typotheque.com/WF-021582-003347-001027-1389713128.eot?#iefix") format("embedded-opentype"), url("https://s3-eu-west-1.amazonaws.com/fonts-ireland.typotheque.com/WF-021582-003347-001027-1389713128.woff") format("woff"), url("https://s3-eu-west-1.amazonaws.com/fonts-ireland.typotheque.com/WF-021582-003347-001027-1389713128.svg#typotheque_webfonts_service") format("svg");
+    font-style: normal;
+    font-weight: normal;
+    font-stretch: normal;
+    }
+@font-face {
+    font-family: "Greta Sans Thin";
+    src: url("https://s3-eu-west-1.amazonaws.com/fonts-ireland.typotheque.com/WF-021582-003347-001029-1389713130.eot");
+    src: url("https://s3-eu-west-1.amazonaws.com/fonts-ireland.typotheque.com/WF-021582-003347-001029-1389713130.eot?#iefix") format("embedded-opentype"), url("https://s3-eu-west-1.amazonaws.com/fonts-ireland.typotheque.com/WF-021582-003347-001029-1389713130.woff") format("woff"), url("https://s3-eu-west-1.amazonaws.com/fonts-ireland.typotheque.com/WF-021582-003347-001029-1389713130.svg#typotheque_webfonts_service") format("svg");
+    font-style: normal;
+    font-weight: normal;
+    font-stretch: normal;
+    }
+@font-face {
+    font-family: "Greta Sans Light";
+    src: url("https://s3-eu-west-1.amazonaws.com/fonts-ireland.typotheque.com/WF-021582-003347-001033-1389713133.eot");
+    src: url("https://s3-eu-west-1.amazonaws.com/fonts-ireland.typotheque.com/WF-021582-003347-001033-1389713133.eot?#iefix") format("embedded-opentype"), url("https://s3-eu-west-1.amazonaws.com/fonts-ireland.typotheque.com/WF-021582-003347-001033-1389713133.woff") format("woff"), url("https://s3-eu-west-1.amazonaws.com/fonts-ireland.typotheque.com/WF-021582-003347-001033-1389713133.svg#typotheque_webfonts_service") format("svg");
+    font-style: normal;
+    font-weight: normal;
+    font-stretch: normal;
+    }
+@font-face {
+    font-family: "Greta Sans Regular";
+    src: url("https://s3-eu-west-1.amazonaws.com/fonts-ireland.typotheque.com/WF-021582-003347-001035-1389713136.eot");
+    src: url("https://s3-eu-west-1.amazonaws.com/fonts-ireland.typotheque.com/WF-021582-003347-001035-1389713136.eot?#iefix") format("embedded-opentype"), url("https://s3-eu-west-1.amazonaws.com/fonts-ireland.typotheque.com/WF-021582-003347-001035-1389713136.woff") format("woff"), url("https://s3-eu-west-1.amazonaws.com/fonts-ireland.typotheque.com/WF-021582-003347-001035-1389713136.svg#typotheque_webfonts_service") format("svg");
+    font-style: normal;
+    font-weight: normal;
+    font-stretch: normal;
+    }
+
+
+    header{
+        display: flex;
+        border-bottom: 1px solid #ef4023;
+        margin-bottom: 30px;
+    }
+
+    h1{
+        font-size: 3em;
+    }
+
+    h2{
+        text-align: center;
+        font-size: 1.6em;
+        font-weight: normal;
+    }
+
+    body{
+        background: url(../img/test2.jpg); 
+        font-family: "Greta Sans Light",Verdana, Geneva, sans-serif;
+    }
+
+    nav{
+        background: black;
+        color:white;
+        padding:10px;
+        margin :-8px -8px 10px -8px;
+    }
+
+    nav a{
+        color:white;
+    }
+
+    .rouge{
+        color : #ef4023;
+    }
+
+    .container{
+        width: 700px;
+        margin:auto;
+        background: white;
+        padding:10px;
+    }
+
+    .fond{
+        background: white;
+    }
+
+    #top{
+        margin: -9px -8px 0px -8px;
+        background: black;
+        color: white;
+        padding : 6px 0px;
+    }
+
+    #top a{
+        width:80px;
+        color: white;
+        text-align: right;
+        margin-left: 620px;
+    }
+
+    #log{
+        text-align: left;
+        margin-bottom: 30px;
+        border : 1px solid lightgrey;
+        padding: 40px;
+        border-radius: 5px;
+    }

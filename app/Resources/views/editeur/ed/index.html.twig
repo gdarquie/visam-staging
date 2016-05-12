@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ed list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Nom</th>
+                <th>Lien</th>
+                <th>Laboext</th>
+                <th>Etabext</th>
+                <th>Contact</th>
+                <th>Effectif</th>
+                <th>Edid</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ed in eds %}
+            <tr>
+                <td><a href="{{ path('ed_show', { 'id': ed.edId }) }}">{{ ed.code }}</a></td>
+                <td>{{ ed.nom }}</td>
+                <td>{{ ed.lien }}</td>
+                <td>{{ ed.laboExt }}</td>
+                <td>{{ ed.etabExt }}</td>
+                <td>{{ ed.contact }}</td>
+                <td>{{ ed.effectif }}</td>
+                <td>{{ ed.edId }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('ed_show', { 'id': ed.edId }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('ed_edit', { 'id': ed.edId }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('ed_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Labo list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Etabext</th>
+                <th>Lien</th>
+                <th>Mailcontact</th>
+                <th>Responsable</th>
+                <th>Description</th>
+                <th>Code</th>
+                <th>Type</th>
+                <th>Effectif</th>
+                <th>Sigle</th>
+                <th>Lien2</th>
+                <th>Lien3</th>
+                <th>Laboid</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for labo in labos %}
+            <tr>
+                <td><a href="{{ path('labo_show', { 'id': labo.laboId }) }}">{{ labo.nom }}</a></td>
+                <td>{{ labo.etabExt }}</td>
+                <td>{{ labo.lien }}</td>
+                <td>{{ labo.mailcontact }}</td>
+                <td>{{ labo.responsable }}</td>
+                <td>{{ labo.description }}</td>
+                <td>{{ labo.code }}</td>
+                <td>{{ labo.type }}</td>
+                <td>{{ labo.effectif }}</td>
+                <td>{{ labo.sigle }}</td>
+                <td>{{ labo.lien2 }}</td>
+                <td>{{ labo.lien3 }}</td>
+                <td>{{ labo.laboId }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('labo_show', { 'id': labo.laboId }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('labo_edit', { 'id': labo.laboId }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('labo_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}
