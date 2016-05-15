@@ -45,11 +45,15 @@ class StatistiquesController extends Controller
         $nbEtud = 125464;
 
         //calculer la répartition des niveaux dans les formations
+        $query = $em->createQuery('SELECT n.niveau, COUNT(n.niveau) AS nb FROM AppBundle:Formation n GROUP BY n.niveau ORDER BY nb DESC');
+        $nbFormations = $query->getResult();
+
         return $this->render('stats.html.twig', array(
         	'eds' => $eds,
         	'etabs' => $etabs,
             'nbEtud' => $nbEtud,
             'formations' => $formations,
+            'nbFormations'=> $nbFormations,
         	));
     }
 

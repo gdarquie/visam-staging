@@ -93,6 +93,14 @@
             <h2>Les formations</h2>
 
             <p>La base contient actuellement {{formations|length}} formations.</p>
+            <p>Nb formations = {{nbFormations|length}}</p>
+        </article>
+
+        <article>
+            <h2>Répartition des formations</h2>
+             {% for nbFormation in nbFormations %}
+                    <li>{{nbFormation.niveau}} ({{nbFormation.nb}})</li>
+            {% endfor %}
         </article>
 
     </section>
