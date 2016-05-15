@@ -123,10 +123,11 @@ Le CRF est une équipe membre du LabEx HASTEC.","labo.gif"],["Cedric", "Le centr
 	
 
 		<!-- Sélectionner seulement les ED de l'établissement en question dans le controller-->
+			<!-- if {{eds|length}} >2-->
         <div id="ecoles" class="row">
         	<h2>Ecoles Doctorales</h2>
 		{% for ed in eds %}
-	        <div class="col s12 m3"> <!-- mettre une hauteur fixe pour les div, sinon elles s'alignent mal-->
+	        <div class="col s12 m3"> 
 	          <div class="card">
 	          <a href="ed.php">
 	            <div class="card-image">

@@ -30,3 +30,13 @@
 	background-color: white;
 	color: #ffab40;
 }
+
+/*Ajout de Gaétan*/
+
+#ecoles .card-content{
+  height:150px
+}
+
+.card-content{
+  overflow:auto;
+}

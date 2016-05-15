@@ -10,7 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 use AppBundle\Entity\Ed;
 use AppBundle\Entity\Etablissement;
-
+use AppBundle\Entity\Formation;
 
 class StatistiquesController extends Controller
 {
@@ -23,6 +23,7 @@ class StatistiquesController extends Controller
     	$em = $this->getDoctrine()->getManager();
     	$eds = $em->getRepository('AppBundle:Ed')->findAll();
     	$etabs = $em->getRepository('AppBundle:Etablissement')->findAll();
+        $formations = $em->getRepository('AppBundle:Formation')->findAll();
 
 
 
@@ -43,10 +44,12 @@ class StatistiquesController extends Controller
 
         $nbEtud = 125464;
 
+        //calculer la répartition des niveaux dans les formations
         return $this->render('stats.html.twig', array(
         	'eds' => $eds,
         	'etabs' => $etabs,
             'nbEtud' => $nbEtud,
+            'formations' => $formations,
         	));
     }
 

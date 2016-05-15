@@ -81,7 +81,6 @@ class DefaultController extends Controller
      */
     public function formationAction($id)
     {
-
         $em = $this->getDoctrine()->getManager();
 
         $formation = $em->getRepository('AppBundle:Formation')->findOneByFormationId($id);
