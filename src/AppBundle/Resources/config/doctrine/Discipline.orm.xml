@@ -24,16 +24,21 @@
 </option>
       </options>
     </field>
+    <field name="abreviation" type="string" column="abreviation" length="10" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
     <field name="description" type="text" column="description" length="65535" nullable="true">
       <options>
         <option name="fixed"/>
       </options>
     </field>
-    <many-to-one field="domaine" target-entity="Domaine" fetch="LAZY">
-      <join-columns>
-        <join-column name="domaine_id" referenced-column-name="domaine_id"/>
-      </join-columns>
-    </many-to-one>
+    <field name="domaineId" type="integer" column="domaine_id" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
     <many-to-many field="ufr" target-entity="Ufr" mapped-by="discipline" fetch="LAZY"/>
     <many-to-many field="labo" target-entity="Labo" inversed-by="discipline" fetch="LAZY">
       <join-table name="discipline_has_labo">

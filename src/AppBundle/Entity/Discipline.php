@@ -36,9 +36,23 @@ class Discipline
     /**
      * @var string
      *
+     * @ORM\Column(name="abreviation", type="string", length=10, nullable=true)
+     */
+    private $abreviation;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="description", type="text", length=65535, nullable=true)
      */
     private $description;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="domaine_id", type="integer", nullable=true)
+     */
+    private $domaineId;
 
     /**
      * @var integer
@@ -48,16 +62,6 @@ class Discipline
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $disciplineId;
-
-    /**
-     * @var \AppBundle\Entity\Domaine
-     *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Domaine")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="domaine_id", referencedColumnName="domaine_id")
-     * })
-     */
-    private $domaine;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -196,6 +200,30 @@ class Discipline
     }
 
     /**
+     * Set abreviation
+     *
+     * @param string $abreviation
+     *
+     * @return Discipline
+     */
+    public function setAbreviation($abreviation)
+    {
+        $this->abreviation = $abreviation;
+
+        return $this;
+    }
+
+    /**
+     * Get abreviation
+     *
+     * @return string
+     */
+    public function getAbreviation()
+    {
+        return $this->abreviation;
+    }
+
+    /**
      * Set description
      *
      * @param string $description
@@ -220,6 +248,30 @@ class Discipline
     }
 
     /**
+     * Set domaineId
+     *
+     * @param integer $domaineId
+     *
+     * @return Discipline
+     */
+    public function setDomaineId($domaineId)
+    {
+        $this->domaineId = $domaineId;
+
+        return $this;
+    }
+
+    /**
+     * Get domaineId
+     *
+     * @return integer
+     */
+    public function getDomaineId()
+    {
+        return $this->domaineId;
+    }
+
+    /**
      * Get disciplineId
      *
      * @return integer
@@ -227,30 +279,6 @@ class Discipline
     public function getDisciplineId()
     {
         return $this->disciplineId;
-    }
-
-    /**
-     * Set domaine
-     *
-     * @param \AppBundle\Entity\Domaine $domaine
-     *
-     * @return Discipline
-     */
-    public function setDomaine(\AppBundle\Entity\Domaine $domaine = null)
-    {
-        $this->domaine = $domaine;
-
-        return $this;
-    }
-
-    /**
-     * Get domaine
-     *
-     * @return \AppBundle\Entity\Domaine
-     */
-    public function getDomaine()
-    {
-        return $this->domaine;
     }
 
     /**

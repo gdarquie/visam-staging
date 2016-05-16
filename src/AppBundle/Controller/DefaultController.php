@@ -34,11 +34,14 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $etablissement = $em->getRepository('AppBundle:Etablissement')->findOneByEtablissementId($id);
-        $eds = $em->getRepository('AppBundle:Ed')->findAll();
+        $eds = $em->getRepository('AppBundle:Ed')->findAll(); //récupérer seulement les ed de l'établissement
+        $formations = $em->getRepository('AppBundle:Formation')->findAll();
+
         
         return $this->render('notice/etablissement.html.twig', array(
             'etablissement' => $etablissement,
             'eds' => $eds,
+            'formations' => $formations,
         ));
     }
 

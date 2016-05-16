@@ -41,6 +41,42 @@ class APIController extends Controller
 
     //Définir des scénarios pour l'API
 
+    //search
+
+    //une fonction de recherce par formation par année
+    /**
+    * @Route("/api/recherche/formation/{string}", name="apiSearchFormation")
+    */
+    public function searchFormationAction($string)
+    {
+
+        //string  => 3 lettres min
+        //recherche string parmi les noms de formation
+        $em = $this->getDoctrine()->getManager();
+        $formations = $em->getRepository('AppBundle:Formation')->findByAnnee($string);
+
+        //je récupère les données coincindant avec la formation // à reprendre
+
+        $liste = [];
+         foreach ($formations as $formation){
+                // echo "{".$formation->getFormationId()."},";
+                // echo "{".$formation->getNom()."},";
+                array_push($liste, $formation);
+        }
+
+        // create a JSON-response with a 200 status code
+        //$response = new Response(json_encode(array('formations' => $formations))); //faire le tableau plus
+
+        $response = new Response();
+        $response->setContent(json_encode(array_values($formations)));
+
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
+
+    //une fonction de recherche par établissement
+
 
 } // Fin de la class APIController
 

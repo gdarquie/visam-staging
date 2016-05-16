@@ -48,6 +48,9 @@ class StatistiquesController extends Controller
         $query = $em->createQuery('SELECT n.niveau, COUNT(n.niveau) AS nb FROM AppBundle:Formation n GROUP BY n.niveau ORDER BY nb DESC');
         $nbFormations = $query->getResult();
 
+
+        //toutes les formations de tous établissements
+
         return $this->render('stats.html.twig', array(
         	'eds' => $eds,
         	'etabs' => $etabs,
