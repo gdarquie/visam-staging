@@ -30,6 +30,12 @@
 	background-color: white;
 	color: #ffab40;
 }
+/* Parallax */
+
+.parallax-container {
+  height: 350px;
+}
+
 
 /*Ajout de Gaétan*/
 

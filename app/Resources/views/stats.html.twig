@@ -2,54 +2,138 @@
 
 {% block fos_user_content %}{% endblock %}
 {% block stylesheets %}
-<link rel="stylesheet" href="../css/mononoke.css"/>
 {% endblock %}
 
 
 {% block body %}
+  <div id="index-banner" class="parallax-container">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <br><br>
+        <h1 class="header center" style="color:white;">Visualisation des compétences de la COMUE heSam Université</h1>
+        <div class="row center">
+          <h5 class="header col s12 light" style="color:white;">Visualisation des compétences de la COMUE heSam Université</h5> 
+        </div>
+        <div class="row center">
+        </div>
+        <br><br>
+      </div>
+    </div>
+    <div class="parallax"><img src="img/louvres.jpg" alt="Unsplashed background img 1"></div>
+  </div>
 
-<section class='container'>
+<div class='container'>
     <header>
-        <h1>vi<span class='rouge'>S</span>am</h1>
-        <h2><span class="rouge">Vi</span>sualisation des compétences de la COMUE he<span class="rouge">Sam</span> Université</h2>
+
+
+  
     </header>
-    
-    <h1>Test</h1>
-
-    <article>
-            {% for formation in formationsDisciplines %}
-            <li>{{formation.nom}}</li>
-            {% endfor %}
-    </article>
-
-    <h1>Statistiques</h1>
-
-
-    <p>Retour sur la page d'accueil : <a href="/">cliquer ici</a>.</p>
-
-    <section>
-        <article> 
-            <h2>Les effectifs</h2>
-            <p>Selon les données entrées dans la base de données ViSam, HeSam compte :
-                <ul>
-                    <li>{{nbEtud}} étudiants</li>
-                    <li>enseignants et chercheurs</li>
-                </ul></p>
-        </article>
-
-
-    </section>
-
-    <section>
-
-        <article>
+    <section class="row">
+        <article class="col s4">
         <h2>Introduction</h2>
-
         <p>Dans cette partie nous allons essayer de montrer les relations entre entités. Nous nous concentrons sur les liens entre ED et établissements.</p>
 
         <p>Visam compte <strong>{{eds|length}}</strong> ED réparties sur <strong>{{etabs|length}}</strong> établissements.</p>
         </article>
+        <article  class="col s4"> 
+            <h2>Les effectifs</h2>
+            <p>Selon les données entrées dans la base de données ViSam, HeSam compte :
+                <ul>
+                    <li><span class="number">{{nbEtud}}</span> étudiants</li>
+                    <li>enseignants et chercheurs</li>
+                </ul></p>
+        </article>
+    </section>
 
+  </div>
+
+  <div id="index-banner" class="parallax-container">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <br><br>
+        <h1 class="header center" style="color:white;">Etablissements</h1>
+        <div class="row center">
+                  <h5 class="header col s12 light" style="color:white;">Visualisation des compétences de la COMUE heSam Université</h5>
+        </div>
+        <div class="row center">
+        </div>
+        <br><br>
+      </div>
+    </div>
+    <div class="parallax"><img src="img/pantheon.jpg" alt="Unsplashed background img 1"></div>
+  </div>
+
+    <div class='container'>
+        <article>
+            <h2>Répartition des étudiants par établissement</h2>
+            <p>Pour réaliser les visualisations, il faut que je puisse faire communiquer les données de Visam avec JS (ce que Twig ne permet pas).</p>
+            <p>Pour y parvenir je dois exporter le code contenant le contenu des visualisations en JSON.</p>
+            <div id="piechart"></div>
+        </article>
+
+        <article>
+            <h2>Répartition des chercheurs par établissement</h2>
+            <div id="chercheur-stat">
+              <svg style="height:500px;"></svg>
+            </div>
+        </article>
+
+
+</div>
+  <div id="index-banner" class="parallax-container">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <br><br>
+        <h1 class="header center" style="color:white;">Formations</h1>
+        <div class="row center">
+          <h5 class="header col s12 light" style="color:white;">La base contient actuellement 99 formations.</h5>
+ </div>
+        <div class="row center">
+        </div>
+        <br><br>
+      </div>
+    </div>
+    <div class="parallax"><img src="img/sorbonne.jpg" alt="Unsplashed background img 1"></div>
+  </div>
+
+<div class="container">
+
+        <article>
+            <h2>Répartition des formations par niveau</h2>
+            <!--  -->
+            <div id="formation-niveau"><svg style="height:400px;"></svg></div>
+        </article>
+
+        <article>
+            <h2>Répartition des formations par établissements</h2>
+              {% for etab in etabs %}
+                  <h5>{{etab.nom}} ({{etab.formation|length}})</h5>
+                <!--<p>
+                      {% for formation in etab.formation %}
+                          {{formation.nom}} /
+                      {% endfor %}
+                  </p> -->
+              {% endfor %}
+        </article>
+    </div>
+
+  <div id="index-banner" class="parallax-container">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <br><br>
+        <h1 class="header center" style="color:white;">Ecoles Doctorales</h1>
+        <div class="row center">
+          <h5 class="header col s12 light" style="color:white;">La base contient actuellement écoles doctorales</h5>
+ </div>
+        <div class="row center">
+        </div>
+        <br><br>
+      </div>
+    </div>
+    <div class="parallax"><img src="img/labo.jpg" alt="Unsplashed background img 1"></div>
+  </div>
+
+  <div class="container">
         <article>
         <h2>Les ED d'un établissement</h2>
 
@@ -67,7 +151,7 @@
         <h2>Les ED par établissement</h2>
         <p>J'essaye de faire la même chose pour toutes les écoles doctorales de tous les établissements. D'abord toutes les ED:</p>
 
-        
+
 
         <ul>
         {% for etab in etabs %}
@@ -75,66 +159,47 @@
                 <ul>
                 {% for eds in etab.ed %}
                     <li>{{eds.nom}}</li>
+                    {% for disci in eds.discipline %}
+                    {{dump(disci)}}
+                      ss{{disci.nom}}
+                    {% endfor %}
                 {% endfor %}
                 </ul>
             </li>
         {% endfor %}
         </ul>
 
-        </article>
+    </div>
 
-        <article>
-            <h2>Répartition des étudiants par établissement</h2>
-            <p>Pour réaliser les visualisations, il faut que je puisse faire communiquer les données de Visam avec JS (ce que Twig ne permet pas).</p>
-            <p>Pour y parvenir je dois exporter le code contenant le contenu des visualisations en JSON.</p>
-            <div id="piechart"></div>
-        </article>
-
-        <article>
-            <h2>Répartition des chercheurs par établissement</h2>
-
-            <div id="piechart2"></div>
-        </article>
-
-        <article>
-            <h2>Les formations</h2>
-
-            <p>La base contient actuellement {{formations|length}} formations.</p>
-        </article>
-
-        <article>
-            <h2>Répartition des formations par niveau [corriger erreurs data bac+5,etc]</h2>
-
-            <div id="piechart3"></div>
-
-            <h3>Détail des données</h3>
-            {% for nbFormation in nbFormations %}
-                    <li>{{nbFormation.niveau}} ({{nbFormation.nb}})</li>
-            {% endfor %}
-        </article>
-
-        <article>
-            <h2>Répartition des formations par établissements</h2>
-
-        
-              {% for etab in etabs %}
-                  <h3>{{etab.nom}} ({{etab.formation|length}})</h3>
-                  <p>
-                      {% for formation in etab.formation %}
-                          {{formation.nom}} /
-                      {% endfor %}
-                  </p>
-              {% endfor %}
-            <h3>Graphe</h3>
-            <div id="piechart4"></div>
-        </article>
-
-    </section>
-
+    <img src="img/map.png" alt="">
+  </div>
 
 
     <script   src="https://code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>  
     <script src="{{ asset('js/function.js') }}"></script>
+
+    <!-- Materialize -->
+    <script type="text/javascript" src="../bower_components/Materialize/js/parallax.js"></script>
+    <script>
+      (function($){
+        $(function(){
+          $('.parallax').parallax();
+        }); // end of document ready
+      })(jQuery); // end of jQuery name space
+    </script>
+
+    <!-- D3.JS -->
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../bower_components/nvd3/build/nv.d3.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.com/libraries/Chart.js"></script>
+    <link rel="stylesheet" href="../bower_components/nvd3/build/nv.d3.css"> 
+    <!-- END D3.JS -->
+
+
+
+
+
+    
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
@@ -221,8 +286,101 @@
         chart4.draw(data4, options);
 
       }
+
+
+    </script>
+
+    <script>
+            //Regular pie chart example
+      nv.addGraph(function() {
+        var chart = nv.models.pieChart()
+            .x(function(d) { return d.label })
+            .y(function(d) { return d.value })
+            .showLabels(true);
+
+          d3.select("#formation-niveau3 svg")
+              .datum(formationData())
+              .transition().duration(350)
+              .call(chart);
+
+        return chart;
+      });
+
+      //Donut chart example
+      nv.addGraph(function() {
+        var chart = nv.models.pieChart()
+            .x(function(d) { return d.label })
+            .y(function(d) { return d.value })
+            .showLabels(true)     //Display pie labels
+            .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+            .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+            .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+            .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
+            ;
+          d3.select("#formation-niveau svg")
+              .datum(formationData())
+              .transition().duration(350)
+              .call(chart);
+
+        return chart;
+      });
+
+            //Donut chart example
+      nv.addGraph(function() {
+        var chart = nv.models.pieChart()
+            .x(function(d) { return d.label })
+            .y(function(d) { return d.value })
+            .showLabels(true)     //Display pie labels
+            .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+            .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+            .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+            .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
+            ;
+          d3.select("#chercheur-stat svg")
+              .datum(chercheursData ())
+              .transition().duration(350)
+              .call(chart);
+
+        return chart;
+      });
+
+      // nv.addGraph(function() {
+      //   var chart = nv.models.discreteBarChart()
+      //       .x(function(d) { return d.label })    //Specify the data accessors.
+      //       .y(function(d) { return d.value })
+      //       .staggerLabels(true)    //Too many bars and not enough room? Try staggering labels.
+      //       .tooltips(false)        //Don't show tooltips
+      //       .showValues(true)       //...instead, show the bar value right on top of each bar.
+      //       .transitionDuration(350)
+      //       ;
+      //   d3.select('#formation-niveau2 svg')
+      //       .datum(formationData())
+      //       .call(chart);
+      //   nv.utils.windowResize(chart.update);
+      //   return chart;
+      // });
+
+
+//Pie chart example data. Note how there is only a single array of key-value pairs.
+function formationData() {
+  return  [
+      {% for nbFormation in nbFormations|sort %}
+          {"label" : "{{nbFormation.niveau}}",
+          "value" : "{{nbFormation.nb}}"},
+      {% endfor %}
+    ];
+}
+
+function chercheursData() {
+  return  [
+      {% for etab in etabs|sort %}
+          {"label" : "{{etab.nom}}",
+          "value" : "{{etab.chercheurs}}"},
+      {% endfor %}
+    ];
+  }
+
     </script>
 
     
-</section>
 {% endblock %}

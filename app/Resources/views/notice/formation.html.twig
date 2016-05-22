@@ -5,6 +5,16 @@
 
 	<h2>{{formation.nom}}</h2> 
 	<p>{{formation.annee}}, {{formation.niveau}}, effectif : {{formation.effectif}}</p>
-	<p><a href="{{formation.url}}">{{formation.url}}</a></p>    	
+	<p><a href="{{formation.url}}">{{formation.url}}</a></p> 
+
+	           {% for disp in formation.discipline %}
+	           		{% if disp.type="NW3" %}
+                    <li>{{disp.nom}}</li>
+                	{% endif %}    
+                {% endfor %}
+
+
+	    {{ dump(formation) }}
+
 
 {% endblock %}
