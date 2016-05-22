@@ -11,6 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use AppBundle\Entity\Ed;
 use AppBundle\Entity\Etablissement;
 use AppBundle\Entity\Formation;
+use AppBundle\Entity\Labo;
 
 class StatistiquesController extends Controller
 {
@@ -24,6 +25,7 @@ class StatistiquesController extends Controller
     	$eds = $em->getRepository('AppBundle:Ed')->findAll();
     	$etabs = $em->getRepository('AppBundle:Etablissement')->findAll();
         $formations = $em->getRepository('AppBundle:Formation')->findAll();
+        $labos = $em->getRepository('AppBundle:Labo')->findAll();
 
 
 
@@ -62,6 +64,7 @@ class StatistiquesController extends Controller
             'formations' => $formations,
             'nbFormations'=> $nbFormations,
             'formationsDisciplines' => $formationsDisciplines,
+            'labos' => $labos,
         	));
     }
 

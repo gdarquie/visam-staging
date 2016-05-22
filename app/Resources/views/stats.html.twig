@@ -29,20 +29,26 @@
   
     </header>
     <section class="row">
-        <article class="col s4">
-        <h2>Introduction</h2>
-        <p>Dans cette partie nous allons essayer de montrer les relations entre entités. Nous nous concentrons sur les liens entre ED et établissements.</p>
+      <h2>Visam : première démo</h2>
+      <article class="col s5">
+        <h3>Explorer les données de la COMUE HESAM</h3>
 
-        <p>Visam compte <strong>{{eds|length}}</strong> ED réparties sur <strong>{{etabs|length}}</strong> établissements.</p>
+        <p>Nous disposons actuellement d'une grande partie des données des établissements. Nous proposons un premier parcours à partir des informations qu'elles produisent afin de de rendre compte de l'état de la collecte et de l'importation des données et, nous l'espérons, de mettre en avant plusieurs scénarios d'exploitation.</p>
+
+      </article>
+
+        <article class="col s7">
+            <h3>Import des données</h3>
+            
+            <ul>
+              <li>Etablissements dont les laboratoires sont importés :</li>
+              <li>Etablissements dont les formations sont importés : </li>
+              <li>Etablissements dont les ED sont importés :</li>
+            </ul>
+
         </article>
-        <article  class="col s4"> 
-            <h2>Les effectifs</h2>
-            <p>Selon les données entrées dans la base de données ViSam, HeSam compte :
-                <ul>
-                    <li><span class="number">{{nbEtud}}</span> étudiants</li>
-                    <li>enseignants et chercheurs</li>
-                </ul></p>
-        </article>
+
+       
     </section>
 
   </div>
@@ -51,7 +57,7 @@
     <div class="section no-pad-bot">
       <div class="container">
         <br><br>
-        <h1 class="header center" style="color:white;">Etablissements</h1>
+        <h1 class="header center" style="color:white;">La COMUE HESAM</h1>
         <div class="row center">
                   <h5 class="header col s12 light" style="color:white;">Visualisation des compétences de la COMUE heSam Université</h5>
         </div>
@@ -64,6 +70,24 @@
   </div>
 
     <div class='container'>
+
+
+<!-- Général -->
+  
+  <article>
+  <p>Visam compte, selon les données entrées dans la base de données <strong>{{eds|length}}</strong> ED, <strong>{{formations|length}}</strong> formations et <strong>{{labos|length}}</strong> laboratoires  répartis sur <strong>{{etabs|length}}</strong> établissements.</p>
+  </article>
+
+<!-- Effectifs -->
+       <article> 
+            <h2>Les effectifs</h2>
+            <p>Selon les données entrées dans la base de données ViSam, HeSam compte :
+                <ul>
+                    <li><span class="number">{{nbEtud}}</span> étudiants</li>
+                    <li>enseignants et chercheurs</li>
+                </ul></p>
+        </article>
+
         <article>
             <h2>Répartition des étudiants par établissement</h2>
             <p>Pour réaliser les visualisations, il faut que je puisse faire communiquer les données de Visam avec JS (ce que Twig ne permet pas).</p>
@@ -78,6 +102,35 @@
             </div>
         </article>
 
+<!-- Les disciplines HESAM -->
+
+
+        <article>
+          <h2>Les disciplines</h2>
+
+          <h3>Les disciplines les plus fréquentes</h3>
+          <p>Les disciplines les plus populaires pour l'ensemble des formations et laboratoires (pas encore implémenté) de la COMUE et pour tous types de disciplines (CNU, HCERES, SISE et NW3)</p>
+          
+          <h3>Disciplines CNU les plus fréquentes</h3>
+          
+          <h3>Disciplines HCERES les plus fréquentes</h3>
+          
+          <h3>Disciplines SISE les plus fréquentes</h3>
+
+          <h3>Disciplines NW3 les plus fréquentes</h3>
+
+          <p>Les données NW3 n'étaient pas obligatoires lors de la collecte, certaines formations ou laboratoires peuvent avoir choisi de ne pas y avoir recourt.</p>
+
+        </article>
+
+
+        <article>
+          <h2>Les domaines?</h2>
+          <h3>Répartition par domaine HCERES</h3>
+          <h3>Répartition par domaine SISE</h3>
+        </article>
+
+        
 
 </div>
   <div id="index-banner" class="parallax-container">
@@ -114,6 +167,20 @@
                       {% endfor %}
                   </p> -->
               {% endfor %}
+        </article>
+
+        <article>
+          <h2>Formations & Disciplines</h2>
+
+          <h3>Disciplines les plus fréquentes</h3>
+
+          <h3>Disciplines CNU les plus fréquentes</h3>
+          
+          <h3>Disciplines HCERES les plus fréquentes</h3>
+          
+          <h3>Disciplines SISE les plus fréquentes</h3>
+
+          <h3>Disciplines NW3 les plus fréquentes</h3>
         </article>
     </div>
 
