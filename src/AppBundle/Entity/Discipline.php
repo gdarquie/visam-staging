@@ -36,7 +36,7 @@ class Discipline
     /**
      * @var string
      *
-     * @ORM\Column(name="abreviation", type="string", length=10, nullable=true)
+     * @ORM\Column(name="abreviation", type="string", length=255, nullable=true)
      */
     private $abreviation;
 

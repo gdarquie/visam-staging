@@ -39,8 +39,7 @@
     <field name="code" type="integer" column="code" nullable="true">
       <options>
         <option name="unsigned"/>
-        <option name="comment">Quelque chose comme EA345 mais sans la EA qui est traité dans le type.
-</option>
+        <option name="comment">Quelque chose comme EA345 mais sans la EA qui est traité dans le type.</option>
       </options>
     </field>
     <field name="type" type="string" column="type" length="5" nullable="true">

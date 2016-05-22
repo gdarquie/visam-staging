@@ -24,7 +24,7 @@
 </option>
       </options>
     </field>
-    <field name="abreviation" type="string" column="abreviation" length="10" nullable="true">
+    <field name="abreviation" type="string" column="abreviation" length="255" nullable="true">
       <options>
         <option name="fixed"/>
       </options>
