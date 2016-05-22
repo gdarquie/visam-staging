@@ -58,17 +58,18 @@ class APIController extends Controller
         //je récupère les données coincindant avec la formation // à reprendre
 
         $liste = [];
-         foreach ($formations as $formation){
-                // echo "{".$formation->getFormationId()."},";
-                // echo "{".$formation->getNom()."},";
-                array_push($liste, $formation);
-        }
+          foreach ($formations as $formation){
+                 //echo $formation->getFormationId();
+                 //echo $formation->getNom();
+                 array_push($liste, $formation->getNom());
+         }
 
         // create a JSON-response with a 200 status code
         //$response = new Response(json_encode(array('formations' => $formations))); //faire le tableau plus
 
+        
         $response = new Response();
-        $response->setContent(json_encode(array_values($formations)));
+        $response->setContent(json_encode($liste));
 
         $response->headers->set('Content-Type', 'application/json');
 
