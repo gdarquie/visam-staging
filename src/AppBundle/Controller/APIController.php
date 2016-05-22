@@ -7,9 +7,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 use AppBundle\Entity\Ed;
+use AppBundle\Entity\Discipline;
+use AppBundle\Entity\Formation;
+
 
 
 class APIController extends Controller
@@ -76,7 +82,114 @@ class APIController extends Controller
         return $response;
     }
 
-    //une fonction de recherche par établissement
+    /**
+    * @Route("/api/formations", name="apiGetAllFormations")
+    */
+    public function getAllFormationsAction()
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $formations = $em->getRepository('AppBundle:Formation')->findAll();
+
+        $liste = [];
+          foreach ($formations as $formation){
+                 array_push($liste, $formation->getNom());
+                 array_push($liste, $formation->getAnnee());
+                 array_push($liste, $formation->getTypeDiplome());
+         }
+
+        // create a JSON-response with a 200 status code
+        //$response = new Response(json_encode(array('formations' => $formations))); //faire le tableau plus
+
+        
+        $response = new Response();
+        $response->setContent(json_encode($liste));
+
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
+
+    //Récupérer toutes les disciplines de toutres le formations
+
+    /**
+    * @Route("/api/disicplinesByformation", name="apiGetDisciplinesForAllFormations")
+    */
+        public function getAllDicicplinesForAllFormationsAction()
+    {
+
+        //  $query = $em->createQuery('SELECT n.niveau, COUNT(n.niveau) AS nb FROM AppBundle:Formation n GROUP BY n.niveau ORDER BY nb DESC');
+        // $nbFormations = $query->getResult();
+
+        $em = $this->getDoctrine()->getManager();
+        $formations = $em->getRepository('AppBundle:Formation')->findOneByFormationId(3);
+
+        $liste = [];
+
+            array_push($liste, $formations->getNom());
+            //$formations->getDiscipline()
+            $nom = $formations->getEtablissement()->getNom();
+
+
+          foreach ($formations as $formation){
+
+            //$disciplines = $em->getRepository('AppBundle:Discipline')->findAll();
+
+            array_push($liste, $formation->getNom());
+            print_r($formation);
+            $nom = $formation->getEtablissement();
+            //echo $nom->getNom();
+            print_r($nom);
+            //array_push($liste, $formation->getDiscipline()->getCode());
+            //array_push($liste, $formation->getEtablissement());
+
+            foreach($disciplines as $discipline){
+               array_push($liste, $discipline->getNom());
+
+                }
+ 
+                 //print_r($disciplines);
+                 //array_push($liste, $formation->getEtablissement()->getNom());
+         }
+
+        // create a JSON-response with a 200 status code
+        //$response = new Response(json_encode(array('formations' => $formations))); //faire le tableau plus
+
+        
+        $response = new Response();
+        $response->setContent(json_encode($liste));
+
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
+
+    /**
+    * @Route("/api/formation/{formationId}", name="apiGetFormationById")
+    */
+    function getAllDisciplinesFor1Formation($formationId){
+
+        //récupérer une discpline
+
+         $formation = $this->getDoctrine()
+        ->getRepository('AppBundle:Formation')
+        ->findAll();
+
+    // $categoryName = $product->getCategory()->getName();
+    //     $em = $this->getDoctrine()->getManager();
+
+        $response = new Response();
+        $response->setContent(json_encode($formation));
+
+
+
+        $response->headers->set('Content-Type', 'application/json');
+
+        foreach ($formations as $formation){};
+
+        return $response;
+    }
+
 
 
 } // Fin de la class APIController
