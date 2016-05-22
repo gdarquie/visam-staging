@@ -48,6 +48,10 @@ class StatistiquesController extends Controller
         $query = $em->createQuery('SELECT n.niveau, COUNT(n.niveau) AS nb FROM AppBundle:Formation n GROUP BY n.niveau ORDER BY nb DESC');
         $nbFormations = $query->getResult();
 
+        //récupérer toutes les formations et leurs disciplines
+        $query = $em->createQuery('SELECT n.nom, COUNT(n.nom) AS nom FROM AppBundle:Formation n GROUP BY n.nom ORDER BY nom DESC');
+        $formationsDisciplines = $query->getResult();
+
 
         //toutes les formations de tous établissements
 
@@ -57,6 +61,7 @@ class StatistiquesController extends Controller
             'nbEtud' => $nbEtud,
             'formations' => $formations,
             'nbFormations'=> $nbFormations,
+            'formationsDisciplines' => $formationsDisciplines,
         	));
     }
 
