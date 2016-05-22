@@ -13,7 +13,14 @@
         <h1>vi<span class='rouge'>S</span>am</h1>
         <h2><span class="rouge">Vi</span>sualisation des compétences de la COMUE he<span class="rouge">Sam</span> Université</h2>
     </header>
+    
+    <h1>Test</h1>
 
+    <article>
+            {% for formation in formationsDisciplines %}
+            <li>{{formation.nom}}</li>
+            {% endfor %}
+    </article>
 
     <h1>Statistiques</h1>
 

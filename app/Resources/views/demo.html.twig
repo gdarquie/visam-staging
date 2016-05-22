@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block fos_user_content %}{% endblock %}
+{% block stylesheets %}
+<link rel="stylesheet" href="../css/mononoke.css"/>
+{% endblock %}
+
+
+{% block body %}
+
+<section class='container'>
+      <article>
+          
+            <h2>La COMUE</h2>
+
+            <h3>Liste des établissements ({{etablissements |length }})</h3>
+            {% for etablissement in etablissements %}
+            <li>{{etablissement.nom}}</li>
+            {% endfor %}
+
+            <h3>Les disciplines par formations ({{formations |length }})</h3>
+            {% for formation in formations %}
+            
+            <ul>
+            <li>{{formation.nom}} ({{formation.discipline|length}})</li>
+            </ul>
+
+            {% endfor %}
+
+
+            <h3>Les disciplines les plus populaires</h3>
+
+            {% for discipline in disciplines %}
+                {{discipline.nom}}
+ 
+                {{discipline.formation|length}}
+          
+                {% for formation in discipline.formation %}
+       {#            {{discipline.nom}} #}
+                {% endfor %}
+
+            {% endfor %}
+    </article>
+</section>
+
+    
+{% endblock %}

@@ -15,6 +15,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use AppBundle\Entity\Ed;
 use AppBundle\Entity\Discipline;
 use AppBundle\Entity\Formation;
+use AppBundle\Entity\Etablissement;
 
 
 
@@ -118,39 +119,31 @@ class APIController extends Controller
         public function getAllDicicplinesForAllFormationsAction()
     {
 
-        //  $query = $em->createQuery('SELECT n.niveau, COUNT(n.niveau) AS nb FROM AppBundle:Formation n GROUP BY n.niveau ORDER BY nb DESC');
-        // $nbFormations = $query->getResult();
-
         $em = $this->getDoctrine()->getManager();
-        $formations = $em->getRepository('AppBundle:Formation')->findOneByFormationId(3);
+        $formations = $em->getRepository('AppBundle:Formation')->findAll();
 
         $liste = [];
+        $listeDiscipline =[];
 
-            array_push($liste, $formations->getNom());
-            //$formations->getDiscipline()
-            $nom = $formations->getEtablissement()->getNom();
+        foreach ($formations as $formation){
 
+        //array_push($liste, $formation->getNom());
+        echo $formation->getNom();
+        echo $formation->getDiscipline()->findAll();
 
-          foreach ($formations as $formation){
+        //echo $nom->getNom();
+        //print_r($nom);
+        //array_push($liste, $formation->getDiscipline()->getCode());
+        //array_push($liste, $formation->getEtablissement());
 
-            //$disciplines = $em->getRepository('AppBundle:Discipline')->findAll();
+        // foreach($disciplines as $discipline){
+        //    array_push($liste, $discipline->getNom());
 
-            array_push($liste, $formation->getNom());
-            print_r($formation);
-            $nom = $formation->getEtablissement();
-            //echo $nom->getNom();
-            print_r($nom);
-            //array_push($liste, $formation->getDiscipline()->getCode());
-            //array_push($liste, $formation->getEtablissement());
+        //     }
 
-            foreach($disciplines as $discipline){
-               array_push($liste, $discipline->getNom());
-
-                }
- 
-                 //print_r($disciplines);
-                 //array_push($liste, $formation->getEtablissement()->getNom());
-         }
+             //print_r($disciplines);
+             //array_push($liste, $formation->getEtablissement()->getNom());
+     }
 
         // create a JSON-response with a 200 status code
         //$response = new Response(json_encode(array('formations' => $formations))); //faire le tableau plus

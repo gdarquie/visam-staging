@@ -49,7 +49,7 @@ class StatistiquesController extends Controller
         $nbFormations = $query->getResult();
 
         //récupérer toutes les formations et leurs disciplines
-        $query = $em->createQuery('SELECT n.nom, COUNT(n.nom) AS nom FROM AppBundle:Formation n GROUP BY n.nom ORDER BY nom DESC');
+        $query = $em->createQuery('SELECT f.nom as nom, f.annee as annee FROM AppBundle:Formation f');
         $formationsDisciplines = $query->getResult();
 
 
