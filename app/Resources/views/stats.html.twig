@@ -108,40 +108,64 @@
         <article>
           <h2>Les disciplines</h2>
 
-          <h3>Les disciplines les plus fréquentes</h3>
-          <p>Les disciplines les plus populaires pour l'ensemble des formations et laboratoires (pas encore implémenté) de la COMUE et pour tous types de disciplines (CNU, HCERES, SISE et NW3)</p>          
-
-          {% for discipline in allDisciplines %}
-                {{discipline.item.type}}, {{discipline.item.nom}}({{discipline.nb}}) /
- {#                ({{discipline.item.formation|length}}) #}
-          {% endfor %}
+                   
           
-          <h3>Disciplines CNU les plus fréquentes</h3>
+          <div class="row">
 
-          {% for discipline in allCnuDisciplines %}
-                {{discipline.item.nom}}({{discipline.nb}}) /
-          {% endfor %}
+            <div class='col s8'>
+              <h3>Les disciplines les plus fréquentes</h3>
+              <p>Les disciplines les plus populaires pour l'ensemble des formations et laboratoires (pas encore implémenté) de la COMUE et pour tous types de disciplines (CNU, HCERES, SISE et NW3)</p> 
+              <table class="striped">
+              {% for discipline in allDisciplines %}
+                    <tr><td>{{discipline.item.type}}</td><td>{{discipline.item.nom}}</td><td>{{discipline.nb}}</td></tr>
+     {#                ({{discipline.item.formation|length}}) #}
+              {% endfor %}
+              </table>
+            </div>
+
+            <div class="col s4">
+              <h3>Disciplines NW3 les plus fréquentes</h3>
+              <table class="striped">
+              {% for discipline in allNw3Disciplines %}
+                  <tr><td>{{discipline.item.nom}}</td><td>{{discipline.nb}}</td></tr>
+              {% endfor %}
+              </table>
+
+              <p>Les données NW3 n'étaient pas obligatoires lors de la collecte, certaines formations ou laboratoires peuvent avoir choisi de ne pas y avoir recourt.</p>
+            </div>
+          </div>
           
-          <h3>Disciplines HCERES les plus fréquentes</h3>
 
-          {% for discipline in allHceresDisciplines %}
-                {{discipline.item.nom}}({{discipline.nb}}) /
-          {% endfor %}
-          
-          <h3>Disciplines SISE les plus fréquentes</h3>
+          <div class="row">
+            <div class="col s4">
+            <h3>Disciplines CNU les plus fréquentes</h3>
+            <table class="striped">
+            {% for discipline in allCnuDisciplines %}
+                  <tr><td>{{discipline.item.nom}}</td><td>{{discipline.nb}}</td></tr>
+            {% endfor %}
+            </table>
+            </div>
 
-          {% for discipline in allSiseDisciplines %}
-                {{discipline.item.nom}}({{discipline.nb}}) /
-          {% endfor %}
+            <div class="col s4">
+            <h3>Disciplines HCERES les plus fréquentes</h3>
+            <table class="striped">
+            {% for discipline in allHceresDisciplines %}
+                  <tr><td>{{discipline.item.nom}}</td><td>{{discipline.nb}}</td></tr>
+            {% endfor %}
+            </table>
+            </div>
 
-          <h3>Disciplines NW3 les plus fréquentes</h3>
+            <div class="col s4">
+            <h3>Disciplines SISE les plus fréquentes</h3>
+            <table class="striped">
+            {% for discipline in allSiseDisciplines %}
+                  <tr><td>{{discipline.item.nom}}</td><td>{{discipline.nb}}</td></tr>
+            {% endfor %}
+            </table>
+            </div>
+          </div>
 
-          {% for discipline in allNw3Disciplines %}
-              {{discipline.item.nom}}({{discipline.nb}}) /
-          {% endfor %}
-
-          <p>Les données NW3 n'étaient pas obligatoires lors de la collecte, certaines formations ou laboratoires peuvent avoir choisi de ne pas y avoir recourt.</p>
-
+         
         </article>
 
 {# 
@@ -196,11 +220,12 @@
 
 
           <h3>Disciplines les plus fréquentes</h3>
-
+          <table class="striped">
           {% for discipline in allDisciplinesFormations %}
-                {{discipline.item.type}}, {{discipline.item.nom}}({{discipline.nb}}) /
+                <tr><td>{{discipline.item.type}}</td> <td>{{discipline.item.nom}}({{discipline.nb}})</td></tr> 
  {#                ({{discipline.item.formation|length}}) #}
           {% endfor %}
+          </table>
 
           <h3>Disciplines HCERES les plus fréquentes</h3>
 
