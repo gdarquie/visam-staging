@@ -109,26 +109,47 @@
           <h2>Les disciplines</h2>
 
           <h3>Les disciplines les plus fréquentes</h3>
-          <p>Les disciplines les plus populaires pour l'ensemble des formations et laboratoires (pas encore implémenté) de la COMUE et pour tous types de disciplines (CNU, HCERES, SISE et NW3)</p>
+          <p>Les disciplines les plus populaires pour l'ensemble des formations et laboratoires (pas encore implémenté) de la COMUE et pour tous types de disciplines (CNU, HCERES, SISE et NW3)</p>          
+
+          {% for discipline in allDisciplines %}
+                {{discipline.item.type}}, {{discipline.item.nom}}({{discipline.nb}}) /
+ {#                ({{discipline.item.formation|length}}) #}
+          {% endfor %}
           
           <h3>Disciplines CNU les plus fréquentes</h3>
+
+          {% for discipline in allCnuDisciplines %}
+                {{discipline.item.nom}}({{discipline.nb}}) /
+          {% endfor %}
           
           <h3>Disciplines HCERES les plus fréquentes</h3>
+
+          {% for discipline in allHceresDisciplines %}
+                {{discipline.item.nom}}({{discipline.nb}}) /
+          {% endfor %}
           
           <h3>Disciplines SISE les plus fréquentes</h3>
 
+          {% for discipline in allSiseDisciplines %}
+                {{discipline.item.nom}}({{discipline.nb}}) /
+          {% endfor %}
+
           <h3>Disciplines NW3 les plus fréquentes</h3>
+
+          {% for discipline in allNw3Disciplines %}
+              {{discipline.item.nom}}({{discipline.nb}}) /
+          {% endfor %}
 
           <p>Les données NW3 n'étaient pas obligatoires lors de la collecte, certaines formations ou laboratoires peuvent avoir choisi de ne pas y avoir recourt.</p>
 
         </article>
 
-
+{# 
         <article>
           <h2>Les domaines?</h2>
           <h3>Répartition par domaine HCERES</h3>
           <h3>Répartition par domaine SISE</h3>
-        </article>
+        </article> #}
 
         
 
@@ -172,15 +193,38 @@
         <article>
           <h2>Formations & Disciplines</h2>
 
+
+
           <h3>Disciplines les plus fréquentes</h3>
 
-          <h3>Disciplines CNU les plus fréquentes</h3>
-          
+          {% for discipline in allDisciplinesFormations %}
+                {{discipline.item.type}}, {{discipline.item.nom}}({{discipline.nb}}) /
+ {#                ({{discipline.item.formation|length}}) #}
+          {% endfor %}
+
           <h3>Disciplines HCERES les plus fréquentes</h3>
+
+          {% for discipline in allHceresDisciplinesFormations %}
+                {{discipline.item.nom}}({{discipline.nb}}) /
+          {% endfor %}
           
           <h3>Disciplines SISE les plus fréquentes</h3>
 
+          {% for discipline in allSiseDisciplinesFormations %}
+                {{discipline.item.nom}}({{discipline.nb}}) /
+          {% endfor %}
+          
+          <h3>Disciplines CNU les plus fréquentes</h3>
+
+          {% for discipline in allCnuDisciplinesFormations %}
+              {{discipline.item.nom}}({{discipline.nb}}) /
+          {% endfor %}
+
           <h3>Disciplines NW3 les plus fréquentes</h3>
+
+          {% for discipline in allNw3DisciplinesFormations %}
+              {{discipline.item.nom}}({{discipline.nb}}) /
+          {% endfor %}
         </article>
     </div>
 

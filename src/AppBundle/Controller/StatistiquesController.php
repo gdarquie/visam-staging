@@ -26,6 +26,7 @@ class StatistiquesController extends Controller
     	$etabs = $em->getRepository('AppBundle:Etablissement')->findAll();
         $formations = $em->getRepository('AppBundle:Formation')->findAll();
         $labos = $em->getRepository('AppBundle:Labo')->findAll();
+        $disciplines = $em->getRepository('AppBundle:Discipline')->findAll();
 
 
 
@@ -50,10 +51,67 @@ class StatistiquesController extends Controller
         $query = $em->createQuery('SELECT n.niveau, COUNT(n.niveau) AS nb FROM AppBundle:Formation n GROUP BY n.niveau ORDER BY nb DESC');
         $nbFormations = $query->getResult();
 
-        //récupérer toutes les formations et leurs disciplines
-        $query = $em->createQuery('SELECT f.nom as nom, f.annee as annee FROM AppBundle:Formation f');
-        $formationsDisciplines = $query->getResult();
 
+//Toutes les disciplines (pour l'instant ne prend en compte que les formations mais il faudra ajouter les labo et les ED)
+
+        //récupérer toutes les formations, leurs disciplines et le nombre de disciplines liées
+        $query = $em->createQuery('SELECT d as item, COUNT(f.nom) as nb, f.nom as formation, f.formationId as id FROM AppBundle:Discipline d JOIN d.formation f GROUP BY d ORDER BY nb DESC')->setMaxResults(20);
+        $allDisciplines = $query->getResult();
+
+        //récupérer toutes les formations, leurs disciplines et le nombre de disciplines liées SISE
+        $query = $em->createQuery('SELECT d as item, COUNT(f.nom) as nb, f.nom as formation, f.formationId as id FROM AppBundle:Discipline d JOIN d.formation f WHERE d.type=:type GROUP BY d ORDER BY nb DESC')->setMaxResults(20);
+        $query->setParameter('type', 'SISE');
+        $allSiseDisciplines = $query->getResult();
+
+        //récupérer toutes les formations, leurs disciplines et le nombre de disciplines liées HCERES
+        $query = $em->createQuery('SELECT d as item, COUNT(f.nom) as nb, f.nom as formation, f.formationId as id FROM AppBundle:Discipline d JOIN d.formation f WHERE d.type=:type GROUP BY d ORDER BY nb DESC')->setMaxResults(20);
+        $query->setParameter('type', 'HCERES');
+        $allHceresDisciplines = $query->getResult();
+
+        //récupérer toutes les formations, leurs disciplines et le nombre de disciplines liées CNU
+        $query = $em->createQuery('SELECT d as item, COUNT(f.nom) as nb, f.nom as formation, f.formationId as id FROM AppBundle:Discipline d JOIN d.formation f WHERE d.type=:type GROUP BY d ORDER BY nb DESC')->setMaxResults(20);
+        $query->setParameter('type', 'CNU');
+        $allCnuDisciplines = $query->getResult();
+
+
+        //récupérer toutes les formations, leurs disciplines et le nombre de disciplines liées NW3
+        $query = $em->createQuery('SELECT d as item, COUNT(f.nom) as nb, f.nom as formation, f.formationId as id FROM AppBundle:Discipline d JOIN d.formation f WHERE d.type=:type GROUP BY d ORDER BY nb DESC')->setMaxResults(20);
+        $query->setParameter('type', 'NW3');
+        $allNw3Disciplines = $query->getResult();
+
+
+//Domaines (en cours)
+
+        //récupérer tous les domaines des formations
+        $query = $em->createQuery('SELECT d as item FROM AppBundle:Discipline d')->setMaxResults(20);
+        $allDomainesDisciplines = $query->getResult();
+
+//Disciplines des formations
+
+        //récupérer toutes les formations, leurs disciplines et le nombre de disciplines liées
+        $query = $em->createQuery('SELECT d as item, COUNT(f.nom) as nb, f.nom as formation, f.formationId as id FROM AppBundle:Discipline d JOIN d.formation f GROUP BY d ORDER BY nb DESC')->setMaxResults(20);
+        $allDisciplinesFormations = $query->getResult();
+
+        //récupérer toutes les formations, leurs disciplines et le nombre de disciplines liées SISE
+        $query = $em->createQuery('SELECT d as item, COUNT(f.nom) as nb, f.nom as formation, f.formationId as id FROM AppBundle:Discipline d JOIN d.formation f WHERE d.type=:type GROUP BY d ORDER BY nb DESC')->setMaxResults(20);
+        $query->setParameter('type', 'SISE');
+        $allSiseDisciplinesFormations = $query->getResult();
+
+        //récupérer toutes les formations, leurs disciplines et le nombre de disciplines liées HCERES
+        $query = $em->createQuery('SELECT d as item, COUNT(f.nom) as nb, f.nom as formation, f.formationId as id FROM AppBundle:Discipline d JOIN d.formation f WHERE d.type=:type GROUP BY d ORDER BY nb DESC')->setMaxResults(20);
+        $query->setParameter('type', 'HCERES');
+        $allHceresDisciplinesFormations = $query->getResult();
+
+        //récupérer toutes les formations, leurs disciplines et le nombre de disciplines liées CNU
+        $query = $em->createQuery('SELECT d as item, COUNT(f.nom) as nb, f.nom as formation, f.formationId as id FROM AppBundle:Discipline d JOIN d.formation f WHERE d.type=:type GROUP BY d ORDER BY nb DESC')->setMaxResults(20);
+        $query->setParameter('type', 'CNU');
+        $allCnuDisciplinesFormations = $query->getResult();
+
+
+        //récupérer toutes les formations, leurs disciplines et le nombre de disciplines liées NW3
+        $query = $em->createQuery('SELECT d as item, COUNT(f.nom) as nb, f.nom as formation, f.formationId as id FROM AppBundle:Discipline d JOIN d.formation f WHERE d.type=:type GROUP BY d ORDER BY nb DESC')->setMaxResults(20);
+        $query->setParameter('type', 'NW3');
+        $allNw3DisciplinesFormations = $query->getResult();
 
         //toutes les formations de tous établissements
 
@@ -63,8 +121,21 @@ class StatistiquesController extends Controller
             'nbEtud' => $nbEtud,
             'formations' => $formations,
             'nbFormations'=> $nbFormations,
-            'formationsDisciplines' => $formationsDisciplines,
+            //toutes les disciplines
+            'allDisciplines'=>$allDisciplines,
+            'allSiseDisciplines'=>$allSiseDisciplines,
+            'allHceresDisciplines'=>$allHceresDisciplines,
+            'allCnuDisciplines'=>$allCnuDisciplines,
+            'allNw3Disciplines'=>$allNw3Disciplines,
+            //formations>Disciplines
+            'allDisciplinesFormations'=>$allDisciplinesFormations,
+            'allSiseDisciplinesFormations'=>$allSiseDisciplinesFormations,
+            'allHceresDisciplinesFormations'=>$allHceresDisciplinesFormations,
+            'allCnuDisciplinesFormations'=>$allCnuDisciplinesFormations,
+            'allNw3DisciplinesFormations'=>$allNw3DisciplinesFormations,
+            //entités
             'labos' => $labos,
+            'disciplines' => $disciplines,
         	));
     }
 
