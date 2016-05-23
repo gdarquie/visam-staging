@@ -313,7 +313,11 @@
         <h2>Les localisations</h2>
 
             {% for localisation in localisations %}
-               {{localisation.nom}}{{localisation.lat}}{{localisation.long}}
+              {{localisation.nom}}{{localisation.lat}}{{localisation.long}}
+              {% for etab in localisation.etablissement %}
+                {{etab.nom}}
+              {% endfor %}
+                
             {% endfor %}
       </article>
     </div>
