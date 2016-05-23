@@ -1,0 +1,71 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Valorisation
+ *
+ * @ORM\Table(name="valorisation", indexes={@ORM\Index(name="fk_valorisation_localisation1_idx", columns={"localisation_id"})})
+ * @ORM\Entity
+ */
+class Valorisation
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="string", length=255, nullable=true)
+     */
+    private $nom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lien", type="string", length=255, nullable=true)
+     */
+    private $lien;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", length=65535, nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="valorisation_id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $valorisationId;
+
+    /**
+     * @var \AppBundle\Entity\Localisation
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Localisation")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="localisation_id", referencedColumnName="localisation_id")
+     * })
+     */
+    private $localisation;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Etablissement", mappedBy="valorisation")
+     */
+    private $etablissement;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->etablissement = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
+

@@ -1,0 +1,139 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Ufr
+ *
+ * @ORM\Table(name="ufr", indexes={@ORM\Index(name="fk_ufr_etablissement1_idx", columns={"etablissement_id"})})
+ * @ORM\Entity
+ */
+class Ufr
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="string", length=500, nullable=true)
+     */
+    private $nom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="code", type="string", length=45, nullable=true)
+     */
+    private $code;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", length=65535, nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lien", type="string", length=255, nullable=true)
+     */
+    private $lien;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="contact", type="string", length=255, nullable=true)
+     */
+    private $contact;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="effectif", type="integer", nullable=true)
+     */
+    private $effectif;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="etudiants", type="integer", nullable=true)
+     */
+    private $etudiants;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="ufr_id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $ufrId;
+
+    /**
+     * @var \AppBundle\Entity\Etablissement
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Etablissement")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="etablissement_id", referencedColumnName="etablissement_id")
+     * })
+     */
+    private $etablissement;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Labo", inversedBy="ufr")
+     * @ORM\JoinTable(name="ufr_has_labo",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="ufr_id", referencedColumnName="ufr_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
+     *   }
+     * )
+     */
+    private $labo;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Discipline", inversedBy="ufr")
+     * @ORM\JoinTable(name="ufr_has_discipline",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="ufr_id", referencedColumnName="ufr_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="discipline_id", referencedColumnName="discipline_id")
+     *   }
+     * )
+     */
+    private $discipline;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Localisation", mappedBy="ufr")
+     */
+    private $localisation;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Formation", mappedBy="ufr")
+     */
+    private $formation;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->labo = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->discipline = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->localisation = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->formation = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
+

@@ -1,0 +1,40 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ImportLab
+ *
+ * @ORM\Table(name="import_lab")
+ * @ORM\Entity
+ */
+class ImportLab
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="uai", type="string", length=45, nullable=true)
+     */
+    private $uai;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="labo", type="integer", nullable=true)
+     */
+    private $labo;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+
+}
+

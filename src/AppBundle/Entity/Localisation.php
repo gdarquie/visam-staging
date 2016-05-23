@@ -48,9 +48,9 @@ class Localisation
     private $ville;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="code", type="integer", nullable=true)
+     * @ORM\Column(name="code", type="string", length=30, nullable=true)
      */
     private $code;
 
@@ -295,7 +295,7 @@ class Localisation
     /**
      * Set code
      *
-     * @param integer $code
+     * @param string $code
      *
      * @return Localisation
      */
@@ -309,7 +309,7 @@ class Localisation
     /**
      * Get code
      *
-     * @return integer
+     * @return string
      */
     public function getCode()
     {
