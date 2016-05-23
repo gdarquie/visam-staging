@@ -22,6 +22,7 @@ class StatistiquesController extends Controller
     {
 
     	$em = $this->getDoctrine()->getManager();
+        
     	$eds = $em->getRepository('AppBundle:Ed')->findAll();
     	$etabs = $em->getRepository('AppBundle:Etablissement')->findAll();
         $formations = $em->getRepository('AppBundle:Formation')->findAll();

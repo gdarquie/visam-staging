@@ -184,6 +184,24 @@ class APIController extends Controller
     }
 
 
+    /**
+     * @Route("/api/map", name="apiMap")
+     */
+    public function mapAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQuery('SELECT l.nom as nom, l.lat as lat, l.long as long, l.adresse FROM AppBundle:Localisation l')->setMaxResults(100);
+        $map = $query->getResult();
+
+        $response = new Response();
+        $response->setContent(json_encode($map));
+
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+       
+    }
+
 
 } // Fin de la class APIController
 
