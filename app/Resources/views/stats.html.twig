@@ -320,6 +320,16 @@
                 
             {% endfor %}
       </article>
+
+      <article>
+        <h2>Localisations pour la map</h2>
+        {% for item in map %}
+          {{item.nom}}
+          {{item.lat}}
+          {{item.long}}
+          {{item.adresse}}
+        {% endfor %}
+      </article>
     </div>
 
     <img src="img/map.png" alt="">

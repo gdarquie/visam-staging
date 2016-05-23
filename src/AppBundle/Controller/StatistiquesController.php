@@ -122,10 +122,9 @@ class StatistiquesController extends Controller
 // ------------------------------------ Localisation ------------------------------------
 // ------------------------------------------------------------------------  
 
-        // //récupérer toutes les formations, leurs disciplines et le nombre de disciplines liées NW3
-        // $query = $em->createQuery('SELECT d as item, COUNT(f.nom) as nb, f.nom as formation, f.formationId as id FROM AppBundle:Discipline d JOIN d.formation f WHERE d.type=:type GROUP BY d ORDER BY nb DESC')->setMaxResults(20);
-        // $query->setParameter('type', 'NW3');
-        // $allNw3DisciplinesFormations = $query->getResult();
+        //localisations pour la map
+        $query = $em->createQuery('SELECT l.nom as nom, l.lat as lat, l.long as long, l.adresse FROM AppBundle:Localisation l')->setMaxResults(100);
+        $map = $query->getResult();
 
 
 
@@ -151,6 +150,7 @@ class StatistiquesController extends Controller
             'labos' => $labos,
             'disciplines' => $disciplines,
             'localisations' =>$localisations,
+            'map' => $map,
         	));
     }
 
