@@ -27,7 +27,7 @@ class StatistiquesController extends Controller
         $formations = $em->getRepository('AppBundle:Formation')->findAll();
         $labos = $em->getRepository('AppBundle:Labo')->findAll();
         $disciplines = $em->getRepository('AppBundle:Discipline')->findAll();
-
+        $localisations = $em->getRepository('AppBundle:Localisation')->findAll();
 
 
         //Test pour faire des requêtes en SQL avec Symfony
@@ -51,6 +51,9 @@ class StatistiquesController extends Controller
         $query = $em->createQuery('SELECT n.niveau, COUNT(n.niveau) AS nb FROM AppBundle:Formation n GROUP BY n.niveau ORDER BY nb DESC');
         $nbFormations = $query->getResult();
 
+// ------------------------------------------------------------------------
+// ------------------------------------ Disciplines ------------------------------------
+// ------------------------------------------------------------------------       
 
 //Toutes les disciplines (pour l'instant ne prend en compte que les formations mais il faudra ajouter les labo et les ED)
 
@@ -115,6 +118,17 @@ class StatistiquesController extends Controller
 
         //toutes les formations de tous établissements
 
+// ------------------------------------------------------------------------
+// ------------------------------------ Localisation ------------------------------------
+// ------------------------------------------------------------------------  
+
+        // //récupérer toutes les formations, leurs disciplines et le nombre de disciplines liées NW3
+        // $query = $em->createQuery('SELECT d as item, COUNT(f.nom) as nb, f.nom as formation, f.formationId as id FROM AppBundle:Discipline d JOIN d.formation f WHERE d.type=:type GROUP BY d ORDER BY nb DESC')->setMaxResults(20);
+        // $query->setParameter('type', 'NW3');
+        // $allNw3DisciplinesFormations = $query->getResult();
+
+
+
         return $this->render('stats.html.twig', array(
         	'eds' => $eds,
         	'etabs' => $etabs,
@@ -136,6 +150,7 @@ class StatistiquesController extends Controller
             //entités
             'labos' => $labos,
             'disciplines' => $disciplines,
+            'localisations' =>$localisations,
         	));
     }
 
