@@ -59,7 +59,7 @@
         <br><br>
         <h1 class="header center" style="color:white;">La COMUE HESAM</h1>
         <div class="row center">
-                  <h5 class="header col s12 light" style="color:white;">Visualisation des compétences de la COMUE heSam Université</h5>
+                  <h5 class="header col s12 light" style="color:white;">Visam comprend {{etabs|length}} établissements</h5>
         </div>
         <div class="row center">
         </div>
@@ -219,47 +219,71 @@
 
 
 
-          <h3>Disciplines les plus fréquentes</h3>
-          <table class="striped">
-          {% for discipline in allDisciplinesFormations %}
-                <tr><td>{{discipline.item.type}}</td> <td>{{discipline.item.nom}}({{discipline.nb}})</td></tr> 
- {#                ({{discipline.item.formation|length}}) #}
-          {% endfor %}
-          </table>
+          <div class="row">
 
-          <h3>Disciplines HCERES les plus fréquentes</h3>
+            <div class='col s8'>
+              <h3>Les disciplines les plus fréquentes</h3>
+              <p>Les disciplines les plus populaires pour l'ensemble des formations de la COMUE et pour tous types de disciplines (CNU, HCERES, SISE et NW3)</p> 
+              <table class="striped">
+              {% for discipline in allDisciplinesFormations %}
+                    <tr><td>{{discipline.item.type}}</td><td>{{discipline.item.nom}}</td><td>{{discipline.nb}}</td></tr>
+     {#                ({{discipline.item.formation|length}}) #}
+              {% endfor %}
+              </table>
+            </div>
 
-          {% for discipline in allHceresDisciplinesFormations %}
-                {{discipline.item.nom}}({{discipline.nb}}) /
-          {% endfor %}
+            <div class="col s4">
+              <h3>Disciplines NW3 les plus fréquentes</h3>
+              <table class="striped">
+              {% for discipline in allNw3DisciplinesFormations %}
+                  <tr><td>{{discipline.item.nom}}</td><td>{{discipline.nb}}</td></tr>
+              {% endfor %}
+              </table>
+
+              <p>Les données NW3 n'étaient pas obligatoires lors de la collecte, certaines formations ou laboratoires peuvent avoir choisi de ne pas y avoir recourt.</p>
+            </div>
+          </div>
           
-          <h3>Disciplines SISE les plus fréquentes</h3>
 
-          {% for discipline in allSiseDisciplinesFormations %}
-                {{discipline.item.nom}}({{discipline.nb}}) /
-          {% endfor %}
-          
-          <h3>Disciplines CNU les plus fréquentes</h3>
+          <div class="row">
+            <div class="col s4">
+            <h3>Disciplines CNU les plus fréquentes</h3>
+            <table class="striped">
+            {% for discipline in allCnuDisciplinesFormations %}
+                  <tr><td>{{discipline.item.nom}}</td><td>{{discipline.nb}}</td></tr>
+            {% endfor %}
+            </table>
+            </div>
 
-          {% for discipline in allCnuDisciplinesFormations %}
-              {{discipline.item.nom}}({{discipline.nb}}) /
-          {% endfor %}
+            <div class="col s4">
+            <h3>Disciplines HCERES les plus fréquentes</h3>
+            <table class="striped">
+            {% for discipline in allHceresDisciplinesFormations %}
+                  <tr><td>{{discipline.item.nom}}</td><td>{{discipline.nb}}</td></tr>
+            {% endfor %}
+            </table>
+            </div>
 
-          <h3>Disciplines NW3 les plus fréquentes</h3>
+            <div class="col s4">
+            <h3>Disciplines SISE les plus fréquentes</h3>
+            <table class="striped">
+            {% for discipline in allSiseDisciplinesFormations %}
+                  <tr><td>{{discipline.item.nom}}</td><td>{{discipline.nb}}</td></tr>
+            {% endfor %}
+            </table>
+            </div>
+          </div>
 
-          {% for discipline in allNw3DisciplinesFormations %}
-              {{discipline.item.nom}}({{discipline.nb}}) /
-          {% endfor %}
         </article>
     </div>
 
-  <div id="index-banner" class="parallax-container">
+    <div id="index-banner" class="parallax-container">
     <div class="section no-pad-bot">
       <div class="container">
         <br><br>
-        <h1 class="header center" style="color:white;">Ecoles Doctorales</h1>
+        <h1 class="header center" style="color:white;">Laboratoires</h1>
         <div class="row center">
-          <h5 class="header col s12 light" style="color:white;">La base contient actuellement écoles doctorales</h5>
+          <h5 class="header col s12 light" style="color:white;">La base contient actuellement {{labos|length}} laboratoires</h5>
  </div>
         <div class="row center">
         </div>
@@ -268,9 +292,88 @@
     </div>
     <div class="parallax"><img src="img/labo.jpg" alt="Unsplashed background img 1"></div>
   </div>
+    
+
+ <div class="container">
+  <article>
+    <h2>Disciplines & Laboratoires</h2>
+
+     <div class="row">
+
+            <div class='col s8'>
+              <h3>Les disciplines les plus fréquentes</h3>
+              <p>Les disciplines les plus populaires pour l'ensemble des laboratoires de la COMUE et pour tous types de disciplines (CNU, HCERES, SISE et NW3)</p> 
+              <table class="striped">
+              {% for discipline in allDisciplinesLabos %}
+                    <tr><td>{{discipline.item.type}}</td><td>{{discipline.item.nom}}</td><td>{{discipline.nb}}</td></tr>
+     {#                ({{discipline.item.formation|length}}) #}
+              {% endfor %}
+              </table>
+            </div>
+
+            <div class="col s4">
+              <h3>Disciplines NW3 les plus fréquentes</h3>
+              <table class="striped">
+              {% for discipline in allNw3DisciplinesLabos %}
+                  <tr><td>{{discipline.item.nom}}</td><td>{{discipline.nb}}</td></tr>
+              {% endfor %}
+              </table>
+
+              <p>Les données NW3 n'étaient pas obligatoires lors de la collecte, certaines formations ou laboratoires peuvent avoir choisi de ne pas y avoir recourt.</p>
+            </div>
+          </div>
+          
+
+          <div class="row">
+            <div class="col s4">
+            <h3>Disciplines CNU les plus fréquentes</h3>
+            <table class="striped">
+            {% for discipline in allCnuDisciplinesLabos %}
+                  <tr><td>{{discipline.item.nom}}</td><td>{{discipline.nb}}</td></tr>
+            {% endfor %}
+            </table>
+            </div>
+
+            <div class="col s4">
+            <h3>Disciplines HCERES les plus fréquentes</h3>
+            <table class="striped">
+            {% for discipline in allHceresDisciplinesLabos %}
+                  <tr><td>{{discipline.item.nom}}</td><td>{{discipline.nb}}</td></tr>
+            {% endfor %}
+            </table>
+            </div>
+
+            <div class="col s4">
+            <h3>Disciplines SISE les plus fréquentes</h3>
+            <table class="striped">
+            {% for discipline in allSiseDisciplinesLabos %}
+                  <tr><td>{{discipline.item.nom}}</td><td>{{discipline.nb}}</td></tr>
+            {% endfor %}
+            </table>
+            </div>
+          </div>
+
+  </article>
+ </div>   
+
+  <div id="index-banner" class="parallax-container">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <br><br>
+        <h1 class="header center" style="color:white;">Ecoles Doctorales</h1>
+        <div class="row center">
+          <h5 class="header col s12 light" style="color:white;">La base contient actuellement {{eds|length}} écoles doctorales</h5>
+ </div>
+        <div class="row center">
+        </div>
+        <br><br>
+      </div>
+    </div>
+    <div class="parallax"><img src="img/ed.png" alt="Unsplashed background img 1"></div>
+  </div>
 
   <div class="container">
-        <article>
+{#         <article>
         <h2>Les ED d'un établissement</h2>
 
         <p>Si je fais un focus sur un établissement, par exemple {{etabs[1].nom}}, ses ED sont :
@@ -280,7 +383,7 @@
             {% endfor %}
             </ul>
         </p>
-        </article>
+        </article> #}
 
 
         <article>
@@ -289,18 +392,14 @@
 
 
 
-        <ul>
+        <ul class="collection">
         {% for etab in etabs %}
-            <li>{{etab.nom}} ({{etab.ed|length}})
-                <ul>
+            <li class="collection-item">{{etab.nom}} ({{etab.ed|length}})
+                <ol>
                 {% for eds in etab.ed %}
                     <li>{{eds.nom}}</li>
-                    {% for disci in eds.discipline %}
-                    {{dump(disci)}}
-                      ss{{disci.nom}}
-                    {% endfor %}
                 {% endfor %}
-                </ul>
+                </ol>
             </li>
         {% endfor %}
         </ul>
@@ -309,7 +408,7 @@
 
 
     <div class="container">
-      <article>
+{#       <article>
         <h2>Les localisations</h2>
 
             {% for localisation in localisations %}
@@ -330,9 +429,17 @@
           {{item.adresse}}
         {% endfor %}
       </article>
-    </div>
+    </div> #}
 
-    <img src="img/map.png" alt="">
+{#     <img src="img/map.png" alt=""> #}
+
+
+
+  </div>
+
+  <div class="row">
+    <div class='overlay'></div>
+    <iframe src="http://localhost:8888/2016/map/map-visam/#/" frameborder="0" class ='col s12' id='map' ></iframe>
   </div>
 
 

@@ -46,3 +46,8 @@
 .card-content{
   overflow:auto;
 }
+
+#map{
+  height:700px;
+}
+
