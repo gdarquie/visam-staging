@@ -158,6 +158,10 @@ class StatistiquesController extends Controller
 // ------------------------------------ labo ------------------------------------
 // ------------------------------------------------------------------------  
 
+        //effectifs
+
+        //???
+
         return $this->render('stats.html.twig', array(
         	'eds' => $eds,
         	'etabs' => $etabs,

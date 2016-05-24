@@ -29,23 +29,81 @@
   
     </header>
     <section class="row">
-      <h2>Visam : première démo</h2>
-      <article class="col s5">
-        <h3>Explorer les données de la COMUE HESAM</h3>
+      <h2>Visam : Exploration des données</h2>
+      <article class="col s4">
+        <h3>3ème vague de données</h3>
 
         <p>Nous disposons actuellement d'une grande partie des données des établissements. Nous proposons un premier parcours à partir des informations qu'elles produisent afin de de rendre compte de l'état de la collecte et de l'importation des données et, nous l'espérons, de mettre en avant plusieurs scénarios d'exploitation.</p>
 
       </article>
 
-        <article class="col s7">
-            <h3>Import des données</h3>
-            
-            <ul>
-              <li>Etablissements dont les laboratoires sont importés :</li>
-              <li>Etablissements dont les formations sont importés : </li>
-              <li>Etablissements dont les ED sont importés :</li>
-            </ul>
+      <article class="col s4">
 
+        <h3>Etablissements (6/10)</h3>
+
+        <div>
+          <h4>Formations</h4>
+
+            <ul class="collection">
+              <li class="collection-item">ENSCI</li>
+              <li class="collection-item">CMS</li>
+              <li class="collection-item">ENSAM</li>
+              <li class="collection-item">Ecole du Louvre</li>
+              <li class="collection-item">INP</li>
+              <li class="collection-item">ENA</li>
+            </ul>
+        </div>
+      
+
+        <h4>Unités de recherche (8/11)</h4>
+
+          <ul class="collection">
+            <li class="collection-item">CNAM</li>
+            <li class="collection-item">Paris 1</li>
+            <li class="collection-item">ENSAM</li>
+            <li class="collection-item">Ecole du Louvre</li>
+            <li class="collection-item">INP</li>
+            <li class="collection-item">ENA</li>
+            <li class="collection-item">INED</li>
+            <li class="collection-item">INHA</li>
+          </ul>
+        <ul>
+          
+        </ul>
+
+        
+      </article>
+
+      <article class="col s4">
+            <h3>Import des données</h3>
+
+            <ul class="collection">
+              <li class="collection-item">Domaines
+              <ul class="collection">
+                <li class="collection-item">Disciplines</li>
+              </ul>
+              <li class="collection-item">Disciplines</li>
+              </li>
+              <li class="collection-item">Formations
+                <ul class="collection">
+                  <li class="collection-item">Disciplines (HCERES,CNU,SISE,NW3)</li>
+                  <li class="collection-item">Etablissements</li>
+                  <li class="collection-item">Tags</li>
+                </ul>
+              </li>
+              <li class="collection-item">Laboratoires
+              <ul class="collection">
+                <li class="collection-item">Disciplines</li>
+                <li class="collection-item">Etablissements</li>
+              </ul>
+            </li>
+            <li class="collection-item">Localisations
+            <ul class="collection" >
+              <li class="collection-item">Etablissements</li>
+            </ul>
+            </li>
+          </ul>
+            
         </article>
 
        
@@ -84,7 +142,7 @@
             <p>Selon les données entrées dans la base de données ViSam, HeSam compte :
                 <ul>
                     <li><span class="number">{{nbEtud}}</span> étudiants</li>
-                    <li>enseignants et chercheurs</li>
+                    <li><span class="number">{{nbEtud}}</span> enseignants et chercheurs (en cours de correction)</li>
                 </ul></p>
         </article>
 
@@ -92,7 +150,11 @@
             <h2>Répartition des étudiants par établissement</h2>
             <p>Pour réaliser les visualisations, il faut que je puisse faire communiquer les données de Visam avec JS (ce que Twig ne permet pas).</p>
             <p>Pour y parvenir je dois exporter le code contenant le contenu des visualisations en JSON.</p>
-            <div id="piechart"></div>
+{#             <div id="piechart"></div> #}
+
+            <div id="etud-stat">
+              <svg style="height:500px;"></svg>
+            </div>
         </article>
 
         <article>
@@ -204,14 +266,10 @@
 
         <article>
             <h2>Répartition des formations par établissements</h2>
-              {% for etab in etabs %}
-                  <h5>{{etab.nom}} ({{etab.formation|length}})</h5>
-                <!--<p>
-                      {% for formation in etab.formation %}
-                          {{formation.nom}} /
-                      {% endfor %}
-                  </p> -->
-              {% endfor %}
+            <div id="forma-etab">
+              <svg style="height:500px;"></svg>
+            </div>
+            
         </article>
 
         <article>
@@ -631,7 +689,7 @@
     </script>
 
     <script>
-            //Regular pie chart example
+      //Regular pie chart example
       nv.addGraph(function() {
         var chart = nv.models.pieChart()
             .x(function(d) { return d.label })
@@ -665,7 +723,7 @@
         return chart;
       });
 
-            //Donut chart example
+      //Donut chart example
       nv.addGraph(function() {
         var chart = nv.models.pieChart()
             .x(function(d) { return d.label })
@@ -683,6 +741,46 @@
 
         return chart;
       });
+
+
+      //Donut chart example
+      nv.addGraph(function() {
+        var chart = nv.models.pieChart()
+            .x(function(d) { return d.label })
+            .y(function(d) { return d.value })
+            .showLabels(true)     //Display pie labels
+            .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+            .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+            .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+            .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
+            ;
+          d3.select("#etud-stat svg")
+              .datum(etudData ())
+              .transition().duration(350)
+              .call(chart);
+
+        return chart;
+      });
+
+      //Répartition du nombre de formations par établissements
+      nv.addGraph(function() {
+        var chart = nv.models.pieChart()
+            .x(function(d) { return d.label })
+            .y(function(d) { return d.value })
+            .showLabels(true)     //Display pie labels
+            .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+            .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+            .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+            .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
+            ;
+          d3.select("#forma-etab svg")
+              .datum(formaEtabData ())
+              .transition().duration(350)
+              .call(chart);
+
+        return chart;
+      });
+
 
       // nv.addGraph(function() {
       //   var chart = nv.models.discreteBarChart()
@@ -716,6 +814,25 @@ function chercheursData() {
       {% for etab in etabs|sort %}
           {"label" : "{{etab.nom}}",
           "value" : "{{etab.chercheurs}}"},
+      {% endfor %}
+    ];
+  }
+
+  function etudData() {
+  return  [
+      {% for etab in etabs|sort %}
+          {"label" : "{{etab.nom}}",
+          "value" : "{{etab.etudiants}}"},
+      {% endfor %}
+    ];
+  }
+
+//Nombre de formations par établissements
+  function formaEtabData() {
+  return  [
+       {% for etab in etabs %}
+          {"label" : "{{etab.nom}}",
+          "value" : "{{etab.formation|length}}"},
       {% endfor %}
     ];
   }
