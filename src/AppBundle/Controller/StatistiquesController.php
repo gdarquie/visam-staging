@@ -117,6 +117,13 @@ class StatistiquesController extends Controller
         $query->setParameter('type', 'NW3');
         $allNw3DisciplinesFormations = $query->getResult();
 
+//Domaine des formations
+
+        //récupérer toutes les formations, leurs disciplines et le nombre de disciplines liées HCERES et les grouper par domaine
+        // $query = $em->createQuery('SELECT d as item, COUNT(f.nom) as nb, f.nom as formation, f.formationId as id FROM AppBundle:Discipline d JOIN d.formation f WHERE d.type=:type GROUP BY d ORDER BY nb DESC')->setMaxResults(20);
+        // $query->setParameter('type', 'HCERES');
+        // $allHceresDisciplinesFormations = $query->getResult();
+
 //Disciplines des labos
 
         //récupérer tous les labos, leurs disciplines et le nombre de disciplines liées
@@ -145,6 +152,7 @@ class StatistiquesController extends Controller
         $allNw3DisciplinesLabos = $query->getResult();
 
         //toutes les formations de tous établissements
+
 
 // ------------------------------------------------------------------------
 // ------------------------------------ Localisation ------------------------------------

@@ -1,0 +1,72 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Axe
+ *
+ * @ORM\Table(name="axe", indexes={@ORM\Index(name="fk_axe_labo1_idx", columns={"labo_id"})})
+ * @ORM\Entity
+ */
+class Axe
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="string", length=255, nullable=true)
+     */
+    private $nom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", length=65535, nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="axe_id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $axeId;
+
+    /**
+     * @var \AppBundle\Entity\Labo
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Labo")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
+     * })
+     */
+    private $labo;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag", inversedBy="axe")
+     * @ORM\JoinTable(name="axe_has_tag",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="axe_id", referencedColumnName="axe_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="tag_id", referencedColumnName="tag_id")
+     *   }
+     * )
+     */
+    private $tag;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tag = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
+

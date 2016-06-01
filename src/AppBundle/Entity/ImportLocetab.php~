@@ -1,0 +1,40 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ImportLocetab
+ *
+ * @ORM\Table(name="import_locEtab")
+ * @ORM\Entity
+ */
+class ImportLocetab
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="loc", type="string", length=255, nullable=true)
+     */
+    private $loc;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="etab", type="integer", nullable=true)
+     */
+    private $etab;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+
+}
+

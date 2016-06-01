@@ -269,13 +269,17 @@
             <div id="forma-etab">
               <svg style="height:500px;"></svg>
             </div>
-            
+
         </article>
 
         <article>
           <h2>Formations & Disciplines</h2>
-
-
+          
+{#         <article>
+            <h2>Les disciplines les plus fréquentes</h2>
+            <div id="formationTopDiscipline"><svg style="height:400px;"></svg></div>
+        </article> #}
+          
 
           <div class="row">
 
@@ -782,6 +786,24 @@
       });
 
 
+        //Colonnes pour les disciplines les plus populaires
+        nv.addGraph(function() {
+        var chart = nv.models.discreteBarChart()
+            .x(function(d) { return d.label;})    //Specify the data accessors.
+            .y(function(d) { return d.value })
+            .staggerLabels(true)    //Too many bars and not enough room? Try staggering labels.
+           // .tooltips(false)        //Don't show tooltips
+           // .showValues(true)       //...instead, show the bar value right on top of each bar.
+           // .transitionDuration(350)
+            ;
+        d3.select('#formationTopDiscipline svg')
+            .datum(formationTopDisciplineData ())
+            .call(chart);
+        nv.utils.windowResize(chart.update);
+        return chart;
+      });
+
+
       // nv.addGraph(function() {
       //   var chart = nv.models.discreteBarChart()
       //       .x(function(d) { return d.label })    //Specify the data accessors.
@@ -833,6 +855,17 @@ function chercheursData() {
        {% for etab in etabs %}
           {"label" : "{{etab.nom}}",
           "value" : "{{etab.formation|length}}"},
+      {% endfor %}
+    ];
+  }
+
+
+//20 disciplines les plus populaires
+  function formationTopDisciplineData() {
+  return  [
+       {% for discipline in allDisciplinesFormations %}
+          {"label" : "{{discipline.item.nom}}",
+          "value" : "{{discipline.item.formation|length}}"},
       {% endfor %}
     ];
   }

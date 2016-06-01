@@ -1,0 +1,54 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ImportUfr
+ *
+ * @ORM\Table(name="import_ufr")
+ * @ORM\Entity
+ */
+class ImportUfr
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ufr", type="string", length=500, nullable=true)
+     */
+    private $ufr;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="formation", type="string", length=255, nullable=true)
+     */
+    private $formation;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="niveau", type="string", length=255, nullable=true)
+     */
+    private $niveau;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="url", type="string", length=255, nullable=true)
+     */
+    private $url;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+
+}
+

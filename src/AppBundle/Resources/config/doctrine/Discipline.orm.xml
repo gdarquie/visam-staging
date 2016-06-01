@@ -39,6 +39,11 @@
         <option name="unsigned"/>
       </options>
     </field>
+    <field name="hesametteId" type="integer" column="hesamette_id" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
     <many-to-many field="ufr" target-entity="Ufr" mapped-by="discipline" fetch="LAZY"/>
     <many-to-many field="labo" target-entity="Labo" inversed-by="discipline" fetch="LAZY">
       <join-table name="discipline_has_labo">

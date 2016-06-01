@@ -57,6 +57,13 @@ class Discipline
     /**
      * @var integer
      *
+     * @ORM\Column(name="hesamette_id", type="integer", nullable=true)
+     */
+    private $hesametteId;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="discipline_id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
@@ -269,6 +276,30 @@ class Discipline
     public function getDomaineId()
     {
         return $this->domaineId;
+    }
+
+    /**
+     * Set hesametteId
+     *
+     * @param integer $hesametteId
+     *
+     * @return Discipline
+     */
+    public function setHesametteId($hesametteId)
+    {
+        $this->hesametteId = $hesametteId;
+
+        return $this;
+    }
+
+    /**
+     * Get hesametteId
+     *
+     * @return integer
+     */
+    public function getHesametteId()
+    {
+        return $this->hesametteId;
     }
 
     /**
