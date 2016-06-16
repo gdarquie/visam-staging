@@ -8,10 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
-use AppBundle\Entity\Ed;
-use AppBundle\Entity\Etablissement;
-use AppBundle\Entity\Formation;
-use AppBundle\Entity\Labo;
+
 
 class StatistiquesController extends Controller
 {
@@ -59,7 +56,7 @@ class StatistiquesController extends Controller
 //Toutes les disciplines (pour l'instant ne prend en compte que les formations mais il faudra ajouter les labo et les ED)
 
         //récupérer toutes les formations, leurs disciplines et le nombre de disciplines liées
-        $query = $em->createQuery('SELECT d as item, COUNT(f.nom) as nb, f.nom as formation, f.formationId as id FROM AppBundle:Discipline d JOIN d.formation f GROUP BY d ORDER BY nb DESC')->setMaxResults(20);
+        $query = $em->createQuery('SELECT d as item, l.nom as labo, COUNT(f) as nb, f.nom as formation, f.formationId as id FROM AppBundle:Discipline d JOIN d.formation f JOIN d.labo l GROUP BY d ORDER BY nb DESC')->setMaxResults(20);
         $allDisciplines = $query->getResult();
 
         //récupérer toutes les formations, leurs disciplines et le nombre de disciplines liées SISE
@@ -83,6 +80,12 @@ class StatistiquesController extends Controller
         $query->setParameter('type', 'NW3');
         $allNw3Disciplines = $query->getResult();
 
+
+//Les Hésamettes
+
+        //nombre de formations par hesamettes 
+        $query = $em->createQuery('SELECT d.nom, d.hesametteId FROM AppBundle:Discipline d')->setMaxResults(20);
+        $formationsHesamette = $query->getResult(); // continuer cette requête
 
 //Domaines (en cours)
 
@@ -165,10 +168,14 @@ class StatistiquesController extends Controller
 // ------------------------------------------------------------------------
 // ------------------------------------ labo ------------------------------------
 // ------------------------------------------------------------------------  
+       
+        //nb de types pour tous les labos
+        $query = $em->createQuery('SELECT l.type as type, COUNT(l.nom) as nb FROM AppBundle:Labo l WHERE l.type != :type GROUP BY l.type ORDER BY nb DESC');
+        $query->setParameter('type', '');
+        $nbTypeLabos = $query->getResult();
 
         //effectifs
 
-        //???
 
         return $this->render('stats.html.twig', array(
         	'eds' => $eds,
@@ -188,12 +195,14 @@ class StatistiquesController extends Controller
             'allHceresDisciplinesFormations'=>$allHceresDisciplinesFormations,
             'allCnuDisciplinesFormations'=>$allCnuDisciplinesFormations,
             'allNw3DisciplinesFormations'=>$allNw3DisciplinesFormations,
-            //formations>Labos
+            //Labos>Disciplines
             'allDisciplinesLabos'=>$allDisciplinesLabos,
             'allSiseDisciplinesLabos'=>$allSiseDisciplinesLabos,
             'allHceresDisciplinesLabos'=>$allHceresDisciplinesLabos,
             'allCnuDisciplinesLabos'=>$allCnuDisciplinesLabos,
             'allNw3DisciplinesLabos'=>$allNw3DisciplinesLabos,
+            //labos
+            'nbTypeLabos' => $nbTypeLabos,
             //entités
             'labos' => $labos,
             'disciplines' => $disciplines,

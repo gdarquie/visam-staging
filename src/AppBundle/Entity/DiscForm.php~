@@ -50,5 +50,110 @@ class DiscForm
     private $id;
 
 
-}
 
+    /**
+     * Set formation
+     *
+     * @param string $formation
+     *
+     * @return DiscForm
+     */
+    public function setFormation($formation)
+    {
+        $this->formation = $formation;
+
+        return $this;
+    }
+
+    /**
+     * Get formation
+     *
+     * @return string
+     */
+    public function getFormation()
+    {
+        return $this->formation;
+    }
+
+    /**
+     * Set discipline
+     *
+     * @param string $discipline
+     *
+     * @return DiscForm
+     */
+    public function setDiscipline($discipline)
+    {
+        $this->discipline = $discipline;
+
+        return $this;
+    }
+
+    /**
+     * Get discipline
+     *
+     * @return string
+     */
+    public function getDiscipline()
+    {
+        return $this->discipline;
+    }
+
+    /**
+     * Set formationId
+     *
+     * @param integer $formationId
+     *
+     * @return DiscForm
+     */
+    public function setFormationId($formationId)
+    {
+        $this->formationId = $formationId;
+
+        return $this;
+    }
+
+    /**
+     * Get formationId
+     *
+     * @return integer
+     */
+    public function getFormationId()
+    {
+        return $this->formationId;
+    }
+
+    /**
+     * Set disciplineId
+     *
+     * @param integer $disciplineId
+     *
+     * @return DiscForm
+     */
+    public function setDisciplineId($disciplineId)
+    {
+        $this->disciplineId = $disciplineId;
+
+        return $this;
+    }
+
+    /**
+     * Get disciplineId
+     *
+     * @return integer
+     */
+    public function getDisciplineId()
+    {
+        return $this->disciplineId;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+}

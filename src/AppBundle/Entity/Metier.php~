@@ -50,5 +50,96 @@ class Metier
         $this->formation = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-}
 
+    /**
+     * Set nom
+     *
+     * @param string $nom
+     *
+     * @return Metier
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * Get nom
+     *
+     * @return string
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Metier
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Get metierId
+     *
+     * @return integer
+     */
+    public function getMetierId()
+    {
+        return $this->metierId;
+    }
+
+    /**
+     * Add formation
+     *
+     * @param \AppBundle\Entity\Formation $formation
+     *
+     * @return Metier
+     */
+    public function addFormation(\AppBundle\Entity\Formation $formation)
+    {
+        $this->formation[] = $formation;
+
+        return $this;
+    }
+
+    /**
+     * Remove formation
+     *
+     * @param \AppBundle\Entity\Formation $formation
+     */
+    public function removeFormation(\AppBundle\Entity\Formation $formation)
+    {
+        $this->formation->removeElement($formation);
+    }
+
+    /**
+     * Get formation
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFormation()
+    {
+        return $this->formation;
+    }
+}

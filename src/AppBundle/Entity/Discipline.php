@@ -54,9 +54,12 @@ class Discipline
      */
     private $domaineId;
 
+
     /**
      * @var integer
      *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Hesamette", inversedBy="disciplines") 
+     * @ORM\JoinColumn(name="hesamette_id", referencedColumnName="hesamette_id") 
      * @ORM\Column(name="hesamette_id", type="integer", nullable=true)
      */
     private $hesametteId;

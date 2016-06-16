@@ -135,5 +135,342 @@ class Ufr
         $this->formation = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-}
 
+    /**
+     * Set nom
+     *
+     * @param string $nom
+     *
+     * @return Ufr
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * Get nom
+     *
+     * @return string
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * Set code
+     *
+     * @param string $code
+     *
+     * @return Ufr
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * Get code
+     *
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Ufr
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set lien
+     *
+     * @param string $lien
+     *
+     * @return Ufr
+     */
+    public function setLien($lien)
+    {
+        $this->lien = $lien;
+
+        return $this;
+    }
+
+    /**
+     * Get lien
+     *
+     * @return string
+     */
+    public function getLien()
+    {
+        return $this->lien;
+    }
+
+    /**
+     * Set contact
+     *
+     * @param string $contact
+     *
+     * @return Ufr
+     */
+    public function setContact($contact)
+    {
+        $this->contact = $contact;
+
+        return $this;
+    }
+
+    /**
+     * Get contact
+     *
+     * @return string
+     */
+    public function getContact()
+    {
+        return $this->contact;
+    }
+
+    /**
+     * Set effectif
+     *
+     * @param integer $effectif
+     *
+     * @return Ufr
+     */
+    public function setEffectif($effectif)
+    {
+        $this->effectif = $effectif;
+
+        return $this;
+    }
+
+    /**
+     * Get effectif
+     *
+     * @return integer
+     */
+    public function getEffectif()
+    {
+        return $this->effectif;
+    }
+
+    /**
+     * Set etudiants
+     *
+     * @param integer $etudiants
+     *
+     * @return Ufr
+     */
+    public function setEtudiants($etudiants)
+    {
+        $this->etudiants = $etudiants;
+
+        return $this;
+    }
+
+    /**
+     * Get etudiants
+     *
+     * @return integer
+     */
+    public function getEtudiants()
+    {
+        return $this->etudiants;
+    }
+
+    /**
+     * Get ufrId
+     *
+     * @return integer
+     */
+    public function getUfrId()
+    {
+        return $this->ufrId;
+    }
+
+    /**
+     * Set etablissement
+     *
+     * @param \AppBundle\Entity\Etablissement $etablissement
+     *
+     * @return Ufr
+     */
+    public function setEtablissement(\AppBundle\Entity\Etablissement $etablissement = null)
+    {
+        $this->etablissement = $etablissement;
+
+        return $this;
+    }
+
+    /**
+     * Get etablissement
+     *
+     * @return \AppBundle\Entity\Etablissement
+     */
+    public function getEtablissement()
+    {
+        return $this->etablissement;
+    }
+
+    /**
+     * Add labo
+     *
+     * @param \AppBundle\Entity\Labo $labo
+     *
+     * @return Ufr
+     */
+    public function addLabo(\AppBundle\Entity\Labo $labo)
+    {
+        $this->labo[] = $labo;
+
+        return $this;
+    }
+
+    /**
+     * Remove labo
+     *
+     * @param \AppBundle\Entity\Labo $labo
+     */
+    public function removeLabo(\AppBundle\Entity\Labo $labo)
+    {
+        $this->labo->removeElement($labo);
+    }
+
+    /**
+     * Get labo
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLabo()
+    {
+        return $this->labo;
+    }
+
+    /**
+     * Add discipline
+     *
+     * @param \AppBundle\Entity\Discipline $discipline
+     *
+     * @return Ufr
+     */
+    public function addDiscipline(\AppBundle\Entity\Discipline $discipline)
+    {
+        $this->discipline[] = $discipline;
+
+        return $this;
+    }
+
+    /**
+     * Remove discipline
+     *
+     * @param \AppBundle\Entity\Discipline $discipline
+     */
+    public function removeDiscipline(\AppBundle\Entity\Discipline $discipline)
+    {
+        $this->discipline->removeElement($discipline);
+    }
+
+    /**
+     * Get discipline
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDiscipline()
+    {
+        return $this->discipline;
+    }
+
+    /**
+     * Add localisation
+     *
+     * @param \AppBundle\Entity\Localisation $localisation
+     *
+     * @return Ufr
+     */
+    public function addLocalisation(\AppBundle\Entity\Localisation $localisation)
+    {
+        $this->localisation[] = $localisation;
+
+        return $this;
+    }
+
+    /**
+     * Remove localisation
+     *
+     * @param \AppBundle\Entity\Localisation $localisation
+     */
+    public function removeLocalisation(\AppBundle\Entity\Localisation $localisation)
+    {
+        $this->localisation->removeElement($localisation);
+    }
+
+    /**
+     * Get localisation
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLocalisation()
+    {
+        return $this->localisation;
+    }
+
+    /**
+     * Add formation
+     *
+     * @param \AppBundle\Entity\Formation $formation
+     *
+     * @return Ufr
+     */
+    public function addFormation(\AppBundle\Entity\Formation $formation)
+    {
+        $this->formation[] = $formation;
+
+        return $this;
+    }
+
+    /**
+     * Remove formation
+     *
+     * @param \AppBundle\Entity\Formation $formation
+     */
+    public function removeFormation(\AppBundle\Entity\Formation $formation)
+    {
+        $this->formation->removeElement($formation);
+    }
+
+    /**
+     * Get formation
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFormation()
+    {
+        return $this->formation;
+    }
+}
