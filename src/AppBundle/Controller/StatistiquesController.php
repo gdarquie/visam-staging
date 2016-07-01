@@ -86,7 +86,6 @@ class StatistiquesController extends Controller
         //nombre de formations par hesamettes
         $query = $em->createQuery('SELECT h.nom as hesamette, COUNT(f) as nb, f.nom as formation FROM AppBundle:Discipline d JOIN d.formation f JOIN d.hesamette h GROUP BY h ORDER BY nb DESC');
         $formationsHesamette = $query->getResult();
-        //'SELECT d.nom, h.nom FROM AppBundle:Discipline d JOIN d.hesamette h'
 
 //Domaines (en cours)
 
@@ -150,12 +149,14 @@ class StatistiquesController extends Controller
         $allCnuDisciplinesLabos = $query->getResult();
 
 
-        //récupérer toutes les labos, leurs disciplines et le nombre de disciplines liées NW3
+        //récupérer tous les labos, leurs disciplines et le nombre de disciplines liées NW3
         $query = $em->createQuery('SELECT d as item, COUNT(f.nom) as nb, f.nom as labo, f.laboId as id FROM AppBundle:Discipline d JOIN d.labo f WHERE d.type=:type GROUP BY d ORDER BY nb DESC')->setMaxResults(20);
         $query->setParameter('type', 'NW3');
         $allNw3DisciplinesLabos = $query->getResult();
 
-        //toutes les formations de tous établissements
+        //répartition des hesamettes par labos
+        $query = $em->createQuery('SELECT h.nom as hesamette, COUNT(l) as nb, l.nom as labo FROM AppBundle:Discipline d JOIN d.labo l JOIN d.hesamette h GROUP BY h ORDER BY nb DESC');
+        $labosHesamette = $query->getResult();
 
 
 // ------------------------------------------------------------------------
@@ -203,6 +204,7 @@ class StatistiquesController extends Controller
             'allHceresDisciplinesLabos'=>$allHceresDisciplinesLabos,
             'allCnuDisciplinesLabos'=>$allCnuDisciplinesLabos,
             'allNw3DisciplinesLabos'=>$allNw3DisciplinesLabos,
+            'labosHesamette' =>$labosHesamette,
             //labos
             'nbTypeLabos' => $nbTypeLabos,
             //entités
