@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Valorisation" table="valorisation">
+    <indexes>
+      <index name="fk_valorisation_localisation1_idx" columns="localisation_id"/>
+    </indexes>
+    <id name="valorisationId" type="integer" column="valorisation_id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nom" type="string" column="nom" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="lien" type="string" column="lien" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="description" type="text" column="description" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="timestamp" type="datetime" column="timestamp" nullable="false">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
+      </options>
+    </field>
+    <many-to-one field="localisation" target-entity="Localisation" fetch="LAZY">
+      <join-columns>
+        <join-column name="localisation_id" referenced-column-name="localisation_id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-many field="etablissement" target-entity="Etablissement" mapped-by="valorisation" fetch="LAZY"/>
+  </entity>
+</doctrine-mapping>

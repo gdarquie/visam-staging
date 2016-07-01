@@ -23,7 +23,30 @@ class DefaultController extends Controller
             'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..'),
         ]);
     }
+    
+    /**
+     * @Route("/rechercher", name="search")
+     */
+    public function rechercheAction(Request $request)
+    {
+        return $this->render('rechercher.html.twig'
+        );
+    }
 
+        /**
+     * @Route("/recherche/{id}", name="recherche")
+     */
+    public function laboratoireAction($id)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $laboratoire = $em->getRepository('AppBundle:Labo')->findOneByLaboId($id);
+        
+        return $this->render('notice/laboratoire.html.twig', array(
+            'laboratoire' => $laboratoire,
+        ));
+    }
 
     /**
      * @Route("/etablissement/{id}", name="etablissement")
@@ -42,21 +65,6 @@ class DefaultController extends Controller
             'etablissement' => $etablissement,
             'eds' => $eds,
             'formations' => $formations,
-        ));
-    }
-
-    /**
-     * @Route("/recherche/{id}", name="recherche")
-     */
-    public function laboratoireAction($id)
-    {
-
-        $em = $this->getDoctrine()->getManager();
-
-        $laboratoire = $em->getRepository('AppBundle:Labo')->findOneByLaboId($id);
-        
-        return $this->render('notice/laboratoire.html.twig', array(
-            'laboratoire' => $laboratoire,
         ));
     }
 

@@ -76,6 +76,13 @@ class Localisation
     private $pays;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="timestamp", type="datetime", nullable=false)
+     */
+    private $timestamp = 'CURRENT_TIMESTAMP';
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="localisation_id", type="integer")
@@ -386,6 +393,30 @@ class Localisation
     public function getPays()
     {
         return $this->pays;
+    }
+
+    /**
+     * Set timestamp
+     *
+     * @param \DateTime $timestamp
+     *
+     * @return Localisation
+     */
+    public function setTimestamp($timestamp)
+    {
+        $this->timestamp = $timestamp;
+
+        return $this;
+    }
+
+    /**
+     * Get timestamp
+     *
+     * @return \DateTime
+     */
+    public function getTimestamp()
+    {
+        return $this->timestamp;
     }
 
     /**

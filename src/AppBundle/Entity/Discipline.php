@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Discipline
  *
- * @ORM\Table(name="discipline", indexes={@ORM\Index(name="fk_discipline_domaine1_idx", columns={"domaine_id"})})
+ * @ORM\Table(name="discipline", indexes={@ORM\Index(name="fk_discipline_domaine1_idx", columns={"domaine_id"}), @ORM\Index(name="fk_hesamette_discipline", columns={"hesamette_id"})})
  * @ORM\Entity
  */
 class Discipline
@@ -54,15 +54,12 @@ class Discipline
      */
     private $domaineId;
 
-
     /**
-     * @var integer
+     * @var \DateTime
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Hesamette", inversedBy="disciplines") 
-     * @ORM\JoinColumn(name="hesamette_id", referencedColumnName="hesamette_id") 
-     * @ORM\Column(name="hesamette_id", type="integer", nullable=true)
+     * @ORM\Column(name="timestamp", type="datetime", nullable=false)
      */
-    private $hesametteId;
+    private $timestamp = 'CURRENT_TIMESTAMP';
 
     /**
      * @var integer
@@ -72,6 +69,16 @@ class Discipline
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $disciplineId;
+
+    /**
+     * @var \AppBundle\Entity\Hesamette
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Hesamette")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="hesamette_id", referencedColumnName="hesamette_id")
+     * })
+     */
+    private $hesamette;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -282,27 +289,27 @@ class Discipline
     }
 
     /**
-     * Set hesametteId
+     * Set timestamp
      *
-     * @param integer $hesametteId
+     * @param \DateTime $timestamp
      *
      * @return Discipline
      */
-    public function setHesametteId($hesametteId)
+    public function setTimestamp($timestamp)
     {
-        $this->hesametteId = $hesametteId;
+        $this->timestamp = $timestamp;
 
         return $this;
     }
 
     /**
-     * Get hesametteId
+     * Get timestamp
      *
-     * @return integer
+     * @return \DateTime
      */
-    public function getHesametteId()
+    public function getTimestamp()
     {
-        return $this->hesametteId;
+        return $this->timestamp;
     }
 
     /**
@@ -313,6 +320,30 @@ class Discipline
     public function getDisciplineId()
     {
         return $this->disciplineId;
+    }
+
+    /**
+     * Set hesamette
+     *
+     * @param \AppBundle\Entity\Hesamette $hesamette
+     *
+     * @return Discipline
+     */
+    public function setHesamette(\AppBundle\Entity\Hesamette $hesamette = null)
+    {
+        $this->hesamette = $hesamette;
+
+        return $this;
+    }
+
+    /**
+     * Get hesamette
+     *
+     * @return \AppBundle\Entity\Hesamette
+     */
+    public function getHesamette()
+    {
+        return $this->hesamette;
     }
 
     /**

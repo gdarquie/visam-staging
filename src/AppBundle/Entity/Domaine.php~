@@ -34,6 +34,13 @@ class Domaine
     private $type;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="timestamp", type="datetime", nullable=false)
+     */
+    private $timestamp = 'CURRENT_TIMESTAMP';
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="domaine_id", type="integer")
@@ -43,86 +50,5 @@ class Domaine
     private $domaineId;
 
 
-
-    /**
-     * Set nom
-     *
-     * @param string $nom
-     *
-     * @return Domaine
-     */
-    public function setNom($nom)
-    {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
-    /**
-     * Get nom
-     *
-     * @return string
-     */
-    public function getNom()
-    {
-        return $this->nom;
-    }
-
-    /**
-     * Set code
-     *
-     * @param string $code
-     *
-     * @return Domaine
-     */
-    public function setCode($code)
-    {
-        $this->code = $code;
-
-        return $this;
-    }
-
-    /**
-     * Get code
-     *
-     * @return string
-     */
-    public function getCode()
-    {
-        return $this->code;
-    }
-
-    /**
-     * Set type
-     *
-     * @param string $type
-     *
-     * @return Domaine
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * Get domaineId
-     *
-     * @return integer
-     */
-    public function getDomaineId()
-    {
-        return $this->domaineId;
-    }
 }
+

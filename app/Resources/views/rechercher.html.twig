@@ -1,3 +1,9 @@
-// Dans cette page nous mettrons l'iframe de la page de recherche d'HESAM
+{% extends 'base.html.twig' %}
 
-<iframe src="http://interlivre.fr/projet/visam/demo/recherche.html?search" frameborder="0"></iframe>
+{% block fos_user_content %}{% endblock %}
+{% block stylesheets %}
+{% endblock %}
+
+{% block body %}
+<iframe id='rechercher' src="http://interlivre.fr/projet/visam/demo/recherche.html?search" frameborder="0"></iframe>
+{% endblock %}

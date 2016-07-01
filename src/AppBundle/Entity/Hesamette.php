@@ -3,7 +3,6 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Hesamette
@@ -21,6 +20,13 @@ class Hesamette
     private $nom;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="timestamp", type="datetime", nullable=false)
+     */
+    private $timestamp = 'CURRENT_TIMESTAMP';
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="hesamette_id", type="integer")
@@ -29,16 +35,6 @@ class Hesamette
      */
     private $hesametteId;
 
-
-    /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Discipline", mappedBy="hesamette_id")
-     */
-    private $disciplines;
-
-    public function __construct()
-    {
-        $this->disciplines = new ArrayCollection();
-    }
 
 
     /**
@@ -66,6 +62,30 @@ class Hesamette
     }
 
     /**
+     * Set timestamp
+     *
+     * @param \DateTime $timestamp
+     *
+     * @return Hesamette
+     */
+    public function setTimestamp($timestamp)
+    {
+        $this->timestamp = $timestamp;
+
+        return $this;
+    }
+
+    /**
+     * Get timestamp
+     *
+     * @return \DateTime
+     */
+    public function getTimestamp()
+    {
+        return $this->timestamp;
+    }
+
+    /**
      * Get hesametteId
      *
      * @return integer
@@ -73,39 +93,5 @@ class Hesamette
     public function getHesametteId()
     {
         return $this->hesametteId;
-    }
-
-    /**
-     * Add discipline
-     *
-     * @param \AppBundle\Entity\Discipline $discipline
-     *
-     * @return Hesamette
-     */
-    public function addDiscipline(\AppBundle\Entity\Discipline $discipline)
-    {
-        $this->disciplines[] = $discipline;
-
-        return $this;
-    }
-
-    /**
-     * Remove discipline
-     *
-     * @param \AppBundle\Entity\Discipline $discipline
-     */
-    public function removeDiscipline(\AppBundle\Entity\Discipline $discipline)
-    {
-        $this->disciplines->removeElement($discipline);
-    }
-
-    /**
-     * Get disciplines
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getDisciplines()
-    {
-        return $this->disciplines;
     }
 }

@@ -29,9 +29,16 @@ class Membre
     /**
      * @var string
      *
-     * @ORM\Column(name="prefession", type="string", length=500, nullable=true)
+     * @ORM\Column(name="profession", type="string", length=500, nullable=true)
      */
-    private $prefession;
+    private $profession;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="timestamp", type="datetime", nullable=false)
+     */
+    private $timestamp = 'CURRENT_TIMESTAMP';
 
     /**
      * @var integer
@@ -147,27 +154,51 @@ class Membre
     }
 
     /**
-     * Set prefession
+     * Set profession
      *
-     * @param string $prefession
+     * @param string $profession
      *
      * @return Membre
      */
-    public function setPrefession($prefession)
+    public function setProfession($profession)
     {
-        $this->prefession = $prefession;
+        $this->profession = $profession;
 
         return $this;
     }
 
     /**
-     * Get prefession
+     * Get profession
      *
      * @return string
      */
-    public function getPrefession()
+    public function getProfession()
     {
-        return $this->prefession;
+        return $this->profession;
+    }
+
+    /**
+     * Set timestamp
+     *
+     * @param \DateTime $timestamp
+     *
+     * @return Membre
+     */
+    public function setTimestamp($timestamp)
+    {
+        $this->timestamp = $timestamp;
+
+        return $this;
+    }
+
+    /**
+     * Get timestamp
+     *
+     * @return \DateTime
+     */
+    public function getTimestamp()
+    {
+        return $this->timestamp;
     }
 
     /**

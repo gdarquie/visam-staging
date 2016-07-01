@@ -41,6 +41,13 @@ class Equipement
     private $lien;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="timestamp", type="datetime", nullable=false)
+     */
+    private $timestamp = 'CURRENT_TIMESTAMP';
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="equipement_id", type="integer")
@@ -159,6 +166,30 @@ class Equipement
     public function getLien()
     {
         return $this->lien;
+    }
+
+    /**
+     * Set timestamp
+     *
+     * @param \DateTime $timestamp
+     *
+     * @return Equipement
+     */
+    public function setTimestamp($timestamp)
+    {
+        $this->timestamp = $timestamp;
+
+        return $this;
+    }
+
+    /**
+     * Get timestamp
+     *
+     * @return \DateTime
+     */
+    public function getTimestamp()
+    {
+        return $this->timestamp;
     }
 
     /**

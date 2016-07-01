@@ -78,6 +78,10 @@
       </article>
     </div>
 
+    <div class="row">
+      <a class="waves-effect waves-light btn blue" href="/rechercher">Faire une recherche avancée</a>
+    </div>
+
   </div>
 
   <div id="index-banner" class="parallax-container">
@@ -252,6 +256,14 @@
               <svg style="height:500px;"></svg>
             </div>
           </article>
+
+        <article>
+        <h2>Hesamettes des formations</h2>
+        {% for hesamette in formationsHesamette %}
+          <p>{{hesamette.hesamette}} ({{hesamette.nb}})</p> 
+        {% endfor %}
+      </article>
+          
           
 {#         <article>
             <h2>Les disciplines les plus fréquentes</h2>

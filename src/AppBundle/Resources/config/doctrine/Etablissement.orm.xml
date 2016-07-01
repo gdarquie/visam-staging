@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Etablissement" table="etablissement">
+    <id name="etablissementId" type="integer" column="etablissement_id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nom" type="string" column="nom" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="description" type="text" column="description" length="16777215" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="code" type="string" column="code" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="sigle" type="string" column="sigle" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="lien" type="string" column="lien" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="ministere" type="string" column="ministere" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="statut" type="string" column="statut" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="fc" type="string" column="FC" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="fcLien" type="string" column="FC_lien" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="etudiants" type="integer" column="etudiants" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="chercheurs" type="integer" column="chercheurs" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="lien2" type="string" column="lien2" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="lien3" type="string" column="lien3" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="timestamp" type="datetime" column="timestamp" nullable="false">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
+      </options>
+    </field>
+    <many-to-many field="localisation" target-entity="Localisation" mapped-by="etablissement" fetch="LAZY"/>
+    <many-to-many field="valorisation" target-entity="Valorisation" inversed-by="etablissement" fetch="LAZY">
+      <join-table name="etablissement_has_valorisation">
+        <join-columns>
+          <join-column name="etablissement_id" referenced-column-name="etablissement_id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="valorisation_id" referenced-column-name="valorisation_id"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+    <many-to-many field="labo" target-entity="Labo" inversed-by="etablissement" fetch="LAZY">
+      <join-table name="etablissement_has_labo">
+        <join-columns>
+          <join-column name="etablissement_id" referenced-column-name="etablissement_id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="labo_id" referenced-column-name="labo_id"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+    <many-to-many field="formation" target-entity="Formation" inversed-by="etablissement" fetch="LAZY">
+      <join-table name="etablissement_has_formation">
+        <join-columns>
+          <join-column name="etablissement_id" referenced-column-name="etablissement_id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="formation_id" referenced-column-name="formation_id"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+    <many-to-many field="ed" target-entity="Ed" inversed-by="etablissement" fetch="LAZY">
+      <join-table name="etablissement_has_ed">
+        <join-columns>
+          <join-column name="etablissement_id" referenced-column-name="etablissement_id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="ED_id" referenced-column-name="ED_id"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+  </entity>
+</doctrine-mapping>

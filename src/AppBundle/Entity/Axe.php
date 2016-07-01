@@ -15,7 +15,7 @@ class Axe
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255, nullable=true)
+     * @ORM\Column(name="nom", type="text", length=65535, nullable=true)
      */
     private $nom;
 
@@ -25,6 +25,13 @@ class Axe
      * @ORM\Column(name="description", type="text", length=65535, nullable=true)
      */
     private $description;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="timestamp", type="datetime", nullable=false)
+     */
+    private $timestamp = 'CURRENT_TIMESTAMP';
 
     /**
      * @var integer
@@ -115,6 +122,30 @@ class Axe
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set timestamp
+     *
+     * @param \DateTime $timestamp
+     *
+     * @return Axe
+     */
+    public function setTimestamp($timestamp)
+    {
+        $this->timestamp = $timestamp;
+
+        return $this;
+    }
+
+    /**
+     * Get timestamp
+     *
+     * @return \DateTime
+     */
+    public function getTimestamp()
+    {
+        return $this->timestamp;
     }
 
     /**

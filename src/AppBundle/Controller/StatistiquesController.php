@@ -83,9 +83,10 @@ class StatistiquesController extends Controller
 
 //Les Hésamettes
 
-        //nombre de formations par hesamettes 
-        $query = $em->createQuery('SELECT d.nom, d.hesametteId FROM AppBundle:Discipline d')->setMaxResults(20);
-        $formationsHesamette = $query->getResult(); // continuer cette requête
+        //nombre de formations par hesamettes
+        $query = $em->createQuery('SELECT h.nom as hesamette, COUNT(f) as nb, f.nom as formation FROM AppBundle:Discipline d JOIN d.formation f JOIN d.hesamette h GROUP BY h ORDER BY nb DESC');
+        $formationsHesamette = $query->getResult();
+        //'SELECT d.nom, h.nom FROM AppBundle:Discipline d JOIN d.hesamette h'
 
 //Domaines (en cours)
 
@@ -195,6 +196,7 @@ class StatistiquesController extends Controller
             'allHceresDisciplinesFormations'=>$allHceresDisciplinesFormations,
             'allCnuDisciplinesFormations'=>$allCnuDisciplinesFormations,
             'allNw3DisciplinesFormations'=>$allNw3DisciplinesFormations,
+            'formationsHesamette' => $formationsHesamette,
             //Labos>Disciplines
             'allDisciplinesLabos'=>$allDisciplinesLabos,
             'allSiseDisciplinesLabos'=>$allSiseDisciplinesLabos,
