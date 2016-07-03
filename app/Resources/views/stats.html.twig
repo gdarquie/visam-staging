@@ -181,9 +181,12 @@
 
         <article>
         <h2>Hesamettes des formations</h2>
-        {% for hesamette in formationsHesamette %}
-          <p>{{hesamette.hesamette}} ({{hesamette.nb}})</p> 
-        {% endfor %}
+
+        <h2>Répartition des formations par hesamettes</h2>
+            <div id="form-hesamette">
+              <svg style="height:500px;"></svg>
+            </div>
+
       </article>
           
           
@@ -268,9 +271,11 @@
       <article>
       <h2>Répartition des laboratoires par hesamettes</h2>
 
-        {% for hesamette in labosHesamette %}
-          <p>{{hesamette.hesamette}} ({{hesamette.nb}})</p> 
-        {% endfor %}
+        <div id="labo-hesamette">
+            <svg style="height:500px;"></svg>
+        </div>
+
+
 
     </div>
   </article>
@@ -631,6 +636,46 @@
       });
 
 
+      //Répartition des hesamettes pour les labos
+      nv.addGraph(function() {
+        var chart = nv.models.pieChart()
+            .x(function(d) { return d.label })
+            .y(function(d) { return d.value })
+            .showLabels(true)     //Display pie labels
+            .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+            .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+            .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+            .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
+            ;
+          d3.select("#labo-hesamette svg")
+              .datum(nbLaboParHesametteData ())
+              .transition().duration(350)
+              .call(chart);
+
+        return chart;
+      });
+
+      //Répartition des hesamettes pour les formations
+      nv.addGraph(function() {
+        var chart = nv.models.pieChart()
+            .x(function(d) { return d.label })
+            .y(function(d) { return d.value })
+            .showLabels(true)     //Display pie labels
+            .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+            .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+            .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+            .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
+            ;
+          d3.select("#form-hesamette svg")
+              .datum(nbFormParHesametteData ())
+              .transition().duration(350)
+              .call(chart);
+
+        return chart;
+      });
+
+      
+
       // nv.addGraph(function() {
       //   var chart = nv.models.discreteBarChart()
       //       .x(function(d) { return d.label })    //Specify the data accessors.
@@ -738,6 +783,29 @@ function chercheursData() {
         {% endfor %}
     ];
   }
+
+
+  //Répartition des labos par hesamettes
+  function nbLaboParHesametteData() {
+    return [
+        {% for hesamette in labosHesamette %}
+          { "label" :"{{hesamette.hesamette}}",
+          "value" : "{{hesamette.nb}}" },
+        {% endfor %}
+    ];
+  }
+
+  //Répartition des formations par hesamettes
+  function nbFormParHesametteData() {
+    return [
+        {% for hesamette in formationsHesamette %}
+          { "label" :"{{hesamette.hesamette}}",
+          "value" : "{{hesamette.nb}}" },
+        {% endfor %}
+    ];
+  }
+
+
 
 
     </script>

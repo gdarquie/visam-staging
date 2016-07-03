@@ -87,6 +87,16 @@ class StatistiquesController extends Controller
         $query = $em->createQuery('SELECT h.nom as hesamette, COUNT(f) as nb, f.nom as formation FROM AppBundle:Discipline d JOIN d.formation f JOIN d.hesamette h GROUP BY h ORDER BY nb DESC');
         $formationsHesamette = $query->getResult();
 
+
+        //répartition des hesamettes par labos
+        $query = $em->createQuery('SELECT h.nom as hesamette, COUNT(l) as nb, l.nom as labo FROM AppBundle:Discipline d JOIN d.labo l JOIN d.hesamette h GROUP BY h ORDER BY nb DESC');
+        $labosHesamette = $query->getResult();
+
+
+        // //répartition des hesamettes par labos
+        // $query = $em->createQuery('SELECT h.nom as hesamette, COUNT(d) as nb FROM AppBundle:Discipline d JOIN d.formation f JOIN d.labo l JOIN d.hesamette h GROUP BY h ORDER BY nb DESC');
+        // $labosHesamette = $query->getResult();
+
 //Domaines (en cours)
 
         //récupérer tous les domaines des formations
@@ -154,9 +164,6 @@ class StatistiquesController extends Controller
         $query->setParameter('type', 'NW3');
         $allNw3DisciplinesLabos = $query->getResult();
 
-        //répartition des hesamettes par labos
-        $query = $em->createQuery('SELECT h.nom as hesamette, COUNT(l) as nb, l.nom as labo FROM AppBundle:Discipline d JOIN d.labo l JOIN d.hesamette h GROUP BY h ORDER BY nb DESC');
-        $labosHesamette = $query->getResult();
 
 
 // ------------------------------------------------------------------------
