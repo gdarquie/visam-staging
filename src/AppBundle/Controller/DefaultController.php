@@ -49,9 +49,18 @@ class DefaultController extends Controller
         return $this->render('rechercher.html.twig'
         );
     }
+    
+    /**
+     * @Route("/apropos", name="apropos")
+     */
+    public function aboutAction(Request $request)
+    {
+        return $this->render('apropos.html.twig'
+        );
+    }
 
-        /**
-     * @Route("/recherche/{id}", name="recherche")
+    /**
+     * @Route("/labo/{id}", name="recherche")
      */
     public function laboratoireAction($id)
     {
