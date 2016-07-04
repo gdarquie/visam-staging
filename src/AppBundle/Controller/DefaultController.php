@@ -68,9 +68,16 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $laboratoire = $em->getRepository('AppBundle:Labo')->findOneByLaboId($id);
+        // $labos = $em->getRepository('AppBundle:Labo')->findAll();
+        $query = $em->createQuery('SELECT l FROM AppBundle:Labo l');
+        $labos = $query->setMaxResults(3)->getResult();
+
+        //$nbEtud = $query->setMaxResults(1)->getOneOrNullResult();
         
         return $this->render('notice/laboratoire.html.twig', array(
             'labo' => $laboratoire,
+            'labos' => $labos
+
         ));
     }
 
