@@ -2,60 +2,43 @@
 
 {% block body %}
 
-	<h2>{{formation.nom}}</h2> 
-	<p>{{formation.annee}}, {{formation.niveau}}, effectif : {{formation.effectif}}</p>
-	<p><a href="{{formation.url}}">{{formation.url}}</a></p> 
+    <section class="container">
+        <div class="first">
+            <div class="card formation">
+              	<div class="card-content">
 
-	<article>		
-		<h3>Disciplines</h3>
+              		<h3>{{formation.nom}}</h3> 
+
+              		{% for etablissement in formation.etablissement %}
+						<span class="etablissement">{{etablissement.nom}}</span><br/>
+					{% endfor %}
+					
+					<p>{{formation.annee}}, {{formation.niveau}}, effectif : {{formation.effectif}}</p>
+					<p><a href="{{formation.url}}">{{formation.url}}</a></p> 
+
+					<h4>Disciplines</h4>
+	                <ul class="list-thematique" >
+						{% for hesamette in hesamettes %}
+							<li>{{hesamette.nom}}({{hesamette.nb}})</li>
+						{% endfor %}
+	                </ul>
+
+
+					
+					</div>
+	              <div class="card-action">
+	              <a href="{{formation.url}}"><i class="material-icons">input</i>{{formation.url}}</a>
+	              <div style="float:right;">
+
+					
+
+				</div> <!--end card content -->
+
+        	</div>
+       	</div>
+    </section>
+
 	
-		<h4>Discipline Hesam</h4>
-		
-		{% for hesamette in hesamettes %}
-			<li>{{hesamette.nom}}({{hesamette.nb}})</li>
-		{% endfor %}
-
-
-		{# <h4>Disciplines SISE</h4>
-
-       {% for disp in formation.discipline %}
-        	{% if disp.type == "SISE" %}
-            <li>{{disp.nom}}</li>
-        	{% endif %}    
-        {% endfor %}
-
-       	<h4>Disciplines CNU</h4>
-
-       {% for disp in formation.discipline %}
-        	{% if disp.type == "CNU" %}
-            <li>{{disp.nom}}</li>
-        	{% endif %}    
-        {% endfor %}
-		
-		<h4>Disciplines HCERES</h4>
-       	{% for disp in formation.discipline %}
-        	{% if disp.type == "HCERES" %}
-            <li>{{disp.nom}}</li>
-        	{% endif %}    
-        {% endfor %}
-
-        <h4>Disciplines NW3</h4>
-       {% for disp in formation.discipline %}
-       		{% if disp.type == "NW3" %}
-            <li>{{disp.nom}}</li>
-        	{% endif %}      
-        {% endfor %} #}
-	</article>
-
-	<article>
-		<h3>Formations liées</h3>
-		[récupération des formations qui ont les mêmes hesamettes (les mêmes trois premières?)]
-	</article>
-
-	<article>
-		<h3>Laboratoires liées</h3>
-		[récupération des laboratoires avec les même hesamettes]
-	</article>
 
 
 {% endblock %}
