@@ -7,13 +7,6 @@
     <field name="nom" type="string" column="nom" length="255" nullable="true">
       <options>
         <option name="fixed"/>
-        <option name="comment">Les domaines sont issus de la nomenclature SISE disciplines.
-
-Un domaine regroupe plusieurs disciplines.
-
-Toutes les disciplines SISE appartiennent à un domaine.
-
-Permet une hiérarchie et déduire par une discipline, le domaine.</option>
       </options>
     </field>
     <field name="code" type="string" column="code" length="45" nullable="true">
@@ -24,7 +17,11 @@ Permet une hiérarchie et déduire par une discipline, le domaine.</option>
     <field name="type" type="string" column="type" length="45" nullable="true">
       <options>
         <option name="fixed"/>
-        <option name="comment">SISE ou HCERS</option>
+      </options>
+    </field>
+    <field name="timestamp" type="datetime" column="timestamp" nullable="false">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
       </options>
     </field>
   </entity>

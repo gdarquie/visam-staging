@@ -3,6 +3,7 @@
   <entity name="AppBundle\Entity\Discipline" table="discipline">
     <indexes>
       <index name="fk_discipline_domaine1_idx" columns="domaine_id"/>
+      <index name="fk_hesamette_discipline" columns="hesamette_id"/>
     </indexes>
     <id name="disciplineId" type="integer" column="discipline_id">
       <generator strategy="IDENTITY"/>
@@ -20,8 +21,6 @@
     <field name="type" type="string" column="type" length="45" nullable="true">
       <options>
         <option name="fixed"/>
-        <option name="comment">Type de discipline - CNU, SISE, HCERS domaine (grosses disciplines de SISE 17).
-</option>
       </options>
     </field>
     <field name="abreviation" type="string" column="abreviation" length="255" nullable="true">
@@ -39,6 +38,16 @@
         <option name="unsigned"/>
       </options>
     </field>
+    <field name="timestamp" type="datetime" column="timestamp" nullable="false">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
+      </options>
+    </field>
+    <many-to-one field="hesamette" target-entity="Hesamette" fetch="LAZY">
+      <join-columns>
+        <join-column name="hesamette_id" referenced-column-name="hesamette_id"/>
+      </join-columns>
+    </many-to-one>
     <many-to-many field="ufr" target-entity="Ufr" mapped-by="discipline" fetch="LAZY"/>
     <many-to-many field="labo" target-entity="Labo" inversed-by="discipline" fetch="LAZY">
       <join-table name="discipline_has_labo">

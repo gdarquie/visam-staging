@@ -12,7 +12,7 @@
       <meta name="description" content="">
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-      <title>{% block title %}Visam : carthographie des compétences de la COMUE HESAM{% endblock %}</title>
+      <title>{% block title %}heSam : carthographie des compétences de la COMUE HESAM{% endblock %}</title>
 
       {% block stylesheets %}{% endblock %}
 
@@ -30,15 +30,15 @@
 
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.css"></script>
 
-        <nav>
+        <nav class="red darken-2">
             <div class="nav-wrapper">
-              <a href="index.php" class="brand-logo center">viSam</a>
-              <ul id="nav-mobile" class="left hide-on-med-and-down">
-        <!--         <li><a href="etablissement.php">Etablissements</a></li>
-                <li><a href="formation.php">Formations</a></li>
-                <li><a href="labo.php">Laboratoires</a></li>
-                <li><a href="ecole.php">Ecoles</a></li> -->
-              </ul>
+              <a href="/" class="brand-logo">heSam</a>
+              <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/rechercher">Rechercher</a></li>
+                <li><a href="/stats">Statistiques</a></li>
+                <li><a href="/apropos">A propos</a></li>
+
+                <li>
               {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                 {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
                 <a href="{{ path('fos_user_security_logout') }}">
@@ -47,6 +47,8 @@
             {% else %}
                 <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
             {% endif %}
+              </li>
+            </ul>
             </div>
         </nav>
 

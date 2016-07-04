@@ -22,7 +22,6 @@
     <field name="annee" type="integer" column="annee" nullable="true">
       <options>
         <option name="unsigned"/>
-        <option name="comment">Durée?</option>
       </options>
     </field>
     <field name="niveau" type="string" column="niveau" length="255" nullable="true">
@@ -33,13 +32,11 @@
     <field name="typediplome" type="string" column="typeDiplome" length="255" nullable="true">
       <options>
         <option name="fixed"/>
-        <option name="comment">Liste contrôlée</option>
       </options>
     </field>
     <field name="effectif" type="integer" column="effectif" nullable="true">
       <options>
         <option name="unsigned"/>
-        <option name="comment">Peut-être à creuser (avec des sous-catégories)</option>
       </options>
     </field>
     <field name="lien2" type="string" column="lien2" length="255" nullable="true">
@@ -55,15 +52,27 @@
     <field name="responsable" type="string" column="responsable" length="500" nullable="true">
       <options>
         <option name="fixed"/>
-        <option name="comment">A lier à membres 
-</option>
       </options>
     </field>
+    <field name="timestamp" type="datetime" column="timestamp" nullable="false">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
+      </options>
+    </field>
+    <many-to-many field="localisation" target-entity="Localisation" mapped-by="formation" fetch="LAZY"/>
     <many-to-many field="membre" target-entity="Membre" mapped-by="formation" fetch="LAZY"/>
     <many-to-many field="tag" target-entity="Tag" mapped-by="formation" fetch="LAZY"/>
-    <many-to-many field="theme" target-entity="Theme" mapped-by="formation" fetch="LAZY"/>
-    <many-to-many field="localisation" target-entity="Localisation" mapped-by="formation" fetch="LAZY"/>
     <many-to-many field="labo" target-entity="Labo" mapped-by="formation" fetch="LAZY"/>
+    <many-to-many field="ufr" target-entity="Ufr" inversed-by="formation" fetch="LAZY">
+      <join-table name="formation_has_ufr">
+        <join-columns>
+          <join-column name="formation_id" referenced-column-name="formation_id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="ufr_id" referenced-column-name="ufr_id"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
     <many-to-many field="etablissement" target-entity="Etablissement" mapped-by="formation" fetch="LAZY"/>
     <many-to-many field="metier" target-entity="Metier" inversed-by="formation" fetch="LAZY">
       <join-table name="formation_has_metier">
@@ -72,16 +81,6 @@
         </join-columns>
         <inverse-join-columns>
           <join-column name="metier_id" referenced-column-name="metier_id"/>
-        </inverse-join-columns>
-      </join-table>
-    </many-to-many>
-    <many-to-many field="ufr" target-entity="Ufr" inversed-by="formation" fetch="LAZY">
-      <join-table name="formation_has_ufr">
-        <join-columns>
-          <join-column name="formation_id" referenced-column-name="formation_id"/>
-        </join-columns>
-        <inverse-join-columns>
-          <join-column name="ufr_id" referenced-column-name="ufr_id"/>
         </inverse-join-columns>
       </join-table>
     </many-to-many>

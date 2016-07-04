@@ -22,6 +22,11 @@
         <option name="fixed"/>
       </options>
     </field>
+    <field name="timestamp" type="datetime" column="timestamp" nullable="false">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
+      </options>
+    </field>
     <many-to-one field="localisation" target-entity="Localisation" fetch="LAZY">
       <join-columns>
         <join-column name="localisation_id" referenced-column-name="localisation_id"/>

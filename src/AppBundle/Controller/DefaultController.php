@@ -19,11 +19,60 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..'),
-        ]);
+        $em = $this->getDoctrine()->getManager();
+        $hesamettes = $em->getRepository('AppBundle:Hesamette')->findAll();
+
+         //nombre de formations par hesamettes
+        $query = $em->createQuery('SELECT h.nom as hesamette, COUNT(f) as nb, f.nom as formation FROM AppBundle:Discipline d JOIN d.formation f JOIN d.hesamette h GROUP BY h ORDER BY nb DESC');
+        $formationsHesamette = $query->getResult();
+
+
+        //répartition des hesamettes par labos
+        $query = $em->createQuery('SELECT h.nom as hesamette, COUNT(l) as nb, l.nom as labo FROM AppBundle:Discipline d JOIN d.labo l JOIN d.hesamette h GROUP BY h ORDER BY nb DESC');
+        $labosHesamette = $query->getResult();
+
+
+        return $this->render('default/index.html.twig',  array(
+            'hesamettes' => $hesamettes,
+            'labosHesamette'=> $labosHesamette,
+            'formationsHesamette' => $formationsHesamette
+        ));
+
+
+    }
+    
+    /**
+     * @Route("/rechercher", name="search")
+     */
+    public function rechercheAction(Request $request)
+    {
+        return $this->render('rechercher.html.twig'
+        );
+    }
+    
+    /**
+     * @Route("/apropos", name="apropos")
+     */
+    public function aboutAction(Request $request)
+    {
+        return $this->render('apropos.html.twig'
+        );
     }
 
+    /**
+     * @Route("/labo/{id}", name="recherche")
+     */
+    public function laboratoireAction($id)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $laboratoire = $em->getRepository('AppBundle:Labo')->findOneByLaboId($id);
+        
+        return $this->render('notice/laboratoire.html.twig', array(
+            'labo' => $laboratoire,
+        ));
+    }
 
     /**
      * @Route("/etablissement/{id}", name="etablissement")
@@ -42,21 +91,6 @@ class DefaultController extends Controller
             'etablissement' => $etablissement,
             'eds' => $eds,
             'formations' => $formations,
-        ));
-    }
-
-    /**
-     * @Route("/recherche/{id}", name="recherche")
-     */
-    public function laboratoireAction($id)
-    {
-
-        $em = $this->getDoctrine()->getManager();
-
-        $laboratoire = $em->getRepository('AppBundle:Labo')->findOneByLaboId($id);
-        
-        return $this->render('notice/laboratoire.html.twig', array(
-            'laboratoire' => $laboratoire,
         ));
     }
 
@@ -87,9 +121,17 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $formation = $em->getRepository('AppBundle:Formation')->findOneByFormationId($id);
+
+        $query = $em->createQuery('SELECT h.nom as nom, COUNT(h) as nb FROM AppBundle:Discipline d JOIN d.formation f JOIN d.hesamette h WHERE f.formationId = :id GROUP BY h.nom ORDER BY nb DESC');
+        $query->setParameter('id', $id);
+        $hesamettes = $query->getResult();
+
+        $idLabosLies = [];
+        $labosLies = ""; //Tous les labos qui ont appartiennent aux mêmes trois hesamettes
         
         return $this->render('notice/formation.html.twig', array(
             'formation' => $formation,
+            'hesamettes' => $hesamettes
         ));
     }
 

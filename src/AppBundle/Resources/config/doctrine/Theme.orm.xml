@@ -14,25 +14,10 @@
         <option name="fixed"/>
       </options>
     </field>
-    <many-to-many field="labo" target-entity="Labo" inversed-by="theme" fetch="LAZY">
-      <join-table name="theme_has_labo">
-        <join-columns>
-          <join-column name="theme_id" referenced-column-name="theme_id"/>
-        </join-columns>
-        <inverse-join-columns>
-          <join-column name="labo_id" referenced-column-name="labo_id"/>
-        </inverse-join-columns>
-      </join-table>
-    </many-to-many>
-    <many-to-many field="formation" target-entity="Formation" inversed-by="theme" fetch="LAZY">
-      <join-table name="theme_has_formation">
-        <join-columns>
-          <join-column name="theme_id" referenced-column-name="theme_id"/>
-        </join-columns>
-        <inverse-join-columns>
-          <join-column name="formation_id" referenced-column-name="formation_id"/>
-        </inverse-join-columns>
-      </join-table>
-    </many-to-many>
+    <field name="timestamp" type="datetime" column="timestamp" nullable="false">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
+      </options>
+    </field>
   </entity>
 </doctrine-mapping>

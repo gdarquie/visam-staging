@@ -15,7 +15,6 @@
     <field name="code" type="string" column="code" length="45" nullable="true">
       <options>
         <option name="fixed"/>
-        <option name="comment">Au cas où</option>
       </options>
     </field>
     <field name="description" type="text" column="description" length="65535" nullable="true">
@@ -36,14 +35,16 @@
     <field name="effectif" type="integer" column="effectif" nullable="true">
       <options>
         <option name="unsigned"/>
-        <option name="comment">Les enseignants
-</option>
       </options>
     </field>
     <field name="etudiants" type="integer" column="etudiants" nullable="true">
       <options>
         <option name="unsigned"/>
-        <option name="comment">Nombre d’étudiants</option>
+      </options>
+    </field>
+    <field name="timestamp" type="datetime" column="timestamp" nullable="false">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
       </options>
     </field>
     <many-to-one field="etablissement" target-entity="Etablissement" fetch="LAZY">

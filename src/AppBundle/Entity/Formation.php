@@ -83,6 +83,13 @@ class Formation
     private $responsable;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="timestamp", type="datetime", nullable=false)
+     */
+    private $timestamp = 'CURRENT_TIMESTAMP';
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="formation_id", type="integer")
@@ -90,6 +97,13 @@ class Formation
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $formationId;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Localisation", mappedBy="formation")
+     */
+    private $localisation;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -108,23 +122,24 @@ class Formation
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Theme", mappedBy="formation")
-     */
-    private $theme;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Localisation", mappedBy="formation")
-     */
-    private $localisation;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Labo", mappedBy="formation")
      */
     private $labo;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Ufr", inversedBy="formation")
+     * @ORM\JoinTable(name="formation_has_ufr",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="formation_id", referencedColumnName="formation_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="ufr_id", referencedColumnName="ufr_id")
+     *   }
+     * )
+     */
+    private $ufr;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -151,21 +166,6 @@ class Formation
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Ufr", inversedBy="formation")
-     * @ORM\JoinTable(name="formation_has_ufr",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="formation_id", referencedColumnName="formation_id")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="ufr_id", referencedColumnName="ufr_id")
-     *   }
-     * )
-     */
-    private $ufr;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Discipline", mappedBy="formation")
      */
     private $discipline;
@@ -175,14 +175,13 @@ class Formation
      */
     public function __construct()
     {
+        $this->localisation = new \Doctrine\Common\Collections\ArrayCollection();
         $this->membre = new \Doctrine\Common\Collections\ArrayCollection();
         $this->tag = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->theme = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->localisation = new \Doctrine\Common\Collections\ArrayCollection();
         $this->labo = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->ufr = new \Doctrine\Common\Collections\ArrayCollection();
         $this->etablissement = new \Doctrine\Common\Collections\ArrayCollection();
         $this->metier = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->ufr = new \Doctrine\Common\Collections\ArrayCollection();
         $this->discipline = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -428,6 +427,30 @@ class Formation
     }
 
     /**
+     * Set timestamp
+     *
+     * @param \DateTime $timestamp
+     *
+     * @return Formation
+     */
+    public function setTimestamp($timestamp)
+    {
+        $this->timestamp = $timestamp;
+
+        return $this;
+    }
+
+    /**
+     * Get timestamp
+     *
+     * @return \DateTime
+     */
+    public function getTimestamp()
+    {
+        return $this->timestamp;
+    }
+
+    /**
      * Get formationId
      *
      * @return integer
@@ -435,6 +458,40 @@ class Formation
     public function getFormationId()
     {
         return $this->formationId;
+    }
+
+    /**
+     * Add localisation
+     *
+     * @param \AppBundle\Entity\Localisation $localisation
+     *
+     * @return Formation
+     */
+    public function addLocalisation(\AppBundle\Entity\Localisation $localisation)
+    {
+        $this->localisation[] = $localisation;
+
+        return $this;
+    }
+
+    /**
+     * Remove localisation
+     *
+     * @param \AppBundle\Entity\Localisation $localisation
+     */
+    public function removeLocalisation(\AppBundle\Entity\Localisation $localisation)
+    {
+        $this->localisation->removeElement($localisation);
+    }
+
+    /**
+     * Get localisation
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLocalisation()
+    {
+        return $this->localisation;
     }
 
     /**
@@ -506,74 +563,6 @@ class Formation
     }
 
     /**
-     * Add theme
-     *
-     * @param \AppBundle\Entity\Theme $theme
-     *
-     * @return Formation
-     */
-    public function addTheme(\AppBundle\Entity\Theme $theme)
-    {
-        $this->theme[] = $theme;
-
-        return $this;
-    }
-
-    /**
-     * Remove theme
-     *
-     * @param \AppBundle\Entity\Theme $theme
-     */
-    public function removeTheme(\AppBundle\Entity\Theme $theme)
-    {
-        $this->theme->removeElement($theme);
-    }
-
-    /**
-     * Get theme
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getTheme()
-    {
-        return $this->theme;
-    }
-
-    /**
-     * Add localisation
-     *
-     * @param \AppBundle\Entity\Localisation $localisation
-     *
-     * @return Formation
-     */
-    public function addLocalisation(\AppBundle\Entity\Localisation $localisation)
-    {
-        $this->localisation[] = $localisation;
-
-        return $this;
-    }
-
-    /**
-     * Remove localisation
-     *
-     * @param \AppBundle\Entity\Localisation $localisation
-     */
-    public function removeLocalisation(\AppBundle\Entity\Localisation $localisation)
-    {
-        $this->localisation->removeElement($localisation);
-    }
-
-    /**
-     * Get localisation
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getLocalisation()
-    {
-        return $this->localisation;
-    }
-
-    /**
      * Add labo
      *
      * @param \AppBundle\Entity\Labo $labo
@@ -605,6 +594,40 @@ class Formation
     public function getLabo()
     {
         return $this->labo;
+    }
+
+    /**
+     * Add ufr
+     *
+     * @param \AppBundle\Entity\Ufr $ufr
+     *
+     * @return Formation
+     */
+    public function addUfr(\AppBundle\Entity\Ufr $ufr)
+    {
+        $this->ufr[] = $ufr;
+
+        return $this;
+    }
+
+    /**
+     * Remove ufr
+     *
+     * @param \AppBundle\Entity\Ufr $ufr
+     */
+    public function removeUfr(\AppBundle\Entity\Ufr $ufr)
+    {
+        $this->ufr->removeElement($ufr);
+    }
+
+    /**
+     * Get ufr
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUfr()
+    {
+        return $this->ufr;
     }
 
     /**
@@ -673,40 +696,6 @@ class Formation
     public function getMetier()
     {
         return $this->metier;
-    }
-
-    /**
-     * Add ufr
-     *
-     * @param \AppBundle\Entity\Ufr $ufr
-     *
-     * @return Formation
-     */
-    public function addUfr(\AppBundle\Entity\Ufr $ufr)
-    {
-        $this->ufr[] = $ufr;
-
-        return $this;
-    }
-
-    /**
-     * Remove ufr
-     *
-     * @param \AppBundle\Entity\Ufr $ufr
-     */
-    public function removeUfr(\AppBundle\Entity\Ufr $ufr)
-    {
-        $this->ufr->removeElement($ufr);
-    }
-
-    /**
-     * Get ufr
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getUfr()
-    {
-        return $this->ufr;
     }
 
     /**

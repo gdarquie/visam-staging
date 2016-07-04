@@ -12,7 +12,6 @@
     <field name="etabExt" type="text" column="etab_ext" length="65535" nullable="true">
       <options>
         <option name="fixed"/>
-        <option name="comment">Si un autre rétablissement est rattaché hors COMUE</option>
       </options>
     </field>
     <field name="lien" type="string" column="lien" length="255" nullable="true">
@@ -28,7 +27,6 @@
     <field name="responsable" type="string" column="responsable" length="500" nullable="true">
       <options>
         <option name="fixed"/>
-        <option name="comment">Le nom de la personne qui s’occupe du labo, plus tard ce lien pourrait pointer directement vers la table Membre.</option>
       </options>
     </field>
     <field name="description" type="text" column="description" length="16777215" nullable="true">
@@ -39,19 +37,16 @@
     <field name="code" type="integer" column="code" nullable="true">
       <options>
         <option name="unsigned"/>
-        <option name="comment">Quelque chose comme EA345 mais sans la EA qui est traité dans le type.</option>
       </options>
     </field>
     <field name="type" type="string" column="type" length="5" nullable="true">
       <options>
         <option name="fixed"/>
-        <option name="comment">EA ou UMR pour pouvoir faire des tri</option>
       </options>
     </field>
     <field name="effectif" type="integer" column="effectif" nullable="true">
       <options>
         <option name="unsigned"/>
-        <option name="comment">Les membres titulaires et associés, hors doctorants</option>
       </options>
     </field>
     <field name="sigle" type="string" column="sigle" length="45" nullable="true">
@@ -69,10 +64,19 @@
         <option name="fixed"/>
       </options>
     </field>
-    <many-to-many field="membre" target-entity="Membre" mapped-by="labo" fetch="LAZY"/>
-    <many-to-many field="theme" target-entity="Theme" mapped-by="labo" fetch="LAZY"/>
-    <many-to-many field="ufr" target-entity="Ufr" mapped-by="labo" fetch="LAZY"/>
+    <field name="uai" type="string" column="uai" length="25" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="timestamp" type="datetime" column="timestamp" nullable="false">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
+      </options>
+    </field>
     <many-to-many field="localisation" target-entity="Localisation" mapped-by="labo" fetch="LAZY"/>
+    <many-to-many field="membre" target-entity="Membre" mapped-by="labo" fetch="LAZY"/>
+    <many-to-many field="ufr" target-entity="Ufr" mapped-by="labo" fetch="LAZY"/>
     <many-to-many field="formation" target-entity="Formation" inversed-by="labo" fetch="LAZY">
       <join-table name="labo_has_formation">
         <join-columns>
@@ -83,8 +87,6 @@
         </inverse-join-columns>
       </join-table>
     </many-to-many>
-    <many-to-many field="discipline" target-entity="Discipline" mapped-by="labo" fetch="LAZY"/>
-    <many-to-many field="etablissement" target-entity="Etablissement" mapped-by="labo" fetch="LAZY"/>
     <many-to-many field="equipement" target-entity="Equipement" inversed-by="labo" fetch="LAZY">
       <join-table name="labo_has_equipement">
         <join-columns>
@@ -95,6 +97,8 @@
         </inverse-join-columns>
       </join-table>
     </many-to-many>
+    <many-to-many field="discipline" target-entity="Discipline" mapped-by="labo" fetch="LAZY"/>
+    <many-to-many field="etablissement" target-entity="Etablissement" mapped-by="labo" fetch="LAZY"/>
     <many-to-many field="ed" target-entity="Ed" inversed-by="labo" fetch="LAZY">
       <join-table name="ed_has_labo">
         <join-columns>

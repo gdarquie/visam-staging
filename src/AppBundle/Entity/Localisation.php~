@@ -1,0 +1,182 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Localisation
+ *
+ * @ORM\Table(name="localisation")
+ * @ORM\Entity
+ */
+class Localisation
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="string", length=255, nullable=true)
+     */
+    private $nom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lat", type="string", length=255, nullable=true)
+     */
+    private $lat;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="long", type="string", length=255, nullable=true)
+     */
+    private $long;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", length=65535, nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ville", type="string", length=500, nullable=true)
+     */
+    private $ville;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="code", type="string", length=30, nullable=true)
+     */
+    private $code;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="adresse", type="string", length=500, nullable=true)
+     */
+    private $adresse;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="region", type="string", length=500, nullable=true)
+     */
+    private $region;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pays", type="string", length=500, nullable=true)
+     */
+    private $pays;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="timestamp", type="datetime", nullable=false)
+     */
+    private $timestamp = 'CURRENT_TIMESTAMP';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="localisation_id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $localisationId;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Ufr", inversedBy="localisation")
+     * @ORM\JoinTable(name="localisation_has_ufr",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="localisation_id", referencedColumnName="localisation_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="ufr_id", referencedColumnName="ufr_id")
+     *   }
+     * )
+     */
+    private $ufr;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Labo", inversedBy="localisation")
+     * @ORM\JoinTable(name="localisation_has_labo",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="localisation_id", referencedColumnName="localisation_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
+     *   }
+     * )
+     */
+    private $labo;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Formation", inversedBy="localisation")
+     * @ORM\JoinTable(name="localisation_has_formation",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="localisation_id", referencedColumnName="localisation_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="formation_id", referencedColumnName="formation_id")
+     *   }
+     * )
+     */
+    private $formation;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Etablissement", inversedBy="localisation")
+     * @ORM\JoinTable(name="localisation_has_etablissement",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="localisation_id", referencedColumnName="localisation_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="etablissement_id", referencedColumnName="etablissement_id")
+     *   }
+     * )
+     */
+    private $etablissement;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Ed", inversedBy="localisation")
+     * @ORM\JoinTable(name="localisation_has_ed",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="localisation_id", referencedColumnName="localisation_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="ED_id", referencedColumnName="ED_id")
+     *   }
+     * )
+     */
+    private $ed;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->ufr = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->labo = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->formation = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->etablissement = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->ed = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
+

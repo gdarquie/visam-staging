@@ -97,6 +97,20 @@ class Labo
     private $lien3;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="uai", type="string", length=25, nullable=false)
+     */
+    private $uai;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="timestamp", type="datetime", nullable=false)
+     */
+    private $timestamp = 'CURRENT_TIMESTAMP';
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="labo_id", type="integer")
@@ -108,6 +122,13 @@ class Labo
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Localisation", mappedBy="labo")
+     */
+    private $localisation;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Membre", mappedBy="labo")
      */
     private $membre;
@@ -115,23 +136,9 @@ class Labo
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Theme", mappedBy="labo")
-     */
-    private $theme;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Ufr", mappedBy="labo")
      */
     private $ufr;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Localisation", mappedBy="labo")
-     */
-    private $localisation;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -151,20 +158,6 @@ class Labo
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Discipline", mappedBy="labo")
-     */
-    private $discipline;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Etablissement", mappedBy="labo")
-     */
-    private $etablissement;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Equipement", inversedBy="labo")
      * @ORM\JoinTable(name="labo_has_equipement",
      *   joinColumns={
@@ -176,6 +169,20 @@ class Labo
      * )
      */
     private $equipement;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Discipline", mappedBy="labo")
+     */
+    private $discipline;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Etablissement", mappedBy="labo")
+     */
+    private $etablissement;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -197,14 +204,13 @@ class Labo
      */
     public function __construct()
     {
-        $this->membre = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->theme = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->ufr = new \Doctrine\Common\Collections\ArrayCollection();
         $this->localisation = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->membre = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->ufr = new \Doctrine\Common\Collections\ArrayCollection();
         $this->formation = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->equipement = new \Doctrine\Common\Collections\ArrayCollection();
         $this->discipline = new \Doctrine\Common\Collections\ArrayCollection();
         $this->etablissement = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->equipement = new \Doctrine\Common\Collections\ArrayCollection();
         $this->ed = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -498,6 +504,54 @@ class Labo
     }
 
     /**
+     * Set uai
+     *
+     * @param string $uai
+     *
+     * @return Labo
+     */
+    public function setUai($uai)
+    {
+        $this->uai = $uai;
+
+        return $this;
+    }
+
+    /**
+     * Get uai
+     *
+     * @return string
+     */
+    public function getUai()
+    {
+        return $this->uai;
+    }
+
+    /**
+     * Set timestamp
+     *
+     * @param \DateTime $timestamp
+     *
+     * @return Labo
+     */
+    public function setTimestamp($timestamp)
+    {
+        $this->timestamp = $timestamp;
+
+        return $this;
+    }
+
+    /**
+     * Get timestamp
+     *
+     * @return \DateTime
+     */
+    public function getTimestamp()
+    {
+        return $this->timestamp;
+    }
+
+    /**
      * Get laboId
      *
      * @return integer
@@ -505,108 +559,6 @@ class Labo
     public function getLaboId()
     {
         return $this->laboId;
-    }
-
-    /**
-     * Add membre
-     *
-     * @param \AppBundle\Entity\Membre $membre
-     *
-     * @return Labo
-     */
-    public function addMembre(\AppBundle\Entity\Membre $membre)
-    {
-        $this->membre[] = $membre;
-
-        return $this;
-    }
-
-    /**
-     * Remove membre
-     *
-     * @param \AppBundle\Entity\Membre $membre
-     */
-    public function removeMembre(\AppBundle\Entity\Membre $membre)
-    {
-        $this->membre->removeElement($membre);
-    }
-
-    /**
-     * Get membre
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getMembre()
-    {
-        return $this->membre;
-    }
-
-    /**
-     * Add theme
-     *
-     * @param \AppBundle\Entity\Theme $theme
-     *
-     * @return Labo
-     */
-    public function addTheme(\AppBundle\Entity\Theme $theme)
-    {
-        $this->theme[] = $theme;
-
-        return $this;
-    }
-
-    /**
-     * Remove theme
-     *
-     * @param \AppBundle\Entity\Theme $theme
-     */
-    public function removeTheme(\AppBundle\Entity\Theme $theme)
-    {
-        $this->theme->removeElement($theme);
-    }
-
-    /**
-     * Get theme
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getTheme()
-    {
-        return $this->theme;
-    }
-
-    /**
-     * Add ufr
-     *
-     * @param \AppBundle\Entity\Ufr $ufr
-     *
-     * @return Labo
-     */
-    public function addUfr(\AppBundle\Entity\Ufr $ufr)
-    {
-        $this->ufr[] = $ufr;
-
-        return $this;
-    }
-
-    /**
-     * Remove ufr
-     *
-     * @param \AppBundle\Entity\Ufr $ufr
-     */
-    public function removeUfr(\AppBundle\Entity\Ufr $ufr)
-    {
-        $this->ufr->removeElement($ufr);
-    }
-
-    /**
-     * Get ufr
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getUfr()
-    {
-        return $this->ufr;
     }
 
     /**
@@ -644,6 +596,74 @@ class Labo
     }
 
     /**
+     * Add membre
+     *
+     * @param \AppBundle\Entity\Membre $membre
+     *
+     * @return Labo
+     */
+    public function addMembre(\AppBundle\Entity\Membre $membre)
+    {
+        $this->membre[] = $membre;
+
+        return $this;
+    }
+
+    /**
+     * Remove membre
+     *
+     * @param \AppBundle\Entity\Membre $membre
+     */
+    public function removeMembre(\AppBundle\Entity\Membre $membre)
+    {
+        $this->membre->removeElement($membre);
+    }
+
+    /**
+     * Get membre
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMembre()
+    {
+        return $this->membre;
+    }
+
+    /**
+     * Add ufr
+     *
+     * @param \AppBundle\Entity\Ufr $ufr
+     *
+     * @return Labo
+     */
+    public function addUfr(\AppBundle\Entity\Ufr $ufr)
+    {
+        $this->ufr[] = $ufr;
+
+        return $this;
+    }
+
+    /**
+     * Remove ufr
+     *
+     * @param \AppBundle\Entity\Ufr $ufr
+     */
+    public function removeUfr(\AppBundle\Entity\Ufr $ufr)
+    {
+        $this->ufr->removeElement($ufr);
+    }
+
+    /**
+     * Get ufr
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUfr()
+    {
+        return $this->ufr;
+    }
+
+    /**
      * Add formation
      *
      * @param \AppBundle\Entity\Formation $formation
@@ -675,6 +695,40 @@ class Labo
     public function getFormation()
     {
         return $this->formation;
+    }
+
+    /**
+     * Add equipement
+     *
+     * @param \AppBundle\Entity\Equipement $equipement
+     *
+     * @return Labo
+     */
+    public function addEquipement(\AppBundle\Entity\Equipement $equipement)
+    {
+        $this->equipement[] = $equipement;
+
+        return $this;
+    }
+
+    /**
+     * Remove equipement
+     *
+     * @param \AppBundle\Entity\Equipement $equipement
+     */
+    public function removeEquipement(\AppBundle\Entity\Equipement $equipement)
+    {
+        $this->equipement->removeElement($equipement);
+    }
+
+    /**
+     * Get equipement
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEquipement()
+    {
+        return $this->equipement;
     }
 
     /**
@@ -743,40 +797,6 @@ class Labo
     public function getEtablissement()
     {
         return $this->etablissement;
-    }
-
-    /**
-     * Add equipement
-     *
-     * @param \AppBundle\Entity\Equipement $equipement
-     *
-     * @return Labo
-     */
-    public function addEquipement(\AppBundle\Entity\Equipement $equipement)
-    {
-        $this->equipement[] = $equipement;
-
-        return $this;
-    }
-
-    /**
-     * Remove equipement
-     *
-     * @param \AppBundle\Entity\Equipement $equipement
-     */
-    public function removeEquipement(\AppBundle\Entity\Equipement $equipement)
-    {
-        $this->equipement->removeElement($equipement);
-    }
-
-    /**
-     * Get equipement
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getEquipement()
-    {
-        return $this->equipement;
     }
 
     /**

@@ -12,7 +12,11 @@
     <field name="description" type="text" column="description" length="65535" nullable="true">
       <options>
         <option name="fixed"/>
-        <option name="comment">Facultatif - voir si on l’utilise vraiment</option>
+      </options>
+    </field>
+    <field name="timestamp" type="datetime" column="timestamp" nullable="false">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
       </options>
     </field>
     <many-to-many field="formation" target-entity="Formation" inversed-by="tag" fetch="LAZY">

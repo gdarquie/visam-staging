@@ -14,9 +14,14 @@
         <option name="fixed"/>
       </options>
     </field>
-    <field name="prefession" type="string" column="prefession" length="500" nullable="true">
+    <field name="profession" type="string" column="profession" length="500" nullable="true">
       <options>
         <option name="fixed"/>
+      </options>
+    </field>
+    <field name="timestamp" type="datetime" column="timestamp" nullable="false">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
       </options>
     </field>
     <many-to-many field="labo" target-entity="Labo" inversed-by="membre" fetch="LAZY">

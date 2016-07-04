@@ -7,7 +7,6 @@
     <field name="code" type="string" column="code" length="45" nullable="true">
       <options>
         <option name="fixed"/>
-        <option name="comment">Code l’école doctorale</option>
       </options>
     </field>
     <field name="nom" type="string" column="nom" length="255" nullable="true">
@@ -23,16 +22,11 @@
     <field name="laboExt" type="text" column="labo_ext" length="65535" nullable="true">
       <options>
         <option name="fixed"/>
-        <option name="comment">Autres labo hors HESAM qui sont en lien avec l’ED
-</option>
       </options>
     </field>
     <field name="etabExt" type="text" column="etab_ext" length="65535" nullable="true">
       <options>
         <option name="fixed"/>
-        <option name="comment">Etablissements partenaires
-
-Paris 8 (234D); Paris 9 (244D)</option>
       </options>
     </field>
     <field name="contact" type="string" column="contact" length="255" nullable="true">
@@ -43,8 +37,11 @@ Paris 8 (234D); Paris 9 (244D)</option>
     <field name="effectif" type="integer" column="effectif" nullable="true">
       <options>
         <option name="unsigned"/>
-        <option name="comment">Nombre de doctorants
-</option>
+      </options>
+    </field>
+    <field name="timestamp" type="datetime" column="timestamp" nullable="false">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
       </options>
     </field>
     <many-to-many field="membre" target-entity="Membre" mapped-by="ed" fetch="LAZY"/>

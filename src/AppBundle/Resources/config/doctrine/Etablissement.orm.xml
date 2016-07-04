@@ -17,7 +17,6 @@
     <field name="code" type="string" column="code" length="45" nullable="true">
       <options>
         <option name="fixed"/>
-        <option name="comment">Code UAI</option>
       </options>
     </field>
     <field name="sigle" type="string" column="sigle" length="45" nullable="true">
@@ -33,7 +32,6 @@
     <field name="ministere" type="string" column="ministere" length="255" nullable="true">
       <options>
         <option name="fixed"/>
-        <option name="comment">Ministère de tutelle, dans l’idéal un lien</option>
       </options>
     </field>
     <field name="statut" type="string" column="statut" length="255" nullable="true">
@@ -44,7 +42,6 @@
     <field name="fc" type="string" column="FC" length="255" nullable="true">
       <options>
         <option name="fixed"/>
-        <option name="comment">Formation continue : oui/ non</option>
       </options>
     </field>
     <field name="fcLien" type="string" column="FC_lien" length="255" nullable="true">
@@ -55,27 +52,26 @@
     <field name="etudiants" type="integer" column="etudiants" nullable="true">
       <options>
         <option name="unsigned"/>
-        <option name="comment">Nombre d’étudiants</option>
       </options>
     </field>
     <field name="chercheurs" type="integer" column="chercheurs" nullable="true">
       <options>
         <option name="unsigned"/>
-        <option name="comment">Nombre de chercheurs et d’enseignants</option>
       </options>
     </field>
     <field name="lien2" type="string" column="lien2" length="255" nullable="true">
       <options>
         <option name="fixed"/>
-        <option name="comment">Lien extérieur - 1 lien (à penser pour la suite)
-</option>
       </options>
     </field>
     <field name="lien3" type="string" column="lien3" length="255" nullable="true">
       <options>
         <option name="fixed"/>
-        <option name="comment">Lien extérieur - 1 lien (à penser pour la suite)
-</option>
+      </options>
+    </field>
+    <field name="timestamp" type="datetime" column="timestamp" nullable="false">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
       </options>
     </field>
     <many-to-many field="localisation" target-entity="Localisation" mapped-by="etablissement" fetch="LAZY"/>

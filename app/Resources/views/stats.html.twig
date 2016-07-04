@@ -10,9 +10,9 @@
     <div class="section no-pad-bot">
       <div class="container">
         <br><br>
-        <h1 class="header center" style="color:white;">Visualisation des compétences de la COMUE heSam Université</h1>
+        <h1 class="header center" style="color:white;">Visualisation des compétences d'heSam Université</h1>
         <div class="row center">
-          <h5 class="header col s12 light" style="color:white;">Visualisation des compétences de la COMUE heSam Université</h5> 
+          <h5 class="header col s12 light" style="color:white;"></h5> 
         </div>
         <div class="row center">
         </div>
@@ -23,33 +23,64 @@
   </div>
 
 <div class='container'>
-    <header>
 
+  <br>
+    <div class="row">
+        <div class="col s12 m4">
+          <div class="card teal">
+                <a href="#formations" class="modal-trigger">
+                    <div class="card-content white-text center-align">
+                    <i class="large material-icons">view_module</i>
+                    <p class="center-align number">1400</p>
+                    <p class="center-align number-label">
+                        Formations
+                    </p>
+                    </div>
+                </a>
+          </div>
+        </div>
+        <div class="col s12 m4">
+          <div class="card cyan">
+                <a href="#laboratoires" class="modal-trigger">
+                    <div class="card-content white-text center-align">
+                    <i class="large material-icons">view_module</i>
+                    <p class="center-align number">85</p>
+                    <p class="center-align number-label">
+                        Laboratoires
+                    </p>
+                    </div>
+                </a>
+          </div>
+        </div>
+        <div class="col s12 m4">
+          <div class="card amber accent-2">
+                <a href="#ecoles" class="modal-trigger">
+                    <div class="card-content white-text center-align">
+                    <i class="large material-icons">view_module</i>
+                    <p class="center-align number">14</p>
+                    <p class="center-align number-label">
+                        Ecoles doctorales
+                    </p>
+                    </div>
+                </a>
+          </div>
+        </div>
+    </div>
 
-  
-    </header>
-    <section class="row">
-      <h2>Visam : première démo</h2>
-      <article class="col s5">
-        <h3>Explorer les données de la COMUE HESAM</h3>
+    <div class='row'>
 
-        <p>Nous disposons actuellement d'une grande partie des données des établissements. Nous proposons un premier parcours à partir des informations qu'elles produisent afin de de rendre compte de l'état de la collecte et de l'importation des données et, nous l'espérons, de mettre en avant plusieurs scénarios d'exploitation.</p>
-
+      <article class="col s6 m10">
+        <input type="text" placeholder="Chercher parmi les laboratoires, formations et écoles doctorales HESAM">
       </article>
 
-        <article class="col s7">
-            <h3>Import des données</h3>
-            
-            <ul>
-              <li>Etablissements dont les laboratoires sont importés :</li>
-              <li>Etablissements dont les formations sont importés : </li>
-              <li>Etablissements dont les ED sont importés :</li>
-            </ul>
+      <article class="col s6 m2">
+      <a class="waves-effect waves-light btn red">Rechercher</a>
+      </article>
+    </div>
 
-        </article>
-
-       
-    </section>
+    <div class="row">
+      <a class="waves-effect waves-light btn blue" href="/rechercher">Faire une recherche avancée</a>
+    </div>
 
   </div>
 
@@ -57,9 +88,9 @@
     <div class="section no-pad-bot">
       <div class="container">
         <br><br>
-        <h1 class="header center" style="color:white;">La COMUE HESAM</h1>
+        <h1 class="header center" style="color:white;">HESAM Université</h1>
         <div class="row center">
-                  <h5 class="header col s12 light" style="color:white;">Visam comprend {{etabs|length}} établissements</h5>
+                  <h5 class="header col s12 light" style="color:white;">Visam comprend {{etabs|length}} entités</h5>
         </div>
         <div class="row center">
         </div>
@@ -75,7 +106,7 @@
 <!-- Général -->
   
   <article>
-  <p>Visam compte, selon les données entrées dans la base de données <strong>{{eds|length}}</strong> ED, <strong>{{formations|length}}</strong> formations et <strong>{{labos|length}}</strong> laboratoires  répartis sur <strong>{{etabs|length}}</strong> établissements.</p>
+  <p>Visam compte, selon les données entrées dans la base de données <strong>{{eds|length}}</strong> ED, <strong>{{formations|length}}</strong> formations et <strong>{{labos|length}}</strong> laboratoires  répartis sur <strong>{{etabs|length}}</strong> entités.</p>
   </article>
 
 <!-- Effectifs -->
@@ -84,15 +115,16 @@
             <p>Selon les données entrées dans la base de données ViSam, HeSam compte :
                 <ul>
                     <li><span class="number">{{nbEtud}}</span> étudiants</li>
-                    <li>enseignants et chercheurs</li>
                 </ul></p>
         </article>
 
         <article>
             <h2>Répartition des étudiants par établissement</h2>
-            <p>Pour réaliser les visualisations, il faut que je puisse faire communiquer les données de Visam avec JS (ce que Twig ne permet pas).</p>
-            <p>Pour y parvenir je dois exporter le code contenant le contenu des visualisations en JSON.</p>
-            <div id="piechart"></div>
+           
+
+            <div id="etud-stat">
+              <svg style="height:500px;"></svg>
+            </div>
         </article>
 
         <article>
@@ -102,81 +134,8 @@
             </div>
         </article>
 
-<!-- Les disciplines HESAM -->
 
-
-        <article>
-          <h2>Les disciplines</h2>
-
-                   
-          
-          <div class="row">
-
-            <div class='col s8'>
-              <h3>Les disciplines les plus fréquentes</h3>
-              <p>Les disciplines les plus populaires pour l'ensemble des formations et laboratoires (pas encore implémenté) de la COMUE et pour tous types de disciplines (CNU, HCERES, SISE et NW3)</p> 
-              <table class="striped">
-              {% for discipline in allDisciplines %}
-                    <tr><td>{{discipline.item.type}}</td><td>{{discipline.item.nom}}</td><td>{{discipline.nb}}</td></tr>
-     {#                ({{discipline.item.formation|length}}) #}
-              {% endfor %}
-              </table>
-            </div>
-
-            <div class="col s4">
-              <h3>Disciplines NW3 les plus fréquentes</h3>
-              <table class="striped">
-              {% for discipline in allNw3Disciplines %}
-                  <tr><td>{{discipline.item.nom}}</td><td>{{discipline.nb}}</td></tr>
-              {% endfor %}
-              </table>
-
-              <p>Les données NW3 n'étaient pas obligatoires lors de la collecte, certaines formations ou laboratoires peuvent avoir choisi de ne pas y avoir recourt.</p>
-            </div>
-          </div>
-          
-
-          <div class="row">
-            <div class="col s4">
-            <h3>Disciplines CNU les plus fréquentes</h3>
-            <table class="striped">
-            {% for discipline in allCnuDisciplines %}
-                  <tr><td>{{discipline.item.nom}}</td><td>{{discipline.nb}}</td></tr>
-            {% endfor %}
-            </table>
-            </div>
-
-            <div class="col s4">
-            <h3>Disciplines HCERES les plus fréquentes</h3>
-            <table class="striped">
-            {% for discipline in allHceresDisciplines %}
-                  <tr><td>{{discipline.item.nom}}</td><td>{{discipline.nb}}</td></tr>
-            {% endfor %}
-            </table>
-            </div>
-
-            <div class="col s4">
-            <h3>Disciplines SISE les plus fréquentes</h3>
-            <table class="striped">
-            {% for discipline in allSiseDisciplines %}
-                  <tr><td>{{discipline.item.nom}}</td><td>{{discipline.nb}}</td></tr>
-            {% endfor %}
-            </table>
-            </div>
-          </div>
-
-         
-        </article>
-
-{# 
-        <article>
-          <h2>Les domaines?</h2>
-          <h3>Répartition par domaine HCERES</h3>
-          <h3>Répartition par domaine SISE</h3>
-        </article> #}
-
-        
-
+    
 </div>
   <div id="index-banner" class="parallax-container">
     <div class="section no-pad-bot">
@@ -184,7 +143,7 @@
         <br><br>
         <h1 class="header center" style="color:white;">Formations</h1>
         <div class="row center">
-          <h5 class="header col s12 light" style="color:white;">La base contient actuellement 99 formations.</h5>
+          <h5 class="header col s12 light" style="color:white;">La base contient actuellement {{formations|length}} formations.</h5>
  </div>
         <div class="row center">
         </div>
@@ -204,75 +163,37 @@
 
         <article>
             <h2>Répartition des formations par établissements</h2>
-              {% for etab in etabs %}
-                  <h5>{{etab.nom}} ({{etab.formation|length}})</h5>
-                <!--<p>
-                      {% for formation in etab.formation %}
-                          {{formation.nom}} /
-                      {% endfor %}
-                  </p> -->
-              {% endfor %}
+            <div id="forma-etab">
+              <svg style="height:500px;"></svg>
+            </div>
+
         </article>
 
         <article>
           <h2>Formations & Disciplines</h2>
 
+          <article>
+            <h2>Répartition des formations par thématiques NW3</h2>
+            <div id="form-nw3">
+              <svg style="height:500px;"></svg>
+            </div>
+          </article>
 
+        <article>
+        <h2>Hesamettes des formations</h2>
 
-          <div class="row">
-
-            <div class='col s8'>
-              <h3>Les disciplines les plus fréquentes</h3>
-              <p>Les disciplines les plus populaires pour l'ensemble des formations de la COMUE et pour tous types de disciplines (CNU, HCERES, SISE et NW3)</p> 
-              <table class="striped">
-              {% for discipline in allDisciplinesFormations %}
-                    <tr><td>{{discipline.item.type}}</td><td>{{discipline.item.nom}}</td><td>{{discipline.nb}}</td></tr>
-     {#                ({{discipline.item.formation|length}}) #}
-              {% endfor %}
-              </table>
+        <h2>Répartition des formations par hesamettes</h2>
+            <div id="form-hesamette">
+              <svg style="height:500px;"></svg>
             </div>
 
-            <div class="col s4">
-              <h3>Disciplines NW3 les plus fréquentes</h3>
-              <table class="striped">
-              {% for discipline in allNw3DisciplinesFormations %}
-                  <tr><td>{{discipline.item.nom}}</td><td>{{discipline.nb}}</td></tr>
-              {% endfor %}
-              </table>
-
-              <p>Les données NW3 n'étaient pas obligatoires lors de la collecte, certaines formations ou laboratoires peuvent avoir choisi de ne pas y avoir recourt.</p>
-            </div>
-          </div>
+      </article>
+          
           
 
           <div class="row">
-            <div class="col s4">
-            <h3>Disciplines CNU les plus fréquentes</h3>
-            <table class="striped">
-            {% for discipline in allCnuDisciplinesFormations %}
-                  <tr><td>{{discipline.item.nom}}</td><td>{{discipline.nb}}</td></tr>
-            {% endfor %}
-            </table>
-            </div>
 
-            <div class="col s4">
-            <h3>Disciplines HCERES les plus fréquentes</h3>
-            <table class="striped">
-            {% for discipline in allHceresDisciplinesFormations %}
-                  <tr><td>{{discipline.item.nom}}</td><td>{{discipline.nb}}</td></tr>
-            {% endfor %}
-            </table>
-            </div>
 
-            <div class="col s4">
-            <h3>Disciplines SISE les plus fréquentes</h3>
-            <table class="striped">
-            {% for discipline in allSiseDisciplinesFormations %}
-                  <tr><td>{{discipline.item.nom}}</td><td>{{discipline.nb}}</td></tr>
-            {% endfor %}
-            </table>
-            </div>
-          </div>
 
           <div class="row">
             <div class="col s12">
@@ -295,6 +216,7 @@
         </article>
     </div>
 
+<!-- Les laboratoires -->
     <div id="index-banner" class="parallax-container">
     <div class="section no-pad-bot">
       <div class="container">
@@ -313,65 +235,52 @@
     
 
  <div class="container">
-  <article>
-    <h2>Disciplines & Laboratoires</h2>
 
-     <div class="row">
 
-            <div class='col s8'>
-              <h3>Les disciplines les plus fréquentes</h3>
-              <p>Les disciplines les plus populaires pour l'ensemble des laboratoires de la COMUE et pour tous types de disciplines (CNU, HCERES, SISE et NW3)</p> 
-              <table class="striped">
-              {% for discipline in allDisciplinesLabos %}
-                    <tr><td>{{discipline.item.type}}</td><td>{{discipline.item.nom}}</td><td>{{discipline.nb}}</td></tr>
-     {#                ({{discipline.item.formation|length}}) #}
-              {% endfor %}
-              </table>
+    <div class="row">
+        <article>
+            <h2>Répartition des laboratoires par établissements</h2>
+            <div id="labo-etab">
+              <svg style="height:500px;"></svg>
             </div>
 
-            <div class="col s4">
-              <h3>Disciplines NW3 les plus fréquentes</h3>
-              <table class="striped">
-              {% for discipline in allNw3DisciplinesLabos %}
-                  <tr><td>{{discipline.item.nom}}</td><td>{{discipline.nb}}</td></tr>
-              {% endfor %}
-              </table>
+        </article>
+    </div>
 
-              <p>Les données NW3 n'étaient pas obligatoires lors de la collecte, certaines formations ou laboratoires peuvent avoir choisi de ne pas y avoir recourt.</p>
-            </div>
-          </div>
-          
+    <div class="row">
+      <article>
+        <h2>Répartition des laboratoires par thématiques NW3 </h2>
+        <div id="labo-nw3">
+          <svg style="height:500px;"></svg>
+        </div>
+      </article>
+    </div>
 
-          <div class="row">
-            <div class="col s4">
-            <h3>Disciplines CNU les plus fréquentes</h3>
-            <table class="striped">
-            {% for discipline in allCnuDisciplinesLabos %}
-                  <tr><td>{{discipline.item.nom}}</td><td>{{discipline.nb}}</td></tr>
-            {% endfor %}
-            </table>
-            </div>
 
-            <div class="col s4">
-            <h3>Disciplines HCERES les plus fréquentes</h3>
-            <table class="striped">
-            {% for discipline in allHceresDisciplinesLabos %}
-                  <tr><td>{{discipline.item.nom}}</td><td>{{discipline.nb}}</td></tr>
-            {% endfor %}
-            </table>
-            </div>
-
-            <div class="col s4">
-            <h3>Disciplines SISE les plus fréquentes</h3>
-            <table class="striped">
-            {% for discipline in allSiseDisciplinesLabos %}
-                  <tr><td>{{discipline.item.nom}}</td><td>{{discipline.nb}}</td></tr>
-            {% endfor %}
-            </table>
-            </div>
-          </div>
-
+    <div class="row">
+      <article>
+      <h2>Répartition des laboratoires par types</h2>
+      <div id="labo-type">
+          <svg style="height:500px;"></svg>
+      </div>
+    </div>
   </article>
+
+
+    <div class="row">
+      <article>
+      <h2>Répartition des laboratoires par hesamettes</h2>
+
+        <div id="labo-hesamette">
+            <svg style="height:500px;"></svg>
+        </div>
+
+
+
+    </div>
+  </article>
+
+
  </div>   
 
   <div id="index-banner" class="parallax-container">
@@ -457,7 +366,7 @@
 
   <div class="row">
     <div class='overlay'></div>
-    <iframe src="http://localhost:8888/2016/map/map-visam/#/" frameborder="0" class ='col s12' id='map' ></iframe>
+    <iframe src="http://localhost:8888/2016/visamFront/2016-06-05/map/#/" frameborder="0" class ='col s12' id='map' ></iframe>
   </div>
 
 
@@ -539,99 +448,8 @@
 
     <script type="text/javascript">
 
-
-
-
-
-
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
-
-        var data = google.visualization.arrayToDataTable([
-          ['Etablissement', "Nombre d'étudiants"],
-          ['{{etabs[0].nom}}',     {{etabs[0].etudiants}}],
-          ['{{etabs[1].nom}}',     {{etabs[1].etudiants}}],
-          ['{{etabs[2].nom}}',      {{etabs[2].etudiants}}],
-          ['{{etabs[3].nom}}',  {{etabs[3].etudiants}}],
-          ['{{etabs[4].nom}}', {{etabs[4].etudiants}}],
-          ['{{etabs[5].nom}}',    {{etabs[5].etudiants}}],
-          ['{{etabs[6].nom}}',    {{etabs[6].etudiants}}],
-          ['{{etabs[7].nom}}',    {{etabs[7].etudiants}}],
-          ['{{etabs[8].nom}}',    {{etabs[8].etudiants}}],
-          ['{{etabs[9].nom}}',    {{etabs[9].etudiants}}],
-          ['{{etabs[10].nom}}',    {{etabs[10].etudiants}}],
-          ['{{etabs[11].nom}}',    {{etabs[11].etudiants}}],
-          ['{{etabs[12].nom}}',    {{etabs[12].etudiants}}],
-        ]);
-
-        var options = {
-          title: 'Répartition des étudiants par établissement'
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-        chart.draw(data, options);
-
-        //Deuxième essai de visualisation
-
-        var chart2 = new google.visualization.PieChart(document.getElementById('piechart2'));
-
-        var data2 = google.visualization.arrayToDataTable([
-          ['Etablissement', "Nombre d'étudiants"],
-            {% for etab in etabs %}
-                ['{{etab.nom}}',{{etab.chercheurs}}],
-            {% endfor %}
-        ]);
-
-        var options = {
-          title: 'Répartition des chercheurs par établissement'
-        };
-
-        chart2.draw(data2, options);
-
-
-        //Répartition des formations par niveau
-
-        var chart3 = new google.visualization.PieChart(document.getElementById('piechart3'));
-
-        var data3 = google.visualization.arrayToDataTable([
-          ['Formation', "Niveau"],
-            {% for nbFormation in nbFormations %}
-                    ['{{nbFormation.niveau}}',{{nbFormation.nb}}],
-            {% endfor %}
-        ]);
-
-        var options = {
-          title: 'Répartition des formations par niveau'
-        };
-
-        chart3.draw(data3, options);
-
-        //Répartition des formations par établissement
-
-        var chart4 = new google.visualization.PieChart(document.getElementById('piechart4'));
-
-        var data4 = google.visualization.arrayToDataTable([
-          ['Etablissement', "Nb Formations"],
-          {% for etab in etabs %}
-            ['{{etab.nom}}',{{etab.formation|length}}],
-          {% endfor %}
-        ]);
-
-        var options = {
-          title: 'Répartition des formations par niveau'
-        };
-
-        chart4.draw(data4, options);
-
-      }
-
-
-    </script>
-
-    <script>
-            //Regular pie chart example
+  
+      //Regular pie chart example
       nv.addGraph(function() {
         var chart = nv.models.pieChart()
             .x(function(d) { return d.label })
@@ -665,7 +483,7 @@
         return chart;
       });
 
-            //Donut chart example
+      //Donut chart example
       nv.addGraph(function() {
         var chart = nv.models.pieChart()
             .x(function(d) { return d.label })
@@ -684,6 +502,180 @@
         return chart;
       });
 
+
+      //Donut chart example
+      nv.addGraph(function() {
+        var chart = nv.models.pieChart()
+            .x(function(d) { return d.label })
+            .y(function(d) { return d.value })
+            .showLabels(true)     //Display pie labels
+            .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+            .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+            .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+            .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
+            ;
+          d3.select("#etud-stat svg")
+              .datum(etudData ())
+              .transition().duration(350)
+              .call(chart);
+
+        return chart;
+      });
+
+      //Répartition du nombre de formations par établissements
+      nv.addGraph(function() {
+        var chart = nv.models.pieChart()
+            .x(function(d) { return d.label })
+            .y(function(d) { return d.value })
+            .showLabels(true)     //Display pie labels
+            .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+            .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+            .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+            .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
+            ;
+          d3.select("#forma-etab svg")
+              .datum(formaEtabData ())
+              .transition().duration(350)
+              .call(chart);
+
+        return chart;
+      });
+
+      //Répartition du nombre de labo par établissements
+      nv.addGraph(function() {
+        var chart = nv.models.pieChart()
+            .x(function(d) { return d.label })
+            .y(function(d) { return d.value })
+            .showLabels(true)     //Display pie labels
+            .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+            .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+            .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+            .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
+            ;
+          d3.select("#labo-etab svg")
+              .datum(laboEtabData ())
+              .transition().duration(350)
+              .call(chart);
+
+        return chart;
+      });
+
+        //Colonnes pour les disciplines les plus populaires
+        nv.addGraph(function() {
+        var chart = nv.models.discreteBarChart()
+            .x(function(d) { return d.label;})    //Specify the data accessors.
+            .y(function(d) { return d.value })
+            .staggerLabels(true)    //Too many bars and not enough room? Try staggering labels.
+           // .tooltips(false)        //Don't show tooltips
+           // .showValues(true)       //...instead, show the bar value right on top of each bar.
+           // .transitionDuration(350)
+            ;
+        d3.select('#formationTopDiscipline svg')
+            .datum(formationTopDisciplineData ())
+            .call(chart);
+        nv.utils.windowResize(chart.update);
+        return chart;
+      });
+
+
+      //Répartition des disciplines NW3 pour les formations
+      nv.addGraph(function() {
+        var chart = nv.models.pieChart()
+            .x(function(d) { return d.label })
+            .y(function(d) { return d.value })
+            .showLabels(true)     //Display pie labels
+            .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+            .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+            .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+            .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
+            ;
+          d3.select("#form-nw3 svg")
+              .datum(allNw3DisciplinesFormationsData ())
+              .transition().duration(350)
+              .call(chart);
+        return chart;
+      });
+
+
+      //Répartition des disciplines NW3 pour les labos
+      nv.addGraph(function() {
+        var chart = nv.models.pieChart()
+            .x(function(d) { return d.label })
+            .y(function(d) { return d.value })
+            .showLabels(true)     //Display pie labels
+            .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+            .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+            .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+            .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
+            ;
+          d3.select("#labo-nw3 svg")
+              .datum(allNw3DisciplinesLabosData ())
+              .transition().duration(350)
+              .call(chart);
+
+        return chart;
+      });
+
+      //Répartition des types (EA, etc.) pour les labos
+      nv.addGraph(function() {
+        var chart = nv.models.pieChart()
+            .x(function(d) { return d.label })
+            .y(function(d) { return d.value })
+            .showLabels(true)     //Display pie labels
+            .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+            .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+            .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+            .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
+            ;
+          d3.select("#labo-type svg")
+              .datum(nbTypeLabosData ())
+              .transition().duration(350)
+              .call(chart);
+
+        return chart;
+      });
+
+
+      //Répartition des hesamettes pour les labos
+      nv.addGraph(function() {
+        var chart = nv.models.pieChart()
+            .x(function(d) { return d.label })
+            .y(function(d) { return d.value })
+            .showLabels(true)     //Display pie labels
+            .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+            .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+            .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+            .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
+            ;
+          d3.select("#labo-hesamette svg")
+              .datum(nbLaboParHesametteData ())
+              .transition().duration(350)
+              .call(chart);
+
+        return chart;
+      });
+
+      //Répartition des hesamettes pour les formations
+      nv.addGraph(function() {
+        var chart = nv.models.pieChart()
+            .x(function(d) { return d.label })
+            .y(function(d) { return d.value })
+            .showLabels(true)     //Display pie labels
+            .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+            .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+            .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+            .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
+            ;
+          d3.select("#form-hesamette svg")
+              .datum(nbFormParHesametteData ())
+              .transition().duration(350)
+              .call(chart);
+
+        return chart;
+      });
+
+      
+
       // nv.addGraph(function() {
       //   var chart = nv.models.discreteBarChart()
       //       .x(function(d) { return d.label })    //Specify the data accessors.
@@ -699,6 +691,7 @@
       //   nv.utils.windowResize(chart.update);
       //   return chart;
       // });
+
 
 
 //Pie chart example data. Note how there is only a single array of key-value pairs.
@@ -717,6 +710,98 @@ function chercheursData() {
           {"label" : "{{etab.nom}}",
           "value" : "{{etab.chercheurs}}"},
       {% endfor %}
+    ];
+  }
+
+  function etudData() {
+  return  [
+      {% for etab in etabs|sort %}
+          {"label" : "{{etab.nom}}",
+          "value" : "{{etab.etudiants}}"},
+      {% endfor %}
+    ];
+  }
+
+  //Nombre de formations par établissements
+  function formaEtabData() {
+  return  [
+       {% for etab in etabs %}
+          {"label" : "{{etab.nom}}",
+          "value" : "{{etab.formation|length}}"},
+      {% endfor %}
+    ];
+  }
+
+  //Nombre de labo par établissements
+  function laboEtabData() {
+  return  [
+       {% for etab in etabs %}
+          {"label" : "{{etab.nom}}",
+          "value" : "{{etab.labo|length}}"},
+      {% endfor %}
+    ];
+  }
+
+
+  //20 disciplines les plus populaires
+  function formationTopDisciplineData() {
+  return  [
+       {% for discipline in allDisciplinesFormations %}
+          {"label" : "{{discipline.item.nom}}",
+          "value" : "{{discipline.item.formation|length}}"},
+      {% endfor %}
+    ];
+  }
+
+  //Répartition des NW3 par formation
+  function allNw3DisciplinesFormationsData() {
+    return [
+        {% for discipline in allNw3DisciplinesFormations %}
+          {"label" : "{{discipline.item.nom}}",
+          "value" : "{{discipline.nb}}" },
+        {% endfor %}
+    ];
+  }
+
+  //Répartition des NW3 par labo
+  function allNw3DisciplinesLabosData() {
+    return [
+        {% for discipline in allNw3DisciplinesLabos %}
+          {"label" : "{{discipline.item.nom}}",
+          "value" : "{{discipline.nb}}" },
+        {% endfor %}
+    ];
+  }
+
+  
+  //Répartition des types de labo
+  function nbTypeLabosData() {
+    return [
+        {% for labo in nbTypeLabos %}
+          {"label" : "{{labo.type}}",
+          "value" : "{{labo.nb}}" },
+        {% endfor %}
+    ];
+  }
+
+
+  //Répartition des labos par hesamettes
+  function nbLaboParHesametteData() {
+    return [
+        {% for hesamette in labosHesamette %}
+          { "label" :"{{hesamette.hesamette}}",
+          "value" : "{{hesamette.nb}}" },
+        {% endfor %}
+    ];
+  }
+
+  //Répartition des formations par hesamettes
+  function nbFormParHesametteData() {
+    return [
+        {% for hesamette in formationsHesamette %}
+          { "label" :"{{hesamette.hesamette}}",
+          "value" : "{{hesamette.nb}}" },
+        {% endfor %}
     ];
   }
 

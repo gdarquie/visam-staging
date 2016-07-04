@@ -7,7 +7,7 @@
     <id name="axeId" type="integer" column="axe_id">
       <generator strategy="IDENTITY"/>
     </id>
-    <field name="nom" type="string" column="nom" length="255" nullable="true">
+    <field name="nom" type="text" column="nom" length="65535" nullable="true">
       <options>
         <option name="fixed"/>
       </options>
@@ -15,6 +15,11 @@
     <field name="description" type="text" column="description" length="65535" nullable="true">
       <options>
         <option name="fixed"/>
+      </options>
+    </field>
+    <field name="timestamp" type="datetime" column="timestamp" nullable="false">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
       </options>
     </field>
     <many-to-one field="labo" target-entity="Labo" fetch="LAZY">

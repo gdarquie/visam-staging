@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Discipline
  *
- * @ORM\Table(name="discipline", indexes={@ORM\Index(name="fk_discipline_domaine1_idx", columns={"domaine_id"})})
+ * @ORM\Table(name="discipline", indexes={@ORM\Index(name="fk_discipline_domaine1_idx", columns={"domaine_id"}), @ORM\Index(name="fk_hesamette_discipline", columns={"hesamette_id"})})
  * @ORM\Entity
  */
 class Discipline
@@ -55,6 +55,13 @@ class Discipline
     private $domaineId;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="timestamp", type="datetime", nullable=false)
+     */
+    private $timestamp = 'CURRENT_TIMESTAMP';
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="discipline_id", type="integer")
@@ -62,6 +69,16 @@ class Discipline
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $disciplineId;
+
+    /**
+     * @var \AppBundle\Entity\Hesamette
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Hesamette")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="hesamette_id", referencedColumnName="hesamette_id")
+     * })
+     */
+    private $hesamette;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -272,6 +289,30 @@ class Discipline
     }
 
     /**
+     * Set timestamp
+     *
+     * @param \DateTime $timestamp
+     *
+     * @return Discipline
+     */
+    public function setTimestamp($timestamp)
+    {
+        $this->timestamp = $timestamp;
+
+        return $this;
+    }
+
+    /**
+     * Get timestamp
+     *
+     * @return \DateTime
+     */
+    public function getTimestamp()
+    {
+        return $this->timestamp;
+    }
+
+    /**
      * Get disciplineId
      *
      * @return integer
@@ -279,6 +320,30 @@ class Discipline
     public function getDisciplineId()
     {
         return $this->disciplineId;
+    }
+
+    /**
+     * Set hesamette
+     *
+     * @param \AppBundle\Entity\Hesamette $hesamette
+     *
+     * @return Discipline
+     */
+    public function setHesamette(\AppBundle\Entity\Hesamette $hesamette = null)
+    {
+        $this->hesamette = $hesamette;
+
+        return $this;
+    }
+
+    /**
+     * Get hesamette
+     *
+     * @return \AppBundle\Entity\Hesamette
+     */
+    public function getHesamette()
+    {
+        return $this->hesamette;
     }
 
     /**

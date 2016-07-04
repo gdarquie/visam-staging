@@ -22,8 +22,6 @@
     <field name="description" type="text" column="description" length="65535" nullable="true">
       <options>
         <option name="fixed"/>
-        <option name="comment">Pour éventuellement écrire l’adresse
-</option>
       </options>
     </field>
     <field name="ville" type="string" column="ville" length="500" nullable="true">
@@ -34,7 +32,6 @@
     <field name="code" type="string" column="code" length="30" nullable="true">
       <options>
         <option name="fixed"/>
-        <option name="comment">Le code postal </option>
       </options>
     </field>
     <field name="adresse" type="string" column="adresse" length="500" nullable="true">
@@ -50,6 +47,11 @@
     <field name="pays" type="string" column="pays" length="500" nullable="true">
       <options>
         <option name="fixed"/>
+      </options>
+    </field>
+    <field name="timestamp" type="datetime" column="timestamp" nullable="false">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
       </options>
     </field>
     <many-to-many field="ufr" target-entity="Ufr" inversed-by="localisation" fetch="LAZY">

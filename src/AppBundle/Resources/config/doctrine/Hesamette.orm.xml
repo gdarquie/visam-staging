@@ -1,22 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-  <entity name="AppBundle\Entity\ImportFormdisc" table="import_formDisc">
-    <id name="id" type="integer" column="id">
+  <entity name="AppBundle\Entity\Hesamette" table="hesamette">
+    <id name="hesametteId" type="integer" column="hesamette_id">
       <generator strategy="IDENTITY"/>
     </id>
-    <field name="niveau" type="string" column="niveau" length="10" nullable="true">
+    <field name="nom" type="string" column="nom" length="500" nullable="false">
       <options>
         <option name="fixed"/>
       </options>
     </field>
-    <field name="discipline" type="string" column="discipline" length="500" nullable="true">
+    <field name="timestamp" type="datetime" column="timestamp" nullable="false">
       <options>
-        <option name="fixed"/>
-      </options>
-    </field>
-    <field name="formation" type="string" column="formation" length="255" nullable="true">
-      <options>
-        <option name="fixed"/>
+        <option name="default">CURRENT_TIMESTAMP</option>
       </options>
     </field>
   </entity>
