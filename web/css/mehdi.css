@@ -90,7 +90,7 @@
       line-height: 0;
       height: auto;
       color: rgba(255,255,255,.9);
-      background-image: url(../img/louvres-search.jpg);
+      background-image: url(../img/louvres.jpg);
     }
 
     /*search-layout*/
@@ -230,6 +230,10 @@
 
      .card-content h5 {
 
+     }
+
+     .petit {
+        /*height: */
      }
      .petit .etablissement {
         font-size: 0.9em;
