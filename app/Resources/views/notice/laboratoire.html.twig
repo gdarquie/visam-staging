@@ -21,15 +21,32 @@
 					<span class="etablissement">{{etablissement.nom}}</span><br/>
 				{% endfor %}
 
+				<h4>Disciplines</h4>
                 <ul class="list-thematique" >
                 	{% for discipline in labo.discipline %}
-                		<li><a class="" href="#">{{discipline.nom}}</a> /</li>
+                		<li><a href="#">{{discipline.nom}}</a> /</li>
  {#                		{% for hesamette in discipline.hesamette %}
                 			{{hesamette.nom}}
                 		{% endfor %} #}
                 	{% endfor %}
-
                 </ul>
+				
+				{% if labo.equipement | length > 0 %}
+					<h4>Equipements</h4>
+                <ul>
+                	{% for equipement in labo.equipement %}
+	                	<li>{{equipement.nom}}</li>
+               		 {% endfor %}
+                </ul>
+            	{% endif %}
+
+{# 
+            	<h4>Axes</h4>
+
+            	{% for axe in labo.axe %}
+            		<li>{{axe.nom}}</li>
+            	{% endfor %} #}
+
                
               </div>
               <div class="card-action">
@@ -47,9 +64,32 @@
         <div class="container">
             <div class="suggest row">
             <h4>Voir aussi...</h4>
+
+            {% for labo in labos %}
+            	<div class="col m4 l4">
+                    <div class="card laboratoire petit" >
+                      <div class="card-content">
+                      <span class="etablissement"><span>{{labo.type}}</span> - {{labo.code}}</span>
+                         <h5>{{labo.nom}}</h5>
+                         {# <span> {{labo.etablissement}}</span> #}
+                          <ul class="list-thematique" >
+                          	{% for discipline in labo.discipline|slice(0,3)%}
+                          		<li>{{discipline.nom}}</li>
+                          	{% endfor%}
+                            {# les disciplines #}
+                          </ul>
+                      </div>
+                      <div class="card-action">
+                        <a href="{{labo.lien}}"><i class="material-icons">input</i></a>
+                    </div>
+                   </div>
+                  </div>
+         	{% endfor %}
+
+
+
 {# 
-         	{% for labo in laboratoires %}
-         	{% endfor %} #}
+
                 {# <div data-ng-repeat="item in suggestFormation" class="col m4 l4">
                     <div class="card laboratoire petit" ng-if="product.type != 'Laboratoire'">
                       <div class="card-content">
