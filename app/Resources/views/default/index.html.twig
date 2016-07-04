@@ -13,7 +13,9 @@
       <div class="container">
         <br><br>
         <div class="row center">
-        <input id="search-input-fake" ng-click="displaySearch()"  type="text" placeholder="Rechercher dans HESAM">
+          <a id="search" href="/rechercher">
+          <input id="search-input-fake"  type="text">
+          </a>
         </div>
       </div>
     </div>
@@ -22,6 +24,9 @@
 <section class='container' id="home">
 
 
+    <article>
+        <p>Le module d'exploration d'HESAM Université permet de parcourir les formations, laboratoires et écoles doctorales de la COMUE.</p>
+    </article>
 
 
 
@@ -69,15 +74,12 @@
     </div>
 
 
-    <article>
-        <p>Le module d'exploration d'HESAM Université permet de parcourir les formations, laboratoires et écoles doctorales de la COMUE.</p>
-    </article>
-
+<!-- 
     <article >
         <a href="/rechercher">
             <input class="pointer" type="text" placeholder="Cliquer pour faire une recherche">
         </a>
-    </article>
+    </article> -->
 </section>
 
 <section class="container">
@@ -86,6 +88,14 @@
 
         {% for hesamette in hesamettes %}
             <li class="btn red darken-2 tags">{{hesamette.nom}}</li>
+        {% endfor %}
+</section>
+<section class="container">
+    <article class="row">
+        <h2>Equipements</h2>
+
+        {% for equipement in equipements %}
+            <li class="btn red darken-2 tags">{{equipement.nom}}</li>
         {% endfor %}
 </section>
 
@@ -121,8 +131,8 @@
     <!-- D3.JS -->
     <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script type="text/javascript" src="../bower_components/nvd3/build/nv.d3.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.com/libraries/Chart.js"></script>
-    <link rel="stylesheet" href="../bower_components/nvd3/build/nv.d3.css"> 
+<!--     <script type="text/javascript" src="https://cdnjs.com/libraries/Chart.js"></script>
+ -->    <link rel="stylesheet" href="../bower_components/nvd3/build/nv.d3.css"> 
     <!-- END D3.JS -->
     
     <!-- jqcloud -->
@@ -131,9 +141,9 @@
     <!-- END jqcloud -->
 
     <!-- Typed -->
-    <script src="https://raw.githubusercontent.com/mattboldt/typed.js/master/js/typed.js"></script>
+    <script src="../bower_components/typed/js/typed.js"></script>
 
-    
+
 
 <script src="{{ asset('js/function.js') }}"></script>
 
@@ -201,7 +211,7 @@
 
   $(function(){
       $("#search-input-fake").typed({
-        strings: ["Rechercher dans Hesam...", "des formations, ", "des compétences", "des équipements", "Commencez à taper!"],
+        strings: ["Rechercher dans Hesam...", "les formations, les laboratoires...", "les compétences et équipements", "Commencez à rechercher"],
         typeSpeed: 0
       });
   });

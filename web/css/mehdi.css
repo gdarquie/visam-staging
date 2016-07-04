@@ -33,13 +33,16 @@
         padding: 4px;
     }
 
+    #search {
+        color: white;
+    }
 
     #search-input, #search-input-fake  {
         font-size: 2.2em;
         padding-top: 15px;
         height: 4rem;
-        color: #D32F2F!important;
-        font-style: italic;
+/*        color: #D32F2F!important;
+*/        font-style: italic;
         width: 1000px;
         border-bottom: 1px solid #D32F2F;
         font-family: Bitter, serif;
