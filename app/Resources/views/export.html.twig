@@ -30,7 +30,7 @@
     {% endfor %}
     {% for labo in labos %}
       {
-      "id" : "{{labo.laboId}}"
+      "id" : "{{labo.laboId}}",
       "name" : "{{labo.nom|e('js')}}",
       "type" : "Laboratoire",
       "url" : "{{labo.lien}}",

@@ -130,6 +130,7 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $formation = $em->getRepository('AppBundle:Formation')->findOneByFormationId($id);
+        $formations = $em->getRepository('AppBundle:Formation')->findAll();
 
         $query = $em->createQuery('SELECT h.nom as nom, COUNT(h) as nb FROM AppBundle:Discipline d JOIN d.formation f JOIN d.hesamette h WHERE f.formationId = :id GROUP BY h.nom ORDER BY nb DESC');
         $query->setParameter('id', $id);
@@ -140,6 +141,7 @@ class DefaultController extends Controller
         
         return $this->render('notice/formation.html.twig', array(
             'formation' => $formation,
+            'formations' => $formations,
             'hesamettes' => $hesamettes
         ));
     }

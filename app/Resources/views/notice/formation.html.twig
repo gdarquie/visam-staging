@@ -38,6 +38,39 @@
        	</div>
     </section>
 
+
+    <section id="suggest">
+        <div class="container">
+            <div class="suggest row">
+            <h4>Voir aussi...</h4>
+
+            {% for formation in formations %}
+            	<div class="col m4 l4">
+                    <div class="card laboratoire petit" >
+                      <div class="card-content">
+                      <span class="etablissement"><span>{{formation.type}}</span> - {{formation.niveau}}</span>
+                         <h5>{{formation.nom}}</h5>
+                         {# <span> {{labo.etablissement}}</span> #}
+                          <ul class="list-thematique" >
+                          	{% for discipline in formation.discipline|slice(0,3)%}
+                          		<li>{{formation.nom}}</li>
+                          	{% endfor%}
+                            {# les disciplines #}
+                          </ul>
+                      </div>
+                      <div class="card-action">
+                        <a href="{{formation.lien}}"><i class="material-icons">input</i></a>
+                    </div>
+                   </div>
+                  </div>
+         	{% endfor %}
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
 	
 
 
