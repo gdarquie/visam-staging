@@ -3,7 +3,7 @@
     [
     {% for formation in formations %}
       {
-      "id" : "{{formation.id}}",
+      "id" : "{{formation.formationId}}",
       "name" : "{{formation.nom|e('js')}}",
       "type" : "Formation",
       "url" : "{{formation.url}}",
@@ -30,7 +30,7 @@
     {% endfor %}
     {% for labo in labos %}
       {
-      "id" : "{{labo.id}}"
+      "id" : "{{labo.laboId}}"
       "name" : "{{labo.nom|e('js')}}",
       "type" : "Laboratoire",
       "url" : "{{labo.lien}}",
