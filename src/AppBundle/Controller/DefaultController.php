@@ -21,6 +21,7 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $hesamettes = $em->getRepository('AppBundle:Hesamette')->findAll();
+        $equipements = $em->getRepository('AppBundle:Equipement')->findAll();
 
          //nombre de formations par hesamettes
         $query = $em->createQuery('SELECT h.nom as hesamette, COUNT(f) as nb, f.nom as formation FROM AppBundle:Discipline d JOIN d.formation f JOIN d.hesamette h GROUP BY h ORDER BY nb DESC');
@@ -35,7 +36,8 @@ class DefaultController extends Controller
         return $this->render('default/index.html.twig',  array(
             'hesamettes' => $hesamettes,
             'labosHesamette'=> $labosHesamette,
-            'formationsHesamette' => $formationsHesamette
+            'formationsHesamette' => $formationsHesamette,
+            'equipements' => $equipements 
         ));
 
 
