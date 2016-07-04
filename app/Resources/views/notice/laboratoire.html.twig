@@ -1,7 +1,76 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-	<h1>Laboratoires</h1>
+{% block stylesheets %}
+	 <link rel="stylesheet" href="../css/mehdi.css">
+{% endblock %}
 
+{% block body %}
+
+    <section class="container">
+        <div class="first">
+            <div class="card laboratoire">
+              <div class="card-content">
+
+                <span class="etablissement">
+                	<span>{{labo.type}} {{labo.code}}</span>
+               	</span> 
+
+                <h3>{{labo.nom}}</h3>
+
+				{% for etablissement in labo.etablissement %}
+					<span class="etablissement">{{etablissement.nom}}</span><br/>
+				{% endfor %}
+
+                <ul class="list-thematique" >
+                	{% for discipline in labo.discipline %}
+                		<li><a class="" href="#">{{discipline.nom}}</a> /</li>
+ {#                		{% for hesamette in discipline.hesamette %}
+                			{{hesamette.nom}}
+                		{% endfor %} #}
+                	{% endfor %}
+
+                </ul>
+               
+              </div>
+              <div class="card-action">
+              <a href="{{labo.lien}}"><i class="material-icons">input</i>{{labo.lien}}</a>
+              <div style="float:right;">
+{#                 <span>Année : <strong>{{labo.annee}}</strong><span> - 
+                <span>Effectif : <strong>{{labo.effectif}}</strong></span> #}
+              </div>
+              </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="suggest">
+        <div class="container">
+            <div class="suggest row">
+            <h4>Voir aussi...</h4>
+{# 
+         	{% for labo in laboratoires %}
+         	{% endfor %} #}
+                {# <div data-ng-repeat="item in suggestFormation" class="col m4 l4">
+                    <div class="card laboratoire petit" ng-if="product.type != 'Laboratoire'">
+                      <div class="card-content">
+                      <span class="etablissement"><span>{{item.type}}</span> - {{item.niveau}}</span>
+                         <h5>{{item.name}}</h5>
+                         <span> {{item.etablissement}}</span>
+                          <ul class="list-thematique" >
+                            <li data-ng-repeat="key in discipline |limitTo: 2"><a class="" href="#">{{key}}</a>|</li>
+                          </ul>
+                      </div>
+                      <div class="card-action">
+                        <a href="{{item.url}}"><i class="material-icons">input</i></a>
+                        <div style="float:right;">
+                            <span>Année : <strong>{{item.annee}}</strong><span> - 
+                            <span>Effectif : <strong>{{item.effectif}}</strong></span>
+                          </div>
+                      </div>
+                    </div> #}
+                </div>
+            </div>
+        </div>
+    </section>
 
 {% endblock %}

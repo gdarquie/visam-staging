@@ -10,12 +10,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 
 
-class StatistiquesController extends Controller
+class ExportController extends Controller
 {
     /**
-     * @Route("/stats", name="statistiques")
+     * @Route("/export", name="export")
      */
-    public function indexAction(Request $request)
+    public function exportAction(Request $request)
     {
 
     	$em = $this->getDoctrine()->getManager();
@@ -26,7 +26,8 @@ class StatistiquesController extends Controller
         $labos = $em->getRepository('AppBundle:Labo')->findAll();
         $disciplines = $em->getRepository('AppBundle:Discipline')->findAll();
         $localisations = $em->getRepository('AppBundle:Localisation')->findAll();
-        $hesamette = $em->getRepository('AppBundle:hesamette')->findAll();
+        $hesamettes = $em->getRepository('AppBundle:hesamette')->findAll();
+        $equipements = $em->getRepository('AppBundle:Equipement')->findAll();
 
 
         //Test pour faire des requêtes en SQL avec Symfony
@@ -187,7 +188,7 @@ class StatistiquesController extends Controller
         //effectifs
 
 
-        return $this->render('stats.html.twig', array(
+        return $this->render('export.html.twig', array(
         	'eds' => $eds,
         	'etabs' => $etabs,
             'nbEtud' => $nbEtud,
@@ -220,6 +221,8 @@ class StatistiquesController extends Controller
             'disciplines' => $disciplines,
             'localisations' =>$localisations,
             'map' => $map,
+            'equipements' => $equipements,
+            'hesamettes' => $hesamettes,
         	));
     }
 

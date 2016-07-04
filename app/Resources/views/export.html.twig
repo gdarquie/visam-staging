@@ -1,0 +1,65 @@
+{% block body %}
+
+    [
+    {% for formation in formations %}
+      {
+      "id" : "{{formation.id}}",
+      "name" : "{{formation.nom|e('js')}}",
+      "type" : "Formation",
+      "url" : "{{formation.url}}",
+      "annee" : "{{formation.annee}}",
+      "niveau" : "{{formation.niveau}}",
+      "typediplome" : "{{formation.typediplome}}",
+      "effectif" : "{{formation.effectif}}",
+      "etablissement" :
+        "{% for etabl in formation.etablissement %}{{etabl.nom|e('js')}}{% if loop.last %}{% else %},{% endif %}{% endfor %}",
+      "discipline" : [
+        {% for discipline in formation.discipline %}
+          "{{discipline.nom|e('js')}}"{% if loop.last %}{% else %},{% endif %}
+        {% endfor %}
+      ],
+      "hesamette" : [
+        {% for discipline in formation.discipline %}
+{#           "{{discipline.hesamette.nom|e('js')}}"{% if loop.last %}{% else %},{% endif %} #}
+          {% for hesamette in discipline.hesamette %}
+            "{{ hesamette.nom }}"
+          {% endfor %}
+        {% endfor %}
+      ]
+      },
+    {% endfor %}
+    {% for labo in labos %}
+      {
+      "id" : "{{labo.id}}"
+      "name" : "{{labo.nom|e('js')}}",
+      "type" : "Laboratoire",
+      "url" : "{{labo.lien}}",
+      "mailcontact" : "{{labo.mailcontact}}",
+      "sigle" : "{{labo.sigle}}",
+      "code" : "{{labo.code}}",
+      "etablissement" : "{% for etabl in labo.etablissement %}{{etabl.nom|e('js')}}{% if loop.last %}{% else %},{% endif %}{% endfor %}",
+      "discipline" : [
+        {% for discipline in labo.discipline %}
+          "{{discipline.nom|e('js')}}"{% if loop.last %}{% else %},{% endif %}
+        {% endfor %}
+      ],
+      "equipement" : [
+        {% for equipement in labo.equipement %}
+          "{{equipement.nom|e('js')}}"{% if loop.last %}{% else %},{% endif %}
+        {% endfor %}
+      ],
+      "hesamette" : [
+        {% for discipline in labo.discipline %}
+          {% for hesamette in discipline.hesamette %}
+            "{{ hesamette.nom }}"
+          {% endfor %}
+        {% endfor %}
+      ]
+    },
+    {% endfor %}
+    ]
+
+
+
+
+{% endblock %}

@@ -70,7 +70,7 @@ class DefaultController extends Controller
         $laboratoire = $em->getRepository('AppBundle:Labo')->findOneByLaboId($id);
         
         return $this->render('notice/laboratoire.html.twig', array(
-            'laboratoire' => $laboratoire,
+            'labo' => $laboratoire,
         ));
     }
 
