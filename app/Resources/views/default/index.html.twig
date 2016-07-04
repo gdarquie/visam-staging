@@ -25,7 +25,7 @@
 
 
     <article>
-        <p>Le module d'exploration d'HESAM Université permet de parcourir les formations, laboratoires et écoles doctorales de la COMUE.</p>
+        <h4>Le module d'exploration d'HESAM Université permet de parcourir les formations, laboratoires et écoles doctorales de la COMUE.</h4>
     </article>
 
 
@@ -90,14 +90,7 @@
             <li class="btn red darken-2 tags">{{hesamette.nom}}</li>
         {% endfor %}
 </section>
-<section class="container">
-    <article class="row">
-        <h2>Equipements</h2>
 
-        {% for equipement in equipements %}
-            <li class="btn red darken-2 tags">{{equipement.nom}}</li>
-        {% endfor %}
-</section>
 
 <section class="container row">
         <div class="col s6">
@@ -116,7 +109,16 @@
 
     </article>
 </section>
+<section class="container">
+    <article class="row">
+        <h2>Equipements</h2>
 
+        {% for equipement in equipements|slice(0,10) %}
+            <li class="btn red darken-2 tags">{{equipement.nom}}</li>
+        {% endfor %}
+        <p><a href="#">Parcourir...</a></p>
+        
+</section>
 <section>
 <iframe src="http://localhost:8888/2016/visamFront/2016-06-05/map/" frameborder="0" width="100%" height="750px"></iframe>
 </section>
@@ -211,7 +213,7 @@
 
   $(function(){
       $("#search-input-fake").typed({
-        strings: ["Rechercher dans Hesam...", "les formations, les laboratoires...", "les compétences et équipements", "Commencez à rechercher"],
+        strings: ["Rechercher dans Hesam...", "les formations, les laboratoires...", "les compétences et équipements", "Commencez à rechercher..."],
         typeSpeed: 0
       });
   });
