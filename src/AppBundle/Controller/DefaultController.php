@@ -33,7 +33,7 @@ class DefaultController extends Controller
         $labosHesamette = $query->getResult();
 
 
-        return $this->render('default/index.html.twig',  array(
+        return $this->render('index.html.twig',  array(
             'hesamettes' => $hesamettes,
             'labosHesamette'=> $labosHesamette,
             'formationsHesamette' => $formationsHesamette,
