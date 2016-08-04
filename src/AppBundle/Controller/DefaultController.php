@@ -89,11 +89,16 @@ class DefaultController extends Controller
         $query = $em->createQuery('SELECT l FROM AppBundle:Labo l');
         $labos = $query->setMaxResults(3)->getResult();
 
+         $query = $em->createQuery('SELECT h.nom as nom, COUNT(h) as nb FROM AppBundle:Discipline d JOIN d.labo f JOIN d.hesamette h WHERE f.laboId = :id GROUP BY h.nom ORDER BY nb DESC');
+        $query->setParameter('id', $id);
+        $hesamettes = $query->getResult();
+
         //$nbEtud = $query->setMaxResults(1)->getOneOrNullResult();
         
         return $this->render('notice/laboratoire.html.twig', array(
             'labo' => $laboratoire,
-            'labos' => $labos
+            'labos' => $labos,
+            'hesamettes' => $hesamettes
 
         ));
     }
