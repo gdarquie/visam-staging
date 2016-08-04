@@ -231,6 +231,15 @@
         vertical-align: top;
     }
 
+    .item-labo {
+        background-color: #00bcd4;
+        color: white;
+        font-size: 1.4em;
+        display: inline-block;
+        padding: 0px 4px;
+
+    }
+
     .laboratoire .card-action a {
         color: #00bcd4 !important;
         vertical-align: top;

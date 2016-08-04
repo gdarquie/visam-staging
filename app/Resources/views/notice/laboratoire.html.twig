@@ -2,61 +2,70 @@
 
 
 {% block body %}
-
+<div style="background-image:url(/img/pantheon.jpg)">
     <section class="container">
         <div class="first">
             <div class="card laboratoire">
               <div class="card-content">
-
+                <span class="item-labo">
+                  Laboratoire
+                </span>
                 <span class="etablissement">
-                	<span>{{labo.type}} {{labo.code}}</span>
+                	<span> - {{labo.type}} {{labo.code}} </span>
                	</span> 
 
-                <h3>{{labo.nom}}</h3>
+                <h3>{{labo.nom}} {% if labo.sigle %} ({{labo.sigle|upper}}) {% endif %}</h3>
+
 
 				{% for etablissement in labo.etablissement %}
 					<span class="etablissement">{{etablissement.nom}}</span><br/>
 				{% endfor %}
-
-				<h4>Disciplines</h4>
+        <div class="row">
+        <div class="col l9 ">
+				      <h5>Thématiques</h5>
                 <ul class="list-thematique" >
                 	{% for discipline in labo.discipline %}
                 		<li><a href="#">{{discipline.nom}}</a> /</li>
- {#                		{% for hesamette in discipline.hesamette %}
-                			{{hesamette.nom}}
-                		{% endfor %} #}
+                    {% for hesamette in discipline.hesamette %}
+                			ee{{hesamette.nom}}
+                		{% endfor %}
                 	{% endfor %}
                 </ul>
 				
-				{% if labo.equipement | length > 0 %}
-					<h4>Equipements</h4>
+				      {% if labo.equipement | length > 0 %}
+					     <h5>Equipements</h5>
                 <ul>
                 	{% for equipement in labo.equipement %}
 	                	<li>{{equipement.nom}}</li>
                		 {% endfor %}
                 </ul>
-            	{% endif %}
-
-{# 
-            	<h4>Axes</h4>
-
+            	 {% endif %}
+              {# 
+            	<h5>Axes</h5>
             	{% for axe in labo.axe %}
             		<li>{{axe.nom}}</li>
             	{% endfor %} #}
 
-               
+              </div>
+              <h5>Localisation</h5>
+              {% for loca in labo.localisation %}
+          <img src="https://maps.googleapis.com/maps/api/staticmap?center={{loca.ville}} {{loca.code}}&zoom=14&size=200x200&maptype=roadmap" alt="Carte réalisée avec Google Static Maps API" />    {% endfor %}     
+              </div>
+
               </div>
               <div class="card-action">
-              <a href="{{labo.lien}}"><i class="material-icons">input</i>{{labo.lien}}</a>
+              <a href="{{labo.lien}}"><i class="material-icons">input</i>Lien vers le laboratoire</a>
+              <a href="mailto:{{labo.mailContact}}"><i class="material-icons">mail</i>{{labo.mailContact}}</a>
+
+              
               <div style="float:right;">
-{#                 <span>Année : <strong>{{labo.annee}}</strong><span> - 
-                <span>Effectif : <strong>{{labo.effectif}}</strong></span> #}
+              <span>Code UAI : <strong>{{labo.uai}}</strong><span>
               </div>
               </div>
             </div>
         </div>
     </section>
-
+</div>
     <section id="suggest">
         <div class="container">
             <div class="suggest row">
