@@ -11,6 +11,11 @@
         font-family: Bitter, serif;
     }
 
+    .begin-line {
+        height: 10px;
+        background-color :#e42e18;
+    }
+
     .card.laboratoire {
         border-top: 4px solid #00bcd4;
     }
@@ -85,17 +90,10 @@
     input:-ms-input-placeholder {  
     color: #7A7777 !important;  
     }
-    .parallax-container {
-        background-color: rgba(255, 255, 255, 0.5);
-    }
-     #index-banner {
-      min-height: 180px;
-      line-height: 0;
-      height: auto;
-      color: rgba(255,255,255,.9);
-      background-image: url(../img/louvres.jpg);
-    }
+    
 
+
+    
     /*search-layout*/
     #search-layout {
         display: none;
@@ -112,8 +110,37 @@
         z-index: 999;
     }
 
+    .logo-hesam {
+        height: 245px !important;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .rechercher-wrapper input[type=text]{
+        width: 70%;
+    }
+
+    .btn-hesam {
+        background-color: #e42e18;
+    }
+    .btn-hesam-inverse {
+        background-color: white;
+        color: #e42e18;
+    }
+
+
+    .actions li {
+        display: inline-block;
+        margin-right: 5px;
+    }
+
     #search-layout h4 {
         font-size: 1.6em;
+    }
+
+    .help-home {
+        padding: 5px 10px;
+        font-style: italic;
     }
 
     ul.tabs {
@@ -243,4 +270,13 @@
      }
     .petit .card-content {
         padding-top: 8px;
+    }
+
+    footer {
+        position: fixed;
+        bottom: 0px;
+        left: 0px;
+        width: 100%;
+        /*border-top: 4px solid #e42e18;*/
+        background-color:  #e42e18;
     }
