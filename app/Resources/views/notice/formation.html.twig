@@ -22,6 +22,16 @@
 							<li>{{hesamette.nom}}({{hesamette.nb}})</li>
 						{% endfor %}
 	                </ul>
+					
+					{% if formation.tag | length > 0 %}
+					<h4>Mots clés</h4>
+	                <ul class="list-thematique" >
+						{% for tag in formation.tag %}
+							<li>{{tag.nom}}</li>
+						{% endfor %}
+	                </ul>
+	            	{% endif %}
+
 
 
 					
@@ -48,7 +58,7 @@
             	<div class="col m4 l4">
                     <div class="card laboratoire petit" >
                       <div class="card-content">
-                      <span class="etablissement"><span>{{formation.type}}</span> - {{formation.niveau}}</span>
+                      <span class="etablissement"><span>{{formation.typediplome}}</span> - {{formation.niveau}}</span>
                          <h5>{{formation.nom}}</h5>
                          {# <span> {{labo.etablissement}}</span> #}
                           <ul class="list-thematique" >
@@ -59,7 +69,7 @@
                           </ul>
                       </div>
                       <div class="card-action">
-                        <a href="{{formation.lien}}"><i class="material-icons">input</i></a>
+                        <a href="{{formation.url}}"><i class="material-icons">input</i></a>
                     </div>
                    </div>
                   </div>

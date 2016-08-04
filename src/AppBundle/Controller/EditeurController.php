@@ -21,7 +21,7 @@ class EditeurController extends Controller
 {
 
     /**
-     * Accueil de l'éditeur.
+     * Accueil de l'éditeur
      *
      * @Route("/", name="editeur")
      * @Method("GET")
@@ -32,6 +32,37 @@ class EditeurController extends Controller
 
         return $this->render('editeur/index.html.twig');
     }
+
+
+    /**
+     * Synthèse
+     *
+     * @Route("/synthese", name="editeur_synthese")
+     * @Method("GET")
+     */
+    public function syntheseAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $max = 10;
+        $offset = 10;
+
+        $query = $em->createQuery(
+            'SELECT f FROM AppBundle:Formation f'
+        )->setMaxResults($max)->setFirstResult(10);
+
+        $formations = $query->getResult();
+        $labos = $em->getRepository('AppBundle:Labo')->findAll();
+        $etabs = $em->getRepository('AppBundle:Etablissement')->findAll();
+
+        return $this->render('editeur/synthese.html.twig', array(
+            'labos' => $labos,
+            'etabs' => $etabs,
+            'formations' => $formations,
+            ));
+    }
+
+
 /**
 *
 * Les écoles doctorales

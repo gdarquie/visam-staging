@@ -40,7 +40,22 @@ class DefaultController extends Controller
             'equipements' => $equipements 
         ));
 
+    }
 
+    /**
+     * @Route("/dev", name="homepageDev")
+     */
+    public function indexDevAction(Request $request)
+    {
+        return $this->render('dev.html.twig');
+    }
+
+    /**
+     * @Route("/dev2", name="homepageDev2")
+     */
+    public function indexDev2Action(Request $request)
+    {
+        return $this->render('dev2.html.twig');
     }
     
     /**
@@ -99,7 +114,7 @@ class DefaultController extends Controller
         return $this->render('notice/etablissement.html.twig', array(
             'etablissement' => $etablissement,
             'eds' => $eds,
-            'formations' => $formations,
+            'formations' => $formations
         ));
     }
 
@@ -117,7 +132,7 @@ class DefaultController extends Controller
         
         return $this->render('notice/ed.html.twig', array(
             'ed' => $ed,
-            'etablissements' => $etablissements,
+            'etablissements' => $etablissements
         ));
     }
 
@@ -130,7 +145,8 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $formation = $em->getRepository('AppBundle:Formation')->findOneByFormationId($id);
-        $formations = $em->getRepository('AppBundle:Formation')->findAll();
+        $query = $em->createQuery('SELECT f FROM AppBundle:Formation f');
+        $formations = $query->setMaxResults(3)->getResult();
 
         $query = $em->createQuery('SELECT h.nom as nom, COUNT(h) as nb FROM AppBundle:Discipline d JOIN d.formation f JOIN d.hesamette h WHERE f.formationId = :id GROUP BY h.nom ORDER BY nb DESC');
         $query->setParameter('id', $id);
