@@ -23,13 +23,18 @@
         <div class="row">
         <div class="col l9 ">
 				      <h5>Thématiques</h5>
+              <ul class="list-thematique" >
+                    {% for hesamette in hesamettes %}
+                    <li>{{hesamette.nom}} /</li> 
+                    {% endfor %}
+                </ul>
+
                 <ul class="list-thematique" >
-                	{% for discipline in labo.discipline %}
+      {#          	{% for discipline in labo.discipline %}
                 		<li><a href="#">{{discipline.nom}}</a> /</li>
-                    {% for hesamette in discipline.hesamette %}
-                			ee{{hesamette.nom}}
-                		{% endfor %}
                 	{% endfor %}
+
+                    #}
                 </ul>
 				
 				      {% if labo.equipement | length > 0 %}

@@ -1,22 +1,22 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<div style="background-image:url(/img/sorbonne.jpg)">
 
     <section class="container">
         <div class="first">
             <div class="card formation">
               	<div class="card-content">
-
+                <span class="item-formation">
+                  Formation
+                </span> - {{formation.niveau}} - {{formation.typeDiplome}}
               		<h3>{{formation.nom}}</h3> 
-
               		{% for etablissement in formation.etablissement %}
 						        <span class="etablissement">{{etablissement.nom}}</span><br/>
-					        {% endfor %}
-					
-					<p>{{formation.annee}}, {{formation.niveau}}, effectif : {{formation.effectif}}</p>
-					<p><a href="{{formation.url}}">{{formation.url}}</a></p> 
-
-					<h4>Disciplines</h4>
+					        {% endfor %}					
+          <div class="row">
+          <div class="col l9">
+					<h5>Disciplines</h5>
 	         <ul class="list-thematique" >
 						{% for hesamette in hesamettes %}
 							<li>{{hesamette.nom}}({{hesamette.nb}})</li>
@@ -24,23 +24,25 @@
 	         </ul>
 					
 					{% if formation.tag | length > 0 %}
-					<h4>Mots clés</h4>
-	                <ul class="list-thematique" >
+					<h5>Mots clés</h5>
+	         <ul class="list-thematique" >
 						{% for tag in formation.tag %}
 							<li>{{tag.nom}}</li>
 						{% endfor %}
-	                </ul>
-	            	{% endif %}
+	         </ul>
+	         {% endif %}
+          </div>
+          {% for loca in formation.localisation %}
+                    <h5>Localisation</h5>
 
-
-
-					
+          <img src="https://maps.googleapis.com/maps/api/staticmap?center={{loca.ville}} {{loca.code}}&zoom=14&size=200x200&maptype=roadmap" alt="Carte réalisée avec Google Static Maps API" />    {% endfor %}     
+          </div>
 					</div>
 	              <div class="card-action">
-	              <a href="{{formation.url}}"><i class="material-icons">input</i>{{formation.url}}</a>
+	              <a href="{{formation.url}}"><i class="material-icons">input</i>Lien vers la formation</a>
 	              <div style="float:right;">
-
-					
+Effectif(s) : {{formation.effectif}}|
+					Année {{formation.annee}}
 
 				</div> <!--end card content -->
 
@@ -48,7 +50,7 @@
        	</div>
     </section>
 
-
+</div>
     <section id="suggest">
         <div class="container">
             <div class="suggest row">

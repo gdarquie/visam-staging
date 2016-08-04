@@ -237,7 +237,15 @@
         font-size: 1.4em;
         display: inline-block;
         padding: 0px 4px;
+    }
 
+
+    .item-formation {
+        background-color: #009688;
+        color: white;
+        font-size: 1.4em;
+        display: inline-block;
+        padding: 0px 4px;
     }
 
     .laboratoire .card-action a {

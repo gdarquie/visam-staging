@@ -37,6 +37,7 @@
       "mailcontact" : "{{labo.mailcontact}}",
       "sigle" : "{{labo.sigle}}",
       "code" : "{{labo.code}}",
+      "ctype" : "{{labo.type}}",
       "etablissement" : "{% for etabl in labo.etablissement %}{{etabl.nom|e('js')}}{% if loop.last %}{% else %},{% endif %}{% endfor %}",
       "discipline" : [
         {% for discipline in labo.discipline %}

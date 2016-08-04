@@ -103,19 +103,20 @@
               <div class="col s12 m12">
                   <div class="card formation" ng-if="product.type != 'Formation'">
                       <div class="card-content">
-                      <span class="etablissement"><span>{[{product.type}]}</span> - {[{product.sigle}]} - {[{product.code}]}</span>
+                      <span class="item-labo">Laboratoire</span>
+                      <span class="etablissement"><span>- {[{product.ctype}]} </span>{[{product.code}]}</span>
                         <a href="/labo/{[{product.id}]}" ng-if="product.type != 'Formation'">
-                         <h5>{[{product.name}]}</h5>
+                         <h5>{[{product.name}]} ({[{product.sigle}]})</h5>
                          </a>
                          <span> {[{product.etablissement}]}</span>
                           <ul class="list-thematique" >
-                            <li data-ng-repeat="discipline in product.discipline |limitTo: 2"><a class="" href="#">{[{discipline}]}</a>|</li>
+                            <li data-ng-repeat="hesamette in product.hesamette"><a class="" href="#">{[{hesamette}]}</a>|</li>
                           </ul>
                       </div>
                       <div class="card-action">
-                        <a href="{[{item.url}]}"><i class="material-icons">input</i>Voir en ligne</a><i class="material-icons">input</i><a href="#">Modifier</a>
+                        <a href="{[{product.url}]}"><i class="material-icons">input</i>Lien vers le laboratoire</a><a href="#"><i class="material-icons">mode_edit</i></a>
                         <div style="float:right;">
-                            <span>Contact : <strong>{[{product.mailcontact}]}</strong></span>
+                            <span>              <a href="mailto:{[{product.mailcontact}]}"><i class="material-icons">mail</i>{[{product.mailcontact}]}</a></span>
                           </div>
                       </div>
                   </div>
