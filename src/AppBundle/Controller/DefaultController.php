@@ -94,11 +94,18 @@ class DefaultController extends Controller
         $hesamettes = $query->getResult();
 
         //$nbEtud = $query->setMaxResults(1)->getOneOrNullResult();
+
+
+        $query = $em->createQuery('SELECT l FROM AppBundle:Axe l JOIN l.labo a WHERE a.laboId = :labo');
+        $query->setParameter('labo', $id);
+        $axes = $query->getResult();
+
         
         return $this->render('notice/laboratoire.html.twig', array(
             'labo' => $laboratoire,
             'labos' => $labos,
-            'hesamettes' => $hesamettes
+            'hesamettes' => $hesamettes,
+            'axes' => $axes,
 
         ));
     }

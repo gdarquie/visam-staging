@@ -27,6 +27,7 @@ class LaboController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $labos = $em->getRepository('AppBundle:Labo')->findAll();
+        
 
         return $this->render('labo/index.html.twig', array(
             'labos' => $labos,
