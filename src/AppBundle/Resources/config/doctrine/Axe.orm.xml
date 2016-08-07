@@ -27,15 +27,5 @@
         <join-column name="labo_id" referenced-column-name="labo_id"/>
       </join-columns>
     </many-to-one>
-    <many-to-many field="tag" target-entity="Tag" inversed-by="axe" fetch="LAZY">
-      <join-table name="axe_has_tag">
-        <join-columns>
-          <join-column name="axe_id" referenced-column-name="axe_id"/>
-        </join-columns>
-        <inverse-join-columns>
-          <join-column name="tag_id" referenced-column-name="tag_id"/>
-        </inverse-join-columns>
-      </join-table>
-    </many-to-many>
   </entity>
 </doctrine-mapping>

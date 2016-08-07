@@ -85,6 +85,13 @@ class Localisation
     /**
      * @var integer
      *
+     * @ORM\Column(name="type", type="integer", nullable=false)
+     */
+    private $type;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="localisation_id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
@@ -417,6 +424,30 @@ class Localisation
     public function getTimestamp()
     {
         return $this->timestamp;
+    }
+
+    /**
+     * Set type
+     *
+     * @param integer $type
+     *
+     * @return Localisation
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return integer
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 
     /**

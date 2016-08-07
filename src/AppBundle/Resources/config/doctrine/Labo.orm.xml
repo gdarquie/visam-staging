@@ -74,9 +74,10 @@
         <option name="default">CURRENT_TIMESTAMP</option>
       </options>
     </field>
-    <many-to-many field="localisation" target-entity="Localisation" mapped-by="labo" fetch="LAZY"/>
     <many-to-many field="membre" target-entity="Membre" mapped-by="labo" fetch="LAZY"/>
+    <many-to-many field="tag" target-entity="Tag" mapped-by="labo" fetch="LAZY"/>
     <many-to-many field="ufr" target-entity="Ufr" mapped-by="labo" fetch="LAZY"/>
+    <many-to-many field="localisation" target-entity="Localisation" mapped-by="labo" fetch="LAZY"/>
     <many-to-many field="formation" target-entity="Formation" inversed-by="labo" fetch="LAZY">
       <join-table name="labo_has_formation">
         <join-columns>
@@ -87,6 +88,8 @@
         </inverse-join-columns>
       </join-table>
     </many-to-many>
+    <many-to-many field="discipline" target-entity="Discipline" mapped-by="labo" fetch="LAZY"/>
+    <many-to-many field="etablissement" target-entity="Etablissement" mapped-by="labo" fetch="LAZY"/>
     <many-to-many field="equipement" target-entity="Equipement" inversed-by="labo" fetch="LAZY">
       <join-table name="labo_has_equipement">
         <join-columns>
@@ -97,8 +100,6 @@
         </inverse-join-columns>
       </join-table>
     </many-to-many>
-    <many-to-many field="discipline" target-entity="Discipline" mapped-by="labo" fetch="LAZY"/>
-    <many-to-many field="etablissement" target-entity="Etablissement" mapped-by="labo" fetch="LAZY"/>
     <many-to-many field="ed" target-entity="Ed" inversed-by="labo" fetch="LAZY">
       <join-table name="ed_has_labo">
         <join-columns>

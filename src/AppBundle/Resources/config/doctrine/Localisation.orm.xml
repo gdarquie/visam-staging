@@ -54,6 +54,12 @@
         <option name="default">CURRENT_TIMESTAMP</option>
       </options>
     </field>
+    <field name="type" type="integer" column="type" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">1 = partenariat, 2 = autres</option>
+      </options>
+    </field>
     <many-to-many field="ufr" target-entity="Ufr" inversed-by="localisation" fetch="LAZY">
       <join-table name="localisation_has_ufr">
         <join-columns>

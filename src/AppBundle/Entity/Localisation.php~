@@ -85,6 +85,13 @@ class Localisation
     /**
      * @var integer
      *
+     * @ORM\Column(name="type", type="integer", nullable=false)
+     */
+    private $type;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="localisation_id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")

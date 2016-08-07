@@ -45,6 +45,21 @@ class Tag
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Labo", inversedBy="tag")
+     * @ORM\JoinTable(name="tag_has_labo",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="tag_id", referencedColumnName="tag_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
+     *   }
+     * )
+     */
+    private $labo;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Formation", inversedBy="tag")
      * @ORM\JoinTable(name="tag_has_formation",
      *   joinColumns={
@@ -58,19 +73,12 @@ class Tag
     private $formation;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Axe", mappedBy="tag")
-     */
-    private $axe;
-
-    /**
      * Constructor
      */
     public function __construct()
     {
+        $this->labo = new \Doctrine\Common\Collections\ArrayCollection();
         $this->formation = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->axe = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
@@ -157,6 +165,40 @@ class Tag
     }
 
     /**
+     * Add labo
+     *
+     * @param \AppBundle\Entity\Labo $labo
+     *
+     * @return Tag
+     */
+    public function addLabo(\AppBundle\Entity\Labo $labo)
+    {
+        $this->labo[] = $labo;
+
+        return $this;
+    }
+
+    /**
+     * Remove labo
+     *
+     * @param \AppBundle\Entity\Labo $labo
+     */
+    public function removeLabo(\AppBundle\Entity\Labo $labo)
+    {
+        $this->labo->removeElement($labo);
+    }
+
+    /**
+     * Get labo
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLabo()
+    {
+        return $this->labo;
+    }
+
+    /**
      * Add formation
      *
      * @param \AppBundle\Entity\Formation $formation
@@ -188,39 +230,5 @@ class Tag
     public function getFormation()
     {
         return $this->formation;
-    }
-
-    /**
-     * Add axe
-     *
-     * @param \AppBundle\Entity\Axe $axe
-     *
-     * @return Tag
-     */
-    public function addAxe(\AppBundle\Entity\Axe $axe)
-    {
-        $this->axe[] = $axe;
-
-        return $this;
-    }
-
-    /**
-     * Remove axe
-     *
-     * @param \AppBundle\Entity\Axe $axe
-     */
-    public function removeAxe(\AppBundle\Entity\Axe $axe)
-    {
-        $this->axe->removeElement($axe);
-    }
-
-    /**
-     * Get axe
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getAxe()
-    {
-        return $this->axe;
     }
 }

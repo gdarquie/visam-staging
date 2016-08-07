@@ -52,28 +52,6 @@ class Axe
      */
     private $labo;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag", inversedBy="axe")
-     * @ORM\JoinTable(name="axe_has_tag",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="axe_id", referencedColumnName="axe_id")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="tag_id", referencedColumnName="tag_id")
-     *   }
-     * )
-     */
-    private $tag;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->tag = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
 }
 

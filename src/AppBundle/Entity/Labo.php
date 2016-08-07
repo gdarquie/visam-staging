@@ -122,13 +122,6 @@ class Labo
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Localisation", mappedBy="labo")
-     */
-    private $localisation;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Membre", mappedBy="labo")
      */
     private $membre;
@@ -136,9 +129,23 @@ class Labo
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag", mappedBy="labo")
+     */
+    private $tag;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Ufr", mappedBy="labo")
      */
     private $ufr;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Localisation", mappedBy="labo")
+     */
+    private $localisation;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -158,6 +165,20 @@ class Labo
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Discipline", mappedBy="labo")
+     */
+    private $discipline;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Etablissement", mappedBy="labo")
+     */
+    private $etablissement;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Equipement", inversedBy="labo")
      * @ORM\JoinTable(name="labo_has_equipement",
      *   joinColumns={
@@ -169,20 +190,6 @@ class Labo
      * )
      */
     private $equipement;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Discipline", mappedBy="labo")
-     */
-    private $discipline;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Etablissement", mappedBy="labo")
-     */
-    private $etablissement;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -200,18 +207,25 @@ class Labo
     private $ed;
 
     /**
+     * @ORM\OneToMany(targetEntity="Axe", mappedBy="labo")
+     */
+    private $axes;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
-        $this->localisation = new \Doctrine\Common\Collections\ArrayCollection();
         $this->membre = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->tag = new \Doctrine\Common\Collections\ArrayCollection();
         $this->ufr = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->localisation = new \Doctrine\Common\Collections\ArrayCollection();
         $this->formation = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->equipement = new \Doctrine\Common\Collections\ArrayCollection();
         $this->discipline = new \Doctrine\Common\Collections\ArrayCollection();
         $this->etablissement = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->equipement = new \Doctrine\Common\Collections\ArrayCollection();
         $this->ed = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->axes = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
@@ -562,40 +576,6 @@ class Labo
     }
 
     /**
-     * Add localisation
-     *
-     * @param \AppBundle\Entity\Localisation $localisation
-     *
-     * @return Labo
-     */
-    public function addLocalisation(\AppBundle\Entity\Localisation $localisation)
-    {
-        $this->localisation[] = $localisation;
-
-        return $this;
-    }
-
-    /**
-     * Remove localisation
-     *
-     * @param \AppBundle\Entity\Localisation $localisation
-     */
-    public function removeLocalisation(\AppBundle\Entity\Localisation $localisation)
-    {
-        $this->localisation->removeElement($localisation);
-    }
-
-    /**
-     * Get localisation
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getLocalisation()
-    {
-        return $this->localisation;
-    }
-
-    /**
      * Add membre
      *
      * @param \AppBundle\Entity\Membre $membre
@@ -627,6 +607,40 @@ class Labo
     public function getMembre()
     {
         return $this->membre;
+    }
+
+    /**
+     * Add tag
+     *
+     * @param \AppBundle\Entity\Tag $tag
+     *
+     * @return Labo
+     */
+    public function addTag(\AppBundle\Entity\Tag $tag)
+    {
+        $this->tag[] = $tag;
+
+        return $this;
+    }
+
+    /**
+     * Remove tag
+     *
+     * @param \AppBundle\Entity\Tag $tag
+     */
+    public function removeTag(\AppBundle\Entity\Tag $tag)
+    {
+        $this->tag->removeElement($tag);
+    }
+
+    /**
+     * Get tag
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTag()
+    {
+        return $this->tag;
     }
 
     /**
@@ -664,6 +678,40 @@ class Labo
     }
 
     /**
+     * Add localisation
+     *
+     * @param \AppBundle\Entity\Localisation $localisation
+     *
+     * @return Labo
+     */
+    public function addLocalisation(\AppBundle\Entity\Localisation $localisation)
+    {
+        $this->localisation[] = $localisation;
+
+        return $this;
+    }
+
+    /**
+     * Remove localisation
+     *
+     * @param \AppBundle\Entity\Localisation $localisation
+     */
+    public function removeLocalisation(\AppBundle\Entity\Localisation $localisation)
+    {
+        $this->localisation->removeElement($localisation);
+    }
+
+    /**
+     * Get localisation
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLocalisation()
+    {
+        return $this->localisation;
+    }
+
+    /**
      * Add formation
      *
      * @param \AppBundle\Entity\Formation $formation
@@ -695,40 +743,6 @@ class Labo
     public function getFormation()
     {
         return $this->formation;
-    }
-
-    /**
-     * Add equipement
-     *
-     * @param \AppBundle\Entity\Equipement $equipement
-     *
-     * @return Labo
-     */
-    public function addEquipement(\AppBundle\Entity\Equipement $equipement)
-    {
-        $this->equipement[] = $equipement;
-
-        return $this;
-    }
-
-    /**
-     * Remove equipement
-     *
-     * @param \AppBundle\Entity\Equipement $equipement
-     */
-    public function removeEquipement(\AppBundle\Entity\Equipement $equipement)
-    {
-        $this->equipement->removeElement($equipement);
-    }
-
-    /**
-     * Get equipement
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getEquipement()
-    {
-        return $this->equipement;
     }
 
     /**
@@ -800,6 +814,40 @@ class Labo
     }
 
     /**
+     * Add equipement
+     *
+     * @param \AppBundle\Entity\Equipement $equipement
+     *
+     * @return Labo
+     */
+    public function addEquipement(\AppBundle\Entity\Equipement $equipement)
+    {
+        $this->equipement[] = $equipement;
+
+        return $this;
+    }
+
+    /**
+     * Remove equipement
+     *
+     * @param \AppBundle\Entity\Equipement $equipement
+     */
+    public function removeEquipement(\AppBundle\Entity\Equipement $equipement)
+    {
+        $this->equipement->removeElement($equipement);
+    }
+
+    /**
+     * Get equipement
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEquipement()
+    {
+        return $this->equipement;
+    }
+
+    /**
      * Add ed
      *
      * @param \AppBundle\Entity\Ed $ed
@@ -831,5 +879,29 @@ class Labo
     public function getEd()
     {
         return $this->ed;
+    }
+
+    /**
+     * Gets the value of axes.
+     *
+     * @return mixed
+     */
+    public function getAxes()
+    {
+        return $this->axes;
+    }
+
+    /**
+     * Sets the value of axes.
+     *
+     * @param mixed $axes the axes
+     *
+     * @return self
+     */
+    private function setAxes($axes)
+    {
+        $this->axes = $axes;
+
+        return $this;
     }
 }

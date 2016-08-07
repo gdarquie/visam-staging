@@ -64,6 +64,13 @@ class Etablissement
     /**
      * @var string
      *
+     * @ORM\Column(name="img", type="string", length=255, nullable=false)
+     */
+    private $img;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="FC", type="string", length=255, nullable=true)
      */
     private $fc;

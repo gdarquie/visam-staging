@@ -45,6 +45,21 @@ class Tag
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Labo", inversedBy="tag")
+     * @ORM\JoinTable(name="tag_has_labo",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="tag_id", referencedColumnName="tag_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
+     *   }
+     * )
+     */
+    private $labo;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Formation", inversedBy="tag")
      * @ORM\JoinTable(name="tag_has_formation",
      *   joinColumns={
@@ -58,19 +73,12 @@ class Tag
     private $formation;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Axe", mappedBy="tag")
-     */
-    private $axe;
-
-    /**
      * Constructor
      */
     public function __construct()
     {
+        $this->labo = new \Doctrine\Common\Collections\ArrayCollection();
         $this->formation = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->axe = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 }

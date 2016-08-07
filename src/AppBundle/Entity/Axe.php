@@ -45,35 +45,13 @@ class Axe
     /**
      * @var \AppBundle\Entity\Labo
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Labo")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Labo", inversedBy='axes')
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
      * })
      */
     private $labo;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag", inversedBy="axe")
-     * @ORM\JoinTable(name="axe_has_tag",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="axe_id", referencedColumnName="axe_id")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="tag_id", referencedColumnName="tag_id")
-     *   }
-     * )
-     */
-    private $tag;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->tag = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
 
     /**
@@ -180,39 +158,5 @@ class Axe
     public function getLabo()
     {
         return $this->labo;
-    }
-
-    /**
-     * Add tag
-     *
-     * @param \AppBundle\Entity\Tag $tag
-     *
-     * @return Axe
-     */
-    public function addTag(\AppBundle\Entity\Tag $tag)
-    {
-        $this->tag[] = $tag;
-
-        return $this;
-    }
-
-    /**
-     * Remove tag
-     *
-     * @param \AppBundle\Entity\Tag $tag
-     */
-    public function removeTag(\AppBundle\Entity\Tag $tag)
-    {
-        $this->tag->removeElement($tag);
-    }
-
-    /**
-     * Get tag
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getTag()
-    {
-        return $this->tag;
     }
 }

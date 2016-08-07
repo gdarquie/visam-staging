@@ -1,0 +1,61 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ImportLoc
+ *
+ * @ORM\Table(name="import_loc")
+ * @ORM\Entity
+ */
+class ImportLoc
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cycle", type="string", length=255, nullable=true)
+     */
+    private $cycle;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="diplome", type="string", length=500, nullable=true)
+     */
+    private $diplome;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="codePostal", type="string", length=30, nullable=true)
+     */
+    private $codepostal;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ville", type="string", length=500, nullable=true)
+     */
+    private $ville;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="url", type="string", length=255, nullable=true)
+     */
+    private $url;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+
+}
+

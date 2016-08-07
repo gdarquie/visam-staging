@@ -64,6 +64,13 @@ class Etablissement
     /**
      * @var string
      *
+     * @ORM\Column(name="img", type="string", length=255, nullable=false)
+     */
+    private $img;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="FC", type="string", length=255, nullable=true)
      */
     private $fc;
@@ -365,6 +372,30 @@ class Etablissement
     public function getStatut()
     {
         return $this->statut;
+    }
+
+    /**
+     * Set img
+     *
+     * @param string $img
+     *
+     * @return Etablissement
+     */
+    public function setImg($img)
+    {
+        $this->img = $img;
+
+        return $this;
+    }
+
+    /**
+     * Get img
+     *
+     * @return string
+     */
+    public function getImg()
+    {
+        return $this->img;
     }
 
     /**

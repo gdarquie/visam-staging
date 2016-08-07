@@ -45,11 +45,20 @@
                		 {% endfor %}
                 </ul>
             	 {% endif %}
-              {# 
-            	<h5>Axes</h5>
-            	{% for axe in labo.axe %}
-            		<li>{{axe.nom}}</li>
-            	{% endfor %} #}
+              
+            	<h5>Mots clés</h5>
+              <p>
+            	{% for tag in labo.tag %}
+            		{{tag.nom}} /
+            	{% endfor %}
+              </p>
+
+              <h5>Axes</h5>
+              {{ dump(labo) }}
+              {% for axe in labo.axes %}
+
+                <li>{{axe.nom}}</li>
+              {% endfor %}
 
               </div>
               <h5>Localisation</h5>
