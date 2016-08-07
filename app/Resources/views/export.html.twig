@@ -20,10 +20,13 @@
         {% endfor %}
       ],
       "hesamette" : [
+          
         {% for discipline in formation.discipline %}
+        {% set item = 0 %}
         {% if discipline.type != "NW3" %} {# suppression des NW3 qui n'ont pas d'hesamette #}
           "{{discipline.hesamette|e('js')}}"
-          {% if loop.last %}{% else %},{% endif %}
+          {% set item = item + 1 %}
+          {% if loop.length == item %}{% elseif loop.index >= (loop.length - item) %}{% else %},{% endif %}
         {% endif %}
         {% endfor %}
       ]
@@ -52,9 +55,11 @@
       ],
       "hesamette" : [
         {% for discipline in labo.discipline %}
+        {% set item = 0 %}
         {% if discipline.type != "NW3" %} {# suppression des NW3 qui n'ont pas d'hesamette #}
           "{{discipline.hesamette|e('js')}}"
-          {% if loop.last %}{% else %},{% endif %}
+          {% set item = item + 1 %}
+          {% if loop.length == item %}{% elseif loop.index >= (loop.length - item) %}{% else %},{% endif %}
         {% endif %}
         {% endfor %}
         
