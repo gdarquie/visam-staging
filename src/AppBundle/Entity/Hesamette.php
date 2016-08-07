@@ -36,7 +36,6 @@ class Hesamette
     private $hesametteId;
 
 
-
     /**
      * Set nom
      *
@@ -94,4 +93,12 @@ class Hesamette
     {
         return $this->hesametteId;
     }
+
+    public function __toString()
+    {
+        return (string) $this->getNom();
+    }
+
+
+
 }

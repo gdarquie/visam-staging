@@ -481,4 +481,5 @@ class Discipline
     {
         return $this->ed;
     }
+
 }
