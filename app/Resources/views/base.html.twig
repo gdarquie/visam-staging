@@ -18,8 +18,10 @@
 
       <!--Import Google Icon Font-->
       <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
       <!--Import materialize.css-->
-      <link rel="stylesheet" href="../bower_components/Materialize/dist/css/materialize.css">
+      <link rel="stylesheet"
+            href="{{ asset('assets/vendor/materialize/dist/css/materialize.min.css') }}">
       <link rel="stylesheet" href="../css/style.css"> 
       <link rel="stylesheet" href="../css/mehdi.css"> 
 
@@ -28,8 +30,6 @@
     <body>
         <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.css"></script>
 
       <div  class="begin-line"></div>
 
@@ -62,6 +62,8 @@
                 </div>
             {% endfor %}
         {% endfor %}
+
+
 
         <div>
             {% block fos_user_content %}
