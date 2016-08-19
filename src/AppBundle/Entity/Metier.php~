@@ -31,7 +31,7 @@ class Metier
      *
      * @ORM\Column(name="timestamp", type="datetime", nullable=false)
      */
-    private $timestamp = 'CURRENT_TIMESTAMP';
+    private $timestamp;
 
     /**
      * @var integer

@@ -40,6 +40,7 @@
 					</div>
 	              <div class="card-action">
 	              <a href="{{formation.url}}"><i class="material-icons">input</i>Lien vers la formation</a>
+                <a href="{{ path('editeur_formation_edit', { id : formation.formationId }) }}"><i class="material-icons">mode_edit</i>Modifier les données</a> 
 	              <div style="float:right;">
 Effectif(s) : {{formation.effectif}}|
 					Année {{formation.annee}}

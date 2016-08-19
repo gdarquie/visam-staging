@@ -62,6 +62,72 @@ class EditeurController extends Controller
             ));
     }
 
+/**
+*
+* Les laboratoires
+*
+/**   
+
+    /**
+     * Editer un laboratoire
+     *
+     * @Route("/labo/{id}/edit", name="editeur_labo_edit")
+     * @Method("GET")
+     */
+    public function editLaboAction(Request $request, Labo $labo){
+
+        // $deleteForm = $this->createDeleteLaboForm($labo);
+        $editForm = $this->createForm('AppBundle\Form\LaboType', $labo);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($labo);
+            $em->flush();
+
+            return $this->redirectToRoute('editeur_labo_edit', array('id' => $labo->getLaboId()));
+        }
+
+        return $this->render('editeur/labo/edit.html.twig', array(
+            'labo' => $labo,
+            'edit_form' => $editForm->createView(),
+            // 'delete_form' => $deleteForm->createView(),
+            ));
+    }
+
+/**
+*
+* Les formations
+*
+/**   
+
+    /**
+     * Editer une formation
+     *
+     * @Route("/formation/{id}/edit", name="editeur_formation_edit")
+     * @Method("GET")
+     */
+    public function editFormationAction(Request $request, Formation $formation){
+
+        // $deleteForm = $this->createDeleteLaboForm($labo);
+        $editForm = $this->createForm('AppBundle\Form\FormationType', $formation);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($formation);
+            $em->flush();
+
+            return $this->redirectToRoute('editeur_formation_edit', array('id' => $formation->getFormationId()));
+        }
+
+        return $this->render('editeur/formation/edit.html.twig', array(
+            'formation' => $formation,
+            'edit_form' => $editForm->createView(),
+            // 'delete_form' => $deleteForm->createView(),
+            ));
+    }
+
 
 /**
 *

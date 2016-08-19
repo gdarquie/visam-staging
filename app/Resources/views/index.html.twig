@@ -12,12 +12,25 @@
 <!--   <img src="" alt="Logo HESAM Université">
  -->  
 
+        <header>
+          <div class="container">
+            <div class="row center">
+              <ul class="actions">
+                <li><a class="btn btn-hesam-inverse" href="{{ path('statistiques') }}">Explorer</a></li> <!-- Lien vers stats -->
+                <li><a class="btn btn-hesam-inverse" href="{{ path('apropos') }}" >À propos</a> <!-- Lien vers à propos // Voir Sonia -->
+                <li><a class="btn btn-hesam-inverse">Comment ça marche ?</a></li> <!-- lien vers tuto à faire-->
+              </ul>
+            </div>
+          </div>
+        </header>
 
       <div class="container">
         <div class="row center rechercher-wrapper">
         <div class="col offset-s3 s6 "><img src="img/hesam.jpg" class="responsive-img logo-hesam" alt="Logo HESAM Université"></div>
+        <h3>Cartographie des compétences</h3>
           <form action="rechercher"   method="get">
             <input type="text" name="search" placeholder="Exemple : Sociologie, Laboratoire INHA, Formation Design et écoles doctorales ">
+
             <input class="btn btn-hesam" type="submit" value="Rechercher">
           </form>
         </div>
@@ -45,18 +58,11 @@
 
       </div>
   
+      <footer>
+        <p>Dernière mise à jour le 18 août 2016</p>
+      </footer>
 
-        <footer>
-          <div class="container">
-            <div class="row center">
-              <ul class="actions">
-                <li><a class="btn btn-hesam-inverse" href="{path('/stats')}">Explorer</a></li> <!-- Lien vers stats -->
-                <li><a class="btn btn-hesam-inverse">À propos</a> <!-- Lien vers à propos // Voir Sonia -->
-                <li><a class="btn btn-hesam-inverse">Comment ça marche ?</a></li> <!-- lien vers tuto à faire-->
-              </ul>
-            </div>
-          </div>
-        </footer>
+
 
 <!-- 
   <div id="index-banner" >

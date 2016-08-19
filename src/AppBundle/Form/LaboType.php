@@ -28,14 +28,14 @@ class LaboType extends AbstractType
             ->add('lien2')
             ->add('lien3')
             ->add('membre')
-            ->add('theme')
-            ->add('ufr')
-            ->add('localisation')
-            ->add('formation')
-            ->add('discipline')
-            ->add('etablissement')
-            ->add('equipement')
-            ->add('ed')
+            // ->add('theme')
+            // ->add('ufr')
+            // ->add('localisation')
+            // ->add('formation')
+            // ->add('discipline')
+            // ->add('etablissement')
+            // ->add('equipement')
+            // ->add('ed')
         ;
     }
     

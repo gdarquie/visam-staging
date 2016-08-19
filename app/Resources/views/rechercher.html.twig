@@ -94,10 +94,6 @@
 
     <div class="col s8">
 
-
-
-
-
             <section data-ng-repeat="product in filteredProducts | filter:searchTerm | orderBy: sorting.order:sorting.direction | limitTo:20" id="{[{product.Sku}]}"  >
 
               <div class="col s12 m12">
@@ -114,7 +110,7 @@
                           </ul>
                       </div>
                       <div class="card-action">
-                        <a href="{[{product.url}]}"><i class="material-icons">input</i>Lien vers le laboratoire</a><a href="#"><i class="material-icons">mode_edit</i></a>
+                        <a href="{[{product.url}]}"><i class="material-icons">input</i>Lien vers le laboratoire</a><a href="editeur/labo/{[{product.id}]}/edit"><i class="material-icons">mode_edit</i>Modifier les données</a> <!-- Changer avec l'édition d'un labo / problème pour synchroniser le id avec celui de symfony en utilisant les routes prédéfinies => path('editeur_labo_edit', { id : 1 }) -->
                         <div style="float:right;">
                             <span>              <a href="mailto:{[{product.mailcontact}]}"><i class="material-icons">mail</i>{[{product.mailcontact}]}</a></span>
                           </div>
@@ -133,6 +129,7 @@
                       </div>
                       <div class="card-action">
                         <a href="{[{product.url}]}"><i class="material-icons">input</i>{[{product.url}]}</a>
+                        <a href="editeur/formation/{[{product.id}]}/edit"><i class="material-icons">mode_edit</i>Modifier les données</a> <!-- Changer avec l'édition d'une formation / problème pour synchroniser le id avec celui de symfony en utilisant les routes prédéfinies => path('editeur_formation_edit', { id : 1 }) -->
                         <div style="float:right;">
                             <span>Année : <strong>{[{product.annee}]}</strong><span> - 
                             <span>Effectif : <strong>{[{product.effectif}]}</strong></span>
