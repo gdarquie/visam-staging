@@ -1,0 +1,22 @@
+<VirtualHost *:80>
+	 ServerName visam.interlivre.fr
+	 DocumentRoot /var/www/visam/web
+ 
+	 <Directory /var/www/visam/web>
+		 AllowOverride All
+		 Order Allow,Deny
+		 Allow from All
+		 <IfModule mod_rewrite.c>
+			 Options -MultiViews
+			 RewriteEngine On
+			 RewriteCond %{REQUEST_FILENAME} !-f
+			 RewriteRule ^(.*)$ app.php [QSA,L]
+		 </IfModule>
+	 </Directory>
+ 
+	 ErrorLog /var/log/apache2/visam_error.log
+	 CustomLog /var/log/apache2/visam_access.log combined
+ </VirtualHost>
+
+
+ 
