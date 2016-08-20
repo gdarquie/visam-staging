@@ -72,7 +72,6 @@ class EditeurController extends Controller
      * Editer un laboratoire
      *
      * @Route("/labo/{id}/edit", name="editeur_labo_edit")
-     * @Method("GET")
      */
     public function editLaboAction(Request $request, Labo $labo){
 
@@ -105,7 +104,6 @@ class EditeurController extends Controller
      * Editer une formation
      *
      * @Route("/formation/{id}/edit", name="editeur_formation_edit")
-     * @Method("GET")
      */
     public function editFormationAction(Request $request, Formation $formation){
 
