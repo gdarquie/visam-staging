@@ -1,4 +1,6 @@
-      $(function(){
+function facette(){
+
+     $(function(){
           var visam_temlate = 
            '<% if (obj.type == "Formation") {  %><div class="card formation">' +
             '<div class="card-content">'+
@@ -98,3 +100,22 @@
         // });
         
       });
+}
+
+facette();
+
+//Tests Gaétan
+
+// function myData(){
+//   return $.getJSON( "/export");
+// }
+
+// function launch(callback){
+//   dataJson = myData();
+//   callback();
+// }
+
+// launch(facette);
+
+
+
