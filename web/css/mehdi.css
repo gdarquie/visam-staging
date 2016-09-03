@@ -12,7 +12,8 @@
     }
 
     .activeorderby, .activefacet {
-        color: red;
+        color: #e42e18;
+        font-weight: 700;
     }
     .bottomline .orderby ul, .bottomline .orderby li {
         display: inline;
@@ -20,6 +21,11 @@
     }
     .bottomline .orderby, .bottomline .facettotalcount {
         display: inline-block;
+    }
+
+    .facettotalcount {
+        font-weight: 700;
+        padding-right: 10px;
     }
 
     .bottomline .deselectstartover {
