@@ -11,6 +11,22 @@
         font-family: Bitter, serif;
     }
 
+    .activeorderby, .activefacet {
+        color: red;
+    }
+    .bottomline .orderby ul, .bottomline .orderby li {
+        display: inline;
+        padding: 0;
+    }
+    .bottomline .orderby, .bottomline .facettotalcount {
+        display: inline-block;
+    }
+
+    .bottomline .deselectstartover {
+    float: right;
+    }
+
+
     .begin-line {
         height: 10px;
         background-color :#e42e18;
