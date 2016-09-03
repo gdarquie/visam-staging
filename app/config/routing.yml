@@ -1,4 +1,4 @@
-app:
+app_web:
     resource: "@AppBundle/Controller/"
     type:     annotation
 
