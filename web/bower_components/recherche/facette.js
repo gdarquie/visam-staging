@@ -1,6 +1,7 @@
 function facette(){
 
      $(function(){
+          var params = getSearchParameters();
           var searchVal;
           var visam_temlate = 
            '<% if (obj.type == "Formation") {  %><div class="card formation">' +
@@ -8,9 +9,9 @@ function facette(){
             '<span class="item-formation">Formation</span>'+
             '<span class="etablissement"><span>- <%= obj.niveau %> </span><%= obj.typeDiplome %></span>'+
              '<a href="/formation/<%= obj.id %>">'+
-              '<h5><%= obj.name %></h5></a>'+
+              '<h5 class="surligne"><%= obj.name %></h5></a>'+
               '<span><%= obj.etablissement %></span>'+
-              '<ul class="list-thematique" >' + 
+              '<ul class="list-thematique surligne" >' + 
               '<li><%= obj.hesamette %></li>'+
               '</ul>'+
               '</div>'+
@@ -26,9 +27,9 @@ function facette(){
             '<span class="item-labo">Laboratoire</span>'+
             '<span class="etablissement"><span>- <%= obj.ctype %> </span><%= obj.code %></span>'+
              '<a href="/labo/<%= obj.id %>">'+
-              '<h5><%= obj.name %> (<%= obj.sigle %>)</h5></a>'+
+              '<h5 class="surligne"><%= obj.name %> (<%= obj.sigle %>)</h5></a>'+
               '<span><%= obj.etablissement %></span>'+
-              '<ul class="list-thematique" >' + 
+              '<ul class="list-thematique surligne" >' + 
               '<li><%= obj.hesamette %></li>'+
               '<ul>'+
               '</div>'+
@@ -46,19 +47,23 @@ function facette(){
             items            : dataJson,
             facets           : { 
                                 'type' : 'Type',
-                                'etablissement'     : 'Etablissements',
-                                'hesamette'     : 'Disciplines',
+                                'hesamette'     : 'Thématiques',
+                                'etablissement'     : 'Établissements',
             },  
             resultSelector   : '#results',
             facetSelector    : '#facets',
             facetTitleTemplate : '<h4 class=facettitle><%= title %></h4>',
             resultTemplate   : visam_temlate,
+            facetContainer     : '<li class=facetsearch id=<%= id %> ></li>',
+            facetTitleTemplate : '<div class="collapsible-header facettitle active"><%= title %></div>',
+            facetListContainer : '<div class="collapsible-body facetlist"></div>',
+            listItemTemplate   : '<div class=facetitem id="<%= id %>"><%= name %> <span class=facetitemcount> <%= count %></span></div>',
             countTemplate      : '<div class=facettotalcount><%= count %> Résultats</div>',
             deselectTemplate   : '<div class=deselectstartover>Suppression des filtres</div>',
-            orderByTemplate    : '<div class=orderby><span class="orderby-title">- Trier par : </span><ul><% _.each(options, function(value, key) { %>'+
+            orderByTemplate    : '<div class=orderby><span class="orderby-title"><!-- - Trier par :--> </span><ul><% _.each(options, function(value, key) { %>'+
                        '<li class=orderbyitem id=orderby_<%= key %>>'+
                        '<%= value %> </li> <% }); %></ul></div>',
-            orderByOptions     : {'a': 'Par A', 'b': 'Par B'},
+            orderByOptions     : false,
             noResults          : '<div class=results>Désolé, nous trouvons aucun résultat ! </div>',
             paginationCount  : 20,
             enablePagination   : true,
@@ -67,52 +72,68 @@ function facette(){
 
         // use them!
         $.facetelize(settings);
+      
+      if(params.search) {
+        $("#search-input").val(params.search);
+        searchInput();
+        $('.surligne').highlight(params.search);
 
+      }
 
 
         $('#search-input').keyup(function () { 
-          searchVal = $("#search-input").val();
-          if (searchVal) {
-            var returnedData = $.grep(dataJson, function(element, index){
-              if (element.hesamette.toString().toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
-                return element;
-              }
-              if (element.name.toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
-                return element;
-              }
-            });
-            settings.items = returnedData;
-          } else {
-            settings.items = dataJson;
-          }
+          searchInput();
 
-          $.facetelize(settings);
-
+$('.surligne').highlight($("#search-input").val());
         });
+
 
         $(settings.resultSelector).bind("facetedsearchresultupdate", function(){
-
-                    $('#results').highlight(searchVal);
-
+            $('.surligne').highlight(searchVal);
         });
 
-        // $("#search-input").change(function () {
-        //   var searchVal = $("#search-input").val();
-
-        //   var returnedData = $.grep(dataJson, function(element, index){
-        //     if (element.name.indexOf(searchVal) >= 0) {
-        //       return element.name.indexOf(searchVal);
-        //     }
-        //   });
-
-        //   settings.items = returnedData;
-        //   $.facetelize(settings);
-        // });
-        
+       //   $('.collapsible').collapsible({expandable : true});
       });
 }
 
 facette();
+
+var searchInput = function () {
+  searchVal = $("#search-input").val();
+  if (searchVal) {
+    var returnedData = $.grep(dataJson, function(element, index){
+      if (element.hesamette.toString().toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
+        return element;
+      }
+      if (element.name.toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
+        return element;
+      }
+    });
+    settings.items = returnedData;
+  } else {
+    settings.items = dataJson;
+  }
+
+  $.facetelize(settings);
+  //$('.collapsible').collapsible({expandable : true});
+  $('.surligne').highlight(searchVal);
+
+}
+
+var getSearchParameters = function() {
+      var prmstr = window.location.search.substr(1);
+      return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
+}
+
+var transformToAssocArray = function( prmstr ) {
+    var params = {};
+    var prmarr = prmstr.split("&");
+    for ( var i = 0; i < prmarr.length; i++) {
+        var tmparr = prmarr[i].split("=");
+        params[tmparr[0]] = tmparr[1];
+    }
+    return params;
+}
 
 //Tests Gaétan
 

@@ -11,6 +11,12 @@
         font-family: Bitter, serif;
     }
 
+    @media only screen and (min-width: 993px) {
+        .container.large {
+            width: 90%;
+        }
+    }
+
     .activeorderby, .activefacet {
         color: #e42e18;
         font-weight: 700;
@@ -27,6 +33,28 @@
         font-weight: 700;
         padding-right: 10px;
     }
+    .facettitle {
+        font-weight: 700;
+        font-size: 1.1em;
+    }
+    .facetitem {
+        cursor: pointer;
+        margin-top: 4px;
+    }
+    .facetitemcount {
+        font-size: 14px;
+        text-align: right;
+        color: #ccc;
+        float: right;
+    }
+    .facetlist {
+        padding: 8px 10px 5px 10px;
+        display: block;
+    }
+    .orderbyitem, .deselectstartover {
+        cursor: pointer;
+    }
+
 
     .bottomline .deselectstartover {
     float: right;
@@ -68,13 +96,23 @@
 
     #search-input, #search-input-fake  {
         font-size: 2.2em;
-        padding-top: 15px;
+/*        padding-top: 15px;
         height: 4rem;
-/*        color: #D32F2F!important;
-*/        font-style: italic;
-        width: 1000px;
-        border-bottom: 1px solid #D32F2F;
+        font-style: italic;
+        border-bottom: 1px solid #D32F2F;*/
         font-family: Bitter, serif;
+    }
+
+    .icon-search {
+        margin-top: 10px;
+    }
+    #search-input:focus {
+        border-bottom: 1px solid #e42e18;
+        box-shadow: 0 1px 0 0 #e42e18;
+
+    }
+    .input-field .prefix.active {
+        color: #e42e18;
     }
 
     #search-input-fake {
@@ -138,6 +176,10 @@
         height: 245px !important;
         margin-top: 20px;
         margin-bottom: 20px;
+    }
+
+    .logo-hesam-small {
+        height: 114px !important;
     }
 
     .rechercher-wrapper input[type=text]{
