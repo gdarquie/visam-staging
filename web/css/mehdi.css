@@ -32,7 +32,9 @@
     float: right;
     }
 
-
+    .highlight {
+        background-color: #FFFF88;
+    }
     .begin-line {
         height: 10px;
         background-color :#e42e18;

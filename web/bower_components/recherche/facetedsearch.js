@@ -306,7 +306,7 @@ function updateFacetUI() {
     });
   });
   countHtml = _.template(settings.countTemplate, {count: settings.currentResults.length});
-  $(settings.facetSelector + ' .facettotalcount').replaceWith(countHtml);
+  $(settings.orderSelector + ' .facettotalcount').replaceWith(countHtml);
 }
 
 /**

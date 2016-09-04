@@ -1,6 +1,7 @@
 function facette(){
 
      $(function(){
+          var searchVal;
           var visam_temlate = 
            '<% if (obj.type == "Formation") {  %><div class="card formation">' +
             '<div class="card-content">'+
@@ -59,7 +60,7 @@ function facette(){
                        '<%= value %> </li> <% }); %></ul></div>',
             orderByOptions     : {'a': 'Par A', 'b': 'Par B'},
             noResults          : '<div class=results>Désolé, nous trouvons aucun résultat ! </div>',
-            paginationCount  : 50,
+            paginationCount  : 20,
             enablePagination   : true,
           } 
 
@@ -70,11 +71,14 @@ function facette(){
 
 
         $('#search-input').keyup(function () { 
-          var searchVal = $("#search-input").val();
+          searchVal = $("#search-input").val();
           if (searchVal) {
             var returnedData = $.grep(dataJson, function(element, index){
-              if (element.name.indexOf(searchVal) >= 0) {
-                return element.name.indexOf(searchVal);
+              if (element.hesamette.toString().toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
+                return element;
+              }
+              if (element.name.toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
+                return element;
               }
             });
             settings.items = returnedData;
@@ -83,6 +87,12 @@ function facette(){
           }
 
           $.facetelize(settings);
+
+        });
+
+        $(settings.resultSelector).bind("facetedsearchresultupdate", function(){
+
+                    $('#results').highlight(searchVal);
 
         });
 
