@@ -83,16 +83,13 @@ function facette(){
 
         $('#search-input').keyup(function () { 
           searchInput();
-
-$('.surligne').highlight($("#search-input").val());
         });
 
 
         $(settings.resultSelector).bind("facetedsearchresultupdate", function(){
-            $('.surligne').highlight(searchVal);
+            $('.surligne').highlight($("#search-input").val());
         });
 
-       //   $('.collapsible').collapsible({expandable : true});
       });
 }
 
@@ -115,8 +112,7 @@ var searchInput = function () {
   }
 
   $.facetelize(settings);
-  //$('.collapsible').collapsible({expandable : true});
-  $('.surligne').highlight(searchVal);
+  //$('.surligne').highlight(searchVal);
 
 }
 
