@@ -11,9 +11,14 @@ function facette(){
              '<a href="/formation/<%= obj.id %>">'+
               '<h5 class="surligne"><%= obj.name %></h5></a>'+
               '<span><%= obj.etablissement %></span>'+
+              '<h5>Thématiques</h5>' +
               '<ul class="list-thematique surligne" >' + 
               '<li><%= obj.hesamette %></li>'+
               '</ul>'+
+              '<h5>Discipline</h5>' +              
+              '<ul class="list-thematique surligne" >' + 
+              '<li><%= obj.discipline %></li>'+
+              '</ul>'+              
               '</div>'+
               '<div class="card-action">'+
               '<a href="<%= obj.url %>"><i class="material-icons">input</i>Lien vers la formation</a>'+
@@ -29,9 +34,18 @@ function facette(){
              '<a href="/labo/<%= obj.id %>">'+
               '<h5 class="surligne"><%= obj.name %> (<%= obj.sigle %>)</h5></a>'+
               '<span><%= obj.etablissement %></span>'+
+              '<h5>Thématiques</h5>' + 
               '<ul class="list-thematique surligne" >' + 
               '<li><%= obj.hesamette %></li>'+
               '<ul>'+
+              '<h5>Discipline</h5>' +
+              '<ul class="list-thematique surligne" >' + 
+              '<li><%= obj.discipline %></li>'+
+              '</ul>'+
+              '<h5>Equipements</h5>' +
+              '<ul class="list-thematique surligne" >' + 
+              '<li><%= obj.equipement %></li>'+
+              '</ul>'+              
               '</div>'+
               '<div class="card-action">'+
               '<a href="<%= obj.url %>"><i class="material-icons">input</i>Lien vers le laboratoire</a>'+
@@ -102,6 +116,12 @@ var searchInput = function () {
       if (element.hesamette.toString().toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
         return element;
       }
+      if (element.discipline.toString().toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
+        return element;
+      }
+      if (element.equipement && element.equipement.toString().toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
+        return element;
+      }         
       if (element.name.toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
         return element;
       }
