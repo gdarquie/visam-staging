@@ -9,13 +9,13 @@ function facette(){
             '<span class="item-formation">Formation</span>'+
             '<span class="etablissement"><span>- <%= obj.niveau %> </span><%= obj.typeDiplome %></span>'+
              '<a href="/formation/<%= obj.id %>">'+
-              '<h5 class="surligne"><%= obj.name %></h5></a>'+
+              '<h6 class="surligne"><%= obj.name %></h6></a>'+
               '<span><%= obj.etablissement %></span>'+
-              '<h5>Thématiques</h5>' +
+              '<h6>Thématiques</h6>' +
               '<ul class="list-thematique surligne" >' + 
               '<li><%= obj.hesamette %></li>'+
               '</ul>'+
-              '<h5>Discipline</h5>' +              
+              '<h6>Discipline</h6>' +              
               '<ul class="list-thematique surligne" >' + 
               '<li><%= obj.discipline %></li>'+
               '</ul>'+              
@@ -34,15 +34,15 @@ function facette(){
              '<a href="/labo/<%= obj.id %>">'+
               '<h5 class="surligne"><%= obj.name %> (<%= obj.sigle %>)</h5></a>'+
               '<span><%= obj.etablissement %></span>'+
-              '<h5>Thématiques</h5>' + 
+              '<h6>Thématiques</h6>' + 
               '<ul class="list-thematique surligne" >' + 
               '<li><%= obj.hesamette %></li>'+
               '<ul>'+
-              '<h5>Discipline</h5>' +
+              '<h6>Discipline</h6>' +
               '<ul class="list-thematique surligne" >' + 
               '<li><%= obj.discipline %></li>'+
               '</ul>'+
-              '<h5>Equipements</h5>' +
+              '<h6>Equipements</h6>' +
               '<ul class="list-thematique surligne" >' + 
               '<li><%= obj.equipement %></li>'+
               '</ul>'+              
