@@ -42,21 +42,6 @@ class DefaultController extends Controller
 
     }
 
-    /**
-     * @Route("/dev", name="homepageDev")
-     */
-    public function indexDevAction(Request $request)
-    {
-        return $this->render('dev.html.twig');
-    }
-
-    /**
-     * @Route("/dev2", name="homepageDev2")
-     */
-    public function indexDev2Action(Request $request)
-    {
-        return $this->render('dev2.html.twig');
-    }
     
     /**
      * @Route("/rechercher", name="search")
