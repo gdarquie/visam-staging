@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace AppBundle\Controller\Web;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -99,6 +99,36 @@ class EditeurController extends Controller
 * Les formations
 *
 /**   
+
+
+    /**
+     * Créer une formation
+     *
+     * @Route("/formation/new", name="editeur_formation_new")
+     */
+    public function newFormationAction(Request $request){
+
+        // $deleteForm = $this->createDeleteLaboForm($labo);
+
+        $formation = new Formation();
+        $editForm = $this->createForm('AppBundle\Form\FormationType', $formation);
+        $editForm->handleRequest($request);
+
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($formation);
+            $em->flush();
+
+            return $this->redirectToRoute('editeur');
+        }
+
+        return $this->render('editeur/formation/new.html.twig', array(
+            'edit_form' => $editForm->createView(),
+            // 'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
 
     /**
      * Editer une formation

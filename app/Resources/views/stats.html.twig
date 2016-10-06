@@ -1,9 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block fos_user_content %}{% endblock %}
 {% block stylesheets %}
+    {{ parent() }}
+
+    <style>
+        .intertitre{
+            box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+            font-size: 2em;
+            margin-top : 30px;
+        }
+
+        .number{
+            font-size:1.3em;
+            font-weight: bold;
+        }
+    </style>
 {% endblock %}
 
+{% block fos_user_content %}{% endblock %}
 
 {% block body %}
   <div id="index-banner" class="parallax-container">
@@ -22,7 +36,13 @@
     <div class="parallax"><img src="img/louvres.jpg" alt="Unsplashed background img 1"></div>
   </div>
 
+
+
 <div class='container'>
+
+    <div class="intertitre row">
+        <p class="col s12">Hesam Université rassemble <span class="number">1400</span> formations, du bac+1 au doctorat, en formation initiale ou continue, <span class="number">85</span> laboratoires pluridisciplinaires /// sciences sociales que des sciences de l'environnement et <span class="number">14</span> écoles doctorales.</p>
+    </div>
 
   <br>
     <div class="row">
@@ -52,6 +72,7 @@
                 </a>
           </div>
         </div>
+
         <div class="col s12 m4">
           <div class="card amber accent-2">
                 <a href="#ecoles" class="modal-trigger">
@@ -67,56 +88,36 @@
         </div>
     </div>
 
-    <div class='row'>
+        <div class="intertitre row">
 
-      <article class="col s6 m10">
-        <input type="text" placeholder="Chercher parmi les laboratoires, formations et écoles doctorales HESAM">
-      </article>
+            <p>Avec <span class="number">{{nbEtud}}</span> étudiants et auditeurs, notre communauté est classée… en Ile de France en nombre d’étudiants</p>
+        </div>
 
-      <article class="col s6 m2">
-      <a class="waves-effect waves-light btn red">Rechercher</a>
-      </article>
-    </div>
 
-    <div class="row">
-      <a class="waves-effect waves-light btn blue" href="/rechercher">Faire une recherche avancée</a>
-    </div>
 
   </div>
 
-  <div id="index-banner" class="parallax-container">
-    <div class="section no-pad-bot">
-      <div class="container">
-        <br><br>
-        <h1 class="header center" style="color:white;">HESAM Université</h1>
-        <div class="row center">
-                  <h5 class="header col s12 light" style="color:white;">Visam comprend {{etabs|length}} entités</h5>
-        </div>
-        <div class="row center">
-        </div>
-        <br><br>
-      </div>
-    </div>
-    <div class="parallax"><img src="img/pantheon.jpg" alt="Unsplashed background img 1"></div>
-  </div>
+  {#<div id="index-banner" class="parallax-container">#}
+    {#<div class="section no-pad-bot">#}
+      {#<div class="container">#}
+        {#<br><br>#}
+        {#<h1 class="header center" style="color:white;">HESAM Université</h1>#}
+        {#<div class="row center">#}
+                  {#<h5 class="header col s12 light" style="color:white;">Visam comprend {{etabs|length}} entités</h5>#}
+        {#</div>#}
+        {#<div class="row center">#}
+        {#</div>#}
+        {#<br><br>#}
+      {#</div>#}
+    {#</div>#}
+    {#<div class="parallax"><img src="img/pantheon.jpg" alt="Unsplashed background img 1"></div>#}
+  {#</div>#}
 
     <div class='container'>
 
 
-<!-- Général -->
-  
-  <article>
-  <p>Visam compte, selon les données entrées dans la base de données <strong>{{eds|length}}</strong> ED, <strong>{{formations|length}}</strong> formations et <strong>{{labos|length}}</strong> laboratoires  répartis sur <strong>{{etabs|length}}</strong> entités.</p>
-  </article>
 
 <!-- Effectifs -->
-       <article> 
-            <h2>Les effectifs</h2>
-            <p>Selon les données entrées dans la base de données ViSam, HeSam compte :
-                <ul>
-                    <li><span class="number">{{nbEtud}}</span> étudiants</li>
-                </ul></p>
-        </article>
 
         <article>
             <h2>Répartition des étudiants par établissement</h2>
@@ -369,452 +370,457 @@
     <iframe src="http://localhost:8888/2016/visamFront/2016-06-05/map/#/" frameborder="0" class ='col s12' id='map' ></iframe>
   </div>
 
+    {% endblock %}
 
-    <script   src="https://code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>  
-    <script src="{{ asset('js/function.js') }}"></script>
+{# fin de body #}
 
-    <!-- Materialize -->
-    <script type="text/javascript" src="../bower_components/Materialize/js/parallax.js"></script>
+{# Début javascripts #}
+
+    {% block  javascripts %}
+
+        {{ parent() }}
 
 
-    <!-- D3.JS -->
-    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <script type="text/javascript" src="../bower_components/nvd3/build/nv.d3.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.com/libraries/Chart.js"></script>
-    <link rel="stylesheet" href="../bower_components/nvd3/build/nv.d3.css"> 
-    <!-- END D3.JS -->
-    
-    <!-- jqcloud -->
-    <script src="../bower_components/jqcloud/dist/jqcloud.min.js"></script>
-    <link rel="stylesheet" href="../bower_components/jqcloud/dist/jqcloud.min.css">
-    <!-- END jqcloud -->
+        <!-- Materialize -->
+        <script type="text/javascript" src="../bower_components/Materialize/js/parallax.js"></script>
 
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+        <!-- D3.JS -->
+        <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+        <script type="text/javascript" src="../bower_components/nvd3/build/nv.d3.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.com/libraries/Chart.js"></script>
+        <link rel="stylesheet" href="../bower_components/nvd3/build/nv.d3.css">
+        <!-- END D3.JS -->
+
+        <!-- jqcloud -->
+        <script src="../bower_components/jqcloud/dist/jqcloud.min.js"></script>
+        <link rel="stylesheet" href="../bower_components/jqcloud/dist/jqcloud.min.css">
+        <!-- END jqcloud -->
+
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+            <script>
+          (function($){
+            $(function(){
+              $('.parallax').parallax();
+
+                var wordsCNU = [
+                {% for discipline in allCnuDisciplinesFormations %}
+                     {text:"{{discipline.item.nom}} ({{discipline.nb}})",
+                     weight : {{discipline.nb}} },
+                {% endfor %}
+                ];
+                console.log(wordsCNU);
+                $('#tagsCNU').jQCloud(wordsCNU, {
+                    shape: 'rectangular',
+                    autoResize: true,
+                    //colors: ["#c62828", "#d32f2f", "#e53935", "#f44336", "#ef5350", "#e57373", "#ef9a9a", "#ffcdd2", "#ffebee"]
+                });
+
+                var wordsHCERES = [
+                {% for discipline in allHceresDisciplinesFormations %}
+                     {text:"{{discipline.item.nom}} ({{discipline.nb}})",
+                     weight : {{discipline.nb}} },
+                {% endfor %}
+                ]
+                $('#tagsHCERES').jQCloud(wordsHCERES, {
+                    shape: 'rectangular',
+                    autoResize: true,
+                });
+
+                var wordsHCERES = [
+                {% for discipline in allHceresDisciplinesFormations %}
+                     {text:"{{discipline.item.nom}} ({{discipline.nb}})",
+                     weight : {{discipline.nb}} },
+                {% endfor %}
+                ]
+                $('#tagsHCERES').jQCloud(wordsHCERES, {
+                    shape: 'rectangular',
+                    autoResize: true,
+                });
+
+                var wordsSISE = [
+                {% for discipline in allSiseDisciplinesFormations %}
+                     {text:"{{discipline.item.nom}} ({{discipline.nb}})",
+                     weight : {{discipline.nb}} },
+                {% endfor %}
+                ]
+                $('#tagsSISE').jQCloud(wordsSISE, {
+                    shape: 'rectangular',
+                    autoResize: true,
+                });
+
+            }); // end of document ready
+          })(jQuery); // end of jQuery name space
+        </script>
+
+        <script type="text/javascript">
+
+
+          //Regular pie chart example
+          nv.addGraph(function() {
+            var chart = nv.models.pieChart()
+                .x(function(d) { return d.label })
+                .y(function(d) { return d.value })
+                .showLabels(true);
+
+              d3.select("#formation-niveau3 svg")
+                  .datum(formationData())
+                  .transition().duration(350)
+                  .call(chart);
+
+            return chart;
+          });
+
+          //Donut chart example
+          nv.addGraph(function() {
+            var chart = nv.models.pieChart()
+                .x(function(d) { return d.label })
+                .y(function(d) { return d.value })
+                .showLabels(true)     //Display pie labels
+                .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+                .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+                .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+                .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
+                ;
+              d3.select("#formation-niveau svg")
+                  .datum(formationData())
+                  .transition().duration(350)
+                  .call(chart);
+
+            return chart;
+          });
+
+          //Donut chart example
+          nv.addGraph(function() {
+            var chart = nv.models.pieChart()
+                .x(function(d) { return d.label })
+                .y(function(d) { return d.value })
+                .showLabels(true)     //Display pie labels
+                .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+                .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+                .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+                .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
+                ;
+              d3.select("#chercheur-stat svg")
+                  .datum(chercheursData ())
+                  .transition().duration(350)
+                  .call(chart);
+
+            return chart;
+          });
+
+
+          //Donut chart example
+          nv.addGraph(function() {
+            var chart = nv.models.pieChart()
+                .x(function(d) { return d.label })
+                .y(function(d) { return d.value })
+                .showLabels(true)     //Display pie labels
+                .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+                .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+                .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+                .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
+                ;
+              d3.select("#etud-stat svg")
+                  .datum(etudData ())
+                  .transition().duration(350)
+                  .call(chart);
+
+            return chart;
+          });
+
+          //Répartition du nombre de formations par établissements
+          nv.addGraph(function() {
+            var chart = nv.models.pieChart()
+                .x(function(d) { return d.label })
+                .y(function(d) { return d.value })
+                .showLabels(true)     //Display pie labels
+                .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+                .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+                .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+                .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
+                ;
+              d3.select("#forma-etab svg")
+                  .datum(formaEtabData ())
+                  .transition().duration(350)
+                  .call(chart);
+
+            return chart;
+          });
+
+          //Répartition du nombre de labo par établissements
+          nv.addGraph(function() {
+            var chart = nv.models.pieChart()
+                .x(function(d) { return d.label })
+                .y(function(d) { return d.value })
+                .showLabels(true)     //Display pie labels
+                .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+                .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+                .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+                .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
+                ;
+              d3.select("#labo-etab svg")
+                  .datum(laboEtabData ())
+                  .transition().duration(350)
+                  .call(chart);
+
+            return chart;
+          });
+
+            //Colonnes pour les disciplines les plus populaires
+            nv.addGraph(function() {
+            var chart = nv.models.discreteBarChart()
+                .x(function(d) { return d.label;})    //Specify the data accessors.
+                .y(function(d) { return d.value })
+                .staggerLabels(true)    //Too many bars and not enough room? Try staggering labels.
+               // .tooltips(false)        //Don't show tooltips
+               // .showValues(true)       //...instead, show the bar value right on top of each bar.
+               // .transitionDuration(350)
+                ;
+            d3.select('#formationTopDiscipline svg')
+                .datum(formationTopDisciplineData ())
+                .call(chart);
+            nv.utils.windowResize(chart.update);
+            return chart;
+          });
+
+
+          //Répartition des disciplines NW3 pour les formations
+          nv.addGraph(function() {
+            var chart = nv.models.pieChart()
+                .x(function(d) { return d.label })
+                .y(function(d) { return d.value })
+                .showLabels(true)     //Display pie labels
+                .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+                .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+                .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+                .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
+                ;
+              d3.select("#form-nw3 svg")
+                  .datum(allNw3DisciplinesFormationsData ())
+                  .transition().duration(350)
+                  .call(chart);
+            return chart;
+          });
+
+
+          //Répartition des disciplines NW3 pour les labos
+          nv.addGraph(function() {
+            var chart = nv.models.pieChart()
+                .x(function(d) { return d.label })
+                .y(function(d) { return d.value })
+                .showLabels(true)     //Display pie labels
+                .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+                .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+                .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+                .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
+                ;
+              d3.select("#labo-nw3 svg")
+                  .datum(allNw3DisciplinesLabosData ())
+                  .transition().duration(350)
+                  .call(chart);
+
+            return chart;
+          });
+
+          //Répartition des types (EA, etc.) pour les labos
+          nv.addGraph(function() {
+            var chart = nv.models.pieChart()
+                .x(function(d) { return d.label })
+                .y(function(d) { return d.value })
+                .showLabels(true)     //Display pie labels
+                .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+                .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+                .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+                .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
+                ;
+              d3.select("#labo-type svg")
+                  .datum(nbTypeLabosData ())
+                  .transition().duration(350)
+                  .call(chart);
+
+            return chart;
+          });
+
+
+          //Répartition des hesamettes pour les labos
+          nv.addGraph(function() {
+            var chart = nv.models.pieChart()
+                .x(function(d) { return d.label })
+                .y(function(d) { return d.value })
+                .showLabels(true)     //Display pie labels
+                .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+                .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+                .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+                .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
+                ;
+              d3.select("#labo-hesamette svg")
+                  .datum(nbLaboParHesametteData ())
+                  .transition().duration(350)
+                  .call(chart);
+
+            return chart;
+          });
+
+          //Répartition des hesamettes pour les formations
+          nv.addGraph(function() {
+            var chart = nv.models.pieChart()
+                .x(function(d) { return d.label })
+                .y(function(d) { return d.value })
+                .showLabels(true)     //Display pie labels
+                .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+                .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+                .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+                .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
+                ;
+              d3.select("#form-hesamette svg")
+                  .datum(nbFormParHesametteData ())
+                  .transition().duration(350)
+                  .call(chart);
+
+            return chart;
+          });
+
+
+
+          // nv.addGraph(function() {
+          //   var chart = nv.models.discreteBarChart()
+          //       .x(function(d) { return d.label })    //Specify the data accessors.
+          //       .y(function(d) { return d.value })
+          //       .staggerLabels(true)    //Too many bars and not enough room? Try staggering labels.
+          //       .tooltips(false)        //Don't show tooltips
+          //       .showValues(true)       //...instead, show the bar value right on top of each bar.
+          //       .transitionDuration(350)
+          //       ;
+          //   d3.select('#formation-niveau2 svg')
+          //       .datum(formationData())
+          //       .call(chart);
+          //   nv.utils.windowResize(chart.update);
+          //   return chart;
+          // });
+
+
+
+    //Pie chart example data. Note how there is only a single array of key-value pairs.
+    function formationData() {
+      return  [
+          {% for nbFormation in nbFormations|sort %}
+              {"label" : "{{nbFormation.niveau}}",
+              "value" : "{{nbFormation.nb}}"},
+          {% endfor %}
+        ];
+    }
+
+    function chercheursData() {
+      return  [
+          {% for etab in etabs|sort %}
+              {"label" : "{{etab.nom}}",
+              "value" : "{{etab.chercheurs}}"},
+          {% endfor %}
+        ];
+      }
+
+      function etudData() {
+      return  [
+          {% for etab in etabs|sort %}
+              {"label" : "{{etab.nom}}",
+              "value" : "{{etab.etudiants}}"},
+          {% endfor %}
+        ];
+      }
+
+      //Nombre de formations par établissements
+      function formaEtabData() {
+      return  [
+           {% for etab in etabs %}
+              {"label" : "{{etab.nom}}",
+              "value" : "{{etab.formation|length}}"},
+          {% endfor %}
+        ];
+      }
+
+      //Nombre de labo par établissements
+      function laboEtabData() {
+      return  [
+           {% for etab in etabs %}
+              {"label" : "{{etab.nom}}",
+              "value" : "{{etab.labo|length}}"},
+          {% endfor %}
+        ];
+      }
+
+
+      //20 disciplines les plus populaires
+      function formationTopDisciplineData() {
+      return  [
+           {% for discipline in allDisciplinesFormations %}
+              {"label" : "{{discipline.item.nom}}",
+              "value" : "{{discipline.item.formation|length}}"},
+          {% endfor %}
+        ];
+      }
+
+      //Répartition des NW3 par formation
+      function allNw3DisciplinesFormationsData() {
+        return [
+            {% for discipline in allNw3DisciplinesFormations %}
+              {"label" : "{{discipline.item.nom}}",
+              "value" : "{{discipline.nb}}" },
+            {% endfor %}
+        ];
+      }
+
+      //Répartition des NW3 par labo
+      function allNw3DisciplinesLabosData() {
+        return [
+            {% for discipline in allNw3DisciplinesLabos %}
+              {"label" : "{{discipline.item.nom}}",
+              "value" : "{{discipline.nb}}" },
+            {% endfor %}
+        ];
+      }
+
+
+      //Répartition des types de labo
+      function nbTypeLabosData() {
+        return [
+            {% for labo in nbTypeLabos %}
+              {"label" : "{{labo.type}}",
+              "value" : "{{labo.nb}}" },
+            {% endfor %}
+        ];
+      }
+
+
+      //Répartition des labos par hesamettes
+      function nbLaboParHesametteData() {
+        return [
+            {% for hesamette in labosHesamette %}
+              { "label" :"{{hesamette.hesamette}}",
+              "value" : "{{hesamette.nb}}" },
+            {% endfor %}
+        ];
+      }
+
+      //Répartition des formations par hesamettes
+      function nbFormParHesametteData() {
+        return [
+            {% for hesamette in formationsHesamette %}
+              { "label" :"{{hesamette.hesamette}}",
+              "value" : "{{hesamette.nb}}" },
+            {% endfor %}
+        ];
+      }
+
+
+        </script>
 
         <script>
-      (function($){
-        $(function(){
+        $(document).ready(function(){
           $('.parallax').parallax();
-
-            var wordsCNU = [
-            {% for discipline in allCnuDisciplinesFormations %}
-                 {text:"{{discipline.item.nom}} ({{discipline.nb}})",
-                 weight : {{discipline.nb}} },
-            {% endfor %}
-            ];
-            console.log(wordsCNU);
-            $('#tagsCNU').jQCloud(wordsCNU, {
-                shape: 'rectangular',
-                autoResize: true,
-                //colors: ["#c62828", "#d32f2f", "#e53935", "#f44336", "#ef5350", "#e57373", "#ef9a9a", "#ffcdd2", "#ffebee"]
-            });
-
-            var wordsHCERES = [
-            {% for discipline in allHceresDisciplinesFormations %}
-                 {text:"{{discipline.item.nom}} ({{discipline.nb}})",
-                 weight : {{discipline.nb}} },
-            {% endfor %}
-            ]
-            $('#tagsHCERES').jQCloud(wordsHCERES, {
-                shape: 'rectangular',
-                autoResize: true,
-            });
-            
-            var wordsHCERES = [
-            {% for discipline in allHceresDisciplinesFormations %}
-                 {text:"{{discipline.item.nom}} ({{discipline.nb}})",
-                 weight : {{discipline.nb}} },
-            {% endfor %}
-            ]
-            $('#tagsHCERES').jQCloud(wordsHCERES, {
-                shape: 'rectangular',
-                autoResize: true,
-            });
-
-            var wordsSISE = [
-            {% for discipline in allSiseDisciplinesFormations %}
-                 {text:"{{discipline.item.nom}} ({{discipline.nb}})",
-                 weight : {{discipline.nb}} },
-            {% endfor %}
-            ]
-            $('#tagsSISE').jQCloud(wordsSISE, {
-                shape: 'rectangular',
-                autoResize: true,
-            });
-
-        }); // end of document ready
-      })(jQuery); // end of jQuery name space
-    </script>
-
-    <script type="text/javascript">
-
-  
-      //Regular pie chart example
-      nv.addGraph(function() {
-        var chart = nv.models.pieChart()
-            .x(function(d) { return d.label })
-            .y(function(d) { return d.value })
-            .showLabels(true);
-
-          d3.select("#formation-niveau3 svg")
-              .datum(formationData())
-              .transition().duration(350)
-              .call(chart);
-
-        return chart;
-      });
-
-      //Donut chart example
-      nv.addGraph(function() {
-        var chart = nv.models.pieChart()
-            .x(function(d) { return d.label })
-            .y(function(d) { return d.value })
-            .showLabels(true)     //Display pie labels
-            .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
-            .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
-            .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
-            .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
-            ;
-          d3.select("#formation-niveau svg")
-              .datum(formationData())
-              .transition().duration(350)
-              .call(chart);
-
-        return chart;
-      });
-
-      //Donut chart example
-      nv.addGraph(function() {
-        var chart = nv.models.pieChart()
-            .x(function(d) { return d.label })
-            .y(function(d) { return d.value })
-            .showLabels(true)     //Display pie labels
-            .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
-            .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
-            .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
-            .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
-            ;
-          d3.select("#chercheur-stat svg")
-              .datum(chercheursData ())
-              .transition().duration(350)
-              .call(chart);
-
-        return chart;
-      });
+        });
+        </script>
 
 
-      //Donut chart example
-      nv.addGraph(function() {
-        var chart = nv.models.pieChart()
-            .x(function(d) { return d.label })
-            .y(function(d) { return d.value })
-            .showLabels(true)     //Display pie labels
-            .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
-            .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
-            .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
-            .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
-            ;
-          d3.select("#etud-stat svg")
-              .datum(etudData ())
-              .transition().duration(350)
-              .call(chart);
-
-        return chart;
-      });
-
-      //Répartition du nombre de formations par établissements
-      nv.addGraph(function() {
-        var chart = nv.models.pieChart()
-            .x(function(d) { return d.label })
-            .y(function(d) { return d.value })
-            .showLabels(true)     //Display pie labels
-            .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
-            .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
-            .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
-            .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
-            ;
-          d3.select("#forma-etab svg")
-              .datum(formaEtabData ())
-              .transition().duration(350)
-              .call(chart);
-
-        return chart;
-      });
-
-      //Répartition du nombre de labo par établissements
-      nv.addGraph(function() {
-        var chart = nv.models.pieChart()
-            .x(function(d) { return d.label })
-            .y(function(d) { return d.value })
-            .showLabels(true)     //Display pie labels
-            .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
-            .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
-            .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
-            .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
-            ;
-          d3.select("#labo-etab svg")
-              .datum(laboEtabData ())
-              .transition().duration(350)
-              .call(chart);
-
-        return chart;
-      });
-
-        //Colonnes pour les disciplines les plus populaires
-        nv.addGraph(function() {
-        var chart = nv.models.discreteBarChart()
-            .x(function(d) { return d.label;})    //Specify the data accessors.
-            .y(function(d) { return d.value })
-            .staggerLabels(true)    //Too many bars and not enough room? Try staggering labels.
-           // .tooltips(false)        //Don't show tooltips
-           // .showValues(true)       //...instead, show the bar value right on top of each bar.
-           // .transitionDuration(350)
-            ;
-        d3.select('#formationTopDiscipline svg')
-            .datum(formationTopDisciplineData ())
-            .call(chart);
-        nv.utils.windowResize(chart.update);
-        return chart;
-      });
-
-
-      //Répartition des disciplines NW3 pour les formations
-      nv.addGraph(function() {
-        var chart = nv.models.pieChart()
-            .x(function(d) { return d.label })
-            .y(function(d) { return d.value })
-            .showLabels(true)     //Display pie labels
-            .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
-            .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
-            .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
-            .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
-            ;
-          d3.select("#form-nw3 svg")
-              .datum(allNw3DisciplinesFormationsData ())
-              .transition().duration(350)
-              .call(chart);
-        return chart;
-      });
-
-
-      //Répartition des disciplines NW3 pour les labos
-      nv.addGraph(function() {
-        var chart = nv.models.pieChart()
-            .x(function(d) { return d.label })
-            .y(function(d) { return d.value })
-            .showLabels(true)     //Display pie labels
-            .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
-            .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
-            .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
-            .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
-            ;
-          d3.select("#labo-nw3 svg")
-              .datum(allNw3DisciplinesLabosData ())
-              .transition().duration(350)
-              .call(chart);
-
-        return chart;
-      });
-
-      //Répartition des types (EA, etc.) pour les labos
-      nv.addGraph(function() {
-        var chart = nv.models.pieChart()
-            .x(function(d) { return d.label })
-            .y(function(d) { return d.value })
-            .showLabels(true)     //Display pie labels
-            .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
-            .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
-            .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
-            .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
-            ;
-          d3.select("#labo-type svg")
-              .datum(nbTypeLabosData ())
-              .transition().duration(350)
-              .call(chart);
-
-        return chart;
-      });
-
-
-      //Répartition des hesamettes pour les labos
-      nv.addGraph(function() {
-        var chart = nv.models.pieChart()
-            .x(function(d) { return d.label })
-            .y(function(d) { return d.value })
-            .showLabels(true)     //Display pie labels
-            .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
-            .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
-            .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
-            .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
-            ;
-          d3.select("#labo-hesamette svg")
-              .datum(nbLaboParHesametteData ())
-              .transition().duration(350)
-              .call(chart);
-
-        return chart;
-      });
-
-      //Répartition des hesamettes pour les formations
-      nv.addGraph(function() {
-        var chart = nv.models.pieChart()
-            .x(function(d) { return d.label })
-            .y(function(d) { return d.value })
-            .showLabels(true)     //Display pie labels
-            .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
-            .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
-            .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
-            .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
-            ;
-          d3.select("#form-hesamette svg")
-              .datum(nbFormParHesametteData ())
-              .transition().duration(350)
-              .call(chart);
-
-        return chart;
-      });
-
-      
-
-      // nv.addGraph(function() {
-      //   var chart = nv.models.discreteBarChart()
-      //       .x(function(d) { return d.label })    //Specify the data accessors.
-      //       .y(function(d) { return d.value })
-      //       .staggerLabels(true)    //Too many bars and not enough room? Try staggering labels.
-      //       .tooltips(false)        //Don't show tooltips
-      //       .showValues(true)       //...instead, show the bar value right on top of each bar.
-      //       .transitionDuration(350)
-      //       ;
-      //   d3.select('#formation-niveau2 svg')
-      //       .datum(formationData())
-      //       .call(chart);
-      //   nv.utils.windowResize(chart.update);
-      //   return chart;
-      // });
-
-
-
-//Pie chart example data. Note how there is only a single array of key-value pairs.
-function formationData() {
-  return  [
-      {% for nbFormation in nbFormations|sort %}
-          {"label" : "{{nbFormation.niveau}}",
-          "value" : "{{nbFormation.nb}}"},
-      {% endfor %}
-    ];
-}
-
-function chercheursData() {
-  return  [
-      {% for etab in etabs|sort %}
-          {"label" : "{{etab.nom}}",
-          "value" : "{{etab.chercheurs}}"},
-      {% endfor %}
-    ];
-  }
-
-  function etudData() {
-  return  [
-      {% for etab in etabs|sort %}
-          {"label" : "{{etab.nom}}",
-          "value" : "{{etab.etudiants}}"},
-      {% endfor %}
-    ];
-  }
-
-  //Nombre de formations par établissements
-  function formaEtabData() {
-  return  [
-       {% for etab in etabs %}
-          {"label" : "{{etab.nom}}",
-          "value" : "{{etab.formation|length}}"},
-      {% endfor %}
-    ];
-  }
-
-  //Nombre de labo par établissements
-  function laboEtabData() {
-  return  [
-       {% for etab in etabs %}
-          {"label" : "{{etab.nom}}",
-          "value" : "{{etab.labo|length}}"},
-      {% endfor %}
-    ];
-  }
-
-
-  //20 disciplines les plus populaires
-  function formationTopDisciplineData() {
-  return  [
-       {% for discipline in allDisciplinesFormations %}
-          {"label" : "{{discipline.item.nom}}",
-          "value" : "{{discipline.item.formation|length}}"},
-      {% endfor %}
-    ];
-  }
-
-  //Répartition des NW3 par formation
-  function allNw3DisciplinesFormationsData() {
-    return [
-        {% for discipline in allNw3DisciplinesFormations %}
-          {"label" : "{{discipline.item.nom}}",
-          "value" : "{{discipline.nb}}" },
-        {% endfor %}
-    ];
-  }
-
-  //Répartition des NW3 par labo
-  function allNw3DisciplinesLabosData() {
-    return [
-        {% for discipline in allNw3DisciplinesLabos %}
-          {"label" : "{{discipline.item.nom}}",
-          "value" : "{{discipline.nb}}" },
-        {% endfor %}
-    ];
-  }
-
-  
-  //Répartition des types de labo
-  function nbTypeLabosData() {
-    return [
-        {% for labo in nbTypeLabos %}
-          {"label" : "{{labo.type}}",
-          "value" : "{{labo.nb}}" },
-        {% endfor %}
-    ];
-  }
-
-
-  //Répartition des labos par hesamettes
-  function nbLaboParHesametteData() {
-    return [
-        {% for hesamette in labosHesamette %}
-          { "label" :"{{hesamette.hesamette}}",
-          "value" : "{{hesamette.nb}}" },
-        {% endfor %}
-    ];
-  }
-
-  //Répartition des formations par hesamettes
-  function nbFormParHesametteData() {
-    return [
-        {% for hesamette in formationsHesamette %}
-          { "label" :"{{hesamette.hesamette}}",
-          "value" : "{{hesamette.nb}}" },
-        {% endfor %}
-    ];
-  }
-
-
-    </script>
-
-    <script>
-    $(document).ready(function(){
-      $('.parallax').parallax();
-    });
-    </script>
-
-
-
-    
 {% endblock %}

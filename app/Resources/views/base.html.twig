@@ -14,16 +14,19 @@
 
       <title>{% block title %}heSam : cartographie des compétences de la COMUE HESAM{% endblock %}</title>
 
-      {% block stylesheets %}{% endblock %}
 
-      <!--Import Google Icon Font-->
-      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      {% block stylesheets %}
+          <!--Import Google Icon Font-->
+          <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-      <!--Import materialize.css-->
-      <link rel="stylesheet"
-            href="{{ asset('assets/vendor/materialize/dist/css/materialize.min.css') }}">
-      <link rel="stylesheet" href="../css/style.css"> 
-      <link rel="stylesheet" href="../css/mehdi.css"> 
+          <!--Import materialize.css-->
+          <link rel="stylesheet"
+                href="{{ asset('assets/vendor/materialize/dist/css/materialize.min.css') }}">
+          <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+          <link rel="stylesheet" href="{{ asset('css/mehdi.css') }}">
+      {% endblock %}
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     </head>
 
@@ -31,7 +34,6 @@
         <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 
-      <div  class="begin-line"></div>
 
 <!--         <nav class="red darken-2">
             <div class="nav-wrapper">
@@ -63,13 +65,70 @@
             {% endfor %}
         {% endfor %}
 
-
-
         <div>
-            {% block fos_user_content %}
-            {% endblock fos_user_content %}
-            {% block body %}{% endblock %}
-            {% block javascripts %}{% endblock %}
+
+        {% block fos_user_content %}{% endblock fos_user_content %}
+
+            <nav>
+                <div class="nav-wrapper red darken-2">
+                    <a href="#" class="brand-logo">Hesam</a>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li><a href="{{ path("statistiques") }}">Statistiques</a></li>
+                        <li><a href="{{ path("apropos") }}">A propos</a></li>
+                        <li><a href="#">Mode d'emploi</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+        {% block body %}{% endblock %}
+
+        <footer class="page-footer red darken-2">
+            <div class="container-fluid row">
+                <div class="col s6">
+                    <h3>Les établissements membres</h3>
+                    <ul>
+                        <li>Université Paris 1 Panthéon - Sorbone</li>
+                        <li>Conservatoire National des Arts et Métiers</li>
+                        <li>Ecole Supérieure Commerce de Paris (ESCP Europe)</li>
+                        <li>Ecole du Louvre</li>
+                        <li>Ecole Nationale d'Administration</li>
+                        <li>Ecole Nationale Supérieure de Création Industrielle (ENSCI les Ateliers)</li>
+                        <li>Ecole Nationale Supérieure d'Architecture Paris la Villette (ENSAPLV)</li>
+                        <li>Institut National d'Etudes Démographiques (INED)</li>
+                        <li>Institut National du Patrimoine (INP)</li>
+                        <li>Arts et Métiers ParisTech(ENSAM)</li>
+                        <li>Institut National d'Histoire de l'Art (INHA)</li>
+                        <li>Centre National Recherche Scientifique</li>
+                    </ul>
+                </div>
+                <div class="col s6">
+                    <p>Le projet a bénéficié du soutien de l’ANR au titre du programme Investissements d’avenir (ANR-11-IDEX-0006).</p>
+                    <h2>Contacts</h2>
+
+                    <span class="contactHesam">
+                    <p>heSam Université</p>
+                    <p>15 rue Soufflot</p>
+                    <p>75005 Paris</p>
+                    <p>01 56 81 20 00</p>
+                    <p>contact@hesam.eu</p>
+                    </span>
+
+                    <span>
+                        <p>© 2016 heSam Université - Vous êtes une version test du site, plusieurs développements sont toujours en cours -
+              <a class="grey-text text-lighten-4 right" href="http://www.hesam.eu">Accéder au site heSam</a></p>
+                    </span>
+                </div>
+            </div>
+
+
+        </footer>
+
+        {% block javascripts %}
+            <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+            <script src="{{ asset("assets/vendor/materialize/dist/js/materialize.min.js") }}"></script>
+            <script src="{{ asset("js/function.js") }}"></script>
+        {% endblock %}
+
         </div>
     </body>
 </html>

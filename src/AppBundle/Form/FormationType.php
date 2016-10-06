@@ -26,14 +26,14 @@ class FormationType extends AbstractType
             ->add('lien3')
             ->add('responsable')
         //     ->add('membre')
-        //     ->add('tag')
+            ->add('tag')
         //     ->add('theme')
         //     ->add('localisation')
         //     ->add('labo')
-        //     ->add('etablissement')
+             ->add('etablissement')
         //     ->add('metier')
         //     ->add('ufr')
-        //     ->add('discipline')
+             ->add('discipline')
         ;
     }
     

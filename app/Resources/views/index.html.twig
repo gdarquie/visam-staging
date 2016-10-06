@@ -2,27 +2,22 @@
 
 {% block fos_user_content %}{% endblock %}
 
-{% block stylesheets %}
-	{{parent()}}
-
-{% endblock %}
-
 {% block body %}
   
 <!--   <img src="" alt="Logo HESAM Université">
  -->  
 
-        <header>
-          <div class="container">
-            <div class="row center">
-              <ul class="actions">
-                <li><a class="btn btn-hesam-inverse" href="{{ path('statistiques') }}">Explorer</a></li> <!-- Lien vers stats -->
-                <li><a class="btn btn-hesam-inverse" href="{{ path('apropos') }}" >À propos</a> <!-- Lien vers à propos // Voir Sonia -->
-                <li><a class="btn btn-hesam-inverse">Comment ça marche ?</a></li> <!-- lien vers tuto à faire-->
-              </ul>
-            </div>
-          </div>
-        </header>
+        {#<header>#}
+          {#<div class="container">#}
+            {#<div class="row center">#}
+              {#<ul class="actions">#}
+                {#<li><a class="btn btn-hesam-inverse" href="{{ path('statistiques') }}">Explorer</a></li> <!-- Lien vers stats -->#}
+                {#<li><a class="btn btn-hesam-inverse" href="{{ path('apropos') }}" >À propos</a> <!-- Lien vers à propos // Voir Sonia -->#}
+                {#<li><a class="btn btn-hesam-inverse">Comment ça marche ?</a></li> <!-- lien vers tuto à faire-->#}
+              {#</ul>#}
+            {#</div>#}
+          {#</div>#}
+        {#</header>#}
 
       <div class="container">
         <div class="row center rechercher-wrapper">
@@ -52,20 +47,9 @@
             <p style="display:none;">Il est possible de faire la recherche par nom et par thème. Voici la liste des thèmes //twig hesmaettes</p>
           </div>
         </div>
-      </div>
-      <div class="row center">
-
-
+        </div>
       </div>
 
-
-      <footer class="page-footer red darken-1">
-          <div class="container">
-              © 2016 heSam Université - Vous êtes une version test du site, plusieurs développements sont toujours en cours -
-              <a class="grey-text text-lighten-4 right" href="http://www.hesam.eu">Accéder au site heSam</a>
-          </div>
-          <br>
-      </footer>
 
 
 <!-- 

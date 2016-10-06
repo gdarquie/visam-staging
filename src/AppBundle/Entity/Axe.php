@@ -45,12 +45,12 @@ class Axe
     /**
      * @var \AppBundle\Entity\Labo
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Labo", inversedBy='axes')
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Labo")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
      * })
      */
-    private $labo;
+    private $labo; //, inversedBy='axes'
 
 
 

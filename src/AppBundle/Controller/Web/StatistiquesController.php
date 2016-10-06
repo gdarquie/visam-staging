@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace AppBundle\Controller\Web;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -13,7 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 class StatistiquesController extends Controller
 {
     /**
-     * @Route("/stats", name="statistiques")
+     * @Route("/explorer", name="statistiques")
      */
     public function indexAction(Request $request)
     {

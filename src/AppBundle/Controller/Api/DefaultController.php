@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace AppBundle\Controller\Api;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -19,7 +19,7 @@ use AppBundle\Entity\Etablissement;
 
 
 
-class APIController extends Controller
+class DefaultController extends Controller
 {   
     /**
      * @Route("/api/", name="api_index")

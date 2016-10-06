@@ -4,8 +4,9 @@
     <h1>Etablissement creation</h1>
 
     {{ form_start(form) }}
-        {{ form_widget(form) }}
+        {{ form_widget(form.description, { 'attr': {'class': 'materialize-textarea'} }) }}
         <input type="submit" value="Create" />
+    <!-- materialize-textarea -->
     {{ form_end(form) }}
 
     <ul>

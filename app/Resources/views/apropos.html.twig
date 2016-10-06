@@ -1,15 +1,83 @@
 {% extends 'base.html.twig' %}
 
 {% block fos_user_content %}{% endblock %}
+
 {% block stylesheets %}
+	{{ parent() }}
+	<style>
+
+		.chapeau{
+		font-weight: bold;
+		font-size: 1.2em;
+		}
+
+		#apropos div{
+			padding-left: 40px;
+
+		}
+
+	</style>
 {% endblock %}
 
 {% block body %}
-	<section class="container">
-		<h2>A propos de viSam</h2>
 
-		<p>Hesam université comporte 12 établissements.</p>
+	<section class="container-fluid row" id="apropos">
 
-		<p>En cours de rédaction</p>
-</section>
+
+
+		<div class="col s10 offset-s1 card">
+
+			<h1>A propos</h1>
+
+			<p class="chapeau">La cartographie des compétences est une application web destinée à trouver les informations essentielles concernant la formation et la recherche des
+				<a href="http://www.hesam.eu/blog/2015/06/23/qui-sommes-nous/" target="_blank">douze établissements</a> membres d'Hesam.</p>
+
+			<h2>Un outil d'exploration</h2>
+
+			<p>L'<a href="{{ path("search") }}">explorateur</a> permet d'effectuer une recherche parmi les formations et les laboratoires d'Hesam. La recherche s'effecture par simple mot clé. Il est possible de trier et de filtrer ces recherches selon un établissement, une thématique, etc. </p>
+
+
+			<h2>Que peut-on trouver?</h2>
+
+			<p>L'utilisateur de l'<a href={{ path("search") }}>explorateur</a> accède à la sélection des formations, des laboratoires et des équipements en lien avec le mot clé entré.</p>
+
+			<p>Une description plus générale d'Hesam de ses compétences est également consultable via la page <a href="{{ path('statistiques') }}">"statistiques"</a>.</p>
+			<p> </p>
+
+
+			<h2>Mode d'emploi</h2>
+
+			<p>La page <a href="">mode d'emploi</a> propose plusieurs courtes vidéos visant à maitriser toutes les subtilités de l'explorateur </p>
+
+			<h2>L'équipe</h2>
+
+			<h3>Hesam Université</h3>
+
+			<li>Laurent Carraro puis Jean-Luc Delpeuch, Présidents d’heSam Université</li>
+			<li>Hugues Brunet, Délégué Général d’heSam Université</li>
+			<li>Sonia Litaïem, Responsable du projet</li>
+			<li>Cécile Delay, chargée de projet, collecte des données</li>
+
+			<h3>Comité de suivi </h3>
+
+			<li>Clotilde Ferroud, CNAM</li>
+			<li>Ariane Fréhel, CNAM</li>
+			<li>Caroline Moricot, Université Paris 1 Panthéon-Sorbonne</li>
+			<li>Soraya Messai-Bahri, Université Paris 1 Panthéon-Sorbonne</li>
+			<li>Bertrand Wigniolle, Université Paris 1 Panthéon Sorbonne</li>
+
+			<h3>Développement, maîtrise d’ouvrage</h3>
+			<li>Gaétan Darquié</li>
+			<li>Mehdi Bourgeois</li>
+
+			<h3>Remerciements</h3>
+
+			<p>Stéphanie Mermet, Nicolas Houssier, Mathilde Boulay, Anand Balaraman, Manon Fraisse, Philippe Dedieu et toutes les équipes administratives des établissements membres qui ont eu la bienveillance et la patience nécessaires pour répondre à nos sollicitations.</p>
+
+		</div>
+
+
+	</section>
+
+
 {% endblock %}
