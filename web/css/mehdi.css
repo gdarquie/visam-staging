@@ -11,6 +11,11 @@
         font-family: Bitter, serif;
     }
 
+	h5 {
+		font-size: 1.3rem;
+		line-height: 139%;
+	}
+
     @media only screen and (min-width: 993px) {
         .container.large {
             width: 90%;
@@ -72,8 +77,8 @@
         border-top: 4px solid #00bcd4;
     }
     .card.formation {
-        border-top: 4px solid #009688;
-/*        border-bottom: 4px solid #009688;
+        border-top: 4px solid #EDA832;
+/*        border-bottom: 4px solid #EDA832;
 */    }
     .card.ecole {
         border-top: 4px solid #ffd740;
@@ -293,7 +298,7 @@
     }
     
     .formation .card-action a {
-        color: #009688 !important;
+        color: #EDA832 !important;
         vertical-align: top;
     }
 
@@ -307,7 +312,7 @@
 
 
     .item-formation {
-        background-color: #009688;
+        background-color: #EDA832;
         color: white;
         font-size: 1.4em;
         display: inline-block;

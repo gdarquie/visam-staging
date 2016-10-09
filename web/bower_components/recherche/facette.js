@@ -9,7 +9,7 @@ function facette(){
             '<span class="item-formation">Formation</span>'+
             '<span class="etablissement"><span>- <%= obj.niveau %> </span><%= obj.typeDiplome %></span>'+
              '<a href="/formation/<%= obj.id %>">'+
-              '<h6 class="surligne"><%= obj.name %></h6></a>'+
+              '<h5 class="surligne"><%= obj.name %></h5></a>'+
               '<span><%= obj.etablissement %></span>'+
               '<h6>Thématique(s)</h6>' +
               '<ul class="list-thematique surligne" >' + 
