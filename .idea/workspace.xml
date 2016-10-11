@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3bb1b647-8eae-4507-b232-68d841001a20" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/base.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/stats.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/stats.html.twig" />
     </list>
     <ignored path="visam_2016-04-28.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -82,10 +82,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base.html.twig" pinned="false" current-in-tab="true">
+      <file leaf-file-name="base.html.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
+            <state relative-caret-position="465">
               <caret line="73" column="46" selection-start-line="73" selection-start-column="46" selection-end-line="73" selection-end-column="46" />
               <folding />
             </state>
@@ -112,14 +112,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="stats.html.twig" pinned="false" current-in-tab="false">
+      <file leaf-file-name="stats.html.twig" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Resources/views/stats.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
+            <state relative-caret-position="517">
+              <caret line="366" column="17" selection-start-line="366" selection-start-column="17" selection-end-line="366" selection-end-column="17" />
               <folding>
-                <marker date="1475769817000" expanded="false" signature="3429:3441" ph="..." />
-                <marker date="1475769817000" expanded="false" signature="3564:3576" ph="..." />
+                <marker date="1476222082000" expanded="false" signature="3429:3441" ph="..." />
+                <marker date="1476222082000" expanded="false" signature="3564:3576" ph="..." />
+                <marker date="1476222082000" expanded="false" signature="8386:8398" ph="..." />
+                <marker date="1476222082000" expanded="false" signature="8514:8526" ph="..." />
               </folding>
             </state>
           </provider>
@@ -189,8 +191,8 @@
         <option value="$PROJECT_DIR$/app/Resources/views/apropos.html.twig" />
         <option value="$PROJECT_DIR$/web/css/mehdi.css" />
         <option value="$PROJECT_DIR$/app/Resources/views/index.html.twig" />
-        <option value="$PROJECT_DIR$/app/Resources/views/stats.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
+        <option value="$PROJECT_DIR$/app/Resources/views/stats.html.twig" />
       </list>
     </option>
   </component>
@@ -561,12 +563,12 @@
       <workItem from="1473752844382" duration="1795000" />
       <workItem from="1474562042995" duration="1089000" />
       <workItem from="1475755929608" duration="11698000" />
-      <workItem from="1476217295491" duration="463000" />
+      <workItem from="1476217295491" duration="1056000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41778000" />
+    <option name="totallyTimeSpent" value="42371000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -952,17 +954,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/stats.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
-          <folding>
-            <marker date="1475769817000" expanded="false" signature="3429:3441" ph="..." />
-            <marker date="1475769817000" expanded="false" signature="3564:3576" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/Api/DefaultController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="900">
@@ -1027,9 +1018,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
+        <state relative-caret-position="465">
           <caret line="73" column="46" selection-start-line="73" selection-start-column="46" selection-end-line="73" selection-end-column="46" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/stats.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="517">
+          <caret line="366" column="17" selection-start-line="366" selection-start-column="17" selection-end-line="366" selection-end-column="17" />
+          <folding>
+            <marker date="1476222082000" expanded="false" signature="3429:3441" ph="..." />
+            <marker date="1476222082000" expanded="false" signature="3564:3576" ph="..." />
+            <marker date="1476222082000" expanded="false" signature="8386:8398" ph="..." />
+            <marker date="1476222082000" expanded="false" signature="8514:8526" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -284,21 +284,21 @@
 
  </div>   
 
-  <div id="index-banner" class="parallax-container">
-    <div class="section no-pad-bot">
-      <div class="container">
-        <br><br>
-        <h1 class="header center" style="color:white;">Ecoles Doctorales</h1>
-        <div class="row center">
-          <h5 class="header col s12 light" style="color:white;">La base contient actuellement {{eds|length}} écoles doctorales</h5>
- </div>
-        <div class="row center">
-        </div>
-        <br><br>
-      </div>
-    </div>
-    <div class="parallax"><img src="img/ed.png" alt="Unsplashed background img 1"></div>
-  </div>
+  {#<div id="index-banner" class="parallax-container">#}
+    {#<div class="section no-pad-bot">#}
+      {#<div class="container">#}
+        {#<br><br>#}
+        {#<h1 class="header center" style="color:white;">Ecoles Doctorales</h1>#}
+        {#<div class="row center">#}
+          {#<h5 class="header col s12 light" style="color:white;">La base contient actuellement {{eds|length}} écoles doctorales</h5>#}
+ {#</div>#}
+        {#<div class="row center">#}
+        {#</div>#}
+        {#<br><br>#}
+      {#</div>#}
+    {#</div>#}
+    {#<div class="parallax"><img src="img/ed.png" alt="Unsplashed background img 1"></div>#}
+  {#</div>#}
 
   <div class="container">
 {#         <article>
@@ -315,22 +315,20 @@
 
 
         <article>
-        <h2>Les ED par établissement</h2>
-        <p>J'essaye de faire la même chose pour toutes les écoles doctorales de tous les établissements. D'abord toutes les ED:</p>
+        {#<h2>Les ED par établissement</h2>#}
+            {##}
 
-
-
-        <ul class="collection">
-        {% for etab in etabs %}
-            <li class="collection-item">{{etab.nom}} ({{etab.ed|length}})
-                <ol>
-                {% for eds in etab.ed %}
-                    <li>{{eds.nom}}</li>
-                {% endfor %}
-                </ol>
-            </li>
-        {% endfor %}
-        </ul>
+        {#<ul class="collection">#}
+        {#{% for etab in etabs %}#}
+            {#<li class="collection-item">{{etab.nom}} ({{etab.ed|length}})#}
+                {#<ol>#}
+                {#{% for eds in etab.ed %}#}
+                    {#<li>{{eds.nom}}</li>#}
+                {#{% endfor %}#}
+                {#</ol>#}
+            {#</li>#}
+        {#{% endfor %}#}
+        {#</ul>#}
 
     </div>
 
@@ -364,6 +362,10 @@
 
 
   </div>
+
+    <div class="container">
+        <h2>Carte des établissements</h2>
+    </div>
 
   <div class="row">
     <div class='overlay'></div>
