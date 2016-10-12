@@ -14,6 +14,11 @@
             font-size:1.3em;
             font-weight: bold;
         }
+
+        h2{
+            padding-top: 60px;
+        }
+
     </style>
 {% endblock %}
 
@@ -24,7 +29,7 @@
     <div class="section no-pad-bot">
       <div class="container">
         <br><br>
-        <h1 class="header center" style="color:white;">Visualisation des compétences d'heSam Université</h1>
+        <h1 class="header center" style="color:white;">Visualisation des compétences d'hesam Université</h1>
         <div class="row center">
           <h5 class="header col s12 light" style="color:white;"></h5> 
         </div>
@@ -36,59 +41,61 @@
     <div class="parallax"><img src="img/louvres.jpg" alt="Unsplashed background img 1"></div>
   </div>
 
+    <!-- Intro -->
 
+    <div class='container'>
+        <div class="intertitre row">
+            <p class="col s12">hesam Université rassemble <span class="number">{{formations|length}}</span> formations, du bac+1 au doctorat, en formation initiale ou continue, <span class="number">{{ labos|length }}</span> laboratoires pluridisciplinaires en sciences humaines et sociales, en sciences de l'environnement et en sciences et techniques de l'ingénieur et <span class="number">{{ eds|length }}</span> écoles doctorales.</p>
+        </div>
 
-<div class='container'>
+          <br>
+        <div class="row">
+            <div class="col s12 m4">
+              <div class="card teal">
+                    <a href="#formations" class="modal-trigger">
+                        <div class="card-content white-text center-align">
+                        <i class="large material-icons">view_module</i>
+                        <p class="center-align number">{{formations|length}}</p>
+                        <p class="center-align number-label">
+                            Formations
+                        </p>
+                        </div>
+                    </a>
+              </div>
+            </div>
+            <div class="col s12 m4">
+              <div class="card cyan">
+                    <a href="#laboratoires" class="modal-trigger">
+                        <div class="card-content white-text center-align">
+                        <i class="large material-icons">view_module</i>
+                        <p class="center-align number">{{ labos|length }}</p>
+                        <p class="center-align number-label">
+                            Laboratoires
+                        </p>
+                        </div>
+                    </a>
+              </div>
+            </div>
 
-    <div class="intertitre row">
-        <p class="col s12">Hesam Université rassemble <span class="number">1400</span> formations, du bac+1 au doctorat, en formation initiale ou continue, <span class="number">85</span> laboratoires pluridisciplinaires en sciences humaines et sociales, en sciences de l'environnement et en sciences et techniques de l'ingénieur et <span class="number">14</span> écoles doctorales.</p>
+            <div class="col s12 m4">
+              <div class="card amber accent-2">
+                    <a href="#ecoles" class="modal-trigger">
+                        <div class="card-content white-text center-align">
+                        <i class="large material-icons">view_module</i>
+                        <p class="center-align number">{{ eds|length }}</p>
+                        <p class="center-align number-label">
+                            Ecoles doctorales
+                        </p>
+                        </div>
+                    </a>
+              </div>
+            </div>
+        </div>
     </div>
 
-  <br>
-    <div class="row">
-        <div class="col s12 m4">
-          <div class="card teal">
-                <a href="#formations" class="modal-trigger">
-                    <div class="card-content white-text center-align">
-                    <i class="large material-icons">view_module</i>
-                    <p class="center-align number">1400</p>
-                    <p class="center-align number-label">
-                        Formations
-                    </p>
-                    </div>
-                </a>
-          </div>
-        </div>
-        <div class="col s12 m4">
-          <div class="card cyan">
-                <a href="#laboratoires" class="modal-trigger">
-                    <div class="card-content white-text center-align">
-                    <i class="large material-icons">view_module</i>
-                    <p class="center-align number">85</p>
-                    <p class="center-align number-label">
-                        Laboratoires
-                    </p>
-                    </div>
-                </a>
-          </div>
-        </div>
+    <!-- Fin intro -->
 
-        <div class="col s12 m4">
-          <div class="card amber accent-2">
-                <a href="#ecoles" class="modal-trigger">
-                    <div class="card-content white-text center-align">
-                    <i class="large material-icons">view_module</i>
-                    <p class="center-align number">14</p>
-                    <p class="center-align number-label">
-                        Ecoles doctorales
-                    </p>
-                    </div>
-                </a>
-          </div>
-        </div>
-    </div>
-
-</div>
+    <!-- Les publics -->
 
     <div id="index-banner" class="parallax-container">
         <div class="section no-pad-bot">
@@ -106,7 +113,6 @@
         <div class="parallax"><img src="img/pantheon.jpg" alt="Unsplashed background img 1"></div>
     </div>
 
-
     <section class="container">
 
         <div class="intertitre row">
@@ -115,24 +121,13 @@
         </div>
 
 
-    </section>
-
-
-
-
-    <div class='container'>
-
-
-
-<!-- Effectifs -->
-
         <article>
-            <h2>Dans quels établissements se trouvent nos étudiants ?</h2>
+            <h2>Dans quels établissements se trouvent les étudiants ?</h2>
             {#<h2>Répartition des étudiants par établissement</h2>#}
 
             <div class="intertitre row">
 
-                <p>Si une majeure partie des étudiants et des auditeurs sont inscrits à Paris 1 et au CNAM, les autres établissements attirent un très grand nombre d'étudiants par leurs formations spécialisées.</p>
+                <p>La majeure partie des étudiants et des auditeurs sont inscrits à Paris 1 et au CNAM. Les autres établissements attirent néanmoins un grand nombre d'étudiants par leurs formations spécialisées.</p>
             </div>
 
             <div id="etud-stat">
@@ -140,105 +135,117 @@
             </div>
         </article>
 
-
-
         <article>
-            <h2>Répartition des chercheurs par établissement</h2>
+            <h2>Dans quels établissements se trouvent les enseignants et chercheurs ?</h2>
+
+            <div class="intertitre row">
+
+                <p>Les enseignants et les chercheurs appartiennent à différents corps de métiers. Ce graphique donne une première idée de leur réparition au sein des établissements de notre communauté.</p>
+            </div>
+
             <div id="chercheur-stat">
               <svg style="height:500px;"></svg>
             </div>
         </article>
+     </section>
 
+    <!-- Fin les publics -->
 
-    
-</div>
-  <div id="index-banner" class="parallax-container">
+    <!-- Les formations -->
+
+    <div id="index-banner" class="parallax-container">
     <div class="section no-pad-bot">
       <div class="container">
         <br><br>
-        <h1 class="header center" style="color:white;">Formations</h1>
+        <h1 class="header center" style="color:white;">Les formations</h1>
         <div class="row center">
-          <h5 class="header col s12 light" style="color:white;">La base contient actuellement {{formations|length}} formations.</h5>
- </div>
+        </div>
         <div class="row center">
         </div>
         <br><br>
       </div>
     </div>
     <div class="parallax"><img src="img/sorbonne.jpg" alt="Unsplashed background img 1"></div>
-  </div>
+    </div>
 
-<div class="container">
+    <div class="container">
 
         <article>
-            <h2>Répartition des formations par niveau</h2>
-            <!--  -->
+            <h2>Les formations par niveau</h2>
+            <div class="intertitre row">
+                <p>hesam Université propose des formations de tous niveaux : LMD (licence, master, doctorat) ou hors LMD (Bac+ n). Les masters en représentent une grande part. A noter qu'il existe aussi plus une trentaine de formations en doctorat.</p>
+            </div>
             <div id="formation-niveau"><svg style="height:400px;"></svg></div>
         </article>
 
         <article>
-            <h2>Répartition des formations par établissements</h2>
+            <h2>Les formations par établissement</h2>
+
+            <div class="intertitre row">
+                <p>Par <i>formation</i>, nous entendons une année complète d'étude : L1 ou L2 ou L3, etc. pour bien prendre en compte la diversité et la richesse des parcours à chaque niveau.</p>
+
+            </div>
+
             <div id="forma-etab">
               <svg style="height:500px;"></svg>
             </div>
+        </article>
 
+
+        <article>
+            <h2>Les formations par thématique</h2>
+
+            <div class="intertitre row">
+                <p>L'offre d'hesam Université couvre l'intégralité des quinze domaines disciplinaires du Haut Conseil de l'Evaluation de la Recherche et de l'Enseignement Supérieur (HCERES).</p>
+            </div>
+
+            <div id="form-hesamette">
+                <svg style="height:500px;"></svg>
+            </div>
         </article>
 
         <article>
-          <h2>Formations & Disciplines</h2>
+            <h2>Les formations par Institut</h2>
 
-          <article>
-            <h2>Répartition des formations par thématiques NW3</h2>
+            <div class="intertitre row">
+                <p>Les instituts sont les creusets interdisciplinaires de l'activité scientifique d'hesam alliant la formation et la recherche. La visualisation ci-dessous présente la struturation de la formation.</p>
+            </div>
+
             <div id="form-nw3">
               <svg style="height:500px;"></svg>
             </div>
-          </article>
-
-        <article>
-        <h2>Hesamettes des formations</h2>
-
-        <h2>Répartition des formations par hesamettes</h2>
-            <div id="form-hesamette">
-              <svg style="height:500px;"></svg>
-            </div>
-
-      </article>
-          
-          
-
-          <div class="row">
-
-
-
-          <div class="row">
-            <div class="col s12">
-                        <h3>Disciplines CNU les plus fréquentes</h3>
-
-              <div id="tagsCNU" class="jqcloud" style="width:100%;height:400px;"></div>
-            </div>
-            <div class="col s12">
-                        <h3>Disciplines HCERES les plus fréquentes</h3>
-
-              <div id="tagsHCERES" class="jqcloud" style="width:100%;height:400px;"></div>
-            </div>
-            <div class="col s12">
-                        <h3>Disciplines SISE les plus fréquentes</h3>
-
-              <div id="tagsSISE" class="jqcloud" style="width:100%;height:400px;"></div>
-            </div>            
-          </div>
-
         </article>
-    </div>
+
+
+
+        {#<div class="row">#}
+            {#<div class="col s12">#}
+                {#<h3>Disciplines CNU les plus fréquentes</h3>#}
+
+              {#<div id="tagsCNU" class="jqcloud" style="width:100%;height:400px;"></div>#}
+            {#</div>#}
+
+            {#<div class="col s12">#}
+                {#<h3>Disciplines HCERES les plus fréquentes</h3>#}
+                {#<div id="tagsHCERES" class="jqcloud" style="width:100%;height:400px;"></div>#}
+            {#</div>#}
+
+            {#<div class="col s12">#}
+                {#<h3>Disciplines SISE les plus fréquentes</h3>#}
+                {#<div id="tagsSISE" class="jqcloud" style="width:100%;height:400px;"></div>#}
+            {#</div>#}
+        {#</div>#}
+
+    </div><!-- fin container -->
 
 <!-- Les laboratoires -->
     <div id="index-banner" class="parallax-container">
     <div class="section no-pad-bot">
       <div class="container">
         <br><br>
-        <h1 class="header center" style="color:white;">Laboratoires</h1>
+        <h1 class="header center" style="color:white;">La recherche</h1>
         <div class="row center">
-          <h5 class="header col s12 light" style="color:white;">La base contient actuellement {{labos|length}} laboratoires</h5>
+          {#<h5 class="header col s12 light" style="color:white;">La base contient actuellement {{labos|length}} laboratoires</h5>#}
  </div>
         <div class="row center">
         </div>
@@ -254,7 +261,12 @@
 
     <div class="row">
         <article>
-            <h2>Répartition des laboratoires par établissements</h2>
+            <h2>Les laboratoires de recherche par établissements</h2>
+
+            <div class="intertitre row">
+                <p>Organismes, écoles et universités : tous les membres d'hesam animent des laboratoires de recherche.</p>
+            </div>
+
             <div id="labo-etab">
               <svg style="height:500px;"></svg>
             </div>
@@ -262,9 +274,30 @@
         </article>
     </div>
 
+
+     <div class="row">
+         <article>
+             <h2>Les laboratoires de recherche par thématiques</h2>
+
+             <div class="intertitre row">
+                 <p>Comme pour la formation, la recherche à hesam couvre les quinze domaines disciplinaires du Haut Conseil de l'Evaluation de la Recherche et de l'Enseignement Supérieur (HCERES).</p>
+             </div>
+
+             <div id="labo-hesamette">
+                 <svg style="height:500px;"></svg>
+             </div>
+
+     </div>
+
     <div class="row">
       <article>
-        <h2>Répartition des laboratoires par thématiques NW3 </h2>
+        <h2>Les laboratoires de recherche par instituts</h2>
+
+          <div class="intertitre row">
+
+              <p>Les activités interdisciplinaires des sept instituts d'hesam mobilisent les laboratoires.</p>
+          </div>
+
         <div id="labo-nw3">
           <svg style="height:500px;"></svg>
         </div>
@@ -274,29 +307,26 @@
 
     <div class="row">
       <article>
-      <h2>Répartition des laboratoires par types</h2>
+      <h2>La typologie des laboratoires</h2>
+
+      <div class="intertitre row">
+
+          <p>Il est classique de distinguer les Equipes d'Accueil (EA), les Unités Mixtes de Recherche (UMR), les Unités Mixtes de Service (UMS), les Unités de Service et de Recherche (USR) et les autres Unités de Recherche (UR).</p>
+      </div>
+
       <div id="labo-type">
           <svg style="height:500px;"></svg>
       </div>
     </div>
+
   </article>
 
 
-    <div class="row">
-      <article>
-      <h2>Répartition des laboratoires par hesamettes</h2>
 
-        <div id="labo-hesamette">
-            <svg style="height:500px;"></svg>
-        </div>
-
-
-
-    </div>
   </article>
 
 
- </div>   
+ </div>
 
   {#<div id="index-banner" class="parallax-container">#}
     {#<div class="section no-pad-bot">#}
@@ -378,9 +408,13 @@
   </div>
 
     <div class="container">
-        <h2>Carte des établissements</h2>
-    </div>
+        <h2>Carte des implantations des établissements membres d'hesam Université</h2>
 
+
+        <div class="intertitre row">
+            <p>hesam Université est présente partout dans le monde à travers les implantations de ces membres.</p>
+        </div>
+    </div>
   <div class="row">
     <div class='overlay'></div>
     <iframe src="http://localhost:8888/2016/visamFront/2016-06-05/map/#/" frameborder="0" class ='col s12' id='map' ></iframe>
