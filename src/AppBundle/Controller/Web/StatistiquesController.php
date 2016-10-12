@@ -187,7 +187,7 @@ class StatistiquesController extends Controller
         //effectifs
 
 
-        return $this->render('stats.html.twig', array(
+        return $this->render('web/stats.html.twig', array(
         	'eds' => $eds,
         	'etabs' => $etabs,
             'nbEtud' => $nbEtud,

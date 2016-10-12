@@ -41,7 +41,7 @@
 <div class='container'>
 
     <div class="intertitre row">
-        <p class="col s12">Hesam Université rassemble <span class="number">1400</span> formations, du bac+1 au doctorat, en formation initiale ou continue, <span class="number">85</span> laboratoires pluridisciplinaires /// sciences sociales que des sciences de l'environnement et <span class="number">14</span> écoles doctorales.</p>
+        <p class="col s12">Hesam Université rassemble <span class="number">1400</span> formations, du bac+1 au doctorat, en formation initiale ou continue, <span class="number">85</span> laboratoires pluridisciplinaires en sciences humaines et sociales, en sciences de l'environnement et en sciences et techniques de l'ingénieur et <span class="number">14</span> écoles doctorales.</p>
     </div>
 
   <br>
@@ -88,30 +88,37 @@
         </div>
     </div>
 
+</div>
+
+    <div id="index-banner" class="parallax-container">
+        <div class="section no-pad-bot">
+            <div class="container">
+                <br><br>
+                <h1 class="header center" style="color:white;">Les publics</h1>
+                <div class="row center">
+                    <h5 class="header col s12 light" style="color:white;"></h5>
+                </div>
+                <div class="row center">
+                </div>
+                <br><br>
+            </div>
+        </div>
+        <div class="parallax"><img src="img/pantheon.jpg" alt="Unsplashed background img 1"></div>
+    </div>
+
+
+    <section class="container">
+
         <div class="intertitre row">
 
-            <p>Avec <span class="number">{{nbEtud}}</span> étudiants et auditeurs, notre communauté est classée… en Ile de France en nombre d’étudiants</p>
+            <p>Avec <span class="number">{{nbEtud|number_format(0, '', ' ')}}</span> étudiants et auditeurs, notre communauté est classée parmi les premières communautés d'Ile de France en nombre d'apprenants.</p>
         </div>
 
 
+    </section>
 
-  </div>
 
-  {#<div id="index-banner" class="parallax-container">#}
-    {#<div class="section no-pad-bot">#}
-      {#<div class="container">#}
-        {#<br><br>#}
-        {#<h1 class="header center" style="color:white;">HESAM Université</h1>#}
-        {#<div class="row center">#}
-                  {#<h5 class="header col s12 light" style="color:white;">Visam comprend {{etabs|length}} entités</h5>#}
-        {#</div>#}
-        {#<div class="row center">#}
-        {#</div>#}
-        {#<br><br>#}
-      {#</div>#}
-    {#</div>#}
-    {#<div class="parallax"><img src="img/pantheon.jpg" alt="Unsplashed background img 1"></div>#}
-  {#</div>#}
+
 
     <div class='container'>
 
@@ -120,13 +127,20 @@
 <!-- Effectifs -->
 
         <article>
-            <h2>Répartition des étudiants par établissement</h2>
-           
+            <h2>Dans quels établissements se trouvent nos étudiants ?</h2>
+            {#<h2>Répartition des étudiants par établissement</h2>#}
+
+            <div class="intertitre row">
+
+                <p>Si une majeure partie des étudiants et des auditeurs sont inscrits à Paris 1 et au CNAM, les autres établissements attirent un très grand nombre d'étudiants par leurs formations spécialisées.</p>
+            </div>
 
             <div id="etud-stat">
               <svg style="height:500px;"></svg>
             </div>
         </article>
+
+
 
         <article>
             <h2>Répartition des chercheurs par établissement</h2>

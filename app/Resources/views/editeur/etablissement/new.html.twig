@@ -1,17 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Etablissement creation</h1>
 
-    {{ form_start(form) }}
-        {{ form_widget(form.description, { 'attr': {'class': 'materialize-textarea'} }) }}
-        <input type="submit" value="Create" />
-    <!-- materialize-textarea -->
-    {{ form_end(form) }}
+    <section class="container">
+        <h1>Ajout d'un établissement</h1>
 
-    <ul>
-        <li>
-            <a href="{{ path('etab_index') }}">Back to the list</a>
-        </li>
-    </ul>
+        {{ form_start(etablissementForm) }}
+            {{ form_widget(etablissementForm.description, { 'attr': {'class': 'materialize-textarea'} }) }}
+            <input type="submit" value="Create" />
+        <!-- materialize-textarea -->
+        {{ form_end(etablissementForm) }}
+
+        <ul>
+            <li>
+                <a href="{{ path('editeur') }}">Retour à l'éditeur</a>
+            </li>
+        </ul>
+
+    </section>
 {% endblock %}

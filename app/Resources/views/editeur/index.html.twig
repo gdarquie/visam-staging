@@ -2,7 +2,7 @@
 
 {% block fos_user_content %}{% endblock %}
 {% block stylesheets %}
-    
+    {{ parent() }}
 {% endblock %}
 
 
@@ -15,18 +15,9 @@
     </header>
 
 
-        <form action="#" id='log'>
-            <div><input type="text" class="text" id='login' /><label for="login"> : login</label></div>
-            <div><input type="text" class="text" id='mdp' /><label for="mdp"> : mot de passe</label> </div>
-        </form>
-
         <p>L'éditeur Visam permet aux utilisateurs autorisés d'ajouter ou de modifier des données de la base de données Visam.</p>
 
         <p>Cette page est une page en accès restreint. Si vous ne pouvez pas vous connecter vous pouvez accéder à l'<a href="#">explorateur Visam</a> qui cartographie les compétences de la COMUE.</p>
-
-        <h2>Test</h2>
-
-        
-
+    
 </section>
 {% endblock %}

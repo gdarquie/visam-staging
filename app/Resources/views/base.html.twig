@@ -69,6 +69,13 @@
 
         {% block fos_user_content %}{% endblock fos_user_content %}
 
+            <ul id="menu_add" class="dropdown-content">
+                <li><a href="{{ path('editeur_etablisement_new') }}">Etablissement</a></li>
+                <li><a href="">Formation</a></li>
+                <li><a href="">Laboratoire</a></li>
+            </ul>
+
+            <div class="navbar-fixed">
             <nav>
                 <div class="nav-wrapper red darken-2">
                     <a href="{{ path('homepage') }}" class="brand-logo">Hesam</a>
@@ -76,15 +83,29 @@
                         <li><a href="{{ path("statistiques") }}">Statistiques</a></li>
                         <li><a href="{{ path("apropos") }}">A propos</a></li>
                         <li><a href="#">Mode d'emploi</a></li>
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            <li><a class="dropdown-button" href="#!" data-activates="menu_add">Ajouter<i class="material-icons right">arrow_drop_down</i></a></li>
+                            <li>connecté : {{ app.user.username }}</li>
+                            <li><a href="{{ path('fos_user_security_logout') }}">logout</a></li>
+                        {% else %}
+                            <li><a href="{{ path('fos_user_security_login') }}">connexion</a></li>
+                        {% endif %}
                     </ul>
                 </div>
             </nav>
+            </div>
 
         {% block body %}{% endblock %}
 
         <footer class="page-footer red darken-2">
             <div class="container-fluid row">
                 <div class="col s6">
+
+                    <div class="row">
+                        <p><a class="grey-text text-lighten-4" href="http://www.hesam.eu">Accéder au site heSam</a></p>
+                        <p><a class="grey-text text-lighten-4" href="{{ path('editeur') }}">Accès réservé</a></p>
+                    </div>
+
                     <h3>Les établissements membres</h3>
                     <ul>
                         <li>Université Paris 1 Panthéon - Sorbone</li>
@@ -102,21 +123,29 @@
                     </ul>
                 </div>
                 <div class="col s6">
-                    <p>Le projet a bénéficié du soutien de l’ANR au titre du programme Investissements d’avenir (ANR-11-IDEX-0006).</p>
-                    <h2>Contacts</h2>
 
-                    <span class="contactHesam">
-                    <p>heSam Université</p>
-                    <p>15 rue Soufflot</p>
-                    <p>75005 Paris</p>
-                    <p>01 56 81 20 00</p>
-                    <p>contact@hesam.eu</p>
-                    </span>
+                    <div class="row">
+                        <p>Le projet a bénéficié du soutien de l’ANR au titre du programme Investissements d’avenir (ANR-11-IDEX-0006).</p>
+                    </div>
 
-                    <span>
-                        <p>© 2016 heSam Université - Vous êtes une version test du site, plusieurs développements sont toujours en cours -
-              <a class="grey-text text-lighten-4 right" href="http://www.hesam.eu">Accéder au site heSam</a></p>
-                    </span>
+                    <div class="row">
+                        <h2>Contacts</h2>
+
+                        <span class="contactHesam">
+                        <p>heSam Université</p>
+                        <p>15 rue Soufflot</p>
+                        <p>75005 Paris</p>
+                        <p>01 56 81 20 00</p>
+                        <p>contact@hesam.eu</p>
+                        </span>
+                    </div>
+
+                    <div class="row">
+                        <span>
+                            <p>© 2016 heSam Université - Vous êtes une version test du site, plusieurs développements sont toujours en cours</p>
+                        </span>
+                    </div>
+
                 </div>
             </div>
 
