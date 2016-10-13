@@ -11,3 +11,23 @@
 .low-titre{
     margin-bottom: 10px;
 }
+
+#domaines, #methode{
+    display:none;
+}
+
+.help-home .plus{
+    cursor:pointer;
+    text-decoration : underline;
+
+}
+
+.plus{
+    margin: auto;
+    max-width:600px;
+}
+
+.plus button{
+    margin-top:10px;
+    margin-bottom: 15px;
+}

@@ -72,22 +72,74 @@ margin-bottom: 4px;
     background-color :#e42e18;
 }
 
+/* Buttons */
+
+.btn-hesam {
+    background-color: #e42e18;
+}
+
+.btn-hesam:hover{
+    background-color: #e42e18;
+}
+
+.btn-hesam-inverse {
+    background-color: white;
+    color: #e42e18;
+}
+
+
+/* Header */
+
+header{
+    background-color:  #ef4023;
+}
+
+
+/* Footer */
+
+footer h1, footer h2, footer h3{
+    text-align: center;
+}
+
+footer h2{
+    font-size: 2em;
+}
+
+footer p{
+    font-size: 1.1em;
+}
+
 .page-footer{
     color:white;
 }
 
 
-.hesamRed{
+.red-hesam{
     background-color: #ef4023;
 }
 
+.accueil-liens{
+    font-size: 1.2em;
+    text-decoration: underline;
+}
+
 footer {
-    margin-top: 100px;
-    background-color:  #e42e18;
+    background-color:  ##ef4023;
 }
 
 
-.contactHesam{
-    line-height: 2px;
+footer.page-footer {
+    margin-top: 120px;
+    background-color:  #ef4023;
 }
+
+
+footer .contactHesam{
+    line-height: 1px;
+}
+
+footer h2, footer h3{
+    padding-top: 0px;
+}
+
 

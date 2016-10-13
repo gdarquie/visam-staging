@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block javascripts %}
+{% block stylesheets %}
   {{ parent() }}
   <link rel="stylesheet" href="{{ asset("css/accueil.css") }}">
 {% endblock %}
@@ -16,15 +16,15 @@
         <div class="col offset-s3 s6">
           <img src="img/hesam.jpg" class="responsive-img" id="mainLogo" alt="Logo HESAM Université">
         </div>
-        <div class="col s12 middle-titre">
-          <h3>Cartographie des compétences</h3>
+        <div class="col s12 middle-titre" id="soustitre">
+          <h3>Cartographie des compétences (version béta)</h3>
         </div>
 
-        <div class="low-titre">
+        <div class="low-titre" id="recherche">
           <form action="rechercher"   method="get">
             <input type="text" name="search" placeholder="Exemples : Sociologie, urbanisme, industrie, microscope ">
 
-            <input class="btn btn-hesam" type="submit" value="Rechercher">
+            <button class="btn btn-hesam red-hesam btn-floating waves-light" type="submit"><i class="material-icons">search</i></button>
           </form>
         </div>
 
@@ -32,37 +32,98 @@
     </div>
 
       <div class="container row">
-        <div class="col offset-l1 offset-m1 offset-s1 s10 m10 l10">
-          <div class="z-depth-1 blue-grey lighten-5 help-home">
-            La cartographie des compétences permet d'obtenir des informations sur les :
-            <ul>
-              <li><strong>- formations<strong></li>
-              <li><strong>- laboratoires<strong></li>
-              <li><strong>- écoles doctorales<strong></li>
-              <li><strong>- équipements<strong></li>
-            </ul>
+        <div class="col offset-l1 offset-m1 offset-s1 s10 m10 l10" id="help-box">
+
+          <div class="z-depth-1 blue-grey lighten-5">
+
+            <div class="help-home" id="general">
+              <p>La cartographie des compétences permet d'obtenir des informations sur les :</p>
+
+              <li><strong> formations</strong></li>
+              <li><strong> laboratoires</strong></li>
+              <li><strong> écoles doctorales* (bientôt)</strong></li>
+              <li><strong> équipements</strong></li>
+
+              <div class="plus" id="chercher-general">
+                <button class="btn waves-effect waves-light btn-hesam" type="button">en savoir d'avantage sur les domaines de recherche
+                  <i class="material-icons right">info</i>
+                </button>
+              </div>
+            </div>
+
+            <div class="help-home" id="domaines">
+              <p>Il est possible de faire la recherche parmi les quinze thématiques Hesam et les disciplines qui leurs sont associées : </p>
+              {% for hesamette in hesamettes %}
+                <li>{{ hesamette }}</li>
+              {% endfor %}
+              <div class="plus" id="chercher-domaines"><button class="btn waves-effect waves-light btn-hesam" type="button">mieux comprendre notre mode de recherche
+                  <i class="material-icons right">info</i>
+                </button>
+              </div>
+            </div>
+
+            <div class="help-home" id="methode">
+              <p>Pour l'instant, les recherches sont limitées à un mot clé, elles s'effectuent sur le titre des laboratoires et formations, le nom des équipements, le nom des disciplines et bientôt les acronymes et codes des laboratoires.</p>
+              <div  class="plus" id="chercher-methode">
+                <button class="btn waves-effect waves-light btn-hesam" type="button">retourner au rappel de nos contenus
+                  <i class="material-icons right">info</i>
+                </button>
+              </div>
+            </div>
+
           </div>
-          <div>
-            <p style="display:none;">Il est possible de faire la recherche par nom et par thème. Voici la liste des thèmes //twig hesmaettes</p>
-          </div>
+
         </div>
       </div>
 
 
+{% endblock %}
 
-<!-- 
-  <div id="index-banner" >
-    <div class="section no-pad-bot">
-      <div class="container">
-        <div class="row center">
-        <div class="col offset-s3 s6 "><img src="img/hesam.jpg" class="responsive-img" alt="Logo HESAM Université"></div>
-          <form action="rechercher"   method="get">
-            <input type="text" name="search">
-            <input class="btn" type="submit" value="Rechercher">
-          </form>
-        </div>
-      </div>
-    </div>
-  </div> -->
+{% block javascripts %}
+  {{ parent() }}
+  <script>
 
+    function accueil(){
+      $("body").hide();
+      $("body").fadeIn(1500);
+
+      $("#mainLogo").hide();
+      $("#mainLogo").fadeIn(1000);
+
+      $("#soustitre").hide();
+      $("#soustitre").delay(300).fadeIn(1000);
+
+      $("#recherche").hide();
+      $("#recherche").delay(600).fadeIn(1000);
+
+      $("#help-box").hide();
+      $("#help-box").delay(900).fadeIn(1000);
+
+      $("footer").hide();
+      $("footer").delay(1500).fadeIn(1000);
+    }
+
+    accueil();
+
+    $("#chercher-general").click(
+            function(){
+              $("#general").hide();
+              $("#domaines").fadeIn(1000);
+            }
+    );
+
+    $("#chercher-domaines").click(
+            function(){
+              $("#domaines").hide();
+              $("#methode").fadeIn(1000);
+            }
+    );
+
+    $("#chercher-methode").click(
+            function(){
+              $("#methode").hide();
+              $("#general").fadeIn(1000);
+            }
+    );
+  </script>
 {% endblock %}
