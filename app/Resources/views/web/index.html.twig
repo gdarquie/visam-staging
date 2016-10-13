@@ -1,38 +1,37 @@
 {% extends 'base.html.twig' %}
 
+{% block javascripts %}
+  {{ parent() }}
+  <link rel="stylesheet" href="{{ asset("css/accueil.css") }}">
+{% endblock %}
+
 {% block fos_user_content %}{% endblock %}
 
 {% block body %}
-  
-<!--   <img src="" alt="Logo HESAM Université">
- -->  
 
-        {#<header>#}
-          {#<div class="container">#}
-            {#<div class="row center">#}
-              {#<ul class="actions">#}
-                {#<li><a class="btn btn-hesam-inverse" href="{{ path('statistiques') }}">Explorer</a></li> <!-- Lien vers stats -->#}
-                {#<li><a class="btn btn-hesam-inverse" href="{{ path('apropos') }}" >À propos</a> <!-- Lien vers à propos // Voir Sonia -->#}
-                {#<li><a class="btn btn-hesam-inverse">Comment ça marche ?</a></li> <!-- lien vers tuto à faire-->#}
-              {#</ul>#}
-            {#</div>#}
-          {#</div>#}
-        {#</header>#}
+    <div class="container">
 
-      <div class="container">
-        <div class="row center rechercher-wrapper">
-        <div class="col offset-s3 s6 "><img src="img/hesam.jpg" class="responsive-img logo-hesam" alt="Logo HESAM Université"></div>
-        <h3>Cartographie des compétences</h3>
+      <div class="row center rechercher-wrapper">
+
+        <div class="col offset-s3 s6">
+          <img src="img/hesam.jpg" class="responsive-img" id="mainLogo" alt="Logo HESAM Université">
+        </div>
+        <div class="col s12 middle-titre">
+          <h3>Cartographie des compétences</h3>
+        </div>
+
+        <div class="low-titre">
           <form action="rechercher"   method="get">
             <input type="text" name="search" placeholder="Exemples : Sociologie, urbanisme, industrie, microscope ">
 
             <input class="btn btn-hesam" type="submit" value="Rechercher">
           </form>
         </div>
-      </div>
 
-      <div class="container">
-      <div class="row">
+      </div>
+    </div>
+
+      <div class="container row">
         <div class="col offset-l1 offset-m1 offset-s1 s10 m10 l10">
           <div class="z-depth-1 blue-grey lighten-5 help-home">
             La cartographie des compétences permet d'obtenir des informations sur les :
@@ -46,7 +45,6 @@
           <div>
             <p style="display:none;">Il est possible de faire la recherche par nom et par thème. Voici la liste des thèmes //twig hesmaettes</p>
           </div>
-        </div>
         </div>
       </div>
 

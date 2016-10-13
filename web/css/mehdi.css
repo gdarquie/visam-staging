@@ -360,15 +360,3 @@
         padding-top: 8px;
     }
 
-    footer {
-        bottom: 0px;
-        left: 0px;
-        width: 100%;
-        /*border-top: 4px solid #e42e18;*/
-        background-color:  #e42e18;
-    }
-
-
-    .contactHesam{
-        line-height: 2px;
-    }
