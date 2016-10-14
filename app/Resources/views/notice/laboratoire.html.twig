@@ -69,7 +69,7 @@
               <a href="{{labo.lien}}"><i class="material-icons">input</i>Lien vers le laboratoire</a>
 
               {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                <a href="{{ path('editeur_labo_edit', { id : labo.laboId }) }}"><i class="material-icons">mode_edit</i>Modifier les données</a> 
+                <a href="{{ path('editeur_laboratoire_edit', { id : labo.laboId }) }}"><i class="material-icons">mode_edit</i>Modifier les données</a>
               {% endif %}
               <a href="mailto:{{labo.mailContact}}"><i class="material-icons">mail</i>{{labo.mailContact}}</a>
 

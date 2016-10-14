@@ -29,10 +29,16 @@ class Tag
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="timestamp", type="datetime", nullable=false)
+     * @ORM\Column(name="date_creation", type="datetime", nullable=false)
      */
-    private $timestamp;
+    private $date_creation;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="last_update", type="datetime", nullable=false)
+     */
+    private $last_update;
     /**
      * @var integer
      *
@@ -131,27 +137,35 @@ class Tag
     }
 
     /**
-     * Set timestamp
-     *
-     * @param \DateTime $timestamp
-     *
-     * @return Tag
+     * @return \DateTime
      */
-    public function setTimestamp($timestamp)
+    public function getDateCreation()
     {
-        $this->timestamp = $timestamp;
-
-        return $this;
+        return $this->date_creation;
     }
 
     /**
-     * Get timestamp
-     *
+     * @param \DateTime $date_creation
+     */
+    public function setDateCreation($date_creation)
+    {
+        $this->date_creation = $date_creation;
+    }
+
+    /**
      * @return \DateTime
      */
-    public function getTimestamp()
+    public function getLastUpdate()
     {
-        return $this->timestamp;
+        return $this->last_update;
+    }
+
+    /**
+     * @param \DateTime $last_update
+     */
+    public function setLastUpdate($last_update)
+    {
+        $this->last_update = $last_update;
     }
 
     /**

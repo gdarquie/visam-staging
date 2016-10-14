@@ -32,7 +32,7 @@ class EtablissementType extends AbstractType
             // ->add('valorisation')
             // ->add('labo')
             // ->add('formation')
-            ->add('ed')
+//            ->add('ed')
         ;
     }
     

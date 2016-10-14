@@ -19,7 +19,6 @@
 .help-home .plus{
     cursor:pointer;
     text-decoration : underline;
-
 }
 
 .plus{
@@ -30,4 +29,8 @@
 .plus button{
     margin-top:10px;
     margin-bottom: 15px;
+}
+
+body{
+    min-height: 1000px;
 }

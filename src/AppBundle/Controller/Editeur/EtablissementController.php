@@ -35,7 +35,6 @@ class EtablissementController extends Controller
      * Créer un établissement
      *
      * @Route("/new", name="editeur_etablisement_new")
-     * @Method("GET")
      */
     public function newAction(Request $request){
 
@@ -44,8 +43,15 @@ class EtablissementController extends Controller
         $form = $this->createForm(EtablissementType::class, $etablissement);
         $form->handleRequest($request);
 
-        if($form->isSubmitted()){
+        if($form->isSubmitted() && $form->isValid()){
+
+            $etablissement = $form->getData();
             $em = $this->getDoctrine()->getManager();
+
+            $now = new \DateTime();
+            $etablissement->setDateCreation($now);
+            $etablissement->setLastUpdate($now);
+
             $em->persist($etablissement);
             $em->flush();
 
@@ -56,6 +62,42 @@ class EtablissementController extends Controller
             'etablissementForm' => $form->createView()
         ));
     }
+
+
+    /**
+     * @Route("/edit" , name = "editeur_etablisement_edit")
+     */
+    public function editAction(Request $request, $numberId){
+
+        $etablissement = new Etablissement();
+
+        $em = $this->getDoctrine()->getManager();
+
+        $form = $this->createForm(EtablissementType::class, $number);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+            // dump($form->getData());die;
+
+            $etablissement = $form->getData();
+            $em = $this->getDoctrine()->getManager();
+            $now = new \DateTime();
+            $etablissement->setLastUpdate($now);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($etablissement);
+            $em->flush();
+        }
+
+        return $this->render('editor/etablissement/edit.html.twig', array(
+            'etablissementForm' => $form->createView()
+        ));
+    }
+
+
+
+
 }
 
 

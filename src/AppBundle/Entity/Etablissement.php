@@ -15,7 +15,7 @@ class Etablissement
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255, nullable=true)
+     * @ORM\Column(name="nom", type="string", length=255, nullable=false)
      */
     private $nom;
 
@@ -64,7 +64,7 @@ class Etablissement
     /**
      * @var string
      *
-     * @ORM\Column(name="img", type="string", length=255, nullable=false)
+     * @ORM\Column(name="img", type="string", length=255, nullable=true)
      */
     private $img;
 
@@ -113,9 +113,16 @@ class Etablissement
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="timestamp", type="datetime", nullable=false)
+     * @ORM\Column(name="date_creation", type="datetime", nullable=false)
      */
-    private $timestamp;
+    private $date_creation;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="last_update", type="datetime", nullable=false)
+     */
+    private $last_update;
 
     /**
      * @var integer
@@ -542,29 +549,7 @@ class Etablissement
         return $this->lien3;
     }
 
-    /**
-     * Set timestamp
-     *
-     * @param \DateTime $timestamp
-     *
-     * @return Etablissement
-     */
-    public function setTimestamp($timestamp)
-    {
-        $this->timestamp = $timestamp;
 
-        return $this;
-    }
-
-    /**
-     * Get timestamp
-     *
-     * @return \DateTime
-     */
-    public function getTimestamp()
-    {
-        return $this->timestamp;
-    }
 
     /**
      * Get etablissementId
@@ -745,6 +730,39 @@ class Etablissement
     {
         return $this->ed;
     }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateCreation()
+    {
+        return $this->date_creation;
+    }
+
+    /**
+     * @param \DateTime $date_creation
+     */
+    public function setDateCreation($date_creation)
+    {
+        $this->date_creation = $date_creation;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getLastUpdate()
+    {
+        return $this->last_update;
+    }
+
+    /**
+     * @param \DateTime $last_update
+     */
+    public function setLastUpdate($last_update)
+    {
+        $this->last_update = $last_update;
+    }
+
 
     public function __toString()
     {
