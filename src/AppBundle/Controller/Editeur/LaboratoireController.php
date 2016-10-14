@@ -59,15 +59,14 @@ class LaboratoireController extends Controller
      *
      * @Route("/{id}/edit", name="editeur_laboratoire_edit")
      */
-    public function editFormationAction(Request $request, $laboratoire){
+    public function editFormationAction(Request $request, Labo $laboratoire){
 
-        $laboratoire = new Labo();
         $editForm = $this->createForm('AppBundle\Form\LaboType', $laboratoire);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
 
-            $laboratoire = $form->getData();
+            $laboratoire = $editForm->getData();
             $em = $this->getDoctrine()->getManager();
 
             $now = new \DateTime();
@@ -76,10 +75,10 @@ class LaboratoireController extends Controller
             $em->persist($laboratoire);
             $em->flush();
 
-            return $this->redirectToRoute('editeur_laboratoire_edit', array('id' => $formation->getLaboId()));
+            return $this->redirectToRoute('editeur');
         }
 
-        return $this->render('editeur/formation/edit.html.twig', array(
+        return $this->render('editeur/labo/edit.html.twig', array(
             'labo' => $laboratoire,
             'edit_form' => $editForm->createView()
         ));

@@ -30,7 +30,24 @@ class EditeurController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        return $this->render('editeur/index.html.twig');
+        $etablissements = $em->getRepository('AppBundle:Etablissement')->findAll();
+
+        $query = $em->createQuery(
+            'SELECT f FROM AppBundle:Formation f ORDER BY f.last_update DESC'
+        )->setMaxResults(10);
+        $formations = $query->getResult();
+
+        $query = $em->createQuery(
+            'SELECT l FROM AppBundle:Labo l ORDER BY l.last_update DESC'
+        )->setMaxResults(10);
+        $laboratoires = $query->getResult();
+
+
+        return $this->render('editeur/index.html.twig', array(
+            'etablissements' => $etablissements,
+            'formations' => $formations,
+            'laboratoires' => $laboratoires,
+        ));
     }
 
 

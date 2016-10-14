@@ -63,38 +63,34 @@ class EtablissementController extends Controller
         ));
     }
 
-
     /**
-     * @Route("/edit" , name = "editeur_etablisement_edit")
+     * @Route("/{id}/edit" , name = "editeur_etablissement_edit")
      */
-    public function editAction(Request $request, $numberId){
+    public function editAction(Request $request, Etablissement $etablissement){
 
-        $etablissement = new Etablissement();
+//        $deleteForm = $this->createDeleteEtablissementForm($etablissement);
+        $etablissementForm = $this->createForm('AppBundle\Form\EtablissementType', $etablissement);
+        $etablissementForm->handleRequest($request);
 
-        $em = $this->getDoctrine()->getManager();
 
-        $form = $this->createForm(EtablissementType::class, $number);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()){
+        if ($etablissementForm->isSubmitted() && $etablissementForm->isValid()){
             // dump($form->getData());die;
 
-            $etablissement = $form->getData();
-            $em = $this->getDoctrine()->getManager();
+            $etablissement = $etablissementForm->getData();
             $now = new \DateTime();
             $etablissement->setLastUpdate($now);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($etablissement);
             $em->flush();
+
+            return $this->redirectToRoute('editeur');
         }
 
-        return $this->render('editor/etablissement/edit.html.twig', array(
-            'etablissementForm' => $form->createView()
+        return $this->render('editeur/etablissement/edit.html.twig', array(
+            'etablissementForm' => $etablissementForm->createView()
         ));
     }
-
 
 
 
