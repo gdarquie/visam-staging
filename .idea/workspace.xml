@@ -2,32 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3bb1b647-8eae-4507-b232-68d841001a20" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/views/editeur/etablissement/index.html.twig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/views/editeur/etablissement/show.html.twig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/views/editeur/formation/index.html.twig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/views/editeur/formation/show.html.twig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/views/editeur/labo/index.html.twig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/views/editeur/labo/show.html.twig" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/base.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/editeur/etablissement/edit.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/editeur/etablissement/edit.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/editeur/etablissement/new.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/editeur/etablissement/new.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/editeur/formation/_form.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/editeur/formation/_form.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/editeur/formation/edit.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/editeur/formation/edit.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/editeur/formation/new.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/editeur/formation/new.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/editeur/labo/edit.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/editeur/labo/edit.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/editeur/labo/new.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/editeur/labo/new.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/notice/laboratoire.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/notice/laboratoire.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Controller/Editeur/EditeurController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/Editeur/EditeurController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Controller/Editeur/EtablissementController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/Editeur/EtablissementController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Axe.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Axe.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Etablissement.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Etablissement.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Formation.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Formation.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Labo.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Labo.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Tag.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Tag.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Form/EtablissementType.php" afterPath="$PROJECT_DIR$/src/AppBundle/Form/EtablissementType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/css/accueil.css" afterPath="$PROJECT_DIR$/web/css/accueil.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/css/style.css" afterPath="$PROJECT_DIR$/web/css/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bower_components/recherche/data-new.js" afterPath="$PROJECT_DIR$/web/bower_components/recherche/data-new.js" />
     </list>
     <ignored path="visam_2016-04-28.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -107,14 +82,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="laboratoire.html.twig" pinned="false" current-in-tab="true">
+      <file leaf-file-name="laboratoire.html.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Resources/views/notice/laboratoire.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="71" column="58" selection-start-line="71" selection-start-column="58" selection-end-line="71" selection-end-column="58" />
+            <state relative-caret-position="529">
+              <caret line="91" column="3" selection-start-line="91" selection-start-column="3" selection-end-line="91" selection-end-column="3" />
               <folding>
                 <element signature="e#12#26#0#Twig" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="data-new.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/web/bower_components/recherche/data-new.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="20" selection-start-line="0" selection-start-column="20" selection-end-line="0" selection-end-column="20" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -157,7 +142,6 @@
         <option value="$PROJECT_DIR$/visam_2016-07-04.json" />
         <option value="$PROJECT_DIR$/app/Resources/views/visam_2016-09-02.json" />
         <option value="$PROJECT_DIR$/web/bower_components/recherche/_data-new.js" />
-        <option value="$PROJECT_DIR$/web/bower_components/recherche/data-new.js" />
         <option value="$PROJECT_DIR$/web/css/mehdi.css" />
         <option value="$PROJECT_DIR$/app/Resources/views/web/index.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/editeur/etablissement/new.html.twig" />
@@ -185,6 +169,7 @@
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/Editeur/LaboratoireController.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/editeur/labo/edit.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/notice/laboratoire.html.twig" />
+        <option value="$PROJECT_DIR$/web/bower_components/recherche/data-new.js" />
       </list>
     </option>
   </component>
@@ -292,6 +277,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="bower_components" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="visam" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="visam" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bower_components" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="recherche" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -735,12 +742,12 @@
       <workItem from="1475755929608" duration="11698000" />
       <workItem from="1476217295491" duration="5106000" />
       <workItem from="1476266524438" duration="10169000" />
-      <workItem from="1476353280393" duration="27464000" />
+      <workItem from="1476353280393" duration="27755000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="84054000" />
+    <option name="totallyTimeSpent" value="84345000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -960,14 +967,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/bower_components/recherche/data-new.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="17886" column="240" selection-start-line="17886" selection-start-column="240" selection-end-line="17886" selection-end-column="240" />
           <folding />
         </state>
       </provider>
@@ -1270,11 +1269,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/notice/laboratoire.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="71" column="58" selection-start-line="71" selection-start-column="58" selection-end-line="71" selection-end-column="58" />
+        <state relative-caret-position="529">
+          <caret line="91" column="3" selection-start-line="91" selection-start-column="3" selection-end-line="91" selection-end-column="3" />
           <folding>
             <element signature="e#12#26#0#Twig" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/bower_components/recherche/data-new.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="20" selection-start-line="0" selection-start-column="20" selection-end-line="0" selection-end-column="20" />
+          <folding />
         </state>
       </provider>
     </entry>
