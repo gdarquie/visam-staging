@@ -2,14 +2,32 @@
 
 {% block stylesheets %}
     {{ parent() }}
+    <style>
+        #opening{
+            margin-bottom: 60px;
+        }
+        table{
+            font-size: 0.7em;
+        }
+
+        #editeur h1{
+            font-size: 2.5em;
+        }
+
+        #editeur h2{
+            font-size: 2em;
+        }
+
+    </style>
 {% endblock %}
 
 
 {% block body %}
-<section class='container'>
+<section class='container' id="editeur">
 
-    <article>
-        <h1 class="center">Administration de visam [top secret]</h1>
+    <article id="opening">
+        <h1 class="center">Administration de visam</h1>
+        <h2 class="center">[top secret]</h2>
     </article>
 
     <article>
@@ -57,23 +75,25 @@
         <table class="striped">
                 <tr>
                     <th>Nom</th>
-                    <th>Description</th>
+                    {#<th>Description</th>#}
                     <th>Lien</th>
                     <th>Mail de contact</th>
-                    <th>Responsable</th>
+                    {#<th>Responsable</th>#}
                     <th>Etablissement(s)</th>
+                    <td>Dernier changement</td>
                     <th>Modifier</th>
                 </tr>
             {% for labo in laboratoires %}
                 <tr>
                     <td>{{ labo.nom }}</td>
-                    <td>{{ labo.description |slice(0,1000) }}...</td>
+                    {#<td>{{ labo.description |slice(0,1000) }}...</td>#}
                     <td><a href="{{ labo.lien }}">{{ labo.lien }}</a></td>
                     <td>{{ labo.mailContact }}</td>
-                    <td>{{ labo.responsable }}</td>
+                    {#<td>{{ labo.responsable }}</td>#}
                     <td>{% for etab in labo.etablissement  %}
                             {{ etab.nom }}{% if loop.last %}{% else %}, {% endif %}
                         {% endfor %}</td>
+                    <td>{{ labo.lastUpdate |date("d/m/y g:i:s", "Europe/Paris") }}</td>
                     <td><a href="{{ path('editeur_laboratoire_edit', {'id' : labo.laboId}) }}">Modifier</a></td>
                 </tr>
             {% endfor %}
@@ -87,23 +107,25 @@
         <table>
                 <tr>
                     <td>Nom</td>
-                    <td>Description</td>
+                    {#<td>Description</td>#}
                     <td>Lien</td>
                     <td>Année</td>
                     <td>Type de diplôme</td>
                     <td>Etablissement(s)</td>
+                    <td>Dernier changement</td>
                     <td>Modifier</td>
                 </tr>
             {% for formation in formations %}
                 <tr>
                     <td>{{ formation.nom }}</td>
-                    <td>{{ formation.description |slice(0,1000) }}...</td>
-                    <td>{{ formation.url }}</td>
+                    {#<td>{{ formation.description |slice(0,1000) }}...</td>#}
+                    <td><a href="{{ formation.url }}">{{ formation.url }}</a></td>
                     <td>{{ formation.annee }}</td>
                     <td>{{ formation.typeDiplome }}</td>
                     <td>{% for etab in formation.etablissement  %}
                             {{ etab.nom }}{% if loop.last %}{% else %}, {% endif %}
                         {% endfor %}</td>
+                    <td>{{ formation.lastUpdate |date("d/m/y g:i:s", "Europe/Paris") }}</td>
                     <td><a href="{{ path('editeur_formation_edit', {'id' : formation.formationId}) }}">Modifier</a></td>
                 </tr>
             {% endfor %}

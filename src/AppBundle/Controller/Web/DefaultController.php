@@ -42,6 +42,14 @@ class DefaultController extends Controller
 
     }
 
+    /**
+     * @Route("/aide", name="aide")
+     */
+    public function aideAction(Request $request)
+    {
+        return $this->render('web/howto.html.twig'
+        );
+    }
     
     /**
      * @Route("/rechercher", name="search")
@@ -158,6 +166,16 @@ class DefaultController extends Controller
             'hesamettes' => $hesamettes
         ));
     }
+
+    /**
+     * @Route("/secret/2016", name="secret2016")
+     */
+    public function secret2016Action(Request $request)
+    {
+        return $this->render('web/secret/2016.html.twig');
+    }
+
+    //prochain secret :une petite IF à secret/XYZZY
 
 
 

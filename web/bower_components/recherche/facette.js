@@ -21,6 +21,7 @@ function facette(){
               '</ul>'+              
               '</div>'+
               '<div class="card-action">'+
+              '<a href="editeur/formation/<%= obj.id %>/edit"><i class="material-icons">edit</i>Modifier</a>'+
               '<a href="<%= obj.url %>"><i class="material-icons">input</i>Lien vers la formation</a>'+
                 '<div style="float:right;">'+
                 '<span>Effectif(s): <%= obj.effectif %> - <%= obj.annee %></span>'+
@@ -48,6 +49,7 @@ function facette(){
               '</ul>'+              
               '</div>'+
               '<div class="card-action">'+
+              '<a href="editeur/laboratoire/<%= obj.id %>/edit"><i class="material-icons">edit</i>Modifier</a>'+
               '<a href="<%= obj.url %>"><i class="material-icons">input</i>Lien vers le laboratoire</a>'+
                 '<div style="float:right;">'+
                 '<span><a href="mailto:<%= obj.mailcontact %>"><i class="material-icons">mail</i><%= obj.mailcontact %></a></span>'+

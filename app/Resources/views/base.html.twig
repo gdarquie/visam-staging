@@ -83,8 +83,9 @@
                         <li><a href="{{ path('search') }}">Rechercher</a></li>
                         <li><a href="{{ path("statistiques") }}">Statistiques</a></li>
                         <li><a href="{{ path("apropos") }}">A propos</a></li>
-                        <li><a href="#">Mode d'emploi</a></li>
+                        <li><a href="{{ path("aide") }}">Mode d'emploi</a></li>
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            <li><a href="{{ path("editeur") }}">Admin</a></li>
                             <li><a class="dropdown-button" href="#!" data-activates="menu_add">Ajouter<i class="material-icons right">arrow_drop_down</i></a></li>
                             <li>connecté : {{ app.user.username }}</li>
                             <li><a href="{{ path('fos_user_security_logout') }}">logout</a></li>
