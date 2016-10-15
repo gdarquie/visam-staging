@@ -70,7 +70,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/labo/{id}", name="recherche")
+     * @Route("/labo/{id}", name="labo")
      */
     public function laboratoireAction($id)
     {
@@ -82,16 +82,39 @@ class DefaultController extends Controller
         $query = $em->createQuery('SELECT l FROM AppBundle:Labo l');
         $labos = $query->setMaxResults(3)->getResult();
 
-         $query = $em->createQuery('SELECT h.nom as nom, COUNT(h) as nb FROM AppBundle:Discipline d JOIN d.labo f JOIN d.hesamette h WHERE f.laboId = :id GROUP BY h.nom ORDER BY nb DESC');
+        $query = $em->createQuery('SELECT h.nom as nom, COUNT(h) as nb FROM AppBundle:Discipline d JOIN d.labo f JOIN d.hesamette h WHERE f.laboId = :id GROUP BY h.nom ORDER BY nb DESC');
         $query->setParameter('id', $id);
         $hesamettes = $query->getResult();
 
         //$nbEtud = $query->setMaxResults(1)->getOneOrNullResult();
 
-
         $query = $em->createQuery('SELECT l FROM AppBundle:Axe l JOIN l.labo a WHERE a.laboId = :labo');
         $query->setParameter('labo', $id);
         $axes = $query->getResult();
+
+
+
+
+        //Les Rebonds
+
+        //Récupération de l'hésamette la plus importante pour le labo en question
+
+        $query = $em->createQuery('SELECT COUNT(h.nom) as nb, h.nom as nom FROM AppBundle:Labo l JOIN l.discipline d JOIN d.hesamette h WHERE l.laboId = :id GROUP BY h.nom ORDER BY nb DESC');
+        $query->setParameter('id', $id);
+        $hesamettes_rebond = $query->setMaxResults(1)->getResult();
+        $hesamette_rebond = $hesamettes_rebond[0]['nom'];
+
+        //sélection des labos en fonction de l'hesamette principale
+        $query = $em->createQuery('SELECT l FROM AppBundle:Labo l JOIN l.discipline d JOIN d.hesamette h WHERE h.nom = :hesamette');
+        $query->setParameter('hesamette', $hesamette_rebond);
+        $rebonds_labo = $query->setMaxResults(2)->getResult();
+
+        //Sélection des formations
+        $query = $em->createQuery('SELECT f FROM AppBundle:Formation f JOIN f.discipline d JOIN d.hesamette h WHERE h.nom = :hesamette');
+        $query->setParameter('hesamette', $hesamette_rebond);
+        $rebonds_formation = $query->setMaxResults(1)->getResult();
+
+//        dump($rebond);die();
 
         
         return $this->render('notice/laboratoire.html.twig', array(
@@ -99,6 +122,8 @@ class DefaultController extends Controller
             'labos' => $labos,
             'hesamettes' => $hesamettes,
             'axes' => $axes,
+            'rebonds_labo' => $rebonds_labo,
+            'rebonds_formation' => $rebonds_formation,
 
         ));
     }
@@ -157,13 +182,30 @@ class DefaultController extends Controller
         $query->setParameter('id', $id);
         $hesamettes = $query->getResult();
 
-        $idLabosLies = [];
-        $labosLies = ""; //Tous les labos qui ont appartiennent aux mêmes trois hesamettes
-        
+
+        //Les rebonds
+        $query = $em->createQuery('SELECT COUNT(h.nom) as nb, h.nom as nom FROM AppBundle:Formation f JOIN f.discipline d JOIN d.hesamette h WHERE f.formationId = :id GROUP BY h.nom ORDER BY nb DESC');
+        $query->setParameter('id', $id);
+        $hesamettes_rebond = $query->setMaxResults(1)->getResult();
+        $hesamette_rebond = $hesamettes_rebond[0]['nom'];
+
+        //sélection des labos en fonction de l'hesamette principale
+        $query = $em->createQuery('SELECT l FROM AppBundle:Labo l JOIN l.discipline d JOIN d.hesamette h WHERE h.nom = :hesamette');
+        $query->setParameter('hesamette', $hesamette_rebond);
+        $rebonds_labo = $query->setMaxResults(1)->getResult();
+
+        //Sélection des formations
+        $query = $em->createQuery('SELECT f FROM AppBundle:Formation f JOIN f.discipline d JOIN d.hesamette h WHERE h.nom = :hesamette');
+        $query->setParameter('hesamette', $hesamette_rebond);
+        $rebonds_formation = $query->setMaxResults(2)->getResult();
+
+
         return $this->render('notice/formation.html.twig', array(
             'formation' => $formation,
             'formations' => $formations,
-            'hesamettes' => $hesamettes
+            'hesamettes' => $hesamettes,
+            'rebonds_labo' => $rebonds_labo,
+            'rebonds_formation' => $rebonds_formation,
         ));
     }
 
