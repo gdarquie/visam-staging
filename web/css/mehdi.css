@@ -16,6 +16,11 @@
 		line-height: 139%;
 	}
 
+	h6 {
+		text-transform: uppercase;
+		font-size: 0.9rem;
+	}
+
     @media only screen and (min-width: 993px) {
         .container.large {
             width: 90%;
@@ -274,6 +279,10 @@
         font-size: 1.3em;
     }
     /*Card CSS */
+
+	ul.list-thematique {
+		margin: 0px;
+	}
 
     ul.list-thematique li {
         display: inline;
