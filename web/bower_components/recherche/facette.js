@@ -58,60 +58,57 @@ function facette(){
            '</div><% } %>';
 
 
-            // $.ajax({
-            //   url: url,
-            //   data: data,
-            //   success: success,
-            //   dataType: dataType
-            // });
 
 
-          settings = { 
-            items            : dataJson,
-            facets           : { 
-                                'type' : 'Type',
-                                'hesamette'     : 'Thématiques',
-                                'etablissement'     : 'Établissements',
-            },  
-            resultSelector   : '#results',
-            facetSelector    : '#facets',
-            facetTitleTemplate : '<h4 class=facettitle><%= title %></h4>',
-            resultTemplate   : visam_temlate,
-            facetContainer     : '<li class=facetsearch id=<%= id %> ></li>',
-            facetTitleTemplate : '<div class="collapsible-header facettitle active"><%= title %></div>',
-            facetListContainer : '<div class="collapsible-body facetlist"></div>',
-            listItemTemplate   : '<div class=facetitem id="<%= id %>"><%= name %> <span class=facetitemcount> <%= count %></span></div>',
-            countTemplate      : '<div class=facettotalcount><%= count %> Résultats</div>',
-            deselectTemplate   : '<div class=deselectstartover>Suppression des filtres</div>',
-            orderByTemplate    : '<div class=orderby><span class="orderby-title"><!-- - Trier par :--> </span><ul><% _.each(options, function(value, key) { %>'+
-                       '<li class=orderbyitem id=orderby_<%= key %>>'+
-                       '<%= value %> </li> <% }); %></ul></div>',
-            orderByOptions     : false,
-            noResults          : '<div class=results>Désolé, nous trouvons aucun résultat ! </div>',
-            paginationCount  : 20,
-            enablePagination   : true,
-          } 
+          // Launch - Face
+            $.get( "http://127.0.0.1:8000/export", function( data ) {
+                settings = { 
+                  items            : jQuery.parseJSON(data),
+                  facets           : { 
+                                      'type' : 'Type',
+                                      'hesamette'     : 'Thématiques',
+                                      'etablissement'     : 'Établissements',
+                  },  
+                  resultSelector   : '#results',
+                  facetSelector    : '#facets',
+                  facetTitleTemplate : '<h4 class=facettitle><%= title %></h4>',
+                  resultTemplate   : visam_temlate,
+                  facetContainer     : '<li class=facetsearch id=<%= id %> ></li>',
+                  facetTitleTemplate : '<div class="collapsible-header facettitle active"><%= title %></div>',
+                  facetListContainer : '<div class="collapsible-body facetlist"></div>',
+                  listItemTemplate   : '<div class=facetitem id="<%= id %>"><%= name %> <span class=facetitemcount> <%= count %></span></div>',
+                  countTemplate      : '<div class=facettotalcount><%= count %> Résultats</div>',
+                  deselectTemplate   : '<div class=deselectstartover>Suppression des filtres</div>',
+                  orderByTemplate    : '<div class=orderby><span class="orderby-title"><!-- - Trier par :--> </span><ul><% _.each(options, function(value, key) { %>'+
+                             '<li class=orderbyitem id=orderby_<%= key %>>'+
+                             '<%= value %> </li> <% }); %></ul></div>',
+                  orderByOptions     : false,
+                  noResults          : '<div class=results>Désolé, nous trouvons aucun résultat ! </div>',
+                  paginationCount  : 20,
+                  enablePagination   : true,
+                } 
+                $.facetelize(settings);
+            
+              if(params.search) {
+                $("#search-input").val(params.search);
+                  searchInput();
+                $('.surligne').highlight(params.search);
+              }
 
 
-        // use them!
-        $.facetelize(settings);
-      
-      if(params.search) {
-        $("#search-input").val(params.search);
-          searchInput();
-        $('.surligne').highlight(params.search);
-
-      }
+                $('#search-input').keyup(function () { 
+                  searchInput();
+                });
 
 
-        $('#search-input').keyup(function () { 
-          searchInput();
-        });
+                $(settings.resultSelector).bind("facetedsearchresultupdate", function(){
+                    $('.surligne').highlight($("#search-input").val());
+                });
+
+            });
 
 
-        $(settings.resultSelector).bind("facetedsearchresultupdate", function(){
-            $('.surligne').highlight($("#search-input").val());
-        });
+
 
       });
 }
@@ -140,8 +137,11 @@ var searchInput = function () {
     settings.items = dataJson;
   }
 
+
   $.facetelize(settings);
   //$('.surligne').highlight(searchVal);
+  history.pushState('data', 'Recherche Hesam', 'rechercher?search='+searchVal);
+
 
 }
 
