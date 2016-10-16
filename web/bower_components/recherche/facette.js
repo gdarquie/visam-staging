@@ -58,6 +58,13 @@ function facette(){
            '</div><% } %>';
 
 
+            // $.ajax({
+            //   url: url,
+            //   data: data,
+            //   success: success,
+            //   dataType: dataType
+            // });
+
 
           settings = { 
             items            : dataJson,
@@ -140,6 +147,7 @@ var searchInput = function () {
 
 var getSearchParameters = function() {
       var prmstr = window.location.search.substr(1);
+      prmstr = decodeURIComponent(prmstr);
       return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
 }
 
