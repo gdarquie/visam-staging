@@ -43,8 +43,7 @@ function facette(){
               '<ul class="list-thematique surligne" >' + 
               '<li><%= obj.discipline %></li>'+
               '</ul>'+
-              '<% if (obj.equipement == "undefined") { %> TRUE <% } %>'+
-              '<% if (obj.equipement != "undefined") { %> <h6>Equipement(s)</h6><ul class="list-thematique surligne" ><li><%= obj.equipement %></li> <%} %></ul>'+ 
+              '<% if (obj.equipement != "") { %> <h6>Equipement(s)</h6><ul class="list-thematique surligne" ><li><%= obj.equipement %></li> <%} %></ul>'+ 
               '</div>'+
               '<div class="card-action">'+
               '<a href="editeur/laboratoire/<%= obj.id %>/edit" class="modifier"><i class="material-icons">edit</i>Modifier</a>'+
@@ -121,9 +120,10 @@ facette();
 var searchInput = function () {
   searchVal = $("#search-input").val();
   if (searchVal) {
+    var name = [];
     var returnedData = $.grep(dataJson, function(element, index){
       if (element.name.toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
-        return element;
+         name.push(element);
       }
       if (element.hesamette.toString().toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
         return element;
@@ -134,7 +134,6 @@ var searchInput = function () {
       if (element.equipement && element.equipement.toString().toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
         return element;
       }         
-
       if (element.sigle && element.sigle.toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
         return element;
       }
@@ -144,9 +143,10 @@ var searchInput = function () {
       if (element.code && element.code.toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
         return element;
       } 
-
     });
-    settings.items = returnedData;
+
+
+    settings.items = name.concat(returnedData);
   } else {
     settings.items = dataJson;
   }
