@@ -61,6 +61,7 @@ class LaboratoireController extends Controller
      */
     public function editFormationAction(Request $request, Labo $laboratoire){
 
+        $deleteForm = $this->createDeleteForm($laboratoire);
         $editForm = $this->createForm('AppBundle\Form\LaboType', $laboratoire);
         $editForm->handleRequest($request);
 
@@ -80,8 +81,45 @@ class LaboratoireController extends Controller
 
         return $this->render('editeur/labo/edit.html.twig', array(
             'labo' => $laboratoire,
-            'edit_form' => $editForm->createView()
+            'edit_form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
         ));
+    }
+
+    /**
+     * Effacer un labo
+     *
+     * @Route("/{id}/delete", name="editeur_laboratoire_delete")
+     * @Method("DELETE")
+     */
+    public function deleteAction(Request $request, Labo $labo)
+    {
+        $form = $this->createDeleteForm($labo);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($labo);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('editeur');
+    }
+
+    /**
+     * Créer un form pour effacer un labo
+     *
+     * @param Labo $labo
+     *
+     * @return \Symfony\Component\Form\Form
+     */
+    private function createDeleteForm(Labo $labo)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('editeur_laboratoire_delete', array('id' => $labo->getLaboId())))
+            ->setMethod('DELETE')
+            ->getForm()
+            ;
     }
 
 

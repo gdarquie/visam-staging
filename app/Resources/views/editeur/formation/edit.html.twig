@@ -12,6 +12,9 @@
         <input type="submit" class="btn btn-hesam" value="Edit" />
     {{ form_end(edit_form) }}
 
+    {{ form_start(delete_form) }}
+     <button disabled value="Supprimer" class="btn btn-hesam right ">Supprimer</button>
+    {{ form_end(delete_form) }}
     <ul>
         <li>
             <a href="{{ path('search') }}">Retour</a>

@@ -37,25 +37,25 @@ class FormationType extends AbstractType
             ->add('lien3')
             ->add('responsable')
         //     ->add('membre')
-            ->add('tag', EntityType::class, array(
-                'class' => 'AppBundle:Tag',
-//                'multiple' => true,
-                'choice_label' => 'nom',
-                'query_builder' => function(TagRepository $repo) {
-                    return $repo->createAlphabeticalQueryBuilder();
-                }
-            ))
+//            ->add('tag', EntityType::class, array(
+//                'class' => 'AppBundle:Tag',
+////                'multiple' => true,
+//                'choice_label' => 'nom',
+//                'query_builder' => function(TagRepository $repo) {
+//                    return $repo->createAlphabeticalQueryBuilder();
+//                }
+//            ))
         //     ->add('theme')
         //     ->add('localisation')
         //     ->add('labo')
-             ->add('etablissement', EntityType::class, array(
-                'class' => 'AppBundle:Etablissement',
-                'multiple' => true,
-                'choice_label' => 'nom',
-                'query_builder' => function(EtablissementRepository $repo) {
-                    return $repo->createAlphabeticalQueryBuilder();
-                }
-            ))
+//             ->add('etablissement', EntityType::class, array(
+//                'class' => 'AppBundle:Etablissement',
+//                'multiple' => true,
+//                'choice_label' => 'nom',
+//                'query_builder' => function(EtablissementRepository $repo) {
+//                    return $repo->createAlphabeticalQueryBuilder();
+//                }
+//            ))
         //     ->add('metier')
         //     ->add('ufr')
 //            ->add('discipline', EntityType::class, array(
