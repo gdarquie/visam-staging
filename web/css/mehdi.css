@@ -195,7 +195,13 @@
     .rechercher-wrapper input[type=text]{
         width: 70%;
     }
+    
 
+    
+    #loader  {
+        margin-top:100px;
+        text-align: center;
+    }
 
 
 

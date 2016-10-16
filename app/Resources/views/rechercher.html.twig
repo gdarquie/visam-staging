@@ -29,18 +29,30 @@
       </div>
 
       <section class="col s9 m9">
-<!--         <div class="input-field">
-          <i class="material-icons prefix">search</i>
-          <input type="text"   class="validate">
-          <label for="icon_prefix">Recherche...</label>
-        </div>
- -->        
+
 <div class="input-field">
         <i class="material-icons prefix icon-search">search</i>
         <input type="text" id="search-input" placeholder="Recherche...">
         </div>
 
-        <div id="order"></div>
+        <div id="order">
+          <div id="loader">
+          <div class="preloader-wrapper big active">
+            <div class="spinner-layer spinner-red-only">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div><div class="gap-patch">
+                <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
+            </div>
+          </div>
+          <p>Chargement...</p>
+          </div>
+        </div>
+
+
         <div id="results"></div>
       </section>
       </div>
