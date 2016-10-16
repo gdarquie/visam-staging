@@ -61,7 +61,7 @@ function facette(){
 
 
           // Launch - Face
-            $.get( "http://127.0.0.1:8000/export", function( data ) {
+            $.get( "/export", function( data ) {
                 settings = { 
                   items            : jQuery.parseJSON(data),
                   facets           : { 
@@ -84,6 +84,7 @@ function facette(){
                              '<%= value %> </li> <% }); %></ul></div>',
                   orderByOptions     : false,
                   noResults          : '<div class=results>Désolé, nous trouvons aucun résultat ! </div>',
+                  showMoreTemplate   : '<a id=showmorebutton class="btn btn-hesam">Voir plus...</a>',
                   paginationCount  : 20,
                   enablePagination   : true,
                 } 
