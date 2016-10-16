@@ -120,9 +120,10 @@ facette();
 var searchInput = function () {
   searchVal = $("#search-input").val();
   if (searchVal) {
+    var name = [];
     var returnedData = $.grep(dataJson, function(element, index){
       if (element.name.toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
-        return element;
+         name.push(element);
       }
       if (element.hesamette.toString().toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
         return element;
@@ -133,7 +134,6 @@ var searchInput = function () {
       if (element.equipement && element.equipement.toString().toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
         return element;
       }         
-
       if (element.sigle && element.sigle.toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
         return element;
       }
@@ -143,9 +143,10 @@ var searchInput = function () {
       if (element.code && element.code.toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
         return element;
       } 
-
     });
-    settings.items = returnedData;
+
+
+    settings.items = name.concat(returnedData);
   } else {
     settings.items = dataJson;
   }
