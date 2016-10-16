@@ -31,7 +31,7 @@ function facette(){
           '<% if (obj.type == "Laboratoire") {  %><div class="card laboratoire">' +
             '<div class="card-content">'+
             '<span class="item-labo">Laboratoire</span>'+
-            '<span class="etablissement"><span>- <%= obj.ctype %> </span><%= obj.code %></span>'+
+            '<span class="etablissement"><span class="surligne">- <%= obj.ctype %> </span><span class="surligne"><%= obj.code %></span>'+
              '<a href="/labo/<%= obj.id %>">'+
               '<h5 class="surligne"><%= obj.name %> (<%= obj.sigle %>)</h5></a>'+
               '<span><%= obj.etablissement %></span>'+
@@ -132,6 +132,15 @@ var searchInput = function () {
       if (element.name.toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
         return element;
       }
+      if (element.sigle && element.sigle.toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
+        return element;
+      }
+      if (element.ctype && element.ctype.toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
+        return element;
+      }
+      if (element.code && element.code.toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
+        return element;
+      }      
     });
     settings.items = returnedData;
   } else {
