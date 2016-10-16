@@ -64,7 +64,7 @@ class FormationController extends Controller
      */
     public function editFormationAction(Request $request, Formation $formation){
 
-        // $deleteForm = $this->createDeleteLaboForm($labo);
+        $deleteForm = $this->createDeleteForm($formation);
         $editForm = $this->createForm('AppBundle\Form\FormationType', $formation);
         $editForm->handleRequest($request);
 
@@ -83,8 +83,44 @@ class FormationController extends Controller
         return $this->render('editeur/formation/edit.html.twig', array(
             'formation' => $formation,
             'edit_form' => $editForm->createView(),
-            // 'delete_form' => $deleteForm->createView(),
+            'delete_form' => $deleteForm->createView(),
         ));
+    }
+
+    /**
+     * Effacer une formation
+     *
+     * @Route("/{id}/delete", name="editeur_formation_delete")
+     * @Method("DELETE")
+     */
+    public function deleteAction(Request $request, Formation $formation)
+    {
+        $form = $this->createDeleteForm($formation);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($formation);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('editeur');
+    }
+
+    /**
+     * Créer un form pour effacer une formation
+     *
+     * @param Formation $formation
+     *
+     * @return \Symfony\Component\Form\Form
+     */
+    private function createDeleteForm(Formation $formation)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('editeur_formation_delete', array('id' => $formation->getFormationId())))
+            ->setMethod('DELETE')
+            ->getForm()
+            ;
     }
 
 }
