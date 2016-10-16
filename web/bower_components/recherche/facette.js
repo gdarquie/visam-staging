@@ -98,7 +98,7 @@ function facette(){
       
       if(params.search) {
         $("#search-input").val(params.search);
-        searchInput();
+          searchInput();
         $('.surligne').highlight(params.search);
 
       }
@@ -148,6 +148,7 @@ var searchInput = function () {
 var getSearchParameters = function() {
       var prmstr = window.location.search.substr(1);
       prmstr = decodeURIComponent(prmstr);
+      prmstr =prmstr.replace('+',' ');
       return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
 }
 
