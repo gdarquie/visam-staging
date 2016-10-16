@@ -8,9 +8,9 @@ function facette(){
             '<div class="card-content">'+
             '<span class="item-formation">Formation</span>'+
             '<span class="etablissement"><span>- <%= obj.niveau %> </span><%= obj.typeDiplome %></span>'+
-             '<a href="/formation/<%= obj.id %>">'+
+             '<a  href="/formation/<%= obj.id %>">'+
               '<h5 class="surligne"><%= obj.name %></h5></a>'+
-              '<span><%= obj.etablissement %></span>'+
+              '<span class="etablissement-name"><%= obj.etablissement %></span>'+
               '<h6>Thématique(s)</h6>' +
               '<ul class="list-thematique surligne" >' + 
               '<li><%= obj.hesamette %></li>'+
@@ -31,10 +31,10 @@ function facette(){
           '<% if (obj.type == "Laboratoire") {  %><div class="card laboratoire">' +
             '<div class="card-content">'+
             '<span class="item-labo">Laboratoire</span>'+
-            '<span class="etablissement"><span>- <%= obj.ctype %> </span><%= obj.code %></span>'+
+            '<span class="etablissement"><span class="surligne">- <%= obj.ctype %> </span><span class="surligne"><%= obj.code %></span>'+
              '<a href="/labo/<%= obj.id %>">'+
               '<h5 class="surligne"><%= obj.name %> (<%= obj.sigle %>)</h5></a>'+
-              '<span><%= obj.etablissement %></span>'+
+              '<span class="etablissement-name"><%= obj.etablissement %></span>'+
               '<h6>Thématique(s)</h6>' +
               '<ul class="list-thematique surligne" >' + 
               '<li><%= obj.hesamette %></li>'+
@@ -76,7 +76,7 @@ function facette(){
                   facetContainer     : '<li class=facetsearch id=<%= id %> ></li>',
                   facetTitleTemplate : '<div class="collapsible-header facettitle active"><%= title %></div>',
                   facetListContainer : '<div class="collapsible-body facetlist"></div>',
-                  listItemTemplate   : '<div class=facetitem id="<%= id %>"><%= name %> <span class=facetitemcount> <%= count %></span></div>',
+                  listItemTemplate   : '<div class=facetitem id="<%= id %>"><%= name %> <span class="facetitemcount hide-on-med-and-down"> <%= count %></span></div>',
                   countTemplate      : '<div class=facettotalcount><%= count %> Résultats</div>',
                   deselectTemplate   : '<div class=deselectstartover>Suppression des filtres</div>',
                   orderByTemplate    : '<div class=orderby><span class="orderby-title"><!-- - Trier par :--> </span><ul><% _.each(options, function(value, key) { %>'+
@@ -132,6 +132,15 @@ var searchInput = function () {
       if (element.name.toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
         return element;
       }
+      if (element.sigle && element.sigle.toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
+        return element;
+      }
+      if (element.ctype && element.ctype.toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
+        return element;
+      }
+      if (element.code && element.code.toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
+        return element;
+      }      
     });
     settings.items = returnedData;
   } else {
@@ -140,7 +149,7 @@ var searchInput = function () {
 
 
   $.facetelize(settings);
-  //$('.surligne').highlight(searchVal);
+  
   history.pushState('data', 'Recherche Hesam', 'rechercher?search='+searchVal);
 
 
