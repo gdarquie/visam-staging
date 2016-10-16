@@ -59,7 +59,18 @@ class DefaultController extends Controller
         return $this->render('rechercher.html.twig'
         );
     }
-    
+
+
+    /**
+     * @Route("/rechercher/{string}", name="searchByString")
+     */
+    public function rechercheByStringAction(Request $request)
+    {
+        return $this->render('rechercher.html.twig'
+        );
+    }
+
+
     /**
      * @Route("/apropos", name="apropos")
      */

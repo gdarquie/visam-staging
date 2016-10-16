@@ -68,7 +68,7 @@ class EtablissementController extends Controller
      */
     public function editAction(Request $request, Etablissement $etablissement){
 
-//        $deleteForm = $this->createDeleteEtablissementForm($etablissement);
+        $deleteForm = $this->createDeleteForm($etablissement);
         $etablissementForm = $this->createForm('AppBundle\Form\EtablissementType', $etablissement);
         $etablissementForm->handleRequest($request);
 
@@ -88,10 +88,47 @@ class EtablissementController extends Controller
         }
 
         return $this->render('editeur/etablissement/edit.html.twig', array(
-            'etablissementForm' => $etablissementForm->createView()
+            'etablissementForm' => $etablissementForm->createView(),
+            'delete_form' => $deleteForm->createView(),
         ));
     }
 
+
+    /**
+     * Effacer un établissement
+     *
+     * @Route("/{id}/delete", name="editeur_etablissement_delete")
+     * @Method("DELETE")
+     */
+    public function deleteAction(Request $request, Etablissement $etablissement)
+    {
+        $form = $this->createDeleteForm($etablissement);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($etablissement);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('editeur');
+    }
+
+    /**
+     * Créer un form pour effacer un établissement
+     *
+     * @param Etablissement $etablissement
+     *
+     * @return \Symfony\Component\Form\Form
+     */
+    private function createDeleteForm(Etablissement $etablissement)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('editeur_etablissement_delete', array('id' => $etablissement->getEtablissementId())))
+            ->setMethod('DELETE')
+            ->getForm()
+            ;
+    }
 
 
 }

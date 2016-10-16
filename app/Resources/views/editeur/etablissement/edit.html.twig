@@ -10,11 +10,16 @@
             <input type="submit" value="Edit" class="btn btn-hesam" formnovalidate/>
         {{ form_end(etablissementForm) }}
 
+        {{ form_start(delete_form) }}
+            <button disabled value="Supprimer" class="btn btn-hesam right ">Supprimer</button>
+        {{ form_end(delete_form) }}
+
         <ul>
             <li>
                 <a href="{{ path('editeur') }}">Retour</a>
             </li>
 
         </ul>
+
     </section>
 {% endblock %}

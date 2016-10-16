@@ -12,10 +12,13 @@
     <article>
         <p>Nous sommes actuellement en train de produire le contenu de cette page. Il s'agira principalement de vidéos expliquant ce que permet de rechercher l'explorateur et comment effectuer au mieux ces recherches.</p>
 
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
         <h2>Vidéo de test</h2>
 
         <p>Cette vidéo "épique" sera bientôt remplacée par une vidéo de tutoriel.</p>
         <iframe width="560" height="315" src="https://www.youtube.com/embed/kxopViU98Xo" frameborder="0" allowfullscreen></iframe>
+    {% endif %}
+
     </article>
 
 </section>

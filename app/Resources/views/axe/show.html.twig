@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Axe</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Nom</th>
+                <td>{{ axe.nom }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ axe.description }}</td>
+            </tr>
+            <tr>
+                <th>Date_creation</th>
+                <td>{% if axe.datecreation %}{{ axe.datecreation|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Last_update</th>
+                <td>{% if axe.lastupdate %}{{ axe.lastupdate|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Axeid</th>
+                <td>{{ axe.axeId }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('axe_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('axe_edit', { 'id': axe.axeId }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
