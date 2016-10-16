@@ -21,11 +21,11 @@
         </div>
 
         <div class="low-titre" id="recherche">
-          <form action="rechercher"   method="get">
+          {#<form action="rechercher"   method="get">#}
             <input type="text" name="search" placeholder="Exemples : Sociologie, urbanisme, industrie, microscope ">
 
-            <button class="btn btn-hesam red-hesam btn-floating waves-light" type="submit"><i class="material-icons">search</i></button>
-          </form>
+            <a href="{{ path("searchByString", {'string' : "oui oui" }) }}" class="btn btn-hesam red-hesam btn-floating waves-light" type="submit"><i class="material-icons">search</i></a>
+          {#</form>#}
         </div>
 
       </div>
