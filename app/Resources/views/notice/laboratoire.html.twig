@@ -66,7 +66,7 @@
 
               </div>
               <div class="card-action">
-              <a href="{{labo.lien}}"><i class="material-icons">input</i>Lien vers le laboratoire</a>
+              <a href="{{labo.lien}}" target="_blank"><i class="material-icons">input</i>Lien vers le laboratoire</a>
 
               {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                 <a href="{{ path('editeur_laboratoire_edit', { id : labo.laboId }) }}"><i class="material-icons">mode_edit</i>Modifier les données</a>

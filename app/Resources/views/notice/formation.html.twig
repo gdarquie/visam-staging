@@ -39,7 +39,7 @@
           </div>
 					</div>
 	              <div class="card-action">
-	              <a href="{{formation.url}}"><i class="material-icons">input</i>Lien vers la formation</a>
+	              <a href="{{formation.url}}" target="_blank"><i class="material-icons">input</i>Lien vers la formation</a>
 
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                   <a href="{{ path('editeur_formation_edit', { id : formation.formationId }) }}"><i class="material-icons">mode_edit</i>Modifier les données</a> 
