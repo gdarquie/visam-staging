@@ -217,25 +217,6 @@
         </article>
 
 
-
-        {#<div class="row">#}
-            {#<div class="col s12">#}
-                {#<h3>Disciplines CNU les plus fréquentes</h3>#}
-
-              {#<div id="tagsCNU" class="jqcloud" style="width:100%;height:400px;"></div>#}
-            {#</div>#}
-
-            {#<div class="col s12">#}
-                {#<h3>Disciplines HCERES les plus fréquentes</h3>#}
-                {#<div id="tagsHCERES" class="jqcloud" style="width:100%;height:400px;"></div>#}
-            {#</div>#}
-
-            {#<div class="col s12">#}
-                {#<h3>Disciplines SISE les plus fréquentes</h3>#}
-                {#<div id="tagsSISE" class="jqcloud" style="width:100%;height:400px;"></div>#}
-            {#</div>#}
-        {#</div>#}
-
     </div><!-- fin container -->
 
 <!-- Les laboratoires -->
@@ -407,18 +388,20 @@
 
   </div>
 
-    <div class="container">
-        <h2>Carte des implantations des établissements membres d'hesam Université</h2>
+    {#<div class="container">#}
+        {#<h2>Carte des implantations des établissements membres d'hesam Université</h2>#}
 
 
-        <div class="intertitre row">
-            <p>hesam Université est présente partout dans le monde à travers les implantations de ces membres.</p>
-        </div>
-    </div>
-  <div class="row">
-    <div class='overlay'></div>
-    <iframe src="http://interlivre.fr/projet/visam/map/#/" frameborder="0" class ='col s12' id='map' ></iframe>
-  </div>
+    {#<div class="intertitre row">#}
+        {#<p>hesam Université est présente partout dans le monde à travers les implantations de ces membres.</p>#}
+    {#</div>#}
+
+{#</div>#}
+
+{#<div class="row">#}
+    {#<div class='overlay'></div>#}
+    {#<iframe src="http://interlivre.fr/projet/visam/map/#/" frameborder="0" class ='col s12' id='map' ></iframe>#}
+{#</div>#}
 
     {% endblock %}
 
@@ -453,53 +436,6 @@
           (function($){
             $(function(){
               $('.parallax').parallax();
-
-                var wordsCNU = [
-                {% for discipline in allCnuDisciplinesFormations %}
-                     {text:"{{discipline.item.nom}} ({{discipline.nb}})",
-                     weight : {{discipline.nb}} },
-                {% endfor %}
-                ];
-                console.log(wordsCNU);
-                $('#tagsCNU').jQCloud(wordsCNU, {
-                    shape: 'rectangular',
-                    autoResize: true,
-                    //colors: ["#c62828", "#d32f2f", "#e53935", "#f44336", "#ef5350", "#e57373", "#ef9a9a", "#ffcdd2", "#ffebee"]
-                });
-
-                var wordsHCERES = [
-                {% for discipline in allHceresDisciplinesFormations %}
-                     {text:"{{discipline.item.nom}} ({{discipline.nb}})",
-                     weight : {{discipline.nb}} },
-                {% endfor %}
-                ]
-                $('#tagsHCERES').jQCloud(wordsHCERES, {
-                    shape: 'rectangular',
-                    autoResize: true,
-                });
-
-                var wordsHCERES = [
-                {% for discipline in allHceresDisciplinesFormations %}
-                     {text:"{{discipline.item.nom}} ({{discipline.nb}})",
-                     weight : {{discipline.nb}} },
-                {% endfor %}
-                ]
-                $('#tagsHCERES').jQCloud(wordsHCERES, {
-                    shape: 'rectangular',
-                    autoResize: true,
-                });
-
-                var wordsSISE = [
-                {% for discipline in allSiseDisciplinesFormations %}
-                     {text:"{{discipline.item.nom}} ({{discipline.nb}})",
-                     weight : {{discipline.nb}} },
-                {% endfor %}
-                ]
-                $('#tagsSISE').jQCloud(wordsSISE, {
-                    shape: 'rectangular',
-                    autoResize: true,
-                });
-
             }); // end of document ready
           })(jQuery); // end of jQuery name space
         </script>
@@ -765,7 +701,7 @@
     function chercheursData() {
       return  [
           {% for etab in etabs|sort %}
-              {"label" : "{{etab.nom}}",
+              {"label" : "{{etab.nom|escape('js')}}",
               "value" : "{{etab.chercheurs}}"},
           {% endfor %}
         ];
@@ -774,7 +710,7 @@
       function etudData() {
       return  [
           {% for etab in etabs|sort %}
-              {"label" : "{{etab.nom}}",
+              {"label" : "{{etab.nom|escape('js')}}",
               "value" : "{{etab.etudiants}}"},
           {% endfor %}
         ];
@@ -784,7 +720,7 @@
       function formaEtabData() {
       return  [
            {% for etab in etabs %}
-              {"label" : "{{etab.nom}}",
+              {"label" : "{{etab.nom|escape('js')}}",
               "value" : "{{etab.formation|length}}"},
           {% endfor %}
         ];
@@ -794,7 +730,7 @@
       function laboEtabData() {
       return  [
            {% for etab in etabs %}
-              {"label" : "{{etab.nom}}",
+              {"label" : "{{etab.nom|escape('js')}}",
               "value" : "{{etab.labo|length}}"},
           {% endfor %}
         ];
@@ -805,7 +741,7 @@
       function formationTopDisciplineData() {
       return  [
            {% for discipline in allDisciplinesFormations %}
-              {"label" : "{{discipline.item.nom}}",
+              {"label" : "{{discipline.item.nom|escape('js')}}",
               "value" : "{{discipline.item.formation|length}}"},
           {% endfor %}
         ];
@@ -815,7 +751,7 @@
       function allNw3DisciplinesFormationsData() {
         return [
             {% for discipline in allNw3DisciplinesFormations %}
-              {"label" : "{{discipline.item.nom}}",
+              {"label" : "{{discipline.item.nom|escape('js')}}",
               "value" : "{{discipline.nb}}" },
             {% endfor %}
         ];
@@ -825,7 +761,7 @@
       function allNw3DisciplinesLabosData() {
         return [
             {% for discipline in allNw3DisciplinesLabos %}
-              {"label" : "{{discipline.item.nom}}",
+              {"label" : "{{discipline.item.nom|escape('js')}}",
               "value" : "{{discipline.nb}}" },
             {% endfor %}
         ];
@@ -836,7 +772,7 @@
       function nbTypeLabosData() {
         return [
             {% for labo in nbTypeLabos %}
-              {"label" : "{{labo.type}}",
+              {"label" : "{{labo.type|escape('js')}}",
               "value" : "{{labo.nb}}" },
             {% endfor %}
         ];
@@ -847,7 +783,7 @@
       function nbLaboParHesametteData() {
         return [
             {% for hesamette in labosHesamette %}
-              { "label" :"{{hesamette.hesamette}}",
+              { "label" :"{{hesamette.hesamette|escape('js')}}",
               "value" : "{{hesamette.nb}}" },
             {% endfor %}
         ];
@@ -857,7 +793,7 @@
       function nbFormParHesametteData() {
         return [
             {% for hesamette in formationsHesamette %}
-              { "label" :"{{hesamette.hesamette}}",
+              { "label" :"{{hesamette.hesamette|escape('js')}}",
               "value" : "{{hesamette.nb}}" },
             {% endfor %}
         ];
