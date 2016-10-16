@@ -127,7 +127,7 @@ class DefaultController extends Controller
 
 //        dump($rebond);die();
 
-        
+
         return $this->render('notice/laboratoire.html.twig', array(
             'labo' => $laboratoire,
             'labos' => $labos,

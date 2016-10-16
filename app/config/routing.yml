@@ -1,6 +1,3 @@
-app_axe:
-    resource: "@AppBundle/Controller/AxeController.php"
-    type:     annotation
 
 app_web:
     resource: "@AppBundle/Controller/Web"
