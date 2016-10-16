@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3bb1b647-8eae-4507-b232-68d841001a20" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/base.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/notice/formation.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/notice/formation.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/notice/laboratoire.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/notice/laboratoire.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/web/stats.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/web/stats.html.twig" />
     </list>
     <ignored path="visam_2016-04-28.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -71,12 +68,45 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base.html.twig" pinned="false" current-in-tab="true">
+      <file leaf-file-name="base.html.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="106" column="28" selection-start-line="106" selection-start-column="28" selection-end-line="106" selection-end-column="28" />
+            <state relative-caret-position="345">
+              <caret line="25" column="22" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StatistiquesController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/Web/StatistiquesController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="234">
+              <caret line="34" column="37" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="37" />
+              <folding>
+                <marker date="1476632524000" expanded="true" signature="1288:1382" ph="SELECT p FRO... AppBundle" />
+                <marker date="1476632524000" expanded="true" signature="1630:1730" ph="SELECT n.niv... AppBundle" />
+                <marker date="1476632524000" expanded="true" signature="2282:2459" ph="SELECT d as AppBundle" />
+                <marker date="1476632524000" expanded="true" signature="2665:2836" ph="SELECT d as AppBundle" />
+                <marker date="1476632524000" expanded="true" signature="3094:3265" ph="SELECT d as AppBundle" />
+                <marker date="1476632524000" expanded="true" signature="3524:3695" ph="SELECT d as AppBundle" />
+                <marker date="1476632524000" expanded="true" signature="3949:4120" ph="SELECT d as AppBundle" />
+                <marker date="1476632524000" expanded="true" signature="4339:4494" ph="SELECT h.nom... AppBundle" />
+                <marker date="1476632524000" expanded="true" signature="4634:4779" ph="SELECT h.nom... AppBundle" />
+                <marker date="1476632524000" expanded="true" signature="5235:5279" ph="SELECT d as AppBundle" />
+                <marker date="1476632524000" expanded="true" signature="5518:5670" ph="SELECT d as AppBundle" />
+                <marker date="1476632524000" expanded="true" signature="5886:6057" ph="SELECT d as AppBundle" />
+                <marker date="1476632524000" expanded="true" signature="6325:6496" ph="SELECT d as AppBundle" />
+                <marker date="1476632524000" expanded="true" signature="6765:6936" ph="SELECT d as AppBundle" />
+                <marker date="1476632524000" expanded="true" signature="7200:7371" ph="SELECT d as AppBundle" />
+                <marker date="1476632524000" expanded="true" signature="8153:8290" ph="SELECT d as AppBundle" />
+                <marker date="1476632524000" expanded="true" signature="8496:8652" ph="SELECT d as AppBundle" />
+                <marker date="1476632524000" expanded="true" signature="8910:9066" ph="SELECT d as AppBundle" />
+                <marker date="1476632524000" expanded="true" signature="9325:9481" ph="SELECT d as AppBundle" />
+                <marker date="1476632524000" expanded="true" signature="9733:9889" ph="SELECT d as AppBundle" />
+                <marker date="1476632524000" expanded="true" signature="10331:10421" ph="SELECT l.nom... AppBundle" />
+                <marker date="1476632524000" expanded="true" signature="10803:10921" ph="SELECT l.typ... AppBundle" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -127,25 +157,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="stats.html.twig" pinned="false" current-in-tab="false">
+      <file leaf-file-name="stats.html.twig" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Resources/views/web/stats.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4170">
-              <caret line="278" column="75" selection-start-line="278" selection-start-column="75" selection-end-line="278" selection-end-column="75" />
+            <state relative-caret-position="354">
+              <caret line="175" column="210" selection-start-line="175" selection-start-column="210" selection-end-line="175" selection-end-column="210" />
               <folding>
                 <element signature="e#12#26#0#Twig" expanded="true" />
-                <element signature="e#6442#6463#0#HTML" expanded="true" />
+                <element signature="e#6444#6465#0#HTML" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_form.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Resources/views/editeur/formation/_form.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="0" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="32" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -211,11 +231,11 @@
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/Editeur/FormationController.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/Editeur/LaboratoireController.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/web/apropos.html.twig" />
-        <option value="$PROJECT_DIR$/app/Resources/views/web/stats.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/web/index.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/notice/laboratoire.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/notice/formation.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
+        <option value="$PROJECT_DIR$/app/Resources/views/web/stats.html.twig" />
       </list>
     </option>
   </component>
@@ -881,12 +901,12 @@
       <workItem from="1476353280393" duration="29085000" />
       <workItem from="1476461719319" duration="16324000" />
       <workItem from="1476611680839" duration="3145000" />
-      <workItem from="1476622358296" duration="15189000" />
+      <workItem from="1476622358296" duration="15507000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="120333000" />
+    <option name="totallyTimeSpent" value="120651000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1250,37 +1270,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/Web/StatistiquesController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="183" column="41" selection-start-line="183" selection-start-column="41" selection-end-line="183" selection-end-column="41" />
-          <folding>
-            <marker date="1476632524000" expanded="true" signature="1288:1382" ph="SELECT p FRO... AppBundle" />
-            <marker date="1476632524000" expanded="true" signature="1630:1730" ph="SELECT n.niv... AppBundle" />
-            <marker date="1476632524000" expanded="true" signature="2282:2459" ph="SELECT d as AppBundle" />
-            <marker date="1476632524000" expanded="true" signature="2665:2836" ph="SELECT d as AppBundle" />
-            <marker date="1476632524000" expanded="true" signature="3094:3265" ph="SELECT d as AppBundle" />
-            <marker date="1476632524000" expanded="true" signature="3524:3695" ph="SELECT d as AppBundle" />
-            <marker date="1476632524000" expanded="true" signature="3949:4120" ph="SELECT d as AppBundle" />
-            <marker date="1476632524000" expanded="true" signature="4339:4494" ph="SELECT h.nom... AppBundle" />
-            <marker date="1476632524000" expanded="true" signature="4634:4779" ph="SELECT h.nom... AppBundle" />
-            <marker date="1476632524000" expanded="true" signature="5235:5279" ph="SELECT d as AppBundle" />
-            <marker date="1476632524000" expanded="true" signature="5518:5670" ph="SELECT d as AppBundle" />
-            <marker date="1476632524000" expanded="true" signature="5886:6057" ph="SELECT d as AppBundle" />
-            <marker date="1476632524000" expanded="true" signature="6325:6496" ph="SELECT d as AppBundle" />
-            <marker date="1476632524000" expanded="true" signature="6765:6936" ph="SELECT d as AppBundle" />
-            <marker date="1476632524000" expanded="true" signature="7200:7371" ph="SELECT d as AppBundle" />
-            <marker date="1476632524000" expanded="true" signature="8153:8290" ph="SELECT d as AppBundle" />
-            <marker date="1476632524000" expanded="true" signature="8496:8652" ph="SELECT d as AppBundle" />
-            <marker date="1476632524000" expanded="true" signature="8910:9066" ph="SELECT d as AppBundle" />
-            <marker date="1476632524000" expanded="true" signature="9325:9481" ph="SELECT d as AppBundle" />
-            <marker date="1476632524000" expanded="true" signature="9733:9889" ph="SELECT d as AppBundle" />
-            <marker date="1476632524000" expanded="true" signature="10331:10421" ph="SELECT l.nom... AppBundle" />
-            <marker date="1476632524000" expanded="true" signature="10803:10921" ph="SELECT l.typ... AppBundle" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/FOSUserBundle/views/login.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1376,17 +1365,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/web/stats.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4170">
-          <caret line="278" column="75" selection-start-line="278" selection-start-column="75" selection-end-line="278" selection-end-column="75" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-            <element signature="e#6442#6463#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/bower_components/recherche/facette.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="662">
@@ -1425,9 +1403,51 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="106" column="28" selection-start-line="106" selection-start-column="28" selection-end-line="106" selection-end-column="28" />
+        <state relative-caret-position="345">
+          <caret line="25" column="22" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/Web/StatistiquesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="34" column="37" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="37" />
+          <folding>
+            <marker date="1476632524000" expanded="true" signature="1288:1382" ph="SELECT p FRO... AppBundle" />
+            <marker date="1476632524000" expanded="true" signature="1630:1730" ph="SELECT n.niv... AppBundle" />
+            <marker date="1476632524000" expanded="true" signature="2282:2459" ph="SELECT d as AppBundle" />
+            <marker date="1476632524000" expanded="true" signature="2665:2836" ph="SELECT d as AppBundle" />
+            <marker date="1476632524000" expanded="true" signature="3094:3265" ph="SELECT d as AppBundle" />
+            <marker date="1476632524000" expanded="true" signature="3524:3695" ph="SELECT d as AppBundle" />
+            <marker date="1476632524000" expanded="true" signature="3949:4120" ph="SELECT d as AppBundle" />
+            <marker date="1476632524000" expanded="true" signature="4339:4494" ph="SELECT h.nom... AppBundle" />
+            <marker date="1476632524000" expanded="true" signature="4634:4779" ph="SELECT h.nom... AppBundle" />
+            <marker date="1476632524000" expanded="true" signature="5235:5279" ph="SELECT d as AppBundle" />
+            <marker date="1476632524000" expanded="true" signature="5518:5670" ph="SELECT d as AppBundle" />
+            <marker date="1476632524000" expanded="true" signature="5886:6057" ph="SELECT d as AppBundle" />
+            <marker date="1476632524000" expanded="true" signature="6325:6496" ph="SELECT d as AppBundle" />
+            <marker date="1476632524000" expanded="true" signature="6765:6936" ph="SELECT d as AppBundle" />
+            <marker date="1476632524000" expanded="true" signature="7200:7371" ph="SELECT d as AppBundle" />
+            <marker date="1476632524000" expanded="true" signature="8153:8290" ph="SELECT d as AppBundle" />
+            <marker date="1476632524000" expanded="true" signature="8496:8652" ph="SELECT d as AppBundle" />
+            <marker date="1476632524000" expanded="true" signature="8910:9066" ph="SELECT d as AppBundle" />
+            <marker date="1476632524000" expanded="true" signature="9325:9481" ph="SELECT d as AppBundle" />
+            <marker date="1476632524000" expanded="true" signature="9733:9889" ph="SELECT d as AppBundle" />
+            <marker date="1476632524000" expanded="true" signature="10331:10421" ph="SELECT l.nom... AppBundle" />
+            <marker date="1476632524000" expanded="true" signature="10803:10921" ph="SELECT l.typ... AppBundle" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/web/stats.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="354">
+          <caret line="175" column="210" selection-start-line="175" selection-start-column="210" selection-end-line="175" selection-end-column="210" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+            <element signature="e#6444#6465#0#HTML" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
