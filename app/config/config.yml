@@ -73,3 +73,10 @@ fos_user:
     db_driver: orm 
     firewall_name: main
     user_class: AppBundle\Entity\User
+
+# Doctrine Cache
+
+doctrine_cache:
+    providers:
+        export_cache:
+            type: file_system
