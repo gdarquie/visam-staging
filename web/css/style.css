@@ -97,13 +97,13 @@ header{
 
 
 /* Footer */
-
+/*
 footer h1, footer h2, footer h3{
     text-align: center;
-}
+}*/
 
 footer h2{
-    font-size: 2em;
+    font-size: 1.9em;
 }
 
 footer p{
@@ -114,6 +114,9 @@ footer p{
     color:white;
 }
 
+footer .container-fluid {
+  margin-bottom: 0px;
+}
 
 .red-hesam{
     background-color: #ef4023;
@@ -140,7 +143,7 @@ footer .contactHesam{
 }
 
 footer h2, footer h3{
-    padding-top: 0px;
+    margin-top: 0px;
 }
 
 
