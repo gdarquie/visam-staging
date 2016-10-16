@@ -496,4 +496,9 @@ class Ed
     {
         return $this->labo;
     }
+
+    public function __toString()
+    {
+        return $this->getNom();
+    }
 }

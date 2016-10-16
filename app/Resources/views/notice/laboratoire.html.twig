@@ -69,7 +69,7 @@
               <a href="{{labo.lien}}"><i class="material-icons">input</i>Lien vers le laboratoire</a>
 
               {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                <a href="{{ path('editeur_labo_edit', { id : labo.laboId }) }}"><i class="material-icons">mode_edit</i>Modifier les données</a> 
+                <a href="{{ path('editeur_laboratoire_edit', { id : labo.laboId }) }}"><i class="material-icons">mode_edit</i>Modifier les données</a>
               {% endif %}
               <a href="mailto:{{labo.mailContact}}"><i class="material-icons">mail</i>{{labo.mailContact}}</a>
 
@@ -87,16 +87,16 @@
             <div class="suggest row">
             <h4>Voir aussi...</h4>
 
-            {% for labo in labos %}
+            {% for labo in rebonds_labo %}
             	<div class="col m4 l4">
                     <div class="card laboratoire petit" >
                       <div class="card-content">
                       <span class="etablissement"><span>{{labo.type}}</span> - {{labo.code}}</span>
-                         <h5>{{labo.nom}}</h5>
+                         <h5><a href="{{ path('labo' ,{"id" : labo.laboId}) }}">{{labo.nom}}</a></h5>
                          {# <span> {{labo.etablissement}}</span> #}
                           <ul class="list-thematique" >
                           	{% for discipline in labo.discipline|slice(0,3)%}
-                          		<li>{{discipline.nom}}</li>
+                          		<li>{{discipline.nom}}{% if loop.last %}{% else %};{% endif %}</li>
                           	{% endfor%}
                             {# les disciplines #}
                           </ul>
@@ -107,6 +107,27 @@
                    </div>
                   </div>
          	{% endfor %}
+
+            {% for formation in rebonds_formation  %}
+                <div class="col m4 l4">
+                    <div class="card formation petit" >
+                        <div class="card-content">
+                            <span class="etablissement"><span>{{formation.annee}}</span> - <span>{{ formation.niveau }}</span></span>
+                            <h5><a href="{{ path('formation' , {"id" : formation.formationId}) }}">{{formation.nom}}</a></h5>
+                            {# <span> {{labo.etablissement}}</span> #}
+                            <ul class="list-thematique" >
+                                {% for discipline in formation.discipline|slice(0,3)%}
+                                    <li>{{discipline.nom}}</li>
+                                {% endfor%}
+                                {# les disciplines #}
+                            </ul>
+                        </div>
+                        <div class="card-action">
+                            <a href="{{formation.url}}"><i class="material-icons">input</i></a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
 
 
                 </div>

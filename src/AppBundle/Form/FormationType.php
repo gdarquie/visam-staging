@@ -5,6 +5,17 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
+use AppBundle\Entity\Discipline;
+use AppBundle\Repository\DisciplineRepository;
+
+use AppBundle\Entity\Etablissement;
+use AppBundle\Repository\EtablissementRepository;
+
+use AppBundle\Entity\Tag;
+use AppBundle\Repository\TagRepository;
 
 class FormationType extends AbstractType
 {
@@ -26,14 +37,35 @@ class FormationType extends AbstractType
             ->add('lien3')
             ->add('responsable')
         //     ->add('membre')
-            ->add('tag')
+            ->add('tag', EntityType::class, array(
+                'class' => 'AppBundle:Tag',
+//                'multiple' => true,
+                'choice_label' => 'nom',
+                'query_builder' => function(TagRepository $repo) {
+                    return $repo->createAlphabeticalQueryBuilder();
+                }
+            ))
         //     ->add('theme')
         //     ->add('localisation')
         //     ->add('labo')
-             ->add('etablissement')
+             ->add('etablissement', EntityType::class, array(
+                'class' => 'AppBundle:Etablissement',
+                'multiple' => true,
+                'choice_label' => 'nom',
+                'query_builder' => function(EtablissementRepository $repo) {
+                    return $repo->createAlphabeticalQueryBuilder();
+                }
+            ))
         //     ->add('metier')
         //     ->add('ufr')
-             ->add('discipline')
+//            ->add('discipline', EntityType::class, array(
+//                'class' => 'AppBundle:Discipline',
+//                'multiple' => true,
+//                'choice_label' => 'nom',
+//                'query_builder' => function(DisciplineRepository $repo) {
+//                    return $repo->createAlphabeticalQueryBuilder();
+//                }
+//            ))
         ;
     }
     

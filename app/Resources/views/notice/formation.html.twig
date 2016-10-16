@@ -61,27 +61,47 @@ Effectif(s) : {{formation.effectif}}|
             <div class="suggest row">
             <h4>Voir aussi...</h4>
 
-            {% for formation in formations %}
-            	<div class="col m4 l4">
-                    <div class="card laboratoire petit" >
-                      <div class="card-content">
-                      <span class="etablissement"><span>{{formation.typediplome}}</span> - {{formation.niveau}}</span>
-                         <h5>{{formation.nom}}</h5>
-                         {# <span> {{labo.etablissement}}</span> #}
-                          <ul class="list-thematique" >
-                          	{% for discipline in formation.discipline|slice(0,3)%}
-                          		<li>{{formation.nom}}</li>
-                          	{% endfor%}
-                            {# les disciplines #}
-                          </ul>
-                      </div>
-                      <div class="card-action">
-                        <a href="{{formation.url}}"><i class="material-icons">input</i></a>
+                {% for labo in rebonds_labo %}
+                    <div class="col m4 l4">
+                        <div class="card laboratoire petit" >
+                            <div class="card-content">
+                                <span class="etablissement"><span>{{labo.type}}</span> - {{labo.code}}</span>
+                                <h5><a href="{{ path('labo' ,{"id" : labo.laboId}) }}">{{labo.nom}}</a></h5>
+                                {# <span> {{labo.etablissement}}</span> #}
+                                <ul class="list-thematique" >
+                                    {% for discipline in labo.discipline|slice(0,3)%}
+                                        <li>{{discipline.nom}}{% if loop.last %}{% else %};{% endif %}</li>
+                                    {% endfor%}
+                                    {# les disciplines #}
+                                </ul>
+                            </div>
+                            <div class="card-action">
+                                <a href="{{labo.lien}}"><i class="material-icons">input</i></a>
+                            </div>
+                        </div>
                     </div>
-                   </div>
-                  </div>
-         	{% endfor %}
+                {% endfor %}
 
+                {% for formation in rebonds_formation  %}
+                    <div class="col m4 l4">
+                        <div class="card formation petit" >
+                            <div class="card-content">
+                                <span class="etablissement"><span>{{formation.annee}}</span> - <span>{{ formation.niveau }}</span></span>
+                                <h5><a href="{{ path('formation' , {"id" : formation.formationId}) }}">{{formation.nom}}</a></h5>
+                                {# <span> {{labo.etablissement}}</span> #}
+                                <ul class="list-thematique" >
+                                    {% for discipline in formation.discipline|slice(0,3)%}
+                                        <li>{{discipline.nom}}</li>
+                                    {% endfor%}
+                                    {# les disciplines #}
+                                </ul>
+                            </div>
+                            <div class="card-action">
+                                <a href="{{formation.url}}"><i class="material-icons">input</i></a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
 
                 </div>
             </div>

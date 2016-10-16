@@ -27,7 +27,7 @@ class LaboType extends AbstractType
             ->add('sigle')
             ->add('lien2')
             ->add('lien3')
-            ->add('membre')
+//            ->add('membre')
             // ->add('theme')
             // ->add('ufr')
             // ->add('localisation')

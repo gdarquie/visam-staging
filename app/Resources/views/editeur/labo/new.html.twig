@@ -1,16 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Laboratoire {{labo.laboId}}</h1>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+    <section class="container">
+        <h1>Créer un laboratoire</h1>
 
-    <ul>
-        <li>
-            <a href="{{ path('labo_index') }}">Back to the list</a>
-        </li>
-    </ul>
+        {{ form_start(edit_form) }}
+            {{ include('editeur/labo/_form.html.twig') }}
+            <input type="submit" value="Créer"  class="btn btn-hesam" formnovalidate/>
+        {{ form_end(edit_form) }}
+
+        <ul>
+            <li>
+                <a href="{{ path('editeur') }}">Retour</a>
+            </li>
+        </ul>
+    </section>
 {% endblock %}
