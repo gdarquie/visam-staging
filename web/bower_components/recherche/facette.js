@@ -43,8 +43,7 @@ function facette(){
               '<ul class="list-thematique surligne" >' + 
               '<li><%= obj.discipline %></li>'+
               '</ul>'+
-              '<% if (obj.equipement == "undefined") { %> TRUE <% } %>'+
-              '<% if (obj.equipement != "undefined") { %> <h6>Equipement(s)</h6><ul class="list-thematique surligne" ><li><%= obj.equipement %></li> <%} %></ul>'+ 
+              '<% if (obj.equipement != "") { %> <h6>Equipement(s)</h6><ul class="list-thematique surligne" ><li><%= obj.equipement %></li> <%} %></ul>'+ 
               '</div>'+
               '<div class="card-action">'+
               '<a href="editeur/laboratoire/<%= obj.id %>/edit" class="modifier"><i class="material-icons">edit</i>Modifier</a>'+
