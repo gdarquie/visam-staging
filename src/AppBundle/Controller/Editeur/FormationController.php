@@ -77,7 +77,8 @@ class FormationController extends Controller
             $em->persist($formation);
             $em->flush();
 
-            return $this->redirectToRoute('editeur');
+            return $this->redirectToRoute('formation', array('id' => $formation->getFormationId() ));
+
         }
 
         return $this->render('editeur/formation/edit.html.twig', array(

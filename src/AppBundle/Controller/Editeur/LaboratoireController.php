@@ -76,7 +76,7 @@ class LaboratoireController extends Controller
             $em->persist($laboratoire);
             $em->flush();
 
-            return $this->redirectToRoute('editeur');
+            return $this->redirectToRoute('labo', array('id' => $laboratoire->getLaboId() ));
         }
 
         return $this->render('editeur/labo/edit.html.twig', array(
