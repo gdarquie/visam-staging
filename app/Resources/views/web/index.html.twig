@@ -54,7 +54,7 @@
             <div class="help-home" id="domaines">
               <p>Il est possible de faire la recherche parmi les quinze thématiques Hesam et les disciplines qui leurs sont associées : </p>
               {% for hesamette in hesamettes %}
-                <li>{{ hesamette }}</li>
+                <li><a href="/rechercher?search={{ hesamette |escape('html') }}" class="black-text text-lighten-4">{{ hesamette }}</a></li>
               {% endfor %}
               <div class="plus" id="chercher-domaines"><button class="btn waves-effect waves-light btn-hesam" type="button">mieux comprendre notre mode de recherche
                   <i class="material-icons right">info</i>

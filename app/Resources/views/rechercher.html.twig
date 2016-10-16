@@ -2,6 +2,19 @@
 
 {% block fos_user_content %}{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+    {% else %}
+    <style>
+        .modifier{
+            display:none;
+        }
+    </style>
+    {% endif %}
+{% endblock %}
+
+
 {% block body %}
 
   <div class="container large">
