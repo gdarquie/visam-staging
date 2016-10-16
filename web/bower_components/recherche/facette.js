@@ -33,7 +33,7 @@ function facette(){
             '<span class="item-labo">Laboratoire</span>'+
             '<span class="etablissement"><span class="surligne">- <%= obj.ctype %> </span><span class="surligne"><%= obj.code %></span>'+
              '<a href="/labo/<%= obj.id %>">'+
-              '<h5 class="surligne"><%= obj.name %> (<%= obj.sigle %>)</h5></a>'+
+              '<h5 class="surligne"><%= obj.name %> <% if (obj.sigle) { %> (<%= obj.sigle%>)  <%} %></h5></a>'+
               '<span class="etablissement-name"><%= obj.etablissement %></span>'+
               '<h6>Thématique(s)</h6>' +
               '<ul class="list-thematique surligne" >' + 
@@ -43,10 +43,8 @@ function facette(){
               '<ul class="list-thematique surligne" >' + 
               '<li><%= obj.discipline %></li>'+
               '</ul>'+
-              '<h6>Equipement(s)</h6>' +
-              '<ul class="list-thematique surligne" >' + 
-              '<li><%= obj.equipement %></li>'+
-              '</ul>'+              
+              '<% if (obj.equipement == "undefined") { %> TRUE <% } %>'+
+              '<% if (obj.equipement != "undefined") { %> <h6>Equipement(s)</h6><ul class="list-thematique surligne" ><li><%= obj.equipement %></li> <%} %></ul>'+ 
               '</div>'+
               '<div class="card-action">'+
               '<a href="editeur/laboratoire/<%= obj.id %>/edit" class="modifier"><i class="material-icons">edit</i>Modifier</a>'+
@@ -93,9 +91,13 @@ function facette(){
               if(params.search) {
                 $("#search-input").val(params.search);
                   searchInput();
+
                 $('.surligne').highlight(params.search);
               }
 
+        $(settings).bind("facetuicreated", function(){
+          console.log("ec");
+        });
 
                 $('#search-input').keyup(function () { 
                   searchInput();
@@ -120,6 +122,9 @@ var searchInput = function () {
   searchVal = $("#search-input").val();
   if (searchVal) {
     var returnedData = $.grep(dataJson, function(element, index){
+      if (element.name.toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
+        return element;
+      }
       if (element.hesamette.toString().toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
         return element;
       }
@@ -129,9 +134,7 @@ var searchInput = function () {
       if (element.equipement && element.equipement.toString().toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
         return element;
       }         
-      if (element.name.toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
-        return element;
-      }
+
       if (element.sigle && element.sigle.toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
         return element;
       }
@@ -140,7 +143,8 @@ var searchInput = function () {
       }
       if (element.code && element.code.toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
         return element;
-      }      
+      } 
+
     });
     settings.items = returnedData;
   } else {
@@ -149,6 +153,7 @@ var searchInput = function () {
 
 
   $.facetelize(settings);
+  if ($(".content-equipement:empty")) {$(".titre-equipement").hide(); }
   
   history.pushState('data', 'Recherche Hesam', 'rechercher?search='+searchVal);
 
