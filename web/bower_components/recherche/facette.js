@@ -149,7 +149,7 @@ var searchInput = function () {
 
 
   $.facetelize(settings);
-  //$('.surligne').highlight(searchVal);
+  
   history.pushState('data', 'Recherche Hesam', 'rechercher?search='+searchVal);
 
 
