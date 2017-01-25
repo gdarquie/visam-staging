@@ -10,7 +10,6 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 use AppBundle\Entity\Discipline;
 use AppBundle\Repository\DisciplineRepository;
-
 use AppBundle\Entity\Etablissement;
 use AppBundle\Repository\EtablissementRepository;
 
@@ -48,24 +47,24 @@ class FormationType extends AbstractType
         //     ->add('theme')
         //     ->add('localisation')
         //     ->add('labo')
-//             ->add('etablissement', EntityType::class, array(
-//                'class' => 'AppBundle:Etablissement',
-//                'multiple' => true,
-//                'choice_label' => 'nom',
-//                'query_builder' => function(EtablissementRepository $repo) {
-//                    return $repo->createAlphabeticalQueryBuilder();
-//                }
-//            ))
+             ->add('etablissement', EntityType::class, array(
+                'class' => 'AppBundle:Etablissement',
+                'multiple' => true,
+                'choice_label' => 'nom',
+                'query_builder' => function(EtablissementRepository $repo) {
+                    return $repo->createAlphabeticalQueryBuilder();
+                }
+            ))
         //     ->add('metier')
         //     ->add('ufr')
-//            ->add('discipline', EntityType::class, array(
-//                'class' => 'AppBundle:Discipline',
-//                'multiple' => true,
-//                'choice_label' => 'nom',
-//                'query_builder' => function(DisciplineRepository $repo) {
-//                    return $repo->createAlphabeticalQueryBuilder();
-//                }
-//            ))
+            ->add('discipline', EntityType::class, array(
+                'class' => 'AppBundle:Discipline',
+                'multiple' => true,
+                'choice_label' => 'nom',
+                'query_builder' => function(DisciplineRepository $repo) {
+                    return $repo->createAlphabeticalQueryBuilder();
+                }
+            ))
         ;
     }
     

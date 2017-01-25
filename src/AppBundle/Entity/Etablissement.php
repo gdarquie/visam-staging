@@ -170,6 +170,7 @@ class Etablissement
      */
     private $labo;
 
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
@@ -184,6 +185,7 @@ class Etablissement
      * )
      */
     private $formation;
+
 
     /**
      * @var \Doctrine\Common\Collections\Collection

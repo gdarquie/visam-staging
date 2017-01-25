@@ -177,18 +177,6 @@ var transformToAssocArray = function( prmstr ) {
     return params;
 }
 
-//Tests Gaétan
-
-// function myData(){
-//   return $.getJSON( "/export");
-// }
-
-// function launch(callback){
-//   dataJson = myData();
-//   callback();
-// }
-
-// launch(facette);
 
 
 

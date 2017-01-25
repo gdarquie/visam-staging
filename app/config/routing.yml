@@ -1,10 +1,16 @@
-
-app_web:
-    resource: "@AppBundle/Controller/Web"
+editeur:
+    resource: "@EditeurBundle/Controller/"
     type:     annotation
+    prefix:   /
 
 app_editeur:
     resource: "@AppBundle/Controller/Editeur"
+    type:     annotation
+    prefix:   /
+
+
+app_web:
+    resource: "@AppBundle/Controller/Web"
     type:     annotation
 
 app_api:
@@ -13,3 +19,4 @@ app_api:
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+

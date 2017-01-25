@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Formation
@@ -646,37 +647,19 @@ class Formation
     }
 
     /**
-     * Add etablissement
-     *
-     * @param \AppBundle\Entity\Etablissement $etablissement
-     *
-     * @return Formation
-     */
-    public function addEtablissement(\AppBundle\Entity\Etablissement $etablissement)
-    {
-        $this->etablissement[] = $etablissement;
-
-        return $this;
-    }
-
-    /**
-     * Remove etablissement
-     *
-     * @param \AppBundle\Entity\Etablissement $etablissement
-     */
-    public function removeEtablissement(\AppBundle\Entity\Etablissement $etablissement)
-    {
-        $this->etablissement->removeElement($etablissement);
-    }
-
-    /**
-     * Get etablissement
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getEtablissement()
     {
         return $this->etablissement;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $etablissement
+     */
+    public function setEtablissement($etablissement)
+    {
+        $this->etablissement = $etablissement;
     }
 
     /**
@@ -746,4 +729,6 @@ class Formation
     {
         return $this->discipline;
     }
+
+
 }
