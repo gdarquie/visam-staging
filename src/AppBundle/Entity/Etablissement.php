@@ -97,6 +97,13 @@ class Etablissement
     private $chercheurs;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="intervenants", type="integer", nullable=true)
+     */
+    private $intervenants;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="lien2", type="string", length=255, nullable=true)
@@ -551,8 +558,6 @@ class Etablissement
         return $this->lien3;
     }
 
-
-
     /**
      * Get etablissementId
      *
@@ -568,11 +573,16 @@ class Etablissement
      *
      * @param \AppBundle\Entity\Localisation $localisation
      *
-     * @return Etablissement
+     * @return Localisation
      */
     public function addLocalisation(\AppBundle\Entity\Localisation $localisation)
     {
+        if ($this->localisation->contains($localisation)) {
+            return;
+        }
+
         $this->localisation[] = $localisation;
+        $localisation->addEtablissement($this);
 
         return $this;
     }
@@ -585,6 +595,7 @@ class Etablissement
     public function removeLocalisation(\AppBundle\Entity\Localisation $localisation)
     {
         $this->localisation->removeElement($localisation);
+        $localisation->removeLocalisation($this);
     }
 
     /**
@@ -675,7 +686,6 @@ class Etablissement
     public function addFormation(\AppBundle\Entity\Formation $formation)
     {
         $this->formation[] = $formation;
-
         return $this;
     }
 
@@ -763,6 +773,22 @@ class Etablissement
     public function setLastUpdate($last_update)
     {
         $this->last_update = $last_update;
+    }
+
+    /**
+     * @return int
+     */
+    public function getIntervenants()
+    {
+        return $this->intervenants;
+    }
+
+    /**
+     * @param int $intervenants
+     */
+    public function setIntervenants($intervenants)
+    {
+        $this->intervenants = $intervenants;
     }
 
 

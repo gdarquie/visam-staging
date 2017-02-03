@@ -36,6 +36,22 @@
   height: 350px;
 }
 
+.cartouche{
+    border:1px solid #CC0000;
+    border-radius: 3px;
+    padding : 10px;
+    margin: 5 15px;
+    margin-bottom: 10px;
+}
+
+.form h3{
+    font-size: 1.3em;
+}
+
+.form label{
+    color:#2B373B;
+}
+
 /* General */
 
 

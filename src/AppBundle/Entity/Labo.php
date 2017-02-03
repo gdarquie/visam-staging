@@ -770,7 +770,13 @@ class Labo
      */
     public function addDiscipline(\AppBundle\Entity\Discipline $discipline)
     {
+
+        if ($this->discipline->contains($discipline)) {
+            return;
+        }
+
         $this->discipline[] = $discipline;
+        $discipline->addLabo($this);
 
         return $this;
     }
@@ -783,6 +789,7 @@ class Labo
     public function removeDiscipline(\AppBundle\Entity\Discipline $discipline)
     {
         $this->discipline->removeElement($discipline);
+        $discipline->removeLabo($this);
     }
 
     /**
@@ -794,6 +801,13 @@ class Labo
     {
         return $this->discipline;
     }
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEtablissement()
+    {
+        return $this->etablissement;
+    }
 
     /**
      * Add etablissement
@@ -802,31 +816,25 @@ class Labo
      *
      * @return Labo
      */
-    public function addEtablissement(\AppBundle\Entity\Etablissement $etablissement)
+    public function addEtablissement(Etablissement $etablissement)
     {
-        $this->etablissement[] = $etablissement;
+        if ($this->etablissement->contains($etablissement)) {
+            return;
+        }
 
-        return $this;
+        $this->etablissement[] = $etablissement;
+        $etablissement->addLabo($this);
     }
 
     /**
      * Remove etablissement
      *
-     * @param \AppBundle\Entity\Etablissement $etablissement
+     * @param \AppBundle\Entity\Etablissement etablissement
      */
-    public function removeEtablissement(\AppBundle\Entity\Etablissement $etablissement)
+    public function removeEtablissement(Etablissement $etablissement)
     {
         $this->etablissement->removeElement($etablissement);
-    }
-
-    /**
-     * Get etablissement
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getEtablissement()
-    {
-        return $this->etablissement;
+        $etablissement->removeLabo($this);
     }
 
     /**

@@ -159,6 +159,13 @@ class Formation
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Discipline", mappedBy="formation")
+     */
+    private $discipline;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Metier", inversedBy="formation")
      * @ORM\JoinTable(name="formation_has_metier",
      *   joinColumns={
@@ -171,12 +178,6 @@ class Formation
      */
     private $metier;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Discipline", mappedBy="formation")
-     */
-    private $discipline;
 
     /**
      * Constructor
@@ -655,11 +656,31 @@ class Formation
     }
 
     /**
-     * @param \Doctrine\Common\Collections\Collection $etablissement
+     * Add etablissement
+     *
+     * @param \AppBundle\Entity\Etablissement $etablissement
+     *
+     * @return Formation
      */
-    public function setEtablissement($etablissement)
+    public function addEtablissement(Etablissement $etablissement)
     {
-        $this->etablissement = $etablissement;
+        if ($this->etablissement->contains($etablissement)) {
+            return;
+        }
+
+        $this->etablissement[] = $etablissement;
+        $etablissement->addFormation($this);
+    }
+
+    /**
+     * Remove etablissement
+     *
+     * @param \AppBundle\Entity\Etablissement etablissement
+     */
+    public function removeEtablissement(Etablissement $etablissement)
+    {
+        $this->etablissement->removeElement($etablissement);
+        $etablissement->removeFormation($this);
     }
 
     /**
@@ -696,6 +717,7 @@ class Formation
         return $this->metier;
     }
 
+
     /**
      * Add discipline
      *
@@ -705,7 +727,13 @@ class Formation
      */
     public function addDiscipline(\AppBundle\Entity\Discipline $discipline)
     {
+
+        if ($this->discipline->contains($discipline)) {
+            return;
+        }
+
         $this->discipline[] = $discipline;
+        $discipline->addFormation($this);
 
         return $this;
     }
@@ -718,6 +746,7 @@ class Formation
     public function removeDiscipline(\AppBundle\Entity\Discipline $discipline)
     {
         $this->discipline->removeElement($discipline);
+        $discipline->removeFormation($this);
     }
 
     /**

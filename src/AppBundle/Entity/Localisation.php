@@ -629,4 +629,9 @@ class Localisation
     {
         return $this->ed;
     }
+
+    public function __toString()
+    {
+        return (string) $this->getNom();
+    }
 }

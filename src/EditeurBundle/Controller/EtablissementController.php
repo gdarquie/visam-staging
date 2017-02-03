@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Controller\Editeur;
+namespace EditeurBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 
 use AppBundle\Entity\Etablissement;
-use AppBundle\Form\EtablissementType;
+use EditeurBundle\Form\EtablissementType;
 
 /**
  *
@@ -45,8 +45,8 @@ class EtablissementController extends Controller
 
         if($form->isSubmitted() && $form->isValid()){
 
-            $etablissement = $form->getData();
             $em = $this->getDoctrine()->getManager();
+            $etablissement = $form->getData();
 
             $now = new \DateTime();
             $etablissement->setDateCreation($now);
@@ -58,7 +58,7 @@ class EtablissementController extends Controller
             return $this->redirectToRoute('editeur');
         }
 
-        return $this->render('editeur/etablissement/new.html.twig', array(
+        return $this->render('EditeurBundle:Etablissement:new.html.twig', array(
             'etablissementForm' => $form->createView()
         ));
     }
@@ -66,12 +66,14 @@ class EtablissementController extends Controller
     /**
      * @Route("/{id}/edit" , name = "editeur_etablissement_edit")
      */
-    public function editAction(Request $request, Etablissement $etablissement){
+    public function editAction(Request $request, Etablissement $etablissement, $id){
 
         $deleteForm = $this->createDeleteForm($etablissement);
-        $etablissementForm = $this->createForm('AppBundle\Form\EtablissementType', $etablissement);
+        $etablissementForm = $this->createForm('EditeurBundle\Form\EtablissementType', $etablissement);
         $etablissementForm->handleRequest($request);
 
+        $em = $this->getDoctrine()->getManager();
+        $etablissement = $em->getRepository('AppBundle:Etablissement')->findOneByEtablissementId($id);
 
         if ($etablissementForm->isSubmitted() && $etablissementForm->isValid()){
             // dump($form->getData());die;
@@ -80,16 +82,17 @@ class EtablissementController extends Controller
             $now = new \DateTime();
             $etablissement->setLastUpdate($now);
 
-            $em = $this->getDoctrine()->getManager();
+
             $em->persist($etablissement);
             $em->flush();
 
             return $this->redirectToRoute('editeur');
         }
 
-        return $this->render('editeur/etablissement/edit.html.twig', array(
+        return $this->render('EditeurBundle:Etablissement:edit.html.twig', array(
             'etablissementForm' => $etablissementForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'etablissement' => $etablissement
         ));
     }
 

@@ -1,0 +1,69 @@
+<div class="row form">
+
+    <div class="col s12 m6">
+        <div class="cartouche">
+
+            <h3>Informations générales</h3>
+            {{form_row(etablissementForm.nom,{
+                'label' : "Nom de l'établissement"
+            }) }}
+            {{form_row(etablissementForm.localisation,{
+                'label' : "Localisation(s)"
+            }) }}
+            {{ form_row(etablissementForm.sigle, { 'label' : "Sigle de l'établissement"}) }}
+            {{ form_row(etablissementForm.lien, { 'label' : "Site de l'établissement"}) }}
+            {{ form_row(etablissementForm.lien2, { 'label' : "Autre lien "}) }}
+
+            </div>
+
+            <div class="cartouche">
+
+                <h3>Description</h3>
+
+                {{ form_row(etablissementForm.description, { 'attr': {'class': 'materialize-textarea', }, 'label' : "Présentation" }) }}
+                {{ form_row(etablissementForm.valorisation) }}
+                {{ form_row(etablissementForm.lien3, { 'label' : "Lien vers le portail HAL"}) }}
+
+        </div>
+    </div>
+
+    <div class="col s12 m6">
+        <div class="cartouche">
+
+            <h3>Informations administratives</h3>
+
+            {{form_row(etablissementForm.code,{
+                'label' : "Code UAI"
+            })}}
+            {{ form_row(etablissementForm.ministere) }}
+            {{ form_row(etablissementForm.statut) }}
+
+
+
+        </div>
+    </div>
+
+    <div class="col s12 m6">
+        <div class="cartouche">
+            <h3>Effectifs</h3>
+            {{ form_row(etablissementForm.etudiants, { 'label' : "Etudiants/auditeurs" } ) }}
+            {{ form_row(etablissementForm.chercheurs, { 'label' : "Enseignants et/ou chercheurs permanents" }) }}
+            {{ form_row(etablissementForm.intervenants, { 'label' : "Intervenants non permanents" }) }}
+
+        </div>
+
+    </div>
+
+    <div class="col s12 m6">
+        <div class="cartouche">
+
+            <h3>Formation continue</h3>
+
+            {{ form_row(etablissementForm.fc, { 'label' : "Formation continue ?"} ) }}
+            {{ form_row(etablissementForm.fcLien, { 'label' : "Lien vers la page de la formation continue"}) }}
+
+        </div>
+    </div>
+
+
+</div>

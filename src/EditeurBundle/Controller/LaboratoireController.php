@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Controller\Editeur;
+namespace EditeurBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -30,7 +30,7 @@ class LaboratoireController extends Controller
     public function newLaboAction(Request $request){
 
         $laboratoire = new Labo();
-        $editForm = $this->createForm('AppBundle\Form\LaboType', $laboratoire);
+        $editForm = $this->createForm('EditeurBundle\Form\LaboType', $laboratoire);
         $editForm->handleRequest($request);
 
 
@@ -49,7 +49,7 @@ class LaboratoireController extends Controller
             return $this->redirectToRoute('editeur');
         }
 
-        return $this->render('editeur/labo/new.html.twig', array(
+        return $this->render('EditeurBundle:Labo:new.html.twig', array(
             'edit_form' => $editForm->createView(),
         ));
     }
@@ -62,7 +62,7 @@ class LaboratoireController extends Controller
     public function editFormationAction(Request $request, Labo $laboratoire){
 
         $deleteForm = $this->createDeleteForm($laboratoire);
-        $editForm = $this->createForm('AppBundle\Form\LaboType', $laboratoire);
+        $editForm = $this->createForm('EditeurBundle\Form\LaboType', $laboratoire);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -79,7 +79,7 @@ class LaboratoireController extends Controller
             return $this->redirectToRoute('labo', array('id' => $laboratoire->getLaboId() ));
         }
 
-        return $this->render('editeur/labo/edit.html.twig', array(
+        return $this->render('EditeurBundle:Labo:edit.html.twig', array(
             'labo' => $laboratoire,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

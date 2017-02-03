@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <section class="container">
+        <h1>Ajout d'un établissement</h1>
+
+        {{ form_start(etablissementForm) }}
+        {{ include('EditeurBundle:Etablissement:_form.html.twig') }}
+            <input class="btn btn-hesam" type="submit" value="Créer" formnovalidate />
+
+        {{ form_end(etablissementForm) }}
+
+        <ul>
+            <li>
+                <a href="{{ path('editeur') }}">Retour à l'éditeur</a>
+            </li>
+        </ul>
+
+    </section>
+{% endblock %}

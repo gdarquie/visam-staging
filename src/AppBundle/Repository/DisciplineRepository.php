@@ -13,4 +13,3 @@ class DisciplineRepository extends EntityRepository
             ->orderBy('discipline.nom', 'ASC');
     }
 }
-

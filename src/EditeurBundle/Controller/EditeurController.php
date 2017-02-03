@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Controller\Editeur;
+namespace EditeurBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -42,8 +42,7 @@ class EditeurController extends Controller
         )->setMaxResults(10);
         $laboratoires = $query->getResult();
 
-
-        return $this->render('editeur/index.html.twig', array(
+        return $this->render('EditeurBundle:Default:index.html.twig', array(
             'etablissements' => $etablissements,
             'formations' => $formations,
             'laboratoires' => $laboratoires,
@@ -72,7 +71,7 @@ class EditeurController extends Controller
         $labos = $em->getRepository('AppBundle:Labo')->findAll();
         $etabs = $em->getRepository('AppBundle:Etablissement')->findAll();
 
-        return $this->render('editeur/synthese.html.twig', array(
+        return $this->render('EditeurBundle:Default:synthese.html.twig', array(
             'labos' => $labos,
             'etabs' => $etabs,
             'formations' => $formations,
@@ -97,7 +96,7 @@ class EditeurController extends Controller
 
         $eds = $em->getRepository('AppBundle:Ed')->findAll();
 
-        return $this->render('editeur/ed/index.html.twig', array(
+        return $this->render('EditeurBundle:Ed:index.html.twig', array(
             'eds' => $eds,
         ));
     }
@@ -122,7 +121,7 @@ class EditeurController extends Controller
             return $this->redirectToRoute('ed_show', array('id' => $ed->getEdId()));
         }
 
-        return $this->render('editeur/ed/new.html.twig', array(
+        return $this->render('EditeurBundle:Ed:new.html.twig', array(
             'ed' => $ed,
             'form' => $form->createView(),
         ));
@@ -138,7 +137,7 @@ class EditeurController extends Controller
     {
         $deleteForm = $this->createDeleteEdForm($ed);
 
-        return $this->render('editeur/ed/show.html.twig', array(
+        return $this->render('EditeurBundle:Ed:show.html.twig', array(
             'ed' => $ed,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -164,7 +163,7 @@ class EditeurController extends Controller
             return $this->redirectToRoute('ed_edit', array('id' => $ed->getEdId()));
         }
 
-        return $this->render('editeur/ed/edit.html.twig', array(
+        return $this->render('EditeurBundle:ed:edit.html.twig', array(
             'ed' => $ed,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

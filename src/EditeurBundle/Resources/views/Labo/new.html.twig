@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <section class="container">
+        <h1>Créer un laboratoire</h1>
+
+        {{ form_start(edit_form) }}
+            {{ include('EditeurBundle:Labo:_form.html.twig') }}
+            <input type="submit" value="Créer"  class="btn btn-hesam" formnovalidate/>
+        {{ form_end(edit_form) }}
+
+        <ul>
+            <li>
+                <a href="{{ path('editeur') }}">Retour</a>
+            </li>
+        </ul>
+    </section>
+{% endblock %}

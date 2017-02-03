@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Controller\Editeur;
+namespace EditeurBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 use AppBundle\Entity\Formation;
-use AppBundle\Form\FormationType;
 
 /**
  *
@@ -32,7 +31,7 @@ class FormationController extends Controller
         // $deleteForm = $this->createDeleteLaboForm($labo);
 
         $formation = new Formation();
-        $form = $this->createForm('AppBundle\Form\FormationType', $formation);
+        $form = $this->createForm('EditeurBundle\Form\FormationType', $formation);
         $form->handleRequest($request);
 
 
@@ -51,7 +50,7 @@ class FormationController extends Controller
             return $this->redirectToRoute('editeur');
         }
 
-        return $this->render('editeur/formation/new.html.twig', array(
+        return $this->render('EditeurBundle:Formation:new.html.twig', array(
             'edit_form' => $form->createView(),
             // 'delete_form' => $deleteForm->createView(),
         ));
@@ -66,7 +65,7 @@ class FormationController extends Controller
     public function editFormationAction(Request $request, Formation $formation){
 
         $deleteForm = $this->createDeleteForm($formation);
-        $editForm = $this->createForm('AppBundle\Form\FormationType', $formation);
+        $editForm = $this->createForm('EditeurBundle\Form\FormationType', $formation);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -82,7 +81,7 @@ class FormationController extends Controller
 
         }
 
-        return $this->render('editeur/formation/edit.html.twig', array(
+        return $this->render('EditeurBundle:Formation:edit.html.twig', array(
             'formation' => $formation,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

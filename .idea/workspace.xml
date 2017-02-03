@@ -2,23 +2,544 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3bb1b647-8eae-4507-b232-68d841001a20" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/Resources/FOSUserBundle/views/login.html.twig" afterPath="$PROJECT_DIR$/app/Resources/FOSUserBundle/views/layout.html.twig" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/views/editeur/ed/edit.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/views/editeur/ed/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/views/editeur/ed/new.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/views/editeur/ed/show.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/views/editeur/etablissement/_form.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/views/editeur/etablissement/edit.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/views/editeur/etablissement/new.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/views/editeur/formation/_form.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/views/editeur/formation/edit.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/views/editeur/formation/new.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/views/editeur/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/views/editeur/labo/_form.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/views/editeur/labo/edit.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/views/editeur/labo/new.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/views/editeur/synthese.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/AppBundle/Controller/Editeur/EditeurController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/AppBundle/Controller/Editeur/EtablissementController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/AppBundle/Controller/Editeur/FormationController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/AppBundle/Controller/Editeur/LaboratoireController.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Item.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Theme.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/AppBundle/Form/EdType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/AppBundle/Form/EtablissementType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/AppBundle/Form/FormationType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/AppBundle/Form/LaboType.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/EditeurBundle/Resources/views/Default/index.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/.bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/.editorconfig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/.gitattributes" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/.npmignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/.travis.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/CHANGELOG.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/CONTRIBUTING.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/bin/materialize.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/bin/materialize.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/css/materialize.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/css/materialize.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/font/material-design-icons/Material-Design-Icons.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/font/material-design-icons/Material-Design-Icons.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/font/material-design-icons/Material-Design-Icons.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/font/material-design-icons/Material-Design-Icons.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/font/material-design-icons/Material-Design-Icons.woff2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/font/roboto/Roboto-Bold.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/font/roboto/Roboto-Bold.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/font/roboto/Roboto-Bold.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/font/roboto/Roboto-Bold.woff2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/font/roboto/Roboto-Light.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/font/roboto/Roboto-Light.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/font/roboto/Roboto-Light.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/font/roboto/Roboto-Light.woff2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/font/roboto/Roboto-Medium.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/font/roboto/Roboto-Medium.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/font/roboto/Roboto-Medium.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/font/roboto/Roboto-Medium.woff2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/font/roboto/Roboto-Regular.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/font/roboto/Roboto-Regular.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/font/roboto/Roboto-Regular.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/font/roboto/Roboto-Regular.woff2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/font/roboto/Roboto-Thin.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/font/roboto/Roboto-Thin.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/font/roboto/Roboto-Thin.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/font/roboto/Roboto-Thin.woff2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/fonts/roboto/Roboto-Bold.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/fonts/roboto/Roboto-Bold.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/fonts/roboto/Roboto-Bold.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/fonts/roboto/Roboto-Bold.woff2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/fonts/roboto/Roboto-Light.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/fonts/roboto/Roboto-Light.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/fonts/roboto/Roboto-Light.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/fonts/roboto/Roboto-Light.woff2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/fonts/roboto/Roboto-Medium.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/fonts/roboto/Roboto-Medium.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/fonts/roboto/Roboto-Medium.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/fonts/roboto/Roboto-Medium.woff2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/fonts/roboto/Roboto-Regular.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/fonts/roboto/Roboto-Regular.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/fonts/roboto/Roboto-Regular.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/fonts/roboto/Roboto-Regular.woff2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/fonts/roboto/Roboto-Thin.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/fonts/roboto/Roboto-Thin.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/fonts/roboto/Roboto-Thin.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/fonts/roboto/Roboto-Thin.woff2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/js/materialize.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/dist/js/materialize.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/extras/noUiSlider/nouislider.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/extras/noUiSlider/nouislider.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/extras/noUiSlider/nouislider.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/fonts/roboto/Roboto-Bold.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/fonts/roboto/Roboto-Bold.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/fonts/roboto/Roboto-Bold.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/fonts/roboto/Roboto-Bold.woff2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/fonts/roboto/Roboto-Light.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/fonts/roboto/Roboto-Light.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/fonts/roboto/Roboto-Light.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/fonts/roboto/Roboto-Light.woff2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/fonts/roboto/Roboto-Medium.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/fonts/roboto/Roboto-Medium.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/fonts/roboto/Roboto-Medium.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/fonts/roboto/Roboto-Medium.woff2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/fonts/roboto/Roboto-Regular.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/fonts/roboto/Roboto-Regular.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/fonts/roboto/Roboto-Regular.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/fonts/roboto/Roboto-Regular.woff2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/fonts/roboto/Roboto-Thin.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/fonts/roboto/Roboto-Thin.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/fonts/roboto/Roboto-Thin.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/fonts/roboto/Roboto-Thin.woff2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/js/animation.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/js/buttons.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/js/cards.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/js/carousel.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/js/character_counter.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/js/chips.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/js/collapsible.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/js/date_picker/picker.date.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/js/date_picker/picker.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/js/dropdown.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/js/forms.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/js/global.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/js/hammer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/js/initial.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/js/jquery.easing.1.3.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/js/jquery.hammer.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/js/jquery.timeago.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/js/leanModal.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/js/materialbox.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/js/parallax.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/js/pushpin.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/js/scrollFire.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/js/scrollspy.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/js/sideNav.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/js/slider.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/js/tabs.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/js/toasts.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/js/tooltip.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/js/transitions.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/js/velocity.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/js/waves.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/package.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/_buttons.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/_cards.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/_carousel.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/_chips.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/_collapsible.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/_color.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/_dropdown.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/_global.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/_grid.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/_icons-material-design.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/_materialbox.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/_mixins.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/_modal.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/_navbar.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/_normalize.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/_prefixer.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/_preloader.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/_roboto.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/_sideNav.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/_slider.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/_table_of_contents.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/_tabs.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/_toast.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/_tooltip.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/_typography.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/_variables.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/_waves.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/date_picker/_default.date.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/date_picker/_default.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/date_picker/_default.time.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/forms/_checkboxes.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/forms/_file-input.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/forms/_forms.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/forms/_input-fields.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/forms/_radio-buttons.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/forms/_range.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/forms/_select.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/components/forms/_switches.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/sass/materialize.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/templates/masonry-template/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/templates/masonry-template/background1.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/templates/masonry-template/background2.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/templates/masonry-template/background3.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/templates/masonry-template/css/style.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/templates/masonry-template/js/init.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/templates/masonry-template/js/masonry.pkgd.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/templates/parallax-template/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/templates/parallax-template/background1.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/templates/parallax-template/background2.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/templates/parallax-template/background3.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/templates/parallax-template/css/style.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/templates/parallax-template/js/init.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/templates/starter-template/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/templates/starter-template/css/style.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/templates/starter-template/js/init.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/tests/spec/cards/cardsSpec.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/tests/spec/collapsible/collapsibleSpec.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/tests/spec/helper.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/tests/spec/scrollFire/scrollFireSpec.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/tests/spec/select/selectSpec.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/tests/spec/tabs/tabsSpec.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/tests/spec/toast/toastSpec.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/Materialize/tests/spec/tooltip/tooltipSpec.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jqcloud/.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jqcloud/Gruntfile.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jqcloud/LICENSE.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jqcloud/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jqcloud/bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jqcloud/dist/jqcloud.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jqcloud/dist/jqcloud.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jqcloud/dist/jqcloud.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jqcloud/dist/jqcloud.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jqcloud/package.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jqcloud/src/jqcloud.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jqcloud/src/jqcloud.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jqcloud/test/core_tests.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jqcloud/test/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/.bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/AUTHORS.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/LICENSE.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/dist/jquery.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/dist/jquery.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/dist/jquery.min.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/dist/jquery.slim.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/dist/jquery.slim.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/dist/jquery.slim.min.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/sizzle/LICENSE.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/sizzle/dist/sizzle.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/sizzle/dist/sizzle.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/sizzle/dist/sizzle.min.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/.jshintrc" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/ajax.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/ajax/jsonp.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/ajax/load.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/ajax/parseJSON.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/ajax/parseXML.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/ajax/script.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/ajax/var/location.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/ajax/var/nonce.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/ajax/var/rquery.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/ajax/xhr.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/attributes.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/attributes/attr.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/attributes/classes.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/attributes/prop.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/attributes/support.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/attributes/val.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/callbacks.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/core.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/core/DOMEval.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/core/access.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/core/init.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/core/parseHTML.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/core/ready.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/core/support.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/core/var/rsingleTag.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/css.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/css/addGetHookIf.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/css/adjustCSS.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/css/curCSS.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/css/defaultDisplay.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/css/hiddenVisibleSelectors.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/css/showHide.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/css/support.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/css/var/cssExpand.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/css/var/getStyles.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/css/var/isHidden.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/css/var/rmargin.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/css/var/rnumnonpx.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/css/var/swap.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/data.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/data/Data.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/data/accepts.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/data/support.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/data/var/acceptData.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/data/var/dataPriv.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/data/var/dataUser.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/deferred.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/deferred/exceptionHook.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/deprecated.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/dimensions.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/effects.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/effects/Tween.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/effects/animatedSelector.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/effects/support.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/event.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/event/ajax.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/event/alias.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/event/focusin.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/event/support.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/event/trigger.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/exports/amd.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/exports/global.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/intro.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/jquery.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/manipulation.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/manipulation/_evalUrl.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/manipulation/buildFragment.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/manipulation/createSafeFragment.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/manipulation/getAll.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/manipulation/setGlobalEval.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/manipulation/support.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/manipulation/var/nodeNames.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/manipulation/var/rcheckableType.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/manipulation/var/rleadingWhitespace.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/manipulation/var/rscriptType.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/manipulation/var/rtagName.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/manipulation/wrapMap.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/offset.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/outro.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/queue.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/queue/delay.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/selector-native.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/selector-sizzle.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/selector.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/serialize.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/support.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/traversing.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/traversing/findFilter.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/traversing/var/dir.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/traversing/var/rneedsContext.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/traversing/var/siblings.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/var/arr.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/var/class2type.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/var/concat.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/var/deletedIds.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/var/document.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/var/documentElement.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/var/hasOwn.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/var/indexOf.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/var/pnum.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/var/push.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/var/rcssNum.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/var/rnotwhite.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/var/slice.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/var/support.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/var/toString.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/jquery/src/wrap.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/.jshintrc" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/.travis.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/GruntFile.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/LICENSE.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/build/nv.d3.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/build/nv.d3.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/build/nv.d3.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/build/nv.d3.min.css.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/build/nv.d3.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/build/nv.d3.min.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/composer.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/TimeSeries.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/boxPlot.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/boxPlotCustomModel.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/bullet.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/bulletChart.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/candlestick.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/candlestickChart.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/cumulativeLineChart.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/discreteBarChart.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/documentation.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/donutChart.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/forceDirected.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/furiousLegend.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/historicalBar.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/historicalBarChart.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/images/background.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/images/body-background.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/images/bullet.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/images/hr.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/images/octocat-logo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/legend.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/lib/colorbrewer.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/lib/stream_layers.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/line.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/lineChart.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/lineChartLogScale.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/lineChartSVGResize.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/linePlusBarChart.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/lineWithFocusChart.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/lineWithFocusChart_x2AxisLabel.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/miserables.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/monitoringChart.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/multiBarChart.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/multiBarChart2.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/multiBarHorizontalChart.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/multiChart.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/ohlc.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/ohlcChart.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/parallelCoordinates.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/parallelCoordinatesChart.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/pie.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/pieChart.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/scatter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/scatterChart.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/scatterPlusLineChart.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/site.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/sparkline.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/sparklinePlus.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/stackedArea.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/stackedAreaChart.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/stackedAreaWithFocusChart.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/stylesheets/pygment_trac.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/stylesheets/styles.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/sunburst.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/examples/tooltip.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/meteor/export.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/package.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/package.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/core.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/css/axis.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/css/bars.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/css/boxplot.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/css/bullet.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/css/candlestick.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/css/forceDirectedGraph.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/css/furiousLegend.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/css/lineplusbar.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/css/lines.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/css/main.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/css/ohlc.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/css/parallelcoordinates.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/css/pie.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/css/scatter.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/css/sparkline.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/css/stackedarea.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/css/tooltip.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/dom.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/interactiveLayer.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/models/axis.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/models/boxPlot.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/models/boxPlotChart.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/models/bullet.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/models/bulletChart.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/models/candlestickBar.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/models/cumulativeLineChart.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/models/discreteBar.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/models/discreteBarChart.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/models/distribution.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/models/focus.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/models/forceDirectedGraph.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/models/furiousLegend.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/models/historicalBar.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/models/historicalBarChart.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/models/legend.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/models/line.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/models/lineChart.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/models/linePlusBarChart.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/models/multiBar.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/models/multiBarChart.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/models/multiBarHorizontal.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/models/multiBarHorizontalChart.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/models/multiChart.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/models/ohlcBar.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/models/parallelCoordinates.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/models/parallelCoordinatesChart.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/models/pie.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/models/pieChart.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/models/scatter.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/models/scatterChart.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/models/sparkline.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/models/sparklinePlus.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/models/stackedArea.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/models/stackedAreaChart.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/models/sunburst.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/models/sunburstChart.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/tooltip.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/src/utils.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/ScatterChartTest.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/boxPlotTest.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/cumulativeLineChart.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/lineChartTest.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/linePlusBarChart.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/linePlusBarWithFocusChart.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/lineWithFisheyeChart.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/lineWithFocusChart.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/lineWithFocusChartMissingData.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/mocha/axis.coffee" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/mocha/boxplot.coffee" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/mocha/bullet.coffee" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/mocha/core.coffee" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/mocha/cumulative-line.coffee" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/mocha/discretebar.coffee" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/mocha/historical-bar.coffee" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/mocha/legend.coffee" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/mocha/line.coffee" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/mocha/multibar-horizontal.coffee" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/mocha/multibar.coffee" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/mocha/pie.coffee" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/mocha/scatter.coffee" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/mocha/sparkline.coffee" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/mocha/stacked.coffee" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/mocha/sunburst.coffee" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/mocha/test-utils.coffee" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/mocha/utils.coffee" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/multiBarChartTest.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/multiBarHorizontalChart.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/node/GruntFile.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/node/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/node/nodeTest.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/node/nodeTest.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/node/package.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/pieChartTest.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/polylinearTest.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/realTimeChartTest.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/scatterPlusLineChart.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/scrollTest.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/scrollTest2.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/stackedAreaChartMissingData.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/stackedAreaChartTest.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/stream_layers.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/testScript.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/teststyle.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/bower_components/nvd3/test/tinytest/nv-is-defined-test.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/AppKernel.php" afterPath="$PROJECT_DIR$/app/AppKernel.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/base.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/editeur/formation/_form.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/editeur/formation/_form.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/editeur/formation/edit.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/editeur/formation/edit.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/facette.html" afterPath="$PROJECT_DIR$/app/Resources/views/facette.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/rechercher.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/rechercher.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/config.yml" afterPath="$PROJECT_DIR$/app/config/config.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/notice/formation.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/notice/formation.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/notice/laboratoire.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/notice/laboratoire.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/web/stats.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/web/stats.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/routing.yml" afterPath="$PROJECT_DIR$/app/config/routing.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Controller/Editeur/FormationController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/Editeur/FormationController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Controller/Web/DefaultController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/Web/DefaultController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Axe.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Axe.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/security.yml" afterPath="$PROJECT_DIR$/app/config/security.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Etablissement.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Etablissement.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Formation.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Formation.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Form/FormationType.php" afterPath="$PROJECT_DIR$/src/AppBundle/Form/FormationType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/bower_components/recherche/facette.js" afterPath="$PROJECT_DIR$/web/bower_components/recherche/facette.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Labo.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Labo.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Localisation.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Localisation.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Valorisation.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Valorisation.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Repository/DisciplineRepository.php" afterPath="$PROJECT_DIR$/src/AppBundle/Repository/DisciplineRepository.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/EditeurBundle/Controller/EditeurController.php" afterPath="$PROJECT_DIR$/src/EditeurBundle/Controller/EditeurController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/EditeurBundle/Controller/EtablissementController.php" afterPath="$PROJECT_DIR$/src/EditeurBundle/Controller/EtablissementController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/EditeurBundle/Controller/FormationController.php" afterPath="$PROJECT_DIR$/src/EditeurBundle/Controller/FormationController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/EditeurBundle/Controller/LaboratoireController.php" afterPath="$PROJECT_DIR$/src/EditeurBundle/Controller/LaboratoireController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/css/style.css" afterPath="$PROJECT_DIR$/web/css/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/js/function.js" afterPath="$PROJECT_DIR$/web/js/function.js" />
     </list>
     <ignored path="visam_2016-04-28.iws" />
@@ -48,105 +569,111 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="config.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/config/config.yml">
+      <file leaf-file-name="Etablissement.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Etablissement.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="11" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
+            <state relative-caret-position="132">
+              <caret line="767" column="5" selection-start-line="767" selection-start-column="5" selection-end-line="767" selection-end-column="5" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DefaultControllerTest.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/EditorBundle/Controller/DefaultControllerTest.php">
+      <file leaf-file-name="_form.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Resources/views/Etablissement/_form.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
+            <state relative-caret-position="165">
+              <caret line="13" column="87" selection-start-line="13" selection-start-column="87" selection-end-line="13" selection-end-column="87" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="parameters.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
+      <file leaf-file-name="edit.html.twig" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Resources/views/Etablissement/edit.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+            <state relative-caret-position="75">
+              <caret line="5" column="41" selection-start-line="5" selection-start-column="41" selection-end-line="5" selection-end-column="41" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="services.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/config/services.yml">
+      <file leaf-file-name="EtablissementController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Controller/EtablissementController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="security.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/config/security.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AppKernel.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/AppKernel.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="22" column="10" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="10" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="routing.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EditeurController.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Controller/EditeurController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="22" column="7" selection-start-line="22" selection-start-column="7" selection-end-line="22" selection-end-column="7" />
+            <state relative-caret-position="475">
+              <caret line="75" column="79" selection-start-line="75" selection-start-column="79" selection-end-line="75" selection-end-column="79" />
               <folding>
-                <marker date="1476629784000" expanded="true" signature="829:892" ph="SELECT f FRO... AppBundle" />
-                <marker date="1476629784000" expanded="true" signature="1016:1074" ph="SELECT l FRO... AppBundle" />
-                <marker date="1476629784000" expanded="true" signature="1668:1703" ph="SELECT f FRO... AppBundle" />
+                <element signature="e#44#101#0#PHP" expanded="true" />
+                <element signature="e#2069#2094#1#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="routing_dev.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/config/routing_dev.yml">
+      <file leaf-file-name="EditeurController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Controller/EditeurController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="465">
+              <caret line="96" column="61" selection-start-line="96" selection-start-column="8" selection-end-line="96" selection-end-column="61" />
+              <folding>
+                <element signature="e#4404#4437#0#PHP" expanded="true" />
+                <marker date="1485379809000" expanded="true" signature="825:888" ph="SELECT f FRO... AppBundle" />
+                <marker date="1485379809000" expanded="true" signature="1012:1070" ph="SELECT l FRO... AppBundle" />
+                <marker date="1485379809000" expanded="true" signature="1677:1712" ph="SELECT f FRO... AppBundle" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="new.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Resources/views/Etablissement/new.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="autoload.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/autoload.php">
+      <file leaf-file-name="EtablissementType.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Form/EtablissementType.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="166">
+              <caret line="33" column="35" selection-start-line="33" selection-start-column="35" selection-end-line="33" selection-end-column="35" />
+              <folding>
+                <element signature="e#38#78#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LaboType.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Form/LaboType.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="12" selection-end-column="49" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EdType.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Form/EdType.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="23" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/css/style.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="309">
+              <caret line="51" column="17" selection-start-line="51" selection-start-column="17" selection-end-line="51" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -167,43 +694,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/Resources/views/editeur/index.html.twig" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/Editeur/EditeurController.php" />
-        <option value="$PROJECT_DIR$/app/Resources/views/editeur/etablissement/edit.html.twig" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/Web/StatistiquesController.php" />
-        <option value="$PROJECT_DIR$/app/Resources/views/editeur/labo/edit.html.twig" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/Web/FormationController.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/Editeur/EtablissementController.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/Web/LaboController.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/Web/ExportController.php" />
-        <option value="$PROJECT_DIR$/app/Resources/views/editeur/formation/new.html.twig" />
-        <option value="$PROJECT_DIR$/app/Resources/views/editeur/labo/_form.html.twig" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/Editeur/LaboratoireController.php" />
-        <option value="$PROJECT_DIR$/app/Resources/views/web/apropos.html.twig" />
-        <option value="$PROJECT_DIR$/app/Resources/views/web/index.html.twig" />
-        <option value="$PROJECT_DIR$/app/Resources/views/notice/laboratoire.html.twig" />
-        <option value="$PROJECT_DIR$/app/Resources/views/notice/formation.html.twig" />
-        <option value="$PROJECT_DIR$/app/Resources/views/web/howto.html.twig" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Entity/Discipline.php" />
-        <option value="$PROJECT_DIR$/app/Resources/views/web/stats.html.twig" />
-        <option value="$PROJECT_DIR$/app/Resources/views/_rechercher.html.twig" />
-        <option value="$PROJECT_DIR$/app/Resources/views/facette.html" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/Web/DefaultController.php" />
-        <option value="$PROJECT_DIR$/app/Resources/views/web/news/index.html.twig" />
-        <option value="$PROJECT_DIR$/app/Resources/views/editeur/formation/_form.html.twig" />
-        <option value="$PROJECT_DIR$/web/js/function.js" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Repository/EtablissementRepository.php" />
-        <option value="$PROJECT_DIR$/app/Resources/views/editeur/formation/edit.html.twig" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Form/FormationType.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Entity/Formation.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Entity/Axe.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Entity/Etablissement.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/Editeur/FormationController.php" />
-        <option value="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
-        <option value="$PROJECT_DIR$/composer.json" />
-        <option value="$PROJECT_DIR$/web/bower_components/recherche/facette.js" />
-        <option value="$PROJECT_DIR$/app/Resources/views/rechercher.html.twig" />
-        <option value="$PROJECT_DIR$/app/Resources/FOSUserBundle/views/login.html.twig" />
         <option value="$PROJECT_DIR$/vendor/friendsofsymfony/user-bundle/Resources/views/Profile/edit_content.html.twig" />
         <option value="$PROJECT_DIR$/vendor/friendsofsymfony/user-bundle/Resources/views/layout.html.twig" />
         <option value="$PROJECT_DIR$/vendor/friendsofsymfony/user-bundle/Resources/views/Security/login.html.twig" />
@@ -217,7 +707,44 @@
         <option value="$PROJECT_DIR$/src/EditeurBundle/Resources/config/services.yml" />
         <option value="$PROJECT_DIR$/app/AppKernel.php" />
         <option value="$PROJECT_DIR$/app/config/config.yml" />
+        <option value="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
+        <option value="$PROJECT_DIR$/app/Resources/views/web/stats.html.twig" />
+        <option value="$PROJECT_DIR$/app/config/security.yml" />
+        <option value="$PROJECT_DIR$/web/js/function.js" />
+        <option value="$PROJECT_DIR$/src/EditeurBundle/Resources/views/Default/index.html.twig" />
         <option value="$PROJECT_DIR$/app/config/routing.yml" />
+        <option value="$PROJECT_DIR$/src/EditeurBundle/Controller/EditeurController.php" />
+        <option value="$PROJECT_DIR$/src/EditeurBundle/Resources/views/Formation/new.html.twig" />
+        <option value="$PROJECT_DIR$/src/EditeurBundle/Resources/views/Labo/edit.html.twig" />
+        <option value="$PROJECT_DIR$/src/EditeurBundle/Resources/views/Labo/new.html.twig" />
+        <option value="$PROJECT_DIR$/src/EditeurBundle/Resources/views/Formation/edit.html.twig" />
+        <option value="$PROJECT_DIR$/src/EditeurBundle/Form/EdType.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Form/EtablissementType.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Form/EdType.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Form/FormationType.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Form/LaboType.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Repository/DisciplineRepository.php" />
+        <option value="$PROJECT_DIR$/src/EditeurBundle/Controller/LaboratoireController.php" />
+        <option value="$PROJECT_DIR$/web/bower_components/recherche/facette.js" />
+        <option value="$PROJECT_DIR$/app/Resources/views/notice/formation.html.twig" />
+        <option value="$PROJECT_DIR$/app/Resources/views/notice/laboratoire.html.twig" />
+        <option value="$PROJECT_DIR$/src/EditeurBundle/Resources/views/Formation/_form.html.twig" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Entity/Formation.php" />
+        <option value="$PROJECT_DIR$/src/EditeurBundle/Form/FormationType.php" />
+        <option value="$PROJECT_DIR$/src/EditeurBundle/Controller/FormationController.php" />
+        <option value="$PROJECT_DIR$/src/EditeurBundle/Form/LaboType.php" />
+        <option value="$PROJECT_DIR$/src/EditeurBundle/Resources/views/Labo/_form.html.twig" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Entity/Labo.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Entity/Image.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Entity/Valorisation.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Entity/Localisation.php" />
+        <option value="$PROJECT_DIR$/web/css/style.css" />
+        <option value="$PROJECT_DIR$/src/EditeurBundle/Resources/views/Etablissement/new.html.twig" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Entity/Etablissement.php" />
+        <option value="$PROJECT_DIR$/src/EditeurBundle/Form/EtablissementType.php" />
+        <option value="$PROJECT_DIR$/src/EditeurBundle/Resources/views/Etablissement/_form.html.twig" />
+        <option value="$PROJECT_DIR$/src/EditeurBundle/Controller/EtablissementController.php" />
+        <option value="$PROJECT_DIR$/src/EditeurBundle/Resources/views/Etablissement/edit.html.twig" />
       </list>
     </option>
   </component>
@@ -304,47 +831,7 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visam" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visam" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visam" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visam" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bundles" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="framework" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -376,137 +863,325 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="visam" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="visam" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EditeurBundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="visam" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="visam" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EditeurBundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Labo" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="visam" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="visam" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EditeurBundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="visam" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="visam" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EditeurBundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Etablissement" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="visam" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="visam" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EditeurBundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="visam" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="visam" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EditeurBundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Form" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="visam" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="visam" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EditeurBundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Controller" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="visam" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="visam" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AppBundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="visam" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="visam" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AppBundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Repository" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="visam" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="visam" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AppBundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Entity" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="visam" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="visam" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AppBundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Controller" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="visam" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="visam" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="visam" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="visam" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="visam" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="visam" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="web" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vendor" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visam" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visam" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visam" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visam" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="EditeurBundle" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visam" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visam" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="EditeurBundle" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controller" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visam" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visam" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppBundle" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visam" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visam" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppBundle" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controller" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visam" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visam" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppBundle" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controller" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Editeur" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -519,6 +1194,18 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="notice" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -536,14 +1223,14 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
+              <option name="myItemId" value="Resources" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -556,8 +1243,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/EditeurBundle/Controller" />
-      <recent name="$PROJECT_DIR$/src/EditorBundle/Controller" />
+      <recent name="$PROJECT_DIR$/src/EditeurBundle/Repository" />
+      <recent name="$PROJECT_DIR$/src/AppBundle" />
+      <recent name="$PROJECT_DIR$/src/EditeurBundle/Form" />
+      <recent name="$PROJECT_DIR$/src/EditeurBundle/Resources/views" />
+      <recent name="$PROJECT_DIR$/src/EditeurBundle/Resources/views/Default" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/AppBundle/Controller/Editeur" />
@@ -679,12 +1369,15 @@
       <workItem from="1484491486388" duration="760000" />
       <workItem from="1484496114718" duration="14000" />
       <workItem from="1484925724743" duration="7345000" />
-      <workItem from="1485336578660" duration="249000" />
+      <workItem from="1485336578660" duration="3138000" />
+      <workItem from="1485374153604" duration="6075000" />
+      <workItem from="1485442244274" duration="2000" />
+      <workItem from="1486111906170" duration="11063000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="150546000" />
+    <option name="totallyTimeSpent" value="170575000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -699,7 +1392,7 @@
     <frame x="0" y="23" width="1440" height="873" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31473532" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32331902" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290653" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6696543" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -737,63 +1430,128 @@
           <url>file://$PROJECT_DIR$/src/AppBundle/Controller/Api/DefaultController.php</url>
           <line>4</line>
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/src/AppBundle/Controller/Editeur/EditeurController.php</url>
-          <line>4</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="2" />
+      <option name="time" value="3" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Repository/FormationRepository.php">
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/editeur/index.html.twig" />
+    <entry file="file://$PROJECT_DIR$/app/config/routing_dev.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/Web/DefaultController.php">
+    <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="237" column="34" selection-start-line="237" selection-start-column="34" selection-end-line="237" selection-end-column="34" />
+        <state relative-caret-position="0">
+          <caret line="0" column="11" selection-start-line="0" selection-start-column="11" selection-end-line="0" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/js/function.js">
+    <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Resources/config/services.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/web/news/index.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Resources/views/Default/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="97" selection-start-line="14" selection-start-column="97" selection-end-line="14" selection-end-column="97" />
+        <state relative-caret-position="-15">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Repository/EtablissementRepository.php">
+    <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Resources/views/Ed/new.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/web/stats.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Resources/views/Labo/new.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="54" column="40" selection-start-line="54" selection-start-column="40" selection-end-line="54" selection-end-column="40" />
+        <state relative-caret-position="120">
+          <caret line="8" column="58" selection-start-line="8" selection-start-column="58" selection-end-line="8" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Resources/views/Labo/edit.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Resources/views/Formation/new.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="59" selection-start-line="8" selection-start-column="59" selection-end-line="8" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Resources/views/Formation/edit.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/AppBundle.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Form/EdType.php" />
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Form/EtablissementType.php" />
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Form/FormationType.php" />
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Form/LaboType.php" />
+    <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Repository/DisciplineRepository.php" />
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Repository/DisciplineRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EditeurBundle/EditeurBundle.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/bower_components/recherche/facette.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="35" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Resources/views/Ed/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Repository/LaboRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/Api/DefaultController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="909">
-          <caret line="198" column="68" selection-start-line="191" selection-start-column="7" selection-end-line="198" selection-end-column="68" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#44#103#0#PHP" expanded="false" />
             <marker date="1473506283000" expanded="true" signature="5770:5860" ph="SELECT l.nom... AppBundle" />
@@ -801,292 +1559,276 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/editeur/formation/_form.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/Api/LaboController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/Editeur/FormationController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1020">
-          <caret line="75" column="44" selection-start-line="75" selection-start-column="44" selection-end-line="75" selection-end-column="44" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#48#105#0#PHP" expanded="false" />
-            <marker date="1484093415000" expanded="true" signature="3808:3911" ph="SELECT f.nom... AppBundle" />
+            <element signature="e#44#103#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/editeur/formation/new.html.twig">
+    <entry file="file://$PROJECT_DIR$/web/css/accueil.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
-          <caret line="19" column="14" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
+          <caret line="19" column="10" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/editeur/formation/edit.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Discipline.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="37" column="10" selection-start-line="37" selection-start-column="10" selection-end-line="37" selection-end-column="10" />
+        <state relative-caret-position="229">
+          <caret line="107" column="63" selection-start-line="107" selection-start-column="54" selection-end-line="107" selection-end-column="63" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Form/FormationType.php">
+    <entry file="file://$PROJECT_DIR$/web/css/mehdi.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="66" selection-end-column="14" />
+        <state relative-caret-position="699">
+          <caret line="330" column="19" selection-start-line="330" selection-start-column="8" selection-end-line="330" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Formation.php">
+    <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Resources/views/Formation/_form.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9810">
-          <caret line="655" column="0" selection-start-line="655" selection-start-column="0" selection-end-line="655" selection-end-column="0" />
+        <state relative-caret-position="30">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/Web/DefaultController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-620">
+          <caret line="130" column="30" selection-start-line="130" selection-start-column="30" selection-end-line="130" selection-end-column="30" />
+          <folding>
+            <element signature="e#569#590#1#PHP" expanded="true" />
+            <element signature="e#646#668#1#PHP" expanded="true" />
+            <element signature="e#2501#2517#1#PHP" expanded="true" />
+            <element signature="e#4427#4457#0#PHP" expanded="true" />
+            <element signature="e#4945#4970#1#PHP" expanded="true" />
+            <element signature="e#5038#5052#1#PHP" expanded="true" />
+            <element signature="e#5155#5176#1#PHP" expanded="true" />
+            <element signature="e#5582#5596#1#PHP" expanded="true" />
+            <element signature="e#5664#5689#1#PHP" expanded="true" />
+            <element signature="e#6073#6094#1#PHP" expanded="true" />
+            <marker date="1484070660000" expanded="true" signature="765:920" ph="SELECT h.nom... AppBundle" />
+            <marker date="1484070660000" expanded="true" signature="1060:1205" ph="SELECT h.nom... AppBundle" />
+            <marker date="1484070660000" expanded="true" signature="2646:2676" ph="SELECT l FRO... AppBundle" />
+            <marker date="1484070660000" expanded="true" signature="2772:2921" ph="SELECT h.nom... AppBundle" />
+            <marker date="1484070660000" expanded="true" signature="3114:3180" ph="SELECT l FRO... AppBundle" />
+            <marker date="1484070660000" expanded="true" signature="3409:3562" ph="SELECT COUNT... AppBundle" />
+            <marker date="1484070660000" expanded="true" signature="3837:3931" ph="SELECT l FRO... AppBundle" />
+            <marker date="1484070660000" expanded="true" signature="4131:4230" ph="SELECT f FRO... AppBundle" />
+            <marker date="1484070660000" expanded="true" signature="6159:6194" ph="SELECT f FRO... AppBundle" />
+            <marker date="1484070660000" expanded="true" signature="6295:6454" ph="SELECT h.nom... AppBundle" />
+            <marker date="1484070660000" expanded="true" signature="6601:6764" ph="SELECT COUNT... AppBundle" />
+            <marker date="1484070660000" expanded="true" signature="7287:7381" ph="SELECT l FRO... AppBundle" />
+            <marker date="1484070660000" expanded="true" signature="7582:7681" ph="SELECT f FRO... AppBundle" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/notice/laboratoire.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-210">
+          <caret line="4" column="33" selection-start-line="4" selection-start-column="33" selection-end-line="4" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/notice/formation.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Resources/views/Labo/_form.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Membre.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-465">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Labo.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3240">
-          <caret line="216" column="39" selection-start-line="216" selection-start-column="36" selection-end-line="216" selection-end-column="39" />
+        <state relative-caret-position="354">
+          <caret line="786" column="54" selection-start-line="786" selection-start-column="54" selection-end-line="786" selection-end-column="54" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Axe.php">
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Image.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="885">
-          <caret line="59" column="18" selection-start-line="59" selection-start-column="18" selection-end-line="59" selection-end-column="18" />
+        <state relative-caret-position="195">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Ed.php">
+    <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Controller/LaboratoireController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1755">
-          <caret line="117" column="33" selection-start-line="117" selection-start-column="33" selection-end-line="117" selection-end-column="33" />
+        <state relative-caret-position="363">
+          <caret line="72" column="2" selection-start-line="72" selection-start-column="2" selection-end-line="73" selection-end-column="46" />
+          <folding>
+            <element signature="e#2269#2304#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Form/FormationType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Repository/EtablissementRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="50" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Controller/FormationController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1110">
+          <caret line="74" column="44" selection-start-line="74" selection-start-column="44" selection-end-line="74" selection-end-column="44" />
+          <folding>
+            <element signature="e#44#101#0#PHP" expanded="true" />
+            <marker date="1486123100000" expanded="true" signature="3790:3893" ph="SELECT f.nom... AppBundle" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Localisation.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="571" column="36" selection-start-line="571" selection-start-column="20" selection-end-line="571" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Formation.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="552">
+          <caret line="759" column="5" selection-start-line="720" selection-start-column="3" selection-end-line="759" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Valorisation.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="56" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Form/EdType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="23" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="309">
+          <caret line="51" column="17" selection-start-line="51" selection-start-column="17" selection-end-line="51" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Resources/views/Etablissement/new.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Etablissement.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2880">
-          <caret line="192" column="84" selection-start-line="192" selection-start-column="84" selection-end-line="192" selection-end-column="84" />
+        <state relative-caret-position="132">
+          <caret line="767" column="5" selection-start-line="767" selection-start-column="5" selection-end-line="767" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/composer.lock">
+    <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Form/LaboType.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="165">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="12" selection-end-column="49" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/composer.json">
+    <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Form/EtablissementType.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="31" column="53" selection-start-line="31" selection-start-column="53" selection-end-line="31" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/Editeur/EditeurController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1203">
-          <caret line="157" column="0" selection-start-line="157" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
+        <state relative-caret-position="166">
+          <caret line="33" column="35" selection-start-line="33" selection-start-column="35" selection-end-line="33" selection-end-column="35" />
           <folding>
-            <marker date="1476629784000" expanded="true" signature="829:864" ph="SELECT f FRO... AppBundle" />
-            <marker date="1476629784000" expanded="true" signature="829:892" ph="SELECT f FRO... AppBundle" />
-            <marker date="1476629784000" expanded="true" signature="1016:1074" ph="SELECT l FRO... AppBundle" />
-            <marker date="1476629784000" expanded="true" signature="1668:1703" ph="SELECT f FRO... AppBundle" />
+            <element signature="e#38#78#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/bower_components/recherche/facette.js">
+    <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Resources/views/Etablissement/_form.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="60" column="27" selection-start-line="60" selection-start-column="20" selection-end-line="60" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/rechercher.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="885">
-          <caret line="59" column="8" selection-start-line="59" selection-start-column="8" selection-end-line="59" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/friendsofsymfony/user-bundle/Resources/views/Profile/show.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/friendsofsymfony/user-bundle/Resources/views/Profile/show_content.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/friendsofsymfony/user-bundle/Resources/views/Profile/edit_content.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/friendsofsymfony/user-bundle/Resources/views/layout.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="55" selection-start-line="7" selection-start-column="47" selection-end-line="7" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Bundle/SecurityBundle/DependencyInjection/Security/Factory/RememberMeFactory.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="42" column="22" selection-start-line="42" selection-start-column="11" selection-end-line="42" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Security/Guard/GuardAuthenticatorInterface.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="159" column="1" selection-start-line="159" selection-start-column="1" selection-end-line="159" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/friendsofsymfony/user-bundle/Resources/views/Security/login.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/friendsofsymfony/user-bundle/Resources/views/Security/login_content.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="36" column="37" selection-start-line="36" selection-start-column="18" selection-end-line="36" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/FOSUserBundle/views/layout.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/EditorBundle/Controller/DefaultController.php" />
-    <entry file="file://$PROJECT_DIR$/src/EditorBundle/Controller/EtablissementController.php" />
-    <entry file="file://$PROJECT_DIR$/src/EditorBundle/Controller/FormationController.php" />
-    <entry file="file://$PROJECT_DIR$/src/EditorBundle/Controller/LaboratoireController.php" />
-    <entry file="file://$PROJECT_DIR$/src/EditorBundle/Controller/EditeurController.php" />
-    <entry file="file://$PROJECT_DIR$/app/autoload.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/EditorBundle/EditeurBundle.php" />
-    <entry file="file://$PROJECT_DIR$/src/EditorBundle/Resources/config/services.yml" />
-    <entry file="file://$PROJECT_DIR$/src/EditorBundle/Resources/views/Default/index.html.twig" />
-    <entry file="file://$PROJECT_DIR$/app/config/services.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/security.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/var/cache/dev/appDevUrlGenerator.php.meta">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="1085" selection-start-line="0" selection-start-column="1085" selection-end-line="0" selection-end-column="1085" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/EditorBundle/Controller/DefaultControllerTest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/AppKernel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="22" column="10" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/routing_dev.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="11" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+        <state relative-caret-position="165">
+          <caret line="13" column="87" selection-start-line="13" selection-start-column="87" selection-end-line="13" selection-end-column="87" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Controller/EditeurController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="22" column="7" selection-start-line="22" selection-start-column="7" selection-end-line="22" selection-end-column="7" />
+        <state relative-caret-position="465">
+          <caret line="96" column="61" selection-start-line="96" selection-start-column="8" selection-end-line="96" selection-end-column="61" />
           <folding>
-            <marker date="1476629784000" expanded="true" signature="829:892" ph="SELECT f FRO... AppBundle" />
-            <marker date="1476629784000" expanded="true" signature="1016:1074" ph="SELECT l FRO... AppBundle" />
-            <marker date="1476629784000" expanded="true" signature="1668:1703" ph="SELECT f FRO... AppBundle" />
+            <element signature="e#4404#4437#0#PHP" expanded="true" />
+            <marker date="1485379809000" expanded="true" signature="825:888" ph="SELECT f FRO... AppBundle" />
+            <marker date="1485379809000" expanded="true" signature="1012:1070" ph="SELECT l FRO... AppBundle" />
+            <marker date="1485379809000" expanded="true" signature="1677:1712" ph="SELECT f FRO... AppBundle" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Controller/EtablissementController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="75" column="79" selection-start-line="75" selection-start-column="79" selection-end-line="75" selection-end-column="79" />
+          <folding>
+            <element signature="e#44#101#0#PHP" expanded="true" />
+            <element signature="e#2069#2094#1#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Resources/views/Etablissement/edit.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="41" selection-start-line="5" selection-start-column="41" selection-end-line="5" selection-end-column="41" />
+          <folding />
         </state>
       </provider>
     </entry>
