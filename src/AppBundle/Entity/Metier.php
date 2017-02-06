@@ -50,11 +50,25 @@ class Metier
     private $formation;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="rome", type="string", length=20)
+     */
+    private $rome;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Souscategorie", inversedBy="metier")
+     * @ORM\JoinColumn(name="souscategorie_id", referencedColumnName="id")
+     */
+    private $souscategorie;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->formation = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->timestamp = new \DateTime();
     }
 
 
@@ -172,5 +186,77 @@ class Metier
     public function getFormation()
     {
         return $this->formation;
+    }
+
+    /**
+     * Set souscategorie
+     *
+     * @param \AppBundle\Entity\Souscategorie $souscategorie
+     *
+     * @return Metier
+     */
+    public function setSouscategorie(\AppBundle\Entity\Souscategorie $souscategorie = null)
+    {
+        $this->souscategorie = $souscategorie;
+
+        return $this;
+    }
+
+    /**
+     * Get souscategorie
+     *
+     * @return \AppBundle\Entity\Souscategorie
+     */
+    public function getSouscategorie()
+    {
+        return $this->souscategorie;
+    }
+
+    /**
+     * Set rome
+     *
+     * @param string $rome
+     *
+     * @return Metier
+     */
+    public function setRome($rome)
+    {
+        $this->rome = $rome;
+
+        return $this;
+    }
+
+    /**
+     * Get rome
+     *
+     * @return string
+     */
+    public function getRome()
+    {
+        return $this->rome;
+    }
+
+    /**
+     * Set souscategories
+     *
+     * @param \AppBundle\Entity\Souscategorie $souscategories
+     *
+     * @return Metier
+     */
+    public function setSouscategories(\AppBundle\Entity\Souscategorie $souscategories = null)
+    {
+        $this->souscategories = $souscategories;
+
+        return $this;
+    }
+
+    /**
+     * Get souscategories
+     *
+     * @return \AppBundle\Entity\Souscategorie
+     */
+    public function getSouscategories()
+    {
+        return $this->souscategories;
     }
 }
