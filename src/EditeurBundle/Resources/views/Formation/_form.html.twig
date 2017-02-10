@@ -1,15 +1,32 @@
-{{ form_row(edit_form.nom) }}
-{{ form_row(edit_form.description, { 'attr': {'class': 'materialize-textarea'} }) }}
-{{ form_row(edit_form.discipline) }}
-{#{{ form_row(edit_form.tag) }} #}
-{{ form_row(edit_form.url)}}
-{{ form_row(edit_form.niveau) }}
-{{ form_row(edit_form.annee) }}
-{{ form_row(edit_form.typediplome, { 'label' : 'Type de diplôme'}) }}
-{{ form_row(edit_form.effectif) }}
-{{ form_row(edit_form.lien2) }}
-{{ form_row(edit_form.lien3) }}
-{{ form_row(edit_form.responsable) }}
-{{ form_row(edit_form.etablissement) }}
+<div class="row form">
 
+    <div class="col s6">
+        <div class="cartouche">
 
+        {{  form_row(edit_form.nom) }}
+        {{ form_row(edit_form.description, { 'attr': {'class': 'materialize-textarea'} }) }}
+        {{ form_row(edit_form.url, {'label' : "Page de la formation"})}}
+
+        </div>
+    </div>
+
+    <div class="col s6">
+        <div class="cartouche">
+            {{ form_row(edit_form.discipline) }}
+            {#{{ form_row(edit_form.tag) }} #}
+
+            {{ form_row(edit_form.niveau, {'label' : "Niveau de sortie"}) }}
+            {{ form_row(edit_form.annee) }}
+            {{ form_row(edit_form.effectif) }}
+
+            {{ form_row(edit_form.typediplome, { 'label' : 'Type de diplôme'}) }}
+
+            {{ form_row(edit_form.lien2,  {'label' : "Autre lien"}) }}
+
+            {{ form_row(edit_form.responsable, {'label' : 'Contact'}) }}
+
+            {{ form_row(edit_form.etablissement) }}
+        </div>
+    </div>
+
+</div>

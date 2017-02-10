@@ -33,7 +33,7 @@ class FormationType extends AbstractType
             ->add('typediplome')
             ->add('effectif')
             ->add('lien2')
-            ->add('lien3')
+//            ->add('lien3')
             ->add('responsable')
         //     ->add('membre')
 //            ->add('tag', EntityType::class, array(
