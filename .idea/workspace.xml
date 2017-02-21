@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3bb1b647-8eae-4507-b232-68d841001a20" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/base.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/web/apropos.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/web/apropos.html.twig" />
     </list>
     <ignored path="visam_2016-04-28.iws" />
@@ -94,11 +93,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="apropos.html.twig" pinned="false" current-in-tab="false">
+      <file leaf-file-name="apropos.html.twig" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Resources/views/web/apropos.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="657">
-              <caret line="73" column="30" selection-start-line="73" selection-start-column="30" selection-end-line="73" selection-end-column="30" />
+            <state relative-caret-position="417">
+              <caret line="72" column="56" selection-start-line="72" selection-start-column="56" selection-end-line="72" selection-end-column="56" />
               <folding>
                 <element signature="e#12#26#0#Twig" expanded="true" />
               </folding>
@@ -118,7 +117,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base.html.twig" pinned="false" current-in-tab="true">
+      <file leaf-file-name="base.html.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="339">
@@ -202,8 +201,8 @@
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/Formation.php" />
         <option value="$PROJECT_DIR$/src/EditeurBundle/Form/FormationType.php" />
         <option value="$PROJECT_DIR$/src/EditeurBundle/Resources/views/Formation/_form.html.twig" />
-        <option value="$PROJECT_DIR$/app/Resources/views/web/apropos.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
+        <option value="$PROJECT_DIR$/app/Resources/views/web/apropos.html.twig" />
       </list>
     </option>
   </component>
@@ -948,12 +947,12 @@
       <workItem from="1486111906170" duration="12014000" />
       <workItem from="1486739717751" duration="3675000" />
       <workItem from="1487340621499" duration="714000" />
-      <workItem from="1487666385004" duration="376000" />
+      <workItem from="1487666385004" duration="477000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="176291000" />
+    <option name="totallyTimeSpent" value="176392000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1369,13 +1368,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/web/apropos.html.twig">
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="657">
-          <caret line="73" column="30" selection-start-line="73" selection-start-column="30" selection-end-line="73" selection-end-column="30" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-          </folding>
+        <state relative-caret-position="339">
+          <caret line="149" column="96" selection-start-line="149" selection-start-column="96" selection-end-line="149" selection-end-column="96" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1389,11 +1386,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/web/apropos.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="149" column="96" selection-start-line="149" selection-start-column="96" selection-end-line="149" selection-end-column="96" />
-          <folding />
+        <state relative-caret-position="417">
+          <caret line="72" column="56" selection-start-line="72" selection-start-column="56" selection-end-line="72" selection-end-column="56" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
