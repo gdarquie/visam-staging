@@ -19,8 +19,8 @@ class ImportCategoriesCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('import:csv:cat')
-            ->setDescription('Importations des secteurs, categories, code Rome du fichier metier CSV');
+            ->setName('import:csv:cat') // bin console/import:csv:cat
+            ->setDescription('Import des secteurs, categories, code Rome du fichier métier CSV');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

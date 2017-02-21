@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Souscategorie
  *
  * @ORM\Table(name="souscategorie")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\SouscategorieRepository")
+ * @ORM\Entity
  */
 class Souscategorie
 {

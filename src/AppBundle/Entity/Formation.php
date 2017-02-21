@@ -51,6 +51,13 @@ class Formation
     /**
      * @var string
      *
+     * @ORM\Column(name="lmd", type="string", length=255, nullable=true)
+     */
+    private $lmd;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="typeDiplome", type="string", length=255, nullable=true)
      */
     private $typediplome;
@@ -758,6 +765,23 @@ class Formation
     {
         return $this->discipline;
     }
+
+    /**
+     * @return string
+     */
+    public function getLmd()
+    {
+        return $this->lmd;
+    }
+
+    /**
+     * @param string $lmd
+     */
+    public function setLmd($lmd)
+    {
+        $this->lmd = $lmd;
+    }
+
 
 
 }
