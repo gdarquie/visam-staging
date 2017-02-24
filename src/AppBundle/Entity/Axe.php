@@ -174,4 +174,12 @@ class Axe
     {
         return $this->labo;
     }
+
+    public function __toString()
+    {
+        return (string) $this->getNom();
+    }
+
+
 }
+

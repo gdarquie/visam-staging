@@ -1,17 +1,78 @@
-{{ form_row(edit_form.nom) }}
-{{ form_row(edit_form.discipline) }}
-{{ form_row(edit_form.lien) }}
-{{ form_row(edit_form.mailcontact) }}
-{{ form_row(edit_form.responsable) }} {# mettre par ordre alphabétique #}
-{{ form_row(edit_form.description, { 'attr': {'class': 'materialize-textarea'} })}}
-{{ form_row(edit_form.code) }}
-{{ form_row(edit_form.type) }}
-{{ form_row(edit_form.effectif, { 'label' : 'Effectif'}) }}
-{{ form_row(edit_form.sigle) }}
-{{ form_row(edit_form.lien2) }}
-{{ form_row(edit_form.lien3) }}
-{#{{ form_row(edit_form.membre) }}#}
-{{ form_row(edit_form.etabExt, { 'attr': {'class': 'materialize-textarea'} }) }}
-{{ form_row(edit_form.etablissement) }}
+<div class="row form">
+
+    <div class="col s6">
+        <div class="cartouche">
 
 
+            <h3>Informations générales</h3>
+
+            {{ form_row(edit_form.nom) }}
+            {{ form_row(edit_form.sigle) }}
+            {{ form_row(edit_form.type) }}
+            {{ form_row(edit_form.code) }}
+            {{ form_row(edit_form.uai, { 'label' : 'UAI'}) }}
+
+
+
+        </div>
+    </div>
+
+    <div class="col s6">
+        <div class="cartouche">
+
+            <h3>Description</h3>
+
+            {{ form_row(edit_form.description, { 'attr': {'class': 'materialize-textarea'} })}}
+
+            {{ form_row(edit_form.discipline) }}
+            {{ form_row(edit_form.axes) }}
+            {{ form_row(edit_form.lien) }}
+
+
+        </div>
+    </div>
+
+    <div class="col s6">
+        <div class="cartouche">
+
+            <h3>Etablissement(s)</h3>
+
+            {{ form_row(edit_form.etablissement, { 'label' : 'Etablissement(s) Hesam'}) }}
+            {{ form_row(edit_form.etabExt, { 'attr': {'class': 'materialize-textarea'}, 'label' : 'Etablissement(s) hors Hesam'}) }}
+
+
+
+        </div>
+    </div>
+    
+    <div class="col s6">
+        <div class="cartouche">
+
+            <h3>Membre(s)</h3>
+
+            {{ form_row(edit_form.responsable) }} {# mettre par ordre alphabétique #}
+            {{ form_row(edit_form.mailcontact, { 'label' : 'Mail'}) }}
+
+            <!-- Chercheurs du labo / mail -->
+
+        </div>
+    </div>
+
+
+
+    <div class="col s6">
+        <div class="cartouche">
+
+            <h3>Effectif(s)</h3>
+
+            {{ form_row(edit_form.effectifHesam, { 'label' : 'Effectif Hesam '}) }}
+            {{ form_row(edit_form.effectif, { 'label' : 'Effectif total du laboratoire (pour les UMR)'}) }}
+            <!-- année -->
+
+        </div>
+    </div>
+
+
+
+
+</div>

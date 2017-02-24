@@ -75,6 +75,14 @@ class Labo
      */
     private $effectif;
 
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="effectif_hesam", type="integer", nullable=true)
+     */
+    private $effectifHesam;
+
     /**
      * @var string
      *
@@ -928,6 +936,23 @@ class Labo
 
         return $this;
     }
+
+    /**
+     * @return int
+     */
+    public function getEffectifHesam()
+    {
+        return $this->effectifHesam;
+    }
+
+    /**
+     * @param int $effectifHesam
+     */
+    public function setEffectifHesam($effectifHesam)
+    {
+        $this->effectifHesam = $effectifHesam;
+    }
+
 
 
     
