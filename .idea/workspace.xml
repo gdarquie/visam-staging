@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3bb1b647-8eae-4507-b232-68d841001a20" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/notice/formation.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/notice/formation.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/notice/laboratoire.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/notice/laboratoire.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/EditeurBundle/Resources/views/Formation/edit.html.twig" afterPath="$PROJECT_DIR$/src/EditeurBundle/Resources/views/Formation/edit.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/EditeurBundle/Resources/views/Formation/new.html.twig" afterPath="$PROJECT_DIR$/src/EditeurBundle/Resources/views/Formation/new.html.twig" />
-    </list>
+    <list default="true" id="3bb1b647-8eae-4507-b232-68d841001a20" name="Default" comment="" />
     <ignored path="visam_2016-04-28.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -696,12 +691,12 @@
       <workItem from="1487949302541" duration="2739000" />
       <workItem from="1488038578791" duration="142000" />
       <workItem from="1489143104180" duration="5231000" />
-      <workItem from="1489584090817" duration="4510000" />
+      <workItem from="1489584090817" duration="4584000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="189643000" />
+    <option name="totallyTimeSpent" value="189717000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
