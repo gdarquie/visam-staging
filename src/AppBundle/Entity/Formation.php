@@ -705,41 +705,6 @@ class Formation
     }
 
     /**
-     * Add metier
-     *
-     * @param \AppBundle\Entity\Metier $metier
-     *
-     * @return Formation
-     */
-    public function addMetier(\AppBundle\Entity\Metier $metier)
-    {
-        $this->metier[] = $metier;
-
-        return $this;
-    }
-
-    /**
-     * Remove metier
-     *
-     * @param \AppBundle\Entity\Metier $metier
-     */
-    public function removeMetier(\AppBundle\Entity\Metier $metier)
-    {
-        $this->metier->removeElement($metier);
-    }
-
-    /**
-     * Get metier
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getMetier()
-    {
-        return $this->metier;
-    }
-
-
-    /**
      * Add discipline
      *
      * @param \AppBundle\Entity\Discipline $discipline
