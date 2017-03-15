@@ -27,6 +27,13 @@
                     {% for hesamette in hesamettes %}
                     <li>{{hesamette.nom}} /</li> 
                     {% endfor %}
+
+
+                  {% if labo.description|length > 0 %}
+                      <h5>Description</h5>
+                      <p>{{ labo.description }}</p>
+                  {% endif %}
+
                 </ul>
 
                 <ul class="list-thematique" >

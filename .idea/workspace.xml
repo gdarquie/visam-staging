@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3bb1b647-8eae-4507-b232-68d841001a20" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/AppBundle/Command/ImportCategoriesCommand.php" afterPath="$PROJECT_DIR$/src/AppBundle/Command/ImportMetiersCommand.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Categorie.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Metier2.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Secteur.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Metier1.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Souscategorie.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Metier3.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/notice/formation.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/notice/formation.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/notice/laboratoire.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/notice/laboratoire.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/EditeurBundle/Resources/views/Formation/edit.html.twig" afterPath="$PROJECT_DIR$/src/EditeurBundle/Resources/views/Formation/edit.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/EditeurBundle/Resources/views/Formation/new.html.twig" afterPath="$PROJECT_DIR$/src/EditeurBundle/Resources/views/Formation/new.html.twig" />
     </list>
     <ignored path="visam_2016-04-28.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,30 +34,70 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Formation.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Formation.php">
+      <file leaf-file-name="formation.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Resources/views/notice/formation.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="69">
-              <caret line="704" column="5" lean-forward="false" selection-start-line="704" selection-start-column="5" selection-end-line="704" selection-end-column="5" />
+            <state relative-caret-position="480">
+              <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Version20170315144423.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/DoctrineMigrations/Version20170315144423.php">
+      <file leaf-file-name="laboratoire.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Resources/views/notice/laboratoire.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="435">
+              <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="33" selection-end-column="51" />
               <folding>
-                <marker date="1489585463000" expanded="true" signature="584:665" ph="ALTER TABLE formation_has_metier... " />
-                <marker date="1489585463000" expanded="true" signature="692:723" ph="DROP TABLE f... " />
-                <marker date="1489585463000" expanded="true" signature="750:767" ph="DROP TABLE m... " />
-                <marker date="1489585463000" expanded="true" signature="1120:1393" ph="CREATE TABLE... formation_has_metier" />
-                <marker date="1489585463000" expanded="true" signature="1420:1850" ph="CREATE TABLE... metier" />
-                <marker date="1489585463000" expanded="true" signature="1877:2062" ph="ALTER TABLE formation_has_metier... " />
-                <marker date="1489585463000" expanded="true" signature="2089:2262" ph="ALTER TABLE formation_has_metier... " />
-                <marker date="1489585463000" expanded="true" signature="2289:2403" ph="ALTER TABLE metier... " />
+                <element signature="e#55#101#0#HTML" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_form.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Resources/views/Formation/_form.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="19" column="46" lean-forward="false" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="46" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FormationController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Controller/FormationController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="525">
+              <caret line="52" column="53" lean-forward="false" selection-start-line="52" selection-start-column="44" selection-end-line="52" selection-end-column="53" />
+              <folding>
+                <element signature="e#2346#2386#0#PHP" expanded="true" />
+                <marker date="1486123100000" expanded="true" signature="3790:3893" ph="SELECT f.nom... AppBundle" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="new.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Resources/views/Formation/new.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="35" lean-forward="false" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
+              <folding>
+                <element signature="e#12#26#0#Twig" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="edit.html.twig" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Resources/views/Formation/edit.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+              <folding>
+                <element signature="e#12#26#0#Twig" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -96,57 +135,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ImportMetiersCommand.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ImportMetiersCommand.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Command/ImportMetiersCommand.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
-              <caret line="59" column="21" lean-forward="true" selection-start-line="59" selection-start-column="21" selection-end-line="59" selection-end-column="21" />
+            <state relative-caret-position="-348">
+              <caret line="59" column="21" lean-forward="false" selection-start-line="59" selection-start-column="21" selection-end-line="59" selection-end-column="21" />
               <folding>
                 <element signature="e#78#143#0#PHP" expanded="true" />
                 <element signature="e#2204#2223#1#PHP" expanded="true" />
                 <element signature="e#2969#2988#1#PHP" expanded="true" />
                 <element signature="e#3625#3644#1#PHP" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Ed.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Ed.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8235">
-              <caret line="549" column="0" lean-forward="false" selection-start-line="549" selection-start-column="0" selection-end-line="549" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Labo.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Labo.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Equipement.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Equipement.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="base.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="154" column="70" lean-forward="false" selection-start-line="154" selection-start-column="70" selection-end-line="154" selection-end-column="70" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -187,10 +186,8 @@
         <option value="$PROJECT_DIR$/src/EditeurBundle/Resources/views/Default/index.html.twig" />
         <option value="$PROJECT_DIR$/app/config/routing.yml" />
         <option value="$PROJECT_DIR$/src/EditeurBundle/Controller/EditeurController.php" />
-        <option value="$PROJECT_DIR$/src/EditeurBundle/Resources/views/Formation/new.html.twig" />
         <option value="$PROJECT_DIR$/src/EditeurBundle/Resources/views/Labo/edit.html.twig" />
         <option value="$PROJECT_DIR$/src/EditeurBundle/Resources/views/Labo/new.html.twig" />
-        <option value="$PROJECT_DIR$/src/EditeurBundle/Resources/views/Formation/edit.html.twig" />
         <option value="$PROJECT_DIR$/src/EditeurBundle/Form/EdType.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Form/EtablissementType.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Form/EdType.php" />
@@ -199,8 +196,6 @@
         <option value="$PROJECT_DIR$/src/AppBundle/Repository/DisciplineRepository.php" />
         <option value="$PROJECT_DIR$/src/EditeurBundle/Controller/LaboratoireController.php" />
         <option value="$PROJECT_DIR$/web/bower_components/recherche/facette.js" />
-        <option value="$PROJECT_DIR$/app/Resources/views/notice/formation.html.twig" />
-        <option value="$PROJECT_DIR$/app/Resources/views/notice/laboratoire.html.twig" />
         <option value="$PROJECT_DIR$/src/EditeurBundle/Controller/FormationController.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/Image.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/Valorisation.php" />
@@ -233,6 +228,10 @@
         <option value="$PROJECT_DIR$/src/AppBundle/Command/ImportCategoriesCommand.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Command/ImportMetier2Command.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Command/ImportMetiersCommand.php" />
+        <option value="$PROJECT_DIR$/app/Resources/views/notice/formation.html.twig" />
+        <option value="$PROJECT_DIR$/app/Resources/views/notice/laboratoire.html.twig" />
+        <option value="$PROJECT_DIR$/src/EditeurBundle/Resources/views/Formation/new.html.twig" />
+        <option value="$PROJECT_DIR$/src/EditeurBundle/Resources/views/Formation/edit.html.twig" />
       </list>
     </option>
   </component>
@@ -386,10 +385,6 @@
               <option name="myItemId" value="views" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Labo" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -442,84 +437,6 @@
               <option name="myItemId" value="Resources" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Etablissement" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visam" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visam" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="EditeurBundle" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visam" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visam" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="EditeurBundle" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visam" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visam" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="EditeurBundle" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Form" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -540,46 +457,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Controller" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visam" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visam" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppBundle" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visam" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visam" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppBundle" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Command" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -648,76 +525,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visam" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visam" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="notice" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visam" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visam" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visam" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visam" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DoctrineMigrations" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -889,12 +696,12 @@
       <workItem from="1487949302541" duration="2739000" />
       <workItem from="1488038578791" duration="142000" />
       <workItem from="1489143104180" duration="5231000" />
-      <workItem from="1489584090817" duration="3224000" />
+      <workItem from="1489584090817" duration="4510000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="188357000" />
+    <option name="totallyTimeSpent" value="189643000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -956,20 +763,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Repository/DisciplineRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/EditeurBundle/EditeurBundle.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="10" lean-forward="false" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/bower_components/recherche/facette.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -1039,13 +832,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/notice/laboratoire.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-210">
-          <caret line="4" column="33" lean-forward="false" selection-start-line="4" selection-start-column="33" selection-end-line="4" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Image.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -1069,17 +855,6 @@
         <state relative-caret-position="135">
           <caret line="9" column="50" lean-forward="false" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="50" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Controller/FormationController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1110">
-          <caret line="74" column="44" lean-forward="false" selection-start-line="74" selection-start-column="44" selection-end-line="74" selection-end-column="44" />
-          <folding>
-            <element signature="e#44#101#0#PHP" expanded="false" />
-            <marker date="1486123100000" expanded="true" signature="3790:3893" ph="SELECT f.nom... AppBundle" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1180,13 +955,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Resources/views/Formation/_form.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="46" lean-forward="false" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Axe.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1472">
@@ -1214,14 +982,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/notice/formation.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="45" column="27" lean-forward="false" selection-start-line="44" selection-start-column="27" selection-end-line="45" selection-end-column="27" />
           <folding />
         </state>
       </provider>
@@ -1367,13 +1127,70 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Command/ImportMetiersCommand.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="59" column="21" lean-forward="true" selection-start-line="59" selection-start-column="21" selection-end-line="59" selection-end-column="21" />
+        <state relative-caret-position="-348">
+          <caret line="59" column="21" lean-forward="false" selection-start-line="59" selection-start-column="21" selection-end-line="59" selection-end-column="21" />
           <folding>
             <element signature="e#78#143#0#PHP" expanded="true" />
             <element signature="e#2204#2223#1#PHP" expanded="true" />
             <element signature="e#2969#2988#1#PHP" expanded="true" />
             <element signature="e#3625#3644#1#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/notice/formation.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/notice/laboratoire.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="33" selection-end-column="51" />
+          <folding>
+            <element signature="e#55#101#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Resources/views/Formation/_form.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="46" lean-forward="false" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Controller/FormationController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="52" column="53" lean-forward="false" selection-start-line="52" selection-start-column="44" selection-end-line="52" selection-end-column="53" />
+          <folding>
+            <element signature="e#2346#2386#0#PHP" expanded="true" />
+            <marker date="1486123100000" expanded="true" signature="3790:3893" ph="SELECT f.nom... AppBundle" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Resources/views/Formation/new.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="35" lean-forward="false" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Resources/views/Formation/edit.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
           </folding>
         </state>
       </provider>
