@@ -86,6 +86,13 @@ class Labo
     /**
      * @var string
      *
+     * @ORM\Column(name="objet_id", type="string", length=255, nullable=true)
+     */
+    private $objetId;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="sigle", type="string", length=45, nullable=true)
      */
     private $sigle;
@@ -110,6 +117,13 @@ class Labo
      * @ORM\Column(name="uai", type="string", length=25, nullable=true)
      */
     private $uai;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="annee_collecte", type="integer", nullable=true)
+     */
+    private $anneeCollecte;
 
     /**
      * @var \DateTime
@@ -953,7 +967,37 @@ class Labo
         $this->effectifHesam = $effectifHesam;
     }
 
+    /**
+     * @return int
+     */
+    public function getAnneeCollecte()
+    {
+        return $this->anneeCollecte;
+    }
+
+    /**
+     * @param int $anneeCollecte
+     */
+    public function setAnneeCollecte($anneeCollecte)
+    {
+        $this->anneeCollecte = $anneeCollecte;
+    }
+
+    /**
+     * @return string
+     */
+    public function getObjetId()
+    {
+        return $this->objetId;
+    }
+
+    /**
+     * @param string $objetId
+     */
+    public function setObjetId($objetId)
+    {
+        $this->objetId = $objetId;
+    }
 
 
-    
 }

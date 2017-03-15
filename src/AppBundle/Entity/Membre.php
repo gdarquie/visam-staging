@@ -12,6 +12,16 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Membre
 {
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="membre_id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $membreId;
+
     /**
      * @var string
      *
@@ -34,6 +44,20 @@ class Membre
     private $profession;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="genre", type="string", length=1, nullable=true)
+     */
+    private $genre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mail", type="string", length=500, nullable=true)
+     */
+    private $mail;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="timestamp", type="datetime", nullable=false)
@@ -41,18 +65,9 @@ class Membre
     private $timestamp;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="membre_id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $membreId;
-
-    /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Labo", inversedBy="membre")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Labo", inversedBy="membres")
      * @ORM\JoinTable(name="membre_has_labo",
      *   joinColumns={
      *     @ORM\JoinColumn(name="membre_id", referencedColumnName="membre_id")
@@ -67,7 +82,7 @@ class Membre
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Formation", inversedBy="membre")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Formation", inversedBy="membres")
      * @ORM\JoinTable(name="membre_has_formation",
      *   joinColumns={
      *     @ORM\JoinColumn(name="membre_id", referencedColumnName="membre_id")
@@ -82,7 +97,23 @@ class Membre
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Ed", inversedBy="membre")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Axe", inversedBy="membres")
+     * @ORM\JoinTable(name="membre_has_axe",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="membre_id", referencedColumnName="membre_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="axe_id", referencedColumnName="axe_id")
+     *   }
+     * )
+     */
+    private $axe;
+
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Ed", inversedBy="membres")
      * @ORM\JoinTable(name="membre_has_ed",
      *   joinColumns={
      *     @ORM\JoinColumn(name="membre_id", referencedColumnName="membre_id")
@@ -93,6 +124,22 @@ class Membre
      * )
      */
     private $ed;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag", inversedBy="tag")
+     * @ORM\JoinTable(name="membre_has_tag",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="membre_id", referencedColumnName="membre_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="tag_id", referencedColumnName="tag_id")
+     *   }
+     * )
+     */
+    private $tag;
+
 
     /**
      * Constructor
@@ -312,4 +359,70 @@ class Membre
     {
         return $this->ed;
     }
+
+    /**
+     * @return string
+     */
+    public function getGenre()
+    {
+        return $this->genre;
+    }
+
+    /**
+     * @param string $genre
+     */
+    public function setGenre($genre)
+    {
+        $this->genre = $genre;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMail()
+    {
+        return $this->mail;
+    }
+
+    /**
+     * @param string $mail
+     */
+    public function setMail($mail)
+    {
+        $this->mail = $mail;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTag()
+    {
+        return $this->tag;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $tag
+     */
+    public function setTag($tag)
+    {
+        $this->tag = $tag;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAxe()
+    {
+        return $this->axe;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $axe
+     */
+    public function setAxe($axe)
+    {
+        $this->axe = $axe;
+    }
+
+
 }

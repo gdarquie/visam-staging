@@ -44,6 +44,20 @@ class Formation
     /**
      * @var string
      *
+     * @ORM\Column(name="objet_id", type="string", length=255, nullable=true)
+     */
+    private $objetId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="annee_collecte", type="integer", nullable=true)
+     */
+    private $anneeCollecte;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="niveau", type="string", length=255, nullable=true)
      */
     private $niveau;
@@ -140,6 +154,22 @@ class Formation
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Labo", mappedBy="formation")
      */
     private $labo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ects", type="integer", length=255, nullable=true)
+     */
+    private $ects;
+
+
+    //à remplacer par un thésaurus
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="modalite", type="string", length=255, nullable=true)
+     */
+    private $modalite;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -782,6 +812,69 @@ class Formation
         $this->lmd = $lmd;
     }
 
+    /**
+     * @return int
+     */
+    public function getAnneeCollecte()
+    {
+        return $this->anneeCollecte;
+    }
+
+    /**
+     * @param int $anneeCollecte
+     */
+    public function setAnneeCollecte($anneeCollecte)
+    {
+        $this->anneeCollecte = $anneeCollecte;
+    }
+
+    /**
+     * @return string
+     */
+    public function getObjetId()
+    {
+        return $this->objetId;
+    }
+
+    /**
+     * @param string $objetId
+     */
+    public function setObjetId($objetId)
+    {
+        $this->objetId = $objetId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEcts()
+    {
+        return $this->ects;
+    }
+
+    /**
+     * @param string $ects
+     */
+    public function setEcts($ects)
+    {
+        $this->ects = $ects;
+    }
+
+    /**
+     * @return string
+     */
+    public function getModalite()
+    {
+        return $this->modalite;
+    }
+
+    /**
+     * @param string $modalite
+     */
+    public function setModalite($modalite)
+    {
+        $this->modalite = $modalite;
+    }
 
 
 }

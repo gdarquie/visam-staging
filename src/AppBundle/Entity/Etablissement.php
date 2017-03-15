@@ -36,6 +36,13 @@ class Etablissement
     /**
      * @var string
      *
+     * @ORM\Column(name="objet_id", type="string", length=255, nullable=true)
+     */
+    private $objetId;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="sigle", type="string", length=45, nullable=true)
      */
     private $sigle;
@@ -102,6 +109,13 @@ class Etablissement
      * @ORM\Column(name="intervenants", type="integer", nullable=true)
      */
     private $intervenants;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="annee_collecte", type="integer", nullable=true)
+     */
+    private $anneeCollecte;
 
     /**
      * @var string
@@ -791,10 +805,42 @@ class Etablissement
         $this->intervenants = $intervenants;
     }
 
+    /**
+     * @return int
+     */
+    public function getAnneeCollecte()
+    {
+        return $this->anneeCollecte;
+    }
+
+    /**
+     * @param int $anneeCollecte
+     */
+    public function setAnneeCollecte($anneeCollecte)
+    {
+        $this->anneeCollecte = $anneeCollecte;
+    }
+
 
     public function __toString()
     {
         return (string) $this->getNom();
+    }
+
+    /**
+     * @return string
+     */
+    public function getObjetId()
+    {
+        return $this->objetId;
+    }
+
+    /**
+     * @param string $objetId
+     */
+    public function setObjetId($objetId)
+    {
+        $this->objetId = $objetId;
     }
 
 }

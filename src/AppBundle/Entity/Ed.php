@@ -29,6 +29,13 @@ class Ed
     /**
      * @var string
      *
+     * @ORM\Column(name="objet_id", type="string", length=255, nullable=true)
+     */
+    private $objetId;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="lien", type="string", length=255, nullable=true)
      */
     private $lien;
@@ -111,6 +118,13 @@ class Ed
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Labo", mappedBy="ed")
      */
     private $labo;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="annee_collecte", type="integer", nullable=true)
+     */
+    private $anneeCollecte;
 
     /**
      * Constructor
@@ -501,4 +515,38 @@ class Ed
     {
         return $this->getNom();
     }
+
+    /**
+     * @return int
+     */
+    public function getAnneeCollecte()
+    {
+        return $this->anneeCollecte;
+    }
+
+    /**
+     * @param int $anneeCollecte
+     */
+    public function setAnneeCollecte($anneeCollecte)
+    {
+        $this->anneeCollecte = $anneeCollecte;
+    }
+
+    /**
+     * @return string
+     */
+    public function getObjetId()
+    {
+        return $this->objetId;
+    }
+
+    /**
+     * @param string $objetId
+     */
+    public function setObjetId($objetId)
+    {
+        $this->objetId = $objetId;
+    }
+
+
 }
