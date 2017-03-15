@@ -2,7 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3bb1b647-8eae-4507-b232-68d841001a20" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Formation.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Formation.php" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/DoctrineMigrations/Version20160910154937.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/DoctrineMigrations/Version20160910160244.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/DoctrineMigrations/Version20161014002706.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/DoctrineMigrations/Version20161014120723.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/DoctrineMigrations/Version20161014121709.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/DoctrineMigrations/Version20161014135720.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/DoctrineMigrations/Version20170125144030.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/DoctrineMigrations/Version20170203152401.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/DoctrineMigrations/Version20170203171355.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/DoctrineMigrations/Version20170210175421.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/DoctrineMigrations/Version20170224164421.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/DoctrineMigrations/Version20170310141959.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/DoctrineMigrations/Version20170310142851.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/DoctrineMigrations/Version20170310170420.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/DoctrineMigrations/Version20170310174018.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/DoctrineMigrations/Version20170310174147.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/DoctrineMigrations/Version20170310182017.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/DoctrineMigrations/Version20170310183105.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/DoctrineMigrations/Version20170315112555.php" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="visam_2016-04-28.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -37,6 +56,25 @@
             <state relative-caret-position="69">
               <caret line="704" column="5" lean-forward="false" selection-start-line="704" selection-start-column="5" selection-end-line="704" selection-end-column="5" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Version20170315144423.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/DoctrineMigrations/Version20170315144423.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <marker date="1489585463000" expanded="true" signature="584:665" ph="ALTER TABLE formation_has_metier... " />
+                <marker date="1489585463000" expanded="true" signature="692:723" ph="DROP TABLE f... " />
+                <marker date="1489585463000" expanded="true" signature="750:767" ph="DROP TABLE m... " />
+                <marker date="1489585463000" expanded="true" signature="1120:1393" ph="CREATE TABLE... formation_has_metier" />
+                <marker date="1489585463000" expanded="true" signature="1420:1850" ph="CREATE TABLE... metier" />
+                <marker date="1489585463000" expanded="true" signature="1877:2062" ph="ALTER TABLE formation_has_metier... " />
+                <marker date="1489585463000" expanded="true" signature="2089:2262" ph="ALTER TABLE formation_has_metier... " />
+                <marker date="1489585463000" expanded="true" signature="2289:2403" ph="ALTER TABLE metier... " />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -124,6 +162,7 @@
     <findStrings>
       <find>anne</find>
       <find>objetI</find>
+      <find>meti</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -767,6 +806,24 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="visam" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="visam" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DoctrineMigrations" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -930,12 +987,12 @@
       <workItem from="1487949302541" duration="2739000" />
       <workItem from="1488038578791" duration="142000" />
       <workItem from="1489143104180" duration="5231000" />
-      <workItem from="1489584090817" duration="921000" />
+      <workItem from="1489584090817" duration="1305000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="186054000" />
+    <option name="totallyTimeSpent" value="186438000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -997,8 +1054,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Form/LaboType.php" />
-    <entry file="file://$PROJECT_DIR$/src/EditeurBundle/Repository/DisciplineRepository.php" />
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Repository/DisciplineRepository.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -1378,6 +1433,31 @@
         <state relative-caret-position="250">
           <caret line="154" column="70" lean-forward="false" selection-start-line="154" selection-start-column="70" selection-end-line="154" selection-end-column="70" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/DoctrineMigrations/Version20170315144233.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/DoctrineMigrations/Version20170315144423.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1489585463000" expanded="true" signature="584:665" ph="ALTER TABLE formation_has_metier... " />
+            <marker date="1489585463000" expanded="true" signature="692:723" ph="DROP TABLE f... " />
+            <marker date="1489585463000" expanded="true" signature="750:767" ph="DROP TABLE m... " />
+            <marker date="1489585463000" expanded="true" signature="1120:1393" ph="CREATE TABLE... formation_has_metier" />
+            <marker date="1489585463000" expanded="true" signature="1420:1850" ph="CREATE TABLE... metier" />
+            <marker date="1489585463000" expanded="true" signature="1877:2062" ph="ALTER TABLE formation_has_metier... " />
+            <marker date="1489585463000" expanded="true" signature="2089:2262" ph="ALTER TABLE formation_has_metier... " />
+            <marker date="1489585463000" expanded="true" signature="2289:2403" ph="ALTER TABLE metier... " />
+          </folding>
         </state>
       </provider>
     </entry>
