@@ -200,21 +200,6 @@ class Formation
      */
     private $discipline;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Metier", inversedBy="formation")
-     * @ORM\JoinTable(name="formation_has_metier",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="formation_id", referencedColumnName="formation_id")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="metier_id", referencedColumnName="metier_id")
-     *   }
-     * )
-     */
-    private $metier;
-
 
     /**
      * Constructor
@@ -227,7 +212,6 @@ class Formation
         $this->labo = new \Doctrine\Common\Collections\ArrayCollection();
         $this->ufr = new \Doctrine\Common\Collections\ArrayCollection();
         $this->etablissement = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->metier = new \Doctrine\Common\Collections\ArrayCollection();
         $this->discipline = new \Doctrine\Common\Collections\ArrayCollection();
     }
 

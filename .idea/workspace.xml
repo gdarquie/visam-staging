@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3bb1b647-8eae-4507-b232-68d841001a20" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/base.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Formation.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Formation.php" />
     </list>
     <ignored path="visam_2016-04-28.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,11 +31,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Formation.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Formation.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Formation.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="804">
-              <caret line="849" column="29" lean-forward="false" selection-start-line="849" selection-start-column="29" selection-end-line="849" selection-end-column="29" />
+            <state relative-caret-position="369">
+              <caret line="213" column="82" lean-forward="false" selection-start-line="213" selection-start-column="82" selection-end-line="213" selection-end-column="82" />
               <folding />
             </state>
           </provider>
@@ -101,7 +101,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base.html.twig" pinned="false" current-in-tab="true">
+      <file leaf-file-name="base.html.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="250">
@@ -181,8 +181,8 @@
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/Labo.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/Etablissement.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/Ed.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Entity/Formation.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Entity/Formation.php" />
       </list>
     </option>
   </component>
@@ -930,12 +930,12 @@
       <workItem from="1487949302541" duration="2739000" />
       <workItem from="1488038578791" duration="142000" />
       <workItem from="1489143104180" duration="5231000" />
-      <workItem from="1489584090817" duration="352000" />
+      <workItem from="1489584090817" duration="841000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="185485000" />
+    <option name="totallyTimeSpent" value="185974000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1333,14 +1333,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Formation.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="804">
-          <caret line="849" column="29" lean-forward="false" selection-start-line="849" selection-start-column="29" selection-end-line="849" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Souscategorie.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-375">
@@ -1385,6 +1377,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="250">
           <caret line="154" column="70" lean-forward="false" selection-start-line="154" selection-start-column="70" selection-end-line="154" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Formation.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="369">
+          <caret line="213" column="82" lean-forward="false" selection-start-line="213" selection-start-column="82" selection-end-line="213" selection-end-column="82" />
           <folding />
         </state>
       </provider>
