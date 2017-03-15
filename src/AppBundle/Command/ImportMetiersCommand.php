@@ -9,18 +9,17 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
 
-use AppBundle\Entity\Secteur;
-use AppBundle\Entity\Categorie;
-use AppBundle\Entity\Souscategorie;
-use AppBundle\Entity\Metier;
+use AppBundle\Entity\Metier1;
+use AppBundle\Entity\Metier2;
+use AppBundle\Entity\Metier3;
 
-class ImportCategoriesCommand extends ContainerAwareCommand
+class ImportMetiersCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
         $this
             ->setName('import:csv:cat') // bin console/import:csv:cat
-            ->setDescription('Import des secteurs, categories, code Rome du fichier métier CSV');
+            ->setDescription('Import des metiers et code Rome du fichier métier CSV');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -51,9 +50,9 @@ class ImportCategoriesCommand extends ContainerAwareCommand
 
             while (($data = fgetcsv($handle, 1000, ';')) !== FALSE) {
                 $codeDomaine = $data[0];
-                $codeSousDomaine = $codeDomaine.$data[1];
-                $codeRome = $codeSousDomaine.$data[2];
-                $libelle = utf8_encode($data[3]);
+                $codeSousDomaine = utf8_decode(utf8_encode($codeDomaine.$data[1]));
+                $codeRome = utf8_decode(utf8_encode($codeSousDomaine.$data[2]));
+                $libelle = utf8_decode(utf8_encode($data[3]));
 
                 if ($data[0] != $col) {
                     if ($data[1] != '' or $data[2] != '') {
@@ -63,15 +62,15 @@ class ImportCategoriesCommand extends ContainerAwareCommand
                     $col1 = '';
                     $col2 = '';
 
-                    $secteur = $em->getRepository('AppBundle:Secteur')
+                    $metier1 = $em->getRepository('AppBundle:Metier1')
                         ->findOneByCode($codeDomaine);
 
-                    //si le secteur n'esiste pas  alors on cree un
-                    if(!is_object($secteur)){
-                        $secteur = new Secteur();
-                        $secteur->setCode($codeDomaine);
-                        $secteur->setNom($libelle);
-                        $em->persist($secteur);
+                    //si le metier1 n'esiste pas  alors on cree un
+                    if(!is_object($metier1)){
+                        $metier1 = new Metier1();
+                        $metier1->setCode($codeDomaine);
+                        $metier1->setNom($libelle);
+                        $em->persist($metier1);
                     }
                 } else {
                     if ($data[1] != $col1) {
@@ -81,30 +80,30 @@ class ImportCategoriesCommand extends ContainerAwareCommand
                         $col1 = $data[1];
                         $col2 = '';
 
-                        $categorie = $em->getRepository('AppBundle:Categorie')
+                        $metier2 = $em->getRepository('AppBundle:Metier2')
                             ->findOneByCode($codeSousDomaine);
 
-                        //si la categorie n'esiste pas alors on cree une
-                        if(!is_object($categorie)){
-                            $categorie = new Categorie();
-                            $categorie->setCode($codeSousDomaine);
-                            $categorie->setNom($libelle);
-                            $categorie->setSecteur($secteur);
-                            $em->persist($categorie);
+                        //si la metier2 n'esiste pas alors on cree une
+                        if(!is_object($metier2)){
+                            $metier2 = new Metier2();
+                            $metier2->setCode($codeSousDomaine);
+                            $metier2->setNom($libelle);
+                            $metier2->setMetier1($metier1);
+                            $em->persist($metier2);
                         }
 
                     } else {
                         if ($data[2] != $col2) {
-                            $souscategorie = $em->getRepository('AppBundle:Souscategorie')
+                            $metier3 = $em->getRepository('AppBundle:Metier3')
                                 ->findOneByCode($codeRome);
 
                             //si le code rome  n'esiste pas alors on cree un
-                            if(!is_object($souscategorie)){
-                                $souscategorie = new Souscategorie();
-                                $souscategorie->setCode($codeRome);
-                                $souscategorie->setNom($libelle);
-                                $souscategorie->setCategorie($categorie);
-                                $em->persist($souscategorie);
+                            if(!is_object($metier3)){
+                                $metier3 = new Metier3();
+                                $metier3->setCode($codeRome);
+                                $metier3->setNom($libelle);
+                                $metier3->setMetier2($metier2);
+                                $em->persist($metier3);
                             }
                             $col2 = $data[2];
                         }

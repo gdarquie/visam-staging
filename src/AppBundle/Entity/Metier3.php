@@ -6,12 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Secteur
+ * Metier3
  *
- * @ORM\Table(name="secteur")
+ * @ORM\Table(name="metier3")
  * @ORM\Entity
  */
-class Secteur
+class Metier3
 {
     /**
      * @var int
@@ -25,7 +25,7 @@ class Secteur
     /**
      * @var string
      *
-     * @ORM\Column(name="code", type="string", length=5, unique=true)
+     * @ORM\Column(name="code", type="string", length=10)
      */
     private $code;
 
@@ -36,10 +36,13 @@ class Secteur
      */
     private $nom;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Metier2", inversedBy="metier3", cascade={"persist"})
+     * @ORM\JoinColumn(name="metier2_id", referencedColumnName="id")
+     */
+    private $metier2;
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId()
@@ -48,22 +51,14 @@ class Secteur
     }
 
     /**
-     * Set code
-     *
-     * @param string $code
-     *
-     * @return Secteur
+     * @param int $id
      */
-    public function setCode($code)
+    public function setId($id)
     {
-        $this->code = $code;
-
-        return $this;
+        $this->id = $id;
     }
 
     /**
-     * Get code
-     *
      * @return string
      */
     public function getCode()
@@ -72,26 +67,47 @@ class Secteur
     }
 
     /**
-     * Set nom
-     *
-     * @param string $nom
-     *
-     * @return Secteur
+     * @param string $code
      */
-    public function setNom($nom)
+    public function setCode($code)
     {
-        $this->nom = $nom;
-
-        return $this;
+        $this->code = $code;
     }
 
     /**
-     * Get nom
-     *
      * @return string
      */
     public function getNom()
     {
         return $this->nom;
     }
+
+    /**
+     * @param string $nom
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMetier2()
+    {
+        return $this->metier2;
+    }
+
+    /**
+     * @param mixed $metier2
+     */
+    public function setMetier2($metier2)
+    {
+        $this->metier2 = $metier2;
+    }
+
+
+
+
+
 }
