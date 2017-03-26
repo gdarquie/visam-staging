@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 
 use AppBundle\Entity\Labo;
-use AppBundle\Form\LaboType;
+use EditeurBundle\Form\LaboType;
 
 
 /**

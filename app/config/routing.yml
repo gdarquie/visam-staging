@@ -1,3 +1,8 @@
+api:
+    resource: "@ApiBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 app_editeur:
     resource: "@EditeurBundle/Controller/"
     type:     annotation

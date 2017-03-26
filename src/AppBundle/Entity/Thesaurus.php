@@ -6,9 +6,17 @@
  * Time: 16:45
  */
 
+
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * Ed
+ *
+ * @ORM\Table(name="thesaurus")
+ * @ORM\Entity
+ */
 class Thesaurus
 {
     /**
@@ -51,7 +59,7 @@ class Thesaurus
     /**
      * @var string
      *
-     * @ORM\Column(name="type", type="string", length=500, nullable=true)
+     * @ORM\Column(name="slug", type="string", length=500, nullable=true)
      */
     private $slug;
 

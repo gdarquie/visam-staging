@@ -18,18 +18,6 @@ use EditeurBundle\Form\EtablissementType;
 class EtablissementController extends Controller
 {
 
-    /**
-     * Etablissements
-     *
-     * @Route("/", name="editeur_etablisement")
-     * @Method("GET")
-     */
-    public function indexAction(Request $request)
-    {
-        return $this->render('', array(
-
-        ));
-    }
 
     /**
      * Créer un établissement

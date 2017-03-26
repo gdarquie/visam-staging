@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 use AppBundle\Entity\Ed;
-use AppBundle\Form\EdType;
+use EditeurBundle\Form\EdType;
 
 
 class DefaultController extends Controller

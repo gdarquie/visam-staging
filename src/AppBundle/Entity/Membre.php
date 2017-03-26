@@ -20,7 +20,7 @@ class Membre
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $membreId;
+    private $membre_id;
 
     /**
      * @var string
@@ -60,9 +60,16 @@ class Membre
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="timestamp", type="datetime", nullable=false)
+     * @ORM\Column(name="date_creation", type="datetime", nullable=false)
      */
-    private $timestamp;
+    private $date_creation;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="last_update", type="datetime", nullable=false)
+     */
+    private $last_update;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -151,24 +158,23 @@ class Membre
         $this->ed = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-
     /**
-     * Set nom
-     *
-     * @param string $nom
-     *
-     * @return Membre
+     * @return int
      */
-    public function setNom($nom)
+    public function getMembreId()
     {
-        $this->nom = $nom;
-
-        return $this;
+        return $this->membre_id;
     }
 
     /**
-     * Get nom
-     *
+     * @param int $membre_id
+     */
+    public function setMembreId($membre_id)
+    {
+        $this->membre_id = $membre_id;
+    }
+
+    /**
      * @return string
      */
     public function getNom()
@@ -177,22 +183,14 @@ class Membre
     }
 
     /**
-     * Set prenom
-     *
-     * @param string $prenom
-     *
-     * @return Membre
+     * @param string $nom
      */
-    public function setPrenom($prenom)
+    public function setNom($nom)
     {
-        $this->prenom = $prenom;
-
-        return $this;
+        $this->nom = $nom;
     }
 
     /**
-     * Get prenom
-     *
      * @return string
      */
     public function getPrenom()
@@ -201,22 +199,14 @@ class Membre
     }
 
     /**
-     * Set profession
-     *
-     * @param string $profession
-     *
-     * @return Membre
+     * @param string $prenom
      */
-    public function setProfession($profession)
+    public function setPrenom($prenom)
     {
-        $this->profession = $profession;
-
-        return $this;
+        $this->prenom = $prenom;
     }
 
     /**
-     * Get profession
-     *
      * @return string
      */
     public function getProfession()
@@ -225,139 +215,11 @@ class Membre
     }
 
     /**
-     * Set timestamp
-     *
-     * @param \DateTime $timestamp
-     *
-     * @return Membre
+     * @param string $profession
      */
-    public function setTimestamp($timestamp)
+    public function setProfession($profession)
     {
-        $this->timestamp = $timestamp;
-
-        return $this;
-    }
-
-    /**
-     * Get timestamp
-     *
-     * @return \DateTime
-     */
-    public function getTimestamp()
-    {
-        return $this->timestamp;
-    }
-
-    /**
-     * Get membreId
-     *
-     * @return integer
-     */
-    public function getMembreId()
-    {
-        return $this->membreId;
-    }
-
-    /**
-     * Add labo
-     *
-     * @param \AppBundle\Entity\Labo $labo
-     *
-     * @return Membre
-     */
-    public function addLabo(\AppBundle\Entity\Labo $labo)
-    {
-        $this->labo[] = $labo;
-
-        return $this;
-    }
-
-    /**
-     * Remove labo
-     *
-     * @param \AppBundle\Entity\Labo $labo
-     */
-    public function removeLabo(\AppBundle\Entity\Labo $labo)
-    {
-        $this->labo->removeElement($labo);
-    }
-
-    /**
-     * Get labo
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getLabo()
-    {
-        return $this->labo;
-    }
-
-    /**
-     * Add formation
-     *
-     * @param \AppBundle\Entity\Formation $formation
-     *
-     * @return Membre
-     */
-    public function addFormation(\AppBundle\Entity\Formation $formation)
-    {
-        $this->formation[] = $formation;
-
-        return $this;
-    }
-
-    /**
-     * Remove formation
-     *
-     * @param \AppBundle\Entity\Formation $formation
-     */
-    public function removeFormation(\AppBundle\Entity\Formation $formation)
-    {
-        $this->formation->removeElement($formation);
-    }
-
-    /**
-     * Get formation
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getFormation()
-    {
-        return $this->formation;
-    }
-
-    /**
-     * Add ed
-     *
-     * @param \AppBundle\Entity\Ed $ed
-     *
-     * @return Membre
-     */
-    public function addEd(\AppBundle\Entity\Ed $ed)
-    {
-        $this->ed[] = $ed;
-
-        return $this;
-    }
-
-    /**
-     * Remove ed
-     *
-     * @param \AppBundle\Entity\Ed $ed
-     */
-    public function removeEd(\AppBundle\Entity\Ed $ed)
-    {
-        $this->ed->removeElement($ed);
-    }
-
-    /**
-     * Get ed
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getEd()
-    {
-        return $this->ed;
+        $this->profession = $profession;
     }
 
     /**
@@ -393,19 +255,67 @@ class Membre
     }
 
     /**
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \DateTime
      */
-    public function getTag()
+    public function getDateCreation()
     {
-        return $this->tag;
+        return $this->date_creation;
     }
 
     /**
-     * @param \Doctrine\Common\Collections\Collection $tag
+     * @param \DateTime $date_creation
      */
-    public function setTag($tag)
+    public function setDateCreation($date_creation)
     {
-        $this->tag = $tag;
+        $this->date_creation = $date_creation;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getLastUpdate()
+    {
+        return $this->last_update;
+    }
+
+    /**
+     * @param \DateTime $last_update
+     */
+    public function setLastUpdate($last_update)
+    {
+        $this->last_update = $last_update;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLabo()
+    {
+        return $this->labo;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $labo
+     */
+    public function setLabo($labo)
+    {
+        $this->labo = $labo;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFormation()
+    {
+        return $this->formation;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $formation
+     */
+    public function setFormation($formation)
+    {
+        $this->formation = $formation;
     }
 
     /**
@@ -423,6 +333,41 @@ class Membre
     {
         $this->axe = $axe;
     }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEd()
+    {
+        return $this->ed;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $ed
+     */
+    public function setEd($ed)
+    {
+        $this->ed = $ed;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTag()
+    {
+        return $this->tag;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $tag
+     */
+    public function setTag($tag)
+    {
+        $this->tag = $tag;
+    }
+
+
+
 
 
 }

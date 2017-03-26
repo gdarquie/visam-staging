@@ -16,11 +16,6 @@ use AppBundle\Entity\Formation;
  */
 class FormationController extends Controller
 {
-    public function indexAction($name)
-    {
-        return $this->render('', array('name' => $name));
-    }
-
     /**
      * Créer une formation
      *
