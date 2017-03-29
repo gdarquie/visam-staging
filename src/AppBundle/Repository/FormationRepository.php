@@ -3,6 +3,7 @@
 namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use AppBundle\Entity\Etablissement;
 
 class FormationRepository extends EntityRepository
 {
@@ -21,5 +22,16 @@ class FormationRepository extends EntityRepository
 
     }
 
+    public function findAllFormations(Etablissement $etablissement)
+    {
+        $qb = $this->createQueryBuilder('f')
+            ->select('f')
+            ->where('e.etablissement = :etab')
+            ->setParameter('etab', $etablissement);
+
+        $query = $qb->getQuery()->getArrayResult();
+
+        return $query;
+    }
 }
 

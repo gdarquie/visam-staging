@@ -159,7 +159,7 @@ class Formation
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Etablissement", mappedBy="formation")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Etablissement", mappedBy="formation", cascade={"persist"})
      */
     private $etablissement;
 

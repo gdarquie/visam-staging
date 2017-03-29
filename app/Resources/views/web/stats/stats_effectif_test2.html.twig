@@ -1,0 +1,237 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+
+    <style>
+        .legend {
+            font-size: 12px;
+        }
+        rect {
+            stroke-width: 2;
+        }
+
+        .intertitre{
+            box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+            font-size: 2em;
+            margin-top : 30px;
+        }
+
+        .number{
+            font-size:1.3em;
+            font-weight: bold;
+        }
+
+        h2{
+            padding-top: 60px;
+        }
+
+        text {
+            font: 10px sans-serif;
+            text-anchor: middle;
+        }
+
+.node {
+  cursor: pointer;
+  fill: white;
+}
+/*
+.node:hover {
+  stroke: #666699;
+  stroke-width: 1.5px;
+}
+*/
+.node--root {
+    fill: #e6e6ff;
+	fill-opacity: .25;
+    stroke: #b3b3ff;
+    stroke-width: 1px;
+}
+
+.node-etab {
+	  stroke-width: 3px;
+	  fill: none;
+}
+
+.node--leaf {
+}
+ 
+text {
+    font: 10px sans-serif;
+    text-anchor: middle;
+    cursor: pointer; cursor: hand;
+}
+        .etab_1 {stroke: #3182bd;} 
+		/*Conservatoire National des Arts et Métiers*/
+        .etab_2 {stroke: #6baed6;} 
+		/*Institut National d'Etudes Démographiques*/
+        .etab_3 {stroke: #9ecae1;} /*Ecole du Louvre*/
+        .etab_4 {stroke:#c6dbef;} /*heSam Université Centre Michel Serres*/
+        .etab_5 {stroke: #e6550d;} /*Institut National du Patrimoine*/
+        .etab_6 {stroke: #fd8d3c;} /*Institut National d'Histoire de l'Art*/
+        .etab_7 {stroke: #fdae6b;} /*Ecole Nationale Supérieure de Création Industrielle - Les Ateliers*/
+        .etab_8 {stroke: #fdd0a2;} /*Ecole Nationale Supérieure d'Arts et Métiers-ParisTech*/
+        .etab_9 {stroke: #31a354;} /*Ecole Nationale Supérieure d'Architecture Paris La Villette*/
+        .etab_10 {stroke: #74c476;} /*Centre National de la Recherche Scientifique*/
+        .etab_11 {stroke: #636363;} /*Université Paris I-Panthéon Sorbonne*/
+        .etab_12 {stroke: #969696;} /*Ecole Nationale d'Administration*/
+        .etab_13 {stroke: #bdbdbd;} /*ESCP Europe*/
+		.etab_14 {stroke: #bcbddc;}
+		.etab_15 {stroke: #bcbddc;}
+		
+		.hesam_1 {fill: #1f77b4; stroke: #1f77b4;} /*Mathématiques*/
+        .hesam_2 {fill: #aec7e8; stroke: #aec7e8;} /*Physique*/
+        .hesam_3 {fill: #ff7f0e; stroke: #ff7f0e;} /*Sciences de la terre et de l'univers*/
+        .hesam_4 {fill: #ffbb78; stroke: #ffbb78;} /*Chimie*/
+        .hesam_5 {fill: #2ca02c; stroke: #2ca02c;} /*Sciences pour l'ingénieur*/
+        .hesam_6 {fill: #98df8a; stroke: #98df8a;} /*Sciences et technologies de l'information et de la*/
+        .hesam_7 {fill: #d62728; stroke: #d62728;} /*Biologie, santé*/
+        .hesam_8 {fill: #ff9896; stroke: #ff9896;} /*Agronomie, écologie, environnement*/
+        .hesam_9 {fill: #9467bd; stroke: #9467bd;} /*Marchés et organisations*/
+        .hesam_10 {fill: #c5b0d5; stroke: #c5b0d5;} /*Normes, institutions et comportements sociaux*/
+        .hesam_11 {fill: #8c564b; stroke: #8c564b;} /*Espace, environnement et sociétés*/
+        .hesam_12 {fill: #c49c94; stroke: #c49c94;} /*Esprit humain, langage, éducation*/
+        .hesam_13 {fill: #e377c2; stroke: #e377c2;} /*Langues, textes, arts et cultures*/
+		.hesam_14 {fill: #f7b6d2; stroke: #f7b6d2;} /*Mondes anciens et contemporains*/
+		.hesam_15 {fill: #7f7f7f; stroke: #7f7f7f;} /*Interdisciplinaire*/
+
+    </style>
+{% endblock %}
+
+{% block fos_user_content %}{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <article>
+                <h2>TEST 2</h2>
+                <div class="intertitre row">
+                    <p>La majeure partie des étudiants et des auditeurs sont inscrits dans le domaine disciplinaire "Sciences pour l'ingénieur"</p>
+                </div>
+                <div id="test">
+
+                </div>
+            </article>
+        </div>
+    </div>
+{% endblock %}
+
+{# fin de body #}
+{% block  javascripts %}
+
+    {{ parent() }}
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+	var diameter = 800,
+	margin = 20,
+    format = d3.format(",d");
+
+    var svg = d3.select("#test").append("svg")
+        .attr("width", diameter)
+        .attr("height", diameter);
+
+
+    var pack = d3.layout.pack()
+		.size([diameter - margin, diameter - margin])
+		.padding(4)
+		.sort( function(a, b) {
+			return -(a.value - b.value);
+		})
+		.value(function(d) { return d.size; });
+
+
+	var g = svg.append("g").attr("transform", "translate(2,2)");
+
+    function renderBubbles() {
+       var data = getData();
+console.log(data);
+
+        var vis = svg.datum(data).selectAll(".node")
+            .data(pack.nodes)
+            .enter()
+            .append("g");
+
+
+        var titles = vis.append("title")
+            .attr("x", function (d) {
+                return d.x;
+            })
+            .attr("y", function (d) {
+                return d.y;
+            })
+            .text(function (d) {
+                return d.name +
+                    (d.children ? "" : ": " + format(d.value));
+            });
+
+
+        var circles = vis.append("circle")
+            .attr("stroke", "black")
+            .attr("class", function (d) {
+                return d.parent ? d.children ? "node node-etab etab_" + d.id : "node node--leaf hesam_" + d.id : "node node--root";
+            })
+            .attr("cx", function (d) {
+                return d.x;
+            })
+            .attr("cy", function (d) {
+                return d.y;
+            })
+            .attr("r", function (d) {
+                return d.r;
+            });
+    }
+
+    renderBubbles();
+	
+	function getData() {
+	
+	var data = JSON.parse(JSON.stringify({{ formations|raw }}));
+	//return data;
+
+		return {
+			"name": "hesam",
+			"children": [
+				{
+					"id": 5,
+					"name": "CNAM",
+					"children": [
+						{"id": 1, "name": "Mathématiques", "size": 39},
+						{"id": 2, "name": "Physique", "size": 39},
+						{"id": 10, "name": "Normes, institutions et comportements sociaux", "size": 39},
+						{"id": 11, "name": "Espace, environnement et sociétés", "size": 139},
+						{"id": 12, "name": "Esprit humain, langage, éducation", "size": 5}
+					]
+				},
+				{
+					"id": 8,
+					"name": "Paris I",
+					"children": [
+						{"id": 1, "name": "Mathématiques", "size": 100},
+						{"id": 2, "name": "Physique", "size": 150}
+					]
+				},
+				{
+					"id": 3,
+					"name": "Paris II",
+					"children": [
+						{"id": 1, "name": "Mathématiques", "size": 25},
+						{"id": 15, "name": "Interdisciplinaire", "size": 50}
+					]
+				},
+				{
+					"id": 7,
+					"name": "Paris III",
+					"children": [
+						{"id": 1, "name": "Mathématiques", "size": 100},
+						{"id": 4, "name": "Sciences de la terre et de l'univers", "size": 150},
+                        {"id": 12, "name": "Esprit humain, langage, éducation", "size": 15}
+					]
+				}
+			]
+		};
+
+	};
+
+</script>
+
+{% endblock %}
