@@ -24,8 +24,8 @@ class AjaxController extends Controller
     const DOSSIER_TYPE_FORMATION = 'formations';
     const DOSSIER_TYPE_LABO = 'laboratoires';
     const EXTENTION_AUTHORIZED = ['csv','xls','xlsx'];
-    const CSV_TYPE_FORMATION = 1;
-    const CSV_TYPE_LABO = 2;
+    const TYPE_FORMATION = 1;
+    const TYPE_LABO = 2;
 
     /**
      * un fichier en format csv
@@ -69,7 +69,7 @@ class AjaxController extends Controller
                 return new JsonResponse($res);
             }
 
-            if (!in_array($type, array(self::CSV_TYPE_FORMATION,self::CSV_TYPE_LABO))) {
+            if (!in_array($type, array(self::TYPE_FORMATION,self::TYPE_LABO))) {
                 //$res['msg'] = 'Le type inconnu.';
                 //return new JsonResponse($res);
                 throw $this->createNotFoundException('Le type inconnu.');
@@ -83,13 +83,18 @@ class AjaxController extends Controller
 
             $dir = $this->container->getParameter('upload_dir');
 
-            if ($type == self::CSV_TYPE_FORMATION) {
+            if ($type == self::TYPE_FORMATION) {
                 $dossier = self::DOSSIER_TYPE_FORMATION;
             } else {
                 $dossier = self::DOSSIER_TYPE_LABO;
+                //pour le moment on traite pas les labos
+                if ($type == self::TYPE_LABO) {
+                    $res['msg'] = 'Le fichier de type laboratoire n\'est pas traitée pour le moment. C\'est en cours de développement.';
+                    return new JsonResponse($res);
+                }
             }
 
-            $target_dir = $dir . '/' . $etab . '/' . $dossier . '/' . date('dmy_h') . '/';
+            $target_dir = $dir . '/' . $etab . '/' . $dossier . '/' . date('Y') . '/';
             $doc_name = 'original_' . date('dmy_his') . '.' . $extension;
 
             $this->rmkdir($target_dir, 0777);
@@ -104,6 +109,11 @@ class AjaxController extends Controller
             $importService = $this->get('editeur.import.service');
             if (!$importService->import($etablissements, $type, $target_dir . '/' . $doc_name)) {
                 $res['msg'] = " l'importation de données echoué. Consulter le fichier log pour plus d'information";
+                //lire fichier log et supprimer le fichier uploadé et fichier log
+                $logFile = $this->getLogName($target_dir . '/' . $doc_name);
+                $res['log'] = $this->getLogInfo($logFile);
+                unlink($target_dir . '/' . $doc_name);
+                unlink($logFile);
             } else {
                 $res['success'] = true;
                 $res['code'] = 200;
@@ -163,5 +173,23 @@ class AjaxController extends Controller
             $cp .= "/" . $e[$i];
         }
         return @mkdir($path, $mode);
+    }
+
+    public function getLogInfo($file) {
+        $f = fopen($file, 'r');
+        $dataArray = [];
+        $line = 0;
+        while (($rawLine = fgets($f)) !== false) {
+            $dataArray[$line] = $rawLine;
+            $line++;
+        }
+        fclose($f);
+        return $dataArray;
+    }
+
+    //via de nom du file a traiter
+    public function getLogName($file) {
+        $pathParts = pathinfo($file);
+        return $pathParts['dirname'] . '/' . $pathParts['filename'].'.log';
     }
 }

@@ -33,8 +33,8 @@ class ImportService
     const REQUIRED_NUMBER_1 = 40;
     //nombre collonnes requis pour un fichier de type laboratoires
     const REQUIRED_NUMBER_2 = 40;
-    const CSV_TYPE_FORMATION = 1;
-    const CSV_TYPE_LABO = 2;
+    const TYPE_FORMATION = 1;
+    const TYPE_LABO = 2;
     const COMMIT_STEP = 5;
 
     public function __construct(EntityManager $em, Logs $log, Factory $factory)
@@ -48,15 +48,22 @@ class ImportService
     {
         $this->type = $type;
         $this->etablissement = $etablissement;
+        try {
+            if (!$formattedData = $this->getData($file)) {
+                return false;
+            }
+            if (!$checkedData = $this->checkData($formattedData)) {
+                return false;
+            }
+            if (!$importation = $this->importData($formattedData)) {
+                return false;
+            }
 
-        $formattedData = $this->getData($file);
-
-        if (!$checkedData = $this->checkData($formattedData)) {
+        } catch (\Exception $e) {
+            $this->log->warning('Erreur technique inattendue : '.$e->getMessage());
             return false;
         }
-        if (!$importation = $this->importData($formattedData)) {
-            return false;
-        }
+
         return true;
     }
 
@@ -84,7 +91,9 @@ class ImportService
         $line = 0;
         while (($rawLine = fgets($f)) !== false) {
             $line++;
-            $dataArray[$line] = $this->formatDataCsv($rawLine, $line);
+            if (!$dataArray[$line] = $this->formatDataCsv($rawLine, $line)) {
+                return false;
+            }
         }
         fclose($f);
         return $dataArray;
@@ -97,7 +106,7 @@ class ImportService
 
         if ($this->checkNbFields($data, $line)) {
 
-            if ($this->type == self::CSV_TYPE_FORMATION) {
+            if ($this->type == self::TYPE_FORMATION) {
                 list(
                     $formattedData['formation']['annee'],
                     $formattedData['etablissement']['code'],
@@ -138,10 +147,14 @@ class ImportService
                     $formattedData['discipline']['nom_nw3_2']/*type NW3*/,
                     $formattedData['formation']['effectif']
                     ) = array_map('trim', $data);
-            } else if ($this->type == self::CSV_TYPE_LABO) {
+            } else if ($this->type == self::TYPE_LABO) {
                 //TODO for Labo
+
             }
+        } else {
+            return false;
         }
+
         return $formattedData;
     }
 
@@ -208,7 +221,10 @@ class ImportService
             $formattedData['discipline']['nom_nw3_1'] = $data['AL'];
             $formattedData['discipline']['nom_nw3_2'] = $data['AM'];
             $formattedData['formation']['effectif'] = $data['AN'];
+        } else {
+            return false;
         }
+
         return $formattedData;
     }
 
@@ -216,7 +232,7 @@ class ImportService
     {
         $nbFields = count($data);
         if (($this->type == 1 && $nbFields != self::REQUIRED_NUMBER_1) || ($this->type == 2 && $nbFields != self::REQUIRED_NUMBER_2) ) {
-            $msg = "Ln $line : Le nombre des colonnes est erroné : " . $nbFields . '-' . ($this->type == 1) ? self::REQUIRED_NUMBER_1 : self::REQUIRED_NUMBER_2;
+            $msg = "Ln $line : Le nombre des colonnes est erroné ou non compatible.";
             $this->log->warning($msg);
             return false;
         }
@@ -228,18 +244,23 @@ class ImportService
         $valid = true;
 
         foreach ($formattedData as $line => $data) {
-            //Formation
-            if (!$this->checkFormationData($data['formation'], $line)) {
+            if (empty($data)) {
                 $valid = false;
-            }
-            //Etablissement
-            if (!$this->checkEtablissementData($data['etablissement'], $line)) {
-                $valid = false;
-            }
-            if (!$this->checkDisciplineData($data['discipline'], $line)) {
-                $valid = false;
+            } else {
+                //Formation
+                if (!$this->checkFormationData($data['formation'], $line)) {
+                    $valid = false;
+                }
+                //Etablissement
+                if (!$this->checkEtablissementData($data['etablissement'], $line)) {
+                    $valid = false;
+                }
+                if (!$this->checkDisciplineData($data['discipline'], $line)) {
+                    $valid = false;
+                }
             }
         }
+
         return $valid;
     }
 
@@ -256,12 +277,23 @@ class ImportService
             $valid = false;
         }
         // verifier format annee
+
         $pattern = '/^\d{4}$/';
         if ($data['annee'] != '' && !preg_match($pattern, $data['annee'])) {
             $msg = sprintf('Ln %d : Mauvais format de date : "%s"', $line, $data['annee']);
             $this->log->warning($msg);
             $valid = false;
         }
+
+        if ($this->initTabComparaison()) {
+            $strFormation = $this->getStrFormation($data['nom'], $data['typeDiplome'], $data['niveau'], $data['annee']);
+            if (array_key_exists($strFormation, $this->tabCheckDoublons)) {
+               $msg = sprintf('Ln %d : La formation "%s | %s | %s | %s" existe déjà dans la BDD avec identifiant %d', $line, $data['nom'], $data['typeDiplome'], $data['niveau'], $data['annee'], $this->tabCheckDoublons[$strFormation]);
+               $this->log->warning($msg);
+               $valid = false;
+           }
+        }
+
         return $valid;
     }
 
@@ -273,14 +305,14 @@ class ImportService
         $checkRequiredParams = $this->checkMandatoryParameters($data, $requiredParams);
 
         if ($checkRequiredParams['success'] === false) {
-            $msg = sprintf('Ln %d : Les champs obligatoires "%s" sont manquants pour les données etablissement', $line, $checkRequiredParams['param']);
+            $msg = sprintf('Ln %d : Les champs obligatoires "%s" sont manquants pour les données établissement', $line, $checkRequiredParams['param']);
             $this->log->warning($msg);
             $valid = false;
         }
 
         // TODO verification si l'etablissement demande est bien avec meme id et meme code
         if ($data['code'] != '' && !$this->em->getRepository('AppBundle:Etablissement')->verifyEtablissementByCodeAndId($this->etablissement->getEtablissementId(), $data['code'])) {
-            $msg = sprintf('Ln %d : L\'etablissement inconnu avec son identifiant %d et son code %s', $line, $this->etablissement->getEtablissementId(), $data['code']);
+            $msg = sprintf('Ln %d : L\'établissement inconnu avec son identifiant %d et son code %s', $line, $this->etablissement->getEtablissementId(), $data['code']);
             $this->log->warning($msg);
             $valid = false;
         }
@@ -296,9 +328,8 @@ class ImportService
             $this->log->warning($msg);
             $valid = false;
         }
-
         if (!$this->checkDisciplinesValues($data)) {
-            $msg = sprintf("Ln %d : La valeur de discipline est inconue", $line);
+            $msg = sprintf("Ln %d : La valeur de discipline est inconnue", $line);
             $this->log->warning($msg);
             $valid = false;
         }
@@ -306,7 +337,7 @@ class ImportService
     }
 
     /**
-     * verification la presence les champs oblicatoires pour traitement
+     * verification la presence les champs obligatoires pour traitement
      */
     public function checkMandatoryParameters($data, $requiredParams = null)
     {
@@ -361,7 +392,7 @@ class ImportService
             $sise = 'abreviation_sise_'.$i;
             if ($disciplines[$sise] != '') {
                 if (!$this->disciplineExists($disciplines[$sise], 'SISE')) {
-                    $msg = sprintf('La valeur de discipline SISE "%s" est inconue', $disciplines[$sise]);
+                    $msg = sprintf('La valeur de discipline SISE "%s" est inconnue', $disciplines[$sise]);
                     $this->log->warning($msg);
                     return false;
                 }
@@ -369,7 +400,7 @@ class ImportService
             $hceres = 'abreviation_hceres_'.$i;
             if ($disciplines[$hceres] != '') {
                 if (!$this->disciplineExists($disciplines[$hceres], 'HCERES')) {
-                    $msg = sprintf('La valeur de discipline HCERES "%s" est inconue', $disciplines[$hceres]);
+                    $msg = sprintf('La valeur de discipline HCERES "%s" est inconnue', $disciplines[$hceres]);
                     $this->log->warning($msg);
                     return false;
                 }
@@ -377,7 +408,7 @@ class ImportService
             $cnu = 'nom_cnu_'.$i;
             if ($disciplines[$cnu] != '') {
                 if (!$this->disciplineExists($disciplines[$cnu], 'CNU')) {
-                    $msg = sprintf('La valeur de discipline CNU "%s" est inconue', $disciplines[$cnu]);
+                    $msg = sprintf('La valeur de discipline CNU "%s" est inconnue', $disciplines[$cnu]);
                     $this->log->warning($msg);
                     return false;
                 }
@@ -481,9 +512,9 @@ class ImportService
         return $valid;
     }
 
-    public function getStrFormation($nom, $typeDiplome, $niveau)
+    public function getStrFormation($nom, $typeDiplome, $niveau, $annee = null)
     {
-        return $this->removeAccents($nom).$this->removeAccents($typeDiplome).$this->removeAccents($niveau);
+        return $this->removeAccents($nom).$this->removeAccents($typeDiplome).$this->removeAccents($niveau).(($annee === null)?:$this->removeAccents($annee));
     }
 
     public function removeAccents($str)
@@ -588,16 +619,20 @@ class ImportService
         return array_key_exists($tag, $this->tabTags);
     }
 
-    public function getTabComparaison()
+    public function initTabComparaison()
     {
-        if ($this->tabComparaison === null) {
-            if ($this->type == self::CSV_TYPE_FORMATION) {
-                $this->getTabComparaisonFormations();
+        if ($this->tabComparaison === null || $this->tabCheckDoublons === null) {
+            if ($this->type == self::TYPE_FORMATION) {
+                if ($this->getTabComparaisonFormations()) {
+                    return true;
+                }
             } else {
-                $this->getTabComparaisonLabo();
+                if ($this->getTabComparaisonLabo()) {
+                    return true;
+                }
             }
         }
-        return $this->tabComparaison;
+        return true;
     }
 
     public function getTabComparaisonFormations()
@@ -609,9 +644,9 @@ class ImportService
         foreach ($list as $val) {
             //TODO changer getFormationId par getObjetId de qu'il est en place
             $str = $this->getStrFormation($val->getNom(), $val->getTypeDiplome(), $val->getNiveau());
-            $str2 = $str.$val->getTypeDiplome();
+            $str2 = $this->getStrFormation($val->getNom(), $val->getTypeDiplome(), $val->getNiveau(), $val->getAnnee());
             $dataComparaison[$str] = 'F'.$val->getFormationId();
-            $dataCheckDoublons[$str2] = 'F'.$val->getFormationId();
+            $dataCheckDoublons[$str2] = $val->getFormationId();
         }
 
         if (count($list) !== count($dataComparaison)) {
@@ -643,10 +678,7 @@ class ImportService
     function getObjId($data)
     {
         $strFormation = $this->getStrFormation($data['nom'], $data['typeDiplome'], $data['niveau']);
-        if ($this->tabComparaison === null) {
-            $this->getTabComparaison();
-        }
-        if (array_key_exists($strFormation, $this->tabComparaison)) {
+        if ($this->initTabComparaison() && array_key_exists($strFormation, $this->tabComparaison)) {
             return $this->tabComparaison[$strFormation];
         }
         return false;

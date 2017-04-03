@@ -67,7 +67,7 @@ class UploadFileType extends AbstractType
 				'attr' => array(
 				    'class' => 'btn-flat'
                     ),
-				'label' => 'Envoyer',
+				'label' => 'Importer',
 			));
 
     }

@@ -146,6 +146,7 @@
 
     $('.modal-trigger').click(function(){
         $('.message-upload').html('');
+        $('#block_log').remove();
         $('.message-upload').removeClass('invalid valid');
         $('#upload_file_attachment').val(null);
         $('#upload_file_etablissement').val($(this).attr('data-id-etablissement'));
@@ -169,11 +170,19 @@
             processData: false,
             contentType: false,
             success: function (data) {
-                $('#upload_file_upload').html('Envoyer');
+                $('#upload_file_upload').html('Importer');
                 $('#upload_file_cancel').show();
                 if (data.success === false) {
+                    var info = '<div id ="block_log" style="overflow:auto; height: 120px; width: 95%; border: 3px solid red;">';
                     $('.message-upload').html(data.msg);
                     $('.message-upload').addClass('invalid');
+                    info += '</ul>';
+                    $.each(data.log, function(i,line) {
+                        info += '<li>' + line + '</li>';
+                    });
+                    info += '</ul></div></br>';
+
+                    $('#logList').html(info);
                 } else {
                     $('.message-upload').html(data.msg);
                     $('.message-upload').addClass('valid');
