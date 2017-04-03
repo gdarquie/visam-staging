@@ -1,0 +1,225 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+
+    <style>
+        .legend {
+            font-size: 12px;
+        }
+        rect {
+            stroke-width: 2;
+        }
+
+        .intertitre{
+            box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+            font-size: 2em;
+            margin-top : 30px;
+        }
+
+        .number{
+            font-size:1.3em;
+            font-weight: bold;
+        }
+
+        h2{
+            padding-top: 60px;
+        }
+
+        text {
+            font: 10px sans-serif;
+            text-anchor: middle;
+        }
+
+.node {
+  cursor: pointer;
+  fill: white;
+}
+/*
+.node:hover {
+  stroke: #666699;
+  stroke-width: 1.5px;
+}
+*/
+.node--root {
+    fill: #e6e6ff;
+	fill-opacity: .25;
+    stroke: #b3b3ff;
+    stroke-width: 1px;
+}
+
+.node-etab {
+	  stroke-width: 3px;
+	  fill: none;
+}
+
+.node--leaf {
+}
+ 
+text {
+    font: 10px sans-serif;
+    text-anchor: middle;
+    cursor: pointer; cursor: hand;
+}
+        .etab_1 {stroke: #3182bd;} 
+		/*Conservatoire National des Arts et Métiers*/
+        .etab_2 {stroke: #6baed6;} 
+		/*Institut National d'Etudes Démographiques*/
+        .etab_3 {stroke: #9ecae1;} /*Ecole du Louvre*/
+        .etab_4 {stroke:#c6dbef;} /*heSam Université Centre Michel Serres*/
+        .etab_5 {stroke: #e6550d;} /*Institut National du Patrimoine*/
+        .etab_6 {stroke: #fd8d3c;} /*Institut National d'Histoire de l'Art*/
+        .etab_7 {stroke: #fdae6b;} /*Ecole Nationale Supérieure de Création Industrielle - Les Ateliers*/
+        .etab_8 {stroke: #fdd0a2;} /*Ecole Nationale Supérieure d'Arts et Métiers-ParisTech*/
+        .etab_9 {stroke: #31a354;} /*Ecole Nationale Supérieure d'Architecture Paris La Villette*/
+        .etab_10 {stroke: #74c476;} /*Centre National de la Recherche Scientifique*/
+        .etab_11 {stroke: #636363;} /*Université Paris I-Panthéon Sorbonne*/
+        .etab_12 {stroke: #969696;} /*Ecole Nationale d'Administration*/
+        .etab_13 {stroke: #bdbdbd;} /*ESCP Europe*/
+		.etab_14 {stroke: #bcbddc;}
+		.etab_15 {stroke: #bcbddc;}
+		
+		.hesam_1 {fill: #1f77b4; stroke: #1f77b4;} /*Mathématiques*/
+        .hesam_2 {fill: #aec7e8; stroke: #aec7e8;} /*Physique*/
+        .hesam_3 {fill: #ff7f0e; stroke: #ff7f0e;} /*Sciences de la terre et de l'univers*/
+        .hesam_4 {fill: #ffbb78; stroke: #ffbb78;} /*Chimie*/
+        .hesam_5 {fill: #2ca02c; stroke: #2ca02c;} /*Sciences pour l'ingénieur*/
+        .hesam_6 {fill: #98df8a; stroke: #98df8a;} /*Sciences et technologies de l'information et de la*/
+        .hesam_7 {fill: #d62728; stroke: #d62728;} /*Biologie, santé*/
+        .hesam_8 {fill: #ff9896; stroke: #ff9896;} /*Agronomie, écologie, environnement*/
+        .hesam_9 {fill: #9467bd; stroke: #9467bd;} /*Marchés et organisations*/
+        .hesam_10 {fill: #c5b0d5; stroke: #c5b0d5;} /*Normes, institutions et comportements sociaux*/
+        .hesam_11 {fill: #8c564b; stroke: #8c564b;} /*Espace, environnement et sociétés*/
+        .hesam_12 {fill: #c49c94; stroke: #c49c94;} /*Esprit humain, langage, éducation*/
+        .hesam_13 {fill: #e377c2; stroke: #e377c2;} /*Langues, textes, arts et cultures*/
+		.hesam_14 {fill: #f7b6d2; stroke: #f7b6d2;} /*Mondes anciens et contemporains*/
+		.hesam_15 {fill: #7f7f7f; stroke: #7f7f7f;} /*Interdisciplinaire*/
+
+    </style>
+{% endblock %}
+
+{% block fos_user_content %}{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <article>
+                <h2>TEST 2</h2>
+                <div class="intertitre row">
+                    <p>La majeure partie des étudiants et des auditeurs sont inscrits dans le domaine disciplinaire "Sciences pour l'ingénieur"</p>
+                </div>
+                <div id="test">
+
+                </div>
+            </article>
+        </div>
+    </div>
+{% endblock %}
+
+{# fin de body #}
+{% block  javascripts %}
+
+    {{ parent() }}
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+    var data = [60.45,60.45,89.54,120.34,106.45,127.43];
+
+    var barWidth = 40;
+    var width = (barWidth + 10) * data.length;
+    var height = 500;
+
+
+    var x = d3.scale.linear().domain([0, data.length]).range([0, width]);
+    var y = d3.scale.linear().domain([0, d3.max(data, function(datum) { return datum; })]).
+    rangeRound([0, height]);
+
+    // add the canvas to the DOM
+    var barDemo = d3.select("#test").
+    append("svg").
+    attr("width", width).
+    attr("height", height);
+
+
+    function topRoundedRect(x, y, width, height, radius) {
+    	return '<g transform="rotate(45 50 50)"> <svg x="100" <line x1="10" y1="10" x2="85" y2="10"style="stroke: #006600;"/> <rect x="10" y="20" height="50" width="75"style="stroke: #006600; fill: #006600"/> <text x="10" y="90" style="stroke: #660000; fill: #660000">Text grouped with shapes</text> </svg> </g>';
+            return "M" + (x + radius) + "," + y
+                + "h" + (width - (radius * 2))
+                + "a" + radius + "," + radius + " 0 0 1 " + radius + "," + radius
+                + "v" + (height - radius)
+                + "h" + (0-width)
+                + "v" + (0-(height-radius))
+                + "a" + radius + "," + radius + " 0 0 1 " + radius + "," + -radius
+                + "z";
+    }
+
+    // Add a group to the canvas
+    group1 = barDemo.append("g")
+        .attr("stroke", "white")
+        .attr("stroke-width", 3)
+        .attr("fill", "orange");
+
+
+
+
+    barDemo.selectAll("path").
+    data(data).
+    enter().append("path").
+    attr("d", function(datum, index) {
+        return topRoundedRect(    x(index),
+            height - y(datum),
+            barWidth,
+            y(datum),
+            3);
+    })
+
+        .style("fill","#ffcc00")
+        .style("stroke","none");
+
+
+    function getData() {
+return {
+	 "name": "flare",
+	 "children": [
+	  {
+	   "id": 5,
+	   "name": "CNAM",
+	   "children": [
+		{"id": 1, "name": "MATH", "size": 39},
+		{"id": 4, "name": "MATH1", "size": 39},
+		{"id": 9, "name": "MATH2", "size": 39},
+		{"id": 7, "name": "MATH3", "size": 39},
+		{"id": 2, "name": "FR", "size": 56}
+	   ]
+	  },
+	  {
+	  "id": 8,
+	   "name": "Paris I",
+	   "children": [
+		{"id": 1, "name": "MATH", "size": 100},
+		{"id": 2, "name": "FR", "size": 150}
+		]
+	  },
+	   {
+	  "id": 3,
+	   "name": "Paris II",
+	   "children": [
+		{"id": 1, "name": "MATH", "size": 100},
+		{"id": 2, "name": "FR", "size": 150}
+		]
+	  },
+	   {
+	  "id": 7,
+	   "name": "Paris III",
+	   "children": [
+		{"id": 1, "name": "MATH", "size": 100},
+		{"id": 2, "name": "FR", "size": 150}
+		]
+	  }
+	]
+	};
+		
+};
+
+</script>
+
+{% endblock %}

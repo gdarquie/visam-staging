@@ -3,9 +3,7 @@
 {% block stylesheets %}
     {{ parent() }}
     <style>
-        #opening{
-            margin-bottom: 60px;
-        }
+
         table{
             font-size: 0.7em;
         }
@@ -61,7 +59,11 @@
                     <td>{{ etab.chercheurs }}</td>
                     <td>{{ etab.dateCreation |date("d/m/y g:i:s", "Europe/Paris")}}</td>
                     <td>{{ etab.lastUpdate|date("d/m/y g:i:s", "Europe/Paris")}}</td>
-                    <td><a href="{{ path("editeur_etablissement_edit", { "id" : etab.etablissementId }) }}">Modifier</a></td>
+                    <td>
+                        <a href="{{ path("editeur_etablissement_edit", { "id" : etab.etablissementId }) }}">Modifier</a>
+                        <br />
+                        <a data-target="modal1" href="#modal1" class="modal-trigger" data-id-etablissement="{{ etab.etablissementId }}" data-nom-etablissement="{{ etab.nom }}">import&nbsp;CSV</a>
+                    </td>
                 </tr>
             {% endfor %}
 
@@ -132,4 +134,68 @@
         </table>
     </article>
 </section>
+    {{  render (controller("EditeurBundle:Ajax:uploadDocument")) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+<script type="text/javascript">
+    $(document).ready(function(){
+
+    });
+
+    $('.modal-trigger').click(function(){
+        $('.message-upload').html('');
+        $('#block_log').remove();
+        $('.message-upload').removeClass('invalid valid');
+        $('#upload_file_attachment').val(null);
+        $('#upload_file_etablissement').val($(this).attr('data-id-etablissement'));
+        $('.modal-header #titre').html('<strong>'+$(this).attr('data-nom-etablissement')+'</strong>');
+        $('.modal-trigger').leanModal();
+    });
+
+    $("#uploadform").submit(function (event) {
+
+        event.preventDefault();
+        $('#upload_file_upload').html('Uploading...');
+        $('#upload_file_cancel').hide();
+        // Create a new FormData object.
+        //var formData = new FormData();
+
+       // formData.append('type', $('input[type=radio]:checked').val());
+        $.ajax( {
+            url: "{{ path('upload') }}",
+            type: 'POST',
+            data: new FormData( this ),
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                $('#upload_file_upload').html('Importer');
+                $('#upload_file_cancel').show();
+                if (data.success === false) {
+                    var info = '<div id ="block_log" style="overflow:auto; height: 120px; width: 95%; border: 3px solid red;">';
+                    $('.message-upload').html(data.msg);
+                    $('.message-upload').addClass('invalid');
+                    info += '</ul>';
+                    $.each(data.log, function(i,line) {
+                        info += '<li>' + line + '</li>';
+                    });
+                    info += '</ul></div></br>';
+
+                    $('#logList').html(info);
+                } else {
+                    $('.message-upload').html(data.msg);
+                    $('.message-upload').addClass('valid');
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown)
+            {   $('#upload_file_upload').html('Envoyer');
+                $('#upload_file_cancel').show();
+                $('.message-upload').html('Le temps d\'exécution maximum autorisé est dépassé');
+                $('.message-upload').addClass('invalid');
+            },
+            timeout:   50000,
+        } );
+    });
+</script>
 {% endblock %}

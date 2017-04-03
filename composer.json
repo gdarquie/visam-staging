@@ -29,7 +29,10 @@
         "incenteev/composer-parameter-handler": "^2.0",
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "friendsofsymfony/rest-bundle": "^1.7",
-        "doctrine/doctrine-migrations-bundle": "^1.2"
+        "doctrine/doctrine-migrations-bundle": "^1.2",
+        "joetannenbaum/mr-clean": "~0.0",
+        "liuggio/excelbundle": "^2.1"
+
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
