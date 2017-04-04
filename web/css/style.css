@@ -162,4 +162,16 @@ footer h2, footer h3{
     margin-top: 0px;
 }
 
+#form-type-csv, #form-file-csv{
+    float: left;
+    width: 50%;
+}
+
+.invalid {
+    color: red;
+ }
+
+.valid {
+    color: limegreen;
+}
 

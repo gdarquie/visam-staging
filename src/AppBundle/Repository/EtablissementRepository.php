@@ -12,5 +12,21 @@ class EtablissementRepository extends EntityRepository
         return $this->createQueryBuilder('etablissement')
             ->orderBy('etablissement.nom', 'ASC');
     }
+
+    /***
+     * @param $id, $code
+     * @return boolean
+     *
+     */
+    public function verifyEtablissementByCodeAndId($id, $code)
+    {
+        $etablissement = $this
+            ->findOneBy(array('etablissementId' => $id, 'code' => $code));
+
+        if (!$etablissement) {
+            return false;
+        }
+        return true;
+    }
 }
 
