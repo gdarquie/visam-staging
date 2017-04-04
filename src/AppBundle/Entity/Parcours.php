@@ -59,6 +59,12 @@ class Parcours
      */
     private $metiers;
 
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $anneeCollecte;
+
     /**
      * @var \DateTime
      *
@@ -154,6 +160,22 @@ class Parcours
     }
 
     /**
+     * @return mixed
+     */
+    public function getAnneeCollecte()
+    {
+        return $this->anneeCollecte;
+    }
+
+    /**
+     * @param mixed $anneeCollecte
+     */
+    public function setAnneeCollecte($anneeCollecte)
+    {
+        $this->anneeCollecte = $anneeCollecte;
+    }
+
+    /**
      * @return \DateTime
      */
     public function getDateCreation()
@@ -184,6 +206,8 @@ class Parcours
     {
         $this->last_update = $last_update;
     }
+
+
 
 
 }
