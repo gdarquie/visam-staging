@@ -132,6 +132,28 @@ class Etablissement
     private $lien3;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="position", type="string", length=255, nullable=true)
+     */
+    private $position;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="entree", type="datetime", nullable=false)
+     */
+    private $entree;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="sortie", type="datetime", nullable=false)
+     */
+    private $sortie;
+
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="date_creation", type="datetime", nullable=false)
@@ -825,6 +847,54 @@ class Etablissement
     public function __toString()
     {
         return (string) $this->getNom();
+    }
+
+    /**
+     * @return string
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getEntree()
+    {
+        return $this->entree;
+    }
+
+    /**
+     * @param \DateTime $entree
+     */
+    public function setEntree($entree)
+    {
+        $this->entree = $entree;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getSortie()
+    {
+        return $this->sortie;
+    }
+
+    /**
+     * @param \DateTime $sortie
+     */
+    public function setSortie($sortie)
+    {
+        $this->sortie = $sortie;
+    }
+
+    /**
+     * @param string $position
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
     }
 
     /**

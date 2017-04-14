@@ -38,6 +38,7 @@ class EtablissementType extends AbstractType
             ->add('etudiants')
             ->add('chercheurs')
             ->add('intervenants')
+            ->add('position')
             ->add('lien2')
             ->add('lien3')
             ->add('localisation', EntityType::class, array(
