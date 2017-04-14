@@ -17,10 +17,6 @@ use EditeurBundle\Form\LaboType;
  */
 class LaboratoireController extends Controller
 {
-    public function indexAction($name)
-    {
-        return $this->render('', array('name' => $name));
-    }
 
     /**
      * Créer un laboratoire

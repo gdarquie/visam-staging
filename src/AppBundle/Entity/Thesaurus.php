@@ -57,9 +57,7 @@ class Thesaurus
     private $soustype;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="slug", type="string", length=500, nullable=true)
+     * @ORM\Column(type="string", unique=true)
      */
     private $slug;
 

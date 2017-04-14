@@ -11,7 +11,7 @@ use AppBundle\Repository\EtablissementRepository;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class EtablissementType extends AbstractType
 {
@@ -48,6 +48,18 @@ class EtablissementType extends AbstractType
                 'choice_label' => 'nom',
             ))
              ->add('valorisation')
+             ->add('entree', DateType::class, [
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
+                'attr' => ['class' => 'datepicker'], // Creates a dropdown of 15 years to control year
+                'html5' => false
+              ])
+            ->add('sortie', DateType::class, [
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
+                'attr' => ['class' => 'datepicker'], // Creates a dropdown of 15 years to control year
+                'html5' => false
+            ])
         ;
     }
     

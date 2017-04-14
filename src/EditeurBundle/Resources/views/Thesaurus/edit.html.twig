@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+    <h1>Edition d'un élément de thésaurus</h1>
+
+
+    {{ form_start(edit_form) }}
+        {{ include('EditeurBundle:Thesaurus:_form.html.twig') }}
+        <input type="submit" value="Edit" class="btn btn-hesam" formnovalidate/>
+    {{ form_end(edit_form) }}
+
+    {{ form_start(delete_form) }}
+        <button disabled value="Supprimer" class="btn btn-hesam right ">Supprimer</button>
+    {{ form_end(delete_form) }}
+    <ul>
+        <li>
+            <a href="{{ path('search') }}">Retour</a>
+        </li>
+
+    </ul>
+    </div>
+{% endblock %}

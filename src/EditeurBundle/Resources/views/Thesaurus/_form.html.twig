@@ -1,0 +1,19 @@
+<div class="row form">
+
+    <div class="row">
+        <div class="col s8">
+            <div class="cartouche">
+
+                <h3>Informations générales</h3>
+
+                {{ form_row(edit_form.nom, {'label' : "Nom"}) }}
+                {{ form_row(edit_form.description, { 'attr': {'class': 'materialize-textarea'}, 'label' : 'Description'}) }}
+                {{ form_row(edit_form.type) }}
+                {{ form_row(edit_form.soustype) }}
+                {{ form_row(edit_form.slug) }}
+
+            </div>
+        </div>
+
+
+</div>

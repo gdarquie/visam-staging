@@ -29,3 +29,5 @@ security:
         - { path: ^/resetting, role: ROLE_ADMIN }
         - { path: ^/admin/, role: ROLE_ADMIN }
         - { path: ^/editeur, role: ROLE_USER } #changer par la suite par un rôle d'éditeur
+
+

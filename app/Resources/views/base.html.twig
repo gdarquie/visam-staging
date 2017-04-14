@@ -11,6 +11,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="description" content="Visualisations des compétences de la COMUE hesam">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="robots" content="noindex, nofollow">
+
 
         <title>{% block title %}heSam : cartographie des compétences de la COMUE HESAM{% endblock %}</title>
             <link rel="icon" href="{{ asset('favicon.ico') }}" />
@@ -72,12 +74,14 @@
                 <li><a href="{{ path('editeur_etablisement_new') }}">Etablissement</a></li>
                 <li><a href="{{ path('editeur_formation_new') }}">Formation</a></li>
                 <li><a href="{{ path('editeur_laboratoire_new') }}">Laboratoire</a>
-                <li><a href="">Thesaurus</a></li>
+                <li><a href="{{ path('editeur_thesaurus_new') }}">Thesaurus</a></li>
                 <li><a href="">Membres</a></li>
                 <li><a href="">UFR</a></li>
                 <li><a href="">Valorisation</a></li>
                 <li><a href="">Equipement</a></li>
+                <li><a href="/register">Utilisateur</a></li>
             </ul>
+
 
             <div class="navbar-fixed">
             <nav>
@@ -152,7 +156,7 @@
             <div class="footer-copyright">
                 <div class="container"></div>
                 <div class="container">
-                    © 2016 heSam Université - <i>visam</i> version 1.4 (<i>on the road to V2</i>)
+                    © 2016 heSam Université - <i>visam</i> version 1.5 (<i>on the road to V2</i>)
                     <a class="grey-text text-lighten-4 right" href="http://www.hesam.eu" target="_blank">Accéder au site hesam</a>
                 </div>
             </div>
