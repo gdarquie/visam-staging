@@ -40,15 +40,34 @@ class LaboType extends AbstractType
             // ->add('ufr')
             // ->add('localisation')
             // ->add('formation')
-            ->add('discipline', EntityType::class, array(
-                'class' => 'AppBundle:Discipline',
-                'by_reference' => false,
-                'multiple' => true,
-                'choice_label' => 'nom',
-                'query_builder' => function(DisciplineRepository $repo) {
-                    return $repo->createAlphabeticalQueryBuilder();
-                }
-            ))
+            ->add('discipline')
+//            ->add('cnu', EntityType::class, array(
+//                'class' => 'AppBundle:Discipline',
+//                'by_reference' => false,
+//                'multiple' => true,
+//                'choice_label' => 'nom',
+//                'query_builder' => function(DisciplineRepository $repo) {
+//                    return $repo->createAlphabeticalQueryBuilderByType('CNU');
+//                }
+//            ))
+//            ->add('sise', EntityType::class, array(
+//                'class' => 'AppBundle:Discipline',
+//                'by_reference' => false,
+//                'multiple' => true,
+//                'choice_label' => 'nom',
+//                'query_builder' => function(DisciplineRepository $repo) {
+//                    return $repo->createAlphabeticalQueryBuilderByType('SISE');
+//                }
+//            ))
+//            ->add('hceres', EntityType::class, array(
+//                'class' => 'AppBundle:Discipline',
+//                'by_reference' => false,
+//                'multiple' => true,
+//                'choice_label' => 'nom',
+//                'query_builder' => function(DisciplineRepository $repo) {
+//                    return $repo->createAlphabeticalQueryBuilderByType('HCERES');
+//                }
+//            ))
             ->add('etablissement', EntityType::class, array(
                 'class' => 'AppBundle:Etablissement',
                 'by_reference' => false,

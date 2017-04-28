@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use AppBundle\Entity\Etablissement;
 use AppBundle\Repository\EtablissementRepository;
+use AppBundle\Repository\ThesaurusRepository;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -27,8 +28,23 @@ class EtablissementType extends AbstractType
             ->add('code')
             ->add('sigle')
             ->add('lien')
-            ->add('ministere')
-            ->add('statut')
+            ->add('ministere_thesaurus', EntityType::class, array(
+                'multiple' => true,
+                'class' => 'AppBundle:Thesaurus',
+                'multiple' => true,
+                'choice_label' => 'nom', //order by alpha
+                'query_builder' => function(ThesaurusRepository $repo) {
+                    return $repo->findAllThesaurusByType("tutelle");
+                }
+            ))
+            ->add('statut_thesaurus', EntityType::class, array(
+                'placeholder' => 'Sélectionner une réponse',
+                'class' => 'AppBundle:Thesaurus',
+                'choice_label' => 'nom', //order by alpha
+                'query_builder' => function(ThesaurusRepository $repo) {
+                    return $repo->findAllThesaurusByType("statut");
+                }
+            ))
             ->add('fc', ChoiceType::class, array(
                 'choices'  => array(
                     'oui' => "oui",
@@ -38,7 +54,14 @@ class EtablissementType extends AbstractType
             ->add('etudiants')
             ->add('chercheurs')
             ->add('intervenants')
-            ->add('position')
+            ->add('position_thesaurus', EntityType::class, array(
+                'placeholder' => 'Sélectionner une réponse',
+                'class' => 'AppBundle:Thesaurus',
+                'choice_label' => 'nom', //order by alpha
+                'query_builder' => function(ThesaurusRepository $repo) {
+                    return $repo->findAllThesaurusByType("position");
+                }
+            ))
             ->add('lien2')
             ->add('lien3')
             ->add('localisation', EntityType::class, array(
@@ -47,13 +70,13 @@ class EtablissementType extends AbstractType
                 'multiple' => true,
                 'choice_label' => 'nom',
             ))
-             ->add('valorisation')
-             ->add('entree', DateType::class, [
+            ->add('valorisation')
+            ->add('entree', DateType::class, [
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
                 'attr' => ['class' => 'datepicker'], // Creates a dropdown of 15 years to control year
                 'html5' => false
-              ])
+            ])
             ->add('sortie', DateType::class, [
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',

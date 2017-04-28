@@ -10,12 +10,13 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Ed
  *
  * @ORM\Table(name="thesaurus")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ThesaurusRepository")
  */
 class Thesaurus
 {
@@ -57,7 +58,8 @@ class Thesaurus
     private $soustype;
 
     /**
-     * @ORM\Column(type="string", unique=true)
+     * @ORM\Column(type="string")
+     * @Gedmo\Slug(fields={"type"})
      */
     private $slug;
 
@@ -201,6 +203,11 @@ class Thesaurus
     public function setLastUpdate($last_update)
     {
         $this->last_update = $last_update;
+    }
+
+    public function __toString()
+    {
+        return (string) $this->getNom();
     }
 
 }

@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new EditeurBundle\EditeurBundle(),
             new ApiBundle\ApiBundle(),
             new Liuggio\ExcelBundle\LiuggioExcelBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

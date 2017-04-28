@@ -127,6 +127,20 @@ class Ed
     private $anneeCollecte;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_creation", type="datetime", nullable=false)
+     */
+    private $date_creation;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="last_update", type="datetime", nullable=false)
+     */
+    private $last_update;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -547,6 +561,40 @@ class Ed
     {
         $this->objetId = $objetId;
     }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateCreation()
+    {
+        return $this->date_creation;
+    }
+
+    /**
+     * @param \DateTime $date_creation
+     */
+    public function setDateCreation($date_creation)
+    {
+        $this->date_creation = $date_creation;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getLastUpdate()
+    {
+        return $this->last_update;
+    }
+
+    /**
+     * @param \DateTime $last_update
+     */
+    public function setLastUpdate($last_update)
+    {
+        $this->last_update = $last_update;
+    }
+
+
 
 
 }

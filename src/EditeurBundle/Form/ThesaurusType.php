@@ -24,7 +24,7 @@ class ThesaurusType extends AbstractType
             ->add('description')
             ->add('type')
             ->add('soustype')
-            ->add('slug')
+//            ->add('slug')
         ;
     }
 

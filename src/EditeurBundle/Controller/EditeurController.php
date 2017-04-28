@@ -45,7 +45,7 @@ class EditeurController extends Controller
         return $this->render('EditeurBundle:Default:index.html.twig', array(
             'etablissements' => $etablissements,
             'formations' => $formations,
-            'laboratoires' => $laboratoires,
+            'laboratoires' => $laboratoires
         ));
     }
 

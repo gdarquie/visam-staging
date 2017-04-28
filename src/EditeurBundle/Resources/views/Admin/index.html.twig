@@ -1,0 +1,117 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .card{
+            padding: 8px;
+        }
+
+        .card li{
+            margin-left: 20px;
+        }
+    </style>
+
+{% endblock %}
+
+{% block body %}
+
+    <section class="container-fluid row">
+        <h1 class="center">Administration de la plateforme</h1>
+        <div class="col s3">
+            <article>
+
+                <ul class="collection with-header">
+                    <h3 class="collection-header">Menu</h3>
+                    <li class="collection-item">Dernières données
+                        <ul class="browser-default">
+                            <li>Etablissement</li>
+                            <li>Formation</li>
+                            <li>Laboratoire</li>
+                            <li>Ecoles doctorales</li>
+                        </ul>
+                    </li>
+                    <li class="collection-item">Gestion des utilisateurs</li>
+                    <li class="collection-item">Gestion du thésaurus</li>
+                </ul>
+            </article>
+        </div>
+
+        <div class="col s9">
+
+
+
+            <article class="card row">
+
+                <h3>Dernières données entrées</h3>
+
+                <div class="col s12">
+
+                    <ul class="collection with-header">
+                        <li class="collection-header"><h4>Etablissements</h4></li>
+                    {% for item in etablissements  %}
+                        <li class="collection-item"><a href="{{ path('editeur_etablissement_edit', {'id' : item.etablissementId}) }}">{{ item.nom }}</a> - {{ item.lastUpdate|date('d/m/Y') }} à {{ item.lastUpdate|date( 'H:i:s') }}</li>
+                        {% endfor %}
+                    </ul>
+                    <p class="right"><a href="">Voir toutes les données établissements</a></p>
+                </div>
+
+                <div class="col s12">
+
+                    <ul class="collection with-header">
+                        <li class="collection-header"><h4>Formations</h4></li>
+                        {% for item in formations  %}
+                            <li class="collection-item"><a href="{{ path('editeur_formation_edit', {'id' : item.formationId}) }}">{{ item.nom }} - {{ item.lastUpdate|date('d/m/Y') }} à {{ item.lastUpdate|date( 'H:i:s') }}</a></li>
+                        {% endfor %}
+                    </ul>
+                    <p class="right"><a href="">Voir toutes les données formations</a></p>
+
+                </div>
+
+                <div class="col s12">
+
+                    <ul class="collection with-header">
+                        <li class="collection-header"><h4>Laboratoires</h4></li>
+                        {% for item in labos  %}
+                            <li class="collection-item"><a href="{{ path('editeur_laboratoire_edit', {'id' : item.laboId}) }}">{{ item.nom }} - {{ item.lastUpdate|date('d/m/Y') }} à {{ item.lastUpdate|date( 'H:i:s') }}</a></li>
+                        {% endfor %}
+                    </ul>
+                    <p class="right"><a href="">Voir toutes les données laboratoires</a></p>
+                </div>
+
+                <div class="col s12">
+
+                    <ul class="collection with-header">
+                        <li class="collection-header"><h4>Ecoles doctorales</h4></li>
+                        {% for item in eds  %}
+                            <li class="collection-item">{{ item.nom }} - {{ item.lastUpdate|date('d/m/Y') }} à {{ item.lastUpdate|date( 'H:i:s') }}</li>
+                        {% endfor %}
+                    </ul>
+                    <p class="right"><a href="">Voir toutes les données écoles doctorales</a></p>
+                </div>
+
+            </article>
+
+            <article class="card">
+                <h3>Gérer les utilisateurs</h3>
+
+                <ul class="collection with-header">
+                    <li class="collection-header"><h4>Liste des utilisateurs</h4></li>
+                    {% for item in users  %}
+                        <li class="collection-item">{{ item.username |capitalize }}, {{ item.email }}, {{ item.lastLogin|date( 'd/m/Y à H:i:s') }}</li>
+                    {% endfor %}
+                </ul>
+
+            </article>
+
+            <article class="card">
+                <h3>Gérer le thésaurus</h3>
+                <ul class="browser-default">
+                    <li><a href="{{ path('admin_thesaurus') }}">Voir les entrées</a></li>
+                    <li><a href="{{ path('editeur_thesaurus_new') }}">Ajouter une entrée</a></li>
+                </ul>
+            </article>
+        </div>
+
+    </section>
+{% endblock %}

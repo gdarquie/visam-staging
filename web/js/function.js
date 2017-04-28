@@ -12,6 +12,8 @@ function test(){
 function myParallax(){
 	$('select').material_select();
 	$('.parallax').parallax();
+    $(".text-count").characterCounter();
+
     $('.datepicker').pickadate({
         // editable: true,
         min: new Date(2015,1,1),
@@ -36,7 +38,7 @@ function myParallax(){
         clear: 'Effacer',
         close: 'Fermer',
 //The format to show on the `input` element
-        format: 'dd/mm/yyyy'
+        format: 'yyyy-mm-dd'
     });
 
 }

@@ -86,3 +86,11 @@ doctrine_cache:
     providers:
         export_cache:
             type: file_system
+
+# Stof Doctrine
+
+stof_doctrine_extensions:
+    default_locale: en_US
+    orm:
+        default:
+            sluggable: true

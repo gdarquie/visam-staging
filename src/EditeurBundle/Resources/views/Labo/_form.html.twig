@@ -51,8 +51,10 @@
                 <h3>Description</h3>
                 <!-- data-length="10" -->
                 {{ form_row(edit_form.description, { 'attr': {'class': 'materialize-textarea'} , 'label' : "Description (2500 caractères max)" })}}
-
-                {{ form_row(edit_form.discipline) }}
+                {{ form_row((edit_form.discipline)) }}
+                {#{{ form_row(edit_form.cnu) }}#}
+                {#{{ form_row(edit_form.hceres) }}#}
+                {#{{ form_row(edit_form.sise) }}#}
                 {{ form_row(edit_form.axes) }}
 
             </div>

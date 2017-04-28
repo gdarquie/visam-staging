@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Etablissement
@@ -16,6 +17,10 @@ class Etablissement
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=255, nullable=false)
+     *
+     * @Assert\NotBlank(
+     *     message = "Un nom doit être renseigné pour permettre la sauvegarde"
+     * )
      */
     private $nom;
 
@@ -23,6 +28,13 @@ class Etablissement
      * @var string
      *
      * @ORM\Column(name="description", type="text", length=16777215, nullable=true)
+     *
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 2500,
+     *      minMessage = "La description doit comprendre au moins {{ limit }} caractères",
+     *      maxMessage = "La description ne peut dépasser {{ limit }} caractères"
+     * )
      */
     private $description;
 
@@ -62,11 +74,35 @@ class Etablissement
     private $ministere;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Thesaurus")
+     * @ORM\JoinTable(name="etablissement_has_ministere",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="etablissement_id", referencedColumnName="etablissement_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="thesaurus_id", referencedColumnName="thesaurus_id")
+     *   }
+     * )
+     */
+    private $ministere_thesaurus;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="statut", type="string", length=255, nullable=true)
      */
     private $statut;
+
+    /** @var  \AppBundle\Entity\Thesaurus
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Thesaurus")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="statut_thesaurus_id", referencedColumnName="thesaurus_id")
+     * })
+     */
+    private $statut_thesaurus;
 
     /**
      * @var string
@@ -138,10 +174,19 @@ class Etablissement
      */
     private $position;
 
+    /** @var  \AppBundle\Entity\Thesaurus
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Thesaurus")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="position_thesaurus_id", referencedColumnName="thesaurus_id")
+     * })
+     */
+    private $position_thesaurus;
+
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="entree", type="datetime", nullable=false)
+     * @ORM\Column(name="entree", type="datetime", nullable=true)
      */
     private $entree;
 
@@ -417,6 +462,23 @@ class Etablissement
     }
 
     /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getStatutThesaurus()
+    {
+        return $this->statut_thesaurus;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $statut_thesaurus
+     */
+    public function setStatutThesaurus($statut_thesaurus)
+    {
+        $this->statut_thesaurus = $statut_thesaurus;
+    }
+
+
+    /**
      * Get statut
      *
      * @return string
@@ -448,6 +510,38 @@ class Etablissement
     public function getImg()
     {
         return $this->img;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMinistereThesaurus()
+    {
+        return $this->ministere_thesaurus;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $ministere_thesaurus
+     */
+    public function setMinistereThesaurus($ministere_thesaurus)
+    {
+        $this->ministere_thesaurus = $ministere_thesaurus;
+    }
+
+    /**
+     * @return Thesaurus
+     */
+    public function getPositionThesaurus()
+    {
+        return $this->position_thesaurus;
+    }
+
+    /**
+     * @param Thesaurus $position_thesaurus
+     */
+    public function setPositionThesaurus($position_thesaurus)
+    {
+        $this->position_thesaurus = $position_thesaurus;
     }
 
     /**
@@ -842,7 +936,6 @@ class Etablissement
     {
         $this->anneeCollecte = $anneeCollecte;
     }
-
 
     public function __toString()
     {

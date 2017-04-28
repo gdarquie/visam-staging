@@ -1,0 +1,63 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .card{
+            padding: 8px;
+        }
+
+        .card li{
+            margin-left: 20px;
+        }
+    </style>
+
+{% endblock %}
+
+
+{% block body %}
+
+    <section class="container">
+
+        <h1>Gestion du thésaurus</h1>
+
+        <article class="card">
+            <h3>Les listes contrôlées</h3>
+
+            <p>Cliquer sur le nom d'un type pour accéder à tous ses items</p>
+            {% for item in types  %}
+                <a class="waves-effect waves-red btn-flat red-text darken-2-text" href="">{{ item.type }}</a>
+            {% endfor %}
+
+            <p>Créer un nouvel item de thésaurus : <a href="{{ path('editeur_thesaurus_new') }}">cliquer ici</a></p>
+            <p>Pour créer un nouveau type de thésaurus, il suffit de créer un nouvel item avec le type souhaité. Le type sera automatiquement ajouté à la liste ci-dessus.</p>
+
+        </article>
+
+        <article class="responsive-table card">
+
+            <h3>Tous les items</h3>
+
+            <p>Cette liste permet de voir tous les items de toutes les listes contrôlées à la suite.</p>
+
+            <table class="striped table-sorter">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in thesaurus %}
+                        <tr>
+                            <td>{{ item.nom }}</td>
+                            <td>{{ item.type }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </article>
+
+    </section>
+{% endblock %}
