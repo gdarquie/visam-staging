@@ -51,7 +51,7 @@ class ThesaurusController extends Controller
     /**
      * Editer un laboratoire
      *
-     * @Route("/{id}/edit", name="editeur_laboratoire_edit")
+     * @Route("/{id}/edit", name="editeur_thesaurus_edit")
      */
     public function editFormationAction(Request $request, Labo $laboratoire){
 
@@ -83,7 +83,7 @@ class ThesaurusController extends Controller
     /**
      * Effacer un labo
      *
-     * @Route("/{id}/delete", name="editeur_laboratoire_delete")
+     * @Route("/{id}/delete", name="editeur_thesaurus_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Labo $labo)
