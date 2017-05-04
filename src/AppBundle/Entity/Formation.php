@@ -3,7 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Formation
@@ -134,10 +135,19 @@ class Formation
      */
     private $localisation;
 
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Membre", mappedBy="formation")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Membre", inversedBy="formation", cascade= {"persist"})
+     * @ORM\JoinTable(name="membre_has_formation",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="formation_id", referencedColumnName="formation_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="membre_id", referencedColumnName="membre_id")
+     *   }
+     * )
      */
     private $membre;
 
@@ -196,9 +206,98 @@ class Formation
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Discipline")
+     * @ORM\JoinTable(name="formation_has_cnu",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="formation_id", referencedColumnName="formation_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="discipline_id", referencedColumnName="discipline_id")
+     *   }
+     * )
+     *
+     * @Assert\Count(
+     *      max = 5,
+     *      minMessage = "Vous devez choisir au moins une discipline CNU",
+     *      maxMessage = "Vous ne pouvez choisir plus de 5 disciplines"
+     * )
+     */
+    private $cnu;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Discipline")
+     * @ORM\JoinTable(name="formation_has_sise",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="formation_id", referencedColumnName="formation_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="discipline_id", referencedColumnName="discipline_id")
+     *   }
+     * )
+     *
+     * @Assert\Count(
+     *      max = 5,
+     *      minMessage = "Vous devez choisir au moins une discipline SISE",
+     *      maxMessage = "Vous ne pouvez choisir plus de 5 disciplines"
+     * )
+     *
+     */
+    private $sise;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Discipline")
+     * @ORM\JoinTable(name="formation_has_hceres",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="formation_id", referencedColumnName="formation_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="discipline_id", referencedColumnName="discipline_id")
+     *   }
+     * )
+     *
+     * @Assert\Count(
+     *      max = 5,
+     *      minMessage = "Vous devez choisir au moins une discipline HCERES",
+     *      maxMessage = "Vous ne pouvez choisir plus de 5 disciplines"
+     * )
+     *
+     */
+    private $hceres;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Discipline", mappedBy="formation")
      */
     private $discipline;
+
+    /**
+     *
+     * @ORM\Column(name="check1", type="boolean")
+     */
+    private $check_general = false;
+
+    /**
+     *
+     * @ORM\Column(name="check2", type="boolean")
+     */
+    private $check_effectif = false;
+
+    /**
+     *
+     * @ORM\Column(name="check3", type="boolean")
+     */
+    private $check_index = false;
+
+    /**
+     *
+     * @ORM\Column(name="check4", type="boolean")
+     */
+    private $check_cursus = false;
 
 
     /**
@@ -823,6 +922,123 @@ class Formation
     public function setModalite($modalite)
     {
         $this->modalite = $modalite;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCnu()
+    {
+        return $this->cnu;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $cnu
+     */
+    public function setCnu($cnu)
+    {
+        $this->cnu = $cnu;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSise()
+    {
+        return $this->sise;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $sise
+     */
+    public function setSise($sise)
+    {
+        $this->sise = $sise;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getHceres()
+    {
+        return $this->hceres;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $hceres
+     */
+    public function setHceres($hceres)
+    {
+        $this->hceres = $hceres;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCheckGeneral()
+    {
+        return $this->check_general;
+    }
+
+    /**
+     * @param mixed $check_general
+     */
+    public function setCheckGeneral($check_general)
+    {
+        $this->check_general = $check_general;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCheckEffectif()
+    {
+        return $this->check_effectif;
+    }
+
+    /**
+     * @param mixed $check_effectif
+     */
+    public function setCheckEffectif($check_effectif)
+    {
+        $this->check_effectif = $check_effectif;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCheckIndex()
+    {
+        return $this->check_index;
+    }
+
+    /**
+     * @param mixed $check_index
+     */
+    public function setCheckIndex($check_index)
+    {
+        $this->check_index = $check_index;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCheckCursus()
+    {
+        return $this->check_cursus;
+    }
+
+    /**
+     * @param mixed $check_cursus
+     */
+    public function setCheckCursus($check_cursus)
+    {
+        $this->check_cursus = $check_cursus;
+    }
+
+    public function __toString()
+    {
+        return (string) $this->getNom();
     }
 
 

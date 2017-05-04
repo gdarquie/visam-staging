@@ -20,6 +20,7 @@ use AppBundle\Entity\Labo;
 class EditeurController extends Controller
 {
 
+
     /**
      * Accueil de l'éditeur
      *
@@ -27,6 +28,124 @@ class EditeurController extends Controller
      * @Method("GET")
      */
     public function indexAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $annee = 2016;
+        $user = $this->getUser();
+        $userId = $user->getId();
+
+    //Récupérer les ids des établissements liés à un membre
+        if ($user->hasRole('ROLE_ADMIN')){
+            $query = $em->createQuery(
+                'SELECT e.etablissementId as id FROM AppBundle:Etablissement e'
+            );
+            $associations = $query->getResult();
+        }
+
+        else{
+            $query = $em->createQuery(
+                'SELECT e.etablissementId as id FROM AppBundle:User u INNER JOIN u.etablissement e WHERE u.id = :user'
+            );
+            $query->setParameter('user', $userId);
+            $associations = $query->getResult();
+        }
+
+    //Get établissement(s) lié(s) à un membre - il peut évenutuellement y en avoir plusieurs
+        $sql = "SELECT e FROM AppBundle:Etablissement e ";
+        foreach ($associations as $key=>$value) {
+            if($key == 0){
+                $sql = $sql." WHERE e.etablissementId = :etablissement".$key;
+            }
+
+            else{
+                $sql = $sql." OR e.etablissementId = :etablissement".$key;
+            }
+        }
+
+        $query = $em->createQuery($sql);
+        foreach ($associations as $key=>$value) {
+            $query->setParameter('etablissement'.$key, $associations[$key]['id']);
+        }
+        $etablissements = $query->getResult();
+
+
+    //Get all formations des établissements retenus
+        $sql = "SELECT f FROM AppBundle:Formation f INNER JOIN f.etablissement e WHERE f.anneeCollecte = :annee";
+        foreach ($etablissements as $key=>$value) {
+            if($key == 0){
+                $sql = $sql." AND (e.etablissementId = :etablissement".$key;
+            }
+
+            else{
+                $sql = $sql." OR e.etablissementId = :etablissement".$key;
+            }
+        }
+//        $query = $em->createQuery(
+//            'SELECT f FROM AppBundle:Formation f INNER JOIN f.etablissement e WHERE e.etablissementId = :etablissement ORDER BY f.last_update DESC'
+//        );
+
+        $query = $em->createQuery($sql.")");
+        $query->setParameter('annee', $annee);
+        foreach ($associations as $key=>$value) {
+            $query->setParameter('etablissement'.$key, $associations[$key]['id']);
+        }
+        $formations = $query->getResult();
+
+    //Get all labo des établissements retenus
+
+        $sql = "SELECT l FROM AppBundle:Labo l INNER JOIN l.etablissement e  WHERE l.anneeCollecte = :annee";
+        foreach ($etablissements as $key=>$value) {
+            if($key == 0){
+                $sql = $sql." AND (e.etablissementId = :etablissement".$key;
+            }
+
+            else{
+                $sql = $sql." OR e.etablissementId = :etablissement".$key;
+            }
+        }
+        $query = $em->createQuery($sql.")");
+        $query->setParameter('annee', $annee);
+        foreach ($associations as $key=>$value) {
+            $query->setParameter('etablissement'.$key, $associations[$key]['id']);
+        }
+        $laboratoires = $query->getResult();
+//        dump($query);die();
+
+    //Get all écoles doctorales des établissements retenus
+        $sql = "SELECT d FROM AppBundle:Ed d INNER JOIN d.etablissement e  WHERE d.anneeCollecte = :annee";
+        foreach ($etablissements as $key=>$value) {
+            if($key == 0){
+                $sql = $sql." AND (d.edId = :ed".$key;
+            }
+
+            else{
+                $sql = $sql." OR d.edId = :ed".$key;
+            }
+        }
+        $query = $em->createQuery($sql.")");
+        $query->setParameter('annee', $annee);
+        foreach ($associations as $key=>$value) {
+            $query->setParameter('ed'.$key, $associations[$key]['id']);
+        }
+        $eds = $query->getResult();
+
+        return $this->render('EditeurBundle:Editeur:index.html.twig', array(
+            'user' => $user,
+            'etablissements' => $etablissements,
+            'formations' => $formations,
+            'laboratoires' => $laboratoires,
+            'eds' => $eds
+        ));
+    }
+
+    /**
+     * Ancien accueil de l'éditeur
+     *
+     * @Route("/oldaccueil", name="editeur_old")
+     * @Method("GET")
+     */
+    public function oldindexAction()
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -78,133 +197,7 @@ class EditeurController extends Controller
             ));
     }
 
-/**
-*
-* Les écoles doctorales
-*
-/**
 
-    /**
-     * Lists all Ed entities.
-     *
-     * @Route("/ed/", name="ed_index")
-     * @Method("GET")
-     */
-    public function allEdAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $eds = $em->getRepository('AppBundle:Ed')->findAll();
-
-        return $this->render('EditeurBundle:Ed:index.html.twig', array(
-            'eds' => $eds,
-        ));
-    }
-
-    /**
-     * Creates a new Ed entity.
-     *
-     * @Route("/ed/new", name="ed_new")
-     * @Method({"GET", "POST"})
-     */
-    public function newEdAction(Request $request)
-    {
-        $ed = new Ed();
-        $form = $this->createForm('AppBundle\Form\EdType', $ed);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($ed);
-            $em->flush();
-
-            return $this->redirectToRoute('ed_show', array('id' => $ed->getEdId()));
-        }
-
-        return $this->render('EditeurBundle:Ed:new.html.twig', array(
-            'ed' => $ed,
-            'form' => $form->createView(),
-        ));
-    }
-
-    /**
-     * Finds and displays a Ed entity.
-     *
-     * @Route("/ed/{id}", name="ed_show")
-     * @Method("GET")
-     */
-    public function showEdAction(Ed $ed)
-    {
-        $deleteForm = $this->createDeleteEdForm($ed);
-
-        return $this->render('EditeurBundle:Ed:show.html.twig', array(
-            'ed' => $ed,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
-
-    /**
-     * Displays a form to edit an existing Ed entity.
-     *
-     * @Route("/ed/{id}/edit", name="ed_edit")
-     * @Method({"GET", "POST"})
-     */
-    public function editEdAction(Request $request, Ed $ed)
-    {
-        $deleteForm = $this->createDeleteEdForm($ed);
-        $editForm = $this->createForm('AppBundle\Form\EdType', $ed);
-        $editForm->handleRequest($request);
-
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($ed);
-            $em->flush();
-
-            return $this->redirectToRoute('ed_edit', array('id' => $ed->getEdId()));
-        }
-
-        return $this->render('EditeurBundle:ed:edit.html.twig', array(
-            'ed' => $ed,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
-
-    /**
-     * Deletes a Ed entity.
-     *
-     * @Route("/ed/{id}", name="ed_delete")
-     * @Method("DELETE")
-     */
-    public function deleteEdAction(Request $request, Ed $ed)
-    {
-        $form = $this->createDeleteEdForm($ed);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($ed);
-            $em->flush();
-        }
-
-        return $this->redirectToRoute('ed_index');
-    }
-
-    /**
-     * Creates a form to delete a Ed entity.
-     *
-     * @param Ed $ed The Ed entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteEdForm(Ed $ed)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('ed_delete', array('id' => $ed->getEdId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
-    }
 
 
 }

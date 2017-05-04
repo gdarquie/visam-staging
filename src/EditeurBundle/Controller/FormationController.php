@@ -47,6 +47,7 @@ class FormationController extends Controller
 
         return $this->render('EditeurBundle:Formation:new.html.twig', array(
             'edit_form' => $form->createView(),
+            'formation' => $formation
             // 'delete_form' => $deleteForm->createView(),
         ));
     }

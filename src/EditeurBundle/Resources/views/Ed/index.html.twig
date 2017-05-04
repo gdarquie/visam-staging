@@ -1,7 +1,7 @@
-{% extends 'base.html.twig' %}
+{% extends 'editeur.html.twig' %}
 
 {% block body %}
-    <h1>Ed list</h1>
+    <h1>Liste des écoles doctorales</h1>
 
     <table>
         <thead>
@@ -20,7 +20,7 @@
         <tbody>
         {% for ed in eds %}
             <tr>
-                <td><a href="{{ path('ed_show', { 'id': ed.edId }) }}">{{ ed.code }}</a></td>
+                <td><a href="{{ path('editeur_ed_show', { 'id': ed.edId }) }}">{{ ed.code }}</a></td>
                 <td>{{ ed.nom }}</td>
                 <td>{{ ed.lien }}</td>
                 <td>{{ ed.laboExt }}</td>
@@ -31,10 +31,10 @@
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('ed_show', { 'id': ed.edId }) }}">show</a>
+                            <a href="{{ path('editeur_ed_show', { 'id': ed.edId }) }}">voir</a>
                         </li>
                         <li>
-                            <a href="{{ path('ed_edit', { 'id': ed.edId }) }}">edit</a>
+                            <a href="{{ path('editeur_ed_edit', { 'id': ed.edId }) }}">modifier</a>
                         </li>
                     </ul>
                 </td>
@@ -45,7 +45,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('ed_new') }}">Create a new entry</a>
+            <a href="{{ path('editeur_ed_new') }}">Créer une nouvelle école doctorale</a>
         </li>
     </ul>
 {% endblock %}

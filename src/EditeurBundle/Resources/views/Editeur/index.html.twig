@@ -1,0 +1,193 @@
+{% extends "editeur.html.twig" %}
+
+{% block stylesheets %}
+
+    {{ parent() }}
+    <style>
+        h1{
+            font-size: 1.6em;
+        }
+        h2{
+            font-size: 1.3em;
+        }
+        .secondary-content:hover{
+            color:red;
+        }
+        .material-icons:hover{
+            opacity: 0.9;
+        }
+        .collection-item .title{
+           font-size: 1em!important;
+        }
+
+        .collection-item .description{
+            font-size: 0.9em!important;
+        }
+
+        .collection-item .title:hover{
+            text-decoration:underline;
+        }
+
+        .collection-item i{
+            vertical-align: middle!important;
+            padding-right: 8px;
+        }
+
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    <section class="container-fluid">
+
+
+        {#<h1>Page éditeur {{ user.user }}</h1>#}
+
+        <div class="card row">
+
+            <div class="col s12">
+                <h1 class="center">{% for item in etablissements  %}{{  item.nom }}{% if loop.last %}{% else %} & {% endif %}{% endfor%}</h1>
+            </div>
+        </div>
+
+
+        <div class="card row">
+
+            {% if formations|length > 0 %}
+            <div class="col s6">
+                <h2>Formations ({{ formations|length }})</h2>
+                <ul class="collection">
+                {% for item in formations  %}
+                    <li class="collection-item avatar">
+                        <a href="{{ path('editeur_formation_edit', {'id': item.formationId } ) }}" >
+
+                            {% if item.checkGeneral and item.checkEffectif and item.checkIndex and item.checkCursus %}
+                                <i class="material-icons circle green">mode_edit</i>
+                            {% else %}
+                                <i class="material-icons circle red">mode_edit</i>
+                            {% endif %}
+
+                            <span class="title">{{ item.nom }}</span>
+                            <p>
+                                <span class="description">général
+                                    {% if item.checkGeneral %}
+                                        <i class="material-icons green-text">done</i>
+                                    {% else %}
+                                        <i class="material-icons red-text">not_interested</i>
+                                    {% endif %}
+                                </span>
+                                <span class="description">effectif
+                                    {% if item.checkEffectif %}
+                                        <i class="material-icons green-text">done</i>
+                                            {% else %}
+                                        <i class="material-icons red-text">not_interested</i>
+                                    {% endif %}
+                                </span>
+                                <span class="description">indexation
+                                    {% if item.checkIndex %}
+                                        <i class="material-icons green-text">done</i>
+                                            {% else %}
+                                        <i class="material-icons red-text">not_interested</i>
+                                    {% endif %}
+                                </span>
+                                <span class="description">cursus
+                                    {% if item.checkCursus %}
+                                        <i class="material-icons green-text">done</i>
+                                            {% else %}
+                                        <i class="material-icons red-text">not_interested</i>
+                                    {% endif %}
+                                </span>
+                            </p>
+
+
+                        </a>
+                        <a href="#!" class="secondary-content"><i class="material-icons">delete</i>
+                        </a>
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
+            {% else %}
+            <div class="col s6">
+                <h2>Formations</h2>
+                <p>Acutellement, il n'y pas de formations rattachées.</p>
+                <p><a href="#">+ Ajouter une formation</a></p>
+            </div>
+            {% endif %}
+
+            <div class="col s6">
+
+                <div class="col s12">
+                    <h2>Laboratoires ({{ laboratoires|length }})</h2>
+
+
+                    <ul class="collection">
+                        {% for item in laboratoires  %}
+                            <li class="collection-item avatar">
+                                <a href="{{ path('editeur_laboratoire_edit', {'id': item.laboId } ) }}" >
+                                    {% if item.checkGeneral and item.checkContact and item.checkEtab and item.checkEtab and item.checkEffectifs and item.checkDescription %}
+                                        <i class="material-icons circle green">mode_edit</i>
+                                    {% else %}
+                                        <i class="material-icons circle red">mode_edit</i>
+                                    {% endif %}
+
+                                    <span class="title">{{ item.nom }}</span>
+                                    <p>
+                                        <span class="description">général
+                                            {% if item.checkGeneral %}
+                                                <i class="material-icons green-text">done</i>
+                                            {% else %}
+                                                <i class="material-icons red-text">not_interested</i>
+                                            {% endif %}
+                                        </span>
+                                        <span class="description">contact
+                                            {% if item.checkContact %}
+                                                <i class="material-icons green-text">done</i>
+                                            {% else %}
+                                                <i class="material-icons red-text">not_interested</i>
+                                            {% endif %}
+                                        </span>
+                                        <span class="description">description
+                                            {% if item.checkDescription %}
+                                                <i class="material-icons green-text">done</i>
+                                            {% else %}
+                                                <i class="material-icons red-text">not_interested</i>
+                                            {% endif %}
+                                        </span>
+                                        <span class="description">établissement
+                                            {% if item.checkEtab %}
+                                                <i class="material-icons green-text">done</i>
+                                            {% else %}
+                                                <i class="material-icons red-text">not_interested</i>
+                                            {% endif %}
+                                        </span>
+                                        <span class="description">effectifs
+                                            {% if item.checkEffectifs %}
+                                                <i class="material-icons green-text">done</i>
+                                            {% else %}
+                                                <i class="material-icons red-text">not_interested</i>
+                                            {% endif %}
+                                        </span>
+                                    </p>
+                                </a>
+                                <a href="#!" class="secondary-content"><i class="material-icons">delete</i>
+                                </a>
+                            </li>
+
+                        {% endfor %}
+                    </ul>
+
+                </div>
+            </div>
+
+            <div class="col s6">
+                <div class="col s12">
+                    <h2>Ecoles doctorales ({{ eds|length }})</h2>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+
+{% endblock %}

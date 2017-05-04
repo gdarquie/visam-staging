@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'editeur.html.twig' %}
 
 {% block body %}
     <h1>Ed</h1>
@@ -42,10 +42,10 @@
 
     <ul>
         <li>
-            <a href="{{ path('ed_index') }}">Back to the list</a>
+            <a href="{{ path('editeur_ed_index') }}">Retour à la liste</a>
         </li>
         <li>
-            <a href="{{ path('ed_edit', { 'id': ed.edId }) }}">Edit</a>
+            <a href="{{ path('editeur_ed_edit', { 'id': ed.edId }) }}">Modifier</a>
         </li>
         <li>
             {{ form_start(delete_form) }}

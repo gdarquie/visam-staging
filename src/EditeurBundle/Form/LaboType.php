@@ -5,12 +5,13 @@ namespace EditeurBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use AppBundle\Entity\Discipline;
 use AppBundle\Repository\DisciplineRepository;
 use AppBundle\Entity\Etablissement;
 use AppBundle\Repository\EtablissementRepository;
+
 
 class LaboType extends AbstractType
 {
@@ -20,6 +21,9 @@ class LaboType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
+//        $etablissements = $options['etablissements'];
+
         $builder
             ->add('nom')
             ->add('etabExt')
@@ -40,55 +44,80 @@ class LaboType extends AbstractType
             // ->add('ufr')
             // ->add('localisation')
             // ->add('formation')
-            ->add('discipline')
-//            ->add('cnu', EntityType::class, array(
-//                'class' => 'AppBundle:Discipline',
-//                'by_reference' => false,
-//                'multiple' => true,
-//                'choice_label' => 'nom',
-//                'query_builder' => function(DisciplineRepository $repo) {
-//                    return $repo->createAlphabeticalQueryBuilderByType('CNU');
-//                }
-//            ))
-//            ->add('sise', EntityType::class, array(
-//                'class' => 'AppBundle:Discipline',
-//                'by_reference' => false,
-//                'multiple' => true,
-//                'choice_label' => 'nom',
-//                'query_builder' => function(DisciplineRepository $repo) {
-//                    return $repo->createAlphabeticalQueryBuilderByType('SISE');
-//                }
-//            ))
-//            ->add('hceres', EntityType::class, array(
-//                'class' => 'AppBundle:Discipline',
-//                'by_reference' => false,
-//                'multiple' => true,
-//                'choice_label' => 'nom',
-//                'query_builder' => function(DisciplineRepository $repo) {
-//                    return $repo->createAlphabeticalQueryBuilderByType('HCERES');
-//                }
-//            ))
+//            ->add('discipline')
+            ->add('cnu', EntityType::class, array(
+                'class' => 'AppBundle:Discipline',
+                'by_reference' => false,
+                'multiple' => true,
+                'choice_label' => 'nom',
+                'query_builder' => function (DisciplineRepository $repo) {
+                    return $repo->createAlphabeticalQueryBuilderByType('CNU');
+                }
+            ))
+            ->add('sise', EntityType::class, array(
+                'class' => 'AppBundle:Discipline',
+                'by_reference' => false,
+                'multiple' => true,
+                'choice_label' => 'nom',
+                'query_builder' => function (DisciplineRepository $repo) {
+                    return $repo->createAlphabeticalQueryBuilderByType('SISE');
+                }
+            ))
+            ->add('hceres', EntityType::class, array(
+                'class' => 'AppBundle:Discipline',
+                'by_reference' => false,
+                'multiple' => true,
+                'choice_label' => 'nom',
+                'query_builder' => function (DisciplineRepository $repo) {
+                    return $repo->createAlphabeticalQueryBuilderByType('HCERES');
+                }
+            ))
             ->add('etablissement', EntityType::class, array(
                 'class' => 'AppBundle:Etablissement',
                 'by_reference' => false,
                 'multiple' => true,
                 'choice_label' => 'nom',
-                'query_builder' => function(EtablissementRepository $repo) {
-                    return $repo->createAlphabeticalQueryBuilder();
+                'query_builder' => function (EtablissementRepository $repo) {
+                    return $repo->createAlphabeticalQueryBuilderWhereEtab(1);
                 }
             ))
             // ->add('equipement')
             // ->add('ed')
+            ->add('checkGeneral',CheckboxType::class, array(
+                'label'    => 'Vérifié?',
+                'required' => false,
+            ))
+            ->add('checkContact',CheckboxType::class, array(
+                'label'    => 'Vérifié?',
+                'required' => false,
+            ))
+            ->add('checkEtab',CheckboxType::class, array(
+                'label'    => 'Vérifié?',
+                'required' => false,
+            ))
+            ->add('checkDescription',CheckboxType::class, array(
+                'label'    => 'Vérifié?',
+                'required' => false,
+            ))
+            ->add('checkEffectifs',CheckboxType::class, array(
+                'label'    => 'Vérifié?',
+                'required' => false,
+            ))
         ;
     }
-    
+
+
     /**
      * @param OptionsResolver $resolver
      */
     public function configureOptions(OptionsResolver $resolver)
     {
+
+        $etablissements = 3;
+
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Labo'
+            'data_class' => 'AppBundle\Entity\Labo',
+            'etablissements' => $etablissements
         ));
     }
 }

@@ -257,4 +257,9 @@ class Valorisation
     {
         return $this->etablissement;
     }
+
+    public function __toString()
+    {
+        return (string) $this->getNom();
+    }
 }

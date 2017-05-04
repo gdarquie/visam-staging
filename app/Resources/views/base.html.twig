@@ -74,12 +74,14 @@
                 <li><a href="{{ path('editeur_etablisement_new') }}">Etablissement</a></li>
                 <li><a href="{{ path('editeur_formation_new') }}">Formation</a></li>
                 <li><a href="{{ path('editeur_laboratoire_new') }}">Laboratoire</a>
-                <li><a href="{{ path('editeur_thesaurus_new') }}">Thesaurus</a></li>
-                <li><a href="">Membres</a></li>
-                <li><a href="">UFR</a></li>
-                <li><a href="">Valorisation</a></li>
-                <li><a href="">Equipement</a></li>
-                <li><a href="/register">Utilisateur</a></li>
+                <li><a href="{{ path('editeur_ed_new') }}">Ecole doctorale</a>
+                <li><a href="{{ path('editeur_membre_new') }}">Membre</a></li>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li><a href="{{ path('editeur_thesaurus_new') }}">Thesaurus</a></li>
+                    <li><a href="{{ path('editeur_valorisation_new') }}">Valorisation</a></li>
+                    <li><a href="">Equipement</a></li>
+                    <li><a href="/register">Utilisateur</a></li>
+                {% endif %}
             </ul>
 
 

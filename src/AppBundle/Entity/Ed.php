@@ -69,13 +69,6 @@ class Ed
     private $effectif;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="timestamp", type="datetime", nullable=false)
-     */
-    private $timestamp;
-
-    /**
      * @var integer
      *
      * @ORM\Column(name="ED_id", type="integer")
@@ -129,14 +122,14 @@ class Ed
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_creation", type="datetime", nullable=false)
+     * @ORM\Column(name="date_creation", type="datetime")
      */
     private $date_creation;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="last_update", type="datetime", nullable=false)
+     * @ORM\Column(name="last_update", type="datetime")
      */
     private $last_update;
 
@@ -145,6 +138,8 @@ class Ed
      */
     public function __construct()
     {
+        $this->date_creation = new \DateTime();
+        $this->last_update = new \DateTime();
         $this->membre = new \Doctrine\Common\Collections\ArrayCollection();
         $this->localisation = new \Doctrine\Common\Collections\ArrayCollection();
         $this->etablissement = new \Doctrine\Common\Collections\ArrayCollection();

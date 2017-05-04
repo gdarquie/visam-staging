@@ -3,11 +3,14 @@
 namespace EditeurBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
+use AppBundle\Entity\Membre;
 use AppBundle\Entity\Discipline;
 use AppBundle\Repository\DisciplineRepository;
 use AppBundle\Entity\Etablissement;
@@ -63,8 +66,12 @@ class FormationType extends AbstractType
             ->add('effectif')
             ->add('lien2')
 //            ->add('lien3')
-            ->add('responsable')
-        //     ->add('membre')
+//            ->add('responsable')
+             ->add('membre', CollectionType::class, [
+                'entry_type' => MembreEmbeddedForm::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+            ])
 //            ->add('tag', EntityType::class, array(
 //                'class' => 'AppBundle:Tag',
 ////                'multiple' => true,
@@ -80,6 +87,7 @@ class FormationType extends AbstractType
              ->add('etablissement', EntityType::class, array(
                 'class' => 'AppBundle:Etablissement',
                 'multiple' => true,
+//                'expanded' => true,
                 'by_reference' => false,
                 'choice_label' => 'nom',
                 'query_builder' => function(EtablissementRepository $repo) {
@@ -88,14 +96,57 @@ class FormationType extends AbstractType
             ))
         //     ->add('metier')
             ->add('tag')
-            ->add('discipline', EntityType::class, array(
+//            ->add('discipline', EntityType::class, array(
+//                'class' => 'AppBundle:Discipline',
+//                'by_reference' => false,
+//                'multiple' => true,
+//                'choice_label' => 'nom',
+//                'query_builder' => function(DisciplineRepository $repo) {
+//                    return $repo->createAlphabeticalQueryBuilder();
+//                }
+//            ))
+            ->add('cnu', EntityType::class, array(
                 'class' => 'AppBundle:Discipline',
                 'by_reference' => false,
                 'multiple' => true,
                 'choice_label' => 'nom',
                 'query_builder' => function(DisciplineRepository $repo) {
-                    return $repo->createAlphabeticalQueryBuilder();
+                    return $repo->createAlphabeticalQueryBuilderByType('CNU');
                 }
+            ))
+            ->add('sise', EntityType::class, array(
+                'class' => 'AppBundle:Discipline',
+                'by_reference' => false,
+                'multiple' => true,
+                'choice_label' => 'nom',
+                'query_builder' => function(DisciplineRepository $repo) {
+                    return $repo->createAlphabeticalQueryBuilderByType('SISE');
+                }
+            ))
+            ->add('hceres', EntityType::class, array(
+                'class' => 'AppBundle:Discipline',
+                'by_reference' => false,
+                'multiple' => true,
+                'choice_label' => 'nom',
+                'query_builder' => function(DisciplineRepository $repo) {
+                    return $repo->createAlphabeticalQueryBuilderByType('HCERES');
+                }
+            ))
+            ->add('checkGeneral',CheckboxType::class, array(
+                'label'    => 'Vérifié?',
+                'required' => false,
+            ))
+            ->add('checkEffectif',CheckboxType::class, array(
+                'label'    => 'Vérifié?',
+                'required' => false,
+            ))
+            ->add('checkIndex',CheckboxType::class, array(
+                'label'    => 'Vérifié?',
+                'required' => false,
+            ))
+            ->add('checkCursus',CheckboxType::class, array(
+                'label'    => 'Vérifié?',
+                'required' => false,
             ))
         ;
     }

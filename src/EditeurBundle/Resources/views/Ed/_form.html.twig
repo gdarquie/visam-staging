@@ -1,0 +1,23 @@
+<div class="row form">
+
+    <div class="col s12 m12">
+        <div class="cartouche">
+
+            <h3>Informations générales</h3>
+            {{form_row(form.nom,{
+                'label' : "Nom de l'école doctoral"
+            }) }}
+            {{form_row(form.code) }}
+            {{form_row(form.nom) }}
+            {{form_row(form.lien) }}
+            {{ form_row(form.laboExt, { 'attr': {'class': 'materialize-textarea'}, 'label' : 'Laboratoire(s) hors Hesam'}) }}
+            {{ form_row(form.etabExt, { 'attr': {'class': 'materialize-textarea'}, 'label' : 'Etablissement(s) hors Hesam'}) }}
+            {{form_row(form.contact) }}
+            {{form_row(form.effectif) }}
+            {{form_row(form.membre) }}
+
+            </div>
+    </div>
+
+
+</div>

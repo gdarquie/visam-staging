@@ -13,6 +13,21 @@ class EtablissementRepository extends EntityRepository
             ->orderBy('etablissement.nom', 'ASC');
     }
 
+    public function createAlphabeticalQueryBuilderWhereEtab()
+    {
+
+        if(!isset($etablissement)){
+            $etablissement = ['etablissement'=>1,'etablissement'=>3];
+        }
+        return $this->createQueryBuilder('etablissement')
+            ->where('etablissement = :etablissement')
+//            ->andWhere('s.id IN (:status)')
+//            ->setParameter('etablissement', $etablissement)
+            ->setParameters($etablissement)
+            ->orderBy('etablissement.nom', 'ASC');
+
+    }
+
     /***
      * @param $id, $code
      * @return boolean

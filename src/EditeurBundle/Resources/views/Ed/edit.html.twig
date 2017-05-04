@@ -1,21 +1,25 @@
-{% extends 'base.html.twig' %}
+{% extends 'editeur.html.twig' %}
 
 {% block body %}
-    <h1>Ed edit</h1>
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
+    <section class="container">
+        <h1>Edition</h1>
 
-    <ul>
-        <li>
-            <a href="{{ path('ed_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+        {{ form_start(form) }}
+        {{ include('EditeurBundle:Ed:_form.html.twig') }}
+            <input type="submit" value="Edit" class="btn btn-hesam" formnovalidate/>
+        {{ form_end(form) }}
+
+        {{ form_start(delete_form) }}
+            <button disabled value="Supprimer" class="btn btn-hesam right ">Supprimer</button>
+        {{ form_end(delete_form) }}
+
+        <ul>
+            <li>
+                <a href="{{ path('editeur') }}">Retour</a>
+            </li>
+
+        </ul>
+
+    </section>
 {% endblock %}

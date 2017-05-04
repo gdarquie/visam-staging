@@ -36,10 +36,6 @@ class EtablissementController extends Controller
             $em = $this->getDoctrine()->getManager();
             $etablissement = $form->getData();
 
-            $now = new \DateTime();
-            $etablissement->setDateCreation($now);
-            $etablissement->setLastUpdate($now);
-
             $em->persist($etablissement);
             $em->flush();
 

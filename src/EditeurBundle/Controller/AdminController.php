@@ -26,28 +26,28 @@ class AdminController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $query = $em->createQuery(
-            'SELECT e FROM AppBundle:Etablissement e ORDER BY e.last_update ASC'
+            'SELECT e FROM AppBundle:Etablissement e ORDER BY e.last_update DESC'
         )->setMaxResults(5);
         $etablissements = $query->getResult();
 
         $query = $em->createQuery(
-            'SELECT f FROM AppBundle:Formation f ORDER BY f.last_update ASC'
+            'SELECT f FROM AppBundle:Formation f ORDER BY f.last_update DESC'
         )->setMaxResults(5);
         $formations = $query->getResult();
 
         $query = $em->createQuery(
-            'SELECT l FROM AppBundle:Labo l ORDER BY l.last_update ASC'
+            'SELECT l FROM AppBundle:Labo l ORDER BY l.last_update DESC'
         )->setMaxResults(5);
         $labos = $query->getResult();
 
         $query = $em->createQuery(
-            'SELECT e FROM AppBundle:Ed e ORDER BY e.last_update ASC'
+            'SELECT e FROM AppBundle:Ed e ORDER BY e.last_update DESC'
         )->setMaxResults(5);
         $eds = $query->getResult();
 
         //utilisateurs
         $query = $em->createQuery(
-            'SELECT u FROM AppBundle:User u ORDER BY u.name DESC'
+            'SELECT u FROM AppBundle:User u ORDER BY u.username DESC'
         )->setMaxResults(10);
         $users = $query->getResult();
 

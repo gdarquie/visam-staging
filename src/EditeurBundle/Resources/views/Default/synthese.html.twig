@@ -1,9 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block fos_user_content %}{% endblock %}
-{% block stylesheets %}
-
-{% endblock %}
 
 
 {% block body %}
@@ -16,7 +13,7 @@
 	{% for etab in etabs %}
 	<tr>
 		<td>{{etab.nom}}</td>
-		<td>{{etab.timestamp|date('Y-m-d')}}</td>
+		<td>{{etab.dateCreation|date('Y-m-d')}}</td>
 	</tr>
 	{% endfor %}
 	</table>
@@ -29,7 +26,7 @@
 	<tr>
 {# 		{{dump(labo)}} #}
 		<td>{{labo.nom}}</td>
-		<td>{{labo.timestamp|date('Y-m-d')}}</td>
+		<td>{{labo.dateCreation|date('Y-m-d')}}</td>
 	</tr>
 	{% endfor %}
 	</table>
@@ -49,7 +46,7 @@
 	{% for formation in formations %}
 	<tr>
 		<td>{{formation.nom}}</td>
-		<td>{{formation.timestamp|date('Y-m-d')}}</td>
+		<td>{{formation.dateCreation|date('Y-m-d')}}</td>
 	</tr>
 	{% endfor %}
 	</table>

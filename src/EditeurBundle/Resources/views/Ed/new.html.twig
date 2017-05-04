@@ -1,16 +1,21 @@
-{% extends 'base.html.twig' %}
+{% extends 'editeur.html.twig' %}
 
 {% block body %}
-    <h1>Ed creation</h1>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+    <section class="container">
+        <h1>Ajout d'une école doctorale</h1>
 
-    <ul>
-        <li>
-            <a href="{{ path('ed_index') }}">Back to the list</a>
-        </li>
-    </ul>
+        {{ form_start(form) }}
+        {{ include('EditeurBundle:Ed:_form.html.twig') }}
+            <input class="btn btn-hesam" type="submit" value="Créer" formnovalidate />
+
+        {{ form_end(form) }}
+
+        <ul>
+            <li>
+                <a href="{{ path('editeur') }}">Retour à l'éditeur</a>
+            </li>
+        </ul>
+
+    </section>
 {% endblock %}

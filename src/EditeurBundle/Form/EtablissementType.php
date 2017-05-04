@@ -10,6 +10,7 @@ use AppBundle\Entity\Etablissement;
 use AppBundle\Repository\EtablissementRepository;
 use AppBundle\Repository\ThesaurusRepository;
 
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -71,6 +72,7 @@ class EtablissementType extends AbstractType
                 'choice_label' => 'nom',
             ))
             ->add('valorisation')
+//            ->add('valorisation', CollectionType::class)
             ->add('entree', DateType::class, [
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
@@ -83,6 +85,7 @@ class EtablissementType extends AbstractType
                 'attr' => ['class' => 'datepicker'], // Creates a dropdown of 15 years to control year
                 'html5' => false
             ])
+
         ;
     }
     

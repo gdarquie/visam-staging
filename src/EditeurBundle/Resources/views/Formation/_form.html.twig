@@ -1,7 +1,11 @@
 <div class="row form">
 
     <div class="col s6">
-        <div class="cartouche">
+        {% if formation.checkGeneral %}
+            <div class="cartouche_checked">
+        {% else %}
+            <div class="cartouche">
+        {% endif %}
 
             <h3>Informations générales</h3>
             {{  form_row(edit_form.nom) }}
@@ -9,37 +13,99 @@
             {{ form_row(edit_form.url, {'label' : "Page de la formation"})}}
             {{ form_row(edit_form.etablissement) }}
             {{ form_row(edit_form.lien2,  {'label' : "Autre lien"}) }}
-            {{ form_row(edit_form.responsable, {'label' : 'Contact'}) }}
+            {#{{ form_row(edit_form.responsable, {'label' : 'Contact'}) }}#}
+            {#{{ form_row(edit_form.membre)}}#}
+
+            <h3>Responsable(s)</h3>
+
+                <div class="row js-membre-wrapper" data-prototype="{{ form_widget(edit_form.membre.vars.prototype)|e('html_attr') }} data-index="{{ edit_form.membre|length }}">
+                    {% for membreForm  in edit_form.membre  %}
+                        <div class="col s12 js-membre-item">
+                            <a href=""class="js-remove-membre right">
+                                <i class="material-icons black-text" >delete</i>
+                            </a>
+
+                            {{ form_errors(membreForm) }}
+                            {{ form_row(membreForm.nom) }}
+                            {{ form_row(membreForm.prenom) }}
+                            {{ form_row(membreForm.mail) }}
+
+                        </div>
+                    {% endfor %}
+                    <div class="col s12">
+                        <a href="#" class="js-add-membre valign-wrapper">
+                            <i class="material-icons black-text ">add</i>
+                            Ajouter un nouveau responsable
+                        </a>
+                    </div>
+                </div>
+
+
+            {{ form_widget(edit_form.checkGeneral) }}
+            {{ form_label(edit_form.checkGeneral) }}
+            {{ form_errors(edit_form.checkGeneral) }}
+
         </div>
     </div>
 
     <div class="col s6">
-        <div class="cartouche">
+        {% if formation.checkEffectif %}
+            <div class="cartouche_checked">
+        {% else %}
+            <div class="cartouche">
+        {% endif %}
             <h3>Effectif</h3>
 
             {{ form_row(edit_form.effectif) }}
             {{ form_row(edit_form.annee, {'label' : "Année"}) }}
 
-        </div>
-    </div>
-
-    <div class="col s6">
-        <div class="cartouche">
-        <h3>Indexation</h3>
-
-        {{ form_row(edit_form.discipline) }}
-        {{ form_row(edit_form.tag) }}
+            {{ form_widget(edit_form.checkEffectif) }}
+            {{ form_label(edit_form.checkEffectif) }}
+            {{ form_errors(edit_form.checkEffectif) }}
 
         </div>
     </div>
 
     <div class="col s6">
-        <div class="cartouche">
+
+        {% if formation.checkIndex %}
+            <div class="cartouche_checked">
+        {% else %}
+            <div class="cartouche">
+        {% endif %}
+
+            <h3>Indexation</h3>
+
+            {#{{ form_row(edit_form.discipline) }}#}
+            {{ form_row(edit_form.cnu) }}
+            {{ form_row(edit_form.hceres) }}
+            {{ form_row(edit_form.sise) }}
+            {{ form_row(edit_form.tag) }}
+
+            {{ form_widget(edit_form.checkIndex) }}
+            {{ form_label(edit_form.checkIndex) }}
+            {{ form_errors(edit_form.checkIndex) }}
+
+
+        </div>
+    </div>
+
+    <div class="col s6">
+
+        {% if formation.checkCursus %}
+            <div class="cartouche_checked">
+        {% else %}
+            <div class="cartouche">
+        {% endif %}
             <h3>Cursus</h3>
 
             {{ form_row(edit_form.niveau, {'label' : "Niveau de sortie"}) }}
             {{ form_row(edit_form.lmd, {'label' : "Parcours LMD"}) }}
             {{ form_row(edit_form.typediplome, { 'label' : 'Type de diplôme'}) }}
+
+            {{ form_widget(edit_form.checkCursus) }}
+            {{ form_label(edit_form.checkCursus) }}
+            {{ form_errors(edit_form.checkCursus) }}
 
         </div>
     </div>

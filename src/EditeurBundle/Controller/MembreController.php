@@ -11,14 +11,14 @@ use AppBundle\Entity\Membre;
 use EditeurBundle\Form\MembreType;
 
 /**
- * @Route("/membre")
+ * @Route("/editeur/membre")
  */
 class MembreController extends Controller
 {
     /**
      * Créer un membre
      *
-     * @Route("/new", name="membre_new")
+     * @Route("/new", name="editeur_membre_new")
      */
     public function newAction(Request $request){
 
@@ -31,10 +31,6 @@ class MembreController extends Controller
 
             $membre = $editForm->getData();
             $em = $this->getDoctrine()->getManager();
-
-            $now = new \DateTime();
-            $membre->setDateCreation($now);
-            $membre->setLastUpdate($now);
 
             $em->persist($membre);
             $em->flush();
@@ -50,7 +46,7 @@ class MembreController extends Controller
     /**
      * Editer un membre
      *
-     * @Route("/{id}/edit", name="membre_edit")
+     * @Route("/{id}/edit", name="editeur_membre_edit")
      */
     public function editMembreAction(Request $request, Membre $membre){
 
@@ -82,7 +78,7 @@ class MembreController extends Controller
     /**
      * Effacer un labo
      *
-     * @Route("/{id}/delete", name="membre_delete")
+     * @Route("/{id}/delete", name="editeur_membre_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Membre $membre)

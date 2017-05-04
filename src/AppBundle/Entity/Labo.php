@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Labo
@@ -12,6 +13,17 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Labo
 {
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="labo_id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $laboId;
+
+
     /**
      * @var string
      *
@@ -139,14 +151,6 @@ class Labo
      */
     private $last_update;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="labo_id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $laboId;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -195,8 +199,75 @@ class Labo
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Discipline", mappedBy="labo")
+     *
+     *
      */
     private $discipline;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Discipline")
+     * @ORM\JoinTable(name="labo_has_cnu",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="discipline_id", referencedColumnName="discipline_id")
+     *   }
+     * )
+     *
+     * @Assert\Count(
+     *      max = 5,
+     *      minMessage = "Vous devez choisir au moins une discipline CNU",
+     *      maxMessage = "Vous ne pouvez choisir plus de 5 disciplines"
+     * )
+     */
+    private $cnu;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Discipline")
+     * @ORM\JoinTable(name="labo_has_sise",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="discipline_id", referencedColumnName="discipline_id")
+     *   }
+     * )
+     *
+     * @Assert\Count(
+     *      max = 5,
+     *      minMessage = "Vous devez choisir au moins une discipline SISE",
+     *      maxMessage = "Vous ne pouvez choisir plus de 5 disciplines"
+     * )
+     *
+     */
+    private $sise;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Discipline")
+     * @ORM\JoinTable(name="labo_has_hceres",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="discipline_id", referencedColumnName="discipline_id")
+     *   }
+     * )
+     *
+     * @Assert\Count(
+     *      max = 5,
+     *      minMessage = "Vous devez choisir au moins une discipline HCERES",
+     *      maxMessage = "Vous ne pouvez choisir plus de 5 disciplines"
+     * )
+     *
+     */
+    private $hceres;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -239,6 +310,36 @@ class Labo
      * @ORM\OneToMany(targetEntity="Axe", mappedBy="labo")
      */
     private $axes;
+
+    /**
+    *
+    * @ORM\Column(name="check1", type="boolean")
+    */
+    private $check_general = false;
+
+    /**
+     *
+     * @ORM\Column(name="check2", type="boolean")
+     */
+    private $check_contact = false;
+
+    /**
+     *
+     * @ORM\Column(name="check3", type="boolean")
+     */
+    private $check_etab = false;
+
+    /**
+     *
+     * @ORM\Column(name="check4", type="boolean")
+     */
+    private $check_description = false;
+
+    /**
+     *
+     * @ORM\Column(name="check5", type="boolean")
+     */
+    private $check_effectifs = false ;
 
     /**
      * Constructor
@@ -998,6 +1099,140 @@ class Labo
     {
         $this->objetId = $objetId;
     }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCnu()
+    {
+        return $this->cnu;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $cnu
+     */
+    public function setCnu($cnu)
+    {
+        $this->cnu = $cnu;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSise()
+    {
+        return $this->sise;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $sise
+     */
+    public function setSise($sise)
+    {
+        $this->sise = $sise;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getHceres()
+    {
+        return $this->hceres;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $hceres
+     */
+    public function setHceres($hceres)
+    {
+        $this->hceres = $hceres;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCheckGeneral()
+    {
+        return $this->check_general;
+    }
+
+    /**
+     * @param mixed $check_general
+     */
+    public function setCheckGeneral($check_general)
+    {
+        $this->check_general = $check_general;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCheckContact()
+    {
+        return $this->check_contact;
+    }
+
+    /**
+     * @param mixed $check_contact
+     */
+    public function setCheckContact($check_contact)
+    {
+        $this->check_contact = $check_contact;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCheckEtab()
+    {
+        return $this->check_etab;
+    }
+
+    /**
+     * @param mixed $check_etab
+     */
+    public function setCheckEtab($check_etab)
+    {
+        $this->check_etab = $check_etab;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCheckDescription()
+    {
+        return $this->check_description;
+    }
+
+    /**
+     * @param mixed $check_description
+     */
+    public function setCheckDescription($check_description)
+    {
+        $this->check_description = $check_description;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCheckEffectifs()
+    {
+        return $this->check_effectifs;
+    }
+
+    /**
+     * @param mixed $check_effectifs
+     */
+    public function setCheckEffectifs($check_effectifs)
+    {
+        $this->check_effectifs = $check_effectifs;
+    }
+
+    public function __toString()
+    {
+        return (string) $this->getNom();
+    }
+
 
 
 }

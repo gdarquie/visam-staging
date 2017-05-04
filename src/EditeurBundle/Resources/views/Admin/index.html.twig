@@ -1,4 +1,4 @@
-{% extends "base.html.twig" %}
+{% extends "editeur.html.twig" %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -98,7 +98,7 @@
                 <ul class="collection with-header">
                     <li class="collection-header"><h4>Liste des utilisateurs</h4></li>
                     {% for item in users  %}
-                        <li class="collection-item">{{ item.username |capitalize }}, {{ item.email }}, {{ item.lastLogin|date( 'd/m/Y à H:i:s') }}</li>
+                        <li class="collection-item"><a href="{{ path('edit_user', {'id' : item.id}) }}">{{ item.username |capitalize }}, {{ item.email }}, {{ item.lastLogin|date( 'd/m/Y à H:i:s') }}</a></li>
                     {% endfor %}
                 </ul>
 

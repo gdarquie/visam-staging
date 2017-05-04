@@ -30,9 +30,7 @@ class Etablissement
      * @ORM\Column(name="description", type="text", length=16777215, nullable=true)
      *
      * @Assert\Length(
-     *      min = 2,
      *      max = 2500,
-     *      minMessage = "La description doit comprendre au moins {{ limit }} caractères",
      *      maxMessage = "La description ne peut dépasser {{ limit }} caractères"
      * )
      */
@@ -201,14 +199,14 @@ class Etablissement
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_creation", type="datetime", nullable=false)
+     * @ORM\Column(name="date_creation", type="datetime")
      */
     private $date_creation;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="last_update", type="datetime", nullable=false)
+     * @ORM\Column(name="last_update", type="datetime")
      */
     private $last_update;
 
@@ -229,6 +227,7 @@ class Etablissement
     private $localisation;
 
     /**
+     *
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Valorisation", inversedBy="etablissement")
@@ -295,6 +294,8 @@ class Etablissement
      */
     public function __construct()
     {
+        $this->date_creation = new \DateTime();
+        $this->last_update = new \DateTime();
         $this->localisation = new \Doctrine\Common\Collections\ArrayCollection();
         $this->valorisation = new \Doctrine\Common\Collections\ArrayCollection();
         $this->labo = new \Doctrine\Common\Collections\ArrayCollection();

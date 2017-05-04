@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css?family=Bitter:400,400italic,700");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,300,600");
+@import url("http://fonts.googleapis.com/icon?family=Material+Icons");
+
+body {
+    /*font-family: Bitter, serif;*/
+    font-family: "Open Sans", sans-serif;
+    font-weight: 300;
+}
+h1, h2, h3, h4, h5 {
+    font-family: Bitter, serif;
+}
+
+h5 {
+    font-size: 1.3rem;
+    line-height: 139%;
+}
+
+h6 {
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+@media only screen and (min-width: 993px) {
+    .container.large {
+        width: 90%;
+    }
+}

@@ -1,4 +1,5 @@
-{% extends 'base.html.twig' %}
+{% extends 'editeur.html.twig' %}
+
 
 {% block body %}
 
@@ -9,11 +10,11 @@
 
         {{ include('EditeurBundle:Formation:_form.html.twig') }}
 
-        <input type="submit" class="btn btn-hesam" value="Edit" />
+        <input type="submit" class="btn btn-hesam" value="Edit" formnovalidate />
     {{ form_end(edit_form) }}
 
     {{ form_start(delete_form) }}
-     <button disabled value="Supprimer" class="btn btn-hesam right ">Supprimer</button>
+     <button disabled value="Supprimer" class="btn btn-hesam right " >Supprimer</button>
     {{ form_end(delete_form) }}
     <ul>
         <li>
@@ -25,4 +26,40 @@
 
     </div>
 
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        jQuery(document).ready(function() {
+
+          var $wrapper = $('.js-membre-wrapper');
+
+          $wrapper.on('click', '.js-remove-membre', function(e) {
+
+              e.preventDefault();
+              $(this).closest('.js-membre-item').remove();
+          });
+          $wrapper.on('click', '.js-add-membre', function(e){
+              e.preventDefault();
+
+              // Get the data-prototype explained earlier
+              var prototype = $wrapper.data('prototype');
+
+              // get the new index
+              var index = $wrapper.data('index');
+
+              // Replace '__name__' in the prototype's HTML to
+              // instead be a number based on how many items we have
+              var newForm = prototype.replace(/__name__/g, index);
+
+              // increase the index with one for the next item
+              $wrapper.data('index', index + 1);
+
+              // Display the form in the page in an li, before the "Add a tag" link li
+              $(this).before(newForm);
+          })
+        });
+    </script>
 {% endblock %}

@@ -44,6 +44,14 @@
     margin-bottom: 10px;
 }
 
+.cartouche_checked{
+    border: 1px solid #31B404;
+    border-radius: 3px;
+    padding : 10px;
+    margin: 5 15px;
+    margin-bottom: 10px;
+}
+
 .form h3{
     font-size: 1.3em;
 }

@@ -42,6 +42,7 @@ class LaboratoireController extends Controller
             $em->persist($laboratoire);
             $em->flush();
 
+
             return $this->redirectToRoute('editeur');
         }
 
@@ -58,7 +59,9 @@ class LaboratoireController extends Controller
     public function editFormationAction(Request $request, Labo $laboratoire){
 
         $deleteForm = $this->createDeleteForm($laboratoire);
-        $editForm = $this->createForm('EditeurBundle\Form\LaboType', $laboratoire);
+        $editForm = $this->createForm('EditeurBundle\Form\LaboType', $laboratoire, array(
+            'etablissements' => '13'
+        ));
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

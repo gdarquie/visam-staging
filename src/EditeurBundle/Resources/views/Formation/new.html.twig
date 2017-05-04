@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'editeur.html.twig' %}
 
 {% block body %}
 
@@ -7,7 +7,7 @@
 
     {{ form_start(edit_form) }}
         {{ include('EditeurBundle:Formation:_form.html.twig') }}
-        <input type="submit" class="btn btn-hesam" value="Créer" />
+        <input type="submit" class="btn btn-hesam" value="Créer" formnovalidate />
     {{ form_end(edit_form) }}
 
     <ul>

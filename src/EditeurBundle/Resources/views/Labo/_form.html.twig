@@ -2,7 +2,12 @@
 
     <div class="row">
         <div class="col s6">
+
+            {% if labo.checkGeneral %}
+            <div class="cartouche_checked">
+            {% else %}
             <div class="cartouche">
+            {% endif %}
 
                 <h3>Informations générales</h3>
 
@@ -11,21 +16,31 @@
                 {{ form_row(edit_form.type) }}
                 {{ form_row(edit_form.code) }}
                 {{ form_row(edit_form.lien, {'label' : "Lien URL"}) }}
+
+                {{ form_widget(edit_form.checkGeneral) }}
+                {{ form_label(edit_form.checkGeneral) }}
+                {{ form_errors(edit_form.checkGeneral) }}
                 {#{{ form_row(edit_form.uai, { 'label' : 'UAI'}) }}#}
-
-
 
             </div>
         </div>
 
         <div class="col s6">
-            <div class="cartouche">
+
+            {% if labo.checkContact %}
+            <div class="cartouche_checked">
+                {% else %}
+                <div class="cartouche">
+                    {% endif %}
 
                 <h3>Contact(s)</h3>
 
                 {{ form_row(edit_form.responsable) }} {# mettre par ordre alphabétique #}
                 {{ form_row(edit_form.mailcontact, { 'label' : 'Mail'}) }}
 
+                {{ form_widget(edit_form.checkContact) }}
+                {{ form_label(edit_form.checkContact) }}
+                {{ form_errors(edit_form.checkContact) }}
                 <!-- Chercheurs du labo / mail -->
 
             </div>
@@ -35,39 +50,63 @@
 
 
         <div class="col s6">
-            <div class="cartouche">
+            {% if labo.checkEtab %}
+            <div class="cartouche_checked">
+                {% else %}
+                <div class="cartouche">
+                    {% endif %}
 
                 <h3>Etablissement(s) de rattachement</h3>
 
                 {{ form_row(edit_form.etablissement, { 'label' : 'Etablissement(s) Hesam'}) }}
                 {{ form_row(edit_form.etabExt, { 'attr': {'class': 'materialize-textarea'}, 'label' : 'Etablissement(s) hors Hesam'}) }}
 
+                {{ form_widget(edit_form.checkEtab) }}
+                {{ form_label(edit_form.checkEtab) }}
+                {{ form_errors(edit_form.checkEtab) }}
+
             </div>
         </div>
 
         <div class="col s6">
-            <div class="cartouche">
+            {% if labo.checkDescription %}
+            <div class="cartouche_checked">
+                {% else %}
+                <div class="cartouche">
+                    {% endif %}
 
                 <h3>Description</h3>
                 <!-- data-length="10" -->
                 {{ form_row(edit_form.description, { 'attr': {'class': 'materialize-textarea'} , 'label' : "Description (2500 caractères max)" })}}
-                {{ form_row((edit_form.discipline)) }}
-                {#{{ form_row(edit_form.cnu) }}#}
-                {#{{ form_row(edit_form.hceres) }}#}
-                {#{{ form_row(edit_form.sise) }}#}
+                {#{{ form_row((edit_form.discipline)) }}#}
+                {{ form_row(edit_form.cnu) }}
+                {{ form_row(edit_form.hceres) }}
+                {{ form_row(edit_form.sise) }}
                 {{ form_row(edit_form.axes) }}
+
+                {{ form_widget(edit_form.checkDescription) }}
+                {{ form_label(edit_form.checkDescription) }}
+                {{ form_errors(edit_form.checkDescription) }}
 
             </div>
         </div>
 
         <div class="col s6">
-            <div class="cartouche">
+            {% if labo.checkEffectifs %}
+            <div class="cartouche_checked">
+                {% else %}
+                <div class="cartouche">
+                {% endif %}
 
                 <h3>Effectif(s) du laboratoire</h3>
 
                 {{ form_row(edit_form.effectifHesam, { 'label' : 'Effectif Hesam '}) }}
                 {{ form_row(edit_form.effectif, { 'label' : 'Effectif total du laboratoire (pour les UMR)'}) }}
                 <!-- année -->
+
+                {{ form_widget(edit_form.checkEffectifs) }}
+                {{ form_label(edit_form.checkEffectifs) }}
+                {{ form_errors(edit_form.checkEffectifs) }}
 
             </div>
         </div>

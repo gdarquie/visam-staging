@@ -60,14 +60,14 @@ class Membre
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_creation", type="datetime", nullable=false)
+     * @ORM\Column(name="date_creation", type="datetime")
      */
     private $date_creation;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="last_update", type="datetime", nullable=false)
+     * @ORM\Column(name="last_update", type="datetime")
      */
     private $last_update;
 
@@ -89,17 +89,10 @@ class Membre
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Formation", inversedBy="membres")
-     * @ORM\JoinTable(name="membre_has_formation",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="membre_id", referencedColumnName="membre_id")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="formation_id", referencedColumnName="formation_id")
-     *   }
-     * )
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Membre", mappedBy="membre")
      */
     private $formation;
+
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -153,6 +146,8 @@ class Membre
      */
     public function __construct()
     {
+        $this->date_creation = new \DateTime();
+        $this->last_update = new \DateTime();
         $this->labo = new \Doctrine\Common\Collections\ArrayCollection();
         $this->formation = new \Doctrine\Common\Collections\ArrayCollection();
         $this->ed = new \Doctrine\Common\Collections\ArrayCollection();
@@ -366,7 +361,10 @@ class Membre
         $this->tag = $tag;
     }
 
-
+    public function __toString()
+    {
+        return (string) $this->getNom();
+    }
 
 
 
