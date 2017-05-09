@@ -3,11 +3,13 @@
 namespace EditeurBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use AppBundle\Entity\Discipline;
+use AppBundle\Entity\Axe;
 use AppBundle\Repository\DisciplineRepository;
 use AppBundle\Entity\Etablissement;
 use AppBundle\Repository\EtablissementRepository;
@@ -22,7 +24,7 @@ class LaboType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
-//        $etablissements = $options['etablissements'];
+        $etablissements = $options['etablissements'];
 
         $builder
             ->add('nom')
@@ -77,10 +79,16 @@ class LaboType extends AbstractType
                 'by_reference' => false,
                 'multiple' => true,
                 'choice_label' => 'nom',
-                'query_builder' => function (EtablissementRepository $repo) {
-                    return $repo->createAlphabeticalQueryBuilderWhereEtab(1);
+                'query_builder' => function (EtablissementRepository $repo) use ($etablissements){
+//                    return $repo->createAlphabeticalQueryBuilderWhereEtab();
+                     return $repo->createQueryBuilder('etablissement')
+                         ->where('etablissement IN(:etablissement)')
+                         ->setParameter('etablissement', $etablissements)
+                         ->orderBy('etablissement.nom', 'ASC')
+                        ;
                 }
             ))
+
             // ->add('equipement')
             // ->add('ed')
             ->add('checkGeneral',CheckboxType::class, array(
@@ -103,6 +111,11 @@ class LaboType extends AbstractType
                 'label'    => 'Vérifié?',
                 'required' => false,
             ))
+            ->add('axes', CollectionType::class, [
+                'entry_type' => AxeEmbeddedForm::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+            ])
         ;
     }
 
@@ -113,7 +126,8 @@ class LaboType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
 
-        $etablissements = 3;
+
+        $etablissements = [];
 
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Labo',

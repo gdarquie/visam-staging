@@ -25,10 +25,33 @@ class LaboratoireController extends Controller
      */
     public function newLaboAction(Request $request){
 
-        $laboratoire = new Labo();
-        $editForm = $this->createForm('EditeurBundle\Form\LaboType', $laboratoire);
-        $editForm->handleRequest($request);
 
+        $laboratoire = new Labo();
+
+        $em = $this->getDoctrine()->getManager();
+
+        //ajout des établissements pour le formulaire
+        $user = $this->getUser();
+        if ($user->hasRole('ROLE_ADMIN')){
+            $query = $em->createQuery(
+                'SELECT e.etablissementId as id FROM AppBundle:Etablissement e'
+            );
+        }
+
+        else{
+            $userId = $user->getId();
+            $query = $em->createQuery(
+                'SELECT e.etablissementId as id FROM AppBundle:User u INNER JOIN u.etablissement e WHERE u.id = :user'
+            );
+            $query->setParameter('user', $userId);
+        }
+        $etablissements = $query->getResult();
+
+        $editForm = $this->createForm('EditeurBundle\Form\LaboType', $laboratoire, array(
+            'etablissements' => $etablissements
+        ));
+
+        $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
 
@@ -48,6 +71,7 @@ class LaboratoireController extends Controller
 
         return $this->render('EditeurBundle:Labo:new.html.twig', array(
             'edit_form' => $editForm->createView(),
+            'labo' => $laboratoire
         ));
     }
 
@@ -59,9 +83,31 @@ class LaboratoireController extends Controller
     public function editFormationAction(Request $request, Labo $laboratoire){
 
         $deleteForm = $this->createDeleteForm($laboratoire);
+
+        $em = $this->getDoctrine()->getManager();
+
+        //ajout des établissements pour le formulaire
+        $user = $this->getUser();
+
+        if ($user->hasRole('ROLE_ADMIN')){
+            $query = $em->createQuery(
+                'SELECT e.etablissementId as id FROM AppBundle:Etablissement e'
+            );
+        }
+
+        else{
+            $userId = $user->getId();
+            $query = $em->createQuery(
+                'SELECT e.etablissementId as id FROM AppBundle:User u INNER JOIN u.etablissement e WHERE u.id = :user'
+            );
+            $query->setParameter('user', $userId);
+        }
+        $etablissements = $query->getResult();
+
         $editForm = $this->createForm('EditeurBundle\Form\LaboType', $laboratoire, array(
-            'etablissements' => '13'
+            'etablissements' => $etablissements
         ));
+
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

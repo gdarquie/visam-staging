@@ -1228,6 +1228,7 @@ class Labo
         $this->check_effectifs = $check_effectifs;
     }
 
+
     public function __toString()
     {
         return (string) $this->getNom();

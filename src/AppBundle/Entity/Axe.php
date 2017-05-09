@@ -7,11 +7,21 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Axe
  *
- * @ORM\Table(name="axe", indexes={@ORM\Index(name="fk_axe_labo1_idx", columns={"labo_id"})})
+ * @ORM\Table(name="axe")})
  * @ORM\Entity
  */
 class Axe
 {
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="axe_id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $axeId;
+
     /**
      * @var string
      *
@@ -39,15 +49,6 @@ class Axe
      * @ORM\Column(name="last_update", type="datetime", nullable=false)
      */
     private $last_update;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="axe_id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $axeId;
 
     /**
      * @var \AppBundle\Entity\Labo
