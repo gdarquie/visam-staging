@@ -17,6 +17,9 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/lexer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/migrations" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/orm" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/ensepar/html2pdf" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/ensepar/html2pdf-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/ensepar/tcpdf" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/friendsofsymfony/rest-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/friendsofsymfony/user-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/gedmo/doctrine-extensions" />
@@ -25,9 +28,11 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/joetannenbaum/mr-clean" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/liuggio/ExcelBundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/monolog/monolog" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/ocramius/package-versions" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/ocramius/proxy-manager" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/paragonie/random_compat" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpoffice/phpexcel" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/cache" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/psr/log" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/sensio/distribution-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/sensio/framework-extra-bundle" />
@@ -55,14 +60,14 @@
     <orderEntry type="module-library">
       <library name="PHARS">
         <CLASSES>
+          <root url="phar://$MODULE_DIR$/composer.phar/" />
           <root url="phar://$MODULE_DIR$/vendor/twig/twig/test/Twig/Tests/Loader/Fixtures/phar/phar-sample.phar/" />
           <root url="phar://$MODULE_DIR$/vendor/symfony/symfony/src/Symfony/Component/DependencyInjection/Tests/Fixtures/includes/ProjectWithXsdExtensionInPhar.phar/" />
-          <root url="phar://$MODULE_DIR$/composer.phar/" />
         </CLASSES>
         <SOURCES>
+          <root url="phar://$MODULE_DIR$/composer.phar/" />
           <root url="phar://$MODULE_DIR$/vendor/twig/twig/test/Twig/Tests/Loader/Fixtures/phar/phar-sample.phar/" />
           <root url="phar://$MODULE_DIR$/vendor/symfony/symfony/src/Symfony/Component/DependencyInjection/Tests/Fixtures/includes/ProjectWithXsdExtensionInPhar.phar/" />
-          <root url="phar://$MODULE_DIR$/composer.phar/" />
         </SOURCES>
       </library>
     </orderEntry>
@@ -94,6 +99,9 @@
           <root url="file://$MODULE_DIR$/vendor/doctrine/lexer" />
           <root url="file://$MODULE_DIR$/vendor/doctrine/migrations" />
           <root url="file://$MODULE_DIR$/vendor/doctrine/orm" />
+          <root url="file://$MODULE_DIR$/vendor/ensepar/html2pdf" />
+          <root url="file://$MODULE_DIR$/vendor/ensepar/html2pdf-bundle" />
+          <root url="file://$MODULE_DIR$/vendor/ensepar/tcpdf" />
           <root url="file://$MODULE_DIR$/vendor/friendsofsymfony/rest-bundle" />
           <root url="file://$MODULE_DIR$/vendor/friendsofsymfony/user-bundle" />
           <root url="file://$MODULE_DIR$/vendor/gedmo/doctrine-extensions" />
@@ -102,9 +110,11 @@
           <root url="file://$MODULE_DIR$/vendor/joetannenbaum/mr-clean" />
           <root url="file://$MODULE_DIR$/vendor/liuggio/ExcelBundle" />
           <root url="file://$MODULE_DIR$/vendor/monolog/monolog" />
+          <root url="file://$MODULE_DIR$/vendor/ocramius/package-versions" />
           <root url="file://$MODULE_DIR$/vendor/ocramius/proxy-manager" />
           <root url="file://$MODULE_DIR$/vendor/paragonie/random_compat" />
           <root url="file://$MODULE_DIR$/vendor/phpoffice/phpexcel" />
+          <root url="file://$MODULE_DIR$/vendor/psr/cache" />
           <root url="file://$MODULE_DIR$/vendor/psr/log" />
           <root url="file://$MODULE_DIR$/vendor/sensio/distribution-bundle" />
           <root url="file://$MODULE_DIR$/vendor/sensio/framework-extra-bundle" />
@@ -143,6 +153,9 @@
           <root url="file://$MODULE_DIR$/vendor/doctrine/lexer" />
           <root url="file://$MODULE_DIR$/vendor/doctrine/migrations" />
           <root url="file://$MODULE_DIR$/vendor/doctrine/orm" />
+          <root url="file://$MODULE_DIR$/vendor/ensepar/html2pdf" />
+          <root url="file://$MODULE_DIR$/vendor/ensepar/html2pdf-bundle" />
+          <root url="file://$MODULE_DIR$/vendor/ensepar/tcpdf" />
           <root url="file://$MODULE_DIR$/vendor/friendsofsymfony/rest-bundle" />
           <root url="file://$MODULE_DIR$/vendor/friendsofsymfony/user-bundle" />
           <root url="file://$MODULE_DIR$/vendor/gedmo/doctrine-extensions" />
@@ -151,9 +164,11 @@
           <root url="file://$MODULE_DIR$/vendor/joetannenbaum/mr-clean" />
           <root url="file://$MODULE_DIR$/vendor/liuggio/ExcelBundle" />
           <root url="file://$MODULE_DIR$/vendor/monolog/monolog" />
+          <root url="file://$MODULE_DIR$/vendor/ocramius/package-versions" />
           <root url="file://$MODULE_DIR$/vendor/ocramius/proxy-manager" />
           <root url="file://$MODULE_DIR$/vendor/paragonie/random_compat" />
           <root url="file://$MODULE_DIR$/vendor/phpoffice/phpexcel" />
+          <root url="file://$MODULE_DIR$/vendor/psr/cache" />
           <root url="file://$MODULE_DIR$/vendor/psr/log" />
           <root url="file://$MODULE_DIR$/vendor/sensio/distribution-bundle" />
           <root url="file://$MODULE_DIR$/vendor/sensio/framework-extra-bundle" />
