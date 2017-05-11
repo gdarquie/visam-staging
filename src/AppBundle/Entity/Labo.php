@@ -342,6 +342,12 @@ class Labo
     private $check_effectifs = false ;
 
     /**
+     *
+     * @ORM\Column(name="valide", type="boolean")
+     */
+    private $valide = false;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -1226,6 +1232,22 @@ class Labo
     public function setCheckEffectifs($check_effectifs)
     {
         $this->check_effectifs = $check_effectifs;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getValide()
+    {
+        return $this->valide;
+    }
+
+    /**
+     * @param mixed $valide
+     */
+    public function setValide($valide)
+    {
+        $this->valide = $valide;
     }
 
 

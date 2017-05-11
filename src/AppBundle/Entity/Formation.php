@@ -299,6 +299,11 @@ class Formation
      */
     private $check_cursus = false;
 
+    /**
+     *
+     * @ORM\Column(name="valide", type="boolean")
+     */
+    private $valide = false;
 
     /**
      * Constructor
@@ -1035,6 +1040,23 @@ class Formation
     {
         $this->check_cursus = $check_cursus;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getValide()
+    {
+        return $this->valide;
+    }
+
+    /**
+     * @param mixed $valide
+     */
+    public function setValide($valide)
+    {
+        $this->valide = $valide;
+    }
+
 
     public function __toString()
     {
