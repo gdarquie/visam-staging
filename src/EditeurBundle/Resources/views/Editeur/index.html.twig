@@ -183,6 +183,18 @@
             <div class="col s6">
                 <div class="col s12">
                     <h2>Ecoles doctorales ({{ eds|length }})</h2>
+
+                    <ul class="collection">
+                        {% for item in eds  %}
+                            <li class="collection-item avatar js-labo-item">
+                                <a href="{{ path('editeur_ed_edit', {'id': item.EdId } ) }}" >
+                                        <i class="material-icons circle green">mode_edit</i>
+                                    <span class="title">{{ item.nom }}</span>
+                                </a>
+                            </li>
+
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
         </div>

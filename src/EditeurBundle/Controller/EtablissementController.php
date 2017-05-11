@@ -39,7 +39,7 @@ class EtablissementController extends Controller
             $em->persist($etablissement);
             $em->flush();
 
-            return $this->redirectToRoute('editeur');
+            return $this->redirectToRoute('admin');
         }
 
         return $this->render('EditeurBundle:Etablissement:new.html.twig', array(
@@ -70,7 +70,7 @@ class EtablissementController extends Controller
             $em->persist($etablissement);
             $em->flush();
 
-            return $this->redirectToRoute('editeur');
+            return $this->redirectToRoute('admin');
         }
 
         return $this->render('EditeurBundle:Etablissement:edit.html.twig', array(
@@ -98,7 +98,7 @@ class EtablissementController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('editeur');
+        return $this->redirectToRoute('admin');
     }
 
     /**

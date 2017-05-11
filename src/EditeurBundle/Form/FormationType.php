@@ -15,6 +15,7 @@ use AppBundle\Entity\Discipline;
 use AppBundle\Repository\DisciplineRepository;
 use AppBundle\Entity\Etablissement;
 use AppBundle\Repository\EtablissementRepository;
+use AppBundle\Repository\ThesaurusRepository;
 
 use AppBundle\Entity\Tag;
 use AppBundle\Repository\TagRepository;
@@ -65,7 +66,23 @@ class FormationType extends AbstractType
                     'Sans objet' => 'Sans objet'
                 ),
             ))
-            ->add('typediplome')
+            ->add('ects')
+            ->add('modalite_thesaurus', EntityType::class, array(
+                'placeholder' => 'Sélectionner une réponse',
+                'class' => 'AppBundle:Thesaurus',
+                'choice_label' => 'nom', //order by alpha
+                'query_builder' => function(ThesaurusRepository $repo) {
+                    return $repo->findAllThesaurusByType("modalites");
+                }
+            ))
+            ->add('typediplome_thesaurus', EntityType::class, array(
+                'placeholder' => 'Sélectionner une réponse',
+                'class' => 'AppBundle:Thesaurus',
+                'choice_label' => 'nom', //order by alpha
+                'query_builder' => function(ThesaurusRepository $repo) {
+                    return $repo->findAllThesaurusByType("diplome");
+                }
+            ))
             ->add('effectif')
             ->add('lien2')
 //            ->add('lien3')
@@ -84,7 +101,7 @@ class FormationType extends AbstractType
 //                }
 //            ))
         //     ->add('theme')
-        //     ->add('localisation')
+             ->add('localisation')
         //     ->add('labo')
 
             ->add('etablissement', EntityType::class, array(
@@ -100,17 +117,8 @@ class FormationType extends AbstractType
                         ;
                 }
             ))
-        //     ->add('metier')
+            ->add('metier')
             ->add('tag')
-//            ->add('discipline', EntityType::class, array(
-//                'class' => 'AppBundle:Discipline',
-//                'by_reference' => false,
-//                'multiple' => true,
-//                'choice_label' => 'nom',
-//                'query_builder' => function(DisciplineRepository $repo) {
-//                    return $repo->createAlphabeticalQueryBuilder();
-//                }
-//            ))
             ->add('cnu', EntityType::class, array(
                 'class' => 'AppBundle:Discipline',
                 'by_reference' => false,

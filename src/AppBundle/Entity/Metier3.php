@@ -107,7 +107,9 @@ class Metier3
     }
 
 
-
-
+    public function __toString()
+    {
+        return (string) $this->getNom();
+    }
 
 }

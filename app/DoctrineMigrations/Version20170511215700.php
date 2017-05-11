@@ -8,7 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20170510212850 extends AbstractMigration
+class Version20170511215700 extends AbstractMigration
 {
     /**
      * @param Schema $schema
@@ -18,10 +18,9 @@ class Version20170510212850 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE axe DROP FOREIGN KEY fk_axe_labo1');
-        $this->addSql('DROP INDEX fk_axe_labo1_idx ON axe');
-        $this->addSql('CREATE INDEX IDX_6C6A1E2CB65FA4A ON axe (labo_id)');
-        $this->addSql('ALTER TABLE axe ADD CONSTRAINT fk_axe_labo1 FOREIGN KEY (labo_id) REFERENCES labo (labo_id) ON UPDATE NO ACTION ON DELETE NO ACTION');
+        $this->addSql('ALTER TABLE labo ADD type_thesaurus INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE labo ADD CONSTRAINT FK_9367435C9C347F1C FOREIGN KEY (type_thesaurus) REFERENCES thesaurus (thesaurus_id)');
+        $this->addSql('CREATE INDEX IDX_9367435C9C347F1C ON labo (type_thesaurus)');
     }
 
     /**
@@ -32,9 +31,8 @@ class Version20170510212850 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE axe DROP FOREIGN KEY FK_6C6A1E2CB65FA4A');
-        $this->addSql('DROP INDEX idx_6c6a1e2cb65fa4a ON axe');
-        $this->addSql('CREATE INDEX fk_axe_labo1_idx ON axe (labo_id)');
-        $this->addSql('ALTER TABLE axe ADD CONSTRAINT FK_6C6A1E2CB65FA4A FOREIGN KEY (labo_id) REFERENCES labo (labo_id)');
+        $this->addSql('ALTER TABLE labo DROP FOREIGN KEY FK_9367435C9C347F1C');
+        $this->addSql('DROP INDEX IDX_9367435C9C347F1C ON labo');
+        $this->addSql('ALTER TABLE labo DROP type_thesaurus');
     }
 }

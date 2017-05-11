@@ -152,26 +152,30 @@ class CollecteController extends Controller
 
             //année par défaut de la première collecte
             $annee = 2016;
+            $now = new \DateTime();
 
             //Update tous les labos
             $query = $em->createQuery(
-                'UPDATE AppBundle:Formation f SET f.anneeCollecte = :annee'
+                'UPDATE AppBundle:Formation f SET f.anneeCollecte = :annee, f.last_update = :now'
             );
             $query->setParameter(':annee', $annee);
+            $query->setParameter(':now', $now);
             $query->execute();
 
             //Update tous les formations
             $query = $em->createQuery(
-                'UPDATE AppBundle:Labo l SET l.anneeCollecte = :annee'
+                'UPDATE AppBundle:Labo l SET l.anneeCollecte = :annee, l.last_update = :now'
             );
             $query->setParameter(':annee', $annee);
+            $query->setParameter(':now', $now);
             $query->execute();
 
             //Update tous les eds
             $query = $em->createQuery(
-                'UPDATE AppBundle:Ed l SET l.anneeCollecte = :annee'
+                'UPDATE AppBundle:Ed e SET e.anneeCollecte = :annee, e.last_update = :now'
             );
             $query->setParameter(':annee', $annee);
+            $query->setParameter(':now', $now);
             $query->execute();
 
             //Créer une collecte 2016
@@ -189,7 +193,7 @@ class CollecteController extends Controller
             $collecte->setActive(false);
             $collecte->setComplete(true);
             $collecte->setEtablissement($etablissements);
-            $now = new \DateTime();
+
             $collecte->setDateCreation($now);
             $collecte->setLastUpdate($now);
 

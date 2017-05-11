@@ -77,6 +77,15 @@ class Formation
      */
     private $typediplome;
 
+    /** @var  \AppBundle\Entity\Thesaurus
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Thesaurus")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="typediplome_thesaurus", referencedColumnName="thesaurus_id")
+     * })
+     */
+    private $typediplome_thesaurus;
+
     /**
      * @var integer
      *
@@ -172,14 +181,14 @@ class Formation
      */
     private $ects;
 
-
-    //à remplacer par un thésaurus
-    /**
-     * @var string
+    /** @var  \AppBundle\Entity\Thesaurus
      *
-     * @ORM\Column(name="modalite", type="string", length=255, nullable=true)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Thesaurus")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="modalite_thesaurus", referencedColumnName="thesaurus_id")
+     * })
      */
-    private $modalite;
+    private $modalite_thesaurus;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -267,6 +276,23 @@ class Formation
      *
      */
     private $hceres;
+
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Metier3")
+     * @ORM\JoinTable(name="formation_has_metier3",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="formation_id", referencedColumnName="formation_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="metier_id", referencedColumnName="id")
+     *   }
+     * )
+     *
+     */
+    private $metier;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -1055,6 +1081,54 @@ class Formation
     public function setValide($valide)
     {
         $this->valide = $valide;
+    }
+
+    /**
+     * @return Thesaurus
+     */
+    public function getTypediplomeThesaurus()
+    {
+        return $this->typediplome_thesaurus;
+    }
+
+    /**
+     * @param Thesaurus $typediplome_thesaurus
+     */
+    public function setTypediplomeThesaurus($typediplome_thesaurus)
+    {
+        $this->typediplome_thesaurus = $typediplome_thesaurus;
+    }
+
+    /**
+     * @return Thesaurus
+     */
+    public function getModaliteThesaurus()
+    {
+        return $this->modalite_thesaurus;
+    }
+
+    /**
+     * @param Thesaurus $modalite_thesaurus
+     */
+    public function setModaliteThesaurus($modalite_thesaurus)
+    {
+        $this->modalite_thesaurus = $modalite_thesaurus;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMetier()
+    {
+        return $this->metier;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $metier
+     */
+    public function setMetier($metier)
+    {
+        $this->metier = $metier;
     }
 
 

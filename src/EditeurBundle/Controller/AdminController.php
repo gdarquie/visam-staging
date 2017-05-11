@@ -50,11 +50,21 @@ class AdminController extends Controller
         );
         $collectes = $query->getResult();
 
+        //année de collecte utilisée par le moteur de recherche
+        $query = $em->createQuery(
+            'SELECT c FROM AppBundle:Collecte c WHERE c.complete = true ORDER BY c.annee DESC'
+        )->setMaxResults(1);
+        $collecte = $query->getResult();
+
         //utilisateurs
         $query = $em->createQuery(
             'SELECT u FROM AppBundle:User u ORDER BY u.username DESC'
         )->setMaxResults(10);
         $users = $query->getResult();
+
+        //thesaurus
+        $query = $em->createQuery('SELECT t FROM AppBundle:Thesaurus t GROUP BY t.type');
+        $thesaurus = $query->getResult();
 
 
         return $this->render('EditeurBundle:Admin:index.html.twig', array(
@@ -63,7 +73,9 @@ class AdminController extends Controller
             'labos' => $labos,
             'eds' => $eds,
             'collectes' => $collectes,
-            'users' => $users
+            'collecte' => $collecte,
+            'users' => $users,
+            'thesaurus' => $thesaurus
         ));
     }
 

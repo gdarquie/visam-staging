@@ -23,11 +23,14 @@ class Labo
      */
     private $laboId;
 
-
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255, nullable=true)
+     * @ORM\Column(name="nom", type="string", length=255, nullable=false)
+     *
+     * @Assert\NotBlank(
+     *     message = "Un nom doit être renseigné pour permettre la sauvegarde"
+     * )
      */
     private $nom;
 
@@ -63,6 +66,11 @@ class Labo
      * @var string
      *
      * @ORM\Column(name="description", type="text", length=16777215, nullable=true)
+     *
+     * @Assert\Length(
+     *      max = 2500,
+     *      maxMessage = "La description ne peut dépasser {{ limit }} caractères"
+     * )
      */
     private $description;
 
@@ -79,6 +87,30 @@ class Labo
      * @ORM\Column(name="type", type="string", length=5, nullable=true)
      */
     private $type;
+
+    /** @var  \AppBundle\Entity\Thesaurus
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Thesaurus")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="type_thesaurus", referencedColumnName="thesaurus_id")
+     * })
+     */
+    private $type_thesaurus;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Thesaurus")
+     * @ORM\JoinTable(name="laboratoire_has_theme",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="thesaurus_id", referencedColumnName="thesaurus_id")
+     *   }
+     * )
+     */
+    private $theme;
 
     /**
      * @var integer
@@ -449,6 +481,22 @@ class Labo
         $this->mailcontact = $mailcontact;
 
         return $this;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTheme()
+    {
+        return $this->theme;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $theme
+     */
+    public function setTheme($theme)
+    {
+        $this->theme = $theme;
     }
 
     /**
@@ -1035,8 +1083,22 @@ class Labo
     }
 
     /**
-     * Gets the value of axes.
-     *
+     * @return Thesaurus
+     */
+    public function getTypeThesaurus()
+    {
+        return $this->type_thesaurus;
+    }
+
+    /**
+     * @param Thesaurus $type_thesaurus
+     */
+    public function setTypeThesaurus($type_thesaurus)
+    {
+        $this->type_thesaurus = $type_thesaurus;
+    }
+
+    /**
      * @return mixed
      */
     public function getAxes()
@@ -1045,18 +1107,13 @@ class Labo
     }
 
     /**
-     * Sets the value of axes.
-     *
-     * @param mixed $axes the axes
-     *
-     * @return self
+     * @param mixed $axes
      */
-    private function setAxes($axes)
+    public function setAxes($axes)
     {
         $this->axes = $axes;
-
-        return $this;
     }
+
 
     /**
      * @return int
