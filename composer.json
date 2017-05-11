@@ -18,7 +18,7 @@
     },
     "require": {
         "php": ">=5.5.9",
-        "symfony/symfony": "3.0.*",
+        "symfony/symfony": "3.2.*",
         "doctrine/orm": "^2.5",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/doctrine-cache-bundle": "^1.2",
@@ -32,7 +32,8 @@
         "doctrine/doctrine-migrations-bundle": "^1.2",
         "joetannenbaum/mr-clean": "~0.0",
         "liuggio/excelbundle": "^2.1",
-        "stof/doctrine-extensions-bundle": "^1.2"
+        "stof/doctrine-extensions-bundle": "^1.2",
+        "ensepar/html2pdf-bundle" : "~2.0"
 
     },
     "require-dev": {

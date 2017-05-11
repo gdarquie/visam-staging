@@ -1,0 +1,3 @@
+[submodule "parcours"]
+	path = parcours
+	url = https://github.com/chatelp/parcours

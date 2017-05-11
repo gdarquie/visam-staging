@@ -33,12 +33,6 @@ class Localisation
      */
     private $long;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description", type="text", length=65535, nullable=true)
-     */
-    private $description;
 
     /**
      * @var string
@@ -57,9 +51,23 @@ class Localisation
     /**
      * @var string
      *
+     * @ORM\Column(name="cedex", type="string", length=100, nullable=true)
+     */
+    private $cedex;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="adresse", type="string", length=500, nullable=true)
      */
     private $adresse;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="complement_adresse", type="string", length=255, nullable=true)
+     */
+    private $complementAdresse;
 
     /**
      * @var string
@@ -74,6 +82,13 @@ class Localisation
      * @ORM\Column(name="pays", type="string", length=500, nullable=true)
      */
     private $pays;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="code_pays", type="string", length=5, nullable=true)
+     */
+    private $codePays;
 
     /**
      * @var \DateTime
@@ -256,30 +271,6 @@ class Localisation
     public function getLong()
     {
         return $this->long;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     *
-     * @return Localisation
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
     }
 
     /**
@@ -633,5 +624,77 @@ class Localisation
     public function __toString()
     {
         return (string) $this->getNom();
+    }
+
+    /**
+     * Set cedex
+     *
+     * @param string $cedex
+     *
+     * @return Localisation
+     */
+    public function setCedex($cedex)
+    {
+        $this->cedex = $cedex;
+
+        return $this;
+    }
+
+    /**
+     * Get cedex
+     *
+     * @return string
+     */
+    public function getCedex()
+    {
+        return $this->cedex;
+    }
+
+    /**
+     * Set complementAdresse
+     *
+     * @param string $complementAdresse
+     *
+     * @return Localisation
+     */
+    public function setComplementAdresse($complementAdresse)
+    {
+        $this->complementAdresse = $complementAdresse;
+
+        return $this;
+    }
+
+    /**
+     * Get complementAdresse
+     *
+     * @return string
+     */
+    public function getComplementAdresse()
+    {
+        return $this->complementAdresse;
+    }
+
+    /**
+     * Set codePays
+     *
+     * @param string $codePays
+     *
+     * @return Localisation
+     */
+    public function setCodePays($codePays)
+    {
+        $this->codePays = $codePays;
+
+        return $this;
+    }
+
+    /**
+     * Get codePays
+     *
+     * @return string
+     */
+    public function getCodePays()
+    {
+        return $this->codePays;
     }
 }
