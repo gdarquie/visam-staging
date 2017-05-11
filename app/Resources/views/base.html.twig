@@ -110,6 +110,14 @@
             </nav>
             </div>
 
+        {% for msg in app.session.flashBag.get('success') %}
+            <div class="container">
+                <div class="card-panel">
+                    <span class="teal-text">{{msg}}</span>
+                </div>
+            </div>
+        {% endfor %}
+
         {% block body %}{% endblock %}
 
         <footer class="page-footer red-hesam">

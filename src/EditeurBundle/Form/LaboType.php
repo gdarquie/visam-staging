@@ -126,7 +126,6 @@ class LaboType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
 
-
         $etablissements = [];
 
         $resolver->setDefaults(array(

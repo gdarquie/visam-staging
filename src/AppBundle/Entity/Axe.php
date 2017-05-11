@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Axe
  *
- * @ORM\Table(name="axe")})
+ * @ORM\Table(name="axe")
  * @ORM\Entity
  */
 class Axe
@@ -55,11 +55,10 @@ class Axe
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Labo" , inversedBy="axes")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
+     *   @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id", onDelete="CASCADE")
      * })
      */
     private $labo;
-
 
 
     /**

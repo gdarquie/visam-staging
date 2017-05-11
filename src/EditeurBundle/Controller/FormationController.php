@@ -26,7 +26,31 @@ class FormationController extends Controller
         // $deleteForm = $this->createDeleteLaboForm($labo);
 
         $formation = new Formation();
-        $form = $this->createForm('EditeurBundle\Form\FormationType', $formation);
+
+        $em = $this->getDoctrine()->getManager();
+
+        //ajout des établissements pour le formulaire
+        $user = $this->getUser();
+        if ($user->hasRole('ROLE_ADMIN')){
+            $query = $em->createQuery(
+                'SELECT e.etablissementId as id FROM AppBundle:Etablissement e'
+            );
+        }
+
+        else{
+            $userId = $user->getId();
+            $query = $em->createQuery(
+                'SELECT e.etablissementId as id FROM AppBundle:User u INNER JOIN u.etablissement e WHERE u.id = :user'
+            );
+            $query->setParameter('user', $userId);
+        }
+        $etablissements = $query->getResult();
+
+        $form = $this->createForm('EditeurBundle\Form\FormationType', $formation, array(
+            'etablissements' => $etablissements
+        ));
+
+//        $form = $this->createForm('EditeurBundle\Form\FormationType', $formation);
         $form->handleRequest($request);
 
 
@@ -61,7 +85,30 @@ class FormationController extends Controller
     public function editFormationAction(Request $request, Formation $formation){
 
         $deleteForm = $this->createDeleteForm($formation);
-        $editForm = $this->createForm('EditeurBundle\Form\FormationType', $formation);
+        $em = $this->getDoctrine()->getManager();
+
+        //ajout des établissements pour le formulaire
+        $user = $this->getUser();
+
+        if ($user->hasRole('ROLE_ADMIN')){
+            $query = $em->createQuery(
+                'SELECT e.etablissementId as id FROM AppBundle:Etablissement e'
+            );
+        }
+
+        else{
+            $userId = $user->getId();
+            $query = $em->createQuery(
+                'SELECT e.etablissementId as id FROM AppBundle:User u INNER JOIN u.etablissement e WHERE u.id = :user'
+            );
+            $query->setParameter('user', $userId);
+        }
+        $etablissements = $query->getResult();
+
+        $editForm = $this->createForm('EditeurBundle\Form\FormationType', $formation, array(
+            'etablissements' => $etablissements
+        ));
+//        $editForm = $this->createForm('EditeurBundle\Form\FormationType', $formation);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -82,6 +129,49 @@ class FormationController extends Controller
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
+    }
+
+
+    /**
+     * Fonction pour effacer via ajax une formation
+     *
+     * @Route("/delete/{formationId}", name="editeur_formation_test_ajax_delete")
+     * @Method("GET")
+     */
+    public function deleteTestAjaxAction($formationId)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        /** @var Formation $formation */
+        $formation = $em->getRepository('AppBundle:Formation')
+            ->find($formationId);
+        $em->remove($formation);
+        $em->flush();
+
+        return new Response(null, 204);
+
+    }
+
+    /**
+     * Fonction pour effacer via ajax une formation
+     *
+     * @Route("/delete/{formationId}", name="editeur_formation_ajax_delete")
+     * @Method("DELETE")
+     */
+    public function deleteAjaxAction($formationId)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        /** @var Formation $formation */
+        $formation = $em->getRepository('AppBundle:Formation')
+            ->find($formationId);
+        $em->remove($formation);
+        $em->flush();
+
+        return new Response(null, 204);
+
     }
 
     /**

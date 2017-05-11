@@ -27,7 +27,7 @@ class AdminController extends Controller
 
         $query = $em->createQuery(
             'SELECT e FROM AppBundle:Etablissement e ORDER BY e.last_update DESC'
-        )->setMaxResults(5);
+        );
         $etablissements = $query->getResult();
 
         $query = $em->createQuery(
@@ -45,6 +45,11 @@ class AdminController extends Controller
         )->setMaxResults(5);
         $eds = $query->getResult();
 
+        $query = $em->createQuery(
+            'SELECT c FROM AppBundle:Collecte c ORDER BY c.annee DESC'
+        );
+        $collectes = $query->getResult();
+
         //utilisateurs
         $query = $em->createQuery(
             'SELECT u FROM AppBundle:User u ORDER BY u.username DESC'
@@ -57,6 +62,7 @@ class AdminController extends Controller
             'formations' => $formations,
             'labos' => $labos,
             'eds' => $eds,
+            'collectes' => $collectes,
             'users' => $users
         ));
     }

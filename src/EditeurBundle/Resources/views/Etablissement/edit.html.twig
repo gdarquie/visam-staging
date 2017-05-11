@@ -3,7 +3,7 @@
 {% block body %}
 
     <section class="container">
-        <h1>{{ etablissement.sigle |upper }} - Edition</h1>
+        <h1>{% if etablissement.sigle %}{{ etablissement.sigle |upper }} - {% else %}{% endif %}Edition</h1>
 
         {{ form_start(etablissementForm) }}
         {{ include('EditeurBundle:Etablissement:_form.html.twig') }}

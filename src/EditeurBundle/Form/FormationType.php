@@ -27,6 +27,9 @@ class FormationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
+        $etablissements = $options['etablissements'];
+
         $builder
             ->add('nom')
             ->add('description')
@@ -84,14 +87,17 @@ class FormationType extends AbstractType
         //     ->add('localisation')
         //     ->add('labo')
 
-             ->add('etablissement', EntityType::class, array(
+            ->add('etablissement', EntityType::class, array(
                 'class' => 'AppBundle:Etablissement',
-                'multiple' => true,
-//                'expanded' => true,
                 'by_reference' => false,
+                'multiple' => true,
                 'choice_label' => 'nom',
-                'query_builder' => function(EtablissementRepository $repo) {
-                    return $repo->createAlphabeticalQueryBuilder();
+                'query_builder' => function (EtablissementRepository $repo) use ($etablissements){
+                    return $repo->createQueryBuilder('etablissement')
+                        ->where('etablissement IN(:etablissement)')
+                        ->setParameter('etablissement', $etablissements)
+                        ->orderBy('etablissement.nom', 'ASC')
+                        ;
                 }
             ))
         //     ->add('metier')
@@ -156,8 +162,12 @@ class FormationType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
+
+        $etablissements = [];
+
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Formation'
+            'data_class' => 'AppBundle\Entity\Formation',
+            'etablissements' => $etablissements
         ));
     }
 }

@@ -289,6 +289,14 @@ class Etablissement
      */
     private $ed;
 
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Collecte", mappedBy="etablissement")
+     */
+    private $collecte;
+
     /**
      * Constructor
      */
@@ -905,6 +913,23 @@ class Etablissement
     {
         $this->last_update = $last_update;
     }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCollecte()
+    {
+        return $this->collecte;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $collecte
+     */
+    public function setCollecte($collecte)
+    {
+        $this->collecte = $collecte;
+    }
+
 
     /**
      * @return int

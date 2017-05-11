@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 use AppBundle\Entity\Labo;
 use EditeurBundle\Form\LaboType;
@@ -131,6 +132,30 @@ class LaboratoireController extends Controller
         ));
     }
 
+
+    /**
+     * Fonction pour effacer via ajax un labo
+     *
+     * @Route("/delete/{laboId}", name="editeur_laboratoire_ajax_delete")
+     * @Method("DELETE")
+     */
+    public function deleteAjaxAction($laboId)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        /** @var Labo $labo */
+        $labo = $em->getRepository('AppBundle:Labo')
+            ->find($laboId);
+        $em->remove($labo);
+        $em->flush();
+
+        return new Response(null, 204);
+
+
+    }
+
+
     /**
      * Effacer un labo
      *
@@ -148,8 +173,11 @@ class LaboratoireController extends Controller
             $em->flush();
         }
 
+//        return new Response(null, 204);
         return $this->redirectToRoute('editeur');
     }
+
+
 
     /**
      * Créer un form pour effacer un labo
@@ -166,6 +194,7 @@ class LaboratoireController extends Controller
             ->getForm()
             ;
     }
+
 
 
 }

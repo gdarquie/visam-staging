@@ -40,7 +40,6 @@
 
     <section class="container-fluid">
 
-
         {#<h1>Page éditeur {{ user.user }}</h1>#}
 
         <div class="card row">
@@ -58,7 +57,7 @@
                 <h2>Formations ({{ formations|length }})</h2>
                 <ul class="collection">
                 {% for item in formations  %}
-                    <li class="collection-item avatar">
+                    <li class="collection-item avatar js-formation-item">
                         <a href="{{ path('editeur_formation_edit', {'id': item.formationId } ) }}" >
 
                             {% if item.checkGeneral and item.checkEffectif and item.checkIndex and item.checkCursus %}
@@ -101,7 +100,7 @@
 
 
                         </a>
-                        <a href="#!" class="secondary-content"><i class="material-icons">delete</i>
+                        <a href="#!" class="secondary-content js-remove-formation" data-url="{{ path('editeur_formation_ajax_delete', { formationId : item.formationId}) }}" ><i class="material-icons">delete</i>
                         </a>
                     </li>
                 {% endfor %}
@@ -123,7 +122,7 @@
 
                     <ul class="collection">
                         {% for item in laboratoires  %}
-                            <li class="collection-item avatar">
+                            <li class="collection-item avatar js-labo-item">
                                 <a href="{{ path('editeur_laboratoire_edit', {'id': item.laboId } ) }}" >
                                     {% if item.checkGeneral and item.checkContact and item.checkEtab and item.checkEtab and item.checkEffectifs and item.checkDescription %}
                                         <i class="material-icons circle green">mode_edit</i>
@@ -170,8 +169,9 @@
                                         </span>
                                     </p>
                                 </a>
-                                <a href="#!" class="secondary-content"><i class="material-icons">delete</i>
+                                <a href="#!" class="secondary-content js-remove-labo" data-url="{{ path('editeur_laboratoire_ajax_delete', { laboId : item.laboId}) }}" ><i class="material-icons">delete</i>
                                 </a>
+
                             </li>
 
                         {% endfor %}
@@ -190,4 +190,52 @@
 
     </section>
 
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+
+        $(document).ready(function() {
+            $('.js-remove-labo').on('click', function(e) {
+                e.preventDefault();
+                var $el = $(this).closest('.js-labo-item');
+                var r = confirm("Etes-vous sûr de vouloir supprimer ce laboratoire?");
+                if (r == true) {
+                    $.ajax({
+                        url: $(this).data('url'),
+                        method: 'DELETE'
+                    }).done(function() {
+                        $el.fadeOut();
+                    });
+                }
+//                $(this).find('.fa-close')
+//                    .removeClass('fa-close')
+//                    .addClass('fa-spinner')
+//                    .addClass('fa-spin');
+
+                e.preventDefault();
+            });
+            $('.js-remove-formation').on('click', function(e) {
+                e.preventDefault();
+                var $el = $(this).closest('.js-formation-item');
+                var r = confirm("Etes-vous sûr de vouloir supprimer cette formation?");
+                if (r == true) {
+                    $.ajax({
+                        url: $(this).data('url'),
+                        method: 'DELETE'
+                    }).done(function() {
+                        $el.fadeOut();
+                    });
+                }
+//                $(this).find('.fa-close')
+//                    .removeClass('fa-close')
+//                    .addClass('fa-spinner')
+//                    .addClass('fa-spin');
+
+                e.preventDefault();
+            });
+        });
+    </script>
 {% endblock %}

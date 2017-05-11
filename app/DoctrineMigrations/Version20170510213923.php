@@ -8,7 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20170501134850 extends AbstractMigration
+class Version20170510213923 extends AbstractMigration
 {
     /**
      * @param Schema $schema
@@ -18,7 +18,8 @@ class Version20170501134850 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE fos_user DROP firstname, DROP lastname');
+        $this->addSql('ALTER TABLE axe DROP FOREIGN KEY fk_axe_labo1');
+        $this->addSql('ALTER TABLE axe ADD CONSTRAINT FK_6C6A1E2CB65FA4A FOREIGN KEY (labo_id) REFERENCES labo (labo_id) ON DELETE CASCADE');
     }
 
     /**
@@ -29,6 +30,7 @@ class Version20170501134850 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE fos_user ADD firstname VARCHAR(255) NOT NULL COLLATE utf8_unicode_ci, ADD lastname VARCHAR(255) NOT NULL COLLATE utf8_unicode_ci');
+        $this->addSql('ALTER TABLE axe DROP FOREIGN KEY FK_6C6A1E2CB65FA4A');
+        $this->addSql('ALTER TABLE axe ADD CONSTRAINT fk_axe_labo1 FOREIGN KEY (labo_id) REFERENCES labo (labo_id) ON UPDATE NO ACTION ON DELETE NO ACTION');
     }
 }
