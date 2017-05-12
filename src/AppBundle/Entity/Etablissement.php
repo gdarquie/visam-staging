@@ -278,7 +278,7 @@ class Etablissement
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Ed", inversedBy="etablissement")
-     * @ORM\JoinTable(name="etablissement_has_ed",
+     * @ORM\JoinTable(name="etablissement_has_ED",
      *   joinColumns={
      *     @ORM\JoinColumn(name="etablissement_id", referencedColumnName="etablissement_id")
      *   },
