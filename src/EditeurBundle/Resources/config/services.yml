@@ -9,3 +9,7 @@ services:
 
   editeur.logs:
       class: EditeurBundle\Services\Logs
+
+  editeur.export.service:
+        class: EditeurBundle\Services\ExportService
+        arguments: ["@doctrine.orm.entity_manager", "@editeur.logs", "@phpexcel"]

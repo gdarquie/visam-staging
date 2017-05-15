@@ -47,10 +47,10 @@ class Discipline
      */
     private $description;
 
+
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="domaine_id", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="Domaine")
+     * @ORM\JoinColumn(name="domaine_id", referencedColumnName="domaine_id", nullable=true)
      */
     private $domaineId;
 
@@ -315,7 +315,7 @@ class Discipline
     /**
      * Get disciplineId
      *
-     * @return integer
+     * @return mixed
      */
     public function getDisciplineId()
     {
