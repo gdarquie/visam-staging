@@ -1,0 +1,26 @@
+{% extends 'editeur.html.twig' %}
+
+{% block body %}
+
+<div class="container">
+    <h1>Préparer une nouvelle collecte</h1>
+
+    <div class="infos">
+        <p>Préparer une année de collecte permet de sélectionner les établissements qui participeront à la collecte via l'éditeur Visam.</p>
+        <p>Il ne peut y avoir qu'une seule collecte à la fois. Avant de commencer à préparer une autre collecte, il faut clore la précédente si elle est toujours active.</p>
+
+    </div>
+
+    {{ form_start(edit_form) }}
+        {{ include('EditeurBundle:Collecte:_form.html.twig') }}
+        <input type="submit" class="btn btn-hesam" value="Créer" formnovalidate />
+    {{ form_end(edit_form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('admin') }}">Retour</a>
+        </li>
+    </ul>
+</div>
+
+{% endblock %}

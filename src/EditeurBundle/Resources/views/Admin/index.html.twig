@@ -10,6 +10,20 @@
         .card li{
             margin-left: 20px;
         }
+        .legend_btn{
+            padding-left:5px;
+        }
+        .add_item_btn{
+            padding-bottom:20px;
+        }
+        .comment{
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .btn{
+            margin-bottom: 5px;
+        }
     </style>
 
 {% endblock %}
@@ -25,14 +39,16 @@
                     <h3 class="collection-header">Menu</h3>
                     <li class="collection-item">Dernières données
                         <ul class="browser-default">
-                            <li>Etablissement</li>
                             <li>Formation</li>
                             <li>Laboratoire</li>
                             <li>Ecoles doctorales</li>
                         </ul>
                     </li>
-                    <li class="collection-item">Gestion des utilisateurs</li>
-                    <li class="collection-item">Gestion du thésaurus</li>
+                    <li class="collection-item"><a href="#etablissement">Gestion des établissements</a></li>
+                    <li class="collection-item"><a href="#utilisateur">Gestion des utilisateurs</a></li>
+                    <li class="collection-item"><a href="#thesaurus">Gestion du thésaurus</a></li>
+                    <li class="collection-item"><a href="#collecte">Gestion des collectes</a></li>
+                    <li class="collection-item"><a href="#collecte">Gestion de l'import</a></li>
                 </ul>
             </article>
         </div>
@@ -48,69 +64,276 @@
                 <div class="col s12">
 
                     <ul class="collection with-header">
-                        <li class="collection-header"><h4>Etablissements</h4></li>
-                    {% for item in etablissements  %}
-                        <li class="collection-item"><a href="{{ path('editeur_etablissement_edit', {'id' : item.etablissementId}) }}">{{ item.nom }}</a> - {{ item.lastUpdate|date('d/m/Y') }} à {{ item.lastUpdate|date( 'H:i:s') }}</li>
-                        {% endfor %}
-                    </ul>
-                    <p class="right"><a href="">Voir toutes les données établissements</a></p>
-                </div>
-
-                <div class="col s12">
-
-                    <ul class="collection with-header">
-                        <li class="collection-header"><h4>Formations</h4></li>
+                        <li class="collection-header"><h4>5 dernières formations éditées</h4></li>
                         {% for item in formations  %}
-                            <li class="collection-item"><a href="{{ path('editeur_formation_edit', {'id' : item.formationId}) }}">{{ item.nom }} - {{ item.lastUpdate|date('d/m/Y') }} à {{ item.lastUpdate|date( 'H:i:s') }}</a></li>
+                            <li class="collection-item avatar js-formation-item">
+                                <a href="{{ path('editeur_formation_edit', {'id': item.formationId } ) }}" >
+
+                                    {% if item.checkGeneral and item.checkEffectif and item.checkIndex and item.checkCursus %}
+                                        <i class="material-icons circle green">mode_edit</i>
+                                    {% else %}
+                                        <i class="material-icons circle red">mode_edit</i>
+                                    {% endif %}
+
+                                    <span class="title">{{ item.nom }}</span>
+                                    <p>
+                                <span class="description">général
+                                    {% if item.checkGeneral %}
+                                        <i class="material-icons green-text">done</i>
+                                    {% else %}
+                                        <i class="material-icons red-text">not_interested</i>
+                                    {% endif %}
+                                </span>
+                                        <span class="description">effectif
+                                            {% if item.checkEffectif %}
+                                                <i class="material-icons green-text">done</i>
+                                            {% else %}
+                                                <i class="material-icons red-text">not_interested</i>
+                                            {% endif %}
+                                </span>
+                                        <span class="description">indexation
+                                            {% if item.checkIndex %}
+                                                <i class="material-icons green-text">done</i>
+                                            {% else %}
+                                                <i class="material-icons red-text">not_interested</i>
+                                            {% endif %}
+                                </span>
+                                        <span class="description">cursus
+                                            {% if item.checkCursus %}
+                                                <i class="material-icons green-text">done</i>
+                                            {% else %}
+                                                <i class="material-icons red-text">not_interested</i>
+                                            {% endif %}
+                                </span>
+                                    </p>
+
+
+                                </a>
+                            </li>
                         {% endfor %}
                     </ul>
-                    <p class="right"><a href="">Voir toutes les données formations</a></p>
+
+                    <p class="center comment"><a href="{{ path('editeur') }}">Voir toutes les données formations</a></p>
 
                 </div>
 
                 <div class="col s12">
 
                     <ul class="collection with-header">
-                        <li class="collection-header"><h4>Laboratoires</h4></li>
+                        <li class="collection-header"><h4>5 derniers laboratoires édités</h4></li>
                         {% for item in labos  %}
-                            <li class="collection-item"><a href="{{ path('editeur_laboratoire_edit', {'id' : item.laboId}) }}">{{ item.nom }} - {{ item.lastUpdate|date('d/m/Y') }} à {{ item.lastUpdate|date( 'H:i:s') }}</a></li>
+                            <li class="collection-item avatar js-labo-item">
+                                <a href="{{ path('editeur_laboratoire_edit', {'id': item.laboId } ) }}" >
+                                    {% if item.checkGeneral and item.checkContact and item.checkEtab and item.checkEtab and item.checkEffectifs and item.checkDescription %}
+                                        <i class="material-icons circle green">mode_edit</i>
+                                    {% else %}
+                                        <i class="material-icons circle red">mode_edit</i>
+                                    {% endif %}
+
+                                    <span class="title">{{ item.nom }}</span>
+                                    <p>
+                                        <span class="description">général
+                                            {% if item.checkGeneral %}
+                                                <i class="material-icons green-text">done</i>
+                                            {% else %}
+                                                <i class="material-icons red-text">not_interested</i>
+                                            {% endif %}
+                                        </span>
+                                        <span class="description">contact
+                                            {% if item.checkContact %}
+                                                <i class="material-icons green-text">done</i>
+                                            {% else %}
+                                                <i class="material-icons red-text">not_interested</i>
+                                            {% endif %}
+                                        </span>
+                                        <span class="description">description
+                                            {% if item.checkDescription %}
+                                                <i class="material-icons green-text">done</i>
+                                            {% else %}
+                                                <i class="material-icons red-text">not_interested</i>
+                                            {% endif %}
+                                        </span>
+                                        <span class="description">établissement
+                                            {% if item.checkEtab %}
+                                                <i class="material-icons green-text">done</i>
+                                            {% else %}
+                                                <i class="material-icons red-text">not_interested</i>
+                                            {% endif %}
+                                        </span>
+                                        <span class="description">effectifs
+                                            {% if item.checkEffectifs %}
+                                                <i class="material-icons green-text">done</i>
+                                            {% else %}
+                                                <i class="material-icons red-text">not_interested</i>
+                                            {% endif %}
+                                        </span>
+                                    </p>
+                                </a>
+
+
+                            </li>
+
                         {% endfor %}
                     </ul>
-                    <p class="right"><a href="">Voir toutes les données laboratoires</a></p>
+                    <p class="center comment"><a href="{{ path('editeur') }}">Voir toutes les données laboratoires</a></p>
                 </div>
 
                 <div class="col s12">
 
                     <ul class="collection with-header">
-                        <li class="collection-header"><h4>Ecoles doctorales</h4></li>
+                        <li class="collection-header"><h4>5 dernières écoles doctorales éditées</h4></li>
                         {% for item in eds  %}
                             <li class="collection-item">{{ item.nom }} - {{ item.lastUpdate|date('d/m/Y') }} à {{ item.lastUpdate|date( 'H:i:s') }}</li>
                         {% endfor %}
                     </ul>
-                    <p class="right"><a href="">Voir toutes les données écoles doctorales</a></p>
+                    <p class="center comment"><a href="{{ path('editeur') }}">Voir toutes les données écoles doctorales</a></p>
                 </div>
 
             </article>
 
-            <article class="card">
-                <h3>Gérer les utilisateurs</h3>
-
+            <article class="card" id="etablissement">
+                <h3>Gérer les établissements</h3>
                 <ul class="collection with-header">
-                    <li class="collection-header"><h4>Liste des utilisateurs</h4></li>
-                    {% for item in users  %}
-                        <li class="collection-item"><a href="{{ path('edit_user', {'id' : item.id}) }}">{{ item.username |capitalize }}, {{ item.email }}, {{ item.lastLogin|date( 'd/m/Y à H:i:s') }}</a></li>
+                    <li class="collection-header"><h4>Etablissements</h4></li>
+                    {% for item in etablissements  %}
+                        <li class="collection-item"><a href="{{ path('editeur_etablissement_edit', {'id' : item.etablissementId}) }}">{{ item.nom }}</a> - {{ item.lastUpdate|date('d/m/Y') }} à {{ item.lastUpdate|date( 'H:i:s') }}</li>
                     {% endfor %}
                 </ul>
 
+                <div class="row">
+                    <div class="add_item_btn right">
+                        <a href="{{ path('editeur_etablisement_new') }}"><span class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></span>
+
+                        <span class="legend_btn">Ajouter un établissement</span>
+                        </a>
+                    </div>
+                </div>
+
             </article>
 
-            <article class="card">
+            <article class="card" id="utilisateur">
+                <h3>Gérer les utilisateurs</h3>
+
+                <div class="row">
+                    <ul class="collection with-header">
+                        <li class="collection-header"><h4>Liste des utilisateurs</h4></li>
+                        {% for item in users  %}
+                            <li class="collection-item"><a href="{{ path('edit_user', {'id' : item.id}) }}">{{ item.username |capitalize }}, {{ item.email }}, {{ item.lastLogin|date( 'd/m/Y à H:i:s') }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="row">
+                    <div class="add_item_btn right">
+                        <a href="/register"><span class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></span>
+                        </a>
+                        <span class="legend_btn">Ajouter un utilisateur</span>
+                    </div>
+                </div>
+
+            </article>
+
+            <article class="card" id="thesaurus">
                 <h3>Gérer le thésaurus</h3>
                 <ul class="browser-default">
                     <li><a href="{{ path('admin_thesaurus') }}">Voir les entrées</a></li>
-                    <li><a href="{{ path('editeur_thesaurus_new') }}">Ajouter une entrée</a></li>
                 </ul>
+
+                {% for item in thesaurus  %}
+                    <a href="" class="btn white red-text">{{ item.type }}</a>
+                {% endfor %}
+
+                <div class="row">
+                    <div class="add_item_btn right">
+                        <a href="{{ path('editeur_thesaurus_new') }}"><span class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></span>
+                        </a>
+                        <span class="legend_btn">Ajouter un élément</span>
+                    </div>
+                </div>
             </article>
+
+
+            <article class="card row" id="collecte">
+                <h3>Gestion des collectes</h3>
+
+                <div class="col s12">
+
+                    {% if collectes|length > 0 %}
+
+                    <h4>Collecte utilisée</h4>
+                    <p>La collecte prise en compte par le module d'exploration est la collecte de <span class="number">{% for item in collecte  %}{{ item.annee }}{% endfor %}</span></p>
+
+                    <ul class="collection with-header">
+                        <li class="collection-header"><h4>Collectes existantes</h4></li>
+                        {% for item in collectes  %}
+
+                            {% if item.active %}
+                                <li class="collection-item avatar js-formation-item">
+                                    <i class="material-icons circle grey">done</i>
+                                    <a href="{{ path('editeur_collecte_edit', {'collecteId': item.collecteId} ) }}">{{ item.nom }}({{ item.annee }}).</a>
+                                    <p>
+                                        <span>activer (si non active et non clôturée = not complete)</span>
+                                        <span>clôturer(si active)</span>
+                                    </p>
+
+                                    <a href="#!" class="secondary-content js-remove-formation" data-url="" ><i class="material-icons">delete</i>(si non active et non clôturée)
+                                    </a>
+                                </li>
+
+                            {% elseif item.complete %}
+                                <li class="collection-item avatar js-formation-item">
+                                    <i class="material-icons circle green">alarm</i>
+                                    <a href="{{ path('editeur_collecte_edit', {'collecteId': item.collecteId} ) }}">{{ item.nom }}({{ item.annee }}).</a>
+                                    <p>
+                                        <span>activer (si non active et non clôturée = not complete)</span>
+                                        <span>clôturer(si active)</span>
+                                    </p>
+
+                                    <a href="#!" class="secondary-content js-remove-formation" data-url="" ><i class="material-icons">delete</i>(si non active et non clôturée)
+                                    </a>
+                                </li>
+                            {% else %}
+                                <li class="collection-item avatar js-formation-item">
+                                    <i class="material-icons circle red">alarm</i>
+                                    <a href="{{ path('editeur_collecte_edit', {'collecteId': item.collecteId} ) }}">{{ item.nom }}({{ item.annee }}).</a>
+                                    <p>
+                                        <span>activer (si non active et non clôturée = not complete)</span>
+                                        <span>clôturer(si active)</span>
+                                    </p>
+
+                                    <a href="#!" class="secondary-content js-remove-formation" data-url="" ><i class="material-icons">delete</i>(si non active et non clôturée)
+                                    </a>
+                                </li>
+                            {% endif %}
+
+                        {% endfor %}
+                    </ul>
+
+                    {% else %}
+                        <p>Il n'y a pas encore de collecte effectuée.</p>
+                    {% endif %}
+
+
+                    <div class="add_item_btn right">
+                        {% if collectes|length > 0 %}
+                        <a href="{{ path('editeur_collecte_new') }}"><span class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></span>
+                            <span class="legend_btn">Préparer une nouvelle collecte</span>
+                        </a>
+                        {% else %}
+                        <a href="{{ path('editeur_collecte_init') }}"><span class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></span>
+                            <span class="legend_btn">Lancer la première collecte</span>
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+
+            </article>
+
+            <article class="card" id="thesaurus">
+                <h3>Gérer l'import automatique</h3>
+                <p>Partie destinée à intégrer le travail pour l'import de Sandra.</p>
+            </article>
+
         </div>
 
     </section>

@@ -13,7 +13,7 @@
 
                 {{ form_row(edit_form.nom, {'label' : "Intitulé du laboratoire"}) }}
                 {{ form_row(edit_form.sigle) }}
-                {{ form_row(edit_form.type) }}
+                {{ form_row(edit_form.type_thesaurus, {'label' : "Type"}) }}
                 {{ form_row(edit_form.code) }}
                 {{ form_row(edit_form.lien, {'label' : "Lien URL"}) }}
 
@@ -83,6 +83,8 @@
                 {{ form_row(edit_form.hceres) }}
                 {{ form_row(edit_form.sise) }}
                 {{ form_row(edit_form.axes) }}
+
+                {{ form_row(edit_form.theme) }}
 
                 {{ form_widget(edit_form.checkDescription) }}
                 {{ form_label(edit_form.checkDescription) }}

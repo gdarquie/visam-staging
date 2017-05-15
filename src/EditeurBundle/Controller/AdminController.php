@@ -27,7 +27,7 @@ class AdminController extends Controller
 
         $query = $em->createQuery(
             'SELECT e FROM AppBundle:Etablissement e ORDER BY e.last_update DESC'
-        )->setMaxResults(5);
+        );
         $etablissements = $query->getResult();
 
         $query = $em->createQuery(
@@ -45,11 +45,26 @@ class AdminController extends Controller
         )->setMaxResults(5);
         $eds = $query->getResult();
 
+        $query = $em->createQuery(
+            'SELECT c FROM AppBundle:Collecte c ORDER BY c.annee DESC'
+        );
+        $collectes = $query->getResult();
+
+        //année de collecte utilisée par le moteur de recherche
+        $query = $em->createQuery(
+            'SELECT c FROM AppBundle:Collecte c WHERE c.complete = true ORDER BY c.annee DESC'
+        )->setMaxResults(1);
+        $collecte = $query->getResult();
+
         //utilisateurs
         $query = $em->createQuery(
             'SELECT u FROM AppBundle:User u ORDER BY u.username DESC'
         )->setMaxResults(10);
         $users = $query->getResult();
+
+        //thesaurus
+        $query = $em->createQuery('SELECT t FROM AppBundle:Thesaurus t GROUP BY t.type');
+        $thesaurus = $query->getResult();
 
 
         return $this->render('EditeurBundle:Admin:index.html.twig', array(
@@ -57,7 +72,10 @@ class AdminController extends Controller
             'formations' => $formations,
             'labos' => $labos,
             'eds' => $eds,
-            'users' => $users
+            'collectes' => $collectes,
+            'collecte' => $collecte,
+            'users' => $users,
+            'thesaurus' => $thesaurus
         ));
     }
 

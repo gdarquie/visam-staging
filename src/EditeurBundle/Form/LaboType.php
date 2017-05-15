@@ -13,6 +13,7 @@ use AppBundle\Entity\Axe;
 use AppBundle\Repository\DisciplineRepository;
 use AppBundle\Entity\Etablissement;
 use AppBundle\Repository\EtablissementRepository;
+use AppBundle\Repository\ThesaurusRepository;
 
 
 class LaboType extends AbstractType
@@ -34,7 +35,23 @@ class LaboType extends AbstractType
             ->add('responsable')
             ->add('description')
             ->add('code')
-            ->add('type')
+            ->add('type_thesaurus', EntityType::class, array(
+                'placeholder' => 'Sélectionner une réponse',
+                'class' => 'AppBundle:Thesaurus',
+                'choice_label' => 'nom', //order by alpha
+                'query_builder' => function(ThesaurusRepository $repo) {
+                    return $repo->findAllThesaurusByType("type");
+                }
+            ))
+            ->add('theme', EntityType::class, array(
+                'multiple' => true,
+                'class' => 'AppBundle:Thesaurus',
+                'multiple' => true,
+                'choice_label' => 'nom', //order by alpha
+                'query_builder' => function(ThesaurusRepository $repo) {
+                    return $repo->findAllThesaurusByType("theme");
+                }
+            ))
             ->add('effectif')
             ->add('effectifHesam')
             ->add('sigle')
@@ -125,7 +142,6 @@ class LaboType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-
 
         $etablissements = [];
 

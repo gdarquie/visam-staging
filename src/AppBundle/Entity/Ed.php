@@ -120,6 +120,12 @@ class Ed
     private $anneeCollecte;
 
     /**
+     *
+     * @ORM\Column(name="valide", type="boolean")
+     */
+    private $valide = false;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="date_creation", type="datetime")
@@ -589,7 +595,21 @@ class Ed
         $this->last_update = $last_update;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getValide()
+    {
+        return $this->valide;
+    }
 
+    /**
+     * @param mixed $valide
+     */
+    public function setValide($valide)
+    {
+        $this->valide = $valide;
+    }
 
 
 }

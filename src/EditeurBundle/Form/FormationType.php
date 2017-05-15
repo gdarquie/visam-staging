@@ -15,6 +15,7 @@ use AppBundle\Entity\Discipline;
 use AppBundle\Repository\DisciplineRepository;
 use AppBundle\Entity\Etablissement;
 use AppBundle\Repository\EtablissementRepository;
+use AppBundle\Repository\ThesaurusRepository;
 
 use AppBundle\Entity\Tag;
 use AppBundle\Repository\TagRepository;
@@ -27,6 +28,9 @@ class FormationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
+        $etablissements = $options['etablissements'];
+
         $builder
             ->add('nom')
             ->add('description')
@@ -62,7 +66,23 @@ class FormationType extends AbstractType
                     'Sans objet' => 'Sans objet'
                 ),
             ))
-            ->add('typediplome')
+            ->add('ects')
+            ->add('modalite_thesaurus', EntityType::class, array(
+                'placeholder' => 'Sélectionner une réponse',
+                'class' => 'AppBundle:Thesaurus',
+                'choice_label' => 'nom', //order by alpha
+                'query_builder' => function(ThesaurusRepository $repo) {
+                    return $repo->findAllThesaurusByType("modalites");
+                }
+            ))
+            ->add('typediplome_thesaurus', EntityType::class, array(
+                'placeholder' => 'Sélectionner une réponse',
+                'class' => 'AppBundle:Thesaurus',
+                'choice_label' => 'nom', //order by alpha
+                'query_builder' => function(ThesaurusRepository $repo) {
+                    return $repo->findAllThesaurusByType("diplome");
+                }
+            ))
             ->add('effectif')
             ->add('lien2')
 //            ->add('lien3')
@@ -81,30 +101,24 @@ class FormationType extends AbstractType
 //                }
 //            ))
         //     ->add('theme')
-        //     ->add('localisation')
+             ->add('localisation')
         //     ->add('labo')
 
-             ->add('etablissement', EntityType::class, array(
+            ->add('etablissement', EntityType::class, array(
                 'class' => 'AppBundle:Etablissement',
-                'multiple' => true,
-//                'expanded' => true,
                 'by_reference' => false,
+                'multiple' => true,
                 'choice_label' => 'nom',
-                'query_builder' => function(EtablissementRepository $repo) {
-                    return $repo->createAlphabeticalQueryBuilder();
+                'query_builder' => function (EtablissementRepository $repo) use ($etablissements){
+                    return $repo->createQueryBuilder('etablissement')
+                        ->where('etablissement IN(:etablissement)')
+                        ->setParameter('etablissement', $etablissements)
+                        ->orderBy('etablissement.nom', 'ASC')
+                        ;
                 }
             ))
-        //     ->add('metier')
+            ->add('metier')
             ->add('tag')
-//            ->add('discipline', EntityType::class, array(
-//                'class' => 'AppBundle:Discipline',
-//                'by_reference' => false,
-//                'multiple' => true,
-//                'choice_label' => 'nom',
-//                'query_builder' => function(DisciplineRepository $repo) {
-//                    return $repo->createAlphabeticalQueryBuilder();
-//                }
-//            ))
             ->add('cnu', EntityType::class, array(
                 'class' => 'AppBundle:Discipline',
                 'by_reference' => false,
@@ -156,8 +170,12 @@ class FormationType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
+
+        $etablissements = [];
+
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Formation'
+            'data_class' => 'AppBundle\Entity\Formation',
+            'etablissements' => $etablissements
         ));
     }
 }

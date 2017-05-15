@@ -7,9 +7,9 @@
         </a>
 
         {{ form_errors(membreForm) }}
-        {{ form_row(membreForm.nom) }}
-        {{ form_row(membreForm.prenom) }}
-        {{ form_row(membreForm.mail) }}
+        {{ form_row(membreForm.nom, {'label' : "Nom"}) }}
+        {{ form_row(membreForm.prenom, {'label' : "Prénom"}) }}
+        {{ form_row(membreForm.mail, {'label' : " Contact du responsable pédagogique (adresse e-mail)"}) }}
 
     </div>
 {% endmacro %}
@@ -24,15 +24,15 @@
         {% endif %}
 
             <h3>Informations générales</h3>
-            {{  form_row(edit_form.nom) }}
+            {{  form_row(edit_form.nom, {'label' : "Nom de la formation / du diplôme"}) }}
             {{ form_row(edit_form.description, { 'attr': {'class': 'materialize-textarea'} }) }}
-            {{ form_row(edit_form.url, {'label' : "Page de la formation"})}}
-            {{ form_row(edit_form.etablissement) }}
+            {{ form_row(edit_form.url, {'label' : "URL de la formation"})}}
+            {{ form_row(edit_form.etablissement, {'label' : "Etablissement(s)"}) }}
             {{ form_row(edit_form.lien2,  {'label' : "Autre lien"}) }}
-            {#{{ form_row(edit_form.responsable, {'label' : 'Contact'}) }}#}
-            {#{{ form_row(edit_form.membre)}}#}
 
-            <h3>Responsable(s)</h3>
+            {{ form_row(edit_form.localisation,  {'label' : "Lieu(x)"}) }}
+
+            <h4>Responsable(s)</h4>
 
                 <div class="row js-membre-wrapper" data-prototype="{{ formMacros.printMembreRow(edit_form.membre.vars.prototype)|e('html_attr') }}" data-index="{{ edit_form.membre|length }}">
 
@@ -47,6 +47,8 @@
                         </a>
                     </div>
                 </div>
+
+
 
                 {# prevents weird label from showing up in new #}
                 {{ form_widget(edit_form.membre) }}
@@ -93,7 +95,7 @@
             {{ form_row(edit_form.cnu) }}
             {{ form_row(edit_form.hceres) }}
             {{ form_row(edit_form.sise) }}
-            {{ form_row(edit_form.tag) }}
+            {{ form_row(edit_form.tag, {'label' : 'Mots-clés'}) }}
 
             {{ form_widget(edit_form.checkIndex) }}
             {{ form_label(edit_form.checkIndex) }}
@@ -112,9 +114,12 @@
         {% endif %}
             <h3>Cursus</h3>
 
-            {{ form_row(edit_form.niveau, {'label' : "Niveau de sortie"}) }}
             {{ form_row(edit_form.lmd, {'label' : "Parcours LMD"}) }}
-            {{ form_row(edit_form.typediplome, { 'label' : 'Type de diplôme'}) }}
+            {{ form_row(edit_form.niveau, {'label' : "Niveau de sortie"}) }}
+            {{ form_row(edit_form.typediplome_thesaurus, { 'label' : 'Type de diplôme'}) }}
+            {{ form_row(edit_form.ects, {'label' : "Crédits ECTS"}) }}
+            {{ form_row(edit_form.modalite_thesaurus, {'label' : "Modalité de la formation"}) }}
+            {{ form_row(edit_form.metier, {'label' : "Métiers"}) }}
 
             {{ form_widget(edit_form.checkCursus) }}
             {{ form_label(edit_form.checkCursus) }}

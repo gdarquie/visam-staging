@@ -135,7 +135,7 @@ class EditeurController extends Controller
             'etablissements' => $etablissements,
             'formations' => $formations,
             'laboratoires' => $laboratoires,
-            'eds' => $eds
+            'eds' => $eds,
         ));
     }
 
