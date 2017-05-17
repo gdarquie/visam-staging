@@ -198,8 +198,8 @@
                     {% for item in etablissements  %}
                         <li class="collection-item"><a href="{{ path('editeur_etablissement_edit', {'id' : item.etablissementId}) }}">{{ item.nom }}</a> - {{ item.lastUpdate|date('d/m/Y') }} à {{ item.lastUpdate|date( 'H:i:s') }}
                          {#   {% if item.sigle == 'Cnam' %} #}
-                            &nbsp;&nbsp;<a href="{{ path("export_formulaire", { "id" : item.etablissementId, "type" : 1 }) }}">Export les données de formation</a>
-                            &nbsp;&nbsp;<a href="{{ path("export_formulaire", { "id" : item.etablissementId, "type" : 2 }) }}">Export les données de labo</a>
+                            &nbsp;&nbsp;<br /><a href="{{ path("export_formulaire", { "id" : item.etablissementId, "type" : 1 }) }}">Export des données de formation</a>
+                            &nbsp;&nbsp;<br /><a href="{{ path("export_formulaire", { "id" : item.etablissementId, "type" : 2 }) }}">Export des données de labo</a>
                             {#    {% endif %} #}
                         </li>
                     {% endfor %}
