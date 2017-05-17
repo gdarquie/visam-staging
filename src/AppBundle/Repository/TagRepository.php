@@ -35,5 +35,18 @@ class TagRepository extends EntityRepository
 
         return $query;
     }
+
+    public function getAllTagsForLabo($laboId)
+    {
+        $qb = $this->createQueryBuilder('tag')
+            ->select('tag.nom')
+            ->leftJoin('tag.labo', 'l')
+            ->where('l.laboId = :labo')
+            ->setParameter('labo', $laboId);
+
+        $query = $qb->getQuery()->getArrayResult();
+
+        return $query;
+    }
 }
 

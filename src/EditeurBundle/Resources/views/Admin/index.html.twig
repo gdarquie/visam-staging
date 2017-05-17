@@ -196,7 +196,12 @@
                 <ul class="collection with-header">
                     <li class="collection-header"><h4>Etablissements</h4></li>
                     {% for item in etablissements  %}
-                        <li class="collection-item"><a href="{{ path('editeur_etablissement_edit', {'id' : item.etablissementId}) }}">{{ item.nom }}</a> - {{ item.lastUpdate|date('d/m/Y') }} à {{ item.lastUpdate|date( 'H:i:s') }}</li>
+                        <li class="collection-item"><a href="{{ path('editeur_etablissement_edit', {'id' : item.etablissementId}) }}">{{ item.nom }}</a> - {{ item.lastUpdate|date('d/m/Y') }} à {{ item.lastUpdate|date( 'H:i:s') }}
+                         {#   {% if item.sigle == 'Cnam' %} #}
+                            &nbsp;&nbsp;<a href="{{ path("export_formulaire", { "id" : item.etablissementId, "type" : 1 }) }}">Export les données de formation</a>
+                            &nbsp;&nbsp;<a href="{{ path("export_formulaire", { "id" : item.etablissementId, "type" : 2 }) }}">Export les données de labo</a>
+                            {#    {% endif %} #}
+                        </li>
                     {% endfor %}
                 </ul>
 
