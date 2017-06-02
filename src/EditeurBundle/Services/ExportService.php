@@ -17,8 +17,8 @@ class ExportService
     protected $factory;
     protected $type;
     protected $etablissement;
-    const TYPE_FORMATION = 1;
-    const TYPE_LABO = 2;
+    const TYPE_FORMATION = 'F';
+    const TYPE_LABO = 'L';
 
     public function __construct(EntityManager $em, Logs $log, Factory $factory)
     {

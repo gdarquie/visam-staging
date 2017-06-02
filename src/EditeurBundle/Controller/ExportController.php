@@ -12,8 +12,8 @@ class ExportController  extends Controller
 {
     const DOSSIER_TYPE_FORMATION = 'formations';
     const DOSSIER_TYPE_LABO = 'laboratoires';
-    const TYPE_FORMATION = 1;
-    const TYPE_LABO = 2;
+    const TYPE_FORMATION = 'F';
+    const TYPE_LABO = 'L';
 
     /**
      * export formulaire

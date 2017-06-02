@@ -252,7 +252,6 @@ class ImportService
                     $formattedData['membre']['email_5'],
 
                     ) = array_map('trim', $data);
-
             }
         } else {
             return false;
@@ -275,13 +274,11 @@ class ImportService
         $reader = $this->factory->createReader($version);
         $canread = $reader->canRead($file);
         $phpExcelObject = $reader->load($file);
-        //on traite que deuzieme onglait
-        $activeSheetName = 'Formations Diplômes';
+
+        //$activeSheetName = 'Formations Diplômes';
         $worksheet = $phpExcelObject->getSheet(0);
         $contents = $worksheet->toArray(null,true,true,true);
         $highestRow = $worksheet->getHighestRow();
-        //$highestColumn = $worksheet->getHighestColumn();
-       // $columns = $this->get_range('A', $highestColumn);
 
         for ($line = 2; $line <= $highestRow; $line++) {
             if ($this->formatDataExcel(array_map('trim',$contents[$line]), $line)) {
@@ -357,77 +354,77 @@ class ImportService
                 $formattedData['metier']['code_5'] = $data['BC'];
 
             } else if ($this->type == self::TYPE_LABO) {
-                $formattedData['etablissement']['code'] = $data[''];
-                $formattedData['etablissement']['nom'] = $data[''];
-                //service de rattachement
-                $formattedData['labo']['type'] = $data[''];
-                $formattedData['labo']['code'] = $data[''];
-                $formattedData['labo']['nom'] = $data[''];
-                $formattedData['labo']['sigle'] = $data[''];
-                $formattedData['labo']['etab_ext'] = $data[''];
-                $formattedData['localisation']['nom'] = $data[''];
-                $formattedData['localisation']['lat'] = $data[''];
-                $formattedData['localisation']['long'] = $data[''];
-                $formattedData['localisation']['adresse'] = $data[''];
-                $formattedData['localisation']['complement_adresse'] = $data[''];
-                $formattedData['localisation']['ville'] = $data[''];
-                $formattedData['localisation']['code'] = $data[''];
-                $formattedData['localisation']['cedex'] = $data[''];
-                $formattedData['localisation']['region'] = $data[''];
-                $formattedData['localisation']['pays'] = $data[''];
-                $formattedData['labo']['url_1'] = $data[''];
-                $formattedData['lab']['url_2'] = $data[''];
-                $formattedData['lab']['url_3'] = $data[''];
-                $formattedData['labo']['mailContact'] = $data[''];
-                $formattedData['ed']['nom'] = $data[''];
-                /* domaine_sise_1 */
-                $formattedData['discipline']['abreviation_sise_1'] = $data['']; /*type SISE*/
-                /* domaine_sise_2 */
-                $formattedData['discipline']['abreviation_sise_2'] = $data[''];/*type SISE*/
-                /* domaine_sise_3 */
-                $formattedData['discipline']['abreviation_sise_3'] = $data[''];/*type SISE*/
-                /* domaine_sise_4 */
-                $formattedData['discipline']['abreviation_sise_4'] = $data[''];/*type SISE*/
-                /* domaine_sise_5 */
-                $formattedData['discipline']['abreviation_sise_5'] = $data[''];/*type SISE*/
-                $formattedData['discipline']['nom_cnu_1'] = $data[''];/*type CNU*/
-                $formattedData['discipline']['nom_cnu_2'] = $data[''];/*type CNU*/
-                $formattedData['discipline']['nom_cnu_3'] = $data[''];/*type CNU*/
-                $formattedData['discipline']['nom_cnu_4'] = $data[''];/*type CNU*/
-                $formattedData['discipline']['nom_cnu_5'] = $data[''];/*type CNU*/
-                /* domaine_hcere_1 */
-                $formattedData['discipline']['abreviation_hceres_1'] = $data[''];/*type HCERE*/
-                /* domaine_hcere_2 */
-                $formattedData['discipline']['abreviation_hceres_2'] = $data[''];/*type HCERE*/
-                /* domaine_hcere_3 */
-                $formattedData['discipline']['abreviation_hceres_3'] = $data[''];/*type HCERE*/
-                /* domaine_hcere_4 */
-                $formattedData['discipline']['abreviation_hceres_4'] = $data[''];/*type HCERE*/
-                /* domaine_hcere_5 */
-                $formattedData['discipline']['abreviation_hceres_5'] = $data[''];/*type HCERE*/
-                $formattedData['tags']['nom'] = $data[''];/*variable compose*/
-                //$formattedData['discipline']['nom_nw3_1'] = $data[''];/*type NW3*/
-                //$formattedData['discipline']['nom_nw3_2'] = $data[''];/*type NW3*/
-                $formattedData['labo']['effectif'] = $data[''];
-                $formattedData['labo']['effectif_hesam'] = $data[''];
-                $formattedData['axe']['nom_1'] = $data[''];
-                $formattedData['axe']['nom_2'] = $data[''];
-                $formattedData['axe']['nom_3'] = $data[''];
-                $formattedData['axe']['nom_4'] = $data[''];
-                $formattedData['axe']['nom_5'] = $data[''];
-                $formattedData['axe']['nom_6'] = $data[''];
-                $formattedData['axe']['nom_7'] = $data[''];
-                $formattedData['equipement']['nom'] = $data['']; //avec ;
-                $formattedData['membre']['nom_prenom_1'] = $data[''];
-                $formattedData['membre']['email_1'] = $data[''];
-                $formattedData['membre']['nom_prenom_2'] = $data[''];
-                $formattedData['membre']['email_2'] = $data[''];
-                $formattedData['membre']['nom_prenom_3'] = $data[''];
-                $formattedData['membre']['email_3'] = $data[''];
-                $formattedData['membre']['nom_prenom_4'] = $data[''];
-                $formattedData['membre']['email_4'] = $data[''];
-                $formattedData['membre']['nom_prenom_5'] = $data[''];
-                $formattedData['membre']['email_5'] = $data[''];
+                $formattedData['etablissement']['code'] = $data['A'];
+                $formattedData['etablissement']['nom'] = $data['B'];
+                //service de rattachement D
+                $formattedData['labo']['type'] = $data['D'];
+                $formattedData['labo']['code'] = $data['E'];
+                $formattedData['labo']['nom'] = $data['F'];
+                $formattedData['labo']['sigle'] = $data['G'];
+                $formattedData['labo']['etab_ext'] = $data['H']; // multi-valeurs separes par ;
+                $formattedData['localisation']['nom'] = $data['I']; // multi-valeurs separes par ;
+                $formattedData['localisation']['lat'] = $data['J']; // multi-valeurs separes par ;
+                $formattedData['localisation']['long'] = $data['K']; // multi-valeurs separes par ;
+                $formattedData['localisation']['adresse'] = $data['L']; // multi-valeurs separes par ;
+                $formattedData['localisation']['complement_adresse'] = $data['M']; // multi-valeurs separes par ;
+                $formattedData['localisation']['ville'] = $data['N']; // multi-valeurs separes par ;
+                $formattedData['localisation']['code'] = $data['O']; // multi-valeurs separes par ;
+                $formattedData['localisation']['cedex'] = $data['P']; // multi-valeurs separes par ;
+                $formattedData['localisation']['region'] = $data['Q']; // multi-valeurs separes par ;
+                $formattedData['localisation']['pays'] = $data['R']; // multi-valeurs separes par ;
+                $formattedData['labo']['url_1'] = $data['S'];
+                $formattedData['lab']['url_2'] = $data['T'];
+                $formattedData['lab']['url_3'] = $data['U'];
+                $formattedData['labo']['mailContact'] = $data['V'];
+                $formattedData['ed']['nom'] = $data['W']; // multi-valeurs separes par ;
+                /* domaine_sise_1 X */
+                $formattedData['discipline']['abreviation_sise_1'] = $data['Y']; /*type SISE*/
+                /* domaine_sise_2 Z */
+                $formattedData['discipline']['abreviation_sise_2'] = $data['AA'];/*type SISE*/
+                /* domaine_sise_3 AB */
+                $formattedData['discipline']['abreviation_sise_3'] = $data['AC'];/*type SISE*/
+                /* domaine_sise_4 AD */
+                $formattedData['discipline']['abreviation_sise_4'] = $data['AE'];/*type SISE*/
+                /* domaine_sise_5 AF */
+                $formattedData['discipline']['abreviation_sise_5'] = $data['AG'];/*type SISE*/
+                $formattedData['discipline']['nom_cnu_1'] = $data['AH'];/*type CNU*/
+                $formattedData['discipline']['nom_cnu_2'] = $data['AI'];/*type CNU*/
+                $formattedData['discipline']['nom_cnu_3'] = $data['AJ'];/*type CNU*/
+                $formattedData['discipline']['nom_cnu_4'] = $data['AK'];/*type CNU*/
+                $formattedData['discipline']['nom_cnu_5'] = $data['AL'];/*type CNU*/
+                /* domaine_hcere_1 AM */
+                $formattedData['discipline']['abreviation_hceres_1'] = $data['AN'];/*type HCERE*/
+                /* domaine_hcere_2 AO */
+                $formattedData['discipline']['abreviation_hceres_2'] = $data['AP'];/*type HCERE*/
+                /* domaine_hcere_3 AQ */
+                $formattedData['discipline']['abreviation_hceres_3'] = $data['AR'];/*type HCERE*/
+                /* domaine_hcere_4 AS */
+                $formattedData['discipline']['abreviation_hceres_4'] = $data['AT'];/*type HCERE*/
+                /* domaine_hcere_5 AU */
+                $formattedData['discipline']['abreviation_hceres_5'] = $data['AV'];/*type HCERE*/
+                $formattedData['tags']['nom'] = $data['AW'];/*variable compose // multi-valeurs separes par ;*/
+                //$formattedData['discipline']['nom_nw3_1'] = $data['AX'];/*type NW3*/
+                //$formattedData['discipline']['nom_nw3_2'] = $data['AY'];/*type NW3*/
+                $formattedData['labo']['effectif'] = $data['AZ'];
+                $formattedData['labo']['effectif_hesam'] = $data['BA'];
+                $formattedData['axe']['nom_1'] = $data['BB'];
+                $formattedData['axe']['nom_2'] = $data['BC'];
+                $formattedData['axe']['nom_3'] = $data['BD'];
+                $formattedData['axe']['nom_4'] = $data['BE'];
+                $formattedData['axe']['nom_5'] = $data['BF'];
+                $formattedData['axe']['nom_6'] = $data['BG'];
+                $formattedData['axe']['nom_7'] = $data['BH'];
+                $formattedData['equipement']['nom'] = $data['BI']; //// multi-valeurs separes par ;
+                $formattedData['membre']['nom_prenom_1'] = $data['BJ'];
+                $formattedData['membre']['email_1'] = $data['BK'];
+                $formattedData['membre']['nom_prenom_2'] = $data['BL'];
+                $formattedData['membre']['email_2'] = $data['BM'];
+                $formattedData['membre']['nom_prenom_3'] = $data['BN'];
+                $formattedData['membre']['email_3'] = $data['BO'];
+                $formattedData['membre']['nom_prenom_4'] = $data['BP'];
+                $formattedData['membre']['email_4'] = $data['BQ'];
+                $formattedData['membre']['nom_prenom_5'] = $data['BR'];
+                $formattedData['membre']['email_5'] = $data['BS'];
             }
         } else {
             return false;
@@ -465,6 +462,17 @@ class ImportService
                         $valid = false;
                     }
                 }
+                //Labo
+                if ($this->type == self::TYPE_LABO) {
+                    if (!$this->checkLaboEmailData($data['labo']['mailContact'], $line)) {
+                        $valid = false;
+                    }
+
+                    if (!$this->checkMembreEmailData($data['membre'], $line)) {
+                        $valid = false;
+                    }
+                }
+
                 //Localisation
                 if (!$this->checkLocalisationData($data['localisation'], $line)) {
                     $valid = false;
@@ -479,6 +487,35 @@ class ImportService
             }
         }
 
+        return $valid;
+    }
+
+    public function checkLaboEmailData($email, $line)
+    {
+        $valid = true;
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $msg = sprintf('Ln %d : Le format d\'email "%s" n\'est pas valide.', $line, $email);
+            $this->log->warning($msg);
+            $valid = false;
+        }
+
+        return $valid;
+    }
+
+    public function checkMembreEmailData($data, $line)
+    {
+        $valid = true;
+        for ($i = 1; $i <= 5; $i++) {
+            $email = 'email_' . $i;
+            if (!empty($data[$email])) {
+                if (!filter_var($data[$email], FILTER_VALIDATE_EMAIL)) {
+                    $msg = sprintf('Ln %d : Le format d\'email "%s" n\'est pas valide.', $line, $data[$email]);
+                    $this->log->warning($msg);
+                    $valid = false;
+                }
+            }
+        }
         return $valid;
     }
 
@@ -676,7 +713,7 @@ class ImportService
 
     public function importLaboData($formattedData)
     {
-        return true;
+        return false;
     }
 
 
