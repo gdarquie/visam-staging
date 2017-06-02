@@ -85,6 +85,7 @@ class ExportService
             "Débouché possible 3",
             "Débouché possible 4",
             "Débouché possible 5",
+            "Code interne d'UF"
         ];
         return $header;
     }
@@ -267,7 +268,8 @@ class ExportService
                 null,
                 null,
                 null,
-                null
+                null,
+                null //TODO  add code interne formation recuperer de la bdd
             ];
 
             $dataMerge = array_merge($dataMerge, $data[$index]);

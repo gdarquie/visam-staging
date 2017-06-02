@@ -55,8 +55,14 @@ class DisciplineRepository extends EntityRepository
     }
 
     public function findAllDisciplines($type){
-        $qb = $this->createQueryBuiler('d')->select('d.nom, d.abreviation')->where('d.type = :type')->setParameter('type', $type);
+
+        $qb = $this->createQueryBuilder('d')
+            ->select('d.nom, d.abreviation')
+            ->where('d.type = :type')
+            ->setParameter('type', $type);
+
         $query = $qb->getQuery()->getArrayResult();
+
         return $query;
     }
 

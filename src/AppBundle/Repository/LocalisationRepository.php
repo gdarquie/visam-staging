@@ -51,4 +51,15 @@ class LocalisationRepository extends EntityRepository
 
         return $query;
     }
+
+    public function existLocalisation($adresse, $code, $ville){
+
+        $localisation = $this
+            ->findBy(array('adresse' => $adresse, 'code' => $code, 'ville' => $ville));
+
+        if (!$localisation || count($localisation) > 1) {
+            return false;
+        }
+        return true;
+    }
 }

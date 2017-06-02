@@ -13,7 +13,10 @@ use EditeurBundle\Services\Logs;
 use Liuggio\ExcelBundle\Factory;
 use AppBundle\Entity\Etablissement;
 use AppBundle\Entity\Formation;
+use AppBundle\Entity\Localisation;
+use AppBundle\Entity\Metier3;
 use AppBundle\Entity\Tag;
+use AppBundle\Entity\Discipline;
 
 class ImportService
 {
@@ -30,11 +33,11 @@ class ImportService
     protected $tabTags = null;
 
     //nombre collonnes requis pour un fichier de type  formations
-    const REQUIRED_NUMBER_1 = 40;
+    const REQUIRED_NUMBER_1 = 55;
     //nombre collonnes requis pour un fichier de type laboratoires
-    const REQUIRED_NUMBER_2 = 40;
-    const TYPE_FORMATION = 1;
-    const TYPE_LABO = 2;
+    const REQUIRED_NUMBER_2 = 71;
+    const TYPE_FORMATION = 'F';
+    const TYPE_LABO = 'L';
     const COMMIT_STEP = 5;
 
     public function __construct(EntityManager $em, Logs $log, Factory $factory)
@@ -55,7 +58,15 @@ class ImportService
             if (!$checkedData = $this->checkData($formattedData)) {
                 return false;
             }
-            if (!$importation = $this->importData($formattedData)) {
+            if ($this->type == self::TYPE_FORMATION) {
+                if (!$importation = $this->importFormationData($formattedData)) {
+                    return false;
+                }
+            } else if ($this->type == self::TYPE_LABO) {
+                if (!$importation = $this->importLaboData($formattedData)) {
+                    return false;
+                }
+            } else {
                 return false;
             }
 
@@ -99,6 +110,7 @@ class ImportService
         return $dataArray;
     }
 
+    //ok
     public function formatDataCsv($rawLine, $line)
     {
         $formattedData = [];
@@ -111,12 +123,24 @@ class ImportService
                     $formattedData['formation']['annee'],
                     $formattedData['etablissement']['code'],
                     $formattedData['etablissement']['nom'],
-                    $formattedData['etablissement']['code_postal'], /*E*/, /*F*/,
+                    $formattedData['localisation']['nom'],
+                    $formattedData['localisation']['lat'],
+                    $formattedData['localisation']['long'],
+                    $formattedData['localisation']['adresse'],
+                    $formattedData['localisation']['complement_adresse'],
+                    $formattedData['localisation']['ville'],
+                    $formattedData['localisation']['code'],
+                    $formattedData['localisation']['cedex'],
+                    $formattedData['localisation']['region'],
+                    $formattedData['localisation']['pays'],
                     $formattedData['formation']['typeDiplome'],
                     $formattedData['formation']['niveau'],
+                    $formattedData['formation']['lmd'],
+                    $formattedData['formation']['modalite_thesaurus'],
+                    $formattedData['formation']['ects'],
                     $formattedData['formation']['url'],
                     $formattedData['formation']['nom'],
-                    /*K*/,
+                    /*K*/, //service de rattachement
                     /* domaine_sise_1 */,
                     $formattedData['discipline']['abreviation_sise_1']/*type SISE*/,
                     /* domaine_sise_2 */,
@@ -143,12 +167,91 @@ class ImportService
                     /* domaine_hcere_5 */,
                     $formattedData['discipline']['abreviation_hceres_5']/*type HCERE*/,
                     $formattedData['tags']['nom']/*variable compose*/,
-                    $formattedData['discipline']['nom_nw3_1']/*type NW3*/,
-                    $formattedData['discipline']['nom_nw3_2']/*type NW3*/,
-                    $formattedData['formation']['effectif']
+                    ,//$formattedData['discipline']['nom_nw3_1']/*type NW3*/,
+                    ,//$formattedData['discipline']['nom_nw3_2']/*type NW3*/,
+                    $formattedData['formation']['effectif'],
+                    $formattedData['metier']['code_1'], //table formation_has_metier
+                    $formattedData['metier']['code_2'],
+                    $formattedData['metier']['code_3'],
+                    $formattedData['metier']['code_4'],
+                    $formattedData['metier']['code_5'],
                     ) = array_map('trim', $data);
             } else if ($this->type == self::TYPE_LABO) {
                 //TODO for Labo
+                list(
+                    $formattedData['etablissement']['code'],
+                    $formattedData['etablissement']['nom'],
+                    , //service de rattachement
+                    $formattedData['labo']['type'],
+                    $formattedData['labo']['code'],
+                    $formattedData['labo']['nom'],
+                    $formattedData['labo']['sigle'],
+                    $formattedData['labo']['etab_ext'],
+                    $formattedData['localisation']['nom'],
+                    $formattedData['localisation']['lat'],
+                    $formattedData['localisation']['long'],
+                    $formattedData['localisation']['adresse'],
+                    $formattedData['localisation']['complement_adresse'],
+                    $formattedData['localisation']['ville'],
+                    $formattedData['localisation']['code'],
+                    $formattedData['localisation']['cedex'],
+                    $formattedData['localisation']['region'],
+                    $formattedData['localisation']['pays'],
+                    $formattedData['labo']['url_1'],
+                    $formattedData['lab']['url_2'],
+                    $formattedData['lab']['url_3'],
+                    $formattedData['labo']['mailContact'],
+                    $formattedData['ed']['nom'],
+                    /* domaine_sise_1 */,
+                    $formattedData['discipline']['abreviation_sise_1']/*type SISE*/,
+                    /* domaine_sise_2 */,
+                    $formattedData['discipline']['abreviation_sise_2']/*type SISE*/,
+                    /* domaine_sise_3 */,
+                    $formattedData['discipline']['abreviation_sise_3']/*type SISE*/,
+                    /* domaine_sise_4 */,
+                    $formattedData['discipline']['abreviation_sise_4']/*type SISE*/,
+                    /* domaine_sise_5 */,
+                    $formattedData['discipline']['abreviation_sise_5']/*type SISE*/,
+                    $formattedData['discipline']['nom_cnu_1']/*type CNU*/,
+                    $formattedData['discipline']['nom_cnu_2']/*type CNU*/,
+                    $formattedData['discipline']['nom_cnu_3']/*type CNU*/,
+                    $formattedData['discipline']['nom_cnu_4']/*type CNU*/,
+                    $formattedData['discipline']['nom_cnu_5']/*type CNU*/,
+                    /* domaine_hcere_1 */,
+                    $formattedData['discipline']['abreviation_hceres_1']/*type HCERE*/,
+                    /* domaine_hcere_2 */,
+                    $formattedData['discipline']['abreviation_hceres_2']/*type HCERE*/,
+                    /* domaine_hcere_3 */,
+                    $formattedData['discipline']['abreviation_hceres_3']/*type HCERE*/,
+                    /* domaine_hcere_4 */,
+                    $formattedData['discipline']['abreviation_hceres_4']/*type HCERE*/,
+                    /* domaine_hcere_5 */,
+                    $formattedData['discipline']['abreviation_hceres_5']/*type HCERE*/,
+                    $formattedData['tags']['nom']/*variable compose*/,
+                    ,//$formattedData['discipline']['nom_nw3_1']/*type NW3*/,
+                    ,//$formattedData['discipline']['nom_nw3_2']/*type NW3*/,
+                    $formattedData['labo']['effectif'],
+                    $formattedData['labo']['effectif_hesam'],
+                    $formattedData['axe']['nom_1'],
+                    $formattedData['axe']['nom_2'],
+                    $formattedData['axe']['nom_3'],
+                    $formattedData['axe']['nom_4'],
+                    $formattedData['axe']['nom_5'],
+                    $formattedData['axe']['nom_6'],
+                    $formattedData['axe']['nom_7'],
+                    $formattedData['equipement']['nom'], //avec ;
+                    $formattedData['membre']['nom_prenom_1'],
+                    $formattedData['membre']['email_1'],
+                    $formattedData['membre']['nom_prenom_2'],
+                    $formattedData['membre']['email_2'],
+                    $formattedData['membre']['nom_prenom_3'],
+                    $formattedData['membre']['email_3'],
+                    $formattedData['membre']['nom_prenom_4'],
+                    $formattedData['membre']['email_4'],
+                    $formattedData['membre']['nom_prenom_5'],
+                    $formattedData['membre']['email_5'],
+
+                    ) = array_map('trim', $data);
 
             }
         } else {
@@ -161,18 +264,31 @@ class ImportService
     public function getDataFromExcel($file, $version)
     {
         $dataArray = [];
+        /**
+        * s'il y a erreur de createReader
+        *
+        * il faut ajouter createReader dans factory du liuggio/ExcelBundle
+        * car a l'heure actuel dernier version recuperable par composer il n'a pas cette fonction qui return @return \PHPExcel_Reader_IReader
+        *  public function createReader($type = 'Excel5'){ return call_user_func(array($this->phpExcelIO, 'createReader'), $type);}
+        */
+
         $reader = $this->factory->createReader($version);
         $canread = $reader->canRead($file);
         $phpExcelObject = $reader->load($file);
         //on traite que deuzieme onglait
-        $worksheet = $phpExcelObject->getSheet(1);
+        $activeSheetName = 'Formations Diplômes';
+        $worksheet = $phpExcelObject->getSheet(0);
         $contents = $worksheet->toArray(null,true,true,true);
         $highestRow = $worksheet->getHighestRow();
         //$highestColumn = $worksheet->getHighestColumn();
        // $columns = $this->get_range('A', $highestColumn);
 
         for ($line = 2; $line <= $highestRow; $line++) {
-            $dataArray[$line] = $this->formatDataExcel(array_map('trim',$contents[$line]), $line);
+            if ($this->formatDataExcel(array_map('trim',$contents[$line]), $line)) {
+                $dataArray[$line] = $this->formatDataExcel(array_map('trim', $contents[$line]), $line);
+            } else {
+                return false;
+            }
         }
         return $dataArray;
     }
@@ -180,47 +296,139 @@ class ImportService
     public function formatDataExcel($data, $line)
     {
         $formattedData = [];
-//TODO faire pour labo
+
         if ($this->checkNbFields($data, $line)) {
-            $formattedData['formation']['annee'] = $data['A'];
-            $formattedData['etablissement']['code'] = $data['B'];
-            $formattedData['etablissement']['nom'] = $data['C'];
-            $formattedData['etablissement']['code_postal'] = $data['D'];
-            /*E*/ /*F*/
-            $formattedData['formation']['typeDiplome'] = $data['G'];
-            $formattedData['formation']['niveau'] = $data['H'];
-            $formattedData['formation']['url'] = $data['I'];
-            $formattedData['formation']['nom'] = $data['J'];
-            /*K*/
-            /* domaine_sise_1 */
-            $formattedData['discipline']['abreviation_sise_1'] = $data['M'];
-            /* domaine_sise_2 */
-            $formattedData['discipline']['abreviation_sise_2'] = $data['O'];
-            /* domaine_sise_3 */
-            $formattedData['discipline']['abreviation_sise_3'] = $data['Q'];
-            /* domaine_sise_4 */
-            $formattedData['discipline']['abreviation_sise_4'] = $data['S'];
-            /* domaine_sise_5 */
-            $formattedData['discipline']['abreviation_sise_5'] = $data['U'];
-            $formattedData['discipline']['nom_cnu_1'] = $data['V'];
-            $formattedData['discipline']['nom_cnu_2'] = $data['W'];
-            $formattedData['discipline']['nom_cnu_3'] = $data['X'];
-            $formattedData['discipline']['nom_cnu_4'] = $data['Y'];
-            $formattedData['discipline']['nom_cnu_5'] = $data['Z'];
-            /* domaine_hceres_1 */
-            $formattedData['discipline']['abreviation_hceres_1'] = $data['AB'];
-            /* domaine_hceres_2 */
-            $formattedData['discipline']['abreviation_hceres_2'] = $data['AD'];
-            /* domaine_hcere_3 */
-            $formattedData['discipline']['abreviation_hceres_3'] = $data['AF'];
-            /* domaine_hceres_4 */
-            $formattedData['discipline']['abreviation_hceres_4'] = $data['AH'];
-            /* domaine_hceres_5 */
-            $formattedData['discipline']['abreviation_hceres_5'] = $data['AJ'];
-            $formattedData['tags']['nom'] = $data['AK'];
-            $formattedData['discipline']['nom_nw3_1'] = $data['AL'];
-            $formattedData['discipline']['nom_nw3_2'] = $data['AM'];
-            $formattedData['formation']['effectif'] = $data['AN'];
+
+            if ($this->type == self::TYPE_FORMATION) {
+                $formattedData['formation']['annee'] = $data['A'];
+                $formattedData['etablissement']['code'] = $data['B'];
+                $formattedData['etablissement']['nom'] = $data['C'];
+                $formattedData['localisation']['nom'] = $data['D'];
+                $formattedData['localisation']['lat'] = $data['E'];
+                $formattedData['localisation']['long'] = $data['F'];
+                $formattedData['localisation']['adresse'] = $data['G'];
+                $formattedData['localisation']['complement_adresse'] = $data['H'];
+                $formattedData['localisation']['ville'] = $data['I'];
+                $formattedData['localisation']['code'] = $data['J'];
+                $formattedData['localisation']['cedex'] = $data['K'];
+                $formattedData['localisation']['region'] = $data['L'];
+                $formattedData['localisation']['pays'] = $data['M'];
+                $formattedData['formation']['typeDiplome'] = $data['N'];
+                $formattedData['formation']['niveau'] = $data['O'];
+                $formattedData['formation']['lmd'] = $data['P'];
+                $formattedData['formation']['modalite_thesaurus'] = $data['Q'];
+                $formattedData['formation']['ects'] = $data['R'];
+                $formattedData['formation']['url'] = $data['S'];
+                $formattedData['formation']['nom'] = $data['T'];
+                /* U service de rattachement */
+                /* V domaine_sise_1 */
+                $formattedData['discipline']['abreviation_sise_1'] = $data['W'];
+                /* X domaine_sise_2 */
+                $formattedData['discipline']['abreviation_sise_2'] = $data['Y'];
+                /* Z domaine_sise_3 */
+                $formattedData['discipline']['abreviation_sise_3'] = $data['AA'];
+                /* AB domaine_sise_4 */
+                $formattedData['discipline']['abreviation_sise_4'] = $data['AC'];
+                /* AD domaine_sise_5 */
+                $formattedData['discipline']['abreviation_sise_5'] = $data['AE'];
+                $formattedData['discipline']['nom_cnu_1'] = $data['AF'];
+                $formattedData['discipline']['nom_cnu_2'] = $data['AG'];
+                $formattedData['discipline']['nom_cnu_3'] = $data['AH'];
+                $formattedData['discipline']['nom_cnu_4'] = $data['AI'];
+                $formattedData['discipline']['nom_cnu_5'] = $data['AJ'];
+                /* AK domaine_hceres_1 */
+                $formattedData['discipline']['abreviation_hceres_1'] = $data['AL'];
+                /* AM domaine_hceres_2 */
+                $formattedData['discipline']['abreviation_hceres_2'] = $data['AN'];
+                /* AO domaine_hcere_3 */
+                $formattedData['discipline']['abreviation_hceres_3'] = $data['AP'];
+                /* AQ domaine_hceres_4 */
+                $formattedData['discipline']['abreviation_hceres_4'] = $data['AR'];
+                /* AS domaine_hceres_5 */
+                $formattedData['discipline']['abreviation_hceres_5'] = $data['AT'];
+                $formattedData['tags']['nom'] = $data['AU'];
+                $formattedData['discipline']['nom_nw3_1'] = $data['AV'];
+                $formattedData['discipline']['nom_nw3_2'] = $data['AW'];
+                $formattedData['formation']['effectif'] = $data['AX'];
+                $formattedData['metier']['code_1'] = $data['AY']; // table formation_has_metier
+                $formattedData['metier']['code_2'] = $data['AZ'];
+                $formattedData['metier']['code_3'] = $data['BA'];
+                $formattedData['metier']['code_4'] = $data['BB'];
+                $formattedData['metier']['code_5'] = $data['BC'];
+
+            } else if ($this->type == self::TYPE_LABO) {
+                $formattedData['etablissement']['code'] = $data[''];
+                $formattedData['etablissement']['nom'] = $data[''];
+                //service de rattachement
+                $formattedData['labo']['type'] = $data[''];
+                $formattedData['labo']['code'] = $data[''];
+                $formattedData['labo']['nom'] = $data[''];
+                $formattedData['labo']['sigle'] = $data[''];
+                $formattedData['labo']['etab_ext'] = $data[''];
+                $formattedData['localisation']['nom'] = $data[''];
+                $formattedData['localisation']['lat'] = $data[''];
+                $formattedData['localisation']['long'] = $data[''];
+                $formattedData['localisation']['adresse'] = $data[''];
+                $formattedData['localisation']['complement_adresse'] = $data[''];
+                $formattedData['localisation']['ville'] = $data[''];
+                $formattedData['localisation']['code'] = $data[''];
+                $formattedData['localisation']['cedex'] = $data[''];
+                $formattedData['localisation']['region'] = $data[''];
+                $formattedData['localisation']['pays'] = $data[''];
+                $formattedData['labo']['url_1'] = $data[''];
+                $formattedData['lab']['url_2'] = $data[''];
+                $formattedData['lab']['url_3'] = $data[''];
+                $formattedData['labo']['mailContact'] = $data[''];
+                $formattedData['ed']['nom'] = $data[''];
+                /* domaine_sise_1 */
+                $formattedData['discipline']['abreviation_sise_1'] = $data['']; /*type SISE*/
+                /* domaine_sise_2 */
+                $formattedData['discipline']['abreviation_sise_2'] = $data[''];/*type SISE*/
+                /* domaine_sise_3 */
+                $formattedData['discipline']['abreviation_sise_3'] = $data[''];/*type SISE*/
+                /* domaine_sise_4 */
+                $formattedData['discipline']['abreviation_sise_4'] = $data[''];/*type SISE*/
+                /* domaine_sise_5 */
+                $formattedData['discipline']['abreviation_sise_5'] = $data[''];/*type SISE*/
+                $formattedData['discipline']['nom_cnu_1'] = $data[''];/*type CNU*/
+                $formattedData['discipline']['nom_cnu_2'] = $data[''];/*type CNU*/
+                $formattedData['discipline']['nom_cnu_3'] = $data[''];/*type CNU*/
+                $formattedData['discipline']['nom_cnu_4'] = $data[''];/*type CNU*/
+                $formattedData['discipline']['nom_cnu_5'] = $data[''];/*type CNU*/
+                /* domaine_hcere_1 */
+                $formattedData['discipline']['abreviation_hceres_1'] = $data[''];/*type HCERE*/
+                /* domaine_hcere_2 */
+                $formattedData['discipline']['abreviation_hceres_2'] = $data[''];/*type HCERE*/
+                /* domaine_hcere_3 */
+                $formattedData['discipline']['abreviation_hceres_3'] = $data[''];/*type HCERE*/
+                /* domaine_hcere_4 */
+                $formattedData['discipline']['abreviation_hceres_4'] = $data[''];/*type HCERE*/
+                /* domaine_hcere_5 */
+                $formattedData['discipline']['abreviation_hceres_5'] = $data[''];/*type HCERE*/
+                $formattedData['tags']['nom'] = $data[''];/*variable compose*/
+                //$formattedData['discipline']['nom_nw3_1'] = $data[''];/*type NW3*/
+                //$formattedData['discipline']['nom_nw3_2'] = $data[''];/*type NW3*/
+                $formattedData['labo']['effectif'] = $data[''];
+                $formattedData['labo']['effectif_hesam'] = $data[''];
+                $formattedData['axe']['nom_1'] = $data[''];
+                $formattedData['axe']['nom_2'] = $data[''];
+                $formattedData['axe']['nom_3'] = $data[''];
+                $formattedData['axe']['nom_4'] = $data[''];
+                $formattedData['axe']['nom_5'] = $data[''];
+                $formattedData['axe']['nom_6'] = $data[''];
+                $formattedData['axe']['nom_7'] = $data[''];
+                $formattedData['equipement']['nom'] = $data['']; //avec ;
+                $formattedData['membre']['nom_prenom_1'] = $data[''];
+                $formattedData['membre']['email_1'] = $data[''];
+                $formattedData['membre']['nom_prenom_2'] = $data[''];
+                $formattedData['membre']['email_2'] = $data[''];
+                $formattedData['membre']['nom_prenom_3'] = $data[''];
+                $formattedData['membre']['email_3'] = $data[''];
+                $formattedData['membre']['nom_prenom_4'] = $data[''];
+                $formattedData['membre']['email_4'] = $data[''];
+                $formattedData['membre']['nom_prenom_5'] = $data[''];
+                $formattedData['membre']['email_5'] = $data[''];
+            }
         } else {
             return false;
         }
@@ -232,7 +440,7 @@ class ImportService
     {
         $nbFields = count($data);
         if (($this->type == 1 && $nbFields != self::REQUIRED_NUMBER_1) || ($this->type == 2 && $nbFields != self::REQUIRED_NUMBER_2) ) {
-            $msg = "Ln $line : Le nombre des colonnes est erroné ou non compatible.";
+            $msg = "Ln $line : Le nombre des colonnes ( $nbFields ) est erroné ou non compatible.";
             $this->log->warning($msg);
             return false;
         }
@@ -248,7 +456,17 @@ class ImportService
                 $valid = false;
             } else {
                 //Formation
-                if (!$this->checkFormationData($data['formation'], $line)) {
+                if ($this->type == self::TYPE_FORMATION) {
+                    if (!$this->checkFormationData($data['formation'], $line)) {
+                        $valid = false;
+                    }
+                    //formation_has_metier3
+                    if (!$this->checkMetierData($data['metier'], $line)) {
+                        $valid = false;
+                    }
+                }
+                //Localisation
+                if (!$this->checkLocalisationData($data['localisation'], $line)) {
                     $valid = false;
                 }
                 //Etablissement
@@ -264,11 +482,52 @@ class ImportService
         return $valid;
     }
 
+    public function checkLocalisationData($data, $line)
+    {
+        $valid = true;
+
+        $requiredParams = array('adresse', 'ville', 'code');
+        $checkRequiredParams = $this->checkMandatoryParameters($data, $requiredParams);
+
+        if ($checkRequiredParams['success'] === false) {
+            $msg = sprintf('Ln %d : Les champs obligatoires "%s" sont manquants pour les données localisation, de la formation', $line, $checkRequiredParams['param']);
+            $this->log->warning($msg);
+            $valid = false;
+        }
+        //existLocalisation
+        //todo ajouter gestion envoie mail a admin sil la localisation n'est pas presente dans la base
+        if (!$this->em
+            ->getRepository('AppBundle:Localisation')
+            ->existLocalisation($data['adresse'], $data['code'], $data['ville'])) {
+            $msg = sprintf('Ln %d : la localisation inconnue : %s %s %s.', $line, $data['adresse'], $data['code'], $data['ville']);
+            $this->log->warning($msg);
+            $valid = false;
+        }
+        return $valid;
+    }
+
+    public function checkMetierData($dataMetier, $line) {
+
+        $valid = true;
+
+        for ($i = 1; $i <= 5; $i++) {
+            $metier = 'code_'. $i;
+            if (!empty(trim($dataMetier[$metier]))) {
+                if (!$this->em->getRepository('AppBundle:Metier3')->existMetier($dataMetier[$metier])) {
+                    $msg = sprintf('Ln %d : le metier pour le code ROME  "%s".', $line, $dataMetier[$metier]);
+                    $this->log->warning($msg);
+                    $valid = false;
+                }
+            }
+        }
+        return $valid;
+    }
+
     public function checkFormationData($data, $line)
     {
         $valid = true;
 
-        $requiredParams = array('annee', 'typeDiplome', 'niveau', 'nom');
+        $requiredParams = array('annee', 'typeDiplome', 'nom');
         $checkRequiredParams = $this->checkMandatoryParameters($data, $requiredParams);
 
         if ($checkRequiredParams['success'] === false) {
@@ -301,7 +560,7 @@ class ImportService
     {
         $valid = true;
 
-        $requiredParams = array('code', 'nom', 'code_postal');
+        $requiredParams = array('code', 'nom');
         $checkRequiredParams = $this->checkMandatoryParameters($data, $requiredParams);
 
         if ($checkRequiredParams['success'] === false) {
@@ -310,7 +569,7 @@ class ImportService
             $valid = false;
         }
 
-        // TODO verification si l'etablissement demande est bien avec meme id et meme code
+        //verification si l'etablissement demande est bien avec meme id et meme code
         if ($data['code'] != '' && !$this->em->getRepository('AppBundle:Etablissement')->verifyEtablissementByCodeAndId($this->etablissement->getEtablissementId(), $data['code'])) {
             $msg = sprintf('Ln %d : L\'établissement inconnu avec son identifiant %d et son code %s', $line, $this->etablissement->getEtablissementId(), $data['code']);
             $this->log->warning($msg);
@@ -328,9 +587,7 @@ class ImportService
             $this->log->warning($msg);
             $valid = false;
         }
-        if (!$this->checkDisciplinesValues($data)) {
-            $msg = sprintf("Ln %d : La valeur de discipline est inconnue", $line);
-            $this->log->warning($msg);
+        if (!$this->checkDisciplinesValues($data, $line)) {
             $valid = false;
         }
         return $valid;
@@ -385,14 +642,14 @@ class ImportService
         return true;
     }
 
-    public function checkDisciplinesValues($disciplines)
+    public function checkDisciplinesValues($disciplines, $line)
     {
         for ($i = 1; $i <= 5; $i++) {
             //SISE
             $sise = 'abreviation_sise_'.$i;
             if ($disciplines[$sise] != '') {
                 if (!$this->disciplineExists($disciplines[$sise], 'SISE')) {
-                    $msg = sprintf('La valeur de discipline SISE "%s" est inconnue', $disciplines[$sise]);
+                    $msg = sprintf('Ln %d : La valeur de discipline SISE "%s" est inconnue.', $line, $disciplines[$sise]);
                     $this->log->warning($msg);
                     return false;
                 }
@@ -400,7 +657,7 @@ class ImportService
             $hceres = 'abreviation_hceres_'.$i;
             if ($disciplines[$hceres] != '') {
                 if (!$this->disciplineExists($disciplines[$hceres], 'HCERES')) {
-                    $msg = sprintf('La valeur de discipline HCERES "%s" est inconnue', $disciplines[$hceres]);
+                    $msg = sprintf('Ln %d : La valeur de discipline HCERES "%s" est inconnue.', $line, $disciplines[$hceres]);
                     $this->log->warning($msg);
                     return false;
                 }
@@ -408,7 +665,7 @@ class ImportService
             $cnu = 'nom_cnu_'.$i;
             if ($disciplines[$cnu] != '') {
                 if (!$this->disciplineExists($disciplines[$cnu], 'CNU')) {
-                    $msg = sprintf('La valeur de discipline CNU "%s" est inconnue', $disciplines[$cnu]);
+                    $msg = sprintf('Ln %d : La valeur de discipline CNU "%s" est inconnue.', $line, $disciplines[$cnu]);
                     $this->log->warning($msg);
                     return false;
                 }
@@ -417,10 +674,15 @@ class ImportService
         return true;
     }
 
-    public function importData($formattedData)
+    public function importLaboData($formattedData)
+    {
+        return true;
+    }
+
+
+    public function importFormationData($formattedData)
     {
         //verifier si la formation ou le labo existe
-        //TODO repenser ; prendre en compte qu'aura aussi labos
         $valid = true;
 
         foreach ($formattedData as $line => $data) {
@@ -428,14 +690,24 @@ class ImportService
                 $formation = new Formation();
                 $formation->addEtablissement($this->etablissement);
                 //$this->etablissement->addFormation($formation);
-/*
+
                 if ($objId = $this->getObjId($data['formation'])) {
-                    $formation->setObjId($objId);
+                    $formation->setObjetId($objId);
                 } else {
                     $formationId = $formation->getFormationId();
-                    $formation->setObjId('F' . $formationId);
-                } */
+                    $formation->setObjetId('F' . $formationId);
+                }
                 $formation->setNom($data['formation']['nom']);
+                $formation->setLmd($data['formation']['lmd']);
+                /*
+                //TODO  modalite_thesaurus
+                //data_error in line : 5 Message : Expected value of type "AppBundle\Entity\Thesaurus" for association field "AppBundle\Entity\Formation#$modalite_thesaurus", got "string" instead.
+                $formation->setModaliteThesaurus($data['formation']['modalite_thesaurus']);
+                */
+
+                //TODO  add code interne formation
+
+                $formation->setEcts($data['formation']['ects']);
                 //$formation->setDescription($data['formation']['description']);
                 $formation->setUrl($data['formation']['url']);
                 $formation->setAnnee($data['formation']['annee']);
@@ -447,13 +719,21 @@ class ImportService
                     $formation->setEffectif($data['formation']['effectif']);
                 }
 
+                //Localisation
+                $localisation = $this->em
+                    ->getRepository('AppBundle:Localisation')
+                    ->findOneBy(array('adresse' => $data['localisation']['adresse'], 'code' => $data['localisation']['code'], 'ville' => $data['localisation']['ville']));
+
+                $formation->addLocalisation($localisation);
+
+                //Disciplines et Debouché
                 for ($i = 1; $i <= 5; $i++) {
                     //SISE
                     $sise = 'abreviation_sise_' . $i;
                     if ($data['discipline'][$sise] != '') {
                         $discipline = $this->em
                             ->getRepository('AppBundle:Discipline')
-                            ->findOneByAbreviation($data['discipline'][$sise]);
+                            ->findOneBy(array('nom' => $data['discipline'][$sise], 'type' => 'SISE'));
 
                         $formation->addDiscipline($discipline);
                     }
@@ -461,7 +741,7 @@ class ImportService
                     if ($data['discipline'][$hceres] != '') {
                         $discipline = $this->em
                             ->getRepository('AppBundle:Discipline')
-                            ->findOneByAbreviation($data['discipline'][$hceres]);
+                            ->findOneBy(array('nom' => $data['discipline'][$hceres], 'type' => 'HCERES'));
 
                         $formation->addDiscipline($discipline);
                     }
@@ -469,7 +749,7 @@ class ImportService
                     if ($data['discipline'][$cnu] != '') {
                         $discipline = $this->em
                             ->getRepository('AppBundle:Discipline')
-                            ->findOneByNom($data['discipline'][$cnu]);
+                            ->findOneBy(array('nom' => $data['discipline'][$cnu], 'type' => 'CNU'));
 
                         $formation->addDiscipline($discipline);
                     }
@@ -499,6 +779,7 @@ class ImportService
                         $formation->addTag($tag);
                     }
                 }
+
                 $this->em->persist($formation);
                 if ((($line % self::COMMIT_STEP) == 0)) {
                     $this->em->flush();
@@ -533,9 +814,11 @@ class ImportService
     {
         if ($this->tabDisciplineSise === null) {
             $tabDisciplines = array();
-            $disciplines = $this->em->getRepository('AppBundle:Discipline')->findAllDisciplines('SISE');
+            $repository = $this->em->getRepository('AppBundle:Discipline');
+            $disciplines = $repository->findAllDisciplines('SISE');
+
             foreach ($disciplines as $discipline) {
-                $key = $discipline['abreviation'];
+                $key = $discipline['nom'];
                 $tabDisciplines[$key] = null;
             }
             $this->tabDisciplineSise = $tabDisciplines;
@@ -549,7 +832,7 @@ class ImportService
             $tabDisciplines = array();
             $disciplines = $this->em->getRepository('AppBundle:Discipline')->findAllDisciplines('HCERES');
             foreach ($disciplines as $discipline) {
-                $key = $discipline['abreviation'];
+                $key = $discipline['nom'];
                 $tabDisciplines[$key] = null;
             }
             $this->tabDisciplineHceres = $tabDisciplines;
@@ -642,16 +925,13 @@ class ImportService
         $dataCheckDoublons = [];
 
         foreach ($list as $val) {
-            //TODO changer getFormationId par getObjetId de qu'il est en place
+            //changer getFormationId par getObjetId de qu'il est en place
             $str = $this->getStrFormation($val->getNom(), $val->getTypeDiplome(), $val->getNiveau());
             $str2 = $this->getStrFormation($val->getNom(), $val->getTypeDiplome(), $val->getNiveau(), $val->getAnnee());
-            $dataComparaison[$str] = 'F'.$val->getFormationId();
-            $dataCheckDoublons[$str2] = $val->getFormationId();
+            $dataComparaison[$str] = $val->getObjetId();
+            $dataCheckDoublons[$str2] = $val->getObjetId();
         }
 
-        if (count($list) !== count($dataComparaison)) {
-            throw new \Exception('Doublons dans la liste de formation (BDD)');
-        }
         $this->tabComparaison = $dataComparaison;
         $this->tabCheckDoublons = $dataCheckDoublons;
         return true;
@@ -664,9 +944,9 @@ class ImportService
         $data = [];
 
         foreach ($list as $val) {
-            //TODO changer getLaboId par getObjetId de qu'il est en place
+            //changer getLaboId par getObjetId de qu'il est en place
             $str = $this->getStrFormation($val->getNom());
-            $data[$str] = 'L'.$val->getLaboId();
+            $data[$str] = 'L'.$val->getObjetId();
         }
 
         if (count($list) !== count($data)) {
@@ -683,5 +963,4 @@ class ImportService
         }
         return false;
     }
-
 }
