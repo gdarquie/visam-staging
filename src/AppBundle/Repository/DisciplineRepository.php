@@ -55,10 +55,49 @@ class DisciplineRepository extends EntityRepository
     }
 
     public function findAllDisciplines($type){
-        $qb = $this->createQueryBuiler('d')->select('d.nom, d.abreviation')->where('d.type = :type')->setParameter('type', $type);
+
+        $qb = $this->createQueryBuilder('d')
+            ->select('d.nom, d.abreviation')
+            ->where('d.type = :type')
+            ->setParameter('type', $type);
+
         $query = $qb->getQuery()->getArrayResult();
+
         return $query;
     }
 
+    public function findDisciplinesByFormationAndType($formationId, $type)
+    {
+
+        $qb = $this->createQueryBuilder('d')
+            ->select('d, do')
+            ->leftJoin('d.formation', 'f')
+            ->leftJoin('d.domaineId', 'do')
+            ->where('f.formationId = :formation')
+            ->andWhere('d.type = :type')
+            ->setParameter('formation', $formationId)
+            ->setParameter('type', $type);
+
+        $query = $qb->getQuery()->getArrayResult();
+
+        return $query;
+    }
+
+    public function findDisciplinesByLaboAndType($laboId, $type)
+    {
+
+        $qb = $this->createQueryBuilder('d')
+            ->select('d, do')
+            ->leftJoin('d.labo', 'l')
+            ->leftJoin('d.domaineId', 'do')
+            ->where('l.laboId = :labo')
+            ->andWhere('d.type = :type')
+            ->setParameter('labo', $laboId)
+            ->setParameter('type', $type);
+
+        $query = $qb->getQuery()->getArrayResult();
+
+        return $query;
+    }
 
 }

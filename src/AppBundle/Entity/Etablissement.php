@@ -210,7 +210,7 @@ class Etablissement
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="last_update", type="datetime")
+     * @ORM\Column(name="last_update", type="datetime" , nullable=true)
      */
     private $last_update;
 

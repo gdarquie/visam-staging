@@ -1,0 +1,60 @@
+<style type="text/css">
+    <!--
+    h1
+    {
+        font-size:16px;
+        color:#2f2e2e;
+    }
+
+    table
+    {
+        width:  100%;
+        border: 1px solid #555555;
+        border-collapse: collapse;
+        color:#2f2e2e;
+        margin-top: 25px;
+    }
+
+    thead tr
+    {
+        text-align: center;
+        background: #dcdcdc;
+        padding: 0;
+        font-weight: bold;
+    }
+
+    td
+    {
+        text-align: center;
+        font-size:12px;
+        border: thin solid #555555;
+        padding: 5px;
+    }
+
+    -->
+</style>
+<page backtop="100px" backbottom="20px">
+    <h1>Erreurs</h1>
+
+    {% if informations|length > 0 %}
+        <table  class="recap">
+            <col style="width: 5%">
+            <col style="width: 95%">
+            <thead>
+            <tr>
+                <td>N°</td>
+                <td>Message</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for key, value in informations %}
+                <tr>
+                    <td>{{ key + 1 }}</td>
+                    <td>{{ value }}</td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    {% endif %}
+</page>

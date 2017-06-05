@@ -37,8 +37,8 @@ class UploadFileType extends AbstractType
 			))
             ->add('type', ChoiceType::class, array(
                 'choices'  => array(
-                    'Formations' => 1,
-                    'Laboratoires' => 2,
+                    'Formations' => 'F',
+                    'Laboratoires' => 'L',
                 ),
                 'attr' => array(
                     'class' => 'type'
@@ -46,7 +46,7 @@ class UploadFileType extends AbstractType
                 'choices_as_values' => true,
                 'choice_value' => function ($choice) {
                     if (null === $choice) {
-                        return 1;
+                        return 'F';
                     }
 
                     return $choice;
@@ -54,7 +54,7 @@ class UploadFileType extends AbstractType
                 'expanded' => true,
                 'multiple' => false,
                 'required' => true,
-                'preferred_choices' => array(1)
+                'preferred_choices' => array('F')
             ))
             ->add('cancel', ButtonType::class, array(
                 'attr' => array(

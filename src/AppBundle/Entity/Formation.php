@@ -356,6 +356,7 @@ class Formation
         $this->ufr = new \Doctrine\Common\Collections\ArrayCollection();
         $this->etablissement = new \Doctrine\Common\Collections\ArrayCollection();
         $this->discipline = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->metier = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
@@ -1151,6 +1152,30 @@ class Formation
     public function getMetier()
     {
         return $this->metier;
+    }
+
+    /**
+     * Add metier
+     *
+     * @param \AppBundle\Entity\Metier3 $metier
+     *
+     * @return Formation
+     */
+    public function addMetier(\AppBundle\Entity\Metier $metier)
+    {
+        $this->metier[] = $metier;
+
+        return $this;
+    }
+
+    /**
+     * Remove metier
+     *
+     * @param \AppBundle\Entity\Metier $metier
+     */
+    public function removeMetier(\AppBundle\Entity\Metier $metier)
+    {
+        $this->metier->removeElement($metier);
     }
 
     /**

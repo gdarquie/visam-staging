@@ -49,7 +49,7 @@ class ThesaurusController extends Controller
     }
 
     /**
-     * Editer un itme du thesaurus
+     * Editer un item du thesaurus
      *
      * @Route("/{id}/edit", name="editeur_thesaurus_edit")
      */
@@ -71,7 +71,7 @@ class ThesaurusController extends Controller
             $em->persist($thesaurus);
             $em->flush();
 
-            return $this->redirectToRoute('thesaurus', array('id' => $thesaurus->getThesaurusId() ));
+            return $this->redirectToRoute('admin_thesaurus', array('slug' => $thesaurus->getSlug() ));
         }
 
         return $this->render('EditeurBundle:Thesaurus:edit.html.twig', array(
@@ -104,7 +104,7 @@ class ThesaurusController extends Controller
     /**
      * Créer un form pour effacer un item
      *
-     * @param Labo $labo
+     * @param Thesaurus $thesaurus
      *
      * @return \Symfony\Component\Form\Form
      */

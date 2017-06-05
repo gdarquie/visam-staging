@@ -241,6 +241,20 @@
                                 <td><a href="#!" class="js-remove-etablissement" data-url="{{ path('editeur_etablissement_ajax_delete', { etablissementId : item.etablissementId}) }}" ><i class="material-icons">delete</i></a></td>
                                 </span>
                         </tr>
+
+                {#<ul class="collection with-header">#}
+                    {#<li class="collection-header"><h4>Etablissements</h4></li>#}
+                    {#{% for item in etablissements  %}#}
+                        {#<li class="collection-item"><a href="{{ path('editeur_etablissement_edit', {'id' : item.etablissementId}) }}">{{ item.nom }}</a> - {{ item.lastUpdate|date('d/m/Y') }} à {{ item.lastUpdate|date( 'H:i:s') }}#}
+                         {#   {% if item.sigle == 'Cnam' %} #}
+                            {#<br /><a href="{{ path("export_formulaire", { "id" : item.etablissementId, "type" : "L" }) }}">Export des données de labo</a>#}
+                            {#&nbsp;&nbsp;<br /><a href="{{ path("export_formulaire", { "id" : item.etablissementId, "type" : "F" }) }}">Export des données de formation</a>#}
+                            {#<br />#}
+                            {#<a data-target="modal1" href="#modal1" class="modal-trigger" data-id-etablissement="{{ item.etablissementId }}" data-nom-etablissement="{{ item.nom }}">Import&nbsp;CSV</a>#}
+                            {#    {% endif %} #}
+                        {#</li>#}
+                {#</ul>#}
+
                     {% endfor %}
                     </tbody>
                 </table>
@@ -425,10 +439,14 @@
         </div>
 
     </section>
+
+    {{  render (controller("EditeurBundle:Ajax:uploadDocument")) }}
+
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
+
     <script>
 
         $(document).ready(function() {
@@ -463,5 +481,81 @@
             });
 
         });
+
+        $('#upload_file_type_0').click(function() {
+            $('.message-upload').html('');
+            $('#logList').html('');
+            $('#upload_file_attachment').val(null);
+        });
+
+        $('#upload_file_type_1').click(function() {
+            $('.message-upload').html('');
+            $('#logList').html('');
+            $('#upload_file_attachment').val(null);
+        });
+
+        $('.modal-trigger').click(function(){
+            $('.message-upload').html('');
+            $('#logList').html('');
+            $('.message-upload').removeClass('invalid valid');
+            $('#upload_file_attachment').val(null);
+            $('#upload_file_etablissement').val($(this).attr('data-id-etablissement'));
+            $('.modal-header #titre').html('<strong>'+$(this).attr('data-nom-etablissement')+'</strong>');
+            $('.modal-trigger').leanModal();
+        });
+
+        $("#uploadform").submit(function (event) {
+
+            event.preventDefault();
+            $('#logList').html('');
+            $('.message-upload').html('');
+            $('#upload_file_upload').html('Uploading...');
+            $('#upload_file_cancel').hide();
+            // Create a new FormData object.
+            //var formData = new FormData();
+
+            // formData.append('type', $('input[type=radio]:checked').val());
+            $.ajax( {
+                url: "{{ path('upload') }}",
+                type: 'POST',
+                data: new FormData( this ),
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    $('#upload_file_upload').html('Importer');
+                    $('#upload_file_cancel').show();
+                    if (data.success === false) {
+                        var info = '<div id ="block_log" style="overflow:auto; height: 120px; width: 95%; border: 3px solid red;">';
+                        //$('.message-upload').html(data.msg);
+                        if (data.log) {
+                            var url = '{{ path("show_log", {'id': 'filename'}) }}';
+                            url = url.replace("filename", data.filename);
+                            $('.message-upload').html(data.msg + '<br /><a id="logpdf" href="' + url + '" target="_blank">Télécharger le fichier en format PDF</a>');
+                        } else {
+                            $('.message-upload').html(data.msg);
+                        }
+                        $('.message-upload').addClass('invalid');
+                        info += '</ul>';
+                        $.each(data.log, function(i,line) {
+                            info += '<li>' + line + '</li>';
+                        });
+                        info += '</ul></div></br>';
+
+                        $('#logList').html(info);
+                    } else {
+                        $('.message-upload').html(data.msg);
+                        $('.message-upload').addClass('valid');
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown)
+                {   $('#upload_file_upload').html('Envoyer');
+                    $('#upload_file_cancel').show();
+                    $('.message-upload').html('Le temps d\'exécution maximum autorisé est dépassé');
+                    $('.message-upload').addClass('invalid');
+                },
+                timeout:   50000,
+            } );
+        });
+
     </script>
 {% endblock %}

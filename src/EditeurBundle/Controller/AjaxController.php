@@ -24,9 +24,9 @@ class AjaxController extends Controller
     const DOSSIER_TYPE_FORMATION = 'formations';
     const DOSSIER_TYPE_LABO = 'laboratoires';
     const EXTENTION_AUTHORIZED = 'csv';
-//    const EXTENTION_AUTHORIZED = ['csv','xls','xlsx'];
-    const TYPE_FORMATION = 1;
-    const TYPE_LABO = 2;
+//    const EXTENTION_AUTHORIZED = array('csv','xls','xlsx');
+    const TYPE_FORMATION = 'F';
+    const TYPE_LABO = 'L';
 
     /**
      * un fichier en format csv
@@ -82,39 +82,46 @@ class AjaxController extends Controller
                 throw $this->createNotFoundException('L\etablissement inconnu.');
             }
 
-            $dir = $this->container->getParameter('upload_dir');
+            $target_dir = $this->container->getParameter('upload_dir');
 
-            if ($type == self::TYPE_FORMATION) {
-                $dossier = self::DOSSIER_TYPE_FORMATION;
+            /*
+               if ($type == self::TYPE_LABO) {
+                   $res['msg'] = 'Le fichier de type laboratoire n\'est pas traitée pour le moment. C\'est en cours de développement.';
+                   return new JsonResponse($res);
+               }
+            */
+
+            if ($type == self::TYPE_LABO) {
+                $doc_name = self::TYPE_LABO .'-'.$etab.'-'. date('Ymd_His');
             } else {
-                $dossier = self::DOSSIER_TYPE_LABO;
-                //pour le moment on traite pas les labos
-                if ($type == self::TYPE_LABO) {
-                    $res['msg'] = 'Le fichier de type laboratoire n\'est pas traitée pour le moment. C\'est en cours de développement.';
-                    return new JsonResponse($res);
-                }
+                $doc_name = self::TYPE_FORMATION .'-'.$etab.'-'.date('Ymd_His');
             }
-
-            $target_dir = $dir . '/' . $etab . '/' . $dossier . '/' . date('Y') . '/';
-            $doc_name = 'original_' . date('dmy_his') . '.' . $extension;
+            $file_name = $doc_name . '.' . $extension;
 
             $this->rmkdir($target_dir, 0777);
-            $file->move($target_dir, $doc_name);
-            chmod($target_dir . '/' . $doc_name, 0777);
+            $file->move($target_dir, $file_name);
+            chmod($target_dir . '/' . $file_name, 0777);
 
-            if (!file_exists($target_dir . '/' . $doc_name)) {
+            if (!file_exists($target_dir . '/' . $file_name)) {
                 $res['msg'] = 'Le fichier non trouvé.';
                 return new JsonResponse($res);
             }
 
             $importService = $this->get('editeur.import.service');
-            if (!$importService->import($etablissements, $type, $target_dir . '/' . $doc_name)) {
-                $res['msg'] = " l'importation de données echoué. Consulter le fichier log pour plus d'information";
+
+            if (!$importService->import($etablissements, $type, $target_dir . '/' . $file_name)) {
+                $message = "L'importation de données echoué.";
                 //lire fichier log et supprimer le fichier uploadé et fichier log
-                $logFile = $this->getLogName($target_dir . '/' . $doc_name);
-                $res['log'] = $this->getLogInfo($logFile);
-                unlink($target_dir . '/' . $doc_name);
-                unlink($logFile);
+                $logFile = $target_dir . '/' . $doc_name . '.log';
+
+                if (file_exists($logFile)) {
+                    $res['log'] = $this->getLogInfo($logFile);
+                    $res['filename'] = $doc_name . '.log';
+                    $message .= " Consulter le fichier log pour plus d'information";
+                    //unlink($logFile);
+                }
+                unlink($target_dir . '/' . $file_name);
+                $res['msg'] = $message;
             } else {
                 $res['success'] = true;
                 $res['code'] = 200;
@@ -177,6 +184,7 @@ class AjaxController extends Controller
     }
 
     public function getLogInfo($file) {
+
         $f = fopen($file, 'r');
         $dataArray = [];
         $line = 0;
@@ -192,5 +200,32 @@ class AjaxController extends Controller
     public function getLogName($file) {
         $pathParts = pathinfo($file);
         return $pathParts['dirname'] . '/' . $pathParts['filename'].'.log';
+    }
+
+    /**
+     * show log
+     *
+     * @Route("/show_log", name="show_log")
+     * @Method("GET")
+     */
+    public function showLogAction(Request $request)
+    {
+        $dir = $this->container->getParameter('upload_dir');
+        $filename = $request->query->get('id');
+
+        $infos = $this->getLogInfo($dir.'/'.$filename);
+
+        $html = $this->renderView('EditeurBundle:pdf:erreurs_importation.html.twig', array('informations' => $infos));
+
+        $html2pdf = $this->get('html2pdf_factory')->create();
+        $html2pdf->pdf->SetDisplayMode('real');
+
+        $html2pdf->writeHTML($html);
+        if (file_exists($dir.'/'.$filename)) {
+            unlink($dir . '/' . $filename);
+        }
+        //Output envoie le document PDF au navigateur internet
+        return new Response($html2pdf->Output('nom-du-pdf.pdf'), 200, array('Content-Type' => 'application/pdf'));
+
     }
 }
