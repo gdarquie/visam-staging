@@ -137,25 +137,6 @@ class AdminController extends Controller
         ));
     }
 
-//    /**
-//     *
-//     * @Route("/laboratoires/{max}", name="admin_laboratoires")
-//     */
-//    public function labosAction(){
-//
-//        $em = $this->getDoctrine()->getManager();
-//
-//        $query = $em->createQuery(
-//            'SELECT l FROM AppBundle:Labo l ORDER BY l.last_update DESC'
-//        )->setMaxResults($max);
-//        $items = $query->getResult();
-//
-//
-//        return $this->render('EditeurBundle:Admin:labos.html.twig', array(
-//            'labos' => $items
-//        ));
-//
-//    }
 
     /**
      *

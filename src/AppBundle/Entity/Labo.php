@@ -1033,6 +1033,7 @@ class Labo
         $etablissement->removeLabo($this);
     }
 
+
     /**
      * Add equipement
      *

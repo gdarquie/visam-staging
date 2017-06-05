@@ -1,5 +1,16 @@
 {% extends 'editeur.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        #collecte_etablissement label{
+            margin-top: 10px;
+            margin-right: 40px;
+            font-size: 1.3em;
+        }
+
+    </style>
+{% endblock %}
 
 {% block body %}
 

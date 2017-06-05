@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 
+use AppBundle\Entity\Etablissement;
 use AppBundle\Entity\Collecte;
 use AppBundle\Entity\Labo;
 use EditeurBundle\Form\CollecteType;
@@ -119,7 +120,7 @@ class CollecteController extends Controller
             $em->persist($collecte);
             $em->flush();
 
-            return $this->redirectToRoute('collecte', array('id' => $collecte->getCollecteId() ));
+            return $this->redirectToRoute('admin');
         }
 
         return $this->render('EditeurBundle:Collecte:edit.html.twig', array(
@@ -214,8 +215,8 @@ class CollecteController extends Controller
      *
      * @Route("/start/{collecteId}", name="editeur_collecte_start")
      */
-    public function launchCollecteAction($collecteId){
-
+    public function launchCollecteAction($collecteId)
+    {
         $em = $this->getDoctrine()->getManager();
 
         $repository = $this->getDoctrine()->getRepository('AppBundle:Collecte');
@@ -227,13 +228,11 @@ class CollecteController extends Controller
         $active = $collecte->getActive();
         $complete = $collecte->getComplete();
 
-        if($active||$complete){
+        if ($active || $complete) {
             $this->addFlash('success', "La collecte est déjà active ou a déjà été finalisée");
             return $this->redirectToRoute('admin');
-        }
-
-        //Activation de la collecte
-        else{
+        } //Activation de la collecte
+        else {
 
             //Selection des éléments de la précédente collecte
 
@@ -245,7 +244,6 @@ class CollecteController extends Controller
             $lastCompleteCollecte = $query->getSingleResult();
             $annee = $lastCompleteCollecte->getAnnee();
 
-
             //Création des éléments de la nouvelle collecte
 
             //Sélection de tous les labos avec la date de collecte (conditionner aux seuls établissement sélectionnés par la collecte)
@@ -254,6 +252,8 @@ class CollecteController extends Controller
             );
             $query->setParameter('annee', $annee);
             $labos = $query->getResult();
+
+//                dump($labos);die();
 
             //Sélection des formations (conditionner aux seuls établissement sélectionnés par la collecte)
             $query = $em->createQuery(
@@ -265,18 +265,32 @@ class CollecteController extends Controller
             //Sélection des écoles doctorales
 
             //Calcul de l'année de collecte
-            $anneeNouvelleCollecte = $annee+1;
+            $anneeNouvelleCollecte = $annee + 1;
 
             //Récupération de la date
             $now = new \DateTime();
 
             //Duplication de chaque élément
-            foreach ($labos as $labo){
+            foreach ($labos as $labo) {
 
                 $id = $labo->getLaboId();
                 $labo->setAnneeCollecte($anneeNouvelleCollecte);
                 $labo->setDateCreation($now);
                 $labo->setLastUpdate($now);
+
+                //retrouver l'établissement du labo
+                $query = $em->createQuery(
+                    'SELECT e.etablissementId FROM AppBundle:Etablissement e JOIN e.labo l WHERE l.laboId = :id '
+                );
+                $query->setParameter('id', $id);
+                $etablissements = $query->getResult();
+
+                $repository = $this->getDoctrine()->getRepository('AppBundle:Etablissement');
+
+                foreach ($etablissements as $item){
+                    $etablissement = $repository->findOneByEtablissementId($item['etablissementId']);
+                    $etablissement->addLabo($labo);
+                }
 
                 //Correction des disciplines
 
@@ -310,12 +324,27 @@ class CollecteController extends Controller
 
             }
 
-            foreach ($formations as $formation){
+
+            foreach ($formations as $formation) {
 
                 $id = $formation->getFormationId();
                 $formation->setAnneeCollecte($anneeNouvelleCollecte);
                 $formation->setDateCreation($now);
                 $formation->setLastUpdate($now);
+
+                //retrouver l'établissement d'une formation
+                $query = $em->createQuery(
+                    'SELECT e.etablissementId FROM AppBundle:Etablissement e JOIN e.formation l WHERE l.formationId = :id '
+                );
+                $query->setParameter('id', $id);
+                $etablissements = $query->getResult();
+
+                $repository = $this->getDoctrine()->getRepository('AppBundle:Etablissement');
+
+                foreach ($etablissements as $item){
+                    $etablissement = $repository->findOneByEtablissementId($item['etablissementId']);
+                    $etablissement->addFormation($formation);
+                }
 
                 //Correction des disciplines
 
@@ -357,6 +386,42 @@ class CollecteController extends Controller
             return $this->redirectToRoute('admin');
 
         }
+
     }
 
-}
+
+    /**
+     * Clôturer une collecte
+     *
+     * @Route("/close/{collecteId}", name="editeur_collecte_close")
+     */
+    public function closeCollecteAction($collecteId)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+
+        $repository = $this->getDoctrine()->getRepository('AppBundle:Collecte');
+        $collecte = $repository->findOneByCollecteId($collecteId);
+        $active = $collecte->getActive();
+
+        if ($user->hasRole('ROLE_ADMIN')) {
+
+            if ($active) {
+                $query = $em->createQuery(
+                    'UPDATE AppBundle:Collecte c SET c.active = 0, c.complete = 1 WHERE c.collecteId = :id'
+                );
+                $query->setParameter('id', $collecteId);
+                $query->execute();
+
+                $this->addFlash('success', "Féciliciations, la collecte est à présent achevée");
+                return $this->redirectToRoute('admin');
+
+            }
+            else {
+                $this->addFlash('success', "La collecte n'est pas active");
+                return $this->redirectToRoute('admin');
+            }
+        }
+    }
+
+}//fin du controller

@@ -82,6 +82,7 @@ class EditeurController extends Controller
         }
         $etablissements = $query->getResult();
 
+//        dump($etablissements);die();
 
     //Get all formations des établissements retenus
         $sql = "SELECT f FROM AppBundle:Formation f INNER JOIN f.etablissement e WHERE f.anneeCollecte = :annee";
@@ -104,6 +105,7 @@ class EditeurController extends Controller
             $query->setParameter('etablissement'.$key, $associations[$key]['id']);
         }
         $formations = $query->getResult();
+//        dump($query);die();
 
     //Get all labo des établissements retenus
 

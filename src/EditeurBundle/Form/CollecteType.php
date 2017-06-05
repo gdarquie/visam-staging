@@ -5,7 +5,7 @@ namespace EditeurBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class CollecteType extends AbstractType
 {
@@ -18,7 +18,14 @@ class CollecteType extends AbstractType
         $builder
             ->add('nom')
             ->add('annee')
-            ->add('etablissement')
+//            ->add('etablissement')
+            ->add('etablissement', EntityType::class, array(
+                'multiple' => true,
+                'class' => 'AppBundle:Etablissement',
+                'multiple' => true,
+                'expanded' => true,
+                'choice_label' => 'nom', //order by alpha
+            ))
         ;
     }
 

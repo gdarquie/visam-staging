@@ -362,7 +362,6 @@
 
                     {% if collectes|length > 0 %}
 
-                        <h4>Collecte utilisée</h4>
                         <p>La collecte prise en compte par le module d'exploration est la collecte de <span class="number">{% for item in collecte  %}{{ item.annee }}{% endfor %}</span></p>
 
                         <!-- collecte active? -->
@@ -376,13 +375,13 @@
                             {% for item in collectes  %}
                                 {% if item.active %}
                             <li class="collection-item avatar js-collection-item">
-                                <i class="material-icons circle green">alarm</i>
-                                <a href="{{ path('editeur_collecte_edit', {'collecteId': item.collecteId} ) }}">{{ item.nom }}({{ item.annee }}).</a>
-                                <p>
-                                    <span>Modifier (ajouter un établissement)</span>
-                                    <span>clôturer</span>
+                                <div class="col s6">
+                                    <i class="material-icons circle green">alarm</i>
+                                    <span class="number">{{ item.annee }} </span>{{ item.nom }}
+                                </div>
+                                <p class="col s6">
+                                    <a class="btn red darken-1 white-text" href="{{ path('editeur_collecte_close' , {'collecteId' : item.collecteId}) }}">Clôturer</a>
                                 </p>
-                                <a href="#!" class="secondary-content js-remove-collection" data-url="" ><i class="material-icons">stop</i></a>
                             </li>
                                 {% endif %}
                             {% endfor %}
@@ -400,13 +399,17 @@
                             {% for item in collectes  %}
                                 {% if item.active != 1 and item.complete != 1 %}
                                     <li class="collection-item avatar js-collection-item">
-                                        <i class="material-icons circle green">alarm</i>
-                                        <a href="{{ path('editeur_collecte_edit', {'collecteId': item.collecteId} ) }}">{{ item.nom }}({{ item.annee }}).</a>
-                                        <p>
-                                            <span>Modifier (ajouter un établissement)</span>
-                                            <span>clôturer</span>
+                                        <div class="col s6">
+                                            <i class="material-icons circle red">edit</i>
+                                            <a href="{{ path('editeur_collecte_edit', {'collecteId': item.collecteId} ) }}"><span class="number">{{ item.annee }} </span>{{ item.nom }}</a>
+                                        </div>
+                                        <p class="col s6">
+                                            <a class="btn grey white-text" href="{{ path('editeur_collecte_edit', {'collecteId': item.collecteId} ) }}">Modifier</a>
+                                            {%  if collecte_active|length == 0 %}
+                                            <a href="{{ path('editeur_collecte_start', {'collecteId': item.collecteId }) }}" class="btn red darken-1 white-text">Activer</a>
+                                            {% endif %}
                                         </p>
-                                        <a href="#!" class="secondary-content js-remove-collection" data-url="" ><i class="material-icons">stop</i></a>
+
                                     </li>
                                 {% endif %}
                             {% endfor %}
@@ -424,12 +427,8 @@
                                 {% if item.complete %}
                             <li class="collection-item avatar js-collection-item">
                                 <i class="material-icons circle grey">done</i>
-                                <a href="{{ path('editeur_collecte_edit', {'collecteId': item.collecteId} ) }}">{{ item.nom }}({{ item.annee }}).</a>
-                                <p>
-                                    <span>Modifier (ajouter un établissement)</span>
-                                    <span>clôturer</span>
-                                </p>
-                                <a href="#!" class="secondary-content js-remove-collection" data-url="" ><i class="material-icons">stop</i></a>
+                                <span class="number">{{ item.annee }} </span>{{ item.nom }}
+
                             </li>
                             {% endif %}
                             {% endfor %}
