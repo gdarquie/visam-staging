@@ -1,0 +1,26 @@
+<div class="row form">
+
+    <div class="col s12">
+
+        <div class="cartouche">
+
+            <h3>Informations générales</h3>
+
+            {{ form_row(edit_form.username) }}
+            {{ form_row(edit_form.email) }}
+
+
+            {{ form_widget(edit_form.roles) }}
+            {{ form_label(edit_form.roles) }}
+            {{ form_errors(edit_form.roles) }}
+
+            {{ form_widget(edit_form.etablissement) }}
+            {{ form_label(edit_form.etablissement) }}
+            {{ form_errors(edit_form.etablissement) }}
+        </div>
+
+
+    </div>
+
+</div>
+

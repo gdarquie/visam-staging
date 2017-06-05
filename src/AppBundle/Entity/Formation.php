@@ -17,7 +17,11 @@ class Formation
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255, nullable=true)
+     * @ORM\Column(name="nom", type="string", length=255, nullable=false)
+     *
+     * @Assert\NotBlank(
+     *     message = "Un nom doit être renseigné pour permettre la sauvegarde"
+     * )
      */
     private $nom;
 
@@ -62,6 +66,15 @@ class Formation
      * @ORM\Column(name="niveau", type="string", length=255, nullable=true)
      */
     private $niveau;
+
+    /** @var  \AppBundle\Entity\Thesaurus
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Thesaurus")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="niveau_thesaurus", referencedColumnName="thesaurus_id")
+     * })
+     */
+    private $niveau_thesaurus;
 
     /**
      * @var string
@@ -798,6 +811,7 @@ class Formation
         return $this->ufr;
     }
 
+
     /**
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -1113,6 +1127,22 @@ class Formation
     public function setModaliteThesaurus($modalite_thesaurus)
     {
         $this->modalite_thesaurus = $modalite_thesaurus;
+    }
+
+    /**
+     * @return Thesaurus
+     */
+    public function getNiveauThesaurus()
+    {
+        return $this->niveau_thesaurus;
+    }
+
+    /**
+     * @param Thesaurus $niveau_thesaurus
+     */
+    public function setNiveauThesaurus($niveau_thesaurus)
+    {
+        $this->niveau_thesaurus = $niveau_thesaurus;
     }
 
     /**

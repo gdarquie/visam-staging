@@ -79,30 +79,97 @@ class AdminController extends Controller
         ));
     }
 
+
     /**
-     * Page de gestion des thésaurus
+     * Tous les thesaurus d'un type
      *
-     * @Route("/thesaurus", name="admin_thesaurus")
+     * @Route("/thesaurus/{slug}", name="admin_thesaurus")
      */
-    public function thesaurusAction()
+    public function thesaurusAction($slug)
     {
 
         $em = $this->getDoctrine()->getManager();
 
         $query = $em->createQuery(
-            'SELECT t.nom, t.type FROM AppBundle:Thesaurus t ORDER BY t.type ASC'
+            'SELECT t.nom, t.type, t.thesaurusId FROM AppBundle:Thesaurus t WHERE t.slug = :slug ORDER BY t.type ASC'
         );
+        $query->setParameter('slug', $slug);
         $thesaurus = $query->getResult();
 
         $query = $em->createQuery(
-            'SELECT t.type FROM AppBundle:Thesaurus t GROUP BY t.type ORDER BY t.type ASC'
+            'SELECT t.type, t.slug FROM AppBundle:Thesaurus t GROUP BY t.type ORDER BY t.type ASC'
         );
         $types = $query->getResult();
 
+        $query = $em->createQuery(
+            'SELECT DISTINCT(t.type) as titre FROM AppBundle:Thesaurus t WHERE t.slug = :slug ORDER BY t.type ASC'
+        );
+        $query->setParameter('slug', $slug);
+        $type = $query->getSingleResult();
+
         return $this->render('EditeurBundle:Admin:thesaurus.html.twig', array(
             'thesaurus' => $thesaurus,
-            'types' => $types
+            'types' => $types,
+            'type' => $type
         ));
+    }
+
+    /**
+     *
+     * @Route("/laboratoires", name="admin_laboratoires")
+     */
+    public function labosAction(){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $query = $em->createQuery(
+            'SELECT l FROM AppBundle:Labo l ORDER BY l.last_update DESC'
+        )->setMaxResults(20);
+        $items = $query->getResult();
+
+
+        return $this->render('EditeurBundle:Admin:labos.html.twig', array(
+            'labos' => $items
+        ));
+
+    }
+
+    /**
+     *
+     * @Route("/formations", name="admin_formations")
+     */
+    public function formationsAction(){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $query = $em->createQuery(
+            'SELECT l FROM AppBundle:Formation l ORDER BY l.last_update DESC'
+        )->setMaxResults(20);
+        $items = $query->getResult();
+
+        return $this->render('EditeurBundle:Admin:formations.html.twig', array(
+            'items' => $items
+        ));
+
+    }
+
+    /**
+     *
+     * @Route("/eds", name="admin_eds")
+     */
+    public function edsAction(){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $query = $em->createQuery(
+            'SELECT l FROM AppBundle:Ed l ORDER BY l.last_update DESC'
+        )->setMaxResults(20);
+        $items = $query->getResult();
+
+        return $this->render('EditeurBundle:Admin:eds.html.twig', array(
+            'eds' => $items
+        ));
+
     }
 
 }

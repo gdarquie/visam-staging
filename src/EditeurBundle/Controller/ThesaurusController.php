@@ -49,51 +49,52 @@ class ThesaurusController extends Controller
     }
 
     /**
-     * Editer un laboratoire
+     * Editer un itme du thesaurus
      *
      * @Route("/{id}/edit", name="editeur_thesaurus_edit")
      */
-    public function editFormationAction(Request $request, Labo $laboratoire){
+    public function editThesaurusAction(Request $request, Thesaurus $thesaurus){
 
-        $deleteForm = $this->createDeleteForm($laboratoire);
-        $editForm = $this->createForm('EditeurBundle\Form\LaboType', $laboratoire);
+        $deleteForm = $this->createDeleteForm($thesaurus);
+
+        $editForm = $this->createForm('EditeurBundle\Form\ThesaurusType', $thesaurus);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
 
-            $laboratoire = $editForm->getData();
+            $thesaurus = $editForm->getData();
             $em = $this->getDoctrine()->getManager();
 
             $now = new \DateTime();
-            $laboratoire->setLastUpdate($now);
+            $thesaurus->setLastUpdate($now);
 
-            $em->persist($laboratoire);
+            $em->persist($thesaurus);
             $em->flush();
 
-            return $this->redirectToRoute('labo', array('id' => $laboratoire->getLaboId() ));
+            return $this->redirectToRoute('thesaurus', array('id' => $thesaurus->getThesaurusId() ));
         }
 
-        return $this->render('EditeurBundle:Labo:edit.html.twig', array(
-            'labo' => $laboratoire,
+        return $this->render('EditeurBundle:Thesaurus:edit.html.twig', array(
+            'thesaurus' => $thesaurus,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Effacer un labo
+     * Effacer un item
      *
      * @Route("/{id}/delete", name="editeur_thesaurus_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, Labo $labo)
+    public function deleteAction(Request $request, Thesaurus $thesaurus)
     {
-        $form = $this->createDeleteForm($labo);
+        $form = $this->createDeleteForm($thesaurus);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($labo);
+            $em->remove($thesaurus);
             $em->flush();
         }
 
@@ -101,16 +102,16 @@ class ThesaurusController extends Controller
     }
 
     /**
-     * Créer un form pour effacer un labo
+     * Créer un form pour effacer un item
      *
      * @param Labo $labo
      *
      * @return \Symfony\Component\Form\Form
      */
-    private function createDeleteForm(Labo $labo)
+    private function createDeleteForm(Thesaurus $thesaurus)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('editeur_laboratoire_delete', array('id' => $labo->getLaboId())))
+            ->setAction($this->generateUrl('editeur_thesaurus_delete', array('id' => $thesaurus->getThesaurusId())))
             ->setMethod('DELETE')
             ->getForm()
             ;

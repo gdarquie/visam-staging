@@ -1,0 +1,95 @@
+{% extends "editeur.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+{% endblock %}
+
+{% block body %}
+
+    <section class="container">
+        <h1>Toutes les formations</h1>
+
+        <div class="col s12 card">
+            <ul class="collection with-header">
+
+                {% for item in items  %}
+
+                    <li class="collection-item avatar js-formation-item">
+                        <a href="{{ path('editeur_formation_edit', {'id': item.formationId } ) }}" >
+
+                            {% if item.checkGeneral and item.checkEffectif and item.checkIndex and item.checkCursus %}
+                                <i class="material-icons circle green">done</i>
+                            {% else %}
+                                <i class="material-icons circle red">mode_edit</i>
+                            {% endif %}
+
+                            <span class="title">{{ item.nom }}</span>
+                            <span class="lastmodif">dernière modification le <i>{{ item.lastUpdate|date() }}</i></span>
+                            <p>
+
+                            <div class="description_container">
+                        <span class="description valign-wrapper">
+                            <span>général</span>
+                            {% if item.checkGeneral %}
+                                <i class="material-icons green-text">done</i>
+                            {% else %}
+                                <i class="material-icons red-text">schedule</i>
+                            {% endif %}
+                        </span>
+                            </div>
+
+                            <div class="description_container">
+                        <span class="description valign-wrapper">
+                            <span>effectif</span>
+                            {% if item.checkEffectif %}
+                                <i class="material-icons green-text">done</i>
+                            {% else %}
+                                <i class="material-icons red-text">schedule</i>
+                            {% endif %}
+                        </span>
+                            </div>
+
+                            <div class="description_container">
+                        <span class="description valign-wrapper">
+                            <span>indexation</span>
+                            {% if item.checkIndex %}
+                                <i class="material-icons green-text">done</i>
+                            {% else %}
+                                <i class="material-icons red-text">schedule</i>
+                            {% endif %}
+                        </span>
+                            </div>
+
+                            <div class="description_container">
+                        <span class="description valign-wrapper">
+                            <span>cursus</span>
+                            {% if item.checkCursus %}
+                                <i class="material-icons green-text">done</i>
+                            {% else %}
+                                <i class="material-icons red-text">schedule</i>
+                            {% endif %}
+                        </span>
+                            </div>
+                            </p>
+
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <ul class="pagination center">
+                <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+                <li class="active"><a href="#!">1</a></li>
+                <li class="waves-effect"><a href="#!">2</a></li>
+                <li class="waves-effect"><a href="#!">3</a></li>
+                <li class="waves-effect"><a href="#!">4</a></li>
+                <li class="waves-effect"><a href="#!">5</a></li>
+                <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+            </ul>
+
+        </div>
+
+    </section>
+
+{% endblock %}

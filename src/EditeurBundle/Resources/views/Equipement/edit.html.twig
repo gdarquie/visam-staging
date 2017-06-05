@@ -15,12 +15,8 @@
     {{ form_start(delete_form) }}
      <button disabled value="Supprimer" class="btn btn-hesam right ">Supprimer</button>
     {{ form_end(delete_form) }}
-    <ul>
-        <li>
-            <a href="{{ path('search') }}">Retour</a>
-        </li>
 
-    </ul>
+    {% include "EditeurBundle:modals:_retour.html.twig" %}
 
 
     </div>

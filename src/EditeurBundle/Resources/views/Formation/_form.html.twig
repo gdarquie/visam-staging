@@ -27,7 +27,13 @@
             {{  form_row(edit_form.nom, {'label' : "Nom de la formation / du diplôme"}) }}
             {{ form_row(edit_form.description, { 'attr': {'class': 'materialize-textarea'} }) }}
             {{ form_row(edit_form.url, {'label' : "URL de la formation"})}}
-            {{ form_row(edit_form.etablissement, {'label' : "Etablissement(s)"}) }}
+            {% if(etablissements|length>1)  %}
+                {{ form_row(edit_form.etablissement, {'label' : "Etablissement(s)"}) }}
+            {% else %}
+                <div class="hide">
+                {{ form_row(edit_form.etablissement) }}
+                </div>
+            {% endif %}
             {{ form_row(edit_form.lien2,  {'label' : "Autre lien"}) }}
 
             {{ form_row(edit_form.localisation,  {'label' : "Lieu(x)"}) }}
@@ -115,7 +121,7 @@
             <h3>Cursus</h3>
 
             {{ form_row(edit_form.lmd, {'label' : "Parcours LMD"}) }}
-            {{ form_row(edit_form.niveau, {'label' : "Niveau de sortie"}) }}
+            {{ form_row(edit_form.niveau_thesaurus, {'label' : "Niveau de sortie"}) }}
             {{ form_row(edit_form.typediplome_thesaurus, { 'label' : 'Type de diplôme'}) }}
             {{ form_row(edit_form.ects, {'label' : "Crédits ECTS"}) }}
             {{ form_row(edit_form.modalite_thesaurus, {'label' : "Modalité de la formation"}) }}
@@ -127,7 +133,5 @@
 
         </div>
     </div>
-
-
 
 </div>

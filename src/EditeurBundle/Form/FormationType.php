@@ -36,25 +36,33 @@ class FormationType extends AbstractType
             ->add('description')
             ->add('url')
             ->add('annee')
-            ->add('niveau', ChoiceType::class, array(
-                'choices'  => array(
-                    'Bac +1' => 'Bac +1',
-                    'Bac +2' => 'Bac +2',
-                    'Bac +3' => 'Bac +3',
-                    'Bac +4' => 'Bac +4',
-                    'Bac +5' => 'Bac +5',
-                    'Bac +6' => 'Bac +6',
-                    'Bac +7' => 'Bac +7',
-                    'Bac +8' => 'Bac +8',
-                    'Licence 1' => 'Licence 1',
-                    'Licence 2' => 'Licence 2',
-                    'Licence 3' => 'Licence 3',
-                    'Master 1' => 'Master 1',
-                    'Master 2' => 'Master 2',
-                    'Doctorat' => 'Doctorat',
-                    'Sans objet' => 'Sans objet'
-                ),
+            ->add('niveau_thesaurus', EntityType::class, array(
+                'placeholder' => 'Sélectionner une réponse',
+                'class' => 'AppBundle:Thesaurus',
+                'choice_label' => 'nom', //order by alpha
+                'query_builder' => function(ThesaurusRepository $repo) {
+                    return $repo->findAllThesaurusByType("modalites");
+                }
             ))
+//            ->add('niveau', ChoiceType::class, array(
+//                'choices'  => array(
+//                    'Bac +1' => 'Bac +1',
+//                    'Bac +2' => 'Bac +2',
+//                    'Bac +3' => 'Bac +3',
+//                    'Bac +4' => 'Bac +4',
+//                    'Bac +5' => 'Bac +5',
+//                    'Bac +6' => 'Bac +6',
+//                    'Bac +7' => 'Bac +7',
+//                    'Bac +8' => 'Bac +8',
+//                    'Licence 1' => 'Licence 1',
+//                    'Licence 2' => 'Licence 2',
+//                    'Licence 3' => 'Licence 3',
+//                    'Master 1' => 'Master 1',
+//                    'Master 2' => 'Master 2',
+//                    'Doctorat' => 'Doctorat',
+//                    'Sans objet' => 'Sans objet'
+//                ),
+//            ))
             ->add('lmd', ChoiceType::class, array(
                 'choices'  => array(
                     'Licence 1' => 'Licence 1',

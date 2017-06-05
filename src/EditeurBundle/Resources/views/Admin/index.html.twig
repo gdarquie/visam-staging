@@ -2,36 +2,14 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <style>
-        .card{
-            padding: 8px;
-        }
-
-        .card li{
-            margin-left: 20px;
-        }
-        .legend_btn{
-            padding-left:5px;
-        }
-        .add_item_btn{
-            padding-bottom:20px;
-        }
-        .comment{
-            margin-bottom: 40px;
-            font-style: italic;
-        }
-
-        .btn{
-            margin-bottom: 5px;
-        }
-    </style>
-
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 {% endblock %}
 
 {% block body %}
 
     <section class="container-fluid row">
         <h1 class="center">Administration de la plateforme</h1>
+
         <div class="col s3">
             <article>
 
@@ -48,14 +26,14 @@
                     <li class="collection-item"><a href="#utilisateur">Gestion des utilisateurs</a></li>
                     <li class="collection-item"><a href="#thesaurus">Gestion du thésaurus</a></li>
                     <li class="collection-item"><a href="#collecte">Gestion des collectes</a></li>
-                    <li class="collection-item"><a href="#collecte">Gestion de l'import</a></li>
+                    {#<li class="collection-item"><a href="#collecte">Gestion de l'import</a></li>#}
                 </ul>
             </article>
         </div>
 
         <div class="col s9">
 
-
+            <!-- Dernières données entrées -->
 
             <article class="card row">
 
@@ -64,56 +42,75 @@
                 <div class="col s12">
 
                     <ul class="collection with-header">
+
                         <li class="collection-header"><h4>5 dernières formations éditées</h4></li>
+
                         {% for item in formations  %}
+
                             <li class="collection-item avatar js-formation-item">
                                 <a href="{{ path('editeur_formation_edit', {'id': item.formationId } ) }}" >
 
                                     {% if item.checkGeneral and item.checkEffectif and item.checkIndex and item.checkCursus %}
-                                        <i class="material-icons circle green">mode_edit</i>
+                                        <i class="material-icons circle green">done</i>
                                     {% else %}
                                         <i class="material-icons circle red">mode_edit</i>
                                     {% endif %}
 
                                     <span class="title">{{ item.nom }}</span>
+                                    <span class="lastmodif">dernière modification le <i>{{ item.lastUpdate|date() }}</i></span>
                                     <p>
-                                <span class="description">général
-                                    {% if item.checkGeneral %}
-                                        <i class="material-icons green-text">done</i>
-                                    {% else %}
-                                        <i class="material-icons red-text">not_interested</i>
-                                    {% endif %}
-                                </span>
-                                        <span class="description">effectif
+
+                                    <div class="description_container">
+                                        <span class="description valign-wrapper">
+                                            <span>général</span>
+                                            {% if item.checkGeneral %}
+                                                <i class="material-icons green-text">done</i>
+                                            {% else %}
+                                                <i class="material-icons red-text">schedule</i>
+                                            {% endif %}
+                                        </span>
+                                    </div>
+
+                                    <div class="description_container">
+                                        <span class="description valign-wrapper">
+                                            <span>effectif</span>
                                             {% if item.checkEffectif %}
                                                 <i class="material-icons green-text">done</i>
                                             {% else %}
-                                                <i class="material-icons red-text">not_interested</i>
+                                                <i class="material-icons red-text">schedule</i>
                                             {% endif %}
-                                </span>
-                                        <span class="description">indexation
+                                        </span>
+                                    </div>
+
+                                    <div class="description_container">
+                                        <span class="description valign-wrapper">
+                                            <span>indexation</span>
                                             {% if item.checkIndex %}
                                                 <i class="material-icons green-text">done</i>
                                             {% else %}
-                                                <i class="material-icons red-text">not_interested</i>
+                                                <i class="material-icons red-text">schedule</i>
                                             {% endif %}
-                                </span>
-                                        <span class="description">cursus
+                                        </span>
+                                    </div>
+
+                                    <div class="description_container">
+                                        <span class="description valign-wrapper">
+                                            <span>cursus</span>
                                             {% if item.checkCursus %}
                                                 <i class="material-icons green-text">done</i>
                                             {% else %}
-                                                <i class="material-icons red-text">not_interested</i>
+                                                <i class="material-icons red-text">schedule</i>
                                             {% endif %}
-                                </span>
+                                        </span>
+                                    </div>
                                     </p>
-
 
                                 </a>
                             </li>
                         {% endfor %}
                     </ul>
 
-                    <p class="center comment"><a href="{{ path('editeur') }}">Voir toutes les données formations</a></p>
+                    <p class="center comment"><a href="{{ path('admin_formations') }}">Voir toutes les données formations</a></p>
 
                 </div>
 
@@ -125,57 +122,74 @@
                             <li class="collection-item avatar js-labo-item">
                                 <a href="{{ path('editeur_laboratoire_edit', {'id': item.laboId } ) }}" >
                                     {% if item.checkGeneral and item.checkContact and item.checkEtab and item.checkEtab and item.checkEffectifs and item.checkDescription %}
-                                        <i class="material-icons circle green">mode_edit</i>
+                                        <i class="material-icons circle green">done</i>
                                     {% else %}
                                         <i class="material-icons circle red">mode_edit</i>
                                     {% endif %}
 
                                     <span class="title">{{ item.nom }}</span>
+                                    <span class="lastmodif">dernière modification le <i>{{ item.lastUpdate|date() }}</i></span>
+
                                     <p>
-                                        <span class="description">général
+
+                                    <div class="description_container">
+                                        <span class="description valign-wrapper">général
                                             {% if item.checkGeneral %}
                                                 <i class="material-icons green-text">done</i>
                                             {% else %}
-                                                <i class="material-icons red-text">not_interested</i>
+                                                <i class="material-icons red-text">schedule</i>
                                             {% endif %}
                                         </span>
-                                        <span class="description">contact
+                                    </div>
+
+                                    <div class="description_container">
+                                        <span class="description valign-wrapper">contact
                                             {% if item.checkContact %}
                                                 <i class="material-icons green-text">done</i>
                                             {% else %}
-                                                <i class="material-icons red-text">not_interested</i>
+                                                <i class="material-icons red-text">schedule</i>
                                             {% endif %}
                                         </span>
-                                        <span class="description">description
+                                    </div>
+
+                                    <div class="description_container">
+                                        <span class="description valign-wrapper">description
                                             {% if item.checkDescription %}
                                                 <i class="material-icons green-text">done</i>
                                             {% else %}
-                                                <i class="material-icons red-text">not_interested</i>
+                                                <i class="material-icons red-text">schedule</i>
                                             {% endif %}
                                         </span>
-                                        <span class="description">établissement
+                                    </div>
+
+                                    <div class="description_container">
+                                        <span class="description valign-wrapper">établissement
                                             {% if item.checkEtab %}
                                                 <i class="material-icons green-text">done</i>
                                             {% else %}
-                                                <i class="material-icons red-text">not_interested</i>
+                                                <i class="material-icons red-text">schedule</i>
                                             {% endif %}
                                         </span>
-                                        <span class="description">effectifs
+                                    </div>
+
+                                    <div class="description_container">
+                                        <span class="description valign-wrapper">effectifs
                                             {% if item.checkEffectifs %}
                                                 <i class="material-icons green-text">done</i>
                                             {% else %}
-                                                <i class="material-icons red-text">not_interested</i>
+                                                <i class="material-icons red-text">schedule</i>
                                             {% endif %}
                                         </span>
+                                    </div>
+
                                     </p>
                                 </a>
-
 
                             </li>
 
                         {% endfor %}
                     </ul>
-                    <p class="center comment"><a href="{{ path('editeur') }}">Voir toutes les données laboratoires</a></p>
+                    <p class="center comment"><a href="{{ path('admin_laboratoires') }}">Voir toutes les données laboratoires</a></p>
                 </div>
 
                 <div class="col s12">
@@ -183,22 +197,54 @@
                     <ul class="collection with-header">
                         <li class="collection-header"><h4>5 dernières écoles doctorales éditées</h4></li>
                         {% for item in eds  %}
-                            <li class="collection-item">{{ item.nom }} - {{ item.lastUpdate|date('d/m/Y') }} à {{ item.lastUpdate|date( 'H:i:s') }}</li>
+                            <li class="collection-item avatar js-labo-item">
+                                <a href="{{ path('editeur_laboratoire_edit', {'id': item.edId } ) }}" >
+                                    <i class="material-icons circle grey">done</i>
+                                    <span class="title">{{ item.nom }}</span>
+                                    <span class="lastmodif">dernière modification le <i>{{ item.lastUpdate|date() }}</i></span>
+
+                                </a>
+
+                            </li>
+
                         {% endfor %}
                     </ul>
-                    <p class="center comment"><a href="{{ path('editeur') }}">Voir toutes les données écoles doctorales</a></p>
+
+                    <p class="center comment"><a href="{{ path('admin_eds') }}">Voir toutes les données écoles doctorales</a></p>
                 </div>
 
             </article>
 
+            <!-- Gestion des établissements -->
+
             <article class="card" id="etablissement">
                 <h3>Gérer les établissements</h3>
-                <ul class="collection with-header">
-                    <li class="collection-header"><h4>Etablissements</h4></li>
-                    {% for item in etablissements  %}
-                        <li class="collection-item"><a href="{{ path('editeur_etablissement_edit', {'id' : item.etablissementId}) }}">{{ item.nom }}</a> - {{ item.lastUpdate|date('d/m/Y') }} à {{ item.lastUpdate|date( 'H:i:s') }}</li>
+
+                <table class="highlight tablesorter responsive-table">
+                    <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Dernière modification</th>
+                        <th>Modifier</th>
+                        <th>Supprimer</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in etablissements %}
+
+                        <tr class="js-etablissement-item">
+                                <span>
+                                <td>{{ item.nom }}</td>
+                                {#<td>le {{ item.lastUpdate|date('d/m/Y') }} à {{ item.lastUpdate|date( 'H:i:s') }}</td>#}
+                                <td>{{ item.lastUpdate|date() }}</td>
+                                <td><a href="{{ path('editeur_etablissement_edit', {'id' : item.etablissementId}) }}"><i class="material-icons">edit</i></a></td>
+                                <td><a href="#!" class="js-remove-etablissement" data-url="{{ path('editeur_etablissement_ajax_delete', { etablissementId : item.etablissementId}) }}" ><i class="material-icons">delete</i></a></td>
+                                </span>
+                        </tr>
                     {% endfor %}
-                </ul>
+                    </tbody>
+                </table>
+
 
                 <div class="row">
                     <div class="add_item_btn right">
@@ -212,22 +258,50 @@
             </article>
 
             <article class="card" id="utilisateur">
-                <h3>Gérer les utilisateurs</h3>
+                <h3>Gérer les contributeurs</h3>
 
                 <div class="row">
-                    <ul class="collection with-header">
-                        <li class="collection-header"><h4>Liste des utilisateurs</h4></li>
-                        {% for item in users  %}
-                            <li class="collection-item"><a href="{{ path('edit_user', {'id' : item.id}) }}">{{ item.username |capitalize }}, {{ item.email }}, {{ item.lastLogin|date( 'd/m/Y à H:i:s') }}</a></li>
+
+
+                    <table class="highlight tablesorter responsive-table">
+                        <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Email</th>
+                            {#<th>Status</th>#}
+                            <th>Roles</th>
+                            <th>Dernière connexion</th>
+                            <th>Modifier</th>
+                            <th>Supprimer</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in users %}
+
+                            <tr class="js-user-item">
+                                <span>
+                                <td>{{ item.username }}</td>
+                                <td>{{ item.email }}</td>
+                                {#<td>{{ item.enabled }}</td>#}
+                                <td>{% for role in item.roles  %}
+                                        {{ role }}{%  if loop.last  %}{% else %},{% endif %}
+                                    {% endfor %}</td>
+                                <td>{{ item.lastLogin|date() }}</td>
+                                <td><a href="{{ path('editeur_user_edit', {'id' : item.id}) }}"><i class="material-icons">edit</i></a></td>
+                                <td><a href="#!" class="js-remove-user" data-url="{{ path('editeur_user_ajax_delete', { userId : item.id}) }}" ><i class="material-icons">delete</i></a></td>
+                                </span>
+                            </tr>
                         {% endfor %}
-                    </ul>
+                        </tbody>
+                    </table>
+
                 </div>
 
                 <div class="row">
                     <div class="add_item_btn right">
                         <a href="/register"><span class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></span>
                         </a>
-                        <span class="legend_btn">Ajouter un utilisateur</span>
+                        <span class="legend_btn">Ajouter un contributeur</span>
                     </div>
                 </div>
 
@@ -235,19 +309,33 @@
 
             <article class="card" id="thesaurus">
                 <h3>Gérer le thésaurus</h3>
-                <ul class="browser-default">
-                    <li><a href="{{ path('admin_thesaurus') }}">Voir les entrées</a></li>
-                </ul>
-
-                {% for item in thesaurus  %}
-                    <a href="" class="btn white red-text">{{ item.type }}</a>
-                {% endfor %}
 
                 <div class="row">
-                    <div class="add_item_btn right">
-                        <a href="{{ path('editeur_thesaurus_new') }}"><span class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></span>
-                        </a>
-                        <span class="legend_btn">Ajouter un élément</span>
+                    <div class=" thesaurus col s7">
+                    {% for item in thesaurus  %}
+
+                        <div class="description_container">
+                            <a href="{{ path('admin_thesaurus', {'slug': item.slug}) }}">
+                                <span class="description valign-wrapper thesaurus-item">
+                                     {{ item.type }}
+                                    <i class="material-icons">link</i>
+                                </span>
+                            </a>
+                        </div>
+                    {% endfor %}
+
+                        <p>Pour créer un nouveau type de thésaurus, il suffit de créer un nouvel item avec le type souhaité. Le type sera automatiquement ajouté à la liste ci-dessus.</p>
+
+                    </div>
+
+
+
+                    <div class=" col s5">
+                        <div class="add_item_btn right">
+                            <a href="{{ path('editeur_thesaurus_new') }}"><span class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></span>
+                            </a>
+                            <span class="legend_btn">Ajouter un élément</span>
+                        </div>
                     </div>
                 </div>
             </article>
@@ -268,7 +356,7 @@
                         {% for item in collectes  %}
 
                             {% if item.active %}
-                                <li class="collection-item avatar js-formation-item">
+                                <li class="collection-item avatar js-collection-item">
                                     <i class="material-icons circle grey">done</i>
                                     <a href="{{ path('editeur_collecte_edit', {'collecteId': item.collecteId} ) }}">{{ item.nom }}({{ item.annee }}).</a>
                                     <p>
@@ -276,12 +364,12 @@
                                         <span>clôturer(si active)</span>
                                     </p>
 
-                                    <a href="#!" class="secondary-content js-remove-formation" data-url="" ><i class="material-icons">delete</i>(si non active et non clôturée)
+                                    <a href="#!" class="secondary-content js-remove-collection" data-url="" ><i class="material-icons">delete</i>(si non active et non clôturée)
                                     </a>
                                 </li>
 
                             {% elseif item.complete %}
-                                <li class="collection-item avatar js-formation-item">
+                                <li class="collection-item avatar js-collection-item">
                                     <i class="material-icons circle green">alarm</i>
                                     <a href="{{ path('editeur_collecte_edit', {'collecteId': item.collecteId} ) }}">{{ item.nom }}({{ item.annee }}).</a>
                                     <p>
@@ -289,11 +377,11 @@
                                         <span>clôturer(si active)</span>
                                     </p>
 
-                                    <a href="#!" class="secondary-content js-remove-formation" data-url="" ><i class="material-icons">delete</i>(si non active et non clôturée)
+                                    <a href="#!" class="secondary-content js-remove-collection" data-url="" ><i class="material-icons">delete</i>(si non active et non clôturée)
                                     </a>
                                 </li>
                             {% else %}
-                                <li class="collection-item avatar js-formation-item">
+                                <li class="collection-item avatar js-collection-item">
                                     <i class="material-icons circle red">alarm</i>
                                     <a href="{{ path('editeur_collecte_edit', {'collecteId': item.collecteId} ) }}">{{ item.nom }}({{ item.annee }}).</a>
                                     <p>
@@ -301,7 +389,7 @@
                                         <span>clôturer(si active)</span>
                                     </p>
 
-                                    <a href="#!" class="secondary-content js-remove-formation" data-url="" ><i class="material-icons">delete</i>(si non active et non clôturée)
+                                    <a href="#!" class="secondary-content js-remove-collection" data-url="" ><i class="material-icons">delete</i>(si non active et non clôturée)
                                     </a>
                                 </li>
                             {% endif %}
@@ -329,12 +417,51 @@
 
             </article>
 
-            <article class="card" id="thesaurus">
-                <h3>Gérer l'import automatique</h3>
-                <p>Partie destinée à intégrer le travail pour l'import de Sandra.</p>
-            </article>
+            {#<article class="card" id="thesaurus">#}
+                {#<h3>Gérer l'import automatique</h3>#}
+                {#<p>Partie destinée à intégrer le travail pour l'import de Sandra.</p>#}
+            {#</article>#}
 
         </div>
 
     </section>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+
+        $(document).ready(function() {
+            $('.js-remove-user').on('click', function(e) {
+                e.preventDefault();
+                var $el = $(this).closest('.js-user-item');
+                var r = confirm("Etes-vous sûr de vouloir supprimer ce contributeur ?");
+                if (r == true) {
+                    $.ajax({
+                        url: $(this).data('url'),
+                        method: 'DELETE'
+                    }).done(function() {
+                        $el.fadeOut();
+                    });
+                }
+                e.preventDefault();
+            });
+
+            $('.js-remove-etablissement').on('click', function(e) {
+                e.preventDefault();
+                var $el = $(this).closest('.js-etablissement-item');
+                var r = confirm("Etes-vous sûr de vouloir supprimer cet établissement ?");
+                if (r == true) {
+                    $.ajax({
+                        url: $(this).data('url'),
+                        method: 'DELETE'
+                    }).done(function() {
+                        $el.fadeOut();
+                    });
+                }
+                e.preventDefault();
+            });
+
+        });
+    </script>
 {% endblock %}

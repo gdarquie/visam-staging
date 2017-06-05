@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
-
+use Symfony\Component\HttpFoundation\Response;
 
 use AppBundle\Entity\Etablissement;
 use EditeurBundle\Form\EtablissementType;
@@ -117,6 +117,30 @@ class EtablissementController extends Controller
             ;
     }
 
+    /**
+     * Fonction pour effacer via ajax un établissement
+     *
+     * @Route("/delete/{etablissementId}", name="editeur_etablissement_ajax_delete")
+     * @Method("DELETE")
+     */
+    public function deleteAjaxAction($etablissementId)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $user = $this->getUser();
+
+        if ($user->hasRole('ROLE_USER')){
+
+            /** @var Etablissement $etablissementId */
+            $etablissement = $em->getRepository('AppBundle:Etablissement')
+                ->find($etablissementId);
+            $em->remove($etablissement);
+            $em->flush();
+        }
+
+        return new Response(null, 204);
+
+    }
 
 }
 

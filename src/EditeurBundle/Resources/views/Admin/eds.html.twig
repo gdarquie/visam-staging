@@ -1,0 +1,38 @@
+{% extends "editeur.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+{% endblock %}
+
+{% block body %}
+
+    <section class="container">
+        <h1>Toutes les écoles doctorales</h1>
+
+        <div class="card">
+            <ul class="collection with-header">
+                {% for item in eds  %}
+                    <li class="collection-item avatar js-labo-item">
+                        <a href="{{ path('editeur_laboratoire_edit', {'id': item.edId } ) }}" >
+                            <i class="material-icons circle grey">done</i>
+                            <span class="title">{{ item.nom }}</span>
+                            <span class="lastmodif">dernière modification le <i>{{ item.lastUpdate|date() }}</i></span>
+                        </a>
+                    </li>
+
+                {% endfor %}
+            </ul>
+        </div>
+        <ul class="pagination center">
+            <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+            <li class="active"><a href="#!">1</a></li>
+            <li class="waves-effect"><a href="#!">2</a></li>
+            <li class="waves-effect"><a href="#!">3</a></li>
+            <li class="waves-effect"><a href="#!">4</a></li>
+            <li class="waves-effect"><a href="#!">5</a></li>
+            <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+        </ul>
+    </section>
+
+{% endblock %}

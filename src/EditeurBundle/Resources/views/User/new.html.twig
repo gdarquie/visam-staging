@@ -1,0 +1,16 @@
+{% extends "editeur.html.twig" %}
+
+{% block body %}
+
+    <section class="container">
+        <h2>Ajouter un contributeur</h2>
+
+        {{ form_start(edit_form) }}
+
+        {{ include('EditeurBundle:User:_form.html.twig') }}
+
+        <input type="submit" class="btn btn-hesam" value="Créer" formnovalidate />
+        {{ form_end(edit_form) }}
+        {% include "EditeurBundle:modals:_retour.html.twig" %}
+    </section>
+{% endblock %}

@@ -10,11 +10,7 @@
         <input type="submit" class="btn btn-hesam" value="Créer" formnovalidate />
     {{ form_end(edit_form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('editeur') }}">Retour</a>
-        </li>
-    </ul>
+    {% include "EditeurBundle:modals:_retour.html.twig" %}
 </div>
 
 {% endblock %}

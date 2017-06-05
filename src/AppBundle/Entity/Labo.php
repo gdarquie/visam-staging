@@ -769,6 +769,25 @@ class Labo
     }
 
     /**
+     * Set laboId
+     *
+     */
+    public function setLaboId($laboId)
+    {
+        $this->laboId = $laboId;
+    }
+
+    /**
+     * Clean laboId
+     *
+     * @return integer
+     */
+    public function cleanLaboId()
+    {
+        $this->laboId = null;
+    }
+
+    /**
      * Add membre
      *
      * @param \AppBundle\Entity\Membre $membre

@@ -16,11 +16,7 @@
 
         {{ form_end(etablissementForm) }}
 
-        <ul>
-            <li>
-                <a href="{{ path('editeur') }}">Retour à l'éditeur</a>
-            </li>
-        </ul>
+        {% include "EditeurBundle:modals:_retour.html.twig" %}
 
     </section>
 {% endblock %}

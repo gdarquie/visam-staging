@@ -195,6 +195,10 @@ class Etablissement
      */
     private $sortie;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $active;
 
     /**
      * @var \DateTime
@@ -1030,6 +1034,22 @@ class Etablissement
     public function setObjetId($objetId)
     {
         $this->objetId = $objetId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getActive()
+    {
+        return $this->active;
+    }
+
+    /**
+     * @param mixed $active
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
     }
 
 }

@@ -45,7 +45,7 @@
                 <li><a href="/apropos">A propos</a></li>
 
                 <li>
-              {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+              {% if is_granted("ROLE_USER") %}
                 {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
                 <a href="{{ path('fos_user_security_logout') }}">
                     {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
@@ -58,29 +58,21 @@
             </div>
         </nav> -->
 
-        {% for type, messages in app.session.flashBag.all %}
-            {% for message in messages %}
-                <div class="{{ type }}">
-                    {{ message|trans({}, 'FOSUserBundle') }}
-                </div>
-            {% endfor %}
-        {% endfor %}
-
         <div>
 
-        {% block fos_user_content %}{% endblock fos_user_content %}
+
 
             <ul id="menu_add" class="dropdown-content">
-                <li><a href="{{ path('editeur_etablisement_new') }}">Etablissement</a></li>
                 <li><a href="{{ path('editeur_formation_new') }}">Formation</a></li>
                 <li><a href="{{ path('editeur_laboratoire_new') }}">Laboratoire</a>
                 <li><a href="{{ path('editeur_ed_new') }}">Ecole doctorale</a>
                 <li><a href="{{ path('editeur_membre_new') }}">Membre</a></li>
                 {% if is_granted('ROLE_ADMIN') %}
+                    <li><a href="{{ path('editeur_etablisement_new') }}">Etablissement</a></li>
                     <li><a href="{{ path('editeur_thesaurus_new') }}">Thesaurus</a></li>
                     <li><a href="{{ path('editeur_valorisation_new') }}">Valorisation</a></li>
                     <li><a href="">Equipement</a></li>
-                    <li><a href="/register">Utilisateur</a></li>
+                    <li><a href="/register">Contributeur</a></li> <!-- changer par editeur_user_new -->
                 {% endif %}
             </ul>
 
@@ -118,7 +110,10 @@
             </div>
         {% endfor %}
 
-        {% block body %}{% endblock %}
+        {% block body %}
+
+            {% block fos_user_content %}{% endblock fos_user_content %}
+        {% endblock %}
 
         <footer class="page-footer red-hesam">
 

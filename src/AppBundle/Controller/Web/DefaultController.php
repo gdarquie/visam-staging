@@ -249,6 +249,13 @@ class DefaultController extends Controller
 
     //prochain secret :une petite IF à secret/XYZZY
 
+//    /**
+//     * @Route("secret/annand/", name="annand")
+//     */
+//    public function annandAction()
+//    {
+//        return $this->render('web/secret/annand.html.twig');
+//    }
 
 
 

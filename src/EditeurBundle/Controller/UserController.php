@@ -2,17 +2,23 @@
 
 namespace EditeurBundle\Controller;
 
+use AppBundle\Entity\User;
+use EditeurBundle\Form\UserType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Response;
 
+/**
+* Gestion des utilisateurs
+*/
 class UserController extends Controller
 {
+
     /**
-     * Gestion des utilisateurs
      *
-     * @Route("/admin/user/{id}", name = "edit_user")
+     * @Route("/admin/user/{id}", name = "editeur_user_edit")
      */
     public function editUserAction(Request $request, $id)
     {
@@ -24,30 +30,54 @@ class UserController extends Controller
             throw new AccessDeniedException("Vous n'avez pas accès à cette section");
         }
 
-        $formFactory = $this->get('fos_user.profile.form.factory');
+        $editForm = $this->createForm('EditeurBundle\Form\UserType', $user, array());
 
-        //http://symfony.com/doc/current/bundles/FOSUserBundle/overriding_forms.html
+        $editForm->handleRequest($request);
 
-        //ajouter les établissements pour qu'on puisse les changer
-        $form = $formFactory->createForm();
-        $form->setData($user);
-        $form->handleRequest($request);
+//        dump($editForm);die();
 
-        if ($form->isValid()) {
-            /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
-            $userManager = $this->get('fos_user.user_manager');
-            $userManager->updateUser($user);
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
 
-            $session = $this->getRequest()->getSession();
-            $session->getFlashBag()->add('message', 'Successfully updated');
-            $url = $this->generateUrl('matrix_edi_viewUser');
-            $response = new RedirectResponse($url);
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirectToRoute('admin');
 
         }
 
-        return $this->render('FOSUserBundle:Profile:edit.html.twig', array(
-            'form' => $form->createView()
+        return $this->render('EditeurBundle:User:edit.html.twig', array(
+            'id' => $id,
+            'edit_form' => $editForm->createView()
         ));
 
     }
+
+    /**
+     * Fonction pour effacer via ajax un user
+     *
+     * @Route("/delete/{userId}", name="editeur_user_ajax_delete")
+     * @Method("DELETE")
+     */
+    public function deleteAjaxAction($userId)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+
+        if ($user->hasRole('ROLE_USER')){
+
+            /** @var User $user */
+            $user = $em->getRepository('AppBundle:User')
+                ->find($userId);
+            $em->remove($user);
+            $em->flush();
+        }
+
+
+        return new Response(null, 204);
+
+
+    }
+
 }

@@ -2,12 +2,14 @@
 
 namespace EditeurBundle\Controller;
 
+use EditeurBundle\Service\CollecteService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 
 use AppBundle\Entity\Collecte;
+use AppBundle\Entity\Labo;
 use EditeurBundle\Form\CollecteType;
 
 /**
@@ -127,7 +129,7 @@ class CollecteController extends Controller
     }
 
     /**
-     * Lancer la première collecte collecte
+     * Lancer la première collecte
      *
      * @Route("/init", name="editeur_collecte_init")
      */
@@ -205,6 +207,156 @@ class CollecteController extends Controller
         }
 
 
+    }
+
+    /**
+     * Lancer une collecte
+     *
+     * @Route("/start/{collecteId}", name="editeur_collecte_start")
+     */
+    public function launchCollecteAction($collecteId){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $repository = $this->getDoctrine()->getRepository('AppBundle:Collecte');
+        $collecte = $repository->findOneByCollecteId($collecteId);
+
+
+        //Vérification si la collecte est active ou a déjà été complétée
+
+        $active = $collecte->getActive();
+        $complete = $collecte->getComplete();
+
+        if($active||$complete){
+            $this->addFlash('success', "La collecte est déjà active ou a déjà été finalisée");
+            return $this->redirectToRoute('admin');
+        }
+
+        //Activation de la collecte
+        else{
+
+            //Selection des éléments de la précédente collecte
+
+            //Séléction de la dernière collecte complétée
+            $query = $em->createQuery(
+                'SELECT c FROM AppBundle:Collecte c WHERE c.complete = true AND c.active = false ORDER BY c.annee DESC'
+            );
+            $query->setMaxResults(1);
+            $lastCompleteCollecte = $query->getSingleResult();
+            $annee = $lastCompleteCollecte->getAnnee();
+
+
+            //Création des éléments de la nouvelle collecte
+
+            //Sélection de tous les labos avec la date de collecte (conditionner aux seuls établissement sélectionnés par la collecte)
+            $query = $em->createQuery(
+                'SELECT l FROM AppBundle:Labo l WHERE l.anneeCollecte = :annee'
+            );
+            $query->setParameter('annee', $annee);
+            $labos = $query->getResult();
+
+            //Sélection des formations (conditionner aux seuls établissement sélectionnés par la collecte)
+            $query = $em->createQuery(
+                'SELECT f FROM AppBundle:Formation f WHERE f.anneeCollecte = :annee'
+            );
+            $query->setParameter('annee', $annee);
+            $formations = $query->getResult();
+
+            //Sélection des écoles doctorales
+
+            //Calcul de l'année de collecte
+            $anneeNouvelleCollecte = $annee+1;
+
+            //Récupération de la date
+            $now = new \DateTime();
+
+            //Duplication de chaque élément
+            foreach ($labos as $labo){
+
+                $id = $labo->getLaboId();
+                $labo->setAnneeCollecte($anneeNouvelleCollecte);
+                $labo->setDateCreation($now);
+                $labo->setLastUpdate($now);
+
+                //Correction des disciplines
+
+                //remplacer par un service
+                $query = $em->createQuery(
+                    'SELECT d FROM AppBundle:Discipline d JOIN d.labo l WHERE d.type = :type AND l.laboId = :id'
+                );
+                $query->setParameter('type', 'cnu');
+                $query->setParameter('id', $id);
+                $cnu = $query->getResult();
+                $labo->setCnu($cnu);
+
+                $query = $em->createQuery(
+                    'SELECT d FROM AppBundle:Discipline d JOIN d.labo l WHERE d.type = :type AND l.laboId = :id'
+                );
+                $query->setParameter('type', 'sise');
+                $query->setParameter('id', $id);
+                $sise = $query->getResult();
+                $labo->setSise($sise);
+
+                $query = $em->createQuery(
+                    'SELECT d FROM AppBundle:Discipline d JOIN d.labo l WHERE d.type = :type AND l.laboId = :id'
+                );
+                $query->setParameter('type', 'hceres');
+                $query->setParameter('id', $id);
+                $hceres = $query->getResult();
+                $labo->setHceres($hceres);
+
+                $em->detach($labo);
+                $em->persist($labo);
+
+            }
+
+            foreach ($formations as $formation){
+
+                $id = $formation->getFormationId();
+                $formation->setAnneeCollecte($anneeNouvelleCollecte);
+                $formation->setDateCreation($now);
+                $formation->setLastUpdate($now);
+
+                //Correction des disciplines
+
+                //remplacer par un service
+                $query = $em->createQuery(
+                    'SELECT d FROM AppBundle:Discipline d JOIN d.formation f WHERE d.type = :type AND f.formationId = :id'
+                );
+                $query->setParameter('type', 'cnu');
+                $query->setParameter('id', $id);
+                $cnu = $query->getResult();
+                $formation->setCnu($cnu);
+
+                $query = $em->createQuery(
+                    'SELECT d FROM AppBundle:Discipline d JOIN d.formation f WHERE d.type = :type AND f.formationId = :id'
+                );
+                $query->setParameter('type', 'sise');
+                $query->setParameter('id', $id);
+                $sise = $query->getResult();
+                $formation->setSise($sise);
+
+                $query = $em->createQuery(
+                    'SELECT d FROM AppBundle:Discipline d JOIN d.formation f WHERE d.type = :type AND f.formationId = :id'
+                );
+                $query->setParameter('type', 'hceres');
+                $query->setParameter('id', $id);
+                $hceres = $query->getResult();
+                $formation->setHceres($hceres);
+
+                $em->detach($formation);
+                $em->persist($formation);
+
+            }
+
+            //rendre la collecte active
+            $collecte->setActive(true);
+            $em->flush();
+
+            $this->addFlash('success', "Ajout des labos et des formations effectué, la collecte est maintenant active");
+            return $this->redirectToRoute('admin');
+
+        }
     }
 
 }

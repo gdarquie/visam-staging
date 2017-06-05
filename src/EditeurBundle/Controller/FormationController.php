@@ -31,12 +31,15 @@ class FormationController extends Controller
 
         //ajout des établissements pour le formulaire
         $user = $this->getUser();
+
+        //si l'utilisateur est administrateur, on lui ajoute tous les établissements
         if ($user->hasRole('ROLE_ADMIN')){
             $query = $em->createQuery(
                 'SELECT e.etablissementId as id FROM AppBundle:Etablissement e'
             );
         }
 
+        //sinon, on lui conditionne un établissement
         else{
             $userId = $user->getId();
             $query = $em->createQuery(
@@ -53,15 +56,61 @@ class FormationController extends Controller
 //        $form = $this->createForm('EditeurBundle\Form\FormationType', $formation);
         $form->handleRequest($request);
 
-
         if ($form->isSubmitted() && $form->isValid()) {
 
             $formation = $form->getData();
             $em = $this->getDoctrine()->getManager();
 
+            // --------------------------
+            //Ajout des établissements
+            // --------------------------
+
+            //s'il n'y en a qu'un, ajout automatique
+            if(count($etablissements) == 1){
+
+                $repository = $this->getDoctrine()->getRepository('AppBundle:Etablissement');
+                $etablissement = $repository->findOneByEtablissementId($etablissements[0]['id']);
+
+                $formation->addEtablissement($etablissement);
+            }
+            //sinon l'utilisateur choisit lui-même un établissement
+
+            // --------------------------
+            //Set année de la collecte
+            // --------------------------
+            //vérification qu'il y a une collecte active
+            $query = $em->createQuery(
+                'SELECT COUNT(c.collecteId) as nb FROM AppBundle:Collecte c WHERE c.active = true'
+            );
+            $checkCollecte = $query->getResult();
+            $checkCollecte = $checkCollecte[0]['nb'];
+
+            //s'il y a plus que 0 = il y a une collecte active donc je prends sa date
+            if($checkCollecte > 0){
+                $query = $em->createQuery(
+                    'SELECT c.annee as annee FROM AppBundle:Collecte c WHERE c.active = true'
+                );
+            }
+            else{
+                $query = $em->createQuery(
+                    'SELECT c.annee as annee FROM AppBundle:Collecte c WHERE c.complete = true ORDER BY c.annee DESC'
+                );
+                $query->setMaxResults(1);
+            }
+            $year = $query->getSingleResult();
+            $year = $year['annee'];
+            $formation->setAnneeCollecte($year);
+
             $now = new \DateTime();
             $formation->setDateCreation($now);
             $formation->setLastUpdate($now);
+
+            $em->persist($formation);
+            $em->flush();
+
+            //Création et set de l'objetId
+            $lastId = $formation->getFormationId();
+            $formation->setObjetId("F".$lastId);
 
             $em->persist($formation);
             $em->flush();
@@ -71,7 +120,8 @@ class FormationController extends Controller
 
         return $this->render('EditeurBundle:Formation:new.html.twig', array(
             'edit_form' => $form->createView(),
-            'formation' => $formation
+            'formation' => $formation,
+            'etablissements' => $etablissements
             // 'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -108,7 +158,7 @@ class FormationController extends Controller
         $editForm = $this->createForm('EditeurBundle\Form\FormationType', $formation, array(
             'etablissements' => $etablissements
         ));
-//        $editForm = $this->createForm('EditeurBundle\Form\FormationType', $formation);
+
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -128,6 +178,7 @@ class FormationController extends Controller
             'formation' => $formation,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'etablissements' => $etablissements
         ));
     }
 
@@ -161,14 +212,18 @@ class FormationController extends Controller
      */
     public function deleteAjaxAction($formationId)
     {
-
         $em = $this->getDoctrine()->getManager();
 
-        /** @var Formation $formation */
-        $formation = $em->getRepository('AppBundle:Formation')
-            ->find($formationId);
-        $em->remove($formation);
-        $em->flush();
+        $user = $this->getUser();
+
+        if ($user->hasRole('ROLE_USER')){
+
+            /** @var Formation $formation */
+            $formation = $em->getRepository('AppBundle:Formation')
+                ->find($formationId);
+            $em->remove($formation);
+            $em->flush();
+        }
 
         return new Response(null, 204);
 
@@ -184,6 +239,8 @@ class FormationController extends Controller
     {
         $form = $this->createDeleteForm($formation);
         $form->handleRequest($request);
+
+        //vérifier que l'user est bien un admin
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();

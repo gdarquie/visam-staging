@@ -58,7 +58,13 @@
 
                 <h3>Etablissement(s) de rattachement</h3>
 
-                {{ form_row(edit_form.etablissement, { 'label' : 'Etablissement(s) Hesam'}) }}
+                {% if(etablissements|length>1)  %}
+                    {{ form_row(edit_form.etablissement, {'label' : "Etablissement(s) Hesam"}) }}
+                {% else %}
+                    <div class="hide">
+                        {{ form_row(edit_form.etablissement) }}
+                    </div>
+                {% endif %}
                 {{ form_row(edit_form.etabExt, { 'attr': {'class': 'materialize-textarea'}, 'label' : 'Etablissement(s) hors Hesam'}) }}
 
                 {{ form_widget(edit_form.checkEtab) }}

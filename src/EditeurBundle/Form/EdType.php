@@ -14,6 +14,10 @@ class EdType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
+
+        $etablissements = $options['etablissements'];
+
         $builder
             ->add('code')
             ->add('nom')
@@ -23,10 +27,10 @@ class EdType extends AbstractType
             ->add('contact')
             ->add('effectif')
             ->add('membre')
-            // ->add('localisation')
-            // ->add('etablissement')
-            // ->add('discipline')
-            // ->add('labo')
+             ->add('localisation')
+             ->add('etablissement')
+             ->add('discipline')
+             ->add('labo')
         ;
     }
     
@@ -35,8 +39,13 @@ class EdType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
+
+
+        $etablissements = [];
+
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Ed'
+            'data_class' => 'AppBundle\Entity\Ed',
+            'etablissements' => $etablissements
         ));
     }
 }

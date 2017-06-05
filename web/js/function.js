@@ -6,6 +6,7 @@ function myParallax(){
 	$('select').material_select();
 	$('.parallax').parallax();
     $(".text-count").characterCounter();
+    $(".tablesorter").tablesorter();
     $('.datepicker').pickadate({
         // editable: true,
         min: new Date(2015,1,1),
