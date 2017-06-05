@@ -15,6 +15,23 @@
             {{form_row(form.contact) }}
             {{form_row(form.effectif) }}
             {{form_row(form.membre) }}
+            {{form_row(form.labo) }}
+
+            {% if(etablissements|length>1)  %}
+                {{ form_row(form.etablissement, {'label' : "Etablissement(s)"}) }}
+            {% else %}
+                <div class="hide">
+                    {{ form_row(form.etablissement) }}
+                </div>
+            {% endif %}
+
+            {% if(localisations|length>1)  %}
+                {{ form_row(form.localisation,  {'label' : "Lieu(x)"}) }}
+            {% else %}
+                <div class="hide">
+                    {{ form_row(form.localisation) }}
+                </div>
+            {% endif %}
 
             </div>
     </div>

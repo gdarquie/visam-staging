@@ -83,6 +83,15 @@ class Formation
      */
     private $lmd;
 
+    /** @var  \AppBundle\Entity\Thesaurus
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Thesaurus")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="lmd_thesaurus", referencedColumnName="thesaurus_id")
+     * })
+     */
+    private $lmd_thesaurus;
+
     /**
      * @var string
      *
@@ -889,6 +898,23 @@ class Formation
     {
         return $this->discipline;
     }
+
+    /**
+     * @return Thesaurus
+     */
+    public function getLmdThesaurus()
+    {
+        return $this->lmd_thesaurus;
+    }
+
+    /**
+     * @param Thesaurus $lmd_thesaurus
+     */
+    public function setLmdThesaurus($lmd_thesaurus)
+    {
+        $this->lmd_thesaurus = $lmd_thesaurus;
+    }
+
 
     /**
      * @return string

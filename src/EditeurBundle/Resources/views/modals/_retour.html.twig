@@ -3,7 +3,7 @@
         {% if is_granted('ROLE_ADMIN') %}
             <a href="{{ path('admin') }}">Retour</a>
         {% elseif is_granted('ROLE_USER') %}
-            <a href="{{ path('editor') }}">Retour</a>
+            <a href="{{ path('editeur') }}">Retour</a>
         {% else %}
             <a href="{{ path('search') }}">Retour</a>
         {% endif %}

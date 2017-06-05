@@ -94,7 +94,7 @@ class Ed
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Etablissement", mappedBy="ed")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Etablissement", mappedBy="ed", cascade={"persist"})
      */
     private $etablissement;
 
@@ -431,21 +431,25 @@ class Ed
      *
      * @return Ed
      */
-    public function addEtablissement(\AppBundle\Entity\Etablissement $etablissement)
+    public function addEtablissement(Etablissement $etablissement)
     {
-        $this->etablissement[] = $etablissement;
+        if ($this->etablissement->contains($etablissement)) {
+            return;
+        }
 
-        return $this;
+        $this->etablissement[] = $etablissement;
+        $etablissement->addEd($this);
     }
 
     /**
      * Remove etablissement
      *
-     * @param \AppBundle\Entity\Etablissement $etablissement
+     * @param \AppBundle\Entity\Etablissement etablissement
      */
-    public function removeEtablissement(\AppBundle\Entity\Etablissement $etablissement)
+    public function removeEtablissement(Etablissement $etablissement)
     {
         $this->etablissement->removeElement($etablissement);
+        $etablissement->removeFormation($this);
     }
 
     /**

@@ -36,7 +36,13 @@
             {% endif %}
             {{ form_row(edit_form.lien2,  {'label' : "Autre lien"}) }}
 
-            {{ form_row(edit_form.localisation,  {'label' : "Lieu(x)"}) }}
+            {% if(localisations|length>1)  %}
+                {{ form_row(edit_form.localisation,  {'label' : "Lieu(x)"}) }}
+            {% else %}
+                <div class="hide">
+                    {{ form_row(edit_form.localisation) }}
+                </div>
+            {% endif %}
 
             <h4>Responsable(s)</h4>
 
@@ -54,16 +60,12 @@
                     </div>
                 </div>
 
-
-
                 {# prevents weird label from showing up in new #}
                 {{ form_widget(edit_form.membre) }}
-
 
                 {{ form_widget(edit_form.checkGeneral) }}
                 {{ form_label(edit_form.checkGeneral) }}
                 {{ form_errors(edit_form.checkGeneral) }}
-
 
         </div>
 
@@ -120,7 +122,7 @@
         {% endif %}
             <h3>Cursus</h3>
 
-            {{ form_row(edit_form.lmd, {'label' : "Parcours LMD"}) }}
+            {{ form_row(edit_form.lmd_thesaurus, {'label' : "Parcours LMD"}) }}
             {{ form_row(edit_form.niveau_thesaurus, {'label' : "Niveau de sortie"}) }}
             {{ form_row(edit_form.typediplome_thesaurus, { 'label' : 'Type de diplôme'}) }}
             {{ form_row(edit_form.ects, {'label' : "Crédits ECTS"}) }}

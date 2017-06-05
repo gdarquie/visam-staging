@@ -8,12 +8,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use AppBundle\Entity\Discipline;
-use AppBundle\Entity\Axe;
-use AppBundle\Repository\DisciplineRepository;
-use AppBundle\Entity\Etablissement;
+
 use AppBundle\Repository\EtablissementRepository;
+use AppBundle\Repository\LocalisationRepository;
 use AppBundle\Repository\ThesaurusRepository;
+use AppBundle\Repository\DisciplineRepository;
 
 
 class LaboType extends AbstractType
@@ -26,6 +25,7 @@ class LaboType extends AbstractType
     {
 
         $etablissements = $options['etablissements'];
+        $localisations = $options['localisations'];
 
         $builder
             ->add('nom')
@@ -61,7 +61,19 @@ class LaboType extends AbstractType
 //            ->add('membre')
             // ->add('theme')
             // ->add('ufr')
-            // ->add('localisation')
+            ->add('localisation', EntityType::class, array(
+                'class' => 'AppBundle:Localisation',
+                'by_reference' => false,
+                'multiple' => true,
+                'choice_label' => 'nom',
+                'query_builder' => function (LocalisationRepository $repo) use ($localisations){
+                    return $repo->createQueryBuilder('localisation')
+                        ->where('localisation IN(:localisation)')
+                        ->setParameter('localisation', $localisations)
+                        ->orderBy('localisation.nom', 'ASC')
+                        ;
+                }
+            ))
             // ->add('formation')
 //            ->add('discipline')
             ->add('cnu', EntityType::class, array(
@@ -144,10 +156,12 @@ class LaboType extends AbstractType
     {
 
         $etablissements = [];
+        $localisations = [];
 
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Labo',
-            'etablissements' => $etablissements
+            'etablissements' => $etablissements,
+            'localisations' => $localisations
         ));
     }
 }

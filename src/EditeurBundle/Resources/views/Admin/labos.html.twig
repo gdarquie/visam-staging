@@ -12,7 +12,7 @@
 
         <div class="card">
         <ul class="collection with-header">
-            <li class="collection-header"><h4>Liste des laboratoires</h4></li>
+
             {% for item in labos  %}
                 <li class="collection-item avatar js-labo-item">
                     <a href="{{ path('editeur_laboratoire_edit', {'id': item.laboId } ) }}" >
@@ -28,53 +28,53 @@
                         <p>
 
                         <div class="description_container">
-                                        <span class="description valign-wrapper">général
-                                            {% if item.checkGeneral %}
-                                                <i class="material-icons green-text">done</i>
-                                            {% else %}
-                                                <i class="material-icons red-text">schedule</i>
-                                            {% endif %}
-                                        </span>
+                            <span class="description valign-wrapper">général
+                                {% if item.checkGeneral %}
+                                    <i class="material-icons green-text">done</i>
+                                {% else %}
+                                    <i class="material-icons red-text">schedule</i>
+                                {% endif %}
+                            </span>
                         </div>
 
                         <div class="description_container">
-                                        <span class="description valign-wrapper">contact
-                                            {% if item.checkContact %}
-                                                <i class="material-icons green-text">done</i>
-                                            {% else %}
-                                                <i class="material-icons red-text">schedule</i>
-                                            {% endif %}
-                                        </span>
+                            <span class="description valign-wrapper">contact
+                                {% if item.checkContact %}
+                                    <i class="material-icons green-text">done</i>
+                                {% else %}
+                                    <i class="material-icons red-text">schedule</i>
+                                {% endif %}
+                            </span>
                         </div>
 
                         <div class="description_container">
-                                        <span class="description valign-wrapper">description
-                                            {% if item.checkDescription %}
-                                                <i class="material-icons green-text">done</i>
-                                            {% else %}
-                                                <i class="material-icons red-text">schedule</i>
-                                            {% endif %}
-                                        </span>
+                            <span class="description valign-wrapper">description
+                                {% if item.checkDescription %}
+                                    <i class="material-icons green-text">done</i>
+                                {% else %}
+                                    <i class="material-icons red-text">schedule</i>
+                                {% endif %}
+                            </span>
                         </div>
 
                         <div class="description_container">
-                                        <span class="description valign-wrapper">établissement
-                                            {% if item.checkEtab %}
-                                                <i class="material-icons green-text">done</i>
-                                            {% else %}
-                                                <i class="material-icons red-text">schedule</i>
-                                            {% endif %}
-                                        </span>
+                            <span class="description valign-wrapper">établissement
+                                {% if item.checkEtab %}
+                                    <i class="material-icons green-text">done</i>
+                                {% else %}
+                                    <i class="material-icons red-text">schedule</i>
+                                {% endif %}
+                            </span>
                         </div>
 
                         <div class="description_container">
-                                        <span class="description valign-wrapper">effectifs
-                                            {% if item.checkEffectifs %}
-                                                <i class="material-icons green-text">done</i>
-                                            {% else %}
-                                                <i class="material-icons red-text">schedule</i>
-                                            {% endif %}
-                                        </span>
+                            <span class="description valign-wrapper">effectifs
+                                {% if item.checkEffectifs %}
+                                    <i class="material-icons green-text">done</i>
+                                {% else %}
+                                    <i class="material-icons red-text">schedule</i>
+                                {% endif %}
+                            </span>
                         </div>
 
                         </p>
@@ -86,14 +86,24 @@
         </ul>
 
         <ul class="pagination center">
-            <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-            <li class="active"><a href="#!">1</a></li>
-            <li class="waves-effect"><a href="#!">2</a></li>
-            <li class="waves-effect"><a href="#!">3</a></li>
-            <li class="waves-effect"><a href="#!">4</a></li>
-            <li class="waves-effect"><a href="#!">5</a></li>
-            <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+            {% for u in 0..(nbPages-1)  %}
+                {% if page == loop.index %}
+                    <li class="active"><a href="{{ path('admin_laboratoires' , {'page' : loop.index}) }}">{{ loop.index }}</a></li>
+                {% else %}
+                    <li class="waves-effect"><a href="{{ path('admin_laboratoires' , {'page' : loop.index}) }}">{{ loop.index }}</a></li>
+                {% endif %}
+            {% endfor %}
         </ul>
+
+        {#<ul class="pagination center">#}
+            {#<li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>#}
+            {#<li class="active"><a href="#!">1</a></li>#}
+            {#<li class="waves-effect"><a href="#!">2</a></li>#}
+            {#<li class="waves-effect"><a href="#!">3</a></li>#}
+            {#<li class="waves-effect"><a href="#!">4</a></li>#}
+            {#<li class="waves-effect"><a href="#!">5</a></li>#}
+            {#<li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>#}
+        {#</ul>#}
 
         </div>
     </section>

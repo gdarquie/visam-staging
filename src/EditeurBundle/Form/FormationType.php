@@ -2,19 +2,19 @@
 
 namespace EditeurBundle\Form;
 
-use Symfony\Component\Form\AbstractType;
+
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
+use Symfony\Component\Form\AbstractType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
-use AppBundle\Entity\Membre;
-use AppBundle\Entity\Discipline;
 use AppBundle\Repository\DisciplineRepository;
-use AppBundle\Entity\Etablissement;
 use AppBundle\Repository\EtablissementRepository;
+use AppBundle\Repository\LocalisationRepository;
 use AppBundle\Repository\ThesaurusRepository;
 
 use AppBundle\Entity\Tag;
@@ -30,6 +30,7 @@ class FormationType extends AbstractType
     {
 
         $etablissements = $options['etablissements'];
+        $localisations = $options['localisations'];
 
         $builder
             ->add('nom')
@@ -41,38 +42,16 @@ class FormationType extends AbstractType
                 'class' => 'AppBundle:Thesaurus',
                 'choice_label' => 'nom', //order by alpha
                 'query_builder' => function(ThesaurusRepository $repo) {
-                    return $repo->findAllThesaurusByType("modalites");
+                    return $repo->findAllThesaurusByType("niveau");
                 }
             ))
-//            ->add('niveau', ChoiceType::class, array(
-//                'choices'  => array(
-//                    'Bac +1' => 'Bac +1',
-//                    'Bac +2' => 'Bac +2',
-//                    'Bac +3' => 'Bac +3',
-//                    'Bac +4' => 'Bac +4',
-//                    'Bac +5' => 'Bac +5',
-//                    'Bac +6' => 'Bac +6',
-//                    'Bac +7' => 'Bac +7',
-//                    'Bac +8' => 'Bac +8',
-//                    'Licence 1' => 'Licence 1',
-//                    'Licence 2' => 'Licence 2',
-//                    'Licence 3' => 'Licence 3',
-//                    'Master 1' => 'Master 1',
-//                    'Master 2' => 'Master 2',
-//                    'Doctorat' => 'Doctorat',
-//                    'Sans objet' => 'Sans objet'
-//                ),
-//            ))
-            ->add('lmd', ChoiceType::class, array(
-                'choices'  => array(
-                    'Licence 1' => 'Licence 1',
-                    'Licence 2' => 'Licence 2',
-                    'Licence 3' => 'Licence 3',
-                    'Master 1' => 'Master 1',
-                    'Master 2' => 'Master 2',
-                    'Doctorat' => 'Doctorat',
-                    'Sans objet' => 'Sans objet'
-                ),
+            ->add('lmd_thesaurus', EntityType::class, array(
+                'placeholder' => 'Sélectionner une réponse',
+                'class' => 'AppBundle:Thesaurus',
+                'choice_label' => 'nom', //order by alpha
+                'query_builder' => function(ThesaurusRepository $repo) {
+                    return $repo->findAllThesaurusByType("parcours");
+                }
             ))
             ->add('ects')
             ->add('modalite_thesaurus', EntityType::class, array(
@@ -109,7 +88,19 @@ class FormationType extends AbstractType
 //                }
 //            ))
         //     ->add('theme')
-             ->add('localisation')
+            ->add('localisation', EntityType::class, array(
+                'class' => 'AppBundle:Localisation',
+                'by_reference' => false,
+                'multiple' => true,
+                'choice_label' => 'nom',
+                'query_builder' => function (LocalisationRepository $repo) use ($localisations){
+                    return $repo->createQueryBuilder('localisation')
+                        ->where('localisation IN(:localisation)')
+                        ->setParameter('localisation', $localisations)
+                        ->orderBy('localisation.nom', 'ASC')
+                        ;
+                }
+            ))
         //     ->add('labo')
 
             ->add('etablissement', EntityType::class, array(
@@ -180,10 +171,12 @@ class FormationType extends AbstractType
     {
 
         $etablissements = [];
+        $localisations = [];
 
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Formation',
-            'etablissements' => $etablissements
+            'etablissements' => $etablissements,
+            'localisations' => $localisations
         ));
     }
 }

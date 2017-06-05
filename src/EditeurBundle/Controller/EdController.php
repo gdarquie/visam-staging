@@ -64,12 +64,19 @@ class EdController extends Controller
         }
         $etablissements = $query->getResult();
 
+        $query = $em->createQuery(
+            'SELECT l.localisationId as id FROM AppBundle:Localisation l JOIN l.etablissement as e WHERE e.etablissementId IN (:etablissements)'
+        );
+        $query->setParameter('etablissements', $etablissements);
+        $localisations = $query->getResult();
+
         $editForm = $this->createForm('EditeurBundle\Form\EdType', $ed, array(
-            'etablissements' => $etablissements
+            'etablissements' => $etablissements,
+            'localisations' => $localisations
         ));
 
         $editForm->handleRequest($request);
-        /////
+
         if ($editForm->isSubmitted() && $editForm->isValid()) {
 
             // --------------------------
@@ -137,7 +144,8 @@ class EdController extends Controller
         return $this->render('EditeurBundle:Ed:new.html.twig', array(
             'ed' => $ed,
             'form' => $editForm->createView(),
-            'etablissements' => $etablissements
+            'etablissements' => $etablissements,
+            'localisations' => $localisations
         ));
     }
 

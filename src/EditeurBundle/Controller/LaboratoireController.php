@@ -48,8 +48,15 @@ class LaboratoireController extends Controller
         }
         $etablissements = $query->getResult();
 
+        $query = $em->createQuery(
+            'SELECT l.localisationId as id FROM AppBundle:Localisation l JOIN l.etablissement as e WHERE e.etablissementId IN (:etablissements)'
+        );
+        $query->setParameter('etablissements', $etablissements);
+        $localisations = $query->getResult();
+
         $editForm = $this->createForm('EditeurBundle\Form\LaboType', $laboratoire, array(
-            'etablissements' => $etablissements
+            'etablissements' => $etablissements,
+            'localisations' => $localisations
         ));
 
         $editForm->handleRequest($request);
@@ -70,6 +77,13 @@ class LaboratoireController extends Controller
             }
             //sinon l'utilisateur choisit lui-même un établissement
 
+            if(count($localisations) == 1){
+
+                $repository = $this->getDoctrine()->getRepository('AppBundle:Localisation');
+                $localisation = $repository->findOneByLocalisationId($localisations[0]['id']);
+
+                $laboratoire->addlocalisation($localisation);
+            }
             // --------------------------
             //Set année de la collecte
             // --------------------------
@@ -116,7 +130,8 @@ class LaboratoireController extends Controller
         return $this->render('EditeurBundle:Labo:new.html.twig', array(
             'edit_form' => $editForm->createView(),
             'labo' => $laboratoire,
-            'etablissements' => $etablissements
+            'etablissements' => $etablissements,
+            'localisations' => $localisations
         ));
     }
 

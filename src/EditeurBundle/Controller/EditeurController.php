@@ -31,7 +31,20 @@ class EditeurController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $annee = 2016;
+        //récupérer l'année de la dernière collecte active
+        $query = $em->createQuery(
+            'SELECT c.annee FROM AppBundle:Collecte c WHERE c.active = 1'
+        )->setMaxResults(1);
+        $annee = $query->getResult();
+
+        //s'il n'y a pas de collecte active, on renvoie directement sur le moteur de recherche
+        if(COUNT($annee)  == 0){
+            return $this->redirectToRoute('search');
+        }
+        $annee = $annee[0]['annee'];
+
+//        dump($annee);die;
+
         $user = $this->getUser();
         $userId = $user->getId();
 

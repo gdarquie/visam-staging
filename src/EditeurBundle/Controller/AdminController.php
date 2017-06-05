@@ -45,6 +45,7 @@ class AdminController extends Controller
         )->setMaxResults(5);
         $eds = $query->getResult();
 
+        //all collectes
         $query = $em->createQuery(
             'SELECT c FROM AppBundle:Collecte c ORDER BY c.annee DESC'
         );
@@ -55,6 +56,24 @@ class AdminController extends Controller
             'SELECT c FROM AppBundle:Collecte c WHERE c.complete = true ORDER BY c.annee DESC'
         )->setMaxResults(1);
         $collecte = $query->getResult();
+
+        //collecte active?
+        $query = $em->createQuery(
+            'SELECT c FROM AppBundle:Collecte c WHERE c.active = 1'
+        );
+        $collecte_active = $query->getResult();
+
+        //collectes complétées
+        $query = $em->createQuery(
+            'SELECT c FROM AppBundle:Collecte c WHERE c.complete = 1 ORDER BY c.annee DESC'
+        );
+        $collecte_complete = $query->getResult();
+
+        //collectes préparées
+        $query = $em->createQuery(
+            'SELECT c FROM AppBundle:Collecte c WHERE c.complete = 0  AND c.active = 0 ORDER BY c.annee DESC'
+        );
+        $collecte_prepare = $query->getResult();
 
         //utilisateurs
         $query = $em->createQuery(
@@ -75,7 +94,11 @@ class AdminController extends Controller
             'collectes' => $collectes,
             'collecte' => $collecte,
             'users' => $users,
-            'thesaurus' => $thesaurus
+            'thesaurus' => $thesaurus,
+            'collecte_active' => $collecte_active,
+            'collecte_complete' => $collecte_complete,
+            'collecte_prepare' => $collecte_prepare
+
         ));
     }
 
@@ -114,33 +137,80 @@ class AdminController extends Controller
         ));
     }
 
+//    /**
+//     *
+//     * @Route("/laboratoires/{max}", name="admin_laboratoires")
+//     */
+//    public function labosAction(){
+//
+//        $em = $this->getDoctrine()->getManager();
+//
+//        $query = $em->createQuery(
+//            'SELECT l FROM AppBundle:Labo l ORDER BY l.last_update DESC'
+//        )->setMaxResults($max);
+//        $items = $query->getResult();
+//
+//
+//        return $this->render('EditeurBundle:Admin:labos.html.twig', array(
+//            'labos' => $items
+//        ));
+//
+//    }
+
     /**
      *
-     * @Route("/laboratoires", name="admin_laboratoires")
+     * @Route("/laboratoires/{page}", name="admin_laboratoires", requirements={"page": "\d+"})
      */
-    public function labosAction(){
+    public function laboOffsetAction($page = 1){
 
         $em = $this->getDoctrine()->getManager();
+        $max = 20;
+
+        //calculer nombre de pages
+        $query = $em->createQuery(
+            'SELECT COUNT(l) as nb FROM AppBundle:Labo l'
+        );
+        $total = $query->getSingleResult();
+        $nbPages = intval(ROUND($total['nb'] / $max));
+//        dump($nbPages);die;
+
+        $first = $max*($page-1);
+        //dump($first);die;
 
         $query = $em->createQuery(
             'SELECT l FROM AppBundle:Labo l ORDER BY l.last_update DESC'
-        )->setMaxResults(20);
+        )->setFirstResult($first)->setMaxResults($max);
         $items = $query->getResult();
 
 
         return $this->render('EditeurBundle:Admin:labos.html.twig', array(
-            'labos' => $items
+            'labos' => $items,
+            'page' => $page,
+            'nbPages' => $nbPages
         ));
 
     }
 
     /**
      *
-     * @Route("/formations", name="admin_formations")
+     * @Route("/formations/{page}", name="admin_formations", requirements={"page": "\d+"})
      */
-    public function formationsAction(){
+    public function formationsAction($page = 1){
 
         $em = $this->getDoctrine()->getManager();
+
+        $max = 20;
+
+        //calculer nombre de pages
+        $query = $em->createQuery(
+            'SELECT COUNT(l) as nb FROM AppBundle:Formation l'
+        );
+        $total = $query->getSingleResult();
+        $nbPages = ROUND($total['nb'] / $max);
+        //dump($nbPages);die;
+
+        $first = $max*($page-1);
+        //dump($first);die;
 
         $query = $em->createQuery(
             'SELECT l FROM AppBundle:Formation l ORDER BY l.last_update DESC'
@@ -148,18 +218,33 @@ class AdminController extends Controller
         $items = $query->getResult();
 
         return $this->render('EditeurBundle:Admin:formations.html.twig', array(
-            'items' => $items
+            'items' => $items,
+            'page' => $page,
+            'nbPages' => $nbPages
         ));
 
     }
 
     /**
      *
-     * @Route("/eds", name="admin_eds")
+     * @Route("/eds/{page}", name="admin_eds", requirements={"page": "\d+"})
      */
-    public function edsAction(){
+    public function edsAction($page = 1){
 
         $em = $this->getDoctrine()->getManager();
+
+        $max = 20;
+
+        //calculer nombre de pages
+        $query = $em->createQuery(
+            'SELECT COUNT(l) as nb FROM AppBundle:Ed l'
+        );
+        $total = $query->getSingleResult();
+        $nbPages = ROUND($total['nb'] / $max);
+        //dump($nbPages);die;
+
+        $first = $max*($page-1);
+        //dump($first);die;
 
         $query = $em->createQuery(
             'SELECT l FROM AppBundle:Ed l ORDER BY l.last_update DESC'
@@ -167,7 +252,9 @@ class AdminController extends Controller
         $items = $query->getResult();
 
         return $this->render('EditeurBundle:Admin:eds.html.twig', array(
-            'eds' => $items
+            'eds' => $items,
+            'page' => $page,
+            'nbPages' => $nbPages
         ));
 
     }

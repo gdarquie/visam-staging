@@ -23,8 +23,6 @@ class FormationController extends Controller
      */
     public function newFormationAction(Request $request){
 
-        // $deleteForm = $this->createDeleteLaboForm($labo);
-
         $formation = new Formation();
 
         $em = $this->getDoctrine()->getManager();
@@ -41,6 +39,7 @@ class FormationController extends Controller
 
         //sinon, on lui conditionne un établissement
         else{
+
             $userId = $user->getId();
             $query = $em->createQuery(
                 'SELECT e.etablissementId as id FROM AppBundle:User u INNER JOIN u.etablissement e WHERE u.id = :user'
@@ -49,11 +48,17 @@ class FormationController extends Controller
         }
         $etablissements = $query->getResult();
 
+        $query = $em->createQuery(
+            'SELECT l.localisationId as id FROM AppBundle:Localisation l JOIN l.etablissement as e WHERE e.etablissementId IN (:etablissements)'
+        );
+        $query->setParameter('etablissements', $etablissements);
+        $localisations = $query->getResult();
+
         $form = $this->createForm('EditeurBundle\Form\FormationType', $formation, array(
-            'etablissements' => $etablissements
+            'etablissements' => $etablissements,
+            'localisations' => $localisations
         ));
 
-//        $form = $this->createForm('EditeurBundle\Form\FormationType', $formation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -72,6 +77,14 @@ class FormationController extends Controller
                 $etablissement = $repository->findOneByEtablissementId($etablissements[0]['id']);
 
                 $formation->addEtablissement($etablissement);
+            }
+
+            if(count($localisations) == 1){
+
+                $repository = $this->getDoctrine()->getRepository('AppBundle:Localisation');
+                $localisation = $repository->findOneByLocalisationId($localisations[0]['id']);
+
+                $formation->addlocalisation($localisation);
             }
             //sinon l'utilisateur choisit lui-même un établissement
 
@@ -121,7 +134,8 @@ class FormationController extends Controller
         return $this->render('EditeurBundle:Formation:new.html.twig', array(
             'edit_form' => $form->createView(),
             'formation' => $formation,
-            'etablissements' => $etablissements
+            'etablissements' => $etablissements,
+            'localisations' => $localisations
             // 'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -155,8 +169,15 @@ class FormationController extends Controller
         }
         $etablissements = $query->getResult();
 
+        $query = $em->createQuery(
+            'SELECT l.localisationId as id FROM AppBundle:Localisation l JOIN l.etablissement as e WHERE e.etablissementId IN (:etablissements)'
+        );
+        $query->setParameter('etablissements', $etablissements);
+        $localisations = $query->getResult();
+
         $editForm = $this->createForm('EditeurBundle\Form\FormationType', $formation, array(
-            'etablissements' => $etablissements
+            'etablissements' => $etablissements,
+            'localisations' => $localisations
         ));
 
         $editForm->handleRequest($request);
@@ -178,7 +199,8 @@ class FormationController extends Controller
             'formation' => $formation,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-            'etablissements' => $etablissements
+            'etablissements' => $etablissements,
+            'localisations' => $localisations
         ));
     }
 
