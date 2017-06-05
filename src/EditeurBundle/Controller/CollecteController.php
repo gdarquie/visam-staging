@@ -413,7 +413,7 @@ class CollecteController extends Controller
                 $query->setParameter('id', $collecteId);
                 $query->execute();
 
-                $this->addFlash('success', "Féciliciations, la collecte est à présent achevée");
+                $this->addFlash('success', "Félicitations, la collecte est à présent achevée");
                 return $this->redirectToRoute('admin');
 
             }
