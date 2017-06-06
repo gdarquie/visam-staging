@@ -1187,7 +1187,7 @@ class Formation
      *
      * @return Formation
      */
-    public function addMetier(\AppBundle\Entity\Metier $metier)
+    public function addMetier(\AppBundle\Entity\Metier3 $metier)
     {
         $this->metier[] = $metier;
 
@@ -1197,9 +1197,9 @@ class Formation
     /**
      * Remove metier
      *
-     * @param \AppBundle\Entity\Metier $metier
+     * @param \AppBundle\Entity\Metier3 $metier
      */
-    public function removeMetier(\AppBundle\Entity\Metier $metier)
+    public function removeMetier(\AppBundle\Entity\Metier3 $metier)
     {
         $this->metier->removeElement($metier);
     }
