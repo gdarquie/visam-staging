@@ -56,7 +56,6 @@ function facette(){
 
 
 
-
           // Launch - Face
             $.get( "/export", function( data ) {
                 settings = { 
@@ -117,7 +116,13 @@ function facette(){
 
 facette();
 
+var corpus = $.get( "/export", function( data ) {
+    return data;
+});
+
+
 var searchInput = function () {
+
   searchVal = $("#search-input").val();
   if (searchVal) {
     var name = [];

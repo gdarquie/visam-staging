@@ -3,6 +3,7 @@
 namespace EditeurBundle\Form;
 
 
+use AppBundle\Repository\Metier3Repository;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -56,6 +57,7 @@ class FormationType extends AbstractType
             ->add('ects')
             ->add('modalite_thesaurus', EntityType::class, array(
                 'placeholder' => 'Sélectionner une réponse',
+                'multiple' => true,
                 'class' => 'AppBundle:Thesaurus',
                 'choice_label' => 'nom', //order by alpha
                 'query_builder' => function(ThesaurusRepository $repo) {
@@ -116,7 +118,15 @@ class FormationType extends AbstractType
                         ;
                 }
             ))
-            ->add('metier')
+            ->add('metier', EntityType::class, array(
+                'class' => 'AppBundle:Metier3',
+                'by_reference' => false,
+                'multiple' => true,
+                'choice_label' => 'nom',
+                'query_builder' => function (Metier3Repository $repo){
+                    return $repo->createAlphabeticalQueryBuilder();
+                }
+            ))
             ->add('tag')
             ->add('cnu', EntityType::class, array(
                 'class' => 'AppBundle:Discipline',

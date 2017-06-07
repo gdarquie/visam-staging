@@ -4,13 +4,14 @@
 {% block body %}
 
     <div class="container">
+
     <h1>Editer une formation</h1>
 
-    {{ form_start(edit_form) }}
+    {{ form_start(edit_form, {'attr': {'class': 'form-to-check', 'data-parsley-validate' : ''} }) }}
 
         {{ include('EditeurBundle:Formation:_form.html.twig') }}
 
-        <input type="submit" class="btn btn-hesam" value="Edit" formnovalidate />
+        <input type="submit" class="btn btn-hesam" value="Sauvegarder" formnovalidate />
     {{ form_end(edit_form) }}
 
     {{ form_start(delete_form) }}

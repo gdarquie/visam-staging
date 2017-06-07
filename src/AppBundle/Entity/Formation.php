@@ -112,6 +112,14 @@ class Formation
      * @var integer
      *
      * @ORM\Column(name="effectif", type="integer", nullable=true)
+     *
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 1000000,
+     *      minMessage = "Il ne peut y avoir d'effectif négatif",
+     *      maxMessage = "Le nombre d'effectifs entré est (bien) trop élevé"
+     * )
+     *
      */
     private $effectif;
 
@@ -203,12 +211,18 @@ class Formation
      */
     private $ects;
 
-    /** @var  \AppBundle\Entity\Thesaurus
+    /**
+     * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Thesaurus")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="modalite_thesaurus", referencedColumnName="thesaurus_id")
-     * })
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Thesaurus")
+     * @ORM\JoinTable(name="formation_has_modalite",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="formation", referencedColumnName="formation_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="modalite_thesaurus", referencedColumnName="thesaurus_id")
+     *   }
+     * )
      */
     private $modalite_thesaurus;
 
@@ -603,6 +617,7 @@ class Formation
      * Get responsable
      *
      * @return string
+     *
      */
     public function getResponsable()
     {

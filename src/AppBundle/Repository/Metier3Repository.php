@@ -17,4 +17,11 @@ class Metier3Repository extends EntityRepository
         }
         return true;
     }
+
+    public function createAlphabeticalQueryBuilder()
+    {
+        return $this->createQueryBuilder('metier3')
+            ->orderBy('metier3.nom', 'ASC');
+    }
+
 }

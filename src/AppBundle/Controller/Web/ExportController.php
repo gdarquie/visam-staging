@@ -33,9 +33,30 @@ class ExportController extends Controller
 //            $cache->save(11, $labos);
 //        }
 
+
         $em = $this->getDoctrine()->getManager();
-        $labos = $em->getRepository('AppBundle:Labo')->findAll();
-        $formations = $em->getRepository('AppBundle:Formation')->findAll();
+
+        $query = $em->createQuery(
+            'SELECT c FROM AppBundle:Collecte c WHERE c.complete = 1 ORDER BY c.annee DESC'
+        )->setMaxResults(1);
+        $anneeCollecte = $query->getSingleResult();
+
+        $anneeCollecte = $anneeCollecte->getAnnee();
+
+//        dump($anneeCollecte);die;
+
+        $query = $em->createQuery(
+            'SELECT l FROM AppBundle:Labo l WHERE l.anneeCollecte = :annee'
+        );
+        $query->setParameter('annee', $anneeCollecte);
+        $labos = $query->getResult();
+
+        $query = $em->createQuery(
+            'SELECT f FROM AppBundle:Formation f WHERE f.anneeCollecte = :annee'
+        );
+        $query->setParameter('annee', $anneeCollecte);
+        $formations = $query->getResult();
+
 
         return $this->render('export.html.twig', array(
             'formations' => $formations,
@@ -43,6 +64,42 @@ class ExportController extends Controller
         	));
     }
 
+
+    /**
+     * @Route("/export/previz", name="export_previz")
+     */
+    public function exportPrevizAction(Request $request)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $query = $em->createQuery(
+            'SELECT c FROM AppBundle:Collecte c WHERE c.active = 1'
+        )->setMaxResults(1);
+        $anneeCollecte = $query->getSingleResult();
+
+        $anneeCollecte = $anneeCollecte->getAnnee();
+
+//        dump($anneeCollecte);die;
+
+        $query = $em->createQuery(
+            'SELECT l FROM AppBundle:Labo l WHERE l.anneeCollecte = :annee'
+        );
+        $query->setParameter('annee', $anneeCollecte);
+        $labos = $query->getResult();
+
+        $query = $em->createQuery(
+            'SELECT f FROM AppBundle:Formation f WHERE f.anneeCollecte = :annee'
+        );
+        $query->setParameter('annee', $anneeCollecte);
+        $formations = $query->getResult();
+
+
+        return $this->render('export.html.twig', array(
+            'formations' => $formations,
+            'labos' => $labos,
+        ));
+    }
 
 } // Fin de la class DefaultController
 

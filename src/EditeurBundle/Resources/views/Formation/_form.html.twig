@@ -9,7 +9,8 @@
         {{ form_errors(membreForm) }}
         {{ form_row(membreForm.nom, {'label' : "Nom"}) }}
         {{ form_row(membreForm.prenom, {'label' : "Prénom"}) }}
-        {{ form_row(membreForm.mail, {'label' : " Contact du responsable pédagogique (adresse e-mail)"}) }}
+        {{ form_row(membreForm.mail, {'attr' : {'class' : 'form-control', 'data-parsley-trigger' : 'change', 'label' : " Contact du responsable pédagogique (adresse e-mail)"}}) }}
+
 
     </div>
 {% endmacro %}

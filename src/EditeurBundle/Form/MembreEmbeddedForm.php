@@ -17,6 +17,7 @@ class MembreEmbeddedForm extends AbstractType
             ->add('prenom')
             ->add('nom')
             ->add('mail')
+
         ;
     }
 

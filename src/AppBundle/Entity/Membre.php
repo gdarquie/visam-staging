@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -54,6 +55,11 @@ class Membre
      * @var string
      *
      * @ORM\Column(name="mail", type="string", length=500, nullable=true)
+     *
+     * @Assert\Email(
+     *     message = "L'email '{{ value }}' n'est pas une adresse email valide.",
+     *     checkMX = true
+     * )
      */
     private $mail;
 

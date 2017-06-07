@@ -60,11 +60,29 @@ class DefaultController extends Controller
         );
     }
 
-
     /**
      * @Route("/rechercher/{string}", name="searchByString")
      */
     public function rechercheByStringAction(Request $request)
+    {
+        return $this->render('rechercher.html.twig'
+        );
+    }
+
+
+    /**
+     * @Route("/previz", name="search_previz")
+     */
+    public function recherchePrevizAction(Request $request)
+    {
+        return $this->render('previz.html.twig'
+        );
+    }
+
+    /**
+     * @Route("/previz/{string}", name="searchByString")
+     */
+    public function recherchePrevizByStringAction(Request $request)
     {
         return $this->render('rechercher.html.twig'
         );

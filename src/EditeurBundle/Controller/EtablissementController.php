@@ -13,11 +13,10 @@ use EditeurBundle\Form\EtablissementType;
 
 /**
  *
- * @Route("/editeur/etablissement")
+ * @Route("/admin/etablissement")
  */
 class EtablissementController extends Controller
 {
-
 
     /**
      * Créer un établissement
@@ -35,6 +34,8 @@ class EtablissementController extends Controller
 
             $em = $this->getDoctrine()->getManager();
             $etablissement = $form->getData();
+
+            $etablissement->setActive(true);
 
             $em->persist($etablissement);
             $em->flush();

@@ -40,7 +40,7 @@ class LaboType extends AbstractType
                 'class' => 'AppBundle:Thesaurus',
                 'choice_label' => 'nom', //order by alpha
                 'query_builder' => function(ThesaurusRepository $repo) {
-                    return $repo->findAllThesaurusByType("diplome");
+                    return $repo->findAllThesaurusByType("labotype");
                 }
             ))
             ->add('theme', EntityType::class, array(
