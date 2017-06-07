@@ -225,6 +225,9 @@
                     <tr>
                         <th>Nom</th>
                         <th>Dernière modification</th>
+                        <th>Importer</th>
+                        <th>Exporter labo</th>
+                        <th>Exporter formations</th>
                         <th>Modifier</th>
                         <th>Supprimer</th>
                     </tr>
@@ -237,8 +240,12 @@
                                 <td>{{ item.nom }}</td>
                                 {#<td>le {{ item.lastUpdate|date('d/m/Y') }} à {{ item.lastUpdate|date( 'H:i:s') }}</td>#}
                                 <td>{{ item.lastUpdate|date() }}</td>
+                                <td><a data-target="modal1" href="#modal1" class="modal-trigger" data-id-etablissement="{{ item.etablissementId }}" data-nom-etablissement="{{ item.nom }}">Import&nbsp;CSV</a></td>
+                                <td><a href="{{ path("export_formulaire", { "id" : item.etablissementId, "type" : "L" }) }}">Export des données de labo</a></td>
+                                <td><a href="{{ path("export_formulaire", { "id" : item.etablissementId, "type" : "F" }) }}">Export des données de formation</a></td>
                                 <td><a href="{{ path('editeur_etablissement_edit', {'id' : item.etablissementId}) }}"><i class="material-icons">edit</i></a></td>
                                 <td><a href="#!" class="js-remove-etablissement" data-url="{{ path('editeur_etablissement_ajax_delete', { etablissementId : item.etablissementId}) }}" ><i class="material-icons">delete</i></a></td>
+
                                 </span>
                         </tr>
 
