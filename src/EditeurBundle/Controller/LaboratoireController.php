@@ -121,7 +121,7 @@ class LaboratoireController extends Controller
             $lastId = $laboratoire->getLaboId();
             $laboratoire->setObjetId("L".$lastId);
 
-            dump($laboratoire);die();
+//            dump($laboratoire);die();
 
             $em->persist($laboratoire);
             $em->flush();
