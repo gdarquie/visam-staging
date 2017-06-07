@@ -1,8 +1,7 @@
 function facette(){
-
+    var searchVal;
      $(function(){
           var params = getSearchParameters();
-          var searchVal;
           var visam_temlate = 
            '<% if (obj.type == "Formation") {  %><div class="card formation">' +
             '<div class="card-content">'+
@@ -98,7 +97,7 @@ function facette(){
         });
 
                 $('#search-input').keyup(function () { 
-                  searchInput();
+                  searchInput(data);
                 });
 
 
@@ -108,20 +107,12 @@ function facette(){
 
             });
 
-
-
-
       });
 }
 
 facette();
 
-var corpus = $.get( "/export", function( data ) {
-    return data;
-});
-
-
-var searchInput = function () {
+var searchInput = function (data) {
 
   searchVal = $("#search-input").val();
   if (searchVal) {

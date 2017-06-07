@@ -222,6 +222,11 @@ class CollecteController extends Controller
         $repository = $this->getDoctrine()->getRepository('AppBundle:Collecte');
         $collecte = $repository->findOneByCollecteId($collecteId);
 
+        //Sélection des établissements de l'année précédente
+        $query = $em->createQuery("SELECT e.etablissementId as id FROM AppBundle:Collecte c JOIN c.etablissement e WHERE c.collecteId = :id");
+        $query->setParameter('id', $collecteId);
+        $etablissements = $query->getResult();
+//        dump($etablissements);die;
 
         //Vérification si la collecte est active ou a déjà été complétée
 
@@ -243,24 +248,29 @@ class CollecteController extends Controller
             $query->setMaxResults(1);
             $lastCompleteCollecte = $query->getSingleResult();
             $annee = $lastCompleteCollecte->getAnnee();
+//            dump($annee);die;
 
             //Création des éléments de la nouvelle collecte
 
             //Sélection de tous les labos avec la date de collecte (conditionner aux seuls établissement sélectionnés par la collecte)
             $query = $em->createQuery(
-                'SELECT l FROM AppBundle:Labo l WHERE l.anneeCollecte = :annee'
+                'SELECT l FROM AppBundle:Labo l JOIN l.etablissement e WHERE l.anneeCollecte = :annee AND e.etablissementId IN (:etablissements)'
             );
             $query->setParameter('annee', $annee);
+            $query->setParameter('etablissements', $etablissements);
             $labos = $query->getResult();
 
 //                dump($labos);die();
 
             //Sélection des formations (conditionner aux seuls établissement sélectionnés par la collecte)
             $query = $em->createQuery(
-                'SELECT f FROM AppBundle:Formation f WHERE f.anneeCollecte = :annee'
+                'SELECT f FROM AppBundle:Formation f JOIN f.etablissement e WHERE f.anneeCollecte = :annee AND e.etablissementId IN (:etablissements)'
             );
             $query->setParameter('annee', $annee);
+            $query->setParameter('etablissements', $etablissements);
             $formations = $query->getResult();
+
+//            dump($formations);die();
 
             //Sélection des écoles doctorales
 
@@ -294,7 +304,6 @@ class CollecteController extends Controller
 
                 //Correction des disciplines
 
-                //remplacer par un service
                 $query = $em->createQuery(
                     'SELECT d FROM AppBundle:Discipline d JOIN d.labo l WHERE d.type = :type AND l.laboId = :id'
                 );

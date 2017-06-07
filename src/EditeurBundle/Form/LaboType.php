@@ -31,8 +31,13 @@ class LaboType extends AbstractType
             ->add('nom')
             ->add('etabExt')
             ->add('lien')
-            ->add('mailcontact')
-            ->add('responsable')
+//            ->add('mailcontact')
+//            ->add('responsable')
+            ->add('membre', CollectionType::class, [
+                'entry_type' => MembreEmbeddedForm::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+            ])
             ->add('description')
             ->add('code')
             ->add('type_thesaurus', EntityType::class, array(

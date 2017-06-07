@@ -187,7 +187,15 @@ class Labo
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Membre", mappedBy="labo")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Membre", inversedBy="labo", cascade= {"persist"})
+     * @ORM\JoinTable(name="membre_has_labo",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="membre_id", referencedColumnName="membre_id")
+     *   }
+     * )
      */
     private $membre;
 

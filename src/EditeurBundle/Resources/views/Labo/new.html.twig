@@ -13,3 +13,8 @@
         {% include "EditeurBundle:modals:_retour.html.twig" %}
     </section>
 {% endblock %}
+
+{%  block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/membreForm.js') }}"></script>
+{% endblock %}

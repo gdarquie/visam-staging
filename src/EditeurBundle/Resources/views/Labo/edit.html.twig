@@ -11,7 +11,7 @@
 
     {{ form_start(edit_form) }}
         {{ include('EditeurBundle:Labo:_form.html.twig') }}
-        <input type="submit" value="Edit" class="btn btn-hesam" formnovalidate/>
+        <input type="submit" value="Sauvegarder" class="btn btn-hesam" formnovalidate/>
     {{ form_end(edit_form) }}
 
     {{ form_start(delete_form) }}
@@ -19,4 +19,10 @@
     {{ form_end(delete_form) }}
     {% include "EditeurBundle:modals:_retour.html.twig" %}
     </div>
+{% endblock %}
+
+
+{%  block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/membreForm.js') }}"></script>
 {% endblock %}

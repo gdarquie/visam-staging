@@ -123,6 +123,7 @@ class LaboratoireController extends Controller
 
 //            dump($laboratoire);die();
 
+
             $em->persist($laboratoire);
             $em->flush();
 

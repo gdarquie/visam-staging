@@ -49,12 +49,14 @@ class ExportController extends Controller
             'SELECT l FROM AppBundle:Labo l WHERE l.anneeCollecte = :annee'
         );
         $query->setParameter('annee', $anneeCollecte);
+//        $query->setMaxResults(10);
         $labos = $query->getResult();
 
         $query = $em->createQuery(
             'SELECT f FROM AppBundle:Formation f WHERE f.anneeCollecte = :annee'
         );
         $query->setParameter('annee', $anneeCollecte);
+//        $query->setMaxResults(10);
         $formations = $query->getResult();
 
 

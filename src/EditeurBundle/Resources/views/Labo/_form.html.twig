@@ -1,3 +1,21 @@
+{% import _self as formMacros %}
+
+{% macro printMembreRow(membreForm) %}
+    <div class="col s12 js-membre-item">
+        <a href="" class="js-remove-membre right">
+            <i class="material-icons black-text" >delete</i>
+        </a>
+
+        {{ form_errors(membreForm) }}
+        {{ form_row(membreForm.nom, {'label' : "Nom"}) }}
+        {{ form_row(membreForm.prenom, {'label' : "Prénom"}) }}
+        {{ form_row(membreForm.mail, {'attr' : {'class' : 'form-control', 'data-parsley-trigger' : 'change', 'label' : " Adresse email"}}) }}
+
+
+    </div>
+{% endmacro %}
+
+
 <div class="row form">
 
     <div class="row">
@@ -35,8 +53,25 @@
 
                 <h3>Contact(s)</h3>
 
-                {{ form_row(edit_form.responsable) }} {# mettre par ordre alphabétique #}
-                {{ form_row(edit_form.mailcontact, { 'label' : 'Mail'}) }}
+                <div class="row js-membre-wrapper" data-prototype="{{ formMacros.printMembreRow(edit_form.membre.vars.prototype)|e('html_attr') }}" data-index="{{ edit_form.membre|length }}">
+
+                    {% for membreForm  in edit_form.membre  %}
+                        {{ formMacros.printMembreRow(membreForm) }}
+                    {% endfor %}
+
+                    <div class="col s12">
+                        <a href="#" class="js-add-membre valign-wrapper">
+                            <i class="material-icons black-text ">add</i>
+                            Ajouter un nouveau responsable
+                        </a>
+                    </div>
+                </div>
+
+                {#{{ form_row(edit_form.responsable) }} #}{# mettre par ordre alphabétique #}
+                {#{{ form_row(edit_form.mailcontact, { 'label' : 'Mail'}) }}#}
+                    {# prevents weird label from showing up in new #}
+                {{ form_widget(edit_form.membre) }}
+
 
                 {{ form_widget(edit_form.checkContact) }}
                 {{ form_label(edit_form.checkContact) }}
