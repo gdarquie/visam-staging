@@ -80,12 +80,14 @@ class ExportService
             "Thème transverse 1",
             "Thème transverse 2",
             "Effectif des diplômés",
+            "Code interne d'UF",
             "Débouché possible 1",
             "Débouché possible 2",
             "Débouché possible 3",
             "Débouché possible 4",
             "Débouché possible 5",
-            "Code interne d'UF"
+            "", //faire un saute de colonne
+            "Identifiant interne heSam"
         ];
         return $header;
     }
@@ -154,6 +156,7 @@ class ExportService
             "Axe de recherche 6",
             "Axe de recherche 7",
             "Equipement",
+            "Code interne d'UR",
             "Prénom et nom du membre 1",
             "Email du membre 1",
             "Prénom et nom du membre 2",
@@ -163,7 +166,9 @@ class ExportService
             "Prénom et nom du membre 4",
             "Email du membre 4",
             "Prénom et nom du membre 5",
-            "Email du membre 5"
+            "Email du membre 5",
+            "", //faire un saute de colonne
+            "Identifiant interne heSam"
         ];
 
         return $header;
@@ -230,7 +235,7 @@ class ExportService
                 $formation->getTypediplome(),
                 $formation->getNiveau(),
                 null,//lmd
-                null,//modalite,
+                null,//modalite multi-valeur separé par ;
                 null,//Ects,
                 $formation->getUrl(),
                 $formation->getNom(),
@@ -264,12 +269,131 @@ class ExportService
                 null,
                 null,
                 $formation->getEffectif(),
+                null, //TODO  add code interne formation recuperer de la bdd
                 null,
                 null,
                 null,
                 null,
                 null,
-                null //TODO  add code interne formation recuperer de la bdd
+                null,
+                $formation->getObjetId()
+            ];
+
+            $dataMerge = array_merge($dataMerge, $data[$index]);
+            $line ++;
+        }
+        return $data;
+    }
+
+    public function getDataLabo(Etablissement $etablissement)
+    {
+        $labos = $etablissement->getLabo();
+        $data = [];
+        $dataMerge = [];
+        $an = date('Y');
+        $etablissementNom = $etablissement->getNom();
+        $etablissementCode = $etablissement->getCode();
+
+        // ligne 1 correspond aux noms des champs
+        $line = 2;
+
+        foreach ($labos as $index => $labo) {
+
+            $laboId = $labo->getLaboId();
+            $localisations = $this->getLocalisations($laboId);
+
+            //plusieurs localisations sont possibles pour une formation
+            //afficher dans chaque champ les valeurs des localisations separes par une point virgule
+            $localisationsFieldsData = $this->getLocalisationFields($localisations);
+            $tag = $this->getLaboTagField($laboId);
+            $equipement = $this->getLaboEquipementField($laboId);
+
+            //TODO OK pour version 1, pour version 2 il y a 3  tables des disciplines, alors pour la collecte 2018 il faut adapter export
+            $disciplinesSISE = $this->em->getRepository('AppBundle:Discipline')->findDisciplinesByLaboAndType($laboId, 'SISE');
+            $disciplinesCNU = $this->em->getRepository('AppBundle:Discipline')->findDisciplinesByLaboAndType($laboId, 'CNU');
+            $disciplinesHCERES = $this->em->getRepository('AppBundle:Discipline')->findDisciplinesByLaboAndType($laboId, 'HCERES');
+
+            $ed = $this->getEcolesDoctorales($laboId);
+            $axes = $this->em->getRepository('AppBundle:Axe')->findAllAxe($laboId);
+            //var_dump($axes); die;
+
+
+            //TODO données avec les valeur null a faire pour les collettes a partir 2018
+            $data[$index] = [
+                $etablissementCode,
+                $etablissementNom,
+                NULL, //ufr BUG supprime ou pas?
+                $labo->getType(),
+                $labo->getCode(),
+                $labo->getNom(),
+                $labo->getSigle(),
+                $labo->getEtabExt(),
+                (isset($localisationsFieldsData['nom']) ? $localisationsFieldsData['nom'] : null),
+                (isset($localisationsFieldsData['lat']) ? $localisationsFieldsData['lat'] : null),
+                (isset($localisationsFieldsData['long']) ? $localisationsFieldsData['long'] : null),
+                (isset($localisationsFieldsData['adresse']) ? $localisationsFieldsData['adresse'] : null),
+                (isset($localisationsFieldsData['complementAdresse']) ? $localisationsFieldsData['complementAdresse'] : null),
+                (isset($localisationsFieldsData['ville']) ? $localisationsFieldsData['ville'] : null),
+                (isset($localisationsFieldsData['code']) ? $localisationsFieldsData['code'] : null),
+                (isset($localisationsFieldsData['cedex']) ? $localisationsFieldsData['cedex'] : null),
+                (isset($localisationsFieldsData['region']) ? $localisationsFieldsData['region'] : null),
+                (isset($localisationsFieldsData['pays']) ? $localisationsFieldsData['pays'] : null),
+                $labo->getLien(),
+                $labo->getLien2(),
+                $labo->getLien3(),
+                $labo->getMailContact(),
+                (isset($ed) ? $ed : null),
+                (isset($disciplinesSISE[0]['domaineId']['nom'])) ? $disciplinesSISE[0]['domaineId']['nom'] : null, //SISE1
+                (isset($disciplinesSISE[0]['nom'])) ? $disciplinesSISE[0]['nom'] : null, //SISE1
+                (isset($disciplinesSISE[1]['domaineId']['nom'])) ? $disciplinesSISE[1]['domaineId']['nom'] : null, //SISE2
+                (isset($disciplinesSISE[1]['nom'])) ? $disciplinesSISE[1]['nom'] : null, //SISE2
+                (isset($disciplinesSISE[2]['domaineId']['nom'])) ? $disciplinesSISE[2]['domaineId']['nom'] : null, //SISE3
+                (isset($disciplinesSISE[2]['nom'])) ? $disciplinesSISE[2]['nom'] : null, //SISE3
+                (isset($disciplinesSISE[3]['domaineId']['nom'])) ? $disciplinesSISE[3]['domaineId']['nom'] : null, //SISE4
+                (isset($disciplinesSISE[3]['nom'])) ? $disciplinesSISE[3]['nom'] : null, //SISE4
+                (isset($disciplinesSISE[4]['domaineId']['nom'])) ? $disciplinesSISE[4]['domaineId']['nom'] : null, //SISE5
+                (isset($disciplinesSISE[4]['nom'])) ? $disciplinesSISE[4]['nom'] : null, //SISE5
+                (isset($disciplinesCNU[0]['nom'])) ? $disciplinesCNU[0]['nom'] : null, //CNU1
+                (isset($disciplinesCNU[1]['nom'])) ? $disciplinesCNU[1]['nom'] : null, //CNU2
+                (isset($disciplinesCNU[2]['nom'])) ? $disciplinesCNU[2]['nom'] : null, //CNU3
+                (isset($disciplinesCNU[3]['nom'])) ? $disciplinesCNU[3]['nom'] : null, //CNU4
+                (isset($disciplinesCNU[4]['nom'])) ? $disciplinesCNU[4]['nom'] : null, //CNU5
+                (isset($disciplinesHCERES[0]['domaineId']['nom'])) ? $disciplinesHCERES[0]['domaineId']['nom'] : null, //HCERES1
+                (isset($disciplinesHCERES[0]['nom'])) ? $disciplinesHCERES[0]['nom'] : null, //HCERES1
+                (isset($disciplinesHCERES[1]['domaineId']['nom'])) ? $disciplinesHCERES[1]['domaineId']['nom'] : null, //HCERES2
+                (isset($disciplinesHCERES[1]['nom'])) ? $disciplinesHCERES[1]['nom'] : null, //HCERES2
+                (isset($disciplinesHCERES[2]['domaineId']['nom'])) ? $disciplinesHCERES[2]['domaineId']['nom'] : null, //HCERES3
+                (isset($disciplinesHCERES[2]['nom'])) ? $disciplinesHCERES[2]['nom'] : null, //HCERES3
+                (isset($disciplinesHCERES[3]['domaineId']['nom'])) ? $disciplinesHCERES[3]['domaineId']['nom'] : null, //HCERES4
+                (isset($disciplinesHCERES[3]['nom'])) ? $disciplinesHCERES[3]['nom'] : null, //HCERES4
+                (isset($disciplinesHCERES[4]['domaineId']['nom'])) ? $disciplinesHCERES[4]['domaineId']['nom'] : null, //HCERES5
+                (isset($disciplinesHCERES[4]['nom'])) ? $disciplinesHCERES[4]['nom'] : null, //HCERES5
+                $tag,
+                null,
+                null,
+                $labo->getEffectif(),
+                $labo->getEffectifHesam(),
+                (isset($axes[0]['nom'])) ? $axes[0]['nom'] : null, // TODO axe de recherche 1
+                (isset($axes[1]['nom'])) ? $axes[1]['nom'] : null, // TODO axe de recherche 2
+                (isset($axes[2]['nom'])) ? $axes[2]['nom'] : null, // TODO axe de recherche 3
+                (isset($axes[3]['nom'])) ? $axes[3]['nom'] : null, // TODO axe de recherche 4
+                (isset($axes[4]['nom'])) ? $axes[4]['nom'] : null, // TODO axe de recherche 5
+                (isset($axes[5]['nom'])) ? $axes[5]['nom'] : null, // TODO axe de recherche 6
+                (isset($axes[6]['nom'])) ? $axes[6]['nom'] : null, // TODO axe de recherche 7
+                (isset($equipement) ? $equipement : null), // TODO équipement
+                null, //TODO  add code interne labo recuperer de la bdd
+                null, //Prénom et nom du membre 1
+                null, //Email du membre 1
+                null, //Prénom et nom du membre 2
+                null, //Email du membre 2
+                null, //Prénom et nom du membre 3
+                null, //Email du membre 3
+                null, //Prénom et nom du membre 4
+                null, //Email du membre 4
+                null, //Prénom et nom du membre 5
+                null, //Email du membre 5
+                null,
+                $labo->getObjetId()
             ];
 
             $dataMerge = array_merge($dataMerge, $data[$index]);
@@ -543,119 +667,4 @@ class ExportService
 
         return join(';', $cp);
     }
-
-    public function getDataLabo(Etablissement $etablissement)
-    {
-        $labos = $etablissement->getLabo();
-        $data = [];
-        $dataMerge = [];
-        $an = date('Y');
-        $etablissementNom = $etablissement->getNom();
-        $etablissementCode = $etablissement->getCode();
-
-        // ligne 1 correspond aux noms des champs
-        $line = 2;
-
-        foreach ($labos as $index => $labo) {
-
-            $laboId = $labo->getLaboId();
-            $localisations = $this->getLocalisations($laboId);
-
-            //plusieurs localisations sont possibles pour une formation
-            //afficher dans chaque champ les valeurs des localisations separes par une point virgule
-            $localisationsFieldsData = $this->getLocalisationFields($localisations);
-            $tag = $this->getLaboTagField($laboId);
-            $equipement = $this->getLaboEquipementField($laboId);
-
-            //TODO OK pour version 1, pour version 2 il y a 3  tables des disciplines, alors pour la collecte 2018 il faut adapter export
-            $disciplinesSISE = $this->em->getRepository('AppBundle:Discipline')->findDisciplinesByLaboAndType($laboId, 'SISE');
-            $disciplinesCNU = $this->em->getRepository('AppBundle:Discipline')->findDisciplinesByLaboAndType($laboId, 'CNU');
-            $disciplinesHCERES = $this->em->getRepository('AppBundle:Discipline')->findDisciplinesByLaboAndType($laboId, 'HCERES');
-
-            $ed = $this->getEcolesDoctorales($laboId);
-            $axes = $this->em->getRepository('AppBundle:Axe')->findAllAxe($laboId);
-            //var_dump($axes); die;
-
-
-            //TODO données avec les valeur null a faire pour les collettes a partir 2018
-            $data[$index] = [
-                $etablissementCode,
-                $etablissementNom,
-                NULL, //ufr BUG supprime ou pas?
-                $labo->getType(),
-                $labo->getCode(),
-                $labo->getNom(),
-                $labo->getSigle(),
-                $labo->getEtabExt(),
-                (isset($localisationsFieldsData['nom']) ? $localisationsFieldsData['nom'] : null),
-                (isset($localisationsFieldsData['lat']) ? $localisationsFieldsData['lat'] : null),
-                (isset($localisationsFieldsData['long']) ? $localisationsFieldsData['long'] : null),
-                (isset($localisationsFieldsData['adresse']) ? $localisationsFieldsData['adresse'] : null),
-                (isset($localisationsFieldsData['complementAdresse']) ? $localisationsFieldsData['complementAdresse'] : null),
-                (isset($localisationsFieldsData['ville']) ? $localisationsFieldsData['ville'] : null),
-                (isset($localisationsFieldsData['code']) ? $localisationsFieldsData['code'] : null),
-                (isset($localisationsFieldsData['cedex']) ? $localisationsFieldsData['cedex'] : null),
-                (isset($localisationsFieldsData['region']) ? $localisationsFieldsData['region'] : null),
-                (isset($localisationsFieldsData['pays']) ? $localisationsFieldsData['pays'] : null),
-                $labo->getLien(),
-                $labo->getLien2(),
-                $labo->getLien3(),
-                $labo->getMailContact(),
-                (isset($ed) ? $ed : null),
-                (isset($disciplinesSISE[0]['domaineId']['nom'])) ? $disciplinesSISE[0]['domaineId']['nom'] : null, //SISE1
-                (isset($disciplinesSISE[0]['nom'])) ? $disciplinesSISE[0]['nom'] : null, //SISE1
-                (isset($disciplinesSISE[1]['domaineId']['nom'])) ? $disciplinesSISE[1]['domaineId']['nom'] : null, //SISE2
-                (isset($disciplinesSISE[1]['nom'])) ? $disciplinesSISE[1]['nom'] : null, //SISE2
-                (isset($disciplinesSISE[2]['domaineId']['nom'])) ? $disciplinesSISE[2]['domaineId']['nom'] : null, //SISE3
-                (isset($disciplinesSISE[2]['nom'])) ? $disciplinesSISE[2]['nom'] : null, //SISE3
-                (isset($disciplinesSISE[3]['domaineId']['nom'])) ? $disciplinesSISE[3]['domaineId']['nom'] : null, //SISE4
-                (isset($disciplinesSISE[3]['nom'])) ? $disciplinesSISE[3]['nom'] : null, //SISE4
-                (isset($disciplinesSISE[4]['domaineId']['nom'])) ? $disciplinesSISE[4]['domaineId']['nom'] : null, //SISE5
-                (isset($disciplinesSISE[4]['nom'])) ? $disciplinesSISE[4]['nom'] : null, //SISE5
-                (isset($disciplinesCNU[0]['nom'])) ? $disciplinesCNU[0]['nom'] : null, //CNU1
-                (isset($disciplinesCNU[1]['nom'])) ? $disciplinesCNU[1]['nom'] : null, //CNU2
-                (isset($disciplinesCNU[2]['nom'])) ? $disciplinesCNU[2]['nom'] : null, //CNU3
-                (isset($disciplinesCNU[3]['nom'])) ? $disciplinesCNU[3]['nom'] : null, //CNU4
-                (isset($disciplinesCNU[4]['nom'])) ? $disciplinesCNU[4]['nom'] : null, //CNU5
-                (isset($disciplinesHCERES[0]['domaineId']['nom'])) ? $disciplinesHCERES[0]['domaineId']['nom'] : null, //HCERES1
-                (isset($disciplinesHCERES[0]['nom'])) ? $disciplinesHCERES[0]['nom'] : null, //HCERES1
-                (isset($disciplinesHCERES[1]['domaineId']['nom'])) ? $disciplinesHCERES[1]['domaineId']['nom'] : null, //HCERES2
-                (isset($disciplinesHCERES[1]['nom'])) ? $disciplinesHCERES[1]['nom'] : null, //HCERES2
-                (isset($disciplinesHCERES[2]['domaineId']['nom'])) ? $disciplinesHCERES[2]['domaineId']['nom'] : null, //HCERES3
-                (isset($disciplinesHCERES[2]['nom'])) ? $disciplinesHCERES[2]['nom'] : null, //HCERES3
-                (isset($disciplinesHCERES[3]['domaineId']['nom'])) ? $disciplinesHCERES[3]['domaineId']['nom'] : null, //HCERES4
-                (isset($disciplinesHCERES[3]['nom'])) ? $disciplinesHCERES[3]['nom'] : null, //HCERES4
-                (isset($disciplinesHCERES[4]['domaineId']['nom'])) ? $disciplinesHCERES[4]['domaineId']['nom'] : null, //HCERES5
-                (isset($disciplinesHCERES[4]['nom'])) ? $disciplinesHCERES[4]['nom'] : null, //HCERES5
-                $tag,
-                null,
-                null,
-                $labo->getEffectif(),
-                $labo->getEffectifHesam(),
-                (isset($axes[0]['nom'])) ? $axes[0]['nom'] : null, // TODO axe de recherche 1
-                (isset($axes[1]['nom'])) ? $axes[1]['nom'] : null, // TODO axe de recherche 2
-                (isset($axes[2]['nom'])) ? $axes[2]['nom'] : null, // TODO axe de recherche 3
-                (isset($axes[3]['nom'])) ? $axes[3]['nom'] : null, // TODO axe de recherche 4
-                (isset($axes[4]['nom'])) ? $axes[4]['nom'] : null, // TODO axe de recherche 5
-                (isset($axes[5]['nom'])) ? $axes[5]['nom'] : null, // TODO axe de recherche 6
-                (isset($axes[6]['nom'])) ? $axes[6]['nom'] : null, // TODO axe de recherche 7
-                (isset($equipement) ? $equipement : null), // TODO équipement
-                null, //Prénom et nom du membre 1
-                null, //Email du membre 1
-                null, //Prénom et nom du membre 2
-                null, //Email du membre 2
-                null, //Prénom et nom du membre 3
-                null, //Email du membre 3
-                null, //Prénom et nom du membre 4
-                null, //Email du membre 4
-                null, //Prénom et nom du membre 5
-                null, //Email du membre 5
-            ];
-
-            $dataMerge = array_merge($dataMerge, $data[$index]);
-            $line ++;
-        }
-        return $data;
-    }
-
 }

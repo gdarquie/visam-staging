@@ -33,9 +33,9 @@ class ImportService
     protected $tabTags = null;
 
     //nombre collonnes requis pour un fichier de type  formations
-    const REQUIRED_NUMBER_1 = 55;
+    const REQUIRED_NUMBER_1 = 57;
     //nombre collonnes requis pour un fichier de type laboratoires
-    const REQUIRED_NUMBER_2 = 71;
+    const REQUIRED_NUMBER_2 = 73;
     const TYPE_FORMATION = 'F';
     const TYPE_LABO = 'L';
     const COMMIT_STEP = 5;
@@ -300,20 +300,20 @@ class ImportService
                 $formattedData['formation']['annee'] = $data['A'];
                 $formattedData['etablissement']['code'] = $data['B'];
                 $formattedData['etablissement']['nom'] = $data['C'];
-                $formattedData['localisation']['nom'] = $data['D'];
-                $formattedData['localisation']['lat'] = $data['E'];
-                $formattedData['localisation']['long'] = $data['F'];
-                $formattedData['localisation']['adresse'] = $data['G'];
-                $formattedData['localisation']['complement_adresse'] = $data['H'];
-                $formattedData['localisation']['ville'] = $data['I'];
-                $formattedData['localisation']['code'] = $data['J'];
-                $formattedData['localisation']['cedex'] = $data['K'];
-                $formattedData['localisation']['region'] = $data['L'];
-                $formattedData['localisation']['pays'] = $data['M'];
+                $formattedData['localisation']['nom'] = $data['D'];// multi-valeurs separes par ;
+                $formattedData['localisation']['lat'] = $data['E'];// multi-valeurs separes par ;
+                $formattedData['localisation']['long'] = $data['F'];// multi-valeurs separes par ;
+                $formattedData['localisation']['adresse'] = $data['G'];// multi-valeurs separes par ;
+                $formattedData['localisation']['complement_adresse'] = $data['H'];// multi-valeurs separes par ;
+                $formattedData['localisation']['ville'] = $data['I'];// multi-valeurs separes par ;
+                $formattedData['localisation']['code'] = $data['J'];// multi-valeurs separes par ;
+                $formattedData['localisation']['cedex'] = $data['K'];// multi-valeurs separes par ;
+                $formattedData['localisation']['region'] = $data['L'];// multi-valeurs separes par ;
+                $formattedData['localisation']['pays'] = $data['M'];// multi-valeurs separes par ;
                 $formattedData['formation']['typeDiplome'] = $data['N'];
                 $formattedData['formation']['niveau'] = $data['O'];
                 $formattedData['formation']['lmd'] = $data['P'];
-                $formattedData['formation']['modalite_thesaurus'] = $data['Q'];
+                $formattedData['formation']['modalite_thesaurus'] = $data['Q']; // TODO multi-valeurs separes par ;
                 $formattedData['formation']['ects'] = $data['R'];
                 $formattedData['formation']['url'] = $data['S'];
                 $formattedData['formation']['nom'] = $data['T'];
@@ -414,7 +414,7 @@ class ImportService
                 $formattedData['axe']['nom_5'] = $data['BF'];
                 $formattedData['axe']['nom_6'] = $data['BG'];
                 $formattedData['axe']['nom_7'] = $data['BH'];
-                $formattedData['equipement']['nom'] = $data['BI']; //// multi-valeurs separes par ;
+                $formattedData['equipement']['nom'] = $data['BI']; // TODO multi-valeurs separes par ;
                 $formattedData['membre']['nom_prenom_1'] = $data['BJ'];
                 $formattedData['membre']['email_1'] = $data['BK'];
                 $formattedData['membre']['nom_prenom_2'] = $data['BL'];
@@ -522,23 +522,31 @@ class ImportService
     public function checkLocalisationData($data, $line)
     {
         $valid = true;
-
-        $requiredParams = array('adresse', 'ville', 'code');
-        $checkRequiredParams = $this->checkMandatoryParameters($data, $requiredParams);
-
-        if ($checkRequiredParams['success'] === false) {
-            $msg = sprintf('Ln %d : Les champs obligatoires "%s" sont manquants pour les données localisation, de la formation', $line, $checkRequiredParams['param']);
+        if (!$localisations = $this->formatLocalisationData($data)) {
+            $msg = sprintf('Ln %d : les nombres des localisations ne se concordent pas entre eux', $line);
             $this->log->warning($msg);
             $valid = false;
-        }
-        //existLocalisation
-        //todo ajouter gestion envoie mail a admin sil la localisation n'est pas presente dans la base
-        if (!$this->em
-            ->getRepository('AppBundle:Localisation')
-            ->existLocalisation($data['adresse'], $data['code'], $data['ville'])) {
-            $msg = sprintf('Ln %d : la localisation inconnue : %s %s %s.', $line, $data['adresse'], $data['code'], $data['ville']);
-            $this->log->warning($msg);
-            $valid = false;
+        } else {
+            foreach ($localisations as $localisation) {
+                $requiredParams = array('adresse', 'ville', 'code');
+                $checkRequiredParams = $this->checkMandatoryParameters($localisation, $requiredParams);
+
+                if ($checkRequiredParams['success'] === false) {
+                    $msg = sprintf('Ln %d : Les champs obligatoires "%s" sont manquants pour les données localisation de la formation', $line, $checkRequiredParams['param']);
+                    $this->log->warning($msg);
+                    return false;
+                }
+                //existLocalisation
+                //todo ajouter gestion envoie mail a admin sil la localisation n'est pas presente dans la base
+                if (!$this->em
+                    ->getRepository('AppBundle:Localisation')
+                    ->existLocalisation($localisation['adresse'], $localisation['code'], $localisation['ville'])
+                ) {
+                    $msg = sprintf('Ln %d : la localisation inconnue : %s %s %s.', $line, $localisation['adresse'], $localisation['code'], $localisation['ville']);
+                    $this->log->warning($msg);
+                    $valid = false;
+                }
+            }
         }
         return $valid;
     }
@@ -966,7 +974,7 @@ class ImportService
             $str = $this->getStrFormation($val->getNom(), $val->getTypeDiplome(), $val->getNiveau());
             $str2 = $this->getStrFormation($val->getNom(), $val->getTypeDiplome(), $val->getNiveau(), $val->getAnnee());
             $dataComparaison[$str] = $val->getObjetId();
-            $dataCheckDoublons[$str2] = $val->getObjetId();
+            $dataCheckDoublons[$str2] = $val->getFormationId();
         }
 
         $this->tabComparaison = $dataComparaison;
@@ -999,5 +1007,37 @@ class ImportService
             return $this->tabComparaison[$strFormation];
         }
         return false;
+    }
+
+
+    function formatLocalisationData($localisations) {
+        $data = [];
+        $formatData = [];
+        $exist = false;
+        $nb = 0;
+
+        foreach ($localisations as $field => $value) {
+            if (!empty($value)) {
+                $data[$field] = explode(';', $value);
+                $countItems = count($data[$field]);
+                if ($exist === false) {
+                    $exist = true;
+                    $nb = $countItems;
+                }
+
+                if ($nb != $countItems) {
+                    return false;
+                }
+            }
+        }
+        if ($nb > 0) {
+            for ($i = 0; $i < $nb; $i++) {
+                foreach ($data as $idx => $v) {
+                    $formatData[$i][$idx] = $data[$idx][$i];
+                }
+            }
+        }
+
+        return $formatData;
     }
 }
