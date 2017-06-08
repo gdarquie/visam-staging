@@ -5,7 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Ed
+ * ed
  *
  * @ORM\Table(name="ed")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\EdRepository")
@@ -71,7 +71,7 @@ class Ed
     /**
      * @var integer
      *
-     * @ORM\Column(name="ED_id", type="integer")
+     * @ORM\Column(name="ed_id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */

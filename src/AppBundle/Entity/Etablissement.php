@@ -287,7 +287,7 @@ class Etablissement
      *     @ORM\JoinColumn(name="etablissement_id", referencedColumnName="etablissement_id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="ED_id", referencedColumnName="ED_id")
+     *     @ORM\JoinColumn(name="ed_id", referencedColumnName="ed_id")
      *   }
      * )
      */

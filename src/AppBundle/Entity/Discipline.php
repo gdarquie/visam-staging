@@ -126,7 +126,7 @@ class Discipline
      *     @ORM\JoinColumn(name="discipline_id", referencedColumnName="discipline_id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="ED_id", referencedColumnName="ED_id")
+     *     @ORM\JoinColumn(name="ed_id", referencedColumnName="ed_id")
      *   }
      * )
      */

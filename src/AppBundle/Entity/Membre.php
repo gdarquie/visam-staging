@@ -125,7 +125,7 @@ class Membre
      *     @ORM\JoinColumn(name="membre_id", referencedColumnName="membre_id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="ED_id", referencedColumnName="ED_id")
+     *     @ORM\JoinColumn(name="ed_id", referencedColumnName="ed_id")
      *   }
      * )
      */
