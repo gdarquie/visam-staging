@@ -31,11 +31,16 @@
         "friendsofsymfony/rest-bundle": "^1.7",
         "doctrine/doctrine-migrations-bundle": "^1.2",
         "joetannenbaum/mr-clean": "~0.0",
-        "liuggio/excelbundle": "^2.1",
         "stof/doctrine-extensions-bundle": "^1.2",
         "ensepar/html2pdf-bundle" : "~2.0"
 
     },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/liuggio/ExcelBundle.git"
+        }
+    ],
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
         "symfony/phpunit-bridge": "^3.0"
