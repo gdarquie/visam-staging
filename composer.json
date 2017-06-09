@@ -32,7 +32,8 @@
         "doctrine/doctrine-migrations-bundle": "^1.2",
         "joetannenbaum/mr-clean": "~0.0",
         "stof/doctrine-extensions-bundle": "^1.2",
-        "ensepar/html2pdf-bundle" : "~2.0"
+        "tecnickcom/tcpdf" : "~6.2.0",
+        "spipu/html2pdf" : "~4.6.0"
 
     },
     "repositories": [
