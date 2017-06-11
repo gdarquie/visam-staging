@@ -22,6 +22,13 @@ class Localisation
     /**
      * @var string
      *
+     * @ORM\Column(name="complet", type="string", length=255, nullable=true)
+     */
+    private $complet;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="lat", type="string", length=255, nullable=true)
      */
     private $lat;
@@ -697,4 +704,23 @@ class Localisation
     {
         return $this->codePays;
     }
+
+    /**
+     * @return string
+     */
+    public function getComplet()
+    {
+        return $this->complet;
+    }
+
+    /**
+     * @param string $complet
+     */
+    public function setComplet($complet)
+    {
+        $this->complet = $complet;
+    }
+
+
+
 }

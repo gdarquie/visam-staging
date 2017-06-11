@@ -57,7 +57,7 @@ class LocalisationRepository extends EntityRepository
         $localisation = $this
             ->findBy(array('adresse' => $adresse, 'code' => $code, 'ville' => $ville));
 
-        if (!$localisation || count($localisation) > 1) {
+        if (!$localisation || count($localisation) < 1) {
             return false;
         }
         return true;

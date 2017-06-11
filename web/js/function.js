@@ -7,6 +7,7 @@ function myParallax(){
 	$('.parallax').parallax();
     $(".text-count").characterCounter();
     $(".tablesorter").tablesorter();
+    $(".button-collapse").sideNav();
     $('.datepicker').pickadate({
         // editable: true,
         min: new Date(2015,1,1),

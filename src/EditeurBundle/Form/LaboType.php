@@ -75,7 +75,7 @@ class LaboType extends AbstractType
                     return $repo->createQueryBuilder('localisation')
                         ->where('localisation IN(:localisation)')
                         ->setParameter('localisation', $localisations)
-                        ->orderBy('localisation.nom', 'ASC')
+                        ->orderBy('localisation.titre', 'ASC')
                         ;
                 }
             ))

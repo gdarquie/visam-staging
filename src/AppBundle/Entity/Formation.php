@@ -25,6 +25,7 @@ class Formation
      */
     private $nom;
 
+
     /**
      * @var string
      *
@@ -1226,7 +1227,6 @@ class Formation
     {
         $this->metier = $metier;
     }
-
 
     public function __toString()
     {

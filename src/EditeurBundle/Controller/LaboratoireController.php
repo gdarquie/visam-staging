@@ -167,8 +167,17 @@ class LaboratoireController extends Controller
         }
         $etablissements = $query->getResult();
 
+        $query = $em->createQuery(
+            'SELECT c.localisationId as id FROM AppBundle:Labo l INNER JOIN l.localisation c JOIN l.etablissement e WHERE e.etablissementId in (:etablissements)'
+        );
+        $query->setParameter('etablissements', $etablissements);
+        $localisations = $query->getResult();
+
+//        dump($localisations);die;
+
         $editForm = $this->createForm('EditeurBundle\Form\LaboType', $laboratoire, array(
-            'etablissements' => $etablissements
+            'etablissements' => $etablissements,
+            'localisations' => $localisations
         ));
 
         $editForm->handleRequest($request);
@@ -181,6 +190,8 @@ class LaboratoireController extends Controller
             $now = new \DateTime();
             $laboratoire->setLastUpdate($now);
 
+            dump($laboratoire);die;
+
             $em->persist($laboratoire);
             $em->flush();
 
@@ -191,7 +202,8 @@ class LaboratoireController extends Controller
             'labo' => $laboratoire,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-            'etablissements' => $etablissements
+            'etablissements' => $etablissements,
+            'localisations' => $localisations
         ));
     }
 

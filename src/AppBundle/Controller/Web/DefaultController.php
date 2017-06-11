@@ -122,8 +122,6 @@ class DefaultController extends Controller
         $axes = $query->getResult();
 
 
-
-
         //Les Rebonds
 
         //Récupération de l'hésamette la plus importante pour le labo en question
@@ -131,7 +129,15 @@ class DefaultController extends Controller
         $query = $em->createQuery('SELECT COUNT(h.nom) as nb, h.nom as nom FROM AppBundle:Labo l JOIN l.discipline d JOIN d.hesamette h WHERE l.laboId = :id GROUP BY h.nom ORDER BY nb DESC');
         $query->setParameter('id', $id);
         $hesamettes_rebond = $query->setMaxResults(1)->getResult();
-        $hesamette_rebond = $hesamettes_rebond[0]['nom'];
+//        $hesamette_rebond = $hesamettes_rebond[0]['nom'];
+
+        // Au cas où il n'y a pas de disciplines entrées
+        if(count($hesamettes_rebond) > 0){
+            $hesamette_rebond = $hesamettes_rebond[0]['nom'];
+        }
+        else{
+            $hesamette_rebond = 0;
+        }
 
         //sélection des labos en fonction de l'hesamette principale
         $query = $em->createQuery('SELECT l FROM AppBundle:Labo l JOIN l.discipline d JOIN d.hesamette h WHERE h.nom = :hesamette');

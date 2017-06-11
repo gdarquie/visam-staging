@@ -97,7 +97,7 @@ function facette(){
         });
 
                 $('#search-input').keyup(function () { 
-                  searchInput(data);
+                  searchInput(jQuery.parseJSON(data));
                 });
 
 
@@ -117,9 +117,11 @@ var searchInput = function (data) {
   searchVal = $("#search-input").val();
   if (searchVal) {
     var name = [];
-    var returnedData = $.grep(dataJson, function(element, index){
+      // console.log(data);
+
+      var returnedData = $.grep(data, function(element, index){
       if (element.name.toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
-         name.push(element);
+          return element;
       }
       if (element.hesamette.toString().toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
         return element;
@@ -141,7 +143,7 @@ var searchInput = function (data) {
       } 
     });
 
-
+    console.log(returnedData);
     settings.items = name.concat(returnedData);
   } else {
     settings.items = dataJson;
