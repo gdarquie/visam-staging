@@ -340,7 +340,7 @@ class Labo
      *     @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="ED_id", referencedColumnName="ED_id")
+     *     @ORM\JoinColumn(name="ed_id", referencedColumnName="ed_id")
      *   }
      * )
      */
