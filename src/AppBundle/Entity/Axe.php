@@ -51,12 +51,9 @@ class Axe
     private $last_update;
 
     /**
-     * @var \AppBundle\Entity\Labo
+     * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Labo" , inversedBy="axes")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id", onDelete="CASCADE")
-     * })
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Labo", mappedBy="axes", cascade= {"persist"})
      */
     private $labo;
 

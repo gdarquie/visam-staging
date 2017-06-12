@@ -218,6 +218,7 @@ class LaboratoireController extends Controller
                 $now = new \DateTime();
                 $laboratoire->setLastUpdate($now);
 
+//                dump($laboratoire);die();
 
                 $em->persist($laboratoire);
                 $em->flush();

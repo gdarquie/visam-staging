@@ -354,8 +354,19 @@ class Labo
      */
     private $ed;
 
+
     /**
-     * @ORM\OneToMany(targetEntity="Axe", mappedBy="labo", cascade= {"persist"})
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Axe", inversedBy="labo", cascade= {"persist"})
+     * @ORM\JoinTable(name="labo_has_axe",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="axe_id", referencedColumnName="axe_id")
+     *   }
+     * )
      */
     private $axes;
 
@@ -1145,7 +1156,6 @@ class Labo
     {
         $this->axes = $axes;
     }
-
 
     /**
      * @return int

@@ -156,14 +156,8 @@ class LaboType extends AbstractType
                 'label'    => 'Vérifié?',
                 'required' => false,
             ))
-            ->add('axes', CollectionType::class, [
-                'entry_type' => AxeEmbeddedForm::class,
-                'allow_add' => true,
-                'allow_delete' => true,
-            ])
         ;
     }
-
 
     /**
      * @param OptionsResolver $resolver
