@@ -396,6 +396,13 @@ class Labo
     private $valide = false;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="code_interne", type="string", length=100, nullable=true)
+     */
+    private $code_interne;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -1338,6 +1345,25 @@ class Labo
         return (string) $this->getNom();
     }
 
+    /**
+     * @return code_interne
+     */
+    public function getCodeInterne()
+    {
+        return $this->code_interne;
+    }
 
+    /**
+      * Set code_interne
+      *
+      * @param string $code_interne
+      *
+      * @return Labo
+      */
+
+    public function setCodeInterne($code_interne)
+    {
+        $this->code_interne = $code_interne;
+    }
 
 }
