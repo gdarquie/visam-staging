@@ -8,7 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20170612225824 extends AbstractMigration
+class Version20170612232122 extends AbstractMigration
 {
     /**
      * @param Schema $schema
@@ -24,6 +24,8 @@ class Version20170612225824 extends AbstractMigration
         $this->addSql('ALTER TABLE axe DROP FOREIGN KEY FK_6C6A1E2CB65FA4A');
         $this->addSql('DROP INDEX IDX_6C6A1E2CB65FA4A ON axe');
         $this->addSql('ALTER TABLE axe DROP labo_id');
+        $this->addSql('ALTER TABLE formation ADD code_interne VARCHAR(100) DEFAULT NULL');
+        $this->addSql('ALTER TABLE labo ADD code_interne VARCHAR(100) DEFAULT NULL');
     }
 
     /**
@@ -38,5 +40,7 @@ class Version20170612225824 extends AbstractMigration
         $this->addSql('ALTER TABLE axe ADD labo_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE axe ADD CONSTRAINT FK_6C6A1E2CB65FA4A FOREIGN KEY (labo_id) REFERENCES labo (labo_id) ON DELETE CASCADE');
         $this->addSql('CREATE INDEX IDX_6C6A1E2CB65FA4A ON axe (labo_id)');
+        $this->addSql('ALTER TABLE formation DROP code_interne');
+        $this->addSql('ALTER TABLE labo DROP code_interne');
     }
 }

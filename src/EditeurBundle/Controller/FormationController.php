@@ -184,15 +184,20 @@ class FormationController extends Controller
 
         $checkUser = [];
 
-        for ($i = 0; $i < count($etablissements); $i++){
+        if ($user->hasRole('ROLE_ADMIN')){
+            $checkUser = ['all'];
+        }
+        else{
+            for ($i = 0; $i < count($etablissements); $i++){
 
-            for($j = 0; $j < count($etab_user);$j++){
-                if($etablissements[$i] == $etab_user[$j]){
-//                    dump($etablissements[$i]);
-//                    dump($etab_user[$j]);
-                    array_push($checkUser,$etab_user[$j]);
+                for($j = 0; $j < count($etab_user);$j++){
+                    if($etablissements[$i] == $etab_user[$j]){
+    //                    dump($etablissements[$i]);
+    //                    dump($etab_user[$j]);
+                        array_push($checkUser,$etab_user[$j]);
+                    }
+
                 }
-
             }
         }
 
