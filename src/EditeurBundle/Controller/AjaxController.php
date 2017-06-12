@@ -23,8 +23,8 @@ class AjaxController extends Controller
     const NB_FIELDS_LABO = 40;
     const DOSSIER_TYPE_FORMATION = 'formations';
     const DOSSIER_TYPE_LABO = 'laboratoires';
-    const EXTENTION_AUTHORIZED = 'xlsx';
-//    const EXTENTION_AUTHORIZED = array('csv','xls','xlsx');
+//    const EXTENTION_AUTHORIZED = 'xlsx';
+    const EXTENTION_AUTHORIZED = array('csv','xls','xlsx');
     const TYPE_FORMATION = 'F';
     const TYPE_LABO = 'L';
 
