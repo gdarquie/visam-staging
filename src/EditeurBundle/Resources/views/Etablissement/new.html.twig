@@ -20,3 +20,8 @@
 
     </section>
 {% endblock %}
+
+{%  block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/valorisationForm.js') }}"></script>
+{% endblock %}

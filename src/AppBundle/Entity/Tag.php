@@ -51,30 +51,14 @@ class Tag
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Labo", inversedBy="tag")
-     * @ORM\JoinTable(name="tag_has_labo",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="tag_id", referencedColumnName="tag_id")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
-     *   }
-     * )
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Labo", mappedBy="tag", cascade= {"persist"})
      */
     private $labo;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Formation", inversedBy="tag")
-     * @ORM\JoinTable(name="tag_has_formation",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="tag_id", referencedColumnName="tag_id")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="formation_id", referencedColumnName="formation_id")
-     *   }
-     * )
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Formation", mappedBy="tag", cascade= {"persist"})
      */
     private $formation;
 
@@ -85,6 +69,8 @@ class Tag
     {
         $this->labo = new \Doctrine\Common\Collections\ArrayCollection();
         $this->formation = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->last_update = new \DateTime();
+        $this->date_creation = new \DateTime();
     }
 
 
@@ -179,32 +165,6 @@ class Tag
     }
 
     /**
-     * Add labo
-     *
-     * @param \AppBundle\Entity\Labo $labo
-     *
-     * @return Tag
-     */
-    public function addLabo(\AppBundle\Entity\Labo $labo)
-    {
-        $this->labo[] = $labo;
-
-        return $this;
-    }
-
-    /**
-     * Remove labo
-     *
-     * @param \AppBundle\Entity\Labo $labo
-     */
-    public function removeLabo(\AppBundle\Entity\Labo $labo)
-    {
-        $this->labo->removeElement($labo);
-    }
-
-    /**
-     * Get labo
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getLabo()
@@ -213,38 +173,30 @@ class Tag
     }
 
     /**
-     * Add formation
-     *
-     * @param \AppBundle\Entity\Formation $formation
-     *
-     * @return Tag
+     * @param \Doctrine\Common\Collections\Collection $labo
      */
-    public function addFormation(\AppBundle\Entity\Formation $formation)
+    public function setLabo($labo)
     {
-        $this->formation[] = $formation;
-
-        return $this;
+        $this->labo = $labo;
     }
 
     /**
-     * Remove formation
-     *
-     * @param \AppBundle\Entity\Formation $formation
-     */
-    public function removeFormation(\AppBundle\Entity\Formation $formation)
-    {
-        $this->formation->removeElement($formation);
-    }
-
-    /**
-     * Get formation
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getFormation()
     {
         return $this->formation;
     }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $formation
+     */
+    public function setFormation($formation)
+    {
+        $this->formation = $formation;
+    }
+
+
 
     public function __toString()
     {

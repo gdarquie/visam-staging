@@ -1,6 +1,7 @@
 {% import _self as formMacros %}
 
 {% macro printMembreRow(membreForm) %}
+
     <div class="col s12 js-membre-item">
         <a href="" class="js-remove-membre right">
             <i class="material-icons black-text" >delete</i>
@@ -9,17 +10,59 @@
         {{ form_errors(membreForm) }}
         {{ form_row(membreForm.nom, {'label' : "Nom"}) }}
         {{ form_row(membreForm.prenom, {'label' : "Prénom"}) }}
+        {{ form_row(membreForm.genre, {'label' : "Genre (F ou M)"}) }}
         {{ form_row(membreForm.mail, {'attr' : {'class' : 'form-control', 'data-parsley-trigger' : 'change', 'label' : " Adresse email"}}) }}
 
-
     </div>
+
 {% endmacro %}
 
+{% macro printTagRow(tagForm) %}
+
+    <div class="col s12 js-tag-item">
+        <a href="" class="js-remove-tag right">
+            <i class="material-icons black-text" >delete</i>
+        </a>
+
+        {{ form_errors(tagForm) }}
+        {{ form_row(tagForm.nom) }}
+
+    </div>
+
+{% endmacro %}
+
+{% macro printAxeRow(axeForm) %}
+
+    <div class="col s12 js-axe-item">
+        <a href="" class="js-remove-axe right">
+            <i class="material-icons black-text" >delete</i>
+        </a>
+
+        {{ form_errors(axeForm) }}
+        {{ form_row(axeForm.nom, {'label' : "Axe [ne fonctionne pas pour l'instant, en cours de réparation, attention les résultats ne sont pas sauvegardés]"}) }}
+
+    </div>
+
+{% endmacro %}
+
+{% macro printEquipementRow(equipementForm) %}
+
+    <div class="col s12 js-equipement-item">
+        <a href="" class="js-remove-equipement right">
+            <i class="material-icons black-text" >delete</i>
+        </a>
+
+        {{ form_errors(equipementForm) }}
+        {{ form_row(equipementForm.nom, {'label' : "Equipement(s)"}) }}
+
+    </div>
+
+{% endmacro %}
 
 <div class="row form">
 
     <div class="row">
-        <div class="col s6">
+        <div class="col s12 m6">
 
             {% if labo.checkGeneral %}
             <div class="cartouche_checked">
@@ -34,6 +77,26 @@
                 {{ form_row(edit_form.type_thesaurus, {'label' : "Type"}) }}
                 {{ form_row(edit_form.code) }}
                 {{ form_row(edit_form.lien, {'label' : "Lien URL"}) }}
+                {{ form_row(edit_form.localisation) }}
+
+                <h4>Equipement(s)</h4>
+
+                <div class="row js-equipement-wrapper" data-prototype="{{ formMacros.printEquipementRow(edit_form.equipement.vars.prototype)|e('html_attr') }}" data-index="{{ edit_form.equipement|length }}">
+
+                    {% for equipementForm  in edit_form.equipement  %}
+                        {{ formMacros.printEquipementRow(equipementForm) }}
+                    {% endfor %}
+
+                    <div class="col s12">
+                        <a href="#" class="js-add-equipement valign-wrapper col s12">
+                            <i class="material-icons black-text ">add</i>
+                            Ajouter un nouvel équipement
+                        </a>
+                    </div>
+                </div>
+
+                {# prevents weird label from showing up in new #}
+                {{ form_widget(edit_form.equipement) }}
 
                 {{ form_widget(edit_form.checkGeneral) }}
                 {{ form_label(edit_form.checkGeneral) }}
@@ -43,7 +106,95 @@
             </div>
         </div>
 
-        <div class="col s6">
+        <div class="col s12 m6">
+            {% if labo.checkDescription %}
+            <div class="cartouche_checked">
+                {% else %}
+                <div class="cartouche">
+                    {% endif %}
+
+                    <h3>Description</h3>
+                    <!-- data-length="10" -->
+                    {{ form_row(edit_form.description, { 'attr': {'class': 'materialize-textarea'} , 'label' : "Description (2500 caractères max)" })}}
+                    {#{{ form_row((edit_form.discipline)) }}#}
+                    {{ form_row(edit_form.cnu) }}
+                    {{ form_row(edit_form.hceres) }}
+                    {{ form_row(edit_form.sise) }}
+
+                    <h4>Mot(s) Clé(s)</h4>
+
+                    <div class="row js-tag-wrapper" data-prototype="{{ formMacros.printTagRow(edit_form.tag.vars.prototype)|e('html_attr') }}" data-index="{{ edit_form.tag|length }}">
+
+                        {% for tagForm  in edit_form.tag  %}
+                            {{ formMacros.printTagRow(tagForm) }}
+                        {% endfor %}
+
+                        <div class="col s12">
+                            <a href="#" class="js-add-tag valign-wrapper col s12">
+                                <i class="material-icons black-text ">add</i>
+                                Ajouter un nouveau mot clé
+                            </a>
+                        </div>
+                    </div>
+
+                    {# prevents weird label from showing up in new #}
+                    {{ form_widget(edit_form.tag) }}
+
+
+                    <h4>Axe(s) <span class="red-text">[attention la partie pour écrire les axes est en cours de réparation - ne pas utiliser pour l'instant svp : les résulats ne sont pas sauvegardés]</span></h4>
+
+                    <div class="row js-axe-wrapper" data-prototype="{{ formMacros.printAxeRow(edit_form.axes.vars.prototype)|e('html_attr') }}" data-index="{{ edit_form.axes|length }}">
+
+                        {% for axeForm  in edit_form.axes  %}
+                            {{ formMacros.printTagRow(axeForm) }}
+                        {% endfor %}
+
+                        <div class="col s12">
+                            <a href="#" class="js-add-axe valign-wrapper col s12">
+                                <i class="material-icons black-text ">add</i>
+                                Ajouter un nouvel axe
+                            </a>
+                        </div>
+                    </div>
+
+                    {# prevents weird label from showing up in new #}
+                    {{ form_widget(edit_form.axes) }}
+
+                    {{ form_row(edit_form.theme) }}
+
+                    {{ form_widget(edit_form.checkDescription) }}
+                    {{ form_label(edit_form.checkDescription) }}
+                    {{ form_errors(edit_form.checkDescription) }}
+
+            </div>
+        </div>
+
+        <div class="col s12 m6">
+        {% if labo.checkEtab %}
+        <div class="cartouche_checked">
+        {% else %}
+        <div class="cartouche">
+        {% endif %}
+
+            <h3>Etablissement(s) de rattachement</h3>
+
+            {% if(etablissements|length>1)  %}
+                {{ form_row(edit_form.etablissement, {'label' : "Etablissement(s) Hesam"}) }}
+            {% else %}
+                <div class="hide">
+                    {{ form_row(edit_form.etablissement) }}
+                </div>
+            {% endif %}
+            {{ form_row(edit_form.etabExt, { 'attr': {'class': 'materialize-textarea'}, 'label' : 'Etablissement(s) hors Hesam'}) }}
+
+            {{ form_widget(edit_form.checkEtab) }}
+            {{ form_label(edit_form.checkEtab) }}
+            {{ form_errors(edit_form.checkEtab) }}
+
+            </div>
+        </div>
+
+        <div class="col s12 m6">
 
             {% if labo.checkContact %}
             <div class="cartouche_checked">
@@ -60,9 +211,9 @@
                     {% endfor %}
 
                     <div class="col s12">
-                        <a href="#" class="js-add-membre valign-wrapper">
+                        <a href="#" class="js-add-membre valign-wrapper col s12">
                             <i class="material-icons black-text ">add</i>
-                            Ajouter un nouveau responsable
+                            Ajouter un nouveau contact
                         </a>
                     </div>
                 </div>
@@ -82,64 +233,12 @@
         </div>
 
 
-
-
-        <div class="col s6">
-            {% if labo.checkEtab %}
-            <div class="cartouche_checked">
-                {% else %}
-                <div class="cartouche">
-                    {% endif %}
-
-                <h3>Etablissement(s) de rattachement</h3>
-
-                {% if(etablissements|length>1)  %}
-                    {{ form_row(edit_form.etablissement, {'label' : "Etablissement(s) Hesam"}) }}
-                {% else %}
-                    <div class="hide">
-                        {{ form_row(edit_form.etablissement) }}
-                    </div>
-                {% endif %}
-                {{ form_row(edit_form.etabExt, { 'attr': {'class': 'materialize-textarea'}, 'label' : 'Etablissement(s) hors Hesam'}) }}
-
-                {{ form_widget(edit_form.checkEtab) }}
-                {{ form_label(edit_form.checkEtab) }}
-                {{ form_errors(edit_form.checkEtab) }}
-
-            </div>
-        </div>
-
-        <div class="col s6">
-            {% if labo.checkDescription %}
-            <div class="cartouche_checked">
-                {% else %}
-                <div class="cartouche">
-                    {% endif %}
-
-                <h3>Description</h3>
-                <!-- data-length="10" -->
-                {{ form_row(edit_form.description, { 'attr': {'class': 'materialize-textarea'} , 'label' : "Description (2500 caractères max)" })}}
-                {#{{ form_row((edit_form.discipline)) }}#}
-                {{ form_row(edit_form.cnu) }}
-                {{ form_row(edit_form.hceres) }}
-                {{ form_row(edit_form.sise) }}
-                {{ form_row(edit_form.axes) }}
-
-                {{ form_row(edit_form.theme) }}
-
-                {{ form_widget(edit_form.checkDescription) }}
-                {{ form_label(edit_form.checkDescription) }}
-                {{ form_errors(edit_form.checkDescription) }}
-
-            </div>
-        </div>
-
-        <div class="col s6">
+        <div class="col s12 m6">
             {% if labo.checkEffectifs %}
             <div class="cartouche_checked">
-                {% else %}
-                <div class="cartouche">
-                {% endif %}
+            {% else %}
+            <div class="cartouche">
+            {% endif %}
 
                 <h3>Effectif(s) du laboratoire</h3>
 
@@ -153,8 +252,11 @@
 
             </div>
         </div>
+
+
+
+
+
     </div>
-
-
 
 </div>

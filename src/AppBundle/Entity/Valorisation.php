@@ -82,6 +82,7 @@ class Valorisation
     {
         $this->etablissement = new \Doctrine\Common\Collections\ArrayCollection();
         $this->date_creation = new \DateTime();
+        $this->last_update = new \DateTime();
     }
 
 

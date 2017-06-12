@@ -16,20 +16,46 @@
 					        {% endfor %}					
           <div class="row">
           <div class="col l9">
-					<h5>Thématique(s)</h5>
+
+              {% if formation.description|length > 0 %}
+                  <h5>Description</h5>
+                  <p>{{ formation.description }}</p>
+              {% endif %}
+
+            <h5>Thématique(s)</h5>
+
 	         <ul class="list-thematique" >
 						{% for hesamette in hesamettes %}
 							<li>{{hesamette.nom}}({{hesamette.nb}})</li>
 						{% endfor %}
 	         </ul>
+
+              {% if formation.anneeCollecte > 2016 %}
+
+                  <h5>Disciplines CNU</h5>
+                  {% for discipline in formation.cnu %}
+                      <li><a href="#">{{discipline.nom}}</a> /</li>
+                  {% endfor %}
+
+                  <h5>Disciplines HCERES</h5>
+                  {% for discipline in formation.hceres %}
+                      <li><a href="#">{{discipline.nom}}</a> /</li>
+                  {% endfor %}
+
+                  <h5>Disciplines SISE</h5>
+                  {% for discipline in formation.sise %}
+                      <li><a href="#">{{discipline.nom}}</a> /</li>
+                  {% endfor %}
+
+              {% endif %}
 					
-					{% if formation.tag | length > 0 %}
-					<h5>Mots clés</h5>
-	         <ul class="list-thematique" >
-						{% for tag in formation.tag %}
-							<li>{{tag.nom}}</li>
-						{% endfor %}
-	         </ul>
+                {% if formation.tag | length > 0 %}
+                <h5>Mots clés</h5>
+                <ul class="list-thematique" >
+                    {% for tag in formation.tag %}
+                        <li>{{tag.nom}}</li>
+                    {% endfor %}
+                </ul>
 
 	         {% endif %}
           </div>

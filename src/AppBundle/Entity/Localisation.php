@@ -721,6 +721,4 @@ class Localisation
         $this->complet = $complet;
     }
 
-
-
 }

@@ -5,10 +5,9 @@ namespace EditeurBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-use AppBundle\Entity\Axe;
-
-class AxeEmbeddedForm extends AbstractType
+class TagEmbedded extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -21,7 +20,7 @@ class AxeEmbeddedForm extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'AppBundle\Entity\Axe'
+            'data_class' => 'AppBundle\Entity\Tag'
         ]);
 
     }

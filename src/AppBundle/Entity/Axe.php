@@ -60,6 +60,15 @@ class Axe
      */
     private $labo;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->last_update = new \DateTime();
+        $this->date_creation = new \DateTime();
+    }
+
 
     /**
      * Set nom

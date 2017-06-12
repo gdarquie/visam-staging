@@ -6,7 +6,7 @@
 
 {% block body %}
     <div class="container">
-    <h1>Edition d'un laboratoire</h1>
+    <h1>Edition d'un laboratoire - Collecte {{ labo.anneeCollecte }}</h1>
 
 
     {{ form_start(edit_form) }}
@@ -25,4 +25,7 @@
 {%  block javascripts %}
     {{ parent() }}
     <script src="{{ asset('js/membreForm.js') }}"></script>
+    <script src="{{ asset('js/tagForm.js') }}"></script>
+    <script src="{{ asset('js/axeForm.js') }}"></script>
+    <script src="{{ asset('js/equipementForm.js') }}"></script>
 {% endblock %}

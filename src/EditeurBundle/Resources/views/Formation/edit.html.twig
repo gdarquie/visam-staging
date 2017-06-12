@@ -5,7 +5,7 @@
 
     <div class="container">
 
-    <h1>Editer une formation</h1>
+    <h1>Editer une formation - Collecte {{ formation.anneeCollecte }}</h1>
 
     {{ form_start(edit_form, {'attr': {'class': 'form-to-check', 'data-parsley-validate' : ''} }) }}
 
@@ -27,4 +27,5 @@
 {%  block javascripts %}
     {{ parent() }}
     <script src="{{ asset('js/membreForm.js') }}"></script>
+    <script src="{{ asset('js/tagForm.js') }}"></script>
 {% endblock %}

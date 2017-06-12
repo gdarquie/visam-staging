@@ -33,6 +33,10 @@
             padding-right: 8px;
         }
 
+        .ajout{
+            margin-left : -10px;
+        }
+
     </style>
 {% endblock %}
 
@@ -54,7 +58,11 @@
 
             {% if formations|length > 0 %}
             <div class="col s6">
-                <h2>Formations ({{ formations|length }})</h2>
+                <div class="row valign-wrapper">
+                    <h2 class="col">Formations ({{ formations|length }})</h2>
+                    <i class="material-icons circle white red-text">add</i>
+                    <a href="{{ path('editeur_formation_new') }}" class="red-text ajout col">Ajouter une formation</a>
+                </div>
                 <ul class="collection">
                 {% for item in formations  %}
                     <li class="collection-item avatar js-formation-item">
@@ -63,7 +71,7 @@
                             {% if item.checkGeneral and item.checkEffectif and item.checkIndex and item.checkCursus %}
                                 <i class="material-icons circle green">mode_edit</i>
                             {% else %}
-                                <i class="material-icons circle red">mode_edit</i>
+                                <i class="material-icons circle red ">mode_edit</i>
                             {% endif %}
 
                             <span class="title">{{ item.nom }}</span>
@@ -117,9 +125,12 @@
             <div class="col s6">
 
                 <div class="col s12">
-                    <h2>Laboratoires ({{ laboratoires|length }})</h2>
 
-
+                    <div class="row valign-wrapper">
+                        <h2>Laboratoires ({{ laboratoires|length }})</h2>
+                        <i class="material-icons circle white red-text">add</i>
+                        <a href="{{ path('editeur_laboratoire_new') }}" class="red-text ajout col">Ajouter un laboratoire</a>
+                    </div>
                     <ul class="collection">
                         {% for item in laboratoires  %}
                             <li class="collection-item avatar js-labo-item">
@@ -182,7 +193,11 @@
 
             <div class="col s6">
                 <div class="col s12">
-                    <h2>Ecoles doctorales ({{ eds|length }})</h2>
+                    <div class="row valign-wrapper">
+                        <h2>Ecoles doctorales ({{ eds|length }})</h2>
+                        <i class="material-icons circle white red-text">add</i>
+                        <a href="{{ path('editeur_ed_new') }}" class="red-text ajout col">Ajouter une école doctorale</a>
+                    </div>
 
                     <ul class="collection">
                         {% for item in eds  %}
@@ -198,7 +213,6 @@
                 </div>
             </div>
         </div>
-
 
     </section>
 

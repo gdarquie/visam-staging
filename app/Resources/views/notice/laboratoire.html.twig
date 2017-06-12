@@ -11,7 +11,7 @@
                   Laboratoire
                 </span>
                 <span class="etablissement">
-                	<span> - {{labo.type}} {{labo.code}} </span>
+                	<span> - {{labo.type}} {{labo.code}} [collecte {{ labo.anneeCollecte }}]</span>
                	</span> 
 
                 <h3>{{labo.nom}} {% if labo.sigle %} ({{labo.sigle|upper}}) {% endif %}</h3>
@@ -36,12 +36,30 @@
 
                 </ul>
 
+            {% if labo.anneeCollecte > 2016 %}
                 <ul class="list-thematique" >
       {#          	{% for discipline in labo.discipline %}
                 		<li><a href="#">{{discipline.nom}}</a> /</li>
                 	{% endfor %}
 
                     #}
+
+                    <h5>Disciplines CNU</h5>
+                    {% for discipline in labo.cnu %}
+                      <li><a href="#">{{discipline.nom}}</a> /</li>
+                    {% endfor %}
+
+                    <h5>Disciplines HCERES</h5>
+                    {% for discipline in labo.hceres %}
+                        <li><a href="#">{{discipline.nom}}</a> /</li>
+                    {% endfor %}
+
+                    <h5>Disciplines SISE</h5>
+                    {% for discipline in labo.sise %}
+                        <li><a href="#">{{discipline.nom}}</a> /</li>
+                    {% endfor %}
+                {% endif %}
+
                 </ul>
 				
 				      {% if labo.equipement | length > 0 %}

@@ -34,7 +34,22 @@ class LaboType extends AbstractType
 //            ->add('mailcontact')
 //            ->add('responsable')
             ->add('membre', CollectionType::class, [
-                'entry_type' => MembreEmbeddedForm::class,
+                'entry_type' => MembreEmbedded::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+            ])
+            ->add('tag', CollectionType::class, [
+                'entry_type' => TagEmbedded::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+            ])
+            ->add('axes', CollectionType::class, [
+                'entry_type' => TagEmbedded::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+            ])
+            ->add('equipement', CollectionType::class, [
+                'entry_type' => EquipementEmbedded::class,
                 'allow_add' => true,
                 'allow_delete' => true,
             ])
@@ -60,9 +75,6 @@ class LaboType extends AbstractType
             ->add('effectif')
             ->add('effectifHesam')
             ->add('sigle')
-//            ->add('lien2')
-//            ->add('lien3')
-            ->add('axes')
 //            ->add('membre')
             // ->add('theme')
             // ->add('ufr')
@@ -70,16 +82,15 @@ class LaboType extends AbstractType
                 'class' => 'AppBundle:Localisation',
                 'by_reference' => false,
                 'multiple' => true,
-                'choice_label' => 'nom',
+                'choice_label' => 'complet',
                 'query_builder' => function (LocalisationRepository $repo) use ($localisations){
                     return $repo->createQueryBuilder('localisation')
                         ->where('localisation IN(:localisation)')
                         ->setParameter('localisation', $localisations)
-                        ->orderBy('localisation.titre', 'ASC')
+                        ->orderBy('localisation.nom', 'ASC')
                         ;
                 }
             ))
-            // ->add('formation')
 //            ->add('discipline')
             ->add('cnu', EntityType::class, array(
                 'class' => 'AppBundle:Discipline',

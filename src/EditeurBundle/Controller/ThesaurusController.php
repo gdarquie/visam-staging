@@ -33,6 +33,9 @@ class ThesaurusController extends Controller
             $thesaurus = $editForm->getData();
             $em = $this->getDoctrine()->getManager();
 
+            $slug = $thesaurus->getNom();
+            $thesaurus->setSlug($slug);
+
             $now = new \DateTime();
             $thesaurus->setDateCreation($now);
             $thesaurus->setLastUpdate($now);
@@ -64,6 +67,9 @@ class ThesaurusController extends Controller
 
             $thesaurus = $editForm->getData();
             $em = $this->getDoctrine()->getManager();
+
+            $slug = $thesaurus->getNom();
+            $thesaurus->setSlug($slug);
 
             $now = new \DateTime();
             $thesaurus->setLastUpdate($now);

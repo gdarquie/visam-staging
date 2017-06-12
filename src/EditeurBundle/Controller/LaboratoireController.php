@@ -54,6 +54,31 @@ class LaboratoireController extends Controller
         $query->setParameter('etablissements', $etablissements);
         $localisations = $query->getResult();
 
+        // --------------------------
+        //Set année de la collecte
+        // --------------------------
+        //vérification qu'il y a une collecte active
+        $query = $em->createQuery(
+            'SELECT COUNT(c.collecteId) as nb FROM AppBundle:Collecte c WHERE c.active = true'
+        );
+        $checkCollecte = $query->getResult();
+        $checkCollecte = $checkCollecte[0]['nb'];
+
+        //s'il y a plus que 0 = il y a une collecte active donc je prends sa date
+        if($checkCollecte > 0){
+            $query = $em->createQuery(
+                'SELECT c.annee as annee FROM AppBundle:Collecte c WHERE c.active = true'
+            );
+        }
+        else{
+            $query = $em->createQuery(
+                'SELECT c.annee as annee FROM AppBundle:Collecte c WHERE c.complete = true ORDER BY c.annee DESC'
+            );
+            $query->setMaxResults(1);
+        }
+        $year = $query->getSingleResult();
+        $year = $year['annee'];
+
         $editForm = $this->createForm('EditeurBundle\Form\LaboType', $laboratoire, array(
             'etablissements' => $etablissements,
             'localisations' => $localisations
@@ -84,30 +109,7 @@ class LaboratoireController extends Controller
 
                 $laboratoire->addlocalisation($localisation);
             }
-            // --------------------------
-            //Set année de la collecte
-            // --------------------------
-            //vérification qu'il y a une collecte active
-            $query = $em->createQuery(
-                'SELECT COUNT(c.collecteId) as nb FROM AppBundle:Collecte c WHERE c.active = true'
-            );
-            $checkCollecte = $query->getResult();
-            $checkCollecte = $checkCollecte[0]['nb'];
 
-            //s'il y a plus que 0 = il y a une collecte active donc je prends sa date
-            if($checkCollecte > 0){
-                $query = $em->createQuery(
-                    'SELECT c.annee as annee FROM AppBundle:Collecte c WHERE c.active = true'
-                );
-            }
-            else{
-                $query = $em->createQuery(
-                    'SELECT c.annee as annee FROM AppBundle:Collecte c WHERE c.complete = true ORDER BY c.annee DESC'
-                );
-                $query->setMaxResults(1);
-            }
-            $year = $query->getSingleResult();
-            $year = $year['annee'];
             $laboratoire->setAnneeCollecte($year);
 
             $now = new \DateTime();
@@ -134,7 +136,8 @@ class LaboratoireController extends Controller
             'edit_form' => $editForm->createView(),
             'labo' => $laboratoire,
             'etablissements' => $etablissements,
-            'localisations' => $localisations
+            'localisations' => $localisations,
+            'year' => $year
         ));
     }
 
@@ -154,7 +157,7 @@ class LaboratoireController extends Controller
 
         if ($user->hasRole('ROLE_ADMIN')){
             $query = $em->createQuery(
-                'SELECT e.etablissementId as id FROM AppBundle:Etablissement e'
+                'SELECT e.etablissementId as id FROM AppBundle:Etablissement e JOIN e.collecte c WHERE c.active = 1 '
             );
         }
 
@@ -168,12 +171,11 @@ class LaboratoireController extends Controller
         $etablissements = $query->getResult();
 
         $query = $em->createQuery(
-            'SELECT c.localisationId as id FROM AppBundle:Labo l INNER JOIN l.localisation c JOIN l.etablissement e WHERE e.etablissementId in (:etablissements)'
+            'SELECT l.localisationId as id FROM AppBundle:Localisation l JOIN l.etablissement as e WHERE e.etablissementId IN (:etablissements)'
         );
         $query->setParameter('etablissements', $etablissements);
         $localisations = $query->getResult();
 
-//        dump($localisations);die;
 
         $editForm = $this->createForm('EditeurBundle\Form\LaboType', $laboratoire, array(
             'etablissements' => $etablissements,
@@ -190,7 +192,6 @@ class LaboratoireController extends Controller
             $now = new \DateTime();
             $laboratoire->setLastUpdate($now);
 
-            dump($laboratoire);die;
 
             $em->persist($laboratoire);
             $em->flush();

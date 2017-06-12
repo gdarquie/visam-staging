@@ -202,7 +202,15 @@ class Labo
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag", mappedBy="labo")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag", inversedBy="labo", cascade= {"persist"})
+     * @ORM\JoinTable(name="labo_has_tag",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="tag_id", referencedColumnName="tag_id")
+     *   }
+     * )
      */
     private $tag;
 
@@ -319,7 +327,7 @@ class Labo
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Equipement", inversedBy="labo")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Equipement", inversedBy="labo", cascade= {"persist"})
      * @ORM\JoinTable(name="labo_has_equipement",
      *   joinColumns={
      *     @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
@@ -347,7 +355,7 @@ class Labo
     private $ed;
 
     /**
-     * @ORM\OneToMany(targetEntity="Axe", mappedBy="labo")
+     * @ORM\OneToMany(targetEntity="Axe", mappedBy="labo", cascade= {"persist"})
      */
     private $axes;
 
@@ -830,38 +838,21 @@ class Labo
     }
 
     /**
-     * Add tag
-     *
-     * @param \AppBundle\Entity\Tag $tag
-     *
-     * @return Labo
-     */
-    public function addTag(\AppBundle\Entity\Tag $tag)
-    {
-        $this->tag[] = $tag;
-
-        return $this;
-    }
-
-    /**
-     * Remove tag
-     *
-     * @param \AppBundle\Entity\Tag $tag
-     */
-    public function removeTag(\AppBundle\Entity\Tag $tag)
-    {
-        $this->tag->removeElement($tag);
-    }
-
-    /**
-     * Get tag
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getTag()
     {
         return $this->tag;
     }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $tag
+     */
+    public function setTag($tag)
+    {
+        $this->tag = $tag;
+    }
+
 
     /**
      * Add ufr

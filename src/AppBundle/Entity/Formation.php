@@ -191,12 +191,22 @@ class Formation
      */
     private $membre;
 
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag", mappedBy="formation")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag", inversedBy="formation", cascade= {"persist"})
+     * @ORM\JoinTable(name="formation_has_tag",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="formation_id", referencedColumnName="formation_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="tag_id", referencedColumnName="tag_id")
+     *   }
+     * )
      */
     private $tag;
+
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -736,38 +746,21 @@ class Formation
     }
 
     /**
-     * Add tag
-     *
-     * @param \AppBundle\Entity\Tag $tag
-     *
-     * @return Formation
-     */
-    public function addTag(\AppBundle\Entity\Tag $tag)
-    {
-        $this->tag[] = $tag;
-
-        return $this;
-    }
-
-    /**
-     * Remove tag
-     *
-     * @param \AppBundle\Entity\Tag $tag
-     */
-    public function removeTag(\AppBundle\Entity\Tag $tag)
-    {
-        $this->tag->removeElement($tag);
-    }
-
-    /**
-     * Get tag
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getTag()
     {
         return $this->tag;
     }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $tag
+     */
+    public function setTag($tag)
+    {
+        $this->tag = $tag;
+    }
+
 
     /**
      * Add labo

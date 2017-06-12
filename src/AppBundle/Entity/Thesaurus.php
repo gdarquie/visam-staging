@@ -58,8 +58,9 @@ class Thesaurus
     private $soustype;
 
     /**
-     * @ORM\Column(type="string")
-     * @Gedmo\Slug(fields={"type"})
+     * @var string
+     *
+     * @ORM\Column(name="slug", type="string", length=255, nullable=false)
      */
     private $slug;
 

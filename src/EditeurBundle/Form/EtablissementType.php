@@ -29,6 +29,12 @@ class EtablissementType extends AbstractType
             ->add('code')
             ->add('sigle')
             ->add('lien')
+            ->add('active')
+            ->add('valorisation', CollectionType::class, [
+                'entry_type' => ValorisationEmbedded::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+            ])
             ->add('ministere_thesaurus', EntityType::class, array(
                 'multiple' => true,
                 'class' => 'AppBundle:Thesaurus',
@@ -71,8 +77,6 @@ class EtablissementType extends AbstractType
                 'multiple' => true,
                 'choice_label' => 'nom',
             ))
-            ->add('valorisation')
-//            ->add('valorisation', CollectionType::class)
             ->add('entree', DateType::class, [
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',

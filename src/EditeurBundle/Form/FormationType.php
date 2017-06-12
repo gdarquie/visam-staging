@@ -77,7 +77,7 @@ class FormationType extends AbstractType
 //            ->add('lien3')
 //            ->add('responsable')
              ->add('membre', CollectionType::class, [
-                'entry_type' => MembreEmbeddedForm::class,
+                'entry_type' => MembreEmbedded::class,
                 'allow_add' => true,
                 'allow_delete' => true,
             ])
@@ -127,7 +127,11 @@ class FormationType extends AbstractType
                     return $repo->createAlphabeticalQueryBuilder();
                 }
             ))
-            ->add('tag')
+            ->add('tag', CollectionType::class, [
+                'entry_type' => TagEmbedded::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+            ])
             ->add('cnu', EntityType::class, array(
                 'class' => 'AppBundle:Discipline',
                 'by_reference' => false,

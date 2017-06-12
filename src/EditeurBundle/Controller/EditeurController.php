@@ -51,7 +51,7 @@ class EditeurController extends Controller
     //Récupérer les ids des établissements liés à un membre
         if ($user->hasRole('ROLE_ADMIN')){
             $query = $em->createQuery(
-                'SELECT e.etablissementId as id FROM AppBundle:Etablissement e'
+                'SELECT e.etablissementId as id FROM AppBundle:Etablissement e JOIN e.collecte c WHERE c.active = 1 '
             );
             $associations = $query->getResult();
         }
@@ -64,7 +64,7 @@ class EditeurController extends Controller
             $associations = $query->getResult();
         }
 
-    //Get établissement(s) lié(s) à un membre - il peut évenutuellement y en avoir plusieurs
+    //Get établissement(s) lié(s) à un membre - il peut éventuellement y en avoir plusieurs
         $sql = "SELECT e FROM AppBundle:Etablissement e ";
         foreach ($associations as $key=>$value) {
             if($key == 0){

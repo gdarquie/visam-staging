@@ -59,6 +59,31 @@ class FormationController extends Controller
             'localisations' => $localisations
         ));
 
+        // --------------------------
+        //Set année de la collecte
+        // --------------------------
+        //vérification qu'il y a une collecte active
+        $query = $em->createQuery(
+            'SELECT COUNT(c.collecteId) as nb FROM AppBundle:Collecte c WHERE c.active = true'
+        );
+        $checkCollecte = $query->getResult();
+        $checkCollecte = $checkCollecte[0]['nb'];
+
+        //s'il y a plus que 0 = il y a une collecte active donc je prends sa date
+        if($checkCollecte > 0){
+            $query = $em->createQuery(
+                'SELECT c.annee as annee FROM AppBundle:Collecte c WHERE c.active = true'
+            );
+        }
+        else{
+            $query = $em->createQuery(
+                'SELECT c.annee as annee FROM AppBundle:Collecte c WHERE c.complete = true ORDER BY c.annee DESC'
+            );
+            $query->setMaxResults(1);
+        }
+        $year = $query->getSingleResult();
+        $year = $year['annee'];
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -88,30 +113,7 @@ class FormationController extends Controller
             }
             //sinon l'utilisateur choisit lui-même un établissement
 
-            // --------------------------
-            //Set année de la collecte
-            // --------------------------
-            //vérification qu'il y a une collecte active
-            $query = $em->createQuery(
-                'SELECT COUNT(c.collecteId) as nb FROM AppBundle:Collecte c WHERE c.active = true'
-            );
-            $checkCollecte = $query->getResult();
-            $checkCollecte = $checkCollecte[0]['nb'];
 
-            //s'il y a plus que 0 = il y a une collecte active donc je prends sa date
-            if($checkCollecte > 0){
-                $query = $em->createQuery(
-                    'SELECT c.annee as annee FROM AppBundle:Collecte c WHERE c.active = true'
-                );
-            }
-            else{
-                $query = $em->createQuery(
-                    'SELECT c.annee as annee FROM AppBundle:Collecte c WHERE c.complete = true ORDER BY c.annee DESC'
-                );
-                $query->setMaxResults(1);
-            }
-            $year = $query->getSingleResult();
-            $year = $year['annee'];
             $formation->setAnneeCollecte($year);
 
             $now = new \DateTime();
@@ -135,7 +137,8 @@ class FormationController extends Controller
             'edit_form' => $form->createView(),
             'formation' => $formation,
             'etablissements' => $etablissements,
-            'localisations' => $localisations
+            'localisations' => $localisations,
+            'year' => $year
             // 'delete_form' => $deleteForm->createView(),
         ));
     }

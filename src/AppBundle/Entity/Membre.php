@@ -80,22 +80,14 @@ class Membre
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Labo", inversedBy="membres")
-     * @ORM\JoinTable(name="membre_has_labo",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="membre_id", referencedColumnName="membre_id")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
-     *   }
-     * )
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Labo", mappedBy="membre")
      */
     private $labo;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Membre", mappedBy="membre")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Formation", mappedBy="membre")
      */
     private $formation;
 

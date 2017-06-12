@@ -9,11 +9,26 @@
         {{ form_errors(membreForm) }}
         {{ form_row(membreForm.nom, {'label' : "Nom"}) }}
         {{ form_row(membreForm.prenom, {'label' : "Prénom"}) }}
+        {{ form_row(membreForm.genre, {'label' : "Genre (F ou M)"}) }}
         {{ form_row(membreForm.mail, {'attr' : {'class' : 'form-control', 'data-parsley-trigger' : 'change', 'label' : " Contact du responsable pédagogique (adresse e-mail)"}}) }}
-
 
     </div>
 {% endmacro %}
+
+{% macro printTagRow(tagForm) %}
+
+    <div class="col s12 js-tag-item">
+        <a href="" class="js-remove-tag right">
+            <i class="material-icons black-text" >delete</i>
+        </a>
+
+        {{ form_errors(tagForm) }}
+        {{ form_row(tagForm.nom) }}
+
+    </div>
+
+{% endmacro %}
+
 
 <div class="row form">
 
@@ -54,9 +69,9 @@
                     {% endfor %}
 
                     <div class="col s12">
-                        <a href="#" class="js-add-membre valign-wrapper">
+                        <a href="#" class="js-add-membre valign-wrapper col s12">
                             <i class="material-icons black-text ">add</i>
-                            Ajouter un nouveau responsable
+                            Ajouter un nouveau contact
                         </a>
                     </div>
                 </div>
@@ -104,7 +119,25 @@
             {{ form_row(edit_form.cnu) }}
             {{ form_row(edit_form.hceres) }}
             {{ form_row(edit_form.sise) }}
-            {{ form_row(edit_form.tag, {'label' : 'Mots-clés'}) }}
+
+            <h4>Mot(s) Clé(s)</h4>
+
+            <div class="row js-tag-wrapper" data-prototype="{{ formMacros.printTagRow(edit_form.tag.vars.prototype)|e('html_attr') }}" data-index="{{ edit_form.tag|length }}">
+
+                {% for tagForm  in edit_form.tag  %}
+                    {{ formMacros.printTagRow(tagForm) }}
+                {% endfor %}
+
+                <div class="col s12">
+                    <a href="#" class="js-add-tag valign-wrapper col s12">
+                        <i class="material-icons black-text ">add</i>
+                        Ajouter un nouveau mot clé
+                    </a>
+                </div>
+            </div>
+
+            {# prevents weird label from showing up in new #}
+            {{ form_widget(edit_form.tag) }}
 
             {{ form_widget(edit_form.checkIndex) }}
             {{ form_label(edit_form.checkIndex) }}
