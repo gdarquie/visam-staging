@@ -44,7 +44,7 @@ class LaboType extends AbstractType
                 'allow_delete' => true,
             ])
             ->add('axes', CollectionType::class, [
-                'entry_type' => TagEmbedded::class,
+                'entry_type' => AxeEmbedded::class,
                 'allow_add' => true,
                 'allow_delete' => true,
             ])

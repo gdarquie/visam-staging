@@ -738,7 +738,7 @@ class Etablissement
     public function removeLocalisation(\AppBundle\Entity\Localisation $localisation)
     {
         $this->localisation->removeElement($localisation);
-        $localisation->removeLocalisation($this);
+        $localisation->removeEtablissement($this);
     }
 
     /**

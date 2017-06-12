@@ -170,42 +170,73 @@ class LaboratoireController extends Controller
         }
         $etablissements = $query->getResult();
 
-        $query = $em->createQuery(
-            'SELECT l.localisationId as id FROM AppBundle:Localisation l JOIN l.etablissement as e WHERE e.etablissementId IN (:etablissements)'
-        );
-        $query->setParameter('etablissements', $etablissements);
-        $localisations = $query->getResult();
+        //vérification que l'utilisateur peut modifier cette formation
 
+        //Sélection de tous les établissements rattachés à la formation
+        $query = $em->createQuery("SELECT e.etablissementId as id FROM AppBundle:Etablissement e JOIN e.labo f WHERE f.laboId = :id");
+        $query->setParameter('id', $laboratoire->getLaboId());
+        $etab_user = $query->getResult();
 
-        $editForm = $this->createForm('EditeurBundle\Form\LaboType', $laboratoire, array(
-            'etablissements' => $etablissements,
-            'localisations' => $localisations
-        ));
+        //vérification que les établissement de la formation sont bien dans ceux du user
 
-        $editForm->handleRequest($request);
+        $checkUser = [];
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
+        for ($i = 0; $i < count($etablissements); $i++){
 
-            $laboratoire = $editForm->getData();
-            $em = $this->getDoctrine()->getManager();
+            for($j = 0; $j < count($etab_user);$j++){
+                if($etablissements[$i] == $etab_user[$j]){
+//                    dump($etablissements[$i]);
+//                    dump($etab_user[$j]);
+                    array_push($checkUser,$etab_user[$j]);
+                }
 
-            $now = new \DateTime();
-            $laboratoire->setLastUpdate($now);
-
-
-            $em->persist($laboratoire);
-            $em->flush();
-
-            return $this->redirectToRoute('labo', array('id' => $laboratoire->getLaboId() ));
+            }
         }
 
-        return $this->render('EditeurBundle:Labo:edit.html.twig', array(
-            'labo' => $laboratoire,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-            'etablissements' => $etablissements,
-            'localisations' => $localisations
-        ));
+        //si l'utilisateur a l'établissement de la formation dans sa liste
+        if(count($checkUser) > 0) {
+
+            $query = $em->createQuery(
+                'SELECT l.localisationId as id FROM AppBundle:Localisation l JOIN l.etablissement as e WHERE e.etablissementId IN (:etablissements)'
+            );
+            $query->setParameter('etablissements', $etablissements);
+            $localisations = $query->getResult();
+
+
+            $editForm = $this->createForm('EditeurBundle\Form\LaboType', $laboratoire, array(
+                'etablissements' => $etablissements,
+                'localisations' => $localisations
+            ));
+
+            $editForm->handleRequest($request);
+
+            if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+                $laboratoire = $editForm->getData();
+                $em = $this->getDoctrine()->getManager();
+
+                $now = new \DateTime();
+                $laboratoire->setLastUpdate($now);
+
+
+                $em->persist($laboratoire);
+                $em->flush();
+
+                return $this->redirectToRoute('labo', array('id' => $laboratoire->getLaboId()));
+            }
+
+            return $this->render('EditeurBundle:Labo:edit.html.twig', array(
+                'labo' => $laboratoire,
+                'edit_form' => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),
+                'etablissements' => $etablissements,
+                'localisations' => $localisations
+            ));
+        }
+        else{
+            $this->addFlash('success', "Vous ne pouvez modifier ce laboratoire, vous n'êtes pas rattaché à l'établissement auquel il appartient");
+            return $this->redirectToRoute('labo', array('id' => $laboratoire->getLaboId()));
+        }
     }
 
 

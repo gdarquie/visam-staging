@@ -682,11 +682,16 @@ class Formation
      *
      * @param \AppBundle\Entity\Localisation $localisation
      *
-     * @return Formation
+     * @return Localisation
      */
     public function addLocalisation(\AppBundle\Entity\Localisation $localisation)
     {
+        if ($this->localisation->contains($localisation)) {
+            return;
+        }
+
         $this->localisation[] = $localisation;
+        $localisation->addFormation($this);
 
         return $this;
     }
@@ -699,6 +704,7 @@ class Formation
     public function removeLocalisation(\AppBundle\Entity\Localisation $localisation)
     {
         $this->localisation->removeElement($localisation);
+        $localisation->removeFormation($this);
     }
 
     /**

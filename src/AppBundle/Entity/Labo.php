@@ -893,11 +893,16 @@ class Labo
      *
      * @param \AppBundle\Entity\Localisation $localisation
      *
-     * @return Labo
+     * @return Localisation
      */
     public function addLocalisation(\AppBundle\Entity\Localisation $localisation)
     {
+        if ($this->localisation->contains($localisation)) {
+            return;
+        }
+
         $this->localisation[] = $localisation;
+        $localisation->addLabo($this);
 
         return $this;
     }
@@ -910,6 +915,7 @@ class Labo
     public function removeLocalisation(\AppBundle\Entity\Localisation $localisation)
     {
         $this->localisation->removeElement($localisation);
+        $localisation->removeLabo($this);
     }
 
     /**
