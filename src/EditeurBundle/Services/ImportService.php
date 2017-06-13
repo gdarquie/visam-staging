@@ -17,6 +17,8 @@ use AppBundle\Entity\Localisation;
 use AppBundle\Entity\Metier3;
 use AppBundle\Entity\Tag;
 use AppBundle\Entity\Membre;
+use AppBundle\Entity\Equipement;
+use AppBundle\Entity\Axe;
 use AppBundle\Entity\Discipline;
 
 class ImportService
@@ -816,7 +818,7 @@ class ImportService
                 //$formattedData['ed']['nom'] = $data['W']; // multi-valeurs separes par ;
 
                 //Disciplines et Membres
-                //TODO Membres
+                // Membres
                 for ($i = 1; $i <= 5; $i++) {
                     //SISE
                     $sise = 'abreviation_sise_' . $i;
@@ -897,27 +899,49 @@ class ImportService
                     }
                 }
 
-                //TODO AXes faire comme tags
-                $formattedData['axe']['nom_1'] = $data['BB'];
-                $formattedData['axe']['nom_2'] = $data['BC'];
-                $formattedData['axe']['nom_3'] = $data['BD'];
-                $formattedData['axe']['nom_4'] = $data['BE'];
-                $formattedData['axe']['nom_5'] = $data['BF'];
-                $formattedData['axe']['nom_6'] = $data['BG'];
-                $formattedData['axe']['nom_7'] = $data['BH'];
+                // AXes faire comme tags
 
                 for ($i = 1; $i <= 7; $i++) {
-                    $nomaxe = 'nom_' . $i;
-                    if ($data['axe'][$nomaxe] != '') {
+                    $nomAxe = 'nom_' . $i;
 
+                    if (!empty($data['axe'][$nomAxe])) {
+                        $axe_bdd = $this->em
+                            ->getRepository('AppBundle:Axe')
+                            ->findOneBy(array('nom' => $data['axe'][$nomAxe]));
+
+                        if (!$axe_bdd) {
+                            $axe = new Axe();
+                            $axe->setNom($data['metier'][$membreNom]);
+                            $axe->setDateCreation($dateTime);
+                            $axe->setLastUpdate($dateTime);
+                            $this->em->persist($axe);
+                            $labo->addAxe($axe);
+                        } else {
+                            $labo->addAxe($axe_bdd);
+                            $axe_bdd->setLastUpdate($dateTime);
+                            $this->em->persist($axe_bdd);
+                        }
                     }
                 }
 
 
                 //TODO equipement
                 //$formattedData['equipement']['nom'] = $data['BI']; // TODO multi-valeurs separes par ;
+                if (!empty($data['equipement']['nom'])) {
+                    $equipements = explode(';', $data['equipement']['nom']);
 
-            } catch (\Exception $e) {
+                    foreach ($equipements as $value) {
+
+                        $equipement = new Equipement();
+                        $equipement->setNom($value);
+                        $equipement->setDateCreation($dateTime);
+                        $equipement->setLastUpdate($dateTime);
+                        $this->em->persist($equipement);
+                        $labo->addEquipement($equipement);
+                    }
+                }
+
+                } catch (\Exception $e) {
                 $this->log->warning('data_error in line : ' . $line . ' Message : ' . $e->getMessage());
                 $valid = false;
             }
