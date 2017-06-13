@@ -37,6 +37,18 @@ class ThesaurusRepository extends EntityRepository
             ->orderBy('thesaurus.nom', 'ASC')
             ->setParameters(array( 'type' => $type, 'category' => $category));
     }
+
+    public function getNomIdThesaurusByType($type)
+    {
+        $qb = $this->createQueryBuilder('thesaurus')
+            ->select('thesaurus.nom, thesaurus.thesaurusId')
+            ->where('thesaurus.type = :type')
+            ->orderBy('thesaurus.nom', 'ASC')
+            ->setParameter('type', $type);
+
+        return $qb->getQuery()->getArrayResult();
+
+    }
 }
 
 

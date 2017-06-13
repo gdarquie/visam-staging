@@ -508,17 +508,19 @@ class ImportService
     public function checkModalitesThesaurus($data, $line)
     {
         $valid = true;
-        $modalites = explode(';', $data);
+        if (!empty($modalites)) {
+            $modalites = explode(';', $data);
 
-        if ($this->tabModalitesThesaurus === null) {
-            $this->tabModalitesThesaurus = $this->initModalitesThesaurus();
-        }
+            if ($this->tabModalitesThesaurus === null) {
+                $this->tabModalitesThesaurus = $this->initModalitesThesaurus();
+            }
 
-        foreach ($modalites as $modalite) {
-            if (!array_key_exists($modalite, $this->tabModalitesThesaurus)) {
-                $msg = sprintf('Ln %d : La modalité "%s" inconnu', $line, $modalite);
-                $this->log->warning($msg);
-                $valid = false;
+            foreach ($modalites as $modalite) {
+                if (!array_key_exists($modalite, $this->tabModalitesThesaurus)) {
+                    $msg = sprintf('Ln %d : La modalité "%s" inconnu', $line, $modalite);
+                    $this->log->warning($msg);
+                    $valid = false;
+                }
             }
         }
         return $valid;
@@ -1121,6 +1123,23 @@ class ImportService
             $this->getTabTags();
         }
         return array_key_exists($tag, $this->tabTags);
+    }
+
+    public function initModalitesThesaurus()
+    {
+        $dataModalites = [];
+        $modalites = $this->em
+            ->getRepository('AppBundle:Thesaurus')
+            ->getNomIdThesaurusByType('modalites');
+
+        foreach ($modalites as $value) {
+            $dataModalites[$value['nom']] = $value['thesaurusId'];
+        }
+
+        $this->tabModalitesThesaurus = $dataModalites ;
+
+        return true;
+
     }
 
     public function initTabComparaison()
