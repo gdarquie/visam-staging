@@ -157,15 +157,20 @@ class ExportService
             "Axe de recherche 7",
             "Equipement",
             "Code interne d'UR",
-            "Prénom et nom du membre 1",
+            "Nom du membre 1",
+            "Prénom du membre 1",
             "Email du membre 1",
-            "Prénom et nom du membre 2",
+            "Nom du membre 2",
+            "Prénom du membre 2",
             "Email du membre 2",
-            "Prénom et nom du membre 3",
+            "Nom du membre 3",
+            "Prénom du membre 3",
             "Email du membre 3",
-            "Prénom et nom du membre 4",
+            "Nom du membre 4",
+            "Prénom du membre 4",
             "Email du membre 4",
-            "Prénom et nom du membre 5",
+            "Nom du membre 5",
+            "Prénom du membre 5",
             "Email du membre 5",
             "", //faire un saute de colonne
             "Identifiant interne heSam"
@@ -382,15 +387,20 @@ class ExportService
                 (isset($axes[6]['nom'])) ? $axes[6]['nom'] : null, // TODO axe de recherche 7
                 (isset($equipement) ? $equipement : null), // TODO équipement
                 null, //TODO  add code interne labo recuperer de la bdd
-                null, //Prénom et nom du membre 1
+                null, //Nom du membre 1
+                null, //Prénom du membre 1
                 null, //Email du membre 1
-                null, //Prénom et nom du membre 2
+                null, //Nom du membre 2
+                null, //Prénom du membre 2
                 null, //Email du membre 2
-                null, //Prénom et nom du membre 3
+                null, //Nom du membre 3
+                null, //Prénom du membre 3
                 null, //Email du membre 3
-                null, //Prénom et nom du membre 4
+                null, //Nom du membre 4
+                null, //Prénom du membre 4
                 null, //Email du membre 4
-                null, //Prénom et nom du membre 5
+                null, //Nom du membre 5
+                null, //Prénom du membre 5
                 null, //Email du membre 5
                 null,
                 $labo->getObjetId()

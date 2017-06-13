@@ -50,7 +50,7 @@ class AjaxController extends Controller
             if (empty($file) || empty($type) || empty($etab) || $file->getError() > 0) {
 
                 if (empty($file)) {
-                    $res['msg'] = 'Le champ obligatoire "fichier csv" est manquant';
+                    $res['msg'] = 'Le champ obligatoire "fichier" est manquant';
                 } else if (empty($type)) {
                     $res['msg'] = 'Le champ obligatoire "type" est manquant';
                 } else if (empty($etab)) {

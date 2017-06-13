@@ -16,6 +16,7 @@ use AppBundle\Entity\Formation;
 use AppBundle\Entity\Localisation;
 use AppBundle\Entity\Metier3;
 use AppBundle\Entity\Tag;
+use AppBundle\Entity\Membre;
 use AppBundle\Entity\Discipline;
 
 class ImportService
@@ -36,7 +37,7 @@ class ImportService
     //nombre collonnes requis pour un fichier de type  formations
     const REQUIRED_NUMBER_1 = 57;
     //nombre collonnes requis pour un fichier de type laboratoires
-    const REQUIRED_NUMBER_2 = 73;
+    const REQUIRED_NUMBER_2 = 78;
     const TYPE_FORMATION = 'F';
     const TYPE_LABO = 'L';
     const COMMIT_STEP = 5;
@@ -181,7 +182,6 @@ class ImportService
                     $formattedData['formation']['objet_id']
                     ) = array_map('trim', $data);
             } else if ($this->type == self::TYPE_LABO) {
-                //TODO for Labo
                 list(
                     $formattedData['etablissement']['code'],
                     $formattedData['etablissement']['nom'],
@@ -245,15 +245,20 @@ class ImportService
                     $formattedData['axe']['nom_7'],
                     $formattedData['equipement']['nom'], //avec ;
                     $formattedData['labo']['code_interne'],
-                    $formattedData['membre']['nom_prenom_1'],
+                    $formattedData['membre']['nom_1'],
+                    $formattedData['membre']['prenom_1'],
                     $formattedData['membre']['email_1'],
-                    $formattedData['membre']['nom_prenom_2'],
+                    $formattedData['membre']['nom_2'],
+                    $formattedData['membre']['prenom_2'],
                     $formattedData['membre']['email_2'],
-                    $formattedData['membre']['nom_prenom_3'],
+                    $formattedData['membre']['nom_3'],
+                    $formattedData['membre']['prenom_3'],
                     $formattedData['membre']['email_3'],
-                    $formattedData['membre']['nom_prenom_4'],
+                    $formattedData['membre']['nom_4'],
+                    $formattedData['membre']['prenom_4'],
                     $formattedData['membre']['email_4'],
-                    $formattedData['membre']['nom_prenom_5'],
+                    $formattedData['membre']['nom_5'],
+                    $formattedData['membre']['prenom_5'],
                     $formattedData['membre']['email_5'],
                     ,
                     $formattedData['labo']['objet_id']
@@ -383,7 +388,7 @@ class ImportService
                 $formattedData['labo']['url_1'] = $data['S'];
                 $formattedData['labo']['url_2'] = $data['T'];
                 $formattedData['labo']['url_3'] = $data['U'];
-                $formattedData['labo']['mailContact'] = $data['V'];
+                $formattedData['labo']['mailContact'] = $data['V'];//multi-valeurs separes par ;
                 $formattedData['ed']['nom'] = $data['W']; // multi-valeurs separes par ;
                 /* domaine_sise_1 X */
                 $formattedData['discipline']['abreviation_sise_1'] = $data['Y']; /*type SISE*/
@@ -424,18 +429,23 @@ class ImportService
                 $formattedData['axe']['nom_7'] = $data['BH'];
                 $formattedData['equipement']['nom'] = $data['BI']; // TODO multi-valeurs separes par ;
                 $formattedData['labo']['code_interne'] = $data['BJ']; //Code interne d'UR
-                $formattedData['membre']['nom_prenom_1'] = $data['BK'];
-                $formattedData['membre']['email_1'] = $data['BL'];
-                $formattedData['membre']['nom_prenom_2'] = $data['BM'];
-                $formattedData['membre']['email_2'] = $data['BN'];
-                $formattedData['membre']['nom_prenom_3'] = $data['BO'];
-                $formattedData['membre']['email_3'] = $data['BP'];
-                $formattedData['membre']['nom_prenom_4'] = $data['BQ'];
-                $formattedData['membre']['email_4'] = $data['BR'];
-                $formattedData['membre']['nom_prenom_5'] = $data['BS'];
-                $formattedData['membre']['email_5'] = $data['BT'];
+                $formattedData['membre']['nom_1'] = $data['BK'];
+                $formattedData['membre']['prenom_1'] = $data['BL'];
+                $formattedData['membre']['email_1'] = $data['BM'];
+                $formattedData['membre']['nom_2'] = $data['BN'];
+                $formattedData['membre']['prenom_2'] = $data['BO'];
+                $formattedData['membre']['email_2'] = $data['BP'];
+                $formattedData['membre']['nom_3'] = $data['BQ'];
+                $formattedData['membre']['prenom_3'] = $data['BR'];
+                $formattedData['membre']['email_3'] = $data['BS'];
+                $formattedData['membre']['nom_4'] = $data['BT'];
+                $formattedData['membre']['prenom_4'] = $data['BU'];
+                $formattedData['membre']['email_4'] = $data['BV'];
+                $formattedData['membre']['nom_5'] = $data['BW'];
+                $formattedData['membre']['prenom_5'] = $data['BX'];
+                $formattedData['membre']['email_5'] = $data['BY'];
                 //saute collonne
-                $formattedData['labo']['objet_id'] = $data['BV'];
+                $formattedData['labo']['objet_id'] = $data['CA'];
             }
         } else {
             return false;
@@ -526,16 +536,18 @@ class ImportService
         return $valid;
     }
 
-    public function checkLaboEmailData($email, $line)
+    public function checkLaboEmailData($data, $line)
     {
         $valid = true;
-
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $msg = sprintf('Ln %d : Le format d\'email "%s" n\'est pas valide.', $line, $email);
-            $this->log->warning($msg);
-            $valid = false;
+        // peut etre multivaleur separe par;
+        $emails = explode(';', $data);
+        foreach ($emails as $email) {
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $msg = sprintf('Ln %d : Le format d\'email "%s" n\'est pas valide.', $line, $email);
+                $this->log->warning($msg);
+                $valid = false;
+            }
         }
-
         return $valid;
     }
 
@@ -759,6 +771,8 @@ class ImportService
     {
         foreach ($formattedData as $line => $data) {
             try {
+                $dateTime = new \DateTime();
+
                 $labo = new Labo();
                 $labo->addEtablissement($this->etablissement);
 
@@ -773,7 +787,7 @@ class ImportService
                 $labo->setCode($data['labo']['code']);
                 $labo->setNom($data['labo']['nom']);
                 $labo->setSigle($data['labo']['sigle']);
-                $labo->setEtabExt($data['labo']['etab_ext']); //TODO multi val ;
+                $labo->setEtabExt($data['labo']['etab_ext']);
                 $labo->setUrl1($data['labo']['url_1']);
                 $labo->setUrl2($data['labo']['url_2']);
                 $labo->setUrl3($data['labo']['url_3']);
@@ -786,8 +800,8 @@ class ImportService
                 }
 
                 $labo->setCodeInterne($data['labo']['code_interne']);
-                $labo->setDateCreation(new \DateTime());
-                $labo->setLastUpdate(new \DateTime());
+                $labo->setDateCreation($dateTime);
+                $labo->setLastUpdate($dateTime);
 
                 //Localisation
                 $localisations = $this->formatLocalisationData($data['localisation']);
@@ -830,7 +844,32 @@ class ImportService
                         $labo->addDiscipline($discipline);
                     }
 
-                    //membre TODO
+                    //membre
+                    $membreNom = 'nom_' . $i;
+                    $membrePrenom = 'prenom_' . $i;
+                    $membreMail = 'mail_' . $i;
+                    $membre_bdd = false;
+                    if (!empty($data['metier'][$membreNom] && $data['metier'][$membrePrenom] && $data['metier'][$membreMail])) {
+                        $membre_bdd = $this->em
+                            ->getRepository('AppBundle:Membre')
+                            ->findOneBy(array('nom' => $data['metier'][$membreNom], 'prenom' => $data['metier'][$membrePrenom], 'mail' => $data['metier'][$membreMail]));
+                    }
+                    if (!$membre_bdd) {
+                        if (!empty($data['metier'][$membreNom] || $data['metier'][$membrePrenom] || $data['metier'][$membreMail])) {
+                            $membre = new Membre();
+                            $membre->setNom($data['metier'][$membreNom]);
+                            $membre->setPrenom($data['metier'][$membrePrenom]);
+                            $membre->setMail($data['metier'][$membreMail]);
+                            $membre->setDateCreation($dateTime);
+                            $membre->setLastUpdate($dateTime);
+                            $this->em->persist($membre);
+                            $labo->addMembre($membre);
+                        }
+                    } else {
+                        $labo->addMembre($membre_bdd);
+                        $membre_bdd->setLastUpdate($dateTime);
+                        $this->em->persist($membre_bdd);
+                    }
                 }
 
                 //Tags
