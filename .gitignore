@@ -16,6 +16,7 @@
 /web/bundles/
 .DS_Store
 .idea/workspace.xml
+/upload/*
 
 
 
