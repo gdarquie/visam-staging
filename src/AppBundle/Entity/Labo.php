@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Labo
  *
- * @ORM\Table(name="labo")
+ * @ORM\Table(name="laboratoire")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\LaboRepository")
  */
 class Labo
@@ -17,7 +17,7 @@ class Labo
     /**
      * @var integer
      *
-     * @ORM\Column(name="labo_id", type="integer")
+     * @ORM\Column(name="laboratoire_id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -103,7 +103,7 @@ class Labo
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Thesaurus")
      * @ORM\JoinTable(name="laboratoire_has_theme",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
+     *     @ORM\JoinColumn(name="laboratoire_id", referencedColumnName="laboratoire_id")
      *   },
      *   inverseJoinColumns={
      *     @ORM\JoinColumn(name="thesaurus_id", referencedColumnName="thesaurus_id")
@@ -188,12 +188,12 @@ class Labo
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Membre", inversedBy="labo", cascade= {"persist"})
-     * @ORM\JoinTable(name="membre_has_labo",
+     * @ORM\JoinTable(name="participant_has_laboratoire",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
+     *     @ORM\JoinColumn(name="laboratoire_id", referencedColumnName="laboratoire_id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="membre_id", referencedColumnName="membre_id")
+     *     @ORM\JoinColumn(name="participant_id", referencedColumnName="participant_id")
      *   }
      * )
      */
@@ -203,9 +203,9 @@ class Labo
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag", inversedBy="labo", cascade= {"persist"})
-     * @ORM\JoinTable(name="labo_has_tag",
+     * @ORM\JoinTable(name="laboratoire_has_tag",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
+     *     @ORM\JoinColumn(name="laboratoire_id", referencedColumnName="laboratoire_id")
      *   },
      *   inverseJoinColumns={
      *     @ORM\JoinColumn(name="tag_id", referencedColumnName="tag_id")
@@ -232,9 +232,9 @@ class Labo
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Formation", inversedBy="labo")
-     * @ORM\JoinTable(name="labo_has_formation",
+     * @ORM\JoinTable(name="laboratoire_has_formation",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
+     *     @ORM\JoinColumn(name="laboratoire_id", referencedColumnName="laboratoire_id")
      *   },
      *   inverseJoinColumns={
      *     @ORM\JoinColumn(name="formation_id", referencedColumnName="formation_id")
@@ -256,9 +256,9 @@ class Labo
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Discipline")
-     * @ORM\JoinTable(name="labo_has_cnu",
+     * @ORM\JoinTable(name="laboratoire_has_cnu",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
+     *     @ORM\JoinColumn(name="laboratoire_id", referencedColumnName="laboratoire_id")
      *   },
      *   inverseJoinColumns={
      *     @ORM\JoinColumn(name="discipline_id", referencedColumnName="discipline_id")
@@ -277,9 +277,9 @@ class Labo
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Discipline")
-     * @ORM\JoinTable(name="labo_has_sise",
+     * @ORM\JoinTable(name="laboratoire_has_sise",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
+     *     @ORM\JoinColumn(name="laboratoireo_id", referencedColumnName="laboratoire_id")
      *   },
      *   inverseJoinColumns={
      *     @ORM\JoinColumn(name="discipline_id", referencedColumnName="discipline_id")
@@ -299,9 +299,9 @@ class Labo
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Discipline")
-     * @ORM\JoinTable(name="labo_has_hceres",
+     * @ORM\JoinTable(name="laboratoire_has_hceres",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
+     *     @ORM\JoinColumn(name="laboratoire_id", referencedColumnName="laboratoire_id")
      *   },
      *   inverseJoinColumns={
      *     @ORM\JoinColumn(name="discipline_id", referencedColumnName="discipline_id")
@@ -328,9 +328,9 @@ class Labo
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Equipement", inversedBy="labo", cascade= {"persist"})
-     * @ORM\JoinTable(name="labo_has_equipement",
+     * @ORM\JoinTable(name="laboratoire_has_equipement",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
+     *     @ORM\JoinColumn(name="laboratoire_id", referencedColumnName="laboratoire_id")
      *   },
      *   inverseJoinColumns={
      *     @ORM\JoinColumn(name="equipement_id", referencedColumnName="equipement_id")
@@ -343,12 +343,12 @@ class Labo
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Ed", inversedBy="labo")
-     * @ORM\JoinTable(name="ed_has_labo",
+     * @ORM\JoinTable(name="ecole_doctorale_has_laboratoire",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
+     *     @ORM\JoinColumn(name="laboratoire_id", referencedColumnName="laboratoire_id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="ed_id", referencedColumnName="ed_id")
+     *     @ORM\JoinColumn(name="ecole_doctorale_id", referencedColumnName="ecole_doctorale_id")
      *   }
      * )
      */
@@ -359,9 +359,9 @@ class Labo
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Axe", inversedBy="labo", cascade= {"persist"})
-     * @ORM\JoinTable(name="labo_has_axe",
+     * @ORM\JoinTable(name="laboratoire_has_axe",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
+     *     @ORM\JoinColumn(name="laboratoire_id", referencedColumnName="laboratoire_id")
      *   },
      *   inverseJoinColumns={
      *     @ORM\JoinColumn(name="axe_id", referencedColumnName="axe_id")

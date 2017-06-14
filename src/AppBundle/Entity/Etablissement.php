@@ -250,12 +250,12 @@ class Etablissement
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Labo", inversedBy="etablissement", cascade= {"persist"})
-     * @ORM\JoinTable(name="etablissement_has_labo",
+     * @ORM\JoinTable(name="etablissement_has_laboratoire",
      *   joinColumns={
      *     @ORM\JoinColumn(name="etablissement_id", referencedColumnName="etablissement_id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
+     *     @ORM\JoinColumn(name="laboratoire_id", referencedColumnName="laboratoire_id")
      *   }
      * )
      */
@@ -282,12 +282,12 @@ class Etablissement
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Ed", inversedBy="etablissement")
-     * @ORM\JoinTable(name="etablissement_has_ed",
+     * @ORM\JoinTable(name="etablissement_has_ecole_doctorale",
      *   joinColumns={
      *     @ORM\JoinColumn(name="etablissement_id", referencedColumnName="etablissement_id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="ed_id", referencedColumnName="ed_id")
+     *     @ORM\JoinColumn(name="ecole_doctorale_id", referencedColumnName="ecole_doctorale_id")
      *   }
      * )
      */

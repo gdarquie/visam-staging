@@ -180,12 +180,12 @@ class Formation
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Membre", inversedBy="formation", cascade= {"persist"})
-     * @ORM\JoinTable(name="membre_has_formation",
+     * @ORM\JoinTable(name="participant_has_formation",
      *   joinColumns={
      *     @ORM\JoinColumn(name="formation_id", referencedColumnName="formation_id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="membre_id", referencedColumnName="membre_id")
+     *     @ORM\JoinColumn(name="participant_id", referencedColumnName="participant_id")
      *   }
      * )
      */

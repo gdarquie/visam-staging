@@ -91,12 +91,12 @@ class Discipline
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Labo", inversedBy="discipline")
-     * @ORM\JoinTable(name="discipline_has_labo",
+     * @ORM\JoinTable(name="discipline_has_laboratoire",
      *   joinColumns={
      *     @ORM\JoinColumn(name="discipline_id", referencedColumnName="discipline_id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
+     *     @ORM\JoinColumn(name="laboratoire_id", referencedColumnName="laboratoire_id")
      *   }
      * )
      */
@@ -121,12 +121,12 @@ class Discipline
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Ed", inversedBy="discipline")
-     * @ORM\JoinTable(name="discipline_has_ed",
+     * @ORM\JoinTable(name="discipline_has_ecole_doctorale",
      *   joinColumns={
      *     @ORM\JoinColumn(name="discipline_id", referencedColumnName="discipline_id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="ed_id", referencedColumnName="ed_id")
+     *     @ORM\JoinColumn(name="ecole_doctorale_id", referencedColumnName="ecole_doctorale_id")
      *   }
      * )
      */
