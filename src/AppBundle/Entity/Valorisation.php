@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Valorisation
  *
- * @ORM\Table(name="valorisation", indexes={@ORM\Index(name="fk_valorisation_localisation1_idx", columns={"localisation_id"})})
+ * @ORM\Table(name="valorisation", indexes={@ORM\Index(name="fk_valorisation_localisation1_idx", columns={"adresse_id"})})
  * @ORM\Entity
  */
 class Valorisation
@@ -61,7 +61,7 @@ class Valorisation
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Localisation")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="localisation_id", referencedColumnName="localisation_id")
+     *   @ORM\JoinColumn(name="adresse_id", referencedColumnName="adresse_id")
      * })
      */
     private $localisation;
