@@ -279,7 +279,7 @@ class Labo
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Discipline")
      * @ORM\JoinTable(name="laboratoire_has_sise",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="laboratoireo_id", referencedColumnName="laboratoire_id")
+     *     @ORM\JoinColumn(name="laboratoire_id", referencedColumnName="laboratoire_id")
      *   },
      *   inverseJoinColumns={
      *     @ORM\JoinColumn(name="discipline_id", referencedColumnName="discipline_id")
