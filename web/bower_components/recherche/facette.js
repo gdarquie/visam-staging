@@ -56,7 +56,7 @@ function facette(){
 
 
           // Launch - Face
-            $.get( "/export", function( data ) {
+            $.get( "/carto/export", function( data ) {
                 settings = { 
                   items            : jQuery.parseJSON(data),
                   facets           : { 

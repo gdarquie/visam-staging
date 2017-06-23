@@ -13,7 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 class ExportController extends Controller
 {
     /**
-     * @Route("/export", name="export")
+     * @Route("/carto/export", name="export")
      */
     public function exportAction(Request $request)
     {

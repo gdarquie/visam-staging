@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Membre
  *
- * @ORM\Table(name="membre")
+ * @ORM\Table(name="participant")
  * @ORM\Entity
  */
 class Membre
@@ -17,7 +17,7 @@ class Membre
     /**
      * @var integer
      *
-     * @ORM\Column(name="membre_id", type="integer")
+     * @ORM\Column(name="participant_id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -96,9 +96,9 @@ class Membre
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Axe", inversedBy="membres")
-     * @ORM\JoinTable(name="membre_has_axe",
+     * @ORM\JoinTable(name="participant_has_axe",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="membre_id", referencedColumnName="membre_id")
+     *     @ORM\JoinColumn(name="participant_id", referencedColumnName="participant_id")
      *   },
      *   inverseJoinColumns={
      *     @ORM\JoinColumn(name="axe_id", referencedColumnName="axe_id")
@@ -112,12 +112,12 @@ class Membre
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Ed", inversedBy="membres")
-     * @ORM\JoinTable(name="membre_has_ed",
+     * @ORM\JoinTable(name="participant_has_ecole_doctorale",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="membre_id", referencedColumnName="membre_id")
+     *     @ORM\JoinColumn(name="participant_id", referencedColumnName="participant_id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="ed_id", referencedColumnName="ed_id")
+     *     @ORM\JoinColumn(name="ecole_doctorale_id", referencedColumnName="ecole_doctorale_id")
      *   }
      * )
      */
@@ -127,9 +127,9 @@ class Membre
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag", inversedBy="tag")
-     * @ORM\JoinTable(name="membre_has_tag",
+     * @ORM\JoinTable(name="participant_has_tag",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="membre_id", referencedColumnName="membre_id")
+     *     @ORM\JoinColumn(name="participant_id", referencedColumnName="participant_id")
      *   },
      *   inverseJoinColumns={
      *     @ORM\JoinColumn(name="tag_id", referencedColumnName="tag_id")

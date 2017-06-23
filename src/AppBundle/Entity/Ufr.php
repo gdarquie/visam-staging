@@ -91,12 +91,12 @@ class Ufr
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Labo", inversedBy="ufr")
-     * @ORM\JoinTable(name="ufr_has_labo",
+     * @ORM\JoinTable(name="ufr_has_laboratoire",
      *   joinColumns={
      *     @ORM\JoinColumn(name="ufr_id", referencedColumnName="ufr_id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
+     *     @ORM\JoinColumn(name="laboratoire_id", referencedColumnName="laboratoire_id")
      *   }
      * )
      */

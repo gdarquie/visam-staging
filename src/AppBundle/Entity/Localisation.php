@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Localisation
  *
- * @ORM\Table(name="localisation")
+ * @ORM\Table(name="adresse")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\LocalisationRepository")
  */
 class Localisation
@@ -114,7 +114,7 @@ class Localisation
     /**
      * @var integer
      *
-     * @ORM\Column(name="localisation_id", type="integer")
+     * @ORM\Column(name="adresse_id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -124,9 +124,9 @@ class Localisation
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Ufr", inversedBy="localisation")
-     * @ORM\JoinTable(name="localisation_has_ufr",
+     * @ORM\JoinTable(name="adresse_has_ufr",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="localisation_id", referencedColumnName="localisation_id")
+     *     @ORM\JoinColumn(name="adresse_id", referencedColumnName="adresse_id")
      *   },
      *   inverseJoinColumns={
      *     @ORM\JoinColumn(name="ufr_id", referencedColumnName="ufr_id")
@@ -139,12 +139,12 @@ class Localisation
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Labo", inversedBy="localisation")
-     * @ORM\JoinTable(name="localisation_has_labo",
+     * @ORM\JoinTable(name="adresse_has_laboratoire",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="localisation_id", referencedColumnName="localisation_id")
+     *     @ORM\JoinColumn(name="adresse_id", referencedColumnName="adresse_id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
+     *     @ORM\JoinColumn(name="laboratoire_id", referencedColumnName="laboratoire_id")
      *   }
      * )
      */
@@ -154,9 +154,9 @@ class Localisation
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Formation", inversedBy="localisation")
-     * @ORM\JoinTable(name="localisation_has_formation",
+     * @ORM\JoinTable(name="adresse_has_formation",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="localisation_id", referencedColumnName="localisation_id")
+     *     @ORM\JoinColumn(name="adresse_id", referencedColumnName="adresse_id")
      *   },
      *   inverseJoinColumns={
      *     @ORM\JoinColumn(name="formation_id", referencedColumnName="formation_id")
@@ -169,9 +169,9 @@ class Localisation
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Etablissement", inversedBy="localisation")
-     * @ORM\JoinTable(name="localisation_has_etablissement",
+     * @ORM\JoinTable(name="adresse_has_etablissement",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="localisation_id", referencedColumnName="localisation_id")
+     *     @ORM\JoinColumn(name="adresse_id", referencedColumnName="adresse_id")
      *   },
      *   inverseJoinColumns={
      *     @ORM\JoinColumn(name="etablissement_id", referencedColumnName="etablissement_id")
@@ -184,12 +184,12 @@ class Localisation
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Ed", inversedBy="localisation")
-     * @ORM\JoinTable(name="localisation_has_ed",
+     * @ORM\JoinTable(name="adresse_has_ecole_doctorale",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="localisation_id", referencedColumnName="localisation_id")
+     *     @ORM\JoinColumn(name="adresse_id", referencedColumnName="adresse_id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="ed_id", referencedColumnName="ed_id")
+     *     @ORM\JoinColumn(name="ecole_doctorale_id", referencedColumnName="ecole_doctorale_id")
      *   }
      * )
      */
