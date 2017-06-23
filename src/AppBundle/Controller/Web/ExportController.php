@@ -13,7 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 class ExportController extends Controller
 {
     /**
-     * @Route("/carto/export", name="export")
+     * @Route("/export", name="export")
      */
     public function exportAction(Request $request)
     {
@@ -46,14 +46,14 @@ class ExportController extends Controller
 //        dump($anneeCollecte);die;
 
         $query = $em->createQuery(
-            'SELECT l FROM AppBundle:Labo l WHERE l.anneeCollecte = :annee'
+            'SELECT l FROM AppBundle:Labo l JOIN l.etablissement e WHERE l.anneeCollecte = :annee AND e.active = 1'
         );
         $query->setParameter('annee', $anneeCollecte);
 //        $query->setMaxResults(10);
         $labos = $query->getResult();
 
         $query = $em->createQuery(
-            'SELECT f FROM AppBundle:Formation f WHERE f.anneeCollecte = :annee'
+            'SELECT f FROM AppBundle:Formation f JOIN f.etablissement e WHERE f.anneeCollecte = :annee AND e.active = 1'
         );
         $query->setParameter('annee', $anneeCollecte);
 //        $query->setMaxResults(10);
