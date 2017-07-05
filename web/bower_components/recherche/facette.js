@@ -1,5 +1,5 @@
 function facette(){
-    var searchVal;
+    // var searchVal;
      $(function(){
           var params = getSearchParameters();
           var visam_temlate = 
