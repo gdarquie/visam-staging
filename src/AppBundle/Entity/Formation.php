@@ -14,6 +14,16 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Formation
 {
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="formation_id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $formationId;
+
     /**
      * @var string
      *
@@ -159,14 +169,7 @@ class Formation
      */
     private $last_update;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="formation_id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $formationId;
+
 
     /**
      * @var \Doctrine\Common\Collections\Collection

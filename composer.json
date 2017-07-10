@@ -33,7 +33,8 @@
         "joetannenbaum/mr-clean": "~0.0",
         "stof/doctrine-extensions-bundle": "^1.2",
         "ensepar/html2pdf-bundle" : "~2.0",
-        "liuggio/excelbundle": "dev-master"
+        "liuggio/excelbundle": "dev-master",
+        "friendsofsymfony/elastica-bundle": "^4.0"
     },
     "repositories": [
         {
