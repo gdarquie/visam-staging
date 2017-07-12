@@ -78,7 +78,7 @@
                 {{ form_row(edit_form.code) }}
                 {{ form_row(edit_form.lien, {'label' : "Lien URL"}) }}
 
-                {% if(localisations|length>1 or is_granted('ROLE_ADMIN'))  %}
+                {% if(localisations|length>1)  %}
                     {{ form_row(edit_form.localisation,  {'label' : "Lieu(x)"}) }}
                 {% else %}
                     <div class="hide">
@@ -185,7 +185,7 @@
 
             <h3>Etablissement(s) de rattachement</h3>
 
-            {% if(etablissements|length>1 or is_granted('ROLE_ADMIN'))  %}
+            {% if(etablissements|length>1)  %}
                 {{ form_row(edit_form.etablissement, {'label' : "Etablissement(s) Hesam"}) }}
             {% else %}
                 <div class="hide">

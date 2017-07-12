@@ -15,7 +15,7 @@ class ExportController extends Controller
     /**
      * @Route("/export", name="export")
      */
-    public function exportAction(Request $request)
+    public function exportAction()
     {
 
 //        $cache = $this->get('doctrine_cache.providers.export_cache');
@@ -70,7 +70,7 @@ class ExportController extends Controller
     /**
      * @Route("/export/previz", name="export_previz")
      */
-    public function exportPrevizAction(Request $request)
+    public function exportPrevizAction()
     {
 
         $em = $this->getDoctrine()->getManager();

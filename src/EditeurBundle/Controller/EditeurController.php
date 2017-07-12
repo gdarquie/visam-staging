@@ -95,11 +95,8 @@ class EditeurController extends Controller
                 $sql = $sql." OR e.etablissementId = :etablissement".$key;
             }
         }
-//        $query = $em->createQuery(
-//            'SELECT f FROM AppBundle:Formation f INNER JOIN f.etablissement e WHERE e.etablissementId = :etablissement ORDER BY f.last_update DESC'
-//        );
-
-        $query = $em->createQuery($sql.")");
+        $sqlEnd = " ORDER BY f.last_update DESC";
+        $query = $em->createQuery($sql.")".$sqlEnd);
         $query->setParameter('annee', $annee);
         foreach ($associations as $key=>$value) {
             $query->setParameter('etablissement'.$key, $associations[$key]['id']);
@@ -119,7 +116,8 @@ class EditeurController extends Controller
                 $sql = $sql." OR e.etablissementId = :etablissement".$key;
             }
         }
-        $query = $em->createQuery($sql.")");
+        $sqlEnd = " ORDER BY l.last_update DESC";
+        $query = $em->createQuery($sql.")".$sqlEnd);
         $query->setParameter('annee', $annee);
         foreach ($associations as $key=>$value) {
             $query->setParameter('etablissement'.$key, $associations[$key]['id']);
@@ -138,7 +136,8 @@ class EditeurController extends Controller
                 $sql = $sql." OR d.edId = :ed".$key;
             }
         }
-        $query = $em->createQuery($sql.")");
+        $sqlEnd = " ORDER BY d.last_update DESC";
+        $query = $em->createQuery($sql.")".$sqlEnd);
         $query->setParameter('annee', $annee);
         foreach ($associations as $key=>$value) {
             $query->setParameter('ed'.$key, $associations[$key]['id']);

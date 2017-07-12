@@ -72,7 +72,7 @@ class CollecteController extends Controller
             $annee = $annee->format('Y');
         }
 
-        $collecte->setAnnee($annee);
+        $collecte->setAnnee($annee+1);
         $collecte->setActive(false);
         $collecte->setComplete(false);
 

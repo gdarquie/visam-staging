@@ -146,7 +146,7 @@ var searchInput = function (data) {
         console.log(returnedData);
         settings.items = name.concat(returnedData);
     } else {
-        settings.items = dataJson;
+        settings.items = data;
     }
 
 

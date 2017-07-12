@@ -87,8 +87,7 @@ function facette(){
             
               if(params.search) {
                 $("#search-input").val(params.search);
-                  searchInput();
-
+                  searchInput(jQuery.parseJSON(data));
                 $('.surligne').highlight(params.search);
               }
 
@@ -99,7 +98,6 @@ function facette(){
                 $('#search-input').keyup(function () { 
                   searchInput(jQuery.parseJSON(data));
                 });
-
 
                 $(settings.resultSelector).bind("facetedsearchresultupdate", function(){
                     $('.surligne').highlight($("#search-input").val());
@@ -146,7 +144,7 @@ var searchInput = function (data) {
     console.log(returnedData);
     settings.items = name.concat(returnedData);
   } else {
-    settings.items = dataJson;
+    settings.items = data;
   }
 
 
