@@ -78,7 +78,7 @@ class AdminController extends Controller
         //utilisateurs
         $query = $em->createQuery(
             'SELECT u FROM AppBundle:User u ORDER BY u.username DESC'
-        )->setMaxResults(10);
+        );
         $users = $query->getResult();
 
         //thesaurus
