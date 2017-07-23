@@ -504,4 +504,9 @@ class Ufr
     {
         return $this->formation;
     }
+
+    public function __toString()
+    {
+        return (string) $this->getNom();
+    }
 }

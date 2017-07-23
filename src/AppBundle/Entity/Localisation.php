@@ -36,7 +36,7 @@ class Localisation
     /**
      * @var string
      *
-     * @ORM\Column(name="long", type="string", length=255, nullable=true)
+     * @ORM\Column(name="lon", type="string", length=255, nullable=true)
      */
     private $long;
 
@@ -107,7 +107,7 @@ class Localisation
     /**
      * @var integer
      *
-     * @ORM\Column(name="type", type="integer", nullable=false)
+     * @ORM\Column(name="type", type="integer", nullable=true)
      */
     private $type;
 

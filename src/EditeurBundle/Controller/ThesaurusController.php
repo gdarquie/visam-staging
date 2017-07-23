@@ -33,7 +33,7 @@ class ThesaurusController extends Controller
             $thesaurus = $editForm->getData();
             $em = $this->getDoctrine()->getManager();
 
-            $slug = $thesaurus->getNom();
+            $slug = $thesaurus->getType();
             $thesaurus->setSlug($slug);
 
             $now = new \DateTime();
@@ -43,7 +43,7 @@ class ThesaurusController extends Controller
             $em->persist($thesaurus);
             $em->flush();
 
-            return $this->redirectToRoute('admin');
+            return $this->redirectToRoute('my_admin');
         }
 
         return $this->render('EditeurBundle:Thesaurus:new.html.twig', array(
