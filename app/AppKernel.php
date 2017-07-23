@@ -23,8 +23,7 @@ class AppKernel extends Kernel
             new ApiBundle\ApiBundle(),
             new Liuggio\ExcelBundle\LiuggioExcelBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-            new Ensepar\Html2pdfBundle\EnseparHtml2pdfBundle(),
-            new JavierEguiluz\Bundle\EasyAdminBundle\EasyAdminBundle(),
+            new Ensepar\Html2pdfBundle\EnseparHtml2pdfBundle()
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
