@@ -68,7 +68,7 @@ class ThesaurusController extends Controller
             $thesaurus = $editForm->getData();
             $em = $this->getDoctrine()->getManager();
 
-            $slug = $thesaurus->getNom();
+            $slug = $thesaurus->getType();
             $thesaurus->setSlug($slug);
 
             $now = new \DateTime();
