@@ -141,27 +141,27 @@ class StatistiquesController extends Controller
 //Disciplines des labos
 
         //récupérer tous les labos, leurs disciplines et le nombre de disciplines liées
-        $query = $em->createQuery('SELECT d as item, COUNT(f.nom) as nb, f.nom as labo, f.laboId as id FROM AppBundle:Discipline d JOIN d.labo f GROUP BY d ORDER BY nb DESC')->setMaxResults(20);
+        $query = $em->createQuery('SELECT d as item, COUNT(f.nom) as nb, f.nom as labo, f.id as id FROM AppBundle:Discipline d JOIN d.labo f GROUP BY d ORDER BY nb DESC')->setMaxResults(20);
         $allDisciplinesLabos = $query->getResult();
 
         //récupérer toutes les labos, leurs disciplines et le nombre de disciplines liées SISE
-        $query = $em->createQuery('SELECT d as item, COUNT(f.nom) as nb, f.nom as labo, f.laboId as id FROM AppBundle:Discipline d JOIN d.labo f WHERE d.type=:type GROUP BY d ORDER BY nb DESC')->setMaxResults(20);
+        $query = $em->createQuery('SELECT d as item, COUNT(f.nom) as nb, f.nom as labo, f.id as id FROM AppBundle:Discipline d JOIN d.labo f WHERE d.type=:type GROUP BY d ORDER BY nb DESC')->setMaxResults(20);
         $query->setParameter('type', 'SISE');
         $allSiseDisciplinesLabos = $query->getResult();
 
         //récupérer toutes les labos, leurs disciplines et le nombre de disciplines liées HCERES
-        $query = $em->createQuery('SELECT d as item, COUNT(f.nom) as nb, f.nom as labo, f.laboId as id FROM AppBundle:Discipline d JOIN d.labo f WHERE d.type=:type GROUP BY d ORDER BY nb DESC')->setMaxResults(20);
+        $query = $em->createQuery('SELECT d as item, COUNT(f.nom) as nb, f.nom as labo, f.id as id FROM AppBundle:Discipline d JOIN d.labo f WHERE d.type=:type GROUP BY d ORDER BY nb DESC')->setMaxResults(20);
         $query->setParameter('type', 'HCERES');
         $allHceresDisciplinesLabos = $query->getResult();
 
         //récupérer toutes les labos, leurs disciplines et le nombre de disciplines liées CNU
-        $query = $em->createQuery('SELECT d as item, COUNT(f.nom) as nb, f.nom as labo, f.laboId as id FROM AppBundle:Discipline d JOIN d.labo f WHERE d.type=:type GROUP BY d ORDER BY nb DESC')->setMaxResults(20);
+        $query = $em->createQuery('SELECT d as item, COUNT(f.nom) as nb, f.nom as labo, f.id as id FROM AppBundle:Discipline d JOIN d.labo f WHERE d.type=:type GROUP BY d ORDER BY nb DESC')->setMaxResults(20);
         $query->setParameter('type', 'CNU');
         $allCnuDisciplinesLabos = $query->getResult();
 
 
         //récupérer tous les labos, leurs disciplines et le nombre de disciplines liées NW3
-        $query = $em->createQuery('SELECT d as item, COUNT(f.nom) as nb, f.nom as labo, f.laboId as id FROM AppBundle:Discipline d JOIN d.labo f WHERE d.type=:type GROUP BY d ORDER BY nb DESC')->setMaxResults(20);
+        $query = $em->createQuery('SELECT d as item, COUNT(f.nom) as nb, f.nom as labo, f.id as id FROM AppBundle:Discipline d JOIN d.labo f WHERE d.type=:type GROUP BY d ORDER BY nb DESC')->setMaxResults(20);
         $query->setParameter('type', 'NW3');
         $allNw3DisciplinesLabos = $query->getResult();
 

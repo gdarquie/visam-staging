@@ -130,6 +130,11 @@ class FormationController extends Controller
             $em->persist($formation);
             $em->flush();
 
+            $this->addFlash(
+                'success',
+                "Une nouvelle formation a bien été créée!"
+            );
+
             return $this->redirectToRoute('editeur');
         }
 
@@ -225,6 +230,11 @@ class FormationController extends Controller
 
                 $em->persist($formation);
                 $em->flush();
+
+                $this->addFlash(
+                    'success',
+                    "Les changements ont été sauvegardés!"
+                );
 
                 return $this->redirectToRoute('formation', array('id' => $formation->getFormationId()));
 

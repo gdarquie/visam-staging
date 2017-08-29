@@ -98,23 +98,53 @@ stof_doctrine_extensions:
             sluggable: true
 
 
-## Elastica
-#fos_elastica:
-#    clients:
-#        default: { host: localhost, port: 9200 }
-#    indexes:
-#        visam:
-#            types:
-#                formations:
-#                    mappings:
-#                        formationId: { type: integer }
-#                        nom: {type:keyword}
-#                        theme: {type:keyword}
-#                    persistence:
-#                        # the driver can be orm, mongodb, phpcr or propel
-#                        # listener and finder are not supported by
-#                        # propel and should be removed
-#                        driver: orm
-#                        model: AppBundle\Entity\Formation
-#                        provider: ~
-#                        finder: ~
+# Elastica
+fos_elastica:
+    clients:
+        default: { host: localhost, port: 9200 }
+    indexes:
+        visam:
+            types:
+                discipline:
+                    mappings:
+                        id:
+                            type: integer
+                        nom:
+                            type: keyword
+                        labo:
+                            type: nested
+                            properties:
+                                nom:
+                                    type: string
+                                responsable:
+                                    type: string
+                                etablissement:
+                                     type: nested
+                                     properties:
+                                        nom:
+                                            type: string
+                                discipline:
+                                     type: nested
+                                     properties:
+                                        nom:
+                                            type: string
+                        formation:
+                            type: nested
+                            properties:
+                                nom:
+                                    type: string
+                                etablissement:
+                                     type: nested
+                                     properties:
+                                        nom:
+                                            type: string
+
+
+                    persistence:
+                        # the driver can be orm, mongodb, phpcr or propel
+                        # listener and finder are not supported by
+                        # propel and should be removed
+                        driver: orm
+                        model: AppBundle\Entity\Discipline
+                        provider: ~
+                        finder: ~

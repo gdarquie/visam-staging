@@ -106,18 +106,18 @@ class DefaultController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $laboratoire = $em->getRepository('AppBundle:Labo')->findOneByLaboId($id);
+        $laboratoire = $em->getRepository('AppBundle:Labo')->findOneById($id);
         // $labos = $em->getRepository('AppBundle:Labo')->findAll();
         $query = $em->createQuery('SELECT l FROM AppBundle:Labo l');
         $labos = $query->setMaxResults(3)->getResult();
 
-        $query = $em->createQuery('SELECT h.nom as nom, COUNT(h) as nb FROM AppBundle:Discipline d JOIN d.labo f JOIN d.hesamette h WHERE f.laboId = :id GROUP BY h.nom ORDER BY nb DESC');
+        $query = $em->createQuery('SELECT h.nom as nom, COUNT(h) as nb FROM AppBundle:Discipline d JOIN d.labo f JOIN d.hesamette h WHERE f.id = :id GROUP BY h.nom ORDER BY nb DESC');
         $query->setParameter('id', $id);
         $hesamettes = $query->getResult();
 
         //$nbEtud = $query->setMaxResults(1)->getOneOrNullResult();
 
-        $query = $em->createQuery('SELECT l FROM AppBundle:Axe l JOIN l.labo a WHERE a.laboId = :labo');
+        $query = $em->createQuery('SELECT l FROM AppBundle:Axe l JOIN l.labo a WHERE a.id = :labo');
         $query->setParameter('labo', $id);
         $axes = $query->getResult();
 
@@ -126,7 +126,7 @@ class DefaultController extends Controller
 
         //Récupération de l'hésamette la plus importante pour le labo en question
 
-        $query = $em->createQuery('SELECT COUNT(h.nom) as nb, h.nom as nom FROM AppBundle:Labo l JOIN l.discipline d JOIN d.hesamette h WHERE l.laboId = :id GROUP BY h.nom ORDER BY nb DESC');
+        $query = $em->createQuery('SELECT COUNT(h.nom) as nb, h.nom as nom FROM AppBundle:Labo l JOIN l.discipline d JOIN d.hesamette h WHERE l.id = :id GROUP BY h.nom ORDER BY nb DESC');
         $query->setParameter('id', $id);
         $hesamettes_rebond = $query->setMaxResults(1)->getResult();
 //        $hesamette_rebond = $hesamettes_rebond[0]['nom'];

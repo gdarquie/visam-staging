@@ -304,22 +304,22 @@ class ExportService
 
         foreach ($labos as $index => $labo) {
 
-            $laboId = $labo->getLaboId();
-            $localisations = $this->getLocalisations($laboId);
+            $id = $labo->getId();
+            $localisations = $this->getLocalisations($id);
 
             //plusieurs localisations sont possibles pour une formation
             //afficher dans chaque champ les valeurs des localisations separes par une point virgule
             $localisationsFieldsData = $this->getLocalisationFields($localisations);
-            $tag = $this->getLaboTagField($laboId);
-            $equipement = $this->getLaboEquipementField($laboId);
+            $tag = $this->getLaboTagField($id);
+            $equipement = $this->getLaboEquipementField($id);
 
             //TODO OK pour version 1, pour version 2 il y a 3  tables des disciplines, alors pour la collecte 2018 il faut adapter export
-            $disciplinesSISE = $this->em->getRepository('AppBundle:Discipline')->findDisciplinesByLaboAndType($laboId, 'SISE');
-            $disciplinesCNU = $this->em->getRepository('AppBundle:Discipline')->findDisciplinesByLaboAndType($laboId, 'CNU');
-            $disciplinesHCERES = $this->em->getRepository('AppBundle:Discipline')->findDisciplinesByLaboAndType($laboId, 'HCERES');
+            $disciplinesSISE = $this->em->getRepository('AppBundle:Discipline')->findDisciplinesByLaboAndType($id, 'SISE');
+            $disciplinesCNU = $this->em->getRepository('AppBundle:Discipline')->findDisciplinesByLaboAndType($id, 'CNU');
+            $disciplinesHCERES = $this->em->getRepository('AppBundle:Discipline')->findDisciplinesByLaboAndType($id, 'HCERES');
 
-            $ed = $this->getEcolesDoctorales($laboId);
-            $axes = $this->em->getRepository('AppBundle:Axe')->findAllAxe($laboId);
+            $ed = $this->getEcolesDoctorales($id);
+            $axes = $this->em->getRepository('AppBundle:Axe')->findAllAxe($id);
             //var_dump($axes); die;
 
 
@@ -637,29 +637,29 @@ class ExportService
         return join(";", $tagField);
     }
 
-    public function getLaboTagField($laboId) {
+    public function getLaboTagField($id) {
 
         $field = [];
-        $res = $this->em->getRepository('AppBundle:Tag')->getAllTagsForLabo($laboId);
+        $res = $this->em->getRepository('AppBundle:Tag')->getAllTagsForLabo($id);
         foreach ($res as $val) {
             $field[] = $val['nom'];
         }
         return join(";", $field);
     }
 
-    public function getEcolesDoctorales($laboId) {
+    public function getEcolesDoctorales($id) {
 
         $field = [];
-        $res = $this->em->getRepository('AppBundle:Ed')->getAllEcolesDoctorales($laboId);
+        $res = $this->em->getRepository('AppBundle:Ed')->getAllEcolesDoctorales($id);
         foreach ($res as $val) {
             $field[] = $val['code'];
         }
         return join(";", $field);
     }
 
-    public function getLaboEquipementField($laboId) {
+    public function getLaboEquipementField($id) {
         $field = [];
-        $res = $this->em->getRepository('AppBundle:Equipement')->getAllEquipements($laboId);
+        $res = $this->em->getRepository('AppBundle:Equipement')->getAllEquipements($id);
         foreach ($res as $val) {
             $field[] = $val['nom'];
         }

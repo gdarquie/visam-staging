@@ -93,7 +93,7 @@ Effectif(s) : {{formation.effectif}}|
                         <div class="card laboratoire petit" >
                             <div class="card-content">
                                 <span class="etablissement"><span>{{labo.type}}</span> - {{labo.code}}</span>
-                                <h5><a href="{{ path('labo' ,{"id" : labo.laboId}) }}">{{labo.nom}}</a></h5>
+                                <h5><a href="{{ path('labo' ,{"id" : labo.id}) }}">{{labo.nom}}</a></h5>
                                 {# <span> {{labo.etablissement}}</span> #}
                                 <ul class="list-thematique" >
                                     {% for discipline in labo.discipline|slice(0,3)%}

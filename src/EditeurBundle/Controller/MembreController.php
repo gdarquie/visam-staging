@@ -65,7 +65,7 @@ class MembreController extends Controller
             $em->persist($membre);
             $em->flush();
 
-            return $this->redirectToRoute('labo', array('id' => $membre->getLaboId() ));
+            return $this->redirectToRoute('labo', array('id' => $membre->getId() ));
         }
 
         return $this->render('EditeurBundle:Membre:edit.html.twig', array(

@@ -120,7 +120,7 @@ class LaboratoireController extends Controller
             $em->flush();
 
             //Création et set de l'objetId
-            $lastId = $laboratoire->getLaboId();
+            $lastId = $laboratoire->getId();
             $laboratoire->setObjetId("L".$lastId);
 
 //            dump($laboratoire);die();
@@ -128,6 +128,11 @@ class LaboratoireController extends Controller
 
             $em->persist($laboratoire);
             $em->flush();
+
+            $this->addFlash(
+                'success',
+                "Un nouveau laboratoire a bien été créée!"
+            );
 
             return $this->redirectToRoute('editeur');
         }
@@ -173,8 +178,8 @@ class LaboratoireController extends Controller
         //vérification que l'utilisateur peut modifier cette formation
 
         //Sélection de tous les établissements rattachés à la formation
-        $query = $em->createQuery("SELECT e.etablissementId as id FROM AppBundle:Etablissement e JOIN e.labo f WHERE f.laboId = :id");
-        $query->setParameter('id', $laboratoire->getLaboId());
+        $query = $em->createQuery("SELECT e.etablissementId as id FROM AppBundle:Etablissement e JOIN e.labo f WHERE f.id = :id");
+        $query->setParameter('id', $laboratoire->getId());
         $etab_user = $query->getResult();
 
         //vérification que les établissement de la formation sont bien dans ceux du user
@@ -229,7 +234,12 @@ class LaboratoireController extends Controller
                 $em->persist($laboratoire);
                 $em->flush();
 
-                return $this->redirectToRoute('labo', array('id' => $laboratoire->getLaboId()));
+                $this->addFlash(
+                    'success',
+                    "Les changements ont été sauvegardés!"
+                );
+
+                return $this->redirectToRoute('labo', array('id' => $laboratoire->getId()));
             }
 
             return $this->render('EditeurBundle:Labo:edit.html.twig', array(
@@ -242,7 +252,7 @@ class LaboratoireController extends Controller
         }
         else{
             $this->addFlash('success', "Vous ne pouvez modifier ce laboratoire, vous n'êtes pas rattaché à l'établissement auquel il appartient");
-            return $this->redirectToRoute('labo', array('id' => $laboratoire->getLaboId()));
+            return $this->redirectToRoute('labo', array('id' => $laboratoire->getId()));
         }
     }
 
@@ -250,10 +260,10 @@ class LaboratoireController extends Controller
     /**
      * Fonction pour effacer via ajax un labo
      *
-     * @Route("/delete/{laboId}", name="editeur_laboratoire_ajax_delete")
+     * @Route("/delete/{id}", name="editeur_laboratoire_ajax_delete")
      * @Method("DELETE")
      */
-    public function deleteAjaxAction($laboId)
+    public function deleteAjaxAction($id)
     {
 
         $em = $this->getDoctrine()->getManager();
@@ -263,7 +273,7 @@ class LaboratoireController extends Controller
 
             /** @var Labo $labo */
             $labo = $em->getRepository('AppBundle:Labo')
-                ->find($laboId);
+                ->find($id);
             $em->remove($labo);
             $em->flush();
         }
@@ -308,7 +318,7 @@ class LaboratoireController extends Controller
     private function createDeleteForm(Labo $labo)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('editeur_laboratoire_delete', array('id' => $labo->getLaboId())))
+            ->setAction($this->generateUrl('editeur_laboratoire_delete', array('id' => $labo->getId())))
             ->setMethod('DELETE')
             ->getForm()
             ;

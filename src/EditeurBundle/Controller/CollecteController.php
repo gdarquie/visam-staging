@@ -283,14 +283,14 @@ class CollecteController extends Controller
             //Duplication de chaque élément
             foreach ($labos as $labo) {
 
-                $id = $labo->getLaboId();
+                $id = $labo->getId();
                 $labo->setAnneeCollecte($anneeNouvelleCollecte);
                 $labo->setDateCreation($now);
                 $labo->setLastUpdate($now);
 
                 //retrouver l'établissement du labo
                 $query = $em->createQuery(
-                    'SELECT e.etablissementId FROM AppBundle:Etablissement e JOIN e.labo l WHERE l.laboId = :id '
+                    'SELECT e.etablissementId FROM AppBundle:Etablissement e JOIN e.labo l WHERE l.id = :id '
                 );
                 $query->setParameter('id', $id);
                 $etablissements = $query->getResult();
@@ -305,7 +305,7 @@ class CollecteController extends Controller
                 //Correction des disciplines
 
                 $query = $em->createQuery(
-                    'SELECT d FROM AppBundle:Discipline d JOIN d.labo l WHERE d.type = :type AND l.laboId = :id'
+                    'SELECT d FROM AppBundle:Discipline d JOIN d.labo l WHERE d.type = :type AND l.id = :id'
                 );
                 $query->setParameter('type', 'cnu');
                 $query->setParameter('id', $id);
@@ -313,7 +313,7 @@ class CollecteController extends Controller
                 $labo->setCnu($cnu);
 
                 $query = $em->createQuery(
-                    'SELECT d FROM AppBundle:Discipline d JOIN d.labo l WHERE d.type = :type AND l.laboId = :id'
+                    'SELECT d FROM AppBundle:Discipline d JOIN d.labo l WHERE d.type = :type AND l.id = :id'
                 );
                 $query->setParameter('type', 'sise');
                 $query->setParameter('id', $id);
@@ -321,7 +321,7 @@ class CollecteController extends Controller
                 $labo->setSise($sise);
 
                 $query = $em->createQuery(
-                    'SELECT d FROM AppBundle:Discipline d JOIN d.labo l WHERE d.type = :type AND l.laboId = :id'
+                    'SELECT d FROM AppBundle:Discipline d JOIN d.labo l WHERE d.type = :type AND l.id = :id'
                 );
                 $query->setParameter('type', 'hceres');
                 $query->setParameter('id', $id);

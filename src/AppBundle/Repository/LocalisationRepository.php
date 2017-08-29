@@ -26,13 +26,13 @@ class LocalisationRepository extends EntityRepository
         return $query;
     }
 
-    public function findAllLocalisationsLabo($laboId)
+    public function findAllLocalisationsLabo($id)
     {
 
         $qb = $this->createQueryBuilder('l')
             ->leftJoin('l.labo', 'f')
-            ->where('f.laboId = :labo')
-            ->setParameter('labo', $laboId);
+            ->where('f.id = :labo')
+            ->setParameter('labo', $id);
 
         $query = $qb->getQuery()->getArrayResult();
 

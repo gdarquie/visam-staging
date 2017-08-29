@@ -7,10 +7,10 @@
 
 {% block body %}
 
-    <section class="container large row">
+    <section class="container large row" id="admin">
         <h1 class="center">Administration de la plateforme</h1>
 
-        <div class="col s3">
+        <div class="col m3" id="menu_admin">
             <article>
 
                 <ul class="collection with-header">
@@ -25,13 +25,14 @@
                     <li class="collection-item"><a href="#etablissement">Gestion des établissements</a></li>
                     <li class="collection-item"><a href="#utilisateur">Gestion des utilisateurs</a></li>
                     <li class="collection-item"><a href="#thesaurus">Gestion du thésaurus</a></li>
+                    <li class="collection-item"><a href="#localisation">Gestion des localisations</a></li>
                     <li class="collection-item"><a href="#collecte">Gestion des collectes</a></li>
                     {#<li class="collection-item"><a href="#collecte">Gestion de l'import</a></li>#}
                 </ul>
             </article>
         </div>
 
-        <div class="col s9">
+        <div class="col m9" id="page_admin">
 
             <!-- Dernières données entrées -->
 
@@ -120,7 +121,7 @@
                         <li class="collection-header"><h4>5 derniers laboratoires édités</h4></li>
                         {% for item in labos  %}
                             <li class="collection-item avatar js-labo-item">
-                                <a href="{{ path('editeur_laboratoire_edit', {'id': item.laboId } ) }}" >
+                                <a href="{{ path('editeur_laboratoire_edit', {'id': item.id } ) }}" >
                                     {% if item.checkGeneral and item.checkContact and item.checkEtab and item.checkEtab and item.checkEffectifs and item.checkDescription %}
                                         <i class="material-icons circle green">done</i>
                                     {% else %}
@@ -328,39 +329,100 @@
 
             </article>
 
-            <article class="card" id="thesaurus">
-                <h3>Gérer le thésaurus</h3>
+
+            <!-- thésaurus -->
+
+            <div id="thesaurus">
+
+                <article class="card">
+                    <h3>Gérer le thésaurus</h3>
+
+                    <div class="row">
+                        <div class=" thesaurus col s7">
+                        {% for item in thesaurus  %}
+
+                            <div class="description_container">
+                                <a href="{{ path('admin_thesaurus', {'slug': item.slug}) }}">
+                                    <span class="description valign-wrapper thesaurus-item">
+                                         {{ item.type }}
+                                        <i class="material-icons">link</i>
+                                    </span>
+                                </a>
+                            </div>
+                        {% endfor %}
+
+                            <p>Pour créer un nouveau type de thésaurus, il suffit de créer un nouvel item avec le type souhaité. Le type sera automatiquement ajouté à la liste ci-dessus.</p>
+
+                        </div>
+
+
+
+                        <div class=" col s5">
+                            <div class="add_item_btn right">
+                                <a href="{{ path('editeur_thesaurus_new') }}"><span class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></span>
+                                </a>
+                                <span class="legend_btn">Ajouter un élément</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                </div>
+
+            <div>
+
+
+
+            <!-- localisations -->
+
+            <article class="card" id="localisation">
+
+                <h3>Gérer les localisations</h3>
 
                 <div class="row">
-                    <div class=" thesaurus col s7">
-                    {% for item in thesaurus  %}
 
-                        <div class="description_container">
-                            <a href="{{ path('admin_thesaurus', {'slug': item.slug}) }}">
-                                <span class="description valign-wrapper thesaurus-item">
-                                     {{ item.type }}
-                                    <i class="material-icons">link</i>
-                                </span>
-                            </a>
-                        </div>
-                    {% endfor %}
+                    <ul class="collection with-header">
 
-                        <p>Pour créer un nouveau type de thésaurus, il suffit de créer un nouvel item avec le type souhaité. Le type sera automatiquement ajouté à la liste ci-dessus.</p>
+                        <li class="collection-header"><h4>5 dernières formations éditées</h4></li>
 
+                        {% for item in localisations  %}
+
+                            <li class="collection-item avatar js-formation-item">
+                                <a href="{{ path('editeur_localisation_edit', {'id': item.localisationId } ) }}" >
+                                    <i class="material-icons circle grey">done</i>
+                                    <span class="title">
+                                    {% if item.nom != '' %}
+                                        {{ item.nom }}
+
+                                    {% else %}
+                                        Sans titre
+                                    {%  endif %}
+                                    </span>
+
+                                    <span class="lastmodif">dernière modification le <i>{{ item.timestamp|date() }}</i></span>
+
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                    <div>
+                        <p class="center comment"><a href="{{ path('admin_localisations') }}">Voir toutes les données localisations</a></p>
                     </div>
 
-
-
-                    <div class=" col s5">
+                    <div class=" col s12">
                         <div class="add_item_btn right">
-                            <a href="{{ path('editeur_thesaurus_new') }}"><span class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></span>
+                            <a href="{{ path('editeur_localisation_new') }}"><span class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></span>
                             </a>
                             <span class="legend_btn">Ajouter un élément</span>
                         </div>
                     </div>
                 </div>
             </article>
+            </div>
 
+
+
+            <!-- collectes -->
 
             <article class="card row" id="collecte">
                 <h3>Gestion des collectes</h3>
@@ -465,11 +527,6 @@
 
             </article>
 
-            {#<article class="card" id="thesaurus">#}
-                {#<h3>Gérer l'import automatique</h3>#}
-                {#<p>Partie destinée à intégrer le travail pour l'import de Sandra.</p>#}
-            {#</article>#}
-
         </div>
 
     </section>
@@ -480,9 +537,10 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <script type="text/javascript" src="{{ asset("build/admin_menu.js") }}"></script>
+    {#<script type="text/javascript" src="{{ asset("build/admin_accueil.js") }}"></script>#}
 
     <script>
-
         $(document).ready(function() {
 
             $('.modal-trigger').leanModal();
@@ -539,6 +597,10 @@
             });
         });
 
+
+    </script>
+
+    <script>
 
         $("#uploadform").submit(function (event) {
 

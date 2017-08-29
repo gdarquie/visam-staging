@@ -40,6 +40,11 @@ class LocalisationController extends Controller
             $em->persist($localisation);
             $em->flush();
 
+            $this->addFlash(
+                'success',
+                "Une nouvelle localisation a bien été créée!"
+            );
+
             return $this->redirectToRoute('admin');
         }
 
@@ -51,7 +56,6 @@ class LocalisationController extends Controller
     }
 
 
-    // à reprendre
     /**
      * Editer une localisation
      *
@@ -62,94 +66,35 @@ class LocalisationController extends Controller
         $deleteForm = $this->createDeleteForm($localisation);
         $em = $this->getDoctrine()->getManager();
 
-        //ajout des établissements pour le formulaire
-        $user = $this->getUser();
 
-        if ($user->hasRole('ROLE_ADMIN')){
-            $query = $em->createQuery(
-                'SELECT e.etablissementId as id FROM AppBundle:Etablissement e'
+        $form = $this->createForm('EditeurBundle\Form\LocalisationType', $localisation);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $localisation = $form->getData();
+            $em = $this->getDoctrine()->getManager();
+
+
+            $now = new \DateTime();
+            $localisation->setTimestamp($now);
+
+            $em->persist($localisation);
+            $em->flush();
+
+            $this->addFlash(
+                'success',
+                "Les changements ont été sauvegardés!"
             );
+
+            return $this->redirectToRoute('admin');
         }
 
-        else{
-            $userId = $user->getId();
-            $query = $em->createQuery(
-                'SELECT e.etablissementId as id FROM AppBundle:User u INNER JOIN u.etablissement e WHERE u.id = :user'
-            );
-            $query->setParameter('user', $userId);
-        }
-        $etablissements = $query->getResult();
-
-
-        //vérification que l'utilisateur peut modifier cette localisation
-
-        //Sélection de tous les établissements rattachés à la localisation
-        $query = $em->createQuery("SELECT e.etablissementId as id FROM AppBundle:Etablissement e JOIN e.localisation f WHERE f.localisationId = :id");
-        $query->setParameter('id', $localisation->getLocalisationId());
-        $etab_user = $query->getResult();
-
-        //vérification que les établissement de la localisation sont bien dans ceux du user
-
-        $checkUser = [];
-
-        if ($user->hasRole('ROLE_ADMIN')){
-            $checkUser = ['all'];
-        }
-        else{
-            for ($i = 0; $i < count($etablissements); $i++){
-
-                for($j = 0; $j < count($etab_user);$j++){
-                    if($etablissements[$i] == $etab_user[$j]){
-                        //                    dump($etablissements[$i]);
-                        //                    dump($etab_user[$j]);
-                        array_push($checkUser,$etab_user[$j]);
-                    }
-
-                }
-            }
-        }
-
-        //si l'utilisateur a l'établissement de la localisation dans sa liste
-        if(count($checkUser) > 0) {
-
-            $query = $em->createQuery(
-                'SELECT l.localisationId as id FROM AppBundle:Localisation l JOIN l.etablissement as e WHERE e.etablissementId IN (:etablissements)'
-            );
-            $query->setParameter('etablissements', $etablissements);
-            $localisations = $query->getResult();
-
-            $editForm = $this->createForm('EditeurBundle\Form\LocalisationType', $localisation, array(
-                'etablissements' => $etablissements,
-                'localisations' => $localisations
-            ));
-
-            $editForm->handleRequest($request);
-
-            if ($editForm->isSubmitted() && $editForm->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-
-                $now = new \DateTime();
-                $localisation->setLastUpdate($now);
-
-                $em->persist($localisation);
-                $em->flush();
-
-                return $this->redirectToRoute('localisation', array('id' => $localisation->getLocalisationId()));
-
-            }
-
-            return $this->render('EditeurBundle:Localisation:edit.html.twig', array(
-                'localisation' => $localisation,
-                'edit_form' => $editForm->createView(),
-                'delete_form' => $deleteForm->createView(),
-                'etablissements' => $etablissements,
-                'localisations' => $localisations
-            ));
-        }
-        else{
-            $this->addFlash('success', "Vous ne pouvez modifier cette localisation, vous n'êtes pas rattaché à l'établissement auquelle elle appartient");
-            return $this->redirectToRoute('localisation', array('id' => $localisation->getLocalisationId()));
-        }
+        return $this->render('EditeurBundle:Localisation:new.html.twig', array(
+            'edit_form' => $form->createView(),
+            'localisation' => $localisation,
+             'delete_form' => $deleteForm->createView(),
+        ));
     }
 
 

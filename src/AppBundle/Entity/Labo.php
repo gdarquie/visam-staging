@@ -21,7 +21,7 @@ class Labo
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $laboId;
+    private $id;
 
     /**
      * @var string
@@ -793,32 +793,32 @@ class Labo
 
 
     /**
-     * Get laboId
+     * Get id
      *
      * @return integer
      */
-    public function getLaboId()
+    public function getId()
     {
-        return $this->laboId;
+        return $this->id;
     }
 
     /**
-     * Set laboId
+     * Set id
      *
      */
-    public function setLaboId($laboId)
+    public function setId($id)
     {
-        $this->laboId = $laboId;
+        $this->id = $id;
     }
 
     /**
-     * Clean laboId
+     * Clean id
      *
      * @return integer
      */
-    public function cleanLaboId()
+    public function cleanId()
     {
-        $this->laboId = null;
+        $this->id = null;
     }
 
     /**

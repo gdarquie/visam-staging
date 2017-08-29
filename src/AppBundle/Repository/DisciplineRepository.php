@@ -83,16 +83,16 @@ class DisciplineRepository extends EntityRepository
         return $query;
     }
 
-    public function findDisciplinesByLaboAndType($laboId, $type)
+    public function findDisciplinesByLaboAndType($id, $type)
     {
 
         $qb = $this->createQueryBuilder('d')
             ->select('d, do')
             ->leftJoin('d.labo', 'l')
             ->leftJoin('d.domaineId', 'do')
-            ->where('l.laboId = :labo')
+            ->where('l.id = :labo')
             ->andWhere('d.type = :type')
-            ->setParameter('labo', $laboId)
+            ->setParameter('labo', $id)
             ->setParameter('type', $type);
 
         $query = $qb->getQuery()->getArrayResult();

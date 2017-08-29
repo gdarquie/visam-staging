@@ -12,6 +12,16 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Localisation
 {
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="adresse_id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $localisationId;
+
     /**
      * @var string
      *
@@ -111,14 +121,6 @@ class Localisation
      */
     private $type;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="adresse_id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $localisationId;
 
     /**
      * @var \Doctrine\Common\Collections\Collection

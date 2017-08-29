@@ -40,7 +40,7 @@
     border:1px solid #CC0000;
     border-radius: 3px;
     padding : 10px;
-    margin: 5 15px;
+    margin: 5px 15px;
     margin-bottom: 10px;
 }
 
@@ -48,7 +48,7 @@
     border: 1px solid #31B404;
     border-radius: 3px;
     padding : 10px;
-    margin: 5 15px;
+    margin: 5px 15px;
     margin-bottom: 10px;
 }
 
@@ -152,7 +152,7 @@ footer .container-fluid {
 }
 
 footer {
-    background-color:  ##ef4023;
+    background-color: #ef4023;
 }
 
 

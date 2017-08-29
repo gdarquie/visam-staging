@@ -25,27 +25,37 @@ class AdminController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
+        // --- établissements
         $query = $em->createQuery(
             'SELECT e FROM AppBundle:Etablissement e ORDER BY e.last_update DESC'
         );
         $etablissements = $query->getResult();
 
+        // --- formations
         $query = $em->createQuery(
             'SELECT f FROM AppBundle:Formation f ORDER BY f.last_update DESC'
         )->setMaxResults(5);
         $formations = $query->getResult();
 
+        // --- laboratoires
         $query = $em->createQuery(
             'SELECT l FROM AppBundle:Labo l ORDER BY l.last_update DESC'
         )->setMaxResults(5);
         $labos = $query->getResult();
 
+        // --- écoles doctorales
         $query = $em->createQuery(
             'SELECT e FROM AppBundle:Ed e ORDER BY e.last_update DESC'
         )->setMaxResults(5);
         $eds = $query->getResult();
 
-        //all collectes
+        // --- localisations
+        $query = $em->createQuery(
+            'SELECT l FROM AppBundle:Localisation l ORDER BY l.timestamp DESC'
+        )->setMaxResults(5);
+        $localisations = $query->getResult();
+
+        // --- toutes les collectes
         $query = $em->createQuery(
             'SELECT c FROM AppBundle:Collecte c ORDER BY c.annee DESC'
         );
@@ -91,6 +101,7 @@ class AdminController extends Controller
             'formations' => $formations,
             'labos' => $labos,
             'eds' => $eds,
+            'localisations' => $localisations,
             'collectes' => $collectes,
             'collecte' => $collecte,
             'users' => $users,
@@ -234,6 +245,40 @@ class AdminController extends Controller
 
         return $this->render('EditeurBundle:Admin:eds.html.twig', array(
             'eds' => $items,
+            'page' => $page,
+            'nbPages' => $nbPages
+        ));
+
+    }
+
+    /**
+     *
+     * @Route("/localisations/{page}", name="admin_localisations", requirements={"page": "\d+"})
+     */
+    public function localisationAction($page = 1){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $max = 20;
+
+        //calculer nombre de pages
+        $query = $em->createQuery(
+            'SELECT COUNT(l) as nb FROM AppBundle:Localisation l'
+        );
+        $total = $query->getSingleResult();
+        $nbPages = ROUND($total['nb'] / $max);
+        //dump($nbPages);die;
+
+        $first = $max*($page-1);
+        //dump($first);die;
+
+        $query = $em->createQuery(
+            'SELECT l FROM AppBundle:Localisation l ORDER BY l.timestamp DESC'
+        )->setMaxResults(20);
+        $items = $query->getResult();
+
+        return $this->render('EditeurBundle:Admin:localisations.html.twig', array(
+            'localisations' => $items,
             'page' => $page,
             'nbPages' => $nbPages
         ));

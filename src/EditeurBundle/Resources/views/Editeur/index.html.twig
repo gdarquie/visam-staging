@@ -173,7 +173,7 @@
                     <ul class="collection">
                         {% for item in laboratoires  %}
                             <li class="collection-item avatar js-labo-item">
-                                <a href="{{ path('editeur_laboratoire_edit', {'id': item.laboId } ) }}" >
+                                <a href="{{ path('editeur_laboratoire_edit', {'id': item.id } ) }}" >
                                     {% if item.checkGeneral and item.checkContact and item.checkEtab and item.checkEtab and item.checkEffectifs and item.checkDescription %}
                                         <i class="material-icons circle green">mode_edit</i>
                                     {% else %}
@@ -219,7 +219,7 @@
                                         </span>
                                     </p>
                                 </a>
-                                <a href="#!" class="secondary-content js-remove-labo" data-url="{{ path('editeur_laboratoire_ajax_delete', { laboId : item.laboId}) }}" ><i class="material-icons">delete</i>
+                                <a href="#!" class="secondary-content js-remove-labo" data-url="{{ path('editeur_laboratoire_ajax_delete', { id : item.id}) }}" ><i class="material-icons">delete</i>
                                 </a>
 
                             </li>

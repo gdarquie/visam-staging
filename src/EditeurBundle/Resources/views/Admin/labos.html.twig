@@ -15,7 +15,7 @@
 
             {% for item in labos  %}
                 <li class="collection-item avatar js-labo-item">
-                    <a href="{{ path('editeur_laboratoire_edit', {'id': item.laboId } ) }}" >
+                    <a href="{{ path('editeur_laboratoire_edit', {'id': item.id } ) }}" >
                         {% if item.checkGeneral and item.checkContact and item.checkEtab and item.checkEtab and item.checkEffectifs and item.checkDescription %}
                             <i class="material-icons circle green">done</i>
                         {% else %}

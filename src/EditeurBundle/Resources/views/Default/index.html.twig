@@ -96,7 +96,7 @@
                             {{ etab.nom }}{% if loop.last %}{% else %}, {% endif %}
                         {% endfor %}</td>
                     <td>{{ labo.lastUpdate |date("d/m/y g:i:s", "Europe/Paris") }}</td>
-                    <td><a href="{{ path('editeur_laboratoire_edit', {'id' : labo.laboId}) }}">Modifier</a></td>
+                    <td><a href="{{ path('editeur_laboratoire_edit', {'id' : labo.id}) }}">Modifier</a></td>
                 </tr>
             {% endfor %}
         </table>

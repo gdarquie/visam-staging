@@ -16,7 +16,7 @@
     {% endfor %}
     {% for labo in labos %}
       {
-      "id" : "{{labo.laboId}}",
+      "id" : "{{labo.id}}",
       "name" : "{{labo.nom|e('html')}}",
       "type" : "Laboratoire",
       "url" : "{{labo.lien}}",

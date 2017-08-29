@@ -15,6 +15,15 @@ class Discipline
     /**
      * @var integer
      *
+     * @ORM\Column(name="discipline_id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="code", type="integer", nullable=true)
      */
     private $code;
@@ -60,15 +69,6 @@ class Discipline
      * @ORM\Column(name="timestamp", type="datetime", nullable=false)
      */
     private $timestamp;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="discipline_id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $disciplineId;
 
     /**
      * @var \AppBundle\Entity\Hesamette
@@ -313,13 +313,13 @@ class Discipline
     }
 
     /**
-     * Get disciplineId
+     * Get id
      *
      * @return mixed
      */
-    public function getDisciplineId()
+    public function getId()
     {
-        return $this->disciplineId;
+        return $this->id;
     }
 
     /**

@@ -6,13 +6,13 @@ use Doctrine\ORM\EntityRepository;
 
 class EquipementRepository extends EntityRepository
 {
-    public function getAllEquipements($laboId)
+    public function getAllEquipements($id)
     {
         $qb = $this->createQueryBuilder('e')
             ->select('e.nom')
             ->leftJoin('e.labo', 'l')
-            ->where('l.laboId = :labo')
-            ->setParameter('labo', $laboId);
+            ->where('l.id = :labo')
+            ->setParameter('labo', $id);
 
         $query = $qb->getQuery()->getArrayResult();
 

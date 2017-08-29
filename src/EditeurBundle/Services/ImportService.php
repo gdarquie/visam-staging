@@ -781,8 +781,8 @@ class ImportService
                 if ($objId = $this->getObjId($data['labo'])) {
                     $labo->setObjetId($objId);
                 } else {
-                    $laboId = $formation->getLaboId();
-                    $labo->setObjetId('L' . $laboId);
+                    $id = $formation->getId();
+                    $labo->setObjetId('L' . $id);
                 }
 
                 $labo->setType($data['labo']['type']);
@@ -1247,7 +1247,7 @@ class ImportService
         $data = [];
 
         foreach ($list as $val) {
-            //changer getLaboId par getObjetId de qu'il est en place
+            //changer getId par getObjetId de qu'il est en place
             $str = $this->getStrFormation($val->getNom());
             $data[$str] = 'L'.$val->getObjetId();
         }
