@@ -138,7 +138,7 @@
                     <div class="card formation petit" >
                         <div class="card-content">
                             <span class="etablissement"><span>{{formation.annee}}</span> - <span>{{ formation.niveau }}</span></span>
-                            <h5><a href="{{ path('formation' , {"id" : formation.formationId}) }}">{{formation.nom}}</a></h5>
+                            <h5><a href="{{ path('formation' , {"id" : formation.id}) }}">{{formation.nom}}</a></h5>
                             {# <span> {{labo.etablissement}}</span> #}
                             <ul class="list-thematique" >
                                 {% for discipline in formation.discipline|slice(0,3)%}

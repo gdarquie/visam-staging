@@ -4,151 +4,81 @@
 
 
  <div role="main" class="container">
-<div class="row">
-	    <div class="col s12 m12">
-          <div class="card">
-            <div class="card-image">
-              <img src="images/cnam.jpg">
-              <span class="card-title">{{ etablissement.nom }}</span>
-            </div>
-            <div class="card-content">
-              <p class="flow-text">{{etablissement.description}}</p>
-            </div>
-            <div class="card-action">
-              <a href="#formations">Formations</a>
-              <a href="#laboratoires">Laboratoires</a>
-              <a href="#ecoles">Ecoles doctorales</a>
-            </div>
-          </div>
-        </div>
-</div>
-<div class="row">
-	  <div class="col s12 m3">
-	      <div class="card teal">
-	            <a href="#formations" class="modal-trigger">
-	                <div class="card-content white-text center-align">
-	      			<i class="large material-icons">view_module</i>
-	                <p class="center-align number">27</p>
-	                <p class="center-align number-label">
-	                    Formations
-	                </p>
-	                </div>
-	            </a>
-	      </div>
-      </div>
-	  <div class="col s12 m3">
-	      <div class="card cyan">
-	            <a href="#laboratoires" class="modal-trigger">
-	                <div class="card-content white-text center-align">
-	      			<i class="large material-icons">view_module</i>
-	                <p class="center-align number">12</p>
-	                <p class="center-align number-label">
-	                    Laboratoires
-	                </p>
-	                </div>
-	            </a>
-	      </div>
-      </div>
-      <div class="col s12 m3">
-	      <div class="card amber accent-2">
-	            <a href="#ecoles" class="modal-trigger">
-	                <div class="card-content white-text center-align">
-	      			<i class="large material-icons">view_module</i>
-	                <p class="center-align number">6</p>
-	                <p class="center-align number-label">
-	                    Ecoles doctorales
-	                </p>
-	                </div>
-	            </a>
-	      </div>
-      </div>
 
-        <div class="col s12 m3">
-          <div class="card blue-grey darken-1">
-            <div class="card-image">
-                <img src="https://maps.googleapis.com/maps/api/staticmap?center=48.866748,2.3548908&zoom=16&size=350x210&maptype=terrain" alt="">
-            </div>
-            <div class="card-content white-text">
-              <p><i>292 Rue Saint-Martin, 75003 Paris</i> </p>
-            </div>
+	 <div class="row">
+		<h1 class="center">{{ etablissement.nom }}{% if collecte > 0 %}  [Collecte {{ collecte }}]{% endif %}</h1>
 
-          </div>
-        </div>	
-</div>
+	 </div>
 
+	<div class="row">
+			<div class="col s12 m12">
+			  <div class="card">
+				<div class="card-image">
+				  {#<img src="images/cnam.jpg">#}
+				  <span class="card-title">{{ etablissement.nom }}</span>
+				</div>
+				<div class="card-content">
+				  <p class="flow-text">{{etablissement.description}}</p>
+				</div>
+			  </div>
+			</div>
+	</div>
+	<div class="row">
+		<div class="col s12 m4">
+		  <div class="card teal">
+				<a href="#formations" class="modal-trigger">
+					<div class="card-content white-text center-align">
+					<i class="large material-icons">view_module</i>
+					<p class="center-align number">{{ formations|length }}</p>
+					<p class="center-align number-label">
+						Formations
+					</p>
+					</div>
+				</a>
+		  </div>
+		</div>
+		<div class="col s12 m4">
+		  <div class="card cyan">
+				<a href="#laboratoires" class="modal-trigger">
+					<div class="card-content white-text center-align">
+					<i class="large material-icons">view_module</i>
+					<p class="center-align number">{{ labos|length }}</p>
+					<p class="center-align number-label">
+						Laboratoires
+					</p>
+					</div>
+				</a>
+		  </div>
+		</div>
+		<div class="col s12 m4">
+		  <div class="card amber accent-2">
+				<a href="#ecoles" class="modal-trigger">
+					<div class="card-content white-text center-align">
+					<i class="large material-icons">view_module</i>
+					<p class="center-align number">{{ eds|length }}</p>
+					<p class="center-align number-label">
+						Ecoles doctorales
+					</p>
+					</div>
+				</a>
+		  </div>
+		</div>
 
+		{#<div class="col s12 m3">#}
+		  {#<div class="card blue-grey darken-1">#}
+			{#<div class="card-image">#}
+				{#<img src="https://maps.googleapis.com/maps/api/staticmap?center=48.866748,2.3548908&zoom=16&size=350x210&maptype=terrain" alt="">#}
+			{#</div>#}
+			{#<div class="card-content white-text">#}
+			  {#<p><i>292 Rue Saint-Martin, 75003 Paris</i> </p>#}
+			{#</div>#}
 
-
-        <div id="formations" class="row">
-        	<h2>Formations</h2>
-			<ul class="collection">
-			{% for formation in [["Cadre administratif ou financier", "first line"],["Chef de projet urbain", "first line"],["Responsable environnement", "first line"],["Cadre financier en collectivité territoriale", "first line"] ]%}
-			    <li class="collection-item avatar">
-			      <i class="material-icons circle">folder</i>
-			      <span class="title">{{formation[0]}}</span>
-			      <p>First Line <br>
-			         Second Line
-			      </p>
-			      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-			    </li>
-	    {% endfor %}
-
-			</ul>
-
-        </div>
-
-        <div id="laboratoires" class="row">
-        	<h2>Laboratoires</h2>
-		{% for labo in [["CRF","Le CRF, Centre de recherche sur la formation (EA 1410) du Cnam, a pour mission la recherche et la formation à la recherche en formation et professionnalisation des adultes.
-Le CRF est une équipe membre du LabEx HASTEC.","labo.gif"],["Cedric", "Le centre d’études et de recherche en informatique et communications, regroupe des recherches menées en informatique, mathématiques appliquées et électronique au Cnam, ainsi qu'une partie de celles de l'ENSIIE (EA 4629). Les membres du Cedric sont enseignants-chercheurs en informatique, en mathématiques ou en électronique, soit au Cnam, soit à l'ENSIIE.","labo.gif"], ["CMGPCE","Le laboratoire de chimie moléculaire, génie des procédés chimiques et énergétiques (EA 7341) regroupe plusieurs disciplines allant de la chimie moléculaire au génie des procédés chimiques et énergétiques permettant une étude des transformations chimiques, biochimiques ou physiques de l’échelle moléculaire aux systèmes industriels.","labo.gif"], ["DynFluid", "Laboratoire de dynamique des fluides (DynFluid) est rattaché au CNRS, à l'école Arts et métiers ParisTech, et au Cnam (EA 92). DynFluid mène des travaux de recherche en mécanique des fluides, aérodynamique et acoustique, avec des applications dans les secteurs aéronautique, automobile et celui des procédés industriels.","dynfluid.jpg"]] %}
-	        <div class="col s12 m3">
-	          <div class="card">
-	          <a href="labo.php">
-	            <div class="card-image">
-	              <img src="images/{{labo[2]}}">
-	              <span class="card-title">{{labo[0]}}</span>
-	            </div>
-	            <div class="card-content max-height">
-	              <p>{{labo[1]}}</p>
-	            </div>
-	            <div class="card-action">
-	            <div class="chip">Tag #1</div><div class="chip">Tag #1</div>
-	            </div>
- 				</a>
-	          </div>
-	        </div>
-	    {% endfor %}
-
-        </div>
-	
-
-		<!-- Sélectionner seulement les ED de l'établissement en question dans le controller-->
-			<!-- if {{eds|length}} >2-->
-        <div id="ecoles" class="row">
-        	<h2>Ecoles Doctorales</h2>
-		{% for ed in eds %}
-	        <div class="col s12 m3"> 
-	          <div class="card">
-	          <a href="ed.php">
-	            <div class="card-image">
-	              <img src="images/">
-	              <span class="card-title">{{ed.nom}}</span>
-	            </div>
-	            <div class="card-content max-height">
-	              <p>{{ed.lien}}</p> <!-- Il faudrait rajouter ici des descriptions des ED-->
-	            </div>
-	            <div class="card-action">
-	            <div class="chip">Tag #1</div><div class="chip">Tag #1</div>
-	            </div>
- 				</a>
-	          </div>
-	        </div>
-	    {% endfor %}        	
-        </div>
-
-
+		  {#</div>#}
+		{#</div>#}
+	</div>
 
   </div>
+
   <footer>
 
   </footer>

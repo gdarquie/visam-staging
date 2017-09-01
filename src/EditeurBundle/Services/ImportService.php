@@ -963,8 +963,8 @@ class ImportService
                 if ($objId = $this->getObjId($data['formation'])) {
                     $formation->setObjetId($objId);
                 } else {
-                    $formationId = $formation->getFormationId();
-                    $formation->setObjetId('F' . $formationId);
+                    $id = $formation->getId();
+                    $formation->setObjetId('F' . $id);
                 }
                 $formation->setNom($data['formation']['nom']);
                 $formation->setLmd($data['formation']['lmd']);
@@ -1228,11 +1228,11 @@ class ImportService
         $dataCheckDoublons = [];
 
         foreach ($list as $val) {
-            //changer getFormationId par getObjetId de qu'il est en place
+            //changer getId par getObjetId de qu'il est en place
             $str = $this->getStrFormation($val->getNom(), $val->getTypeDiplome(), $val->getNiveau());
             $str2 = $this->getStrFormation($val->getNom(), $val->getTypeDiplome(), $val->getNiveau(), $val->getAnnee());
             $dataComparaison[$str] = $val->getObjetId();
-            $dataCheckDoublons[$str2] = $val->getFormationId();
+            $dataCheckDoublons[$str2] = $val->getId();
         }
 
         $this->tabComparaison = $dataComparaison;

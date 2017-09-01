@@ -124,7 +124,7 @@ class FormationController extends Controller
             $em->flush();
 
             //Création et set de l'objetId
-            $lastId = $formation->getFormationId();
+            $lastId = $formation->getId();
             $formation->setObjetId("F".$lastId);
 
             $em->persist($formation);
@@ -181,8 +181,8 @@ class FormationController extends Controller
         //vérification que l'utilisateur peut modifier cette formation
 
         //Sélection de tous les établissements rattachés à la formation
-        $query = $em->createQuery("SELECT e.etablissementId as id FROM AppBundle:Etablissement e JOIN e.formation f WHERE f.formationId = :id");
-        $query->setParameter('id', $formation->getFormationId());
+        $query = $em->createQuery("SELECT e.etablissementId as id FROM AppBundle:Etablissement e JOIN e.formation f WHERE f.id = :id");
+        $query->setParameter('id', $formation->getId());
         $etab_user = $query->getResult();
 
         //vérification que les établissement de la formation sont bien dans ceux du user
@@ -236,7 +236,7 @@ class FormationController extends Controller
                     "Les changements ont été sauvegardés!"
                 );
 
-                return $this->redirectToRoute('formation', array('id' => $formation->getFormationId()));
+                return $this->redirectToRoute('formation', array('id' => $formation->getId()));
 
             }
 
@@ -250,7 +250,7 @@ class FormationController extends Controller
         }
         else{
             $this->addFlash('success', "Vous ne pouvez modifier cette formation, vous n'êtes pas rattaché à l'établissement auquelle elle appartient");
-            return $this->redirectToRoute('formation', array('id' => $formation->getFormationId()));
+            return $this->redirectToRoute('formation', array('id' => $formation->getId()));
         }
     }
 
@@ -258,17 +258,17 @@ class FormationController extends Controller
     /**
      * Fonction pour effacer via ajax une formation
      *
-     * @Route("/delete/{formationId}", name="editeur_formation_test_ajax_delete")
+     * @Route("/delete/{id}", name="editeur_formation_test_ajax_delete")
      * @Method("GET")
      */
-    public function deleteTestAjaxAction($formationId)
+    public function deleteTestAjaxAction($id)
     {
 
         $em = $this->getDoctrine()->getManager();
 
         /** @var Formation $formation */
         $formation = $em->getRepository('AppBundle:Formation')
-            ->find($formationId);
+            ->find($id);
         $em->remove($formation);
         $em->flush();
 
@@ -279,10 +279,10 @@ class FormationController extends Controller
     /**
      * Fonction pour effacer via ajax une formation
      *
-     * @Route("/delete/{formationId}", name="editeur_formation_ajax_delete")
+     * @Route("/delete/{id}", name="editeur_formation_ajax_delete")
      * @Method("DELETE")
      */
-    public function deleteAjaxAction($formationId)
+    public function deleteAjaxAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -292,7 +292,7 @@ class FormationController extends Controller
 
             /** @var Formation $formation */
             $formation = $em->getRepository('AppBundle:Formation')
-                ->find($formationId);
+                ->find($id);
             $em->remove($formation);
             $em->flush();
         }
@@ -333,7 +333,7 @@ class FormationController extends Controller
     private function createDeleteForm(Formation $formation)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('editeur_formation_delete', array('id' => $formation->getFormationId())))
+            ->setAction($this->generateUrl('editeur_formation_delete', array('id' => $formation->getId())))
             ->setMethod('DELETE')
             ->getForm()
             ;
@@ -346,7 +346,7 @@ class FormationController extends Controller
     public function formationTestAction($id){
 
         $em = $this->getDoctrine()->getManager();
-        $query = $em->createQuery('SELECT f.nom, e.nom as etab FROM AppBundle:Formation f JOIN f.etablissement e WHERE f.formationId = :id')->setMaxResults(10);
+        $query = $em->createQuery('SELECT f.nom, e.nom as etab FROM AppBundle:Formation f JOIN f.etablissement e WHERE f.id = :id')->setMaxResults(10);
         $query->setParameter("id", $id);
         $formation = $query->getResult();
 

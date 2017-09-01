@@ -13,13 +13,13 @@ use AppBundle\Entity\Formation;
 
 class LocalisationRepository extends EntityRepository
 {
-    public function findAllLocalisationsFormation($formationId)
+    public function findAllLocalisationsFormation($id)
     {
 
         $qb = $this->createQueryBuilder('l')
             ->leftJoin('l.formation', 'f')
-            ->where('f.formationId = :formation')
-            ->setParameter('formation', $formationId);
+            ->where('f.id = :formation')
+            ->setParameter('formation', $id);
 
         $query = $qb->getQuery()->getArrayResult();
 

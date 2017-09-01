@@ -172,14 +172,59 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $etablissement = $em->getRepository('AppBundle:Etablissement')->findOneByEtablissementId($id);
-        $eds = $em->getRepository('AppBundle:Ed')->findAll(); //récupérer seulement les ed de l'établissement
-        $formations = $em->getRepository('AppBundle:Formation')->findAll();
 
-        
+        $query = $em->createQuery('SELECT f FROM AppBundle:Formation f JOIN f.etablissement e WHERE e.etablissementId = :id');
+        $query->setParameter('id', $id);
+        $formations = $query->getResult();
+
+        $query = $em->createQuery('SELECT l FROM AppBundle:Labo l JOIN l.etablissement e WHERE e.etablissementId = :id');
+        $query->setParameter('id', $id);
+        $labos = $query->getResult();
+
+        $query = $em->createQuery('SELECT f FROM AppBundle:Ed f JOIN f.etablissement e WHERE e.etablissementId = :id');
+        $query->setParameter('id', $id);
+        $eds = $query->getResult();
+
         return $this->render('notice/etablissement.html.twig', array(
             'etablissement' => $etablissement,
             'eds' => $eds,
-            'formations' => $formations
+            'formations' => $formations,
+            'labos' => $labos,
+            'collecte' => 0
+        ));
+    }
+
+    /**
+     * @Route("/etablissement/{id}/{annee}", name="etablissement_collecte")
+     */
+    public function etablissementCollecteAction($id, $annee)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $etablissement = $em->getRepository('AppBundle:Etablissement')->findOneByEtablissementId($id);
+
+        $query = $em->createQuery('SELECT f FROM AppBundle:Formation f JOIN f.etablissement e WHERE e.etablissementId = :id AND f.anneeCollecte = :annee');
+        $query->setParameter('id', $id);
+        $query->setParameter('annee', $annee);
+        $formations = $query->getResult();
+
+        $query = $em->createQuery('SELECT l FROM AppBundle:Labo l JOIN l.etablissement e WHERE e.etablissementId = :id AND l.anneeCollecte = :annee');
+        $query->setParameter('id', $id);
+        $query->setParameter('annee', $annee);
+        $labos = $query->getResult();
+
+        $query = $em->createQuery('SELECT f FROM AppBundle:Ed f JOIN f.etablissement e WHERE e.etablissementId = :id AND f.anneeCollecte = :annee');
+        $query->setParameter('id', $id);
+        $query->setParameter('annee', $annee);
+        $eds = $query->getResult();
+
+        return $this->render('notice/etablissement.html.twig', array(
+            'etablissement' => $etablissement,
+            'eds' => $eds,
+            'formations' => $formations,
+            'labos' => $labos,
+            'collecte' => $annee
         ));
     }
 
@@ -209,17 +254,17 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $formation = $em->getRepository('AppBundle:Formation')->findOneByFormationId($id);
+        $formation = $em->getRepository('AppBundle:Formation')->findOneById($id);
         $query = $em->createQuery('SELECT f FROM AppBundle:Formation f');
         $formations = $query->setMaxResults(3)->getResult();
 
-        $query = $em->createQuery('SELECT h.nom as nom, COUNT(h) as nb FROM AppBundle:Discipline d JOIN d.formation f JOIN d.hesamette h WHERE f.formationId = :id GROUP BY h.nom ORDER BY nb DESC');
+        $query = $em->createQuery('SELECT h.nom as nom, COUNT(h) as nb FROM AppBundle:Discipline d JOIN d.formation f JOIN d.hesamette h WHERE f.id = :id GROUP BY h.nom ORDER BY nb DESC');
         $query->setParameter('id', $id);
         $hesamettes = $query->getResult();
 
 
         //Les rebonds
-        $query = $em->createQuery('SELECT COUNT(h.nom) as nb, h.nom as nom FROM AppBundle:Formation f JOIN f.discipline d JOIN d.hesamette h WHERE f.formationId = :id GROUP BY h.nom ORDER BY nb DESC');
+        $query = $em->createQuery('SELECT COUNT(h.nom) as nb, h.nom as nom FROM AppBundle:Formation f JOIN f.discipline d JOIN d.hesamette h WHERE f.id = :id GROUP BY h.nom ORDER BY nb DESC');
         $query->setParameter('id', $id);
         $hesamettes_rebond = $query->setMaxResults(1)->getResult();
 

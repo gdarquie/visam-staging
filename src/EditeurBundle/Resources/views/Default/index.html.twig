@@ -128,7 +128,7 @@
                             {{ etab.nom }}{% if loop.last %}{% else %}, {% endif %}
                         {% endfor %}</td>
                     <td>{{ formation.lastUpdate |date("d/m/y g:i:s", "Europe/Paris") }}</td>
-                    <td><a href="{{ path('editeur_formation_edit', {'id' : formation.formationId}) }}">Modifier</a></td>
+                    <td><a href="{{ path('editeur_formation_edit', {'id' : formation.id}) }}">Modifier</a></td>
                 </tr>
             {% endfor %}
         </table>

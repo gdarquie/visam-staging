@@ -2,7 +2,7 @@
     [
     {% for formation in formations %}
       {
-      "id" : "{{formation.formationId}}",
+      "id" : "{{formation.id}}",
       "name" : "{{formation.nom|e('html')}}",
       "type" : "Formation",
       "url" : "{{formation.url}}",

@@ -49,7 +49,7 @@
                         {% for item in formations  %}
 
                             <li class="collection-item avatar js-formation-item">
-                                <a href="{{ path('editeur_formation_edit', {'id': item.formationId } ) }}" >
+                                <a href="{{ path('editeur_formation_edit', {'id': item.id } ) }}" >
 
                                     {% if item.checkGeneral and item.checkEffectif and item.checkIndex and item.checkCursus %}
                                         <i class="material-icons circle green">done</i>

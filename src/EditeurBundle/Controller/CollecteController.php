@@ -336,14 +336,14 @@ class CollecteController extends Controller
 
             foreach ($formations as $formation) {
 
-                $id = $formation->getFormationId();
+                $id = $formation->getId();
                 $formation->setAnneeCollecte($anneeNouvelleCollecte);
                 $formation->setDateCreation($now);
                 $formation->setLastUpdate($now);
 
                 //retrouver l'établissement d'une formation
                 $query = $em->createQuery(
-                    'SELECT e.etablissementId FROM AppBundle:Etablissement e JOIN e.formation l WHERE l.formationId = :id '
+                    'SELECT e.etablissementId FROM AppBundle:Etablissement e JOIN e.formation l WHERE l.id = :id '
                 );
                 $query->setParameter('id', $id);
                 $etablissements = $query->getResult();
@@ -359,7 +359,7 @@ class CollecteController extends Controller
 
                 //remplacer par un service
                 $query = $em->createQuery(
-                    'SELECT d FROM AppBundle:Discipline d JOIN d.formation f WHERE d.type = :type AND f.formationId = :id'
+                    'SELECT d FROM AppBundle:Discipline d JOIN d.formation f WHERE d.type = :type AND f.id = :id'
                 );
                 $query->setParameter('type', 'cnu');
                 $query->setParameter('id', $id);
@@ -367,7 +367,7 @@ class CollecteController extends Controller
                 $formation->setCnu($cnu);
 
                 $query = $em->createQuery(
-                    'SELECT d FROM AppBundle:Discipline d JOIN d.formation f WHERE d.type = :type AND f.formationId = :id'
+                    'SELECT d FROM AppBundle:Discipline d JOIN d.formation f WHERE d.type = :type AND f.id = :id'
                 );
                 $query->setParameter('type', 'sise');
                 $query->setParameter('id', $id);
@@ -375,7 +375,7 @@ class CollecteController extends Controller
                 $formation->setSise($sise);
 
                 $query = $em->createQuery(
-                    'SELECT d FROM AppBundle:Discipline d JOIN d.formation f WHERE d.type = :type AND f.formationId = :id'
+                    'SELECT d FROM AppBundle:Discipline d JOIN d.formation f WHERE d.type = :type AND f.id = :id'
                 );
                 $query->setParameter('type', 'hceres');
                 $query->setParameter('id', $id);

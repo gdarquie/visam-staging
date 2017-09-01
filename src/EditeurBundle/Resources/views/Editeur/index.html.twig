@@ -105,7 +105,7 @@
                 <ul class="collection">
                 {% for item in formations  %}
                     <li class="collection-item avatar js-formation-item">
-                        <a href="{{ path('editeur_formation_edit', {'id': item.formationId } ) }}" >
+                        <a href="{{ path('editeur_formation_edit', {'id': item.id } ) }}" >
 
                             {% if item.checkGeneral and item.checkEffectif and item.checkIndex and item.checkCursus %}
                                 <i class="material-icons circle green">mode_edit</i>
@@ -147,7 +147,7 @@
 
 
                         </a>
-                        <a href="#!" class="secondary-content js-remove-formation" data-url="{{ path('editeur_formation_ajax_delete', { formationId : item.formationId}) }}" ><i class="material-icons">delete</i>
+                        <a href="#!" class="secondary-content js-remove-formation" data-url="{{ path('editeur_formation_ajax_delete', { id : item.id}) }}" ><i class="material-icons">delete</i>
                         </a>
                     </li>
                 {% endfor %}

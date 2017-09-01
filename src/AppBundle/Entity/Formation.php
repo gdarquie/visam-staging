@@ -22,7 +22,7 @@ class Formation
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $formationId;
+    private $id;
 
     /**
      * @var string
@@ -678,13 +678,13 @@ class Formation
     }
 
     /**
-     * Get formationId
+     * Get id
      *
      * @return integer
      */
-    public function getFormationId()
+    public function getId()
     {
-        return $this->formationId;
+        return $this->id;
     }
 
     /**

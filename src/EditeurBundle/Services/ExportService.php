@@ -208,18 +208,18 @@ class ExportService
 
         foreach ($formations as $index => $formation) {
 
-            $formationId = $formation->getFormationId();
-            $localisations = $this->getLocalisations($formationId);
+            $id = $formation->getId();
+            $localisations = $this->getLocalisations($id);
 
             //plusieurs localisations sont possibles pour une formation
             //afficher dans chaque champ les valeurs des localisations separes par une point virgule
             $localisationsFieldsData = $this->getLocalisationFields($localisations);
-            $tag = $this->getFormationTagField($formationId);
+            $tag = $this->getFormationTagField($id);
 
             //TODO OK pour version 1, pour version 2 il y a 3  tables des disciplines, alors pour la collecte 2018 il faut adapter export
-            $disciplinesSISE = $this->em->getRepository('AppBundle:Discipline')->findDisciplinesByFormationAndType($formationId, 'SISE');
-            $disciplinesCNU = $this->em->getRepository('AppBundle:Discipline')->findDisciplinesByFormationAndType($formationId, 'CNU');
-            $disciplinesHCERES = $this->em->getRepository('AppBundle:Discipline')->findDisciplinesByFormationAndType($formationId, 'HCERES');
+            $disciplinesSISE = $this->em->getRepository('AppBundle:Discipline')->findDisciplinesByFormationAndType($id, 'SISE');
+            $disciplinesCNU = $this->em->getRepository('AppBundle:Discipline')->findDisciplinesByFormationAndType($id, 'CNU');
+            $disciplinesHCERES = $this->em->getRepository('AppBundle:Discipline')->findDisciplinesByFormationAndType($id, 'HCERES');
 
             //var_dump($tag); die;
 
@@ -627,10 +627,10 @@ class ExportService
         return null;
     }
 
-    public function getFormationTagField($formationId) {
+    public function getFormationTagField($id) {
 
         $tagField = [];
-        $tags = $this->em->getRepository('AppBundle:Tag')->getAllTagsForFormation($formationId);
+        $tags = $this->em->getRepository('AppBundle:Tag')->getAllTagsForFormation($id);
         foreach ($tags as $tag) {
             $tagField[] = $tag['nom'];
         }
