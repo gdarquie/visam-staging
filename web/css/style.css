@@ -182,3 +182,10 @@ footer h2, footer h3{
 .valid {
     color: limegreen;
 }
+
+
+/* List js */
+
+.pagination .active{
+    background: #EF4023!important;
+}

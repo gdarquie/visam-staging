@@ -388,6 +388,14 @@ class Formation
      */
     private $code_interne;
 
+//    /**
+//     * @var string
+//     *
+//     * @ORM\Column(name="code_interne", type="string", length=100, nullable=true)
+//     */
+//    private $geo;
+
+
     /**
      * Constructor
      */
@@ -1237,11 +1245,6 @@ class Formation
         $this->metier = $metier;
     }
 
-    public function __toString()
-    {
-        return (string) $this->getNom();
-    }
-
     /**
      * @return code_interne
      */
@@ -1261,4 +1264,23 @@ class Formation
     {
         $this->code_interne = $code_interne;
     }
+
+    /**
+     * Get localisation mapping
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getGeo()
+    {
+        foreach($this->localisation as $geo) {
+            if ($geo->getLat())
+                return $geo->getLat().",".$geo->getLong();
+        }
+    }
+
+    public function __toString()
+    {
+        return (string) $this->getNom();
+    }
+
 }

@@ -31,3 +31,26 @@ h6 {
         width: 90%;
     }
 }
+
+.collection-item .title{
+    color: #b53127;
+}
+
+.collection .collection-item{
+    overflow: auto;
+}
+
+.sort-menu .sort:not(:last-child){
+    border-right:1px solid black;
+    padding-right:3px;
+}
+
+.sort{
+    font-weight: bold;
+    font-size:0.9em;
+    cursor:pointer;
+}
+
+.collection-item p .description{
+    font-size:0.8em!important;
+}

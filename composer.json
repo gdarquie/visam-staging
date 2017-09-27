@@ -31,10 +31,11 @@
         "friendsofsymfony/rest-bundle": "^1.7",
         "doctrine/doctrine-migrations-bundle": "^1.2",
         "joetannenbaum/mr-clean": "~0.0",
-        "stof/doctrine-extensions-bundle": "^1.2",
+        "beberlei/DoctrineExtensions": "^1.0",
         "ensepar/html2pdf-bundle" : "~2.0",
         "liuggio/excelbundle": "dev-master",
-        "friendsofsymfony/elastica-bundle": "^4.0"
+        "friendsofsymfony/elastica-bundle": "^4.0",
+        "friendsofsymfony/jsrouting-bundle": "^1.6"
     },
     "repositories": [
         {

@@ -1349,12 +1349,6 @@ class Labo
         $this->valide = $valide;
     }
 
-
-    public function __toString()
-    {
-        return (string) $this->getNom();
-    }
-
     /**
      * @return code_interne
      */
@@ -1375,5 +1369,24 @@ class Labo
     {
         $this->code_interne = $code_interne;
     }
+
+    /**
+     * Get localisation mapping
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getGeo()
+    {
+        foreach($this->localisation as $geo) {
+            if ($geo->getLat())
+                return $geo->getLat().",".$geo->getLong();
+        }
+    }
+
+    public function __toString()
+    {
+        return (string) $this->getNom();
+    }
+
 
 }

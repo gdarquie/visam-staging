@@ -1,0 +1,53 @@
+{% if eds|length > 0 %}
+
+<div class="col s6 row" id="eds-list">
+
+    <div class="col s12">
+
+        <div class="row valign-wrapper">
+            <h2>Ecoles doctorales ({{ eds|length }})</h2>
+            <i class="material-icons circle white red-text">add</i>
+            <a href="{{ path('editeur_ed_new') }}" class="red-text ajout col">Ajouter une école doctorale</a>
+        </div>
+
+        <div class="row">
+
+            <div class="col s4">
+                <input class="search" placeholder="Rechercher une école doctorale"/>
+            </div>
+
+            <div class="col s8 sort-menu">
+                <span>Ordonner :</span>
+                <span class="sort" data-sort="title">nom</span>
+            </div>
+        </div>
+
+
+        {% if eds|length == 0 %}
+
+        {% else %}
+            <ul class="collection list">
+                {% for item in eds  %}
+                    <li class="collection-item avatar js-labo-item">
+                        <a href="{{ path('editeur_ed_edit', {'id': item.EdId } ) }}" >
+                            <i class="material-icons circle green">mode_edit</i>
+                            <span class="title">{{ item.nom }}</span>
+                        </a>
+                    </li>
+
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <ul class="center pagination"></ul>
+    </div>
+</div>
+{% else %}
+    <div class="col s6 row">
+        <div class="card col s12">
+            <h2>Ecoles doctorales</h2>
+            <p>Aucune n'école doctorale n'a encore été définie. Souhaitez-vous en <a href="{{ path('editeur_ed_new') }}" class="red-text ">ajouter</a> une nouvelle? </p>
+        </div>
+    </div>
+{% endif %}
+

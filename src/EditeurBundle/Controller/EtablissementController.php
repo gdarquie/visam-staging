@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\File\File;
 
 use AppBundle\Entity\Etablissement;
 use EditeurBundle\Form\EtablissementType;
@@ -36,6 +37,16 @@ class EtablissementController extends Controller
             $etablissement = $form->getData();
 
             $etablissement->setActive(true);
+            $file  = $etablissement->getLogo();
+
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+
+            $file->move(
+                $this->getParameter('logos_directory'),
+                $fileName
+            );
+
+            $etablissement->setLogo($fileName);
 
             $em->persist($etablissement);
             $em->flush();
@@ -67,6 +78,9 @@ class EtablissementController extends Controller
             $now = new \DateTime();
             $etablissement->setLastUpdate($now);
 
+            $etablissement->setLogo(
+                new File($this->getParameter('logos_directory').'/'.$etablissement->getLogo())
+            );
 
             $em->persist($etablissement);
             $em->flush();

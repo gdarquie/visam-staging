@@ -723,4 +723,13 @@ class Localisation
         $this->complet = $complet;
     }
 
+    public function getGeo()
+    {
+        $lat = $this->lat;
+        $long = $this->long;
+        $geo = $lat.','.$long;
+
+        return $geo;
+    }
+
 }

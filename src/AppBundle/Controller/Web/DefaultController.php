@@ -140,12 +140,13 @@ class DefaultController extends Controller
         }
 
         //sélection des labos en fonction de l'hesamette principale
-        $query = $em->createQuery('SELECT l FROM AppBundle:Labo l JOIN l.discipline d JOIN d.hesamette h WHERE h.nom = :hesamette');
+        $query = $em->createQuery('SELECT l FROM AppBundle:Labo l JOIN l.discipline d JOIN d.hesamette h WHERE h.nom = :hesamette AND l.id != :id ORDER BY RAND()');
         $query->setParameter('hesamette', $hesamette_rebond);
+        $query->setParameter('id', $id);
         $rebonds_labo = $query->setMaxResults(2)->getResult();
 
         //Sélection des formations
-        $query = $em->createQuery('SELECT f FROM AppBundle:Formation f JOIN f.discipline d JOIN d.hesamette h WHERE h.nom = :hesamette');
+        $query = $em->createQuery('SELECT f FROM AppBundle:Formation f JOIN f.discipline d JOIN d.hesamette h WHERE h.nom = :hesamette ORDER BY RAND()');
         $query->setParameter('hesamette', $hesamette_rebond);
         $rebonds_formation = $query->setMaxResults(1)->getResult();
 
@@ -253,8 +254,15 @@ class DefaultController extends Controller
     public function formationAction($id)
     {
         $em = $this->getDoctrine()->getManager();
+//        $query = $em->createQuery('SELECT f FROM AppBundle:Formation f WHERE f.id = :id');
+//        $query->setParameter('id', $id);
+//        $formation = $query->getSingleResult();
 
+//        dump($formation->getLocalisation());die;
         $formation = $em->getRepository('AppBundle:Formation')->findOneById($id);
+
+
+
         $query = $em->createQuery('SELECT f FROM AppBundle:Formation f');
         $formations = $query->setMaxResults(3)->getResult();
 
@@ -278,14 +286,15 @@ class DefaultController extends Controller
 
 
         //sélection des labos en fonction de l'hesamette principale
-        $query = $em->createQuery('SELECT l FROM AppBundle:Labo l JOIN l.discipline d JOIN d.hesamette h WHERE h.nom = :hesamette');
+        $query = $em->createQuery('SELECT l FROM AppBundle:Labo l JOIN l.discipline d JOIN d.hesamette h WHERE h.nom = :hesamette ORDER BY RAND()');
         $query->setParameter('hesamette', $hesamette_rebond);
         $rebonds_labo = $query->setMaxResults(1)->getResult();
 
 
         //Sélection des formations
-        $query = $em->createQuery('SELECT f FROM AppBundle:Formation f JOIN f.discipline d JOIN d.hesamette h WHERE h.nom = :hesamette');
+        $query = $em->createQuery('SELECT f FROM AppBundle:Formation f JOIN f.discipline d JOIN d.hesamette h WHERE h.nom = :hesamette AND f.id != :id ORDER BY RAND()');
         $query->setParameter('hesamette', $hesamette_rebond);
+        $query->setParameter('id', $id);
         $rebonds_formation = $query->setMaxResults(2)->getResult();
 
 

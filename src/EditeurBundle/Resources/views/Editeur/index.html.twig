@@ -48,9 +48,18 @@
 
         <div class="card row">
 
+            {% if is_granted('ROLE_ADMIN') %}
+                <div class="col s12">
+                    <h1>Editeur [vue administrateur]</h1>
+                    <div class="col s12">
+                        {% for item in etablissements  %}{{  item.nom }}{% if loop.last %}{% else %} & {% endif %}{% endfor%}
+                    </div>
+                </div>
+            {% else %}
             <div class="col s12">
                 <h1 class="center">{% for item in etablissements  %}{{  item.nom }}{% if loop.last %}{% else %} & {% endif %}{% endfor%}</h1>
             </div>
+            {% endif %}
         </div>
 
         {% if formations|length == 0 and laboratoires|length == 0 and eds|length == 0 %}
@@ -85,9 +94,7 @@
                     </tr>
                     {% endfor %}
                     </tbody>
-                    </table>
-
-
+                </table>
 
             </div>
         </div>
@@ -95,161 +102,24 @@
 
         <div class="card row">
 
-            {% if formations|length > 0 %}
-            <div class="col s6">
-                <div class="row valign-wrapper">
-                    <h2 class="col">Formations ({{ formations|length }})</h2>
-                    <i class="material-icons circle white red-text">add</i>
-                    <a href="{{ path('editeur_formation_new') }}" class="red-text ajout col">Ajouter une formation</a>
-                </div>
-                <ul class="collection">
-                {% for item in formations  %}
-                    <li class="collection-item avatar js-formation-item">
-                        <a href="{{ path('editeur_formation_edit', {'id': item.id } ) }}" >
 
-                            {% if item.checkGeneral and item.checkEffectif and item.checkIndex and item.checkCursus %}
-                                <i class="material-icons circle green">mode_edit</i>
-                            {% else %}
-                                <i class="material-icons circle red ">mode_edit</i>
-                            {% endif %}
+            <div class="row">
+            <!-- Liste des formations -->
 
-                            <span class="title">{{ item.nom }}</span>
-                            <p>
-                                <span class="description">général
-                                    {% if item.checkGeneral %}
-                                        <i class="material-icons green-text">done</i>
-                                    {% else %}
-                                        <i class="material-icons red-text">not_interested</i>
-                                    {% endif %}
-                                </span>
-                                <span class="description">effectif
-                                    {% if item.checkEffectif %}
-                                        <i class="material-icons green-text">done</i>
-                                            {% else %}
-                                        <i class="material-icons red-text">not_interested</i>
-                                    {% endif %}
-                                </span>
-                                <span class="description">indexation
-                                    {% if item.checkIndex %}
-                                        <i class="material-icons green-text">done</i>
-                                            {% else %}
-                                        <i class="material-icons red-text">not_interested</i>
-                                    {% endif %}
-                                </span>
-                                <span class="description">cursus
-                                    {% if item.checkCursus %}
-                                        <i class="material-icons green-text">done</i>
-                                            {% else %}
-                                        <i class="material-icons red-text">not_interested</i>
-                                    {% endif %}
-                                </span>
-                            </p>
+            {%  include '@Editeur/Editeur/_formation.html.twig' %}
 
 
-                        </a>
-                        <a href="#!" class="secondary-content js-remove-formation" data-url="{{ path('editeur_formation_ajax_delete', { id : item.id}) }}" ><i class="material-icons">delete</i>
-                        </a>
-                    </li>
-                {% endfor %}
-                </ul>
-            </div>
-            {% else %}
-            <div class="col s6">
-                <h2>Formations</h2>
-                <p>Acutellement, il n'y pas de formations rattachées.</p>
-                <p><a href="#">+ Ajouter une formation</a></p>
-            </div>
-            {% endif %}
+            <!-- Liste des labos -->
 
-            <div class="col s6">
-
-                <div class="col s12">
-
-                    <div class="row valign-wrapper">
-                        <h2>Laboratoires ({{ laboratoires|length }})</h2>
-                        <i class="material-icons circle white red-text">add</i>
-                        <a href="{{ path('editeur_laboratoire_new') }}" class="red-text ajout col">Ajouter un laboratoire</a>
-                    </div>
-                    <ul class="collection">
-                        {% for item in laboratoires  %}
-                            <li class="collection-item avatar js-labo-item">
-                                <a href="{{ path('editeur_laboratoire_edit', {'id': item.id } ) }}" >
-                                    {% if item.checkGeneral and item.checkContact and item.checkEtab and item.checkEtab and item.checkEffectifs and item.checkDescription %}
-                                        <i class="material-icons circle green">mode_edit</i>
-                                    {% else %}
-                                        <i class="material-icons circle red">mode_edit</i>
-                                    {% endif %}
-
-                                    <span class="title">{{ item.nom }}</span>
-                                    <p>
-                                        <span class="description">général
-                                            {% if item.checkGeneral %}
-                                                <i class="material-icons green-text">done</i>
-                                            {% else %}
-                                                <i class="material-icons red-text">not_interested</i>
-                                            {% endif %}
-                                        </span>
-                                        <span class="description">contact
-                                            {% if item.checkContact %}
-                                                <i class="material-icons green-text">done</i>
-                                            {% else %}
-                                                <i class="material-icons red-text">not_interested</i>
-                                            {% endif %}
-                                        </span>
-                                        <span class="description">description
-                                            {% if item.checkDescription %}
-                                                <i class="material-icons green-text">done</i>
-                                            {% else %}
-                                                <i class="material-icons red-text">not_interested</i>
-                                            {% endif %}
-                                        </span>
-                                        <span class="description">établissement
-                                            {% if item.checkEtab %}
-                                                <i class="material-icons green-text">done</i>
-                                            {% else %}
-                                                <i class="material-icons red-text">not_interested</i>
-                                            {% endif %}
-                                        </span>
-                                        <span class="description">effectifs
-                                            {% if item.checkEffectifs %}
-                                                <i class="material-icons green-text">done</i>
-                                            {% else %}
-                                                <i class="material-icons red-text">not_interested</i>
-                                            {% endif %}
-                                        </span>
-                                    </p>
-                                </a>
-                                <a href="#!" class="secondary-content js-remove-labo" data-url="{{ path('editeur_laboratoire_ajax_delete', { id : item.id}) }}" ><i class="material-icons">delete</i>
-                                </a>
-
-                            </li>
-
-                        {% endfor %}
-                    </ul>
-
-                </div>
+            {%  include '@Editeur/Editeur/_labo.html.twig' %}
             </div>
 
-            <div class="col s6">
-                <div class="col s12">
-                    <div class="row valign-wrapper">
-                        <h2>Ecoles doctorales ({{ eds|length }})</h2>
-                        <i class="material-icons circle white red-text">add</i>
-                        <a href="{{ path('editeur_ed_new') }}" class="red-text ajout col">Ajouter une école doctorale</a>
-                    </div>
+            <div class="row">
 
-                    <ul class="collection">
-                        {% for item in eds  %}
-                            <li class="collection-item avatar js-labo-item">
-                                <a href="{{ path('editeur_ed_edit', {'id': item.EdId } ) }}" >
-                                        <i class="material-icons circle green">mode_edit</i>
-                                    <span class="title">{{ item.nom }}</span>
-                                </a>
-                            </li>
+            <!-- Ecole doctorale -->
 
-                        {% endfor %}
-                    </ul>
-                </div>
+            {%  include '@Editeur/Editeur/_ed.html.twig' %}
+
             </div>
         </div>
 
@@ -259,6 +129,34 @@
 
 {% block javascripts %}
     {{ parent() }}
+
+    <!-- list.js -->
+    <script>
+
+        var list_formations_options = {
+            valueNames: [ 'title', 'f-general', 'f-effectif', 'f-indexation', 'f-cursus' ],
+            page: 5,
+            pagination: true
+        };
+
+        var formationsList = new List('formations-list', list_formations_options);
+
+        var list_laboratoires_options = {
+            valueNames: [ 'title', 'f-general', 'f-effectif', 'f-indexation', 'f-cursus' ],
+            page: 5,
+            pagination: true
+        };
+
+        var laboratoiresList = new List('laboratoires-list', list_laboratoires_options);
+
+        var list_eds_options = {
+            valueNames: [ 'title', 'l-general', 'l-contact', 'l-description', 'l-etablissement', 'l-effectif' ],
+            page: 5,
+            pagination: true
+        };
+
+        var edsList = new List('eds-list', list_eds_options);
+    </script>
 
     <script>
 

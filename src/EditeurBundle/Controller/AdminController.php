@@ -206,7 +206,7 @@ class AdminController extends Controller
 
         $query = $em->createQuery(
             'SELECT l FROM AppBundle:Formation l ORDER BY l.last_update DESC'
-        )->setMaxResults(20);
+        )->setFirstResult($first)->setMaxResults($max);
         $items = $query->getResult();
 
         return $this->render('EditeurBundle:Admin:formations.html.twig', array(
@@ -240,7 +240,7 @@ class AdminController extends Controller
 
         $query = $em->createQuery(
             'SELECT l FROM AppBundle:Ed l ORDER BY l.last_update DESC'
-        )->setMaxResults(20);
+        )->setFirstResult($first)->setMaxResults($max);
         $items = $query->getResult();
 
         return $this->render('EditeurBundle:Admin:eds.html.twig', array(
@@ -274,7 +274,7 @@ class AdminController extends Controller
 
         $query = $em->createQuery(
             'SELECT l FROM AppBundle:Localisation l ORDER BY l.timestamp DESC'
-        )->setMaxResults(20);
+        )->setFirstResult($first)->setMaxResults($max);
         $items = $query->getResult();
 
         return $this->render('EditeurBundle:Admin:localisations.html.twig', array(

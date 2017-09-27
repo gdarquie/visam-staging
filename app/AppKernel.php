@@ -22,7 +22,6 @@ class AppKernel extends Kernel
             new EditeurBundle\EditeurBundle(),
             new ApiBundle\ApiBundle(),
             new Liuggio\ExcelBundle\LiuggioExcelBundle(),
-            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Ensepar\Html2pdfBundle\EnseparHtml2pdfBundle(),
             new FOS\ElasticaBundle\FOSElasticaBundle(),
         ];

@@ -293,6 +293,14 @@ class Etablissement
      */
     private $ed;
 
+    /**
+     * @ORM\Column(type="string")
+     *
+     * @Assert\File(mimeTypes={ "image/png" }, maxSize = "10M")
+     */
+    private $logo;
+
+//         * @Assert\NotBlank(message="Veuillez uploader le logo de l'établissement (les formats acceptés sont : .png)")
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -1051,5 +1059,23 @@ class Etablissement
     {
         $this->active = $active;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getLogo()
+    {
+        return $this->logo;
+    }
+
+    /**
+     * @param mixed $logo
+     */
+    public function setLogo($logo)
+    {
+        $this->logo = $logo;
+    }
+
+
 
 }

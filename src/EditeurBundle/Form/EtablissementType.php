@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class EtablissementType extends AbstractType
 {
@@ -27,6 +28,7 @@ class EtablissementType extends AbstractType
             ->add('nom')
             ->add('description')
             ->add('code')
+            ->add('logo', FileType::class, array('data_class' => null, 'label' => 'Importer un logo'))
             ->add('sigle')
             ->add('lien')
             ->add('active')
