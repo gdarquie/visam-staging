@@ -63,7 +63,7 @@
     <div class="navbar-fixed">
         <nav>
             <div class="nav-wrapper red-hesam">
-                <a href="{{ path('homepage') }}" class="brand-logo">carto heSam</a>
+                <a href="{{ path('homepage') }}" class="brand-logo">Carto HESAM</a>
                 <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li><a href="{{ path('search') }}">Rechercher</a></li>
@@ -73,7 +73,7 @@
 
 
                     {% if is_granted('ROLE_USER') %}
-                    <li><a class="dropdown-button" href="#!" data-activates="menu_editeur">Editeur carto heSam<i class="material-icons right">arrow_drop_down</i></a></li>
+                    <li><a class="dropdown-button" href="#!" data-activates="menu_editeur">Editeur carto HESAM<i class="material-icons right">arrow_drop_down</i></a></li>
                     {% endif %}
 
                     {% if is_granted('ROLE_ADMIN') %}

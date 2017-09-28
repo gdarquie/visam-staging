@@ -41,34 +41,39 @@
 
                         <div class="col s12">
                             <p class="col s12">
-                                    <span class="description f-general">général
-                                        {% if item.checkGeneral %}
-                                            <i class="material-icons green-text">done</i>
-                                        {% else %}
-                                            <i class="material-icons red-text">not_interested</i>
-                                        {% endif %}
-                                    </span>
+
+                                <span class="description f-general">général
+                                    {% if item.checkGeneral %}
+                                        <i class="material-icons green-text">done</i>
+                                    {% else %}
+                                        <i class="material-icons red-text">not_interested</i>
+                                    {% endif %}
+                                </span>
+
                                 <span class="description f-effectif">effectif
                                     {% if item.checkEffectif %}
                                         <i class="material-icons green-text">done</i>
                                                 {% else %}
                                         <i class="material-icons red-text">not_interested</i>
                                     {% endif %}
-                                    </span>
+                                </span>
+
                                 <span class="description">indexation
                                     {% if item.checkIndex %}
                                         <i class="material-icons green-text">done</i>
                                                 {% else %}
                                         <i class="material-icons red-text">not_interested</i>
                                     {% endif %}
-                                    </span>
+                                </span>
+
                                 <span class="description">cursus
                                     {% if item.checkCursus %}
                                         <i class="material-icons green-text">done</i>
                                                 {% else %}
                                         <i class="material-icons red-text">not_interested</i>
                                     {% endif %}
-                                    </span>
+                                </span>
+
                             </p>
                         </div>
 

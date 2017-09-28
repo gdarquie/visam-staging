@@ -218,116 +218,12 @@
 
             <!-- Gestion des établissements -->
 
-            <article class="card" id="etablissement">
-                <h3>Gérer les établissements</h3>
-
-                <table class="highlight tablesorter responsive-table">
-                    <thead>
-                    <tr>
-                        <th>Nom</th>
-                        <th>Dernière modification</th>
-                        <th>Importer</th>
-                        <th>Exporter labo</th>
-                        <th>Exporter formations</th>
-                        <th>Modifier</th>
-                        <th>Supprimer</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for item in etablissements %}
-
-                        <tr class="js-etablissement-item">
-                                <span>
-                                <td>{{ item.nom }}</td>
-                                {#<td>le {{ item.lastUpdate|date('d/m/Y') }} à {{ item.lastUpdate|date( 'H:i:s') }}</td>#}
-                                <td>{{ item.lastUpdate|date() }}</td>
-                                <td><a data-target="modal1" href="#modal1" class="modal-trigger" data-id-etablissement="{{ item.etablissementId }}" data-nom-etablissement="{{ item.nom }}">Import&nbsp;CSV</a></td>
-                                <td><a href="{{ path("export_formulaire", { "id" : item.etablissementId, "type" : "L" }) }}">Export des données de labo</a></td>
-                                <td><a href="{{ path("export_formulaire", { "id" : item.etablissementId, "type" : "F" }) }}">Export des données de formation</a></td>
-                                <td><a href="{{ path('editeur_etablissement_edit', {'id' : item.etablissementId}) }}"><i class="material-icons">edit</i></a></td>
-                                <td><a href="#!" class="js-remove-etablissement" data-url="{{ path('editeur_etablissement_ajax_delete', { etablissementId : item.etablissementId}) }}" ><i class="material-icons">delete</i></a></td>
-
-                                </span>
-                        </tr>
-
-                {#<ul class="collection with-header">#}
-                    {#<li class="collection-header"><h4>Etablissements</h4></li>#}
-                    {#{% for item in etablissements  %}#}
-                        {#<li class="collection-item"><a href="{{ path('editeur_etablissement_edit', {'id' : item.etablissementId}) }}">{{ item.nom }}</a> - {{ item.lastUpdate|date('d/m/Y') }} à {{ item.lastUpdate|date( 'H:i:s') }}#}
-                         {#   {% if item.sigle == 'Cnam' %} #}
-                            {#<br /><a href="{{ path("export_formulaire", { "id" : item.etablissementId, "type" : "L" }) }}">Export des données de labo</a>#}
-                            {#&nbsp;&nbsp;<br /><a href="{{ path("export_formulaire", { "id" : item.etablissementId, "type" : "F" }) }}">Export des données de formation</a>#}
-                            {#<br />#}
-                            {#<a data-target="modal1" href="#modal1" class="modal-trigger" data-id-etablissement="{{ item.etablissementId }}" data-nom-etablissement="{{ item.nom }}">Import&nbsp;CSV</a>#}
-                            {#    {% endif %} #}
-                        {#</li>#}
-                {#</ul>#}
-
-                    {% endfor %}
-                    </tbody>
-                </table>
+            {%  include 'EditeurBundle:Admin:_etablissements.html.twig' %}
 
 
-                <div class="row">
-                    <div class="add_item_btn right">
-                        <a href="{{ path('editeur_etablisement_new') }}"><span class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></span>
+            <!-- Gestion des contributeurs -->
 
-                        <span class="legend_btn">Ajouter un établissement</span>
-                        </a>
-                    </div>
-                </div>
-
-            </article>
-
-            <article class="card" id="utilisateur">
-                <h3>Gérer les contributeurs</h3>
-
-                <div class="row">
-
-
-                    <table class="highlight tablesorter responsive-table">
-                        <thead>
-                        <tr>
-                            <th>Nom</th>
-                            <th>Email</th>
-                            {#<th>Status</th>#}
-                            <th>Roles</th>
-                            <th>Dernière connexion</th>
-                            <th>Modifier</th>
-                            <th>Supprimer</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for item in users %}
-
-                            <tr class="js-user-item">
-                                <span>
-                                <td>{{ item.username }}</td>
-                                <td>{{ item.email }}</td>
-                                {#<td>{{ item.enabled }}</td>#}
-                                <td>{% for role in item.roles  %}
-                                        {{ role }}{%  if loop.last  %}{% else %},{% endif %}
-                                    {% endfor %}</td>
-                                <td>{{ item.lastLogin|date() }}</td>
-                                <td><a href="{{ path('editeur_user_edit', {'id' : item.id}) }}"><i class="material-icons">edit</i></a></td>
-                                <td><a href="#!" class="js-remove-user" data-url="{{ path('editeur_user_ajax_delete', { userId : item.id}) }}" ><i class="material-icons">delete</i></a></td>
-                                </span>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-
-                </div>
-
-                <div class="row">
-                    <div class="add_item_btn right">
-                        <a href="/register"><span class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></span>
-                        </a>
-                        <span class="legend_btn">Ajouter un contributeur</span>
-                    </div>
-                </div>
-
-            </article>
+            {%  include 'EditeurBundle:Admin:_users.html.twig' %}
 
 
             <!-- thésaurus -->
@@ -539,6 +435,28 @@
     {{ parent() }}
     <script type="text/javascript" src="{{ asset("build/admin_menu.js") }}"></script>
     {#<script type="text/javascript" src="{{ asset("build/admin_accueil.js") }}"></script>#}
+
+    <!-- list.js -->
+    <script>
+
+        var list_etablissement_options = {
+            //valueNames: [ 'title', 'f-general', 'f-effectif', 'f-indexation', 'f-cursus' ],
+            page: 5,
+            pagination: true
+        };
+
+        var etablissementList = new List('etablissement', list_etablissement_options);
+
+        var list_user_options = {
+            //valueNames: [ 'title', 'f-general', 'f-effectif', 'f-indexation', 'f-cursus' ],
+            page: 5,
+            pagination: true
+        };
+
+        var userList = new List('user', list_user_options);
+
+
+    </script>
 
     <script>
         $(document).ready(function() {

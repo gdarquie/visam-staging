@@ -37,16 +37,17 @@ class EtablissementController extends Controller
             $etablissement = $form->getData();
 
             $etablissement->setActive(true);
-            $file  = $etablissement->getLogo();
 
-            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+//            $file  = $etablissement->getLogo();
+//
+//            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+//
+//            $file->move(
+//                $this->getParameter('logos_directory'),
+//                $fileName
+//            );
 
-            $file->move(
-                $this->getParameter('logos_directory'),
-                $fileName
-            );
-
-            $etablissement->setLogo($fileName);
+//            $etablissement->setLogo($fileName);
 
             $em->persist($etablissement);
             $em->flush();
@@ -78,9 +79,9 @@ class EtablissementController extends Controller
             $now = new \DateTime();
             $etablissement->setLastUpdate($now);
 
-            $etablissement->setLogo(
-                new File($this->getParameter('logos_directory').'/'.$etablissement->getLogo())
-            );
+//            $etablissement->setLogo(
+//                new File($this->getParameter('logos_directory').'/'.$etablissement->getLogo())
+//            );
 
             $em->persist($etablissement);
             $em->flush();

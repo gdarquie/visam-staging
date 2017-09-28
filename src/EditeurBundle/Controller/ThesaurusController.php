@@ -43,7 +43,7 @@ class ThesaurusController extends Controller
             $em->persist($thesaurus);
             $em->flush();
 
-            return $this->redirectToRoute('my_admin');
+            return $this->redirectToRoute('admin');
         }
 
         return $this->render('EditeurBundle:Thesaurus:new.html.twig', array(

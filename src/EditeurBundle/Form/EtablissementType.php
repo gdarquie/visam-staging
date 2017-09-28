@@ -28,7 +28,7 @@ class EtablissementType extends AbstractType
             ->add('nom')
             ->add('description')
             ->add('code')
-            ->add('logo', FileType::class, array('data_class' => null, 'label' => 'Importer un logo'))
+//            ->add('logo', FileType::class, array('data_class' => null, 'label' => 'Importer un logo'))
             ->add('sigle')
             ->add('lien')
             ->add('active')

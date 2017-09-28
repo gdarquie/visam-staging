@@ -37,6 +37,15 @@
             margin-left : -10px;
         }
 
+        .chip{
+            color: #FF412C;
+            border-color: #FF412C;
+        }
+
+        .admin_title h1{
+            font-size : 2em;
+        }
+
     </style>
 {% endblock %}
 
@@ -50,10 +59,18 @@
 
             {% if is_granted('ROLE_ADMIN') %}
                 <div class="col s12">
-                    <h1>Editeur [vue administrateur]</h1>
-                    <div class="col s12">
-                        {% for item in etablissements  %}{{  item.nom }}{% if loop.last %}{% else %} & {% endif %}{% endfor%}
+
+                    <div class="admin_title">
+                        <h1 class="center">Editeur [vue administrateur]</h1>
+                        <p class="center pointer">Voir les établissements de la collecte en cours</p>
                     </div>
+
+                    <div class="col s12 hide">
+                        {% for item in etablissements  %}
+                            <span class="chip">{{  item.nom }}</span>
+                        {% endfor%}
+                    </div>
+
                 </div>
             {% else %}
             <div class="col s12">
@@ -156,6 +173,7 @@
         };
 
         var edsList = new List('eds-list', list_eds_options);
+
     </script>
 
     <script>

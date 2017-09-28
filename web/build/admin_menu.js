@@ -10349,7 +10349,7 @@ return jQuery;
             let footer_height = $('footer').height();
             let limit_height = page_height - footer_height;
 
-            console.log("taille limite = " + limit_height + ", nous sommes actuellement à " + y + " pixel(s) du top");
+            //console.log("taille limite = " + limit_height + ", nous sommes actuellement à " + y + " pixel(s) du top");
 
             if (y > limit_height) {
 

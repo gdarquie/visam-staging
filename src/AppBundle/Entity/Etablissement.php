@@ -294,7 +294,7 @@ class Etablissement
     private $ed;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable= true)
      *
      * @Assert\File(mimeTypes={ "image/png" }, maxSize = "10M")
      */
