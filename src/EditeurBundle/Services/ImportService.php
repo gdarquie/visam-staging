@@ -35,6 +35,7 @@ class ImportService
     protected $tabDisciplineCnu = null;
     protected $tabModalitesThesaurus = null;
     protected $tabTags = null;
+    protected $tabComparaisonAdresses = null;
 
     //nombre collonnes requis pour un fichier de type  formations
     const REQUIRED_NUMBER_1 = 57;
@@ -572,11 +573,14 @@ class ImportService
     public function checkLocalisationData($data, $line)
     {
         $valid = true;
-        if (!$localisations = $this->formatLocalisationData($data)) {
+        $localisations = $this->formatLocalisationData($data);
+        if (!$localisations) {
             $msg = sprintf('Ligne %d : les nombres de localisations ne concordent pas entre eux', $line);
             $this->log->warning($msg);
             $valid = false;
         } else {
+            $tabAdresses = $this->getTabComparaisonAdresses();
+
             foreach ($localisations as $localisation) {
                 $requiredParams = array('adresse', 'ville', 'code');
                 $checkRequiredParams = $this->checkMandatoryParameters($localisation, $requiredParams);
@@ -588,10 +592,10 @@ class ImportService
                 }
                 //existLocalisation
                 //todo ajouter gestion envoie mail a admin sil la localisation n'est pas presente dans la base
-                if (!$this->em
-                    ->getRepository('AppBundle:Localisation')
-                    ->existLocalisation(trim($localisation['adresse']), trim($localisation['code']), trim($localisation['ville']))
-                ) {
+
+                $strAdresse = $this->getStrAdresse(trim($localisation['adresse']), trim($localisation['code']), trim($localisation['ville']));
+
+                if (!array_key_exists($strAdresse, $tabAdresses)) {
                     $msg = sprintf('Ligne %d : localisation inconnue : %s %s %s.', $line, $localisation['adresse'], $localisation['code'], $localisation['ville']);
                     $this->log->warning($msg);
                     $valid = false;
@@ -781,7 +785,7 @@ class ImportService
                 if ($objId = $this->getObjId($data['labo'])) {
                     $labo->setObjetId($objId);
                 } else {
-                    $id = $formation->getId();
+                    $id = $labo->getId();
                     $labo->setObjetId('L' . $id);
                 }
 
@@ -940,8 +944,7 @@ class ImportService
                         $labo->addEquipement($equipement);
                     }
                 }
-
-                } catch (\Exception $e) {
+            } catch (\Exception $e) {
                 $this->log->warning('data_error in line : ' . $line . ' Message : ' . $e->getMessage());
                 $valid = false;
             }
@@ -977,7 +980,7 @@ class ImportService
                         $this->tabModalitesThesaurus = $this->initModalitesThesaurus();
                     }
                     foreach ($modalites as $value) {
-                        $formation->addModalite($this->tabModalitesThesaurus[$value]);
+                        $formation->addModalite(trim($this->tabModalitesThesaurus[$value]));
                     }
                 }
 
@@ -994,10 +997,13 @@ class ImportService
                 }
 
                 //Localisation
-                foreach ($localisations as $value) {
+                $localisations = $this->formatLocalisationData($data['localisation']);
+                foreach ($localisations as $val) {
+                    $strAdresse = $this->getStrAdresse(trim($val['adresse']), trim($val['code'], trim($val['ville'])));
+
                     $localisation = $this->em
                         ->getRepository('AppBundle:Localisation')
-                        ->findOneBy(array('adresse' => $value['adresse'], 'code' => $value['code'], 'ville' => $value['ville']));
+                        ->find($this->tabComparaisonAdresses[$strAdresse]);
 
                     $formation->addLocalisation($localisation);
                 }
@@ -1082,6 +1088,11 @@ class ImportService
     public function getStrFormation($nom, $typeDiplome, $niveau, $annee = null)
     {
         return $this->removeAccents($nom).$this->removeAccents($typeDiplome).$this->removeAccents($niveau).(($annee === null)?:$this->removeAccents($annee));
+    }
+
+    public function getStrAdresse($adresse='', $code='', $ville='')
+    {
+        return $this->removeAccents($adresse).$this->removeAccents($code).$this->removeAccents($ville);
     }
 
     public function removeAccents($str)
@@ -1219,6 +1230,26 @@ class ImportService
             }
         }
         return true;
+    }
+
+
+    public function getTabComparaisonAdresses()
+    {
+        if ($this->tabComparaisonAdresses === null) {
+            $localisations = $this->em
+                ->getRepository('AppBundle:Localisation')
+                ->findAll();
+
+            $dataComparaisonAdresses = [];
+
+            foreach ($localisations as $val) {
+                $str = $this->getStrAdresse($val->getAdresse(), $val->getCode(), $val->getVille());
+                $dataComparaisonAdresses[$str] = $val->getLocalisationId();
+            }
+            $this->tabComparaisonAdresses = $dataComparaisonAdresses;
+        }
+
+        return $this->tabComparaisonAdresses;
     }
 
     public function getTabComparaisonFormations()
