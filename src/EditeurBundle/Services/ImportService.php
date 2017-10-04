@@ -460,7 +460,7 @@ class ImportService
     {
         $nbFields = count($data);
         if (($this->type == 1 && $nbFields != self::REQUIRED_NUMBER_1) || ($this->type == 2 && $nbFields != self::REQUIRED_NUMBER_2) ) {
-            $msg = "Ln $line : Le nombre des colonnes ( $nbFields ) est erroné ou non compatible.";
+            $msg = "Ligne $line : Le nombre des colonnes ( $nbFields ) est erroné ou non compatible.";
             $this->log->warning($msg);
             return false;
         }
@@ -529,7 +529,7 @@ class ImportService
 
             foreach ($modalites as $modalite) {
                 if (!array_key_exists($modalite, $this->tabModalitesThesaurus)) {
-                    $msg = sprintf('Ln %d : La modalité "%s" inconnu', $line, $modalite);
+                    $msg = sprintf('Ligne %d : La modalité "%s" inconnu', $line, $modalite);
                     $this->log->warning($msg);
                     $valid = false;
                 }
@@ -545,7 +545,7 @@ class ImportService
         $emails = explode(';', $data);
         foreach ($emails as $email) {
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $msg = sprintf('Ln %d : Le format d\'email "%s" n\'est pas valide.', $line, $email);
+                $msg = sprintf('Ligne %d : Le format d\'email "%s" n\'est pas valide.', $line, $email);
                 $this->log->warning($msg);
                 $valid = false;
             }
@@ -560,7 +560,7 @@ class ImportService
             $email = 'email_' . $i;
             if (!empty($data[$email])) {
                 if (!filter_var($data[$email], FILTER_VALIDATE_EMAIL)) {
-                    $msg = sprintf('Ln %d : Le format d\'email "%s" n\'est pas valide.', $line, $data[$email]);
+                    $msg = sprintf('Ligne %d : Le format d\'email "%s" n\'est pas valide.', $line, $data[$email]);
                     $this->log->warning($msg);
                     $valid = false;
                 }
@@ -573,7 +573,7 @@ class ImportService
     {
         $valid = true;
         if (!$localisations = $this->formatLocalisationData($data)) {
-            $msg = sprintf('Ln %d : les nombres des localisations ne se concordent pas entre eux', $line);
+            $msg = sprintf('Ligne %d : les nombres de localisations ne concordent pas entre eux', $line);
             $this->log->warning($msg);
             $valid = false;
         } else {
@@ -582,7 +582,7 @@ class ImportService
                 $checkRequiredParams = $this->checkMandatoryParameters($localisation, $requiredParams);
 
                 if ($checkRequiredParams['success'] === false) {
-                    $msg = sprintf('Ln %d : Les champs obligatoires "%s" sont manquants pour les données localisation de la formation', $line, $checkRequiredParams['param']);
+                    $msg = sprintf('Ligne %d : Les champs obligatoires "%s" sont manquants pour les données localisation de la formation', $line, $checkRequiredParams['param']);
                     $this->log->warning($msg);
                     return false;
                 }
@@ -590,9 +590,9 @@ class ImportService
                 //todo ajouter gestion envoie mail a admin sil la localisation n'est pas presente dans la base
                 if (!$this->em
                     ->getRepository('AppBundle:Localisation')
-                    ->existLocalisation($localisation['adresse'], $localisation['code'], $localisation['ville'])
+                    ->existLocalisation(trim($localisation['adresse']), trim($localisation['code']), trim($localisation['ville']))
                 ) {
-                    $msg = sprintf('Ln %d : la localisation inconnue : %s %s %s.', $line, $localisation['adresse'], $localisation['code'], $localisation['ville']);
+                    $msg = sprintf('Ligne %d : localisation inconnue : %s %s %s.', $line, $localisation['adresse'], $localisation['code'], $localisation['ville']);
                     $this->log->warning($msg);
                     $valid = false;
                 }
@@ -609,7 +609,7 @@ class ImportService
             $metier = 'code_'. $i;
             if (!empty(trim($dataMetier[$metier]))) {
                 if (!$this->em->getRepository('AppBundle:Metier3')->existMetier($dataMetier[$metier])) {
-                    $msg = sprintf('Ln %d : le metier pour le code ROME  "%s" inconnu.', $line, $dataMetier[$metier]);
+                    $msg = sprintf('Ligne %d : le metier pour le code ROME  "%s" inconnu.', $line, $dataMetier[$metier]);
                     $this->log->warning($msg);
                     $valid = false;
                 }
@@ -626,7 +626,7 @@ class ImportService
         $checkRequiredParams = $this->checkMandatoryParameters($data, $requiredParams);
 
         if ($checkRequiredParams['success'] === false) {
-            $msg = sprintf('Ln %d : Les champs obligatoires "%s" sont manquants pour les données formation', $line, $checkRequiredParams['param']);
+            $msg = sprintf('Ligne %d : Les champs obligatoires "%s" sont manquants pour les données formation', $line, $checkRequiredParams['param']);
             $this->log->warning($msg);
             $valid = false;
         }
@@ -634,7 +634,7 @@ class ImportService
 
         $pattern = '/^\d{4}$/';
         if ($data['annee'] != '' && !preg_match($pattern, $data['annee'])) {
-            $msg = sprintf('Ln %d : Mauvais format de date : "%s"', $line, $data['annee']);
+            $msg = sprintf('Ligne %d : Mauvais format de date : "%s"', $line, $data['annee']);
             $this->log->warning($msg);
             $valid = false;
         }
@@ -642,7 +642,7 @@ class ImportService
         if ($this->initTabComparaison()) {
             $strFormation = $this->getStrFormation($data['nom'], $data['typeDiplome'], $data['niveau'], $data['annee']);
             if (array_key_exists($strFormation, $this->tabCheckDoublons)) {
-               $msg = sprintf('Ln %d : La formation "%s | %s | %s | %s" existe déjà dans la BDD avec identifiant %d', $line, $data['nom'], $data['typeDiplome'], $data['niveau'], $data['annee'], $this->tabCheckDoublons[$strFormation]);
+               $msg = sprintf('Ligne %d : La formation "%s | %s | %s | %s" existe déjà dans la BDD avec identifiant %d', $line, $data['nom'], $data['typeDiplome'], $data['niveau'], $data['annee'], $this->tabCheckDoublons[$strFormation]);
                $this->log->warning($msg);
                $valid = false;
             }
@@ -659,14 +659,14 @@ class ImportService
         $checkRequiredParams = $this->checkMandatoryParameters($data, $requiredParams);
 
         if ($checkRequiredParams['success'] === false) {
-            $msg = sprintf('Ln %d : Les champs obligatoires "%s" sont manquants pour les données établissement', $line, $checkRequiredParams['param']);
+            $msg = sprintf('Ligne %d : Les champs obligatoires "%s" sont manquants pour les données établissement', $line, $checkRequiredParams['param']);
             $this->log->warning($msg);
             $valid = false;
         }
 
         //verification si l'etablissement demande est bien avec meme id et meme code
         if ($data['code'] != '' && !$this->em->getRepository('AppBundle:Etablissement')->verifyEtablissementByCodeAndId($this->etablissement->getEtablissementId(), $data['code'])) {
-            $msg = sprintf('Ln %d : L\'établissement inconnu avec son identifiant %d et son code %s', $line, $this->etablissement->getEtablissementId(), $data['code']);
+            $msg = sprintf('Ligne %d : Etablissement inconnu avec son identifiant %d et son code %s', $line, $this->etablissement->getEtablissementId(), $data['code']);
             $this->log->warning($msg);
             $valid = false;
         }
@@ -678,7 +678,7 @@ class ImportService
         $valid = true;
 
         if (!$this->checkDisciplineParameters($data)) {
-            $msg = sprintf("Ln %d : Une ou plusieurs valeurs  des disciplines type SISE, CNU et HCERES est/sont absente(s)", $line);
+            $msg = sprintf("Ligne %d : Une ou plusieurs valeurs  des disciplines type SISE, CNU et HCERES est/sont absente(s)", $line);
             $this->log->warning($msg);
             $valid = false;
         }
@@ -744,7 +744,7 @@ class ImportService
             $sise = 'abreviation_sise_'.$i;
             if ($disciplines[$sise] != '') {
                 if (!$this->disciplineExists($disciplines[$sise], 'SISE')) {
-                    $msg = sprintf('Ln %d : La valeur de discipline SISE "%s" est inconnue.', $line, $disciplines[$sise]);
+                    $msg = sprintf('Ligne %d : La valeur de discipline SISE "%s" est inconnue.', $line, $disciplines[$sise]);
                     $this->log->warning($msg);
                     return false;
                 }
@@ -752,7 +752,7 @@ class ImportService
             $hceres = 'abreviation_hceres_'.$i;
             if ($disciplines[$hceres] != '') {
                 if (!$this->disciplineExists($disciplines[$hceres], 'HCERES')) {
-                    $msg = sprintf('Ln %d : La valeur de discipline HCERES "%s" est inconnue.', $line, $disciplines[$hceres]);
+                    $msg = sprintf('Ligne %d : La valeur de discipline HCERES "%s" est inconnue.', $line, $disciplines[$hceres]);
                     $this->log->warning($msg);
                     return false;
                 }
@@ -760,7 +760,7 @@ class ImportService
             $cnu = 'nom_cnu_'.$i;
             if ($disciplines[$cnu] != '') {
                 if (!$this->disciplineExists($disciplines[$cnu], 'CNU')) {
-                    $msg = sprintf('Ln %d : La valeur de discipline CNU "%s" est inconnue.', $line, $disciplines[$cnu]);
+                    $msg = sprintf('Ligne %d : La valeur de discipline CNU "%s" est inconnue.', $line, $disciplines[$cnu]);
                     $this->log->warning($msg);
                     return false;
                 }
