@@ -37,6 +37,7 @@ class ImportService
     protected $tabTags = null;
     protected $tabComparaisonAdresses = null;
 
+
     //nombre collonnes requis pour un fichier de type  formations
     const REQUIRED_NUMBER_1 = 57;
     //nombre collonnes requis pour un fichier de type laboratoires
@@ -298,7 +299,7 @@ class ImportService
             if ($this->formatDataExcel(array_map('trim',$contents[$line]), $line)) {
                 $dataArray[$line] = $this->formatDataExcel(array_map('trim', $contents[$line]), $line);
             } else {
-                return false;
+                break;
             }
         }
         return $dataArray;
@@ -309,6 +310,36 @@ class ImportService
         $formattedData = [];
 
         if ($this->checkNbFields($data, $line)) {
+            $data = array_map('trim', $data);
+            if ($data['A'] == '' &&
+                $data['B'] == '' &&
+                $data['C'] == '' &&
+                $data['D'] == '' &&
+                $data['E'] == '' &&
+                $data['F'] == '' &&
+                $data['G'] == '' &&
+                $data['H'] == '' &&
+                $data['I'] == '' &&
+                $data['J'] == '' &&
+                $data['K'] == '' &&
+                $data['L'] == '' &&
+                $data['M'] == '' &&
+                $data['N'] == '' &&
+                $data['O'] == '' &&
+                $data['P'] == '' &&
+                $data['Q'] == '' &&
+                $data['R'] == '' &&
+                $data['S'] == '' &&
+                $data['T'] == '' &&
+                $data['W'] == '' &&
+                $data['Y'] == '' &&
+                $data['AA'] == '' &&
+                $data['AC'] == '' &&
+                $data['AE'] == '' &&
+                $data['AF'] == ''
+            ) {
+                return false;
+            }
 
             if ($this->type == self::TYPE_FORMATION) {
                 $formattedData['formation']['annee'] = $data['A'];
