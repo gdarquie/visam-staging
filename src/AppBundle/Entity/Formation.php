@@ -14,11 +14,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Formation
 {
-
     /**
      * @var integer
      *
-     * @ORM\Column(name="formation_id", type="integer")
+     * @ORM\Column(name="formation_id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -46,7 +45,7 @@ class Formation
     /**
      * @var string
      *
-     * @ORM\Column(name="url", type="string", length=255, nullable=true)
+     * @ORM\Column(name="url", type="string", length=500, nullable=true)
      */
     private $url;
 
@@ -137,14 +136,14 @@ class Formation
     /**
      * @var string
      *
-     * @ORM\Column(name="lien2", type="string", length=255, nullable=true)
+     * @ORM\Column(name="lien2", type="string", length=500, nullable=true)
      */
     private $lien2;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="lien3", type="string", length=255, nullable=true)
+     * @ORM\Column(name="lien3", type="string", length=500, nullable=true)
      */
     private $lien3;
 
@@ -409,6 +408,7 @@ class Formation
         $this->etablissement = new \Doctrine\Common\Collections\ArrayCollection();
         $this->discipline = new \Doctrine\Common\Collections\ArrayCollection();
         $this->metier = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->modalite_thesaurus = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
@@ -1014,22 +1014,6 @@ class Formation
     }
 
     /**
-     * @return string
-     */
-    public function getModalite()
-    {
-        return $this->modalite;
-    }
-
-    /**
-     * @param string $modalite
-     */
-    public function setModalite($modalite)
-    {
-        $this->modalite = $modalite;
-    }
-
-    /**
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getCnu()
@@ -1174,7 +1158,7 @@ class Formation
     }
 
     /**
-     * @return Thesaurus
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getModaliteThesaurus()
     {
@@ -1182,12 +1166,19 @@ class Formation
     }
 
     /**
-     * @param Thesaurus $modalite_thesaurus
+     * Add modalite_thesaurus
+     *
+     * @param \AppBundle\Entity\Thesaurus $modalite_thesaurus
+     *
+     * @return Formation
      */
-    public function setModaliteThesaurus($modalite_thesaurus)
+    public function addModaliteThesaurus(\AppBundle\Entity\Thesaurus $modalite_thesaurus)
     {
-        $this->modalite_thesaurus = $modalite_thesaurus;
+        $this->modalite_thesaurus[] = $modalite_thesaurus;
+
+        return $this;
     }
+
 
     /**
      * @return Thesaurus
@@ -1281,6 +1272,62 @@ class Formation
     public function __toString()
     {
         return (string) $this->getNom();
+    }
+
+    /**
+ * Add tag
+ *
+ * @param \AppBundle\Entity\Tag $tag
+ *
+ * @return Formation
+ */
+    public function addTag(\AppBundle\Entity\Tag $tag)
+    {
+        $this->tag[] = $tag;
+
+        return $this;
+    }
+
+    /**
+     * Add sise
+     *
+     * @param \AppBundle\Entity\Discipline $sise
+     *
+     * @return Formation
+     */
+    public function addSise(\AppBundle\Entity\Discipline $sise)
+    {
+        $this->sise[] = $sise;
+
+        return $this;
+    }
+
+    /**
+     * Add cnu
+     *
+     * @param \AppBundle\Entity\Discipline $cnu
+     *
+     * @return Formation
+     */
+    public function addCnu(\AppBundle\Entity\Discipline $cnu)
+    {
+        $this->cnu[] = $cnu;
+
+        return $this;
+    }
+
+    /**
+     * Add hceres
+     *
+     * @param \AppBundle\Entity\Discipline $hceres
+     *
+     * @return Formation
+     */
+    public function addHceres(\AppBundle\Entity\Discipline $hceres)
+    {
+        $this->hceres[] = $hceres;
+
+        return $this;
     }
 
 }

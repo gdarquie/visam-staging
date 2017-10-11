@@ -16,6 +16,7 @@ use AppBundle\Entity\Formation;
 use AppBundle\Entity\Localisation;
 use AppBundle\Entity\Metier3;
 use AppBundle\Entity\Tag;
+use AppBundle\Entity\Ufr;
 use AppBundle\Entity\Membre;
 use AppBundle\Entity\Equipement;
 use AppBundle\Entity\Axe;
@@ -34,8 +35,13 @@ class ImportService
     protected $tabDisciplineSise = null;
     protected $tabDisciplineCnu = null;
     protected $tabModalitesThesaurus = null;
+    protected $tabNiveauThesaurus = null;
+    protected $tabLmdThesaurus = null;
     protected $tabTags = null;
     protected $tabComparaisonAdresses = null;
+    protected $tabTypeDiplome = null;
+    protected $tabNiveauDiplome = null;
+    protected $tabLmdDiplome = null;
 
 
     //nombre collonnes requis pour un fichier de type  formations
@@ -44,7 +50,7 @@ class ImportService
     const REQUIRED_NUMBER_2 = 78;
     const TYPE_FORMATION = 'F';
     const TYPE_LABO = 'L';
-    const COMMIT_STEP = 5;
+    const COMMIT_STEP = 10;
 
     public function __construct(EntityManager $em, Logs $log, Factory $factory)
     {
@@ -55,6 +61,7 @@ class ImportService
 
     public function import(Etablissement $etablissement, $type, $file)
     {
+
         $this->type = $type;
         $this->etablissement = $etablissement;
         try {
@@ -65,11 +72,16 @@ class ImportService
                 return false;
             }
             if ($this->type == self::TYPE_FORMATION) {
-                if (!$importation = $this->importFormationData($formattedData)) {
+
+                if (!$this->prepareFormationData($formattedData)) {
+                    return false;
+                }
+
+                if (!$this->importFormationData($formattedData)) {
                     return false;
                 }
             } else if ($this->type == self::TYPE_LABO) {
-                if (!$importation = $this->importLaboData($formattedData)) {
+                if (!$this->importLaboData($formattedData)) {
                     return false;
                 }
             } else {
@@ -146,7 +158,7 @@ class ImportService
                     $formattedData['formation']['ects'],
                     $formattedData['formation']['url'],
                     $formattedData['formation']['nom'],
-                    /*K*/, //service de rattachement
+                    $formattedData['ufr']['nom'], //service de rattachement
                     /* domaine_sise_1 */,
                     $formattedData['discipline']['abreviation_sise_1']/*type SISE*/,
                     /* domaine_sise_2 */,
@@ -358,11 +370,11 @@ class ImportService
                 $formattedData['formation']['typeDiplome'] = $data['N'];
                 $formattedData['formation']['niveau'] = $data['O'];
                 $formattedData['formation']['lmd'] = $data['P'];
-                $formattedData['formation']['modalite_thesaurus'] = $data['Q']; // TODO multi-valeurs separes par ;
+                $formattedData['formation']['modalite_thesaurus'] = $data['Q'];
                 $formattedData['formation']['ects'] = $data['R'];
                 $formattedData['formation']['url'] = $data['S'];
                 $formattedData['formation']['nom'] = $data['T'];
-                /* U service de rattachement */
+                $formattedData['ufr']['nom'] = $data['U']; /* U service de rattachement */
                 /* V domaine_sise_1 */
                 $formattedData['discipline']['abreviation_sise_1'] = $data['W'];
                 /* X domaine_sise_2 */
@@ -398,7 +410,9 @@ class ImportService
                 $formattedData['metier']['code_3'] = $data['BB'];
                 $formattedData['metier']['code_4'] = $data['BC'];
                 $formattedData['metier']['code_5'] = $data['BD'];
-                $formattedData['formation']['objet_id'] = $data['BF'];
+                if (isset($data['BF'])) {
+                    $formattedData['formation']['objet_id'] = $data['BF'];
+                }
 
             } else if ($this->type == self::TYPE_LABO) {
                 $formattedData['etablissement']['code'] = $data['A'];
@@ -512,14 +526,37 @@ class ImportService
                     if (!$this->checkFormationData($data['formation'], $line)) {
                         $valid = false;
                     }
+
                     //metiers
                     if (!$this->checkMetierData($data['metier'], $line)) {
                         $valid = false;
                     }
+
                     //modalites
-                    if ($this->checkModalitesThesaurus($data['formation']['modalite_thesaurus'], $line)) {
+                    if (!$this->checkModalitesThesaurus($data['formation']['modalite_thesaurus'], $line)) {
                         $valid = false;
                     }
+
+                    //niveau
+                    if (!$this->checkNiveauThesaurus($data['formation']['niveau'], $line)) {
+                        $valid = false;
+                    }
+
+                    //parcours
+                    if (!$this->checkLmdThesaurus($data['formation']['lmd'], $line)) {
+                        $valid = false;
+                    }
+
+                    //type diplome
+                    if (!$this->checkTypeDiplomeThesaurus($data['formation']['typeDiplome'], $line)) {
+                        $valid = false;
+                    }
+
+                    //tag
+                    if (!$this->checkTags($data['tags']['nom'], $line)) {
+                        $valid = false;
+                    }
+
                 }
                 //Labo
                 if ($this->type == self::TYPE_LABO) {
@@ -545,26 +582,100 @@ class ImportService
                 }
             }
         }
+        return $valid;
+    }
 
+    public function checkTypeDiplomeThesaurus($data, $line)
+    {
+        $valid = true;
+        if ($data != '') {
+
+            if ($this->tabTypeDiplome === null) {
+                $this->initTabTypeDiplome();
+            }
+            if (!array_key_exists($data, $this->tabTypeDiplome)) {
+                $msg = sprintf('Ligne %d : Type dipl&ocirc;me "%s" inconnu', $line, $data);
+                $this->log->warning($msg);
+                $valid = false;
+            }
+        }
+        return $valid;
+    }
+
+    public function checkTags($data, $line)
+    {
+        $valid = true;
+        if ($data != '') {
+            $tags = explode(';', $data);
+
+            //verifier les doublons
+            if (count($tags) != count(array_flip($tags))) {
+                $msg = sprintf('Ligne %d : contient mots-clés en doublon.', $line);
+                $this->log->warning($msg);
+                $valid = false;
+            }
+        }
         return $valid;
     }
 
     public function checkModalitesThesaurus($data, $line)
     {
         $valid = true;
-        if (!empty($modalites)) {
+        if ($data != '') {
             $modalites = explode(';', $data);
 
             if ($this->tabModalitesThesaurus === null) {
-                $this->tabModalitesThesaurus = $this->initModalitesThesaurus();
+                $this->initModalitesThesaurus();
             }
 
             foreach ($modalites as $modalite) {
+
                 if (!array_key_exists($modalite, $this->tabModalitesThesaurus)) {
-                    $msg = sprintf('Ligne %d : La modalité "%s" inconnu', $line, $modalite);
+                    $msg = sprintf('Ligne %d : Modalité "%s" inconnue', $line, $data);
                     $this->log->warning($msg);
                     $valid = false;
                 }
+            }
+            //verifier les doublons
+
+            if (count($modalites) != count(array_flip($modalites))) {
+                $msg = sprintf('Ligne %d : contient modalites en doublon.', $line);
+                $this->log->warning($msg);
+                $valid = false;
+            }
+        }
+        return $valid;
+    }
+
+    public function checkLmdThesaurus($data, $line)
+    {
+        $valid = true;
+        if ($data != '') {
+
+            if ($this->tabLmdThesaurus === null) {
+                $this->initLmdThesaurus();
+            }
+            if (!array_key_exists($this->removeAccents($data), $this->tabLmdThesaurus)) {
+                $msg = sprintf('Ligne %d : Lmd "%s" inconnu', $line, $data);
+                $this->log->warning($msg);
+                $valid = false;
+            }
+        }
+        return $valid;
+    }
+
+    public function checkNiveauThesaurus($data, $line)
+    {
+        $valid = true;
+        if ($data != '') {
+
+            if ($this->tabNiveauThesaurus === null) {
+                $this->initNiveauThesaurus();
+            }
+            if (!array_key_exists($this->removeAccents($data), $this->tabNiveauThesaurus)) {
+                $msg = sprintf('Ligne %d : Niveau "%s" inconnu', $line, $data);
+                $this->log->warning($msg);
+                $valid = false;
             }
         }
         return $valid;
@@ -574,12 +685,14 @@ class ImportService
     {
         $valid = true;
         // peut etre multivaleur separe par;
-        $emails = explode(';', $data);
-        foreach ($emails as $email) {
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $msg = sprintf('Ligne %d : Le format d\'email "%s" n\'est pas valide.', $line, $email);
-                $this->log->warning($msg);
-                $valid = false;
+        if ($data != '') {
+            $emails = explode(';', $data);
+            foreach ($emails as $email) {
+                if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                    $msg = sprintf('Ligne %d : Le format d\'email "%s" n\'est pas valide.', $line, $email);
+                    $this->log->warning($msg);
+                    $valid = false;
+                }
             }
         }
         return $valid;
@@ -588,13 +701,15 @@ class ImportService
     public function checkMembreEmailData($data, $line)
     {
         $valid = true;
-        for ($i = 1; $i <= 5; $i++) {
-            $email = 'email_' . $i;
-            if (!empty($data[$email])) {
-                if (!filter_var($data[$email], FILTER_VALIDATE_EMAIL)) {
-                    $msg = sprintf('Ligne %d : Le format d\'email "%s" n\'est pas valide.', $line, $data[$email]);
-                    $this->log->warning($msg);
-                    $valid = false;
+        if ($data != '') {
+            for ($i = 1; $i <= 5; $i++) {
+                $email = 'email_' . $i;
+                if (!empty($data[$email])) {
+                    if (!filter_var($data[$email], FILTER_VALIDATE_EMAIL)) {
+                        $msg = sprintf('Ligne %d : Le format d\'email "%s" n\'est pas valide.', $line, $data[$email]);
+                        $this->log->warning($msg);
+                        $valid = false;
+                    }
                 }
             }
         }
@@ -630,6 +745,16 @@ class ImportService
                     $msg = sprintf('Ligne %d : localisation inconnue : %s %s %s.', $line, $localisation['adresse'], $localisation['code'], $localisation['ville']);
                     $this->log->warning($msg);
                     $valid = false;
+                } else {
+                    $tabCheckUnique[] = $tabAdresses[$strAdresse];
+                }
+            }
+            //verifier s'ils sont uniques par formation
+            if (isset($tabCheckUnique)) {
+                if (count($tabCheckUnique) != count(array_flip($tabCheckUnique))) {
+                    $msg = sprintf('Ligne %d : contient localisation en doublon.', $line);
+                    $this->log->warning($msg);
+                    $valid = false;
                 }
             }
         }
@@ -648,6 +773,14 @@ class ImportService
                     $this->log->warning($msg);
                     $valid = false;
                 }
+                $tabMetier[] = $dataMetier[$metier];
+            }
+        }
+        if (isset($tabMetier)) {
+            if (count($tabMetier) != count(array_flip($tabMetier))) {
+                $msg = sprintf('Ligne %d : contient metier en doublon.', $line);
+                $this->log->warning($msg);
+                $valid = false;
             }
         }
         return $valid;
@@ -783,6 +916,7 @@ class ImportService
                     $this->log->warning($msg);
                     return false;
                 }
+                $tabSise[] = $disciplines[$sise];
             }
             $hceres = 'abreviation_hceres_'.$i;
             if ($disciplines[$hceres] != '') {
@@ -791,6 +925,7 @@ class ImportService
                     $this->log->warning($msg);
                     return false;
                 }
+                $tabHceres[] = $disciplines[$hceres];
             }
             $cnu = 'nom_cnu_'.$i;
             if ($disciplines[$cnu] != '') {
@@ -799,6 +934,31 @@ class ImportService
                     $this->log->warning($msg);
                     return false;
                 }
+                $tabCnu[] = $disciplines[$cnu];
+            }
+        }
+        //verifier les doublons
+        if (isset($tabSise)) {
+            if (count($tabSise) != count(array_flip($tabSise))) {
+                $msg = sprintf('Ligne %d : contient discipline SISE en doublon.', $line);
+                $this->log->warning($msg);
+                $valid = false;
+            }
+        }
+
+        if (isset($tabHceres)) {
+            if (count($tabHceres) != count(array_flip($tabHceres))) {
+                $msg = sprintf('Ligne %d : contient discipline Hceres en doublon.', $line);
+                $this->log->warning($msg);
+                $valid = false;
+            }
+        }
+
+        if (isset($tabCnu)) {
+            if (count($tabCnu) != count(array_flip($tabCnu))) {
+                $msg = sprintf('Ligne %d : contient discipline CNU en doublon.', $line);
+                $this->log->warning($msg);
+                $valid = false;
             }
         }
         return true;
@@ -813,13 +973,14 @@ class ImportService
                 $labo = new Labo();
                 $labo->addEtablissement($this->etablissement);
 
+                /*
                 if ($objId = $this->getObjId($data['labo'])) {
                     $labo->setObjetId($objId);
                 } else {
                     $id = $labo->getId();
                     $labo->setObjetId('L' . $id);
                 }
-
+*/
                 $labo->setType($data['labo']['type']);
                 $labo->setCode($data['labo']['code']);
                 $labo->setNom($data['labo']['nom']);
@@ -975,6 +1136,18 @@ class ImportService
                         $labo->addEquipement($equipement);
                     }
                 }
+
+                $labo->setAnneeCollecte(date("Y"));
+                $labo->setCheckGeneral(1);
+                $labo->setCheckContact(1);
+                $labo->setCheckEtab(1);
+                $labo->setCheckDescription(1);
+                $labo->setCheckEffectifs(1);
+                $labo->setValide(1);
+
+                $this->em->persist($labo);
+                $this->em->flush();
+
             } catch (\Exception $e) {
                 $this->log->warning('data_error in line : ' . $line . ' Message : ' . $e->getMessage());
                 $valid = false;
@@ -982,11 +1155,59 @@ class ImportService
         }
     }
 
+    public function prepareFormationData($formattedData)
+    {
+        try {
+
+            foreach ($formattedData as $line => $data) {
+
+                //ufr
+                if ($data['ufr']['nom'] != '') {
+                    //verifier sil est deja dans la base, avant il faut supprimer accents etc..
+                    $ufr = $this->em->getRepository('AppBundle:Ufr')->getUfrByNom($data['ufr']['nom']);
+
+                    if ($ufr === null) {
+                        $ufr = new Ufr();
+                        $ufr->setNom($data['ufr']['nom']);
+                        $ufr->setTimestamp(new \DateTime());
+                        $this->em->persist($ufr);
+                        $this->em->flush();
+                    }
+                }
+                //Tags
+                if ($data['tags']['nom'] != '') {
+                    $tags = explode(';', $data['tags']['nom']);
+
+                    foreach ($tags as $value) {
+                        //verifier sil est deja dans la base, avant il faut supprimer accents etc..
+                        $tag = $this->em->getRepository('AppBundle:Tag')->getTagByNom($value);
+                        if ($tag === null) {
+                            $tag = new Tag();
+                            $tag->setNom($value);
+                            $tag->setDateCreation(new \DateTime());
+                            $tag->setLastUpdate(new \DateTime());
+                            $this->em->persist($tag);
+                            $this->em->flush();
+                        }
+                    }
+                }
+            }
+        } catch (\Exception $e) {
+            $this->log->warning('data_error in line : ' . $line . ' Message : ' . $e->getMessage());
+
+            return false;
+        }
+        return true;
+    }
+
 
     public function importFormationData($formattedData)
     {
         //verifier si la formation ou le labo existe
         $valid = true;
+        ini_set('error_reporting', E_ALL);
+        //ini_set('max_execution_time', 10000);
+        set_time_limit(0);
 
         foreach ($formattedData as $line => $data) {
             try {
@@ -994,123 +1215,197 @@ class ImportService
                 $formation->addEtablissement($this->etablissement);
                 //$this->etablissement->addFormation($formation);
 
-                if ($objId = $this->getObjId($data['formation'])) {
-                    $formation->setObjetId($objId);
-                } else {
-                    $id = $formation->getId();
-                    $formation->setObjetId('F' . $id);
-                }
                 $formation->setNom($data['formation']['nom']);
-                $formation->setLmd($data['formation']['lmd']);
-                $formation->setCodeInterne($data['formation']['code_interne']);
+                $formation->setDateCreation(new \DateTime());
+                $formation->setLastUpdate(new \DateTime());
+
+                if ($data['formation']['lmd']) {
+                    $formation->setLmd($data['formation']['lmd']);
+                    $lmd = $this->removeAccents($data['formation']['lmd']);
+
+                    $parcours = $this->em
+                        ->getRepository('AppBundle:Thesaurus')
+                        ->findOneBy(array('type' => 'parcours', 'thesaurusId' => $this->tabLmdThesaurus[$lmd]));
+                    if ($parcours) {
+                        $formation->setLmdThesaurus($parcours);
+                    }
+                }
+
+                if ($data['formation']['code_interne']) {
+                    $formation->setCodeInterne($data['formation']['code_interne']);
+                }
 
                 //modalite_thesaurus
                 if ($data['formation']['modalite_thesaurus'] != '') {
+
                     $modalites = explode(';', $data['formation']['modalite_thesaurus']);
                     if ($this->tabModalitesThesaurus === null) {
-                        $this->tabModalitesThesaurus = $this->initModalitesThesaurus();
+                        $this->initModalitesThesaurus();
                     }
+                    // parfois il y a 2 meme modalites pour la meme formation, avec array_flip j'ecrase
+                    $modalites = array_flip(array_flip($modalites));
                     foreach ($modalites as $value) {
-                        $formation->addModalite(trim($this->tabModalitesThesaurus[$value]));
+                        $modalite = $this->em
+                            ->getRepository('AppBundle:Thesaurus')
+                            ->findOneBy(array('type' => 'modalites', 'thesaurusId' => $this->tabModalitesThesaurus[$value]));
+                        if ($modalite) {
+                            $formation->addModaliteThesaurus($modalite);
+                        }
                     }
                 }
 
-                $formation->setEcts($data['formation']['ects']);
+                if ($data['formation']['ects']) {
+                    $formation->setEcts($data['formation']['ects']);
+                }
                 //$formation->setDescription($data['formation']['description']);
                 $formation->setUrl($data['formation']['url']);
                 $formation->setAnnee($data['formation']['annee']);
-                $formation->setNiveau($data['formation']['niveau']);
-                $formation->setTypeDiplome($data['formation']['typeDiplome']);
-                $formation->setDateCreation(new \DateTime());
-                $formation->setLastUpdate(new \DateTime());
+
+                if ($data['formation']['niveau']) {
+                    $formation->setNiveau($data['formation']['niveau']);
+                    $niveauSansAccent = $this->removeAccents($data['formation']['niveau']);
+                    $niveau = $this->em
+                        ->getRepository('AppBundle:Thesaurus')
+                        ->findOneBy(array('type' => 'niveau', 'thesaurusId' => $this->tabNiveauThesaurus[$niveauSansAccent]));
+                    if ($niveau) {
+                        $formation->setNiveauThesaurus($niveau);
+                    }
+                }
+
+                //TypeDiplome
+                if ($this->tabTypeDiplome) {
+                    $typeDiplome = $data['formation']['typeDiplome'];
+                    $formation->setTypeDiplome($typeDiplome);
+                    $type = $this->em
+                        ->getRepository('AppBundle:Thesaurus')
+                        ->findOneBy(array('type' => 'diplome', 'nom' => trim($typeDiplome)));
+                    if ($type) {
+                        $formation->setTypediplomeThesaurus($type);
+                    }
+                } else {
+                    $formation->setTypeDiplome(null);
+                    $formation->setTypediplomeThesaurus(null);
+                }
+
                 if ($data['formation']['effectif'] != '') {
                     $formation->setEffectif($data['formation']['effectif']);
                 }
 
                 //Localisation
                 $localisations = $this->formatLocalisationData($data['localisation']);
-                foreach ($localisations as $val) {
-                    $strAdresse = $this->getStrAdresse(trim($val['adresse']), trim($val['code'], trim($val['ville'])));
 
+                foreach ($localisations as $val) {
+                    $strAdresse = $this->getStrAdresse(trim($val['adresse']), trim($val['code']), trim($val['ville']));
                     $localisation = $this->em
                         ->getRepository('AppBundle:Localisation')
                         ->find($this->tabComparaisonAdresses[$strAdresse]);
-
-                    $formation->addLocalisation($localisation);
+                    if ($localisation !== null) {
+                        $formation->addLocalisation($localisation);
+                    }
                 }
 
                 //Disciplines et Debouché
                 for ($i = 1; $i <= 5; $i++) {
                     //SISE
                     $sise = 'abreviation_sise_' . $i;
+
                     if ($data['discipline'][$sise] != '') {
+
                         $discipline = $this->em
                             ->getRepository('AppBundle:Discipline')
                             ->findOneBy(array('nom' => $data['discipline'][$sise], 'type' => 'SISE'));
-
-                        $formation->addDiscipline($discipline);
+                        if ($discipline) {
+                            $formation->addSise($discipline);
+                        }
                     }
                     $hceres = 'abreviation_hceres_' . $i;
+
                     if ($data['discipline'][$hceres] != '') {
                         $discipline = $this->em
                             ->getRepository('AppBundle:Discipline')
                             ->findOneBy(array('nom' => $data['discipline'][$hceres], 'type' => 'HCERES'));
-
-                        $formation->addDiscipline($discipline);
+                        if ($discipline) {
+                            $formation->addHceres($discipline);
+                        }
                     }
                     $cnu = 'nom_cnu_' . $i;
+
                     if ($data['discipline'][$cnu] != '') {
                         $discipline = $this->em
                             ->getRepository('AppBundle:Discipline')
                             ->findOneBy(array('nom' => $data['discipline'][$cnu], 'type' => 'CNU'));
-
-                        $formation->addDiscipline($discipline);
+                        if ($discipline) {
+                            $formation->addCnu($discipline);
+                        }
                     }
 
                     //metiers
                     $code = 'code_'. $i;
+
                     if ($data['metier'][$code] != '') {
                         $metier = $this->em
-                            ->getRepository('AppBundle:Metiers3')
+                            ->getRepository('AppBundle:Metier3')
                             ->findOneBy(array('code' => $data['metier'][$code]));
-
-                        $formation->addMetier($metier);
+                        if ($metier) {
+                            $formation->addMetier($metier);
+                        }
                     }
                 }
+
+                //ufr
+                if ($data['ufr']['nom'] !='') {
+                    //verifier sil est deja dans la base, avant il faut supprimer accents etc..
+                    $objUfr = $this->em->getRepository('AppBundle:Ufr')->getUfrByNom($data['ufr']['nom']);
+
+                    if ($objUfr) {
+                        $formation->addUfr($objUfr);
+                    }
+                }
+
+                $formation->setAnneeCollecte(date("Y"));
 
                 //Tags
                 if ($data['tags']['nom'] !='') {
                     $tags = explode(';', $data['tags']['nom']);
-
+                    // parfaoi il ya 2 meme tags pour la meme formation alors avec array_flip j'ecrase
+                    $tag = array_flip(array_flip($tags));
                     foreach ($tags as $value) {
                         //verifier sil est deja dans la base, avant il faut supprimer accents etc..
-                        $valueSansAccents = $this->removeAccents($value);
-                        if (!$this->tagExists($valueSansAccents)) {
-                            $tag = new Tag();
-                            $tag->setNom($value);
-                            $tag->setDateCreation(new \DateTime());
-                            $tag->setLastUpdate(new \DateTime());
-                            $this->em->persist($tag);
-                            //on ajout nouvelle entree dans tabTags
-                            $newTag = array($valueSansAccents => $tag->getTagId());
-                            array_merge($this->tabTags, $newTag);
-                        } else {
-                            $tag = $this->em
-                                ->getRepository('AppBundle:Tag')
-                                ->find($this->tabTags[$valueSansAccents]);
+                        $tag = $this->em->getRepository('AppBundle:Tag')->getTagByNom($value);
+                        if ($tag) {
+                            $formation->addTag($tag);
                         }
-                        $formation->addTag($tag);
                     }
                 }
+                $formation->setObjetId(null);
+
+                $formation->setCheckGeneral(1);
+                $formation->setCheckEffectif(1);
+                $formation->setCheckIndex(1);
+                $formation->setCheckCursus(1);
+                $formation->setValide(1);
 
                 $this->em->persist($formation);
+
+                /*
+                                if ($objId = $this->getObjId($data['formation'])) {
+                                    $formation->setObjetId($objId);
+                                } else {
+                                    $id = $formation->getId();
+                                    $formation->setObjetId('F' . $id);
+                                }
+                */
+/*
                 if ((($line % self::COMMIT_STEP) == 0)) {
                     $this->em->flush();
+                    die;
                 }
+*/
             } catch (\Exception $e) {
                 $this->log->warning('data_error in line : '.$line.' Message : '.$e->getMessage());
                 $valid = false;
             }
+
         }
         $this->em->flush();
         return $valid;
@@ -1230,21 +1525,74 @@ class ImportService
         return array_key_exists($tag, $this->tabTags);
     }
 
+    public function initLmdThesaurus()
+    {
+        if ($this->tabLmdThesaurus === null) {
+            $data = [];
+            $lmd = $this->em
+                ->getRepository('AppBundle:Thesaurus')
+                ->getNomIdThesaurusByType('parcours');
+
+            foreach ($lmd as $value) {
+                $nom = $this->removeAccents($value['nom']);
+                $data[$nom] = $value['thesaurusId'];
+            }
+
+            $this->tabLmdThesaurus = $data;
+        }
+        return true;
+    }
+
+    public function initNiveauThesaurus()
+    {
+       if ($this->tabNiveauThesaurus === null) {
+           $data = [];
+           $niveaux = $this->em
+               ->getRepository('AppBundle:Thesaurus')
+               ->getNomIdThesaurusByType('niveau');
+
+           foreach ($niveaux as $value) {
+               $nom = $this->removeAccents($value['nom']);
+               $data[$nom] = $value['thesaurusId'];
+           }
+
+           $this->tabNiveauThesaurus = $data;
+       }
+       return true;
+    }
+
     public function initModalitesThesaurus()
     {
-        $dataModalites = [];
-        $modalites = $this->em
-            ->getRepository('AppBundle:Thesaurus')
-            ->getNomIdThesaurusByType('modalites');
+        if ($this->tabModalitesThesaurus === null) {
+            $data = [];
+            $modalites = $this->em
+                ->getRepository('AppBundle:Thesaurus')
+                ->getNomIdThesaurusByType('modalites');
 
-        foreach ($modalites as $value) {
-            $dataModalites[$value['nom']] = $value['thesaurusId'];
+            foreach ($modalites as $value) {
+                $data[$value['nom']] = $value['thesaurusId'];
+            }
+
+            $this->tabModalitesThesaurus = $data;
         }
-
-        $this->tabModalitesThesaurus = $dataModalites ;
-
         return true;
+    }
 
+    public function initTabTypeDiplome() {
+
+        if ($this->tabTypeDiplome === null) {
+            $data = [];
+            $typeDiplomes = $this->em
+                ->getRepository('AppBundle:Thesaurus')
+                ->getNomIdThesaurusByType('diplome');
+
+            foreach ($typeDiplomes as $value) {
+                $data[$value['nom']] = $value['thesaurusId'];
+            }
+
+            $this->tabTypeDiplome = $data;
+        }
+        return true;
     }
 
     public function initTabComparaison()
@@ -1320,7 +1668,7 @@ class ImportService
         return $data;
     }
 
-    function getObjId($data)
+    private function getObjId($data)
     {
         $strFormation = $this->getStrFormation($data['nom'], $data['typeDiplome'], $data['niveau']);
         if ($this->initTabComparaison() && array_key_exists($strFormation, $this->tabComparaison)) {
@@ -1330,7 +1678,7 @@ class ImportService
     }
 
 
-    function formatLocalisationData($localisations) {
+    private function formatLocalisationData($localisations) {
         $data = [];
         $formatData = [];
         $exist = false;
