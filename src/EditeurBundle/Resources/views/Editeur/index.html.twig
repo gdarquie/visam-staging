@@ -62,13 +62,18 @@
 
                     <div class="admin_title">
                         <h1 class="center">Editeur [vue administrateur]</h1>
-                        <p class="center pointer">Voir les établissements de la collecte en cours</p>
+                        <p class="center pointer"><a class="modal-trigger" href="#etabs">Voir les établissements de la collecte en cours</a></p>
                     </div>
 
-                    <div class="col s12 hide">
-                        {% for item in etablissements  %}
-                            <span class="chip">{{  item.nom }}</span>
-                        {% endfor%}
+                    <div id="etabs" class="modal">
+                        <div class="modal-content">
+                            <h2 class="center">Etablissements de la collecte en cours</h2>
+                            <div class="col s12">
+                                {% for item in etablissements  %}
+                                    <span class="chip text-black"><a href="{{ path('etablissement' , { 'id' : item.etablissementId }) }}">{{  item.nom }}</a></span>
+                                {% endfor%}
+                            </div>
+                        </div>
                     </div>
 
                 </div>

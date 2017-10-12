@@ -20,7 +20,6 @@ use AppBundle\Entity\Labo;
 class EditeurController extends Controller
 {
 
-
     /**
      * Accueil de l'éditeur
      *
