@@ -1,24 +1,28 @@
-{% extends 'base.html.twig' %}
+    {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-    {{ parent() }}
 
-    <link rel="stylesheet" href="{{ asset('css/search/main.7aefcc50.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/search/main.7aefcc50.css.map') }}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!--Import materialize.css-->
+    <link rel="stylesheet"
+          href="{{ asset('assets/vendor/materialize/dist/css/materialize.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/mehdi.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('css/search/main.ee2b58d4.css') }}">
+
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-xVtrt5MG5-Ym3bZvezFY35Xx1xdEMI4"></script>
 {% endblock %}
 
-
 {% block body %}
 
-    <h1 class="center">Module de recherche</h1>
 
-    <div id="root">
-
-    </div>
+    <iframe style="width:100%; height:900px;" src="{{ path('search_iframe') }}" frameborder="0"></iframe>
 
 {% endblock %}
 
 {% block javascripts %}
-    <script type="text/javascript" src="{{ asset('js/search/main.fcad810d.js') }}"></script>
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('js/search/main.3ec7f6f5.js') }}"></script>
 {% endblock %}

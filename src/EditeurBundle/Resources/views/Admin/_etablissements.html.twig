@@ -1,5 +1,8 @@
 <article class="card" id="etablissement">
+
     <h3>Gérer les établissements</h3>
+
+    <input type="text" class="fuzzy-search" />
 
     <ul class="collection list">
 
@@ -12,7 +15,7 @@
                     <i class="material-icons circle red darken-2">business_center</i>
 
                     <div class="col s12">
-                        <span class="title col s11">{{ item.nom }}</span>
+                        <span class="title col s11"><span class="titre">{{ item.nom }}</span> <span class="sigle">({{ item.sigle }})</span></span>
                     </div>
 
                     <div class="col s12">

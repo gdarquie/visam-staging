@@ -11,7 +11,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class SearchController extends Controller
 {
     /**
-     * Créer une collecte
      *
      * @Route("/", name="search_v2")
      */
@@ -21,4 +20,15 @@ class SearchController extends Controller
 
         ));
     }
+
+    /**
+     * @Route("/iframe", name="search_iframe")
+     */
+    public function iframeAction()
+    {
+        return $this->render('@App/search/iframe.html.twig', array(
+
+        ));
+    }
+
 }

@@ -28,7 +28,7 @@ class AdminController extends Controller
         // --- établissements
         $query = $em->createQuery(
             'SELECT e FROM AppBundle:Etablissement e ORDER BY e.last_update DESC'
-        );
+        )->setMaxResults(500);;
         $etablissements = $query->getResult();
 
         // --- formations
@@ -58,7 +58,7 @@ class AdminController extends Controller
         // --- toutes les collectes
         $query = $em->createQuery(
             'SELECT c FROM AppBundle:Collecte c ORDER BY c.annee DESC'
-        );
+        )->setMaxResults(500);
         $collectes = $query->getResult();
 
         //année de collecte utilisée par le moteur de recherche
@@ -88,7 +88,7 @@ class AdminController extends Controller
         //utilisateurs
         $query = $em->createQuery(
             'SELECT u FROM AppBundle:User u ORDER BY u.username DESC'
-        );
+        )->setMaxResults(500);;
         $users = $query->getResult();
 
         //thesaurus

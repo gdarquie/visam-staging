@@ -1,45 +1,46 @@
 <article class="card" id="user">
+
     <h3>Gérer les contributeurs</h3>
 
-    <div class="row">
+    <input type="text" class="fuzzy-search" />
 
-        <ul class="collection list">
-            {% for item in users %}
-            <li class="collection-item avatar js-user-item">
+    <ul class="collection list">
+        {% for item in users %}
+        <li class="collection-item avatar js-user-item">
 
-                <i class="material-icons circle white black-text">accessibility</i>
+            <i class="material-icons circle white black-text">accessibility</i>
 
-                <div class="col s9">
-                    <div class="col m3 s12">
-                        <span>{{ item.username }}</span>
-                    </div>
-
-                    <div class="col m5 s12">
-                        <span>{{ item.email }}</span>
-                    </div>
-                    {#<td>{{ item.enabled }}</td>#}
-
-                    <div class="col m4 s12">
-                        <span>{% for role in item.roles  %}
-                                {{ role }}{%  if loop.last  %}{% else %},{% endif %}
-                            {% endfor %}</span>
-                        <span>{{ item.lastLogin|date() }}</span>
-                    </div>
+            <div class="col s9">
+                <div class="col m3 s12">
+                    <span class="nom">{{ item.username }}</span>
                 </div>
 
-                <div class="col s3">
-                    <div class="col s6">
-                        <span><a href="{{ path('editeur_user_edit', {'id' : item.id}) }}"><i class="material-icons">edit</i></a></span>
-                    </div>
+                <div class="col m5 s12">
+                    <span class="email">{{ item.email }}</span>
+                </div>
+                {#<td>{{ item.enabled }}</td>#}
 
-                    <div class="col s6">
-                        <span><a href="#!" class="js-remove-user" data-url="{{ path('editeur_user_ajax_delete', { userId : item.id}) }}" ><i class="material-icons">delete</i></a></span>
-                    </div>
+                <div class="col m4 s12">
+                    <span>{% for role in item.roles  %}
+                            {{ role }}{%  if loop.last  %}{% else %},{% endif %}
+                        {% endfor %}</span>
+                    <span>{{ item.lastLogin|date() }}</span>
+                </div>
+            </div>
+
+            <div class="col s3">
+                <div class="col s6">
+                    <span><a href="{{ path('editeur_user_edit', {'id' : item.id}) }}"><i class="material-icons">edit</i></a></span>
                 </div>
 
-            </li>
-            {% endfor %}
-        </ul>
+                <div class="col s6">
+                    <span><a href="#!" class="js-remove-user" data-url="{{ path('editeur_user_ajax_delete', { userId : item.id}) }}" ><i class="material-icons">delete</i></a></span>
+                </div>
+            </div>
+
+        </li>
+        {% endfor %}
+    </ul>
 
 
         {#<table class="highlight tablesorter responsive-table">#}
@@ -73,8 +74,6 @@
             {#{% endfor %}#}
             {#</tbody>#}
         {#</table>#}
-
-    </div>
 
     <ul class="center pagination"></ul>
 
