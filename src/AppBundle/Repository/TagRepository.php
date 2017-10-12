@@ -48,5 +48,15 @@ class TagRepository extends EntityRepository
 
         return $query;
     }
+
+    /***
+     * @param $value
+     * @return $urf
+     *
+     */
+    public function getTagByNom($value){
+
+        return $this->findOneBy(array('nom' => $value));
+    }
 }
 

@@ -568,8 +568,13 @@
                     $('#upload_file_cancel').show();
                     $('.message-upload').html('Le temps d\'exécution maximum autorisé est dépassé');
                     $('.message-upload').addClass('invalid');
-                },
-                timeout:   50000,
+                    console.log('jqXHR:');
+                    console.log(jqXHR);
+                    console.log('textStatus:');
+                    console.log(textStatus);
+                    console.log('errorThrown:');
+                    console.log(errorThrown);
+                }
             } );
         });
 
