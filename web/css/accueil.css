@@ -1,16 +1,11 @@
+p {
+    font-size: 1.8rem;
+}
+
 #mainLogo{
-    height: 245px !important;
     margin-top: 30px;
-    margin-bottom: 10px;
 }
 
-.middle-titre{
-    margin-bottom: 50px;
-}
-
-.low-titre{
-    margin-bottom: 10px;
-}
 
 #domaines, #methode{
     display:none;

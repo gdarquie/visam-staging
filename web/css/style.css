@@ -94,37 +94,111 @@ margin-bottom: 4px;
 }
 
 .redHesam{
-    background-color :#e42e18;
+    background-color :#de1d34;
 }
 
 /* Buttons */
 
 .btn-hesam {
-    background-color: #e42e18;
+    background-color: #de1d34;
 }
 
 .btn-hesam:hover{
-    background-color: #e42e18;
+    background-color: #de1d34;
 }
 
 .btn-hesam-inverse {
     background-color: white;
-    color: #e42e18;
+    color: #de1d34;
 }
 
 
 /* Header */
 
 header{
-    background-color:  #ef4023;
+    background-color:  #de1d34;
 }
 
 
-/* Footer */
-/*
-footer h1, footer h2, footer h3{
-    text-align: center;
-}*/
+/* Homepage  */
+
+.recherche-home {
+  background:url('../img/louvres.jpg'); 
+  background-size: cover;
+}
+
+.presentation-home .anr {
+  font-weight: 700;
+}
+
+.recherche-home #mainLogo {
+  width:350px;
+}
+
+.recherche-home .titre {
+  text-align: center;
+}
+.recherche-home h1 {
+  font-size: 2.9rem;
+}
+
+
+.recherche-home .wrapper {
+  background-color: rgba(255,255,255,0.5);
+}
+
+.recherche-home input {
+  background-color: white;
+  padding: 0px 15px;
+  margin-left : -0.75rem;
+}
+
+.recherche-home input:focus:not([readonly]) {
+    border-bottom: 1px solid #de1d34;
+    box-shadow: 0 1px 0 0 #de1d34;
+}
+
+.recherche-home form {
+  margin-bottom: 90px;
+}
+
+.chiffres-home {
+  margin-top: -70px;
+}
+.chiffres-home li {
+  background-color: white;
+  min-height: 150px;
+  border: 1px solid #e9e9e9;
+  padding: 5px;
+  text-align: center;
+  font-size: 1.8rem;
+}
+.chiffres-home li span {
+  font-size: 4rem;
+  display: block;
+}
+
+
+.rubrique-home {
+  background-color: #4B5063;
+  color:white;
+}
+
+.rubrique-home li {
+  font-size:1.5rem;
+}
+
+.rubrique-home a {
+  color:white;
+}
+.etablissements-home li {
+  text-align: center;
+  border: 1px solid #e9e9e9;
+}
+.etablissements-home img {
+  max-height: 140px;
+  min-height: 140px;
+}
 
 footer h2{
     font-size: 1.9em;
@@ -134,16 +208,13 @@ footer p{
     font-size: 1.1em;
 }
 
-.page-footer{
-    color:white;
-}
 
 footer .container-fluid {
   margin-bottom: 0px;
 }
 
 .red-hesam{
-    background-color: #ef4023;
+    background-color: #de1d34;
 }
 
 .accueil-liens{
@@ -152,13 +223,21 @@ footer .container-fluid {
 }
 
 footer {
-    background-color: #ef4023;
+    background-color: #e9e9e9;
+}
+
+footer {
+  color:black;
+}
+
+footer a {
+  color: #4B5063;
 }
 
 
 footer.page-footer {
-    margin-top: 120px;
-    background-color:  #ef4023;
+    background-color:  #e9e9e9;
+    margin-top:0px;
 }
 
 
@@ -169,6 +248,30 @@ footer .contactHesam{
 footer h2, footer h3{
     margin-top: 0px;
 }
+
+.footer-menu {
+  background-color: #4B5063;
+  text-align:center;
+      margin-top: 120px;
+
+}
+.footer-menu ul {
+  margin:0;
+  color:white;
+}
+.footer-menu li {
+  display:inline-block;
+  padding: 10px 20px;
+}
+
+.footer-menu li  a {
+  color:white;
+}
+
+.footer-copyright {
+  color: #4B5063 !important;
+}
+
 
 #form-type-csv, #form-file-csv{
     float: left;
@@ -187,5 +290,5 @@ footer h2, footer h3{
 /* List js */
 
 .pagination .active{
-    background: #EF4023!important;
+    background: #de1d34!important;
 }

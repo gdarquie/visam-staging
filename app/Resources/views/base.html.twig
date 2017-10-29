@@ -50,34 +50,42 @@
             {% block fos_user_content %}{% endblock fos_user_content %}
         {% endblock %}
 
+
+    <section class='footer-menu'>
+        <ul>
+            <li><a href="{{ path("apropos") }}">A propos</a></li>|
+            <li><a href="#">Mode d'emploi</a></li>|
+            <li><a href="{{ path("statistiques") }}">Statistiques</a></li>|
+            {% if is_granted('ROLE_USER') %}
+                connecté : {{ app.user.username }}
+                <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
+            {% else %}
+                <li><a href="{{ path('fos_user_security_login') }}">Connexion</a></li>
+            {% endif %}        </ul>
+        
+    </section>
         <footer class="page-footer red-hesam">
-
             <div class="container-fluid row">
-
-                <div class="col s7 offset-s1">
-
+                <div class="col s6 offset-s1">
                     <h2>Les établissements membres</h2>
                     <ul>
-                        <li><a class="grey-text text-lighten-4" href="http://www.univ-paris1.fr/" target="_blank">Université Paris 1 Panthéon - Sorbonne</a></li>
-                        <li><a class="grey-text text-lighten-4" href="http://www.cnam.fr/" target="_blank">Conservatoire National des Arts et Métiers (CNAM)</a></li>
-                        <li><a class="grey-text text-lighten-4" href="http://www.escpeurope.eu/fr/campus/paris/campus-paris/escp-europe-paris/" target="_blank">Ecole Supérieure Commerce de Paris (ESCP Europe)</a></li>
-                        <li><a class="grey-text text-lighten-4" href="http://www.ecoledulouvre.fr/" target="_blank">Ecole du Louvre</a></li>
+                        <li><a href="http://www.univ-paris1.fr/" target="_blank">Université Paris 1 Panthéon - Sorbonne</a></li>
+                        <li><a href="http://www.cnam.fr/" target="_blank">Conservatoire National des Arts et Métiers (CNAM)</a></li>
+                        <li><a href="http://www.escpeurope.eu/fr/campus/paris/campus-paris/escp-europe-paris/" target="_blank">Ecole Supérieure Commerce de Paris (ESCP Europe)</a></li>
+                        <li><a href="http://www.ecoledulouvre.fr/" target="_blank">Ecole du Louvre</a></li>
                         {#<li><a class="grey-text text-lighten-4" href="http://www.ena.fr/" target="_blank">Ecole Nationale d'Administration (ENA)</a></li>#}
-                        <li><a class="grey-text text-lighten-4" href="http://www.ensci.com/" target="_blank">Ecole Nationale Supérieure de Création Industrielle (ENSCI les Ateliers)</a></li>
-                        <li><a class="grey-text text-lighten-4" href="http://www.paris-lavillette.archi.fr/" target="_blank">Ecole Nationale Supérieure d'Architecture Paris la Villette (ENSAPLV)</a></li>
-                        <li><a class="grey-text text-lighten-4" href="https://www.ined.fr/" target="_blank">Institut National d'Etudes Démographiques (INED)</a></li>
-                        <li><a class="grey-text text-lighten-4" href="http://www.inp.fr/" target="_blank">Institut National du Patrimoine (INP)</a></li>
-                        <li><a class="grey-text text-lighten-4" href="http://www.ensam.eu/" target="_blank">Arts et Métiers ParisTech (ENSAM)</a></li>
-                        <li><a class="grey-text text-lighten-4" href="http://www.inha.fr/fr/index.html" target="_blank">Institut National d'Histoire de l'Art (INHA)</a></li>
-                        <li><a class="grey-text text-lighten-4" href="http://www.cnrs.fr/" target="_blank">Centre National de la Recherche Scientifique (CNRS)</a></li>
+                        <li><a href="http://www.ensci.com/" target="_blank">Ecole Nationale Supérieure de Création Industrielle (ENSCI les Ateliers)</a></li>
+                        <li><a href="http://www.paris-lavillette.archi.fr/" target="_blank">Ecole Nationale Supérieure d'Architecture Paris la Villette (ENSAPLV)</a></li>
+                        <li><a href="https://www.ined.fr/" target="_blank">Institut National d'Etudes Démographiques (INED)</a></li>
+                        <li><a href="http://www.inp.fr/" target="_blank">Institut National du Patrimoine (INP)</a></li>
+                        <li><a href="http://www.ensam.eu/" target="_blank">Arts et Métiers ParisTech (ENSAM)</a></li>
+                        <li><a href="http://www.inha.fr/fr/index.html" target="_blank">Institut National d'Histoire de l'Art (INHA)</a></li>
+                        <li><a href="http://www.cnrs.fr/" target="_blank">Centre National de la Recherche Scientifique (CNRS)</a></li>
                     </ul>
                 </div>
 
-                <div class="col s3">
+                <div class="col s5">
 
-<!--                     <div class="row accueil-liens center">
-                        <p><a class="grey-text text-lighten-4" href="{{ path('editeur') }}">Accès réservé</a></p>
-                    </div> -->
 
                     <div class="row">
                         <h2>Contacts</h2>
@@ -86,14 +94,10 @@
                         <p>15 rue Soufflot</p>
                         <p>75005 Paris</p>
                         <p>01 56 81 20 00</p>
-                        <p><a class="grey-text text-lighten-4" href="mailto:contact@hesam.eu">contact@hesam.eu</a></p>
+                        <p><a href="mailto:contact@hesam.eu">contact@hesam.eu</a></p>
                         </span>
                     </div>
-                </div>
-
-                <div class="col offset-s7 s5">
-
-                    <div class="col s2">
+                   <div class="col s2">
                         <br><br>
                         <img src="img/MESRIlogo_vert.jpg" class="responsive-img" alt="Logo">
                     </div>
@@ -101,16 +105,21 @@
                     <div class="col s6">
                         <p>Le projet a bénéficié du soutien de l’ANR au titre du programme Investissements d’avenir (ANR-11-IDEX-0006)  et de l'AMI 2016 sur la transformation pédagogique et numérique.</p>
                     </div>
+                </div>
+
+                <div class="col offset-s7 s5">
+
+
 
                 </div>
                 <div class="s1"></div>
 
             </div>
             <div class="footer-copyright">
-                <div class="container"></div>
                 <div class="container">
-                    © 2016-2017 HESAM Université - <i>visam</i> version 1.6 (<i>editeur V2 - version beta</i>)
-                    <a class="grey-text text-lighten-4 right" href="http://www.hesam.eu" target="_blank">Accéder au site hesam</a>
+                  <span>  © 2016-2017 HESAM Université - <i>visam</i> version 1.6 (<i>editeur V2 - version beta</i>)</span>
+
+                    <a class="right" href="http://www.hesam.eu" target="_blank">Accéder au site hesam</a>
                 </div>
             </div>
 

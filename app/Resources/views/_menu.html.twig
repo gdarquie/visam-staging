@@ -68,8 +68,6 @@
                     <li><a href="{{ path('search') }}">Rechercher</a></li>
                     <li><a href="{{ path("statistiques") }}">Statistiques</a></li>
                     <li><a href="{{ path("apropos") }}">A propos</a></li>
-                    <li><a href="{{ path("aide") }}">Mode d'emploi</a></li>
-
 
                     {% if is_granted('ROLE_USER') %}
                     <li><a class="dropdown-button" href="#!" data-activates="menu_editeur">Editeur carto HESAM<i class="material-icons right">arrow_drop_down</i></a></li>
@@ -79,12 +77,7 @@
                     <li><a class="dropdown-button" href="#!" data-activates="menu_admin">Administration<i class="material-icons right">arrow_drop_down</i></a></li>
                     {% endif %}
 
-                    {% if is_granted('ROLE_USER') %}
-                        <li>connecté : {{ app.user.username }}</li>
-                        <li><a href="{{ path('fos_user_security_logout') }}">logout</a></li>
-                    {% else %}
-                        <li><a href="{{ path('fos_user_security_login') }}">connexion</a></li>
-                    {% endif %}
+
 
                 </ul>
             </div>
