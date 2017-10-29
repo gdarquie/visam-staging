@@ -384,3 +384,12 @@
     .petit .card-content {
         padding-top: 8px;
     }
+
+    /* Nouveau ajout Search  */
+    #root {
+        margin-top:30px;
+    }
+    .sk-layout__top-bar {
+        position: relative !important;
+    }
+

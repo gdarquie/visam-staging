@@ -18,5 +18,5 @@
 .idea/workspace.xml
 /upload/*
 /uploads/*
-
+node_modules
 
