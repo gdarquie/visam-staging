@@ -30,22 +30,21 @@
 
     <!-- Pour mobile -->
 
-    <ul id="mobile-demo" class="side-nav">
 
         {% if is_granted('ROLE_USER') %}
-
-                <h2>Editeur</h2>
-                <li><a href="{{ path("editeur") }}">Espace Editeur</a></li>
-                <li class="divider"></li>
-                <li><a href="{{ path('editeur_formation_new') }}">Ajout Formation</a></li>
-                <li><a href="{{ path('editeur_laboratoire_new') }}">Ajout Laboratoire</a>
-                <li><a href="{{ path('editeur_ed_new') }}">Ajout Ecole doctorale</a>
-                <li class="divider"></li>
-                <li><a href="{{ path('search_previz') }}">Prévisualiser</a></li>
-
+        <ul id="mobile-demo" class="side-nav">
+            <h2>Editeur</h2>
+            <li><a href="{{ path("editeur") }}">Espace Editeur</a></li>
+            <li class="divider"></li>
+            <li><a href="{{ path('editeur_formation_new') }}">Ajout Formation</a></li>
+            <li><a href="{{ path('editeur_laboratoire_new') }}">Ajout Laboratoire</a>
+            <li><a href="{{ path('editeur_ed_new') }}">Ajout Ecole doctorale</a>
+            <li class="divider"></li>
+            <li><a href="{{ path('search_previz') }}">Prévisualiser</a></li>
+        </ul>
         {% endif %}
-
         {% if is_granted('ROLE_USER') %}
+            <ul id="mobile-demo" class="side-nav">
                 <h2>Admin</h2>
                 <li class="divider"></li>
                 <li><a href="{{ path("editeur") }}">Espace Editeur</a></li>
@@ -56,9 +55,9 @@
                 <li><a href="{{ path('editeur_localisation_new') }}">Ajout Localisation</a>
                 <li class="divider"></li>
                 <li><a href="{{ path('search_previz') }}">Prévisualiser</a></li>
+            </ul>
         {% endif %}
 
-    </ul>
 
     <div class="navbar-fixed">
         <nav>

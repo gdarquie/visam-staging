@@ -42,7 +42,8 @@ class SimpleMap extends SearchkitComponent {
 }
 
 
-const host = "http://visam.interlivre.fr/elastic/visam_elastica"
+//const host = "http://visam.interlivre.fr/elastic/visam_elastica"
+const host = "http://localhost:9200/visam_elastica"
 const searchkit = new SearchkitManager(host)
 searchkit.translateFunction = (key) => {
   let translations = {
@@ -149,6 +150,7 @@ const HitsGridItem = (props)=> {
             </div>
           }
           <br/>
+        <div className={bemBlocks.item(" card-action")}>
           {/* Effectifs : Labo */}
           {source.lien &&
             <a href={source.lien} target="_blank">Lien vers le laboratoire</a>
@@ -157,6 +159,7 @@ const HitsGridItem = (props)=> {
           {source.url &&
             <a href={source.url} target="_blank">Lien vers la formation</a>
           }
+          </div>
       </div>
       </div>
     </div>
@@ -247,6 +250,9 @@ const HitsListItem = (props)=> {
             </div>
           }
           <br/>
+
+      </div>
+          <div className={bemBlocks.item(" card-action")}>
           {/* Effectifs : Labo */}
           {source.lien &&
             <a href={source.lien} target="_blank">Lien vers le laboratoire</a>
@@ -255,8 +261,9 @@ const HitsListItem = (props)=> {
           {source.url &&
             <a href={source.url} target="_blank">Lien vers la formation</a>
           }
+          </div>
       </div>
-      </div>
+      
     </div>
   )
 }

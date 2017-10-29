@@ -386,9 +386,7 @@
     }
 
     /* Nouveau ajout Search  */
-    #root {
-        margin-top:30px;
-    }
+
     .sk-layout__top-bar {
         position: relative !important;
     }
