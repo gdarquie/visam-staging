@@ -932,6 +932,26 @@ class Formation
         return $this->discipline;
     }
 
+
+        /**
+     * Get Hesamette
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getHesamette()
+    {
+        $mesHesamette = Array();
+        foreach($this->discipline as $disc) {
+            if($disc->getHesamette()) {
+                if(!in_array($disc->getHesamette()->getNom(), $mesHesamette, true)){
+                    array_push($mesHesamette, $disc->getHesamette()->getNom());
+                }
+            }
+
+        }
+        return $mesHesamette;
+    }
+
     /**
      * @return Thesaurus
      */

@@ -82,7 +82,9 @@ const HitsGridItem = (props)=> {
           <h3 data-qa="etablissement" className={bemBlocks.item("etablissement etablissement-name")} dangerouslySetInnerHTML={{__html:source.etablissement}}>
           </h3>
           <div data-qa="discipline" className={bemBlocks.item("discipline")} dangerouslySetInnerHTML={{__html:source.discipline}}>
-          </div><br/>
+          </div>
+          <div data-qa="hesamette" className={bemBlocks.item("hesamette")} dangerouslySetInnerHTML={{__html:source.hesamette}}></div>
+          <br/>
         {/* Effectifs : Formation */}
           {source.niveau &&
             <div>
@@ -183,6 +185,10 @@ const HitsListItem = (props)=> {
           </h3>
           <div data-qa="discipline" className={bemBlocks.item("discipline")} dangerouslySetInnerHTML={{__html:source.discipline}}>
           </div><br/>
+
+          <div data-qa="hesamette" className={bemBlocks.item("hesamette")} dangerouslySetInnerHTML={{__html:source.hesamette}}></div>
+
+          <br/>
         {/* Effectifs : Formation */}
           {source.niveau &&
             <div>
@@ -275,7 +281,7 @@ class App extends Component {
       <SearchkitProvider searchkit={searchkit}>
         <Layout>
           <TopBar>
-            <SearchBox placeholder="Rechercher" autofocus={true} searchOnChange={true} prefixQueryFields={["nom^2","description","discipline"]}/>
+            <SearchBox placeholder="Rechercher" autofocus={true} searchOnChange={true} prefixQueryFields={["nom^2","description","discipline", "hesamette"]}/>
           </TopBar>
 
         <LayoutBody>
@@ -284,6 +290,7 @@ class App extends Component {
             <RefinementListFilter id="_type" title="Type" field="_type" operator="OR" listComponent={ItemHistogramList}/>
             <RefinementListFilter id="etablissement" title="Établissements" field="etablissement" operator="OR" listComponent={ItemList}/>
             <RefinementListFilter size="12" id="discipline" title="Disciplines" field="discipline" operator="OR"/>
+            <RefinementListFilter size="12" id="hesamette" title="hesamette" field="hesamette" operator="OR"/>
             <RefinementListFilter listComponent={PieFilterList} id="annee" title="Annee" field="annee" operator="OR"/>
             <DynamicRangeFilter field="effectif" id="effectif" title="Effectif"/>
             <GeoMap/>
@@ -311,7 +318,7 @@ class App extends Component {
 
             <ViewSwitcherHits
                 hitsPerPage={12} highlightFields={["nom","description"]}
-                sourceFilter={["nom", "description", "niveau", "type","discipline","etablissement",'geo', 'annee', 'effectif', 'niveau', 'url', 'lien', 'mailContact', 'sigle','code']}
+                sourceFilter={["nom", "description", "niveau", "type","discipline","hesamette","etablissement",'geo', 'annee', 'effectif', 'niveau', 'url', 'lien', 'mailContact', 'sigle','code']}
                 hitComponents={[
                   {key:"list", title:"Liste", itemComponent:HitsListItem, defaultOption:true},
                   {key:"grid", title:"Grille", itemComponent:HitsGridItem},
