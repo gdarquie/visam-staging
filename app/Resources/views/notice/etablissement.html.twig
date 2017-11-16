@@ -23,6 +23,51 @@
 			  </div>
 			</div>
 	</div>
+
+	<div class="row">
+		      {% for formation in formations|slice(0,3) %}
+                <div class="col m4 l4">
+                    <div class="card formation petit" >
+                        <div class="card-content">
+                            <span class="etablissement"><span>{{formation.annee}}</span> - <span>{{ formation.niveau }}</span></span>
+                            <h5><a href="{{ path('formation' , {"id" : formation.id}) }}">{{formation.nom}}</a></h5>
+                            {# <span> {{labo.etablissement}}</span> #}
+                            <ul class="list-thematique" >
+                                {% for discipline in formation.discipline|slice(0,3)%}
+                                    <li>{{discipline.nom}}</li>
+                                {% endfor%}
+                                {# les disciplines #}
+                            </ul>
+                        </div>
+                        <div class="card-action">
+                            <a href="{{formation.url}}"><i class="material-icons">input</i></a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+	</div>
+	<div class="row">
+            {% for labo in labos|slice(0,3) %}
+            	<div class="col m4 l4">
+                    <div class="card laboratoire petit" >
+                      <div class="card-content">
+                      <span class="etablissement"><span>{{labo.type}}</span> - {{labo.code}}</span>
+                         <h5><a href="{{ path('labo' ,{"id" : labo.id}) }}">{{labo.nom}}</a></h5>
+                         {# <span> {{labo.etablissement}}</span> #}
+                          <ul class="list-thematique" >
+                          	{% for discipline in labo.discipline|slice(0,3)%}
+                          		<li>{{discipline.nom}}{% if loop.last %}{% else %};{% endif %}</li>
+                          	{% endfor%}
+                            {# les disciplines #}
+                          </ul>
+                      </div>
+                      <div class="card-action">
+                        <a href="{{labo.lien}}"><i class="material-icons">input</i></a>
+                    </div>
+                   </div>
+                  </div>
+         	{% endfor %}
+	</div>
 	<div class="row">
 		<div class="col s12 m4">
 		  <div class="card teal">
