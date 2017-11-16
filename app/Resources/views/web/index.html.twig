@@ -28,15 +28,15 @@
 </section>
 <section class="chiffres-home container">
     <ul class="row">
-        <li class="col offset-s1 s3"><span>1403</span>Laboratoires</li>
-        <li class="col s3"><span>92</span>Formations</li>
-        <li class="col s3"><span>14</span>Ecoles doctorales</li>
+        <li class="col offset-s1 s3"><span>{{ stats['nb_laboratoires']['nb'] }}</span>Laboratoires</li>
+        <li class="col s3"><span>{{  stats['nb_formations']['nb'] }}</span>Formations</li>
+        <li class="col s3"><span>{{ stats['nb_eds']['nb'] }}</span>Ecoles doctorales</li>
     </ul>
 </section>
 <section class="presentation-home">
     <div class="container row">
         <p class="col s12">
-            heSam Université rassemble 1403 formations, du bac+1 au doctorat, en formation initiale ou continue, 92 laboratoires pluridisciplinaires en sciences humaines et sociales, en sciences de l'environnement et en sciences et techniques de l'ingénieur et 14 écoles doctorales.
+            heSam Université rassemble {{ stats['nb_laboratoires']['nb'] }} formations, du bac+1 au doctorat, en formation initiale ou continue, {{  stats['nb_formations']['nb'] }} laboratoires pluridisciplinaires en sciences humaines et sociales, en sciences de l'environnement et en sciences et techniques de l'ingénieur et {{ stats['nb_eds']['nb'] }} écoles doctorales.
         </p>
         <div class="col anr s8">
             <p>
@@ -52,25 +52,19 @@
     <div class="container">
         <div class="row">
             <p class="col s12">Il est possible de faire la recherche parmi les quinze thématiques Hesam et les disciplines qui leurs sont associées :</p>
+
             <ul class="col s6">
-                <li><a href="#">Agronomie, écologie, environnement</a></li>
-                <li><a href="#">Architecture, milieu, urbanisme</a></li>
-                <li><a href="#">Arts et arts appliqués, culture et patrimoine</a></li>
-                <li><a href="#">Biologie, santé</a></li>
-                <li><a href="#">Chimie</a></li>
-                <li><a href="#">Esprit humain, langage, éducation</a></li>
-                <li><a href="#">Information-communication, sciences sociales, juridiques et politiques</a></li>
+                {% for item in hesamettes | slice(0,7) %}
+                    <li><a href="#">{{ item.nom }}</a></li>
+                {% endfor %}
             </ul>
+
             <ul class="col s6">
-                <li><a href="#">Interdisciplinaire</a></li>
-                <li><a href="#">Marchés et organisations</a></li>
-                <li><a href="#">Mathématiques</a></li>
-                <li><a href="#">Mondes anciens et contemporains</a></li>
-                <li><a href="#">Physique</a></li>
-                <li><a href="#">Sciences de la terre et de l'univers</a></li>
-                <li><a href="#">Sciences et technologies de l'information et de la communication</a></li>
-                <li><a href="#">Sciences pour l'ingénieur, industrie, design</a></li>
+                {% for item in hesamettes | slice(7,8) %}
+                    <li><a href="#">{{ item.nom }}</a></li>
+                {% endfor %}
             </ul>
+
         </div>
     </div>
 </section>

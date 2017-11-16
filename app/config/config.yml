@@ -239,7 +239,6 @@ fos_elastica:
                             type: float
                         geo:
                             type: geo_point
-
                     persistence:
                      # the driver can be orm, mongodb, phpcr or propel
                      # listener and finder are not supported by
@@ -248,6 +247,7 @@ fos_elastica:
                      model: AppBundle\Entity\Labo
                      provider: ~
                      finder: ~
+
                 formation:
                     mappings:
                         nom: { type: string, analyzer : french_light }
@@ -265,8 +265,6 @@ fos_elastica:
                             type: string
                         geo:
                             type: geo_point
-
-
                     persistence:
                         # the driver can be orm, mongodb, phpcr or propel
                         # listener and finder are not supported by

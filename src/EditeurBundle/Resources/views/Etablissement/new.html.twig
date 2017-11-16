@@ -10,7 +10,7 @@
     <section class="container">
         <h1>Ajout d'un établissement</h1>
 
-        {{ form_start(etablissementForm) }}
+        {{ form_start(etablissementForm, {'attr': {'id' : 'etablissementForm'}}) }}
         {{ include('EditeurBundle:Etablissement:_form.html.twig') }}
             <input class="btn btn-hesam" type="submit" value="Créer" formnovalidate />
 
@@ -23,5 +23,9 @@
 
 {%  block javascripts %}
     {{ parent() }}
+    {#<script src="{{ asset('assets/vendor/parsleyjs/dist/parsley.js') }}"></script>#}
+    <script src="{{ asset('assets/vendor/jquery-validation/dist/jquery.validate.js') }}"></script>
     <script src="{{ asset('js/valorisationForm.js') }}"></script>
+    <script src="{{ asset('js/validation/etablissement.js') }}"></script>
+
 {% endblock %}

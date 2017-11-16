@@ -40,7 +40,3 @@ function myParallax(){
 myParallax();
 
 
-//Debug
-ibgSdk.init({
-    token: '61316fce7046b44aad78248c48855362'
-});

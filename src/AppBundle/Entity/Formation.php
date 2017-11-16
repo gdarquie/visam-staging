@@ -168,8 +168,6 @@ class Formation
      */
     private $last_update;
 
-
-
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
@@ -931,6 +929,7 @@ class Formation
     {
         return $this->discipline;
     }
+
 
     /**
      * @return Thesaurus

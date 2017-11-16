@@ -27,17 +27,27 @@ class DefaultController extends Controller
         $query = $em->createQuery('SELECT h.nom as hesamette, COUNT(f) as nb, f.nom as formation FROM AppBundle:Discipline d JOIN d.formation f JOIN d.hesamette h GROUP BY h ORDER BY nb DESC');
         $formationsHesamette = $query->getResult();
 
-
         //répartition des hesamettes par labos
         $query = $em->createQuery('SELECT h.nom as hesamette, COUNT(l) as nb, l.nom as labo FROM AppBundle:Discipline d JOIN d.labo l JOIN d.hesamette h GROUP BY h ORDER BY nb DESC');
         $labosHesamette = $query->getResult();
 
+        $stats = array();
+
+        $query = $em->createQuery('SELECT COUNT(f) as nb FROM AppBundle:Formation f');
+        $stats['nb_formations'] = $query->getSingleResult();
+
+        $query = $em->createQuery('SELECT COUNT(l) as nb FROM AppBundle:Labo l');
+        $stats['nb_laboratoires'] = $query->getSingleResult();
+
+        $query = $em->createQuery('SELECT COUNT(e) as nb FROM AppBundle:Ed e');
+        $stats['nb_eds'] = $query->getSingleResult();
 
         return $this->render('web/index.html.twig',  array(
             'hesamettes' => $hesamettes,
             'labosHesamette'=> $labosHesamette,
             'formationsHesamette' => $formationsHesamette,
-            'equipements' => $equipements 
+            'equipements' => $equipements,
+            'stats' => $stats
         ));
 
     }
