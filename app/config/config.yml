@@ -227,6 +227,8 @@ fos_elastica:
                             type: keyword
                         discipline:
                             type: keyword
+                        hesamette:
+                            type: keyword
                         lien:
                             type: string
                         mailContact:
@@ -254,6 +256,8 @@ fos_elastica:
                         etablissement:
                             type: keyword
                         discipline:
+                            type: keyword
+                        hesamette:
                             type: keyword
                         annee:
                             type: float
