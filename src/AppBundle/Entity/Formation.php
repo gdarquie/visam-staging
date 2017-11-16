@@ -929,7 +929,6 @@ class Formation
     {
         return $this->discipline;
     }
-
     
     /**
      * Get Hesamette

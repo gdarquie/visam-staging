@@ -2,14 +2,10 @@
 
 namespace AppBundle\Controller\Web;
 
+use AppBundle\Component\Stats\HandlerStats;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-
-use AppBundle\Entity\Ed;
-use EditeurBundle\Form\EdType;
 
 
 class DefaultController extends Controller
@@ -21,32 +17,10 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $hesamettes = $em->getRepository('AppBundle:Hesamette')->findAll();
-        $equipements = $em->getRepository('AppBundle:Equipement')->findAll();
-
-         //nombre de formations par hesamettes
-        $query = $em->createQuery('SELECT h.nom as hesamette, COUNT(f) as nb, f.nom as formation FROM AppBundle:Discipline d JOIN d.formation f JOIN d.hesamette h GROUP BY h ORDER BY nb DESC');
-        $formationsHesamette = $query->getResult();
-
-        //répartition des hesamettes par labos
-        $query = $em->createQuery('SELECT h.nom as hesamette, COUNT(l) as nb, l.nom as labo FROM AppBundle:Discipline d JOIN d.labo l JOIN d.hesamette h GROUP BY h ORDER BY nb DESC');
-        $labosHesamette = $query->getResult();
-
-        $stats = array();
-
-        $query = $em->createQuery('SELECT COUNT(f) as nb FROM AppBundle:Formation f');
-        $stats['nb_formations'] = $query->getSingleResult();
-
-        $query = $em->createQuery('SELECT COUNT(l) as nb FROM AppBundle:Labo l');
-        $stats['nb_laboratoires'] = $query->getSingleResult();
-
-        $query = $em->createQuery('SELECT COUNT(e) as nb FROM AppBundle:Ed e');
-        $stats['nb_eds'] = $query->getSingleResult();
+        $stats = (new HandlerStats())->generalStats($em);
 
         return $this->render('web/index.html.twig',  array(
             'hesamettes' => $hesamettes,
-            'labosHesamette'=> $labosHesamette,
-            'formationsHesamette' => $formationsHesamette,
-            'equipements' => $equipements,
             'stats' => $stats
         ));
 
