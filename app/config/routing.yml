@@ -1,18 +1,17 @@
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
-api:
-    resource: "@ApiBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
 app_editeur:
     resource: "@EditeurBundle/Controller/"
     type:     annotation
     prefix:   /
 
 app_web:
-    resource: "@AppBundle/Controller/Web"
+    resource: "@AppBundle/Controller/Site"
+    type:     annotation
+
+app_stats:
+    resource: "@AppBundle/Controller/Stats"
     type:     annotation
 
 app_api:
