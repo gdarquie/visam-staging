@@ -1,0 +1,17 @@
+{% extends 'editeur.html.twig' %}
+
+{% block body %}
+
+    <section class="container">
+        <h1>Ajout d'une école doctorale</h1>
+
+        {{ form_start(form) }}
+        {{ include('EditeurBundle:Ed:_form.html.twig') }}
+            <input class="btn btn-hesam" type="submit" value="Créer" formnovalidate />
+
+        {{ form_end(form) }}
+
+        {% include "EditeurBundle:modals:_retour.html.twig" %}
+
+    </section>
+{% endblock %}

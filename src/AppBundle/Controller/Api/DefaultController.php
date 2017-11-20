@@ -66,7 +66,7 @@ class DefaultController extends Controller
 
         $liste = [];
           foreach ($formations as $formation){
-                 //echo $formation->getFormationId();
+                 //echo $formation->getId();
                  //echo $formation->getNom();
                  array_push($liste, $formation->getNom());
          }
@@ -158,9 +158,9 @@ class DefaultController extends Controller
     }
 
     /**
-    * @Route("/api/formation/{formationId}", name="apiGetFormationById")
+    * @Route("/api/formation/{id}", name="apiGetFormationById")
     */
-    function getAllDisciplinesFor1Formation($formationId){
+    function getAllDisciplinesFor1Formation($id){
 
         //récupérer une discpline
 

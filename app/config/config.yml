@@ -2,11 +2,15 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: "@EditeurBundle/Resources/config/services.yml" }
+    - { resource: "@ApiBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: en
+    locale: fr
+    logos_directory: '%kernel.root_dir%/../uploads/logos'
+    upload_dir: '%kernel.root_dir%/../uploads'
 
 framework:
     #esi:             ~
@@ -58,14 +62,102 @@ doctrine:
         auto_generate_proxy_classes: "%kernel.debug%"
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
+        dql:
+          datetime_functions:
+             convert_tz: DoctrineExtensions\Query\Mysql\ConvertTz
+             date: DoctrineExtensions\Query\Mysql\Date
+             date_format: DoctrineExtensions\Query\Mysql\DateFormat
+             dateadd: DoctrineExtensions\Query\Mysql\DateAdd
+             datesub: DoctrineExtensions\Query\Mysql\DateSub
+             datediff: DoctrineExtensions\Query\Mysql\DateDiff
+             day: DoctrineExtensions\Query\Mysql\Day
+             dayname: DoctrineExtensions\Query\Mysql\DayName
+             dayofweek: DoctrineExtensions\Query\Mysql\DayOfWeek
+             dayofyear: DoctrineExtensions\Query\Mysql\DayOfYear
+             div: DoctrineExtensions\Query\Mysql\Div
+             from_unixtime: DoctrineExtensions\Query\Mysql\FromUnixtime
+             hour: DoctrineExtensions\Query\Mysql\Hour
+             last_day: DoctrineExtensions\Query\Mysql\LastDay
+             minute: DoctrineExtensions\Query\Mysql\Minute
+             now: DoctrineExtensions\Query\Mysql\Now
+             month: DoctrineExtensions\Query\Mysql\Month
+             monthname: DoctrineExtensions\Query\Mysql\MonthName
+             second: DoctrineExtensions\Query\Mysql\Second
+             strtodate: DoctrineExtensions\Query\Mysql\StrToDate
+             time: DoctrineExtensions\Query\Mysql\Time
+             timediff: DoctrineExtensions\Query\Mysql\TimeDiff
+             timestampadd: DoctrineExtensions\Query\Mysql\TimestampAdd
+             timestampdiff: DoctrineExtensions\Query\Mysql\TimestampDiff
+             timetosec: DoctrineExtensions\Query\Mysql\TimeToSec
+             week: DoctrineExtensions\Query\Mysql\Week
+             weekday: DoctrineExtensions\Query\Mysql\WeekDay
+             year: DoctrineExtensions\Query\Mysql\Year
+             yearweek: DoctrineExtensions\Query\Mysql\YearWeek
+             unix_timestamp: DoctrineExtensions\Query\Mysql\UnixTimestamp
+          numeric_functions:
+            acos: DoctrineExtensions\Query\Mysql\Acos
+            asin: DoctrineExtensions\Query\Mysql\Asin
+            atan2: DoctrineExtensions\Query\Mysql\Atan2
+            atan: DoctrineExtensions\Query\Mysql\Atan
+            bit_count: DoctrineExtensions\Query\Mysql\BitCount
+            bit_xor: DoctrineExtensions\Query\Mysql\BitXor
+            ceil: DoctrineExtensions\Query\Mysql\Ceil
+            cos: DoctrineExtensions\Query\Mysql\Cos
+            cot: DoctrineExtensions\Query\Mysql\Cot
+            degrees: DoctrineExtensions\Query\Mysql\Degrees
+            floor: DoctrineExtensions\Query\Mysql\Floor
+            log10: DoctrineExtensions\Query\Mysql\Log10
+            pi: DoctrineExtensions\Query\Mysql\Pi
+            power: DoctrineExtensions\Query\Mysql\Power
+            quarter: DoctrineExtensions\Query\Mysql\Quarter
+            radians: DoctrineExtensions\Query\Mysql\Radians
+            rand: DoctrineExtensions\Query\Mysql\Rand
+            round: DoctrineExtensions\Query\Mysql\Round
+            stddev: DoctrineExtensions\Query\Mysql\StdDev
+            sin: DoctrineExtensions\Query\Mysql\Sin
+            std: DoctrineExtensions\Query\Mysql\Std
+            tan: DoctrineExtensions\Query\Mysql\Tan
+            variance: DoctrineExtensions\Query\Mysql\Variance
+          string_functions:
+            ascii: DoctrineExtensions\Query\Mysql\Ascii
+            binary: DoctrineExtensions\Query\Mysql\Binary
+            char_length: DoctrineExtensions\Query\Mysql\CharLength
+            concat_ws: DoctrineExtensions\Query\Mysql\ConcatWs
+            countif: DoctrineExtensions\Query\Mysql\CountIf
+            crc32: DoctrineExtensions\Query\Mysql\Crc32
+            degrees: DoctrineExtensions\Query\Mysql\Degrees
+            field: DoctrineExtensions\Query\Mysql\Field
+            find_in_set: DoctrineExtensions\Query\Mysql\FindInSet
+            greatest: DoctrineExtensions\Query\Mysql\Greatest
+            group_concat: DoctrineExtensions\Query\Mysql\GroupConcat
+            ifelse: DoctrineExtensions\Query\Mysql\IfElse
+            ifnull: DoctrineExtensions\Query\Mysql\IfNull
+            least: DoctrineExtensions\Query\Mysql\Least
+            lpad: DoctrineExtensions\Query\Mysql\Lpad
+            match: DoctrineExtensions\Query\Mysql\MatchAgainst
+            md5: DoctrineExtensions\Query\Mysql\Md5
+            nullif: DoctrineExtensions\Query\Mysql\NullIf
+            radians: DoctrineExtensions\Query\Mysql\Radians
+            regexp: DoctrineExtensions\Query\Mysql\Regexp
+            replace: DoctrineExtensions\Query\Mysql\Replace
+            rpad: DoctrineExtensions\Query\Mysql\Rpad
+            sha1: DoctrineExtensions\Query\Mysql\Sha1
+            sha2: DoctrineExtensions\Query\Mysql\Sha2
+            soundex: DoctrineExtensions\Query\Mysql\Soundex
+            str_to_date: DoctrineExtensions\Query\Mysql\StrToDate
+            substring_index: DoctrineExtensions\Query\Mysql\SubstringIndex
+            uuid_short: DoctrineExtensions\Query\Mysql\UuidShort
+            hex: DoctrineExtensions\Query\Mysql\Hex
+            unhex: DoctrineExtensions\Query\Mysql\Unhex
+
 
 # Swiftmailer Configuration
-swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
-    spool:     { type: memory }
+#swiftmailer:
+#    transport: "%mailer_transport%"
+#    host:      "%mailer_host%"
+#    username:  "%mailer_user%"
+#    password:  "%mailer_password%"
+#    spool:     { type: memory }
 
 # FoS Configuration
 
@@ -73,6 +165,12 @@ fos_user:
     db_driver: orm 
     firewall_name: main
     user_class: AppBundle\Entity\User
+    from_email:
+        address:        "gaetan.darquie@gmail.com"
+        sender_name:    "Admin"
+    registration:
+        form:
+            type: EditeurBundle\Form\RegistrationType
 
 # Doctrine Cache
 
@@ -80,3 +178,102 @@ doctrine_cache:
     providers:
         export_cache:
             type: file_system
+
+
+# Elastica
+fos_elastica:
+    clients:
+        default: { host: localhost, port: 9200 }
+    indexes:
+        visam_elastica:
+            settings:
+                index:
+                    number_of_shards : 5
+                    number_of_replicas : 1
+                analysis:
+                    filter:
+                        french_elision:
+                            type: elision
+                            articles_case: true
+                            articles: ["l", "m", "t", "qu", "n", "s", "j", "d", "c", "jusqu", "quoiqu", "lorsqu", "puisqu"]
+                        french_stemmer:
+                            type: stemmer
+                            language: light_french
+                        french_synonym:
+                            type: synonym
+                            ignore_case: true
+                            expand: true
+                            synonyms: ["salade, laitue","mayo, mayonnaise"]
+                        french_stop:
+                            type: stop
+                            stopwords:  _french_
+                    analyzer:
+                        custom_french_analyzer:
+                            tokenizer: letter
+                            filter: ["asciifolding", "lowercase", "french_stem", "elision", "stop"]
+                        french_heavy:
+                            tokenizer: standard
+                            filter : ["french_elision", "french_stop", "french_synonym","french_stemmer"]
+                        french_light:
+                            tokenizer: standard
+                            filter: ["french_elision", "french_stemmer"]
+            types:
+                labo:
+                    mappings:
+                        nom: { type: string, analyzer : french_light }
+                        responsable:
+                            type: string
+                        etablissement:
+                            type: keyword
+                        discipline:
+                            type: keyword
+                        hesamette:
+                            type: keyword
+                        lien:
+                            type: string
+                        mailContact:
+                            type: string
+                        code:
+                            type: string
+                        sigle:
+                            type: string
+                        effectif:
+                            type: float
+                        geo:
+                            type: geo_point
+                    persistence:
+                     # the driver can be orm, mongodb, phpcr or propel
+                     # listener and finder are not supported by
+                     # propel and should be removed
+                     driver: orm
+                     model: AppBundle\Entity\Labo
+                     provider: ~
+                     finder: ~
+
+                formation:
+                    mappings:
+                        nom: { type: string, analyzer : french_light }
+                        etablissement:
+                            type: keyword
+                        discipline:
+                            type: keyword
+                        hesamette:
+                            type: keyword
+                        annee:
+                            type: float
+                        effectif:
+                            type: float
+                        niveau:
+                            type: string
+                        url:
+                            type: string
+                        geo:
+                            type: geo_point
+                    persistence:
+                        # the driver can be orm, mongodb, phpcr or propel
+                        # listener and finder are not supported by
+                        # propel and should be removed
+                        driver: orm
+                        model: AppBundle\Entity\Formation
+                        provider: ~
+                        finder: ~

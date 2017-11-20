@@ -7,17 +7,34 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Localisation
  *
- * @ORM\Table(name="localisation")
- * @ORM\Entity
+ * @ORM\Table(name="adresse")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\LocalisationRepository")
  */
 class Localisation
 {
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="adresse_id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $localisationId;
+
     /**
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=255, nullable=true)
      */
     private $nom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="complet", type="string", length=255, nullable=true)
+     */
+    private $complet;
 
     /**
      * @var string
@@ -29,16 +46,10 @@ class Localisation
     /**
      * @var string
      *
-     * @ORM\Column(name="long", type="string", length=255, nullable=true)
+     * @ORM\Column(name="lon", type="string", length=255, nullable=true)
      */
     private $long;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description", type="text", length=65535, nullable=true)
-     */
-    private $description;
 
     /**
      * @var string
@@ -57,9 +68,23 @@ class Localisation
     /**
      * @var string
      *
+     * @ORM\Column(name="cedex", type="string", length=100, nullable=true)
+     */
+    private $cedex;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="adresse", type="string", length=500, nullable=true)
      */
     private $adresse;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="complement_adresse", type="string", length=255, nullable=true)
+     */
+    private $complementAdresse;
 
     /**
      * @var string
@@ -76,6 +101,13 @@ class Localisation
     private $pays;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="code_pays", type="string", length=5, nullable=true)
+     */
+    private $codePays;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="timestamp", type="datetime", nullable=false)
@@ -85,26 +117,18 @@ class Localisation
     /**
      * @var integer
      *
-     * @ORM\Column(name="type", type="integer", nullable=false)
+     * @ORM\Column(name="type", type="integer", nullable=true)
      */
     private $type;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="localisation_id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $localisationId;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Ufr", inversedBy="localisation")
-     * @ORM\JoinTable(name="localisation_has_ufr",
+     * @ORM\JoinTable(name="adresse_has_ufr",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="localisation_id", referencedColumnName="localisation_id")
+     *     @ORM\JoinColumn(name="adresse_id", referencedColumnName="adresse_id")
      *   },
      *   inverseJoinColumns={
      *     @ORM\JoinColumn(name="ufr_id", referencedColumnName="ufr_id")
@@ -117,12 +141,12 @@ class Localisation
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Labo", inversedBy="localisation")
-     * @ORM\JoinTable(name="localisation_has_labo",
+     * @ORM\JoinTable(name="adresse_has_laboratoire",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="localisation_id", referencedColumnName="localisation_id")
+     *     @ORM\JoinColumn(name="adresse_id", referencedColumnName="adresse_id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
+     *     @ORM\JoinColumn(name="laboratoire_id", referencedColumnName="laboratoire_id")
      *   }
      * )
      */
@@ -132,9 +156,9 @@ class Localisation
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Formation", inversedBy="localisation")
-     * @ORM\JoinTable(name="localisation_has_formation",
+     * @ORM\JoinTable(name="adresse_has_formation",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="localisation_id", referencedColumnName="localisation_id")
+     *     @ORM\JoinColumn(name="adresse_id", referencedColumnName="adresse_id")
      *   },
      *   inverseJoinColumns={
      *     @ORM\JoinColumn(name="formation_id", referencedColumnName="formation_id")
@@ -147,9 +171,9 @@ class Localisation
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Etablissement", inversedBy="localisation")
-     * @ORM\JoinTable(name="localisation_has_etablissement",
+     * @ORM\JoinTable(name="adresse_has_etablissement",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="localisation_id", referencedColumnName="localisation_id")
+     *     @ORM\JoinColumn(name="adresse_id", referencedColumnName="adresse_id")
      *   },
      *   inverseJoinColumns={
      *     @ORM\JoinColumn(name="etablissement_id", referencedColumnName="etablissement_id")
@@ -162,12 +186,12 @@ class Localisation
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Ed", inversedBy="localisation")
-     * @ORM\JoinTable(name="localisation_has_ed",
+     * @ORM\JoinTable(name="adresse_has_ecole_doctorale",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="localisation_id", referencedColumnName="localisation_id")
+     *     @ORM\JoinColumn(name="adresse_id", referencedColumnName="adresse_id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="ED_id", referencedColumnName="ED_id")
+     *     @ORM\JoinColumn(name="ecole_doctorale_id", referencedColumnName="ecole_doctorale_id")
      *   }
      * )
      */
@@ -256,30 +280,6 @@ class Localisation
     public function getLong()
     {
         return $this->long;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     *
-     * @return Localisation
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
     }
 
     /**
@@ -629,4 +629,107 @@ class Localisation
     {
         return $this->ed;
     }
+
+    public function __toString()
+    {
+        return (string) $this->getNom();
+    }
+
+    /**
+     * Set cedex
+     *
+     * @param string $cedex
+     *
+     * @return Localisation
+     */
+    public function setCedex($cedex)
+    {
+        $this->cedex = $cedex;
+
+        return $this;
+    }
+
+    /**
+     * Get cedex
+     *
+     * @return string
+     */
+    public function getCedex()
+    {
+        return $this->cedex;
+    }
+
+    /**
+     * Set complementAdresse
+     *
+     * @param string $complementAdresse
+     *
+     * @return Localisation
+     */
+    public function setComplementAdresse($complementAdresse)
+    {
+        $this->complementAdresse = $complementAdresse;
+
+        return $this;
+    }
+
+    /**
+     * Get complementAdresse
+     *
+     * @return string
+     */
+    public function getComplementAdresse()
+    {
+        return $this->complementAdresse;
+    }
+
+    /**
+     * Set codePays
+     *
+     * @param string $codePays
+     *
+     * @return Localisation
+     */
+    public function setCodePays($codePays)
+    {
+        $this->codePays = $codePays;
+
+        return $this;
+    }
+
+    /**
+     * Get codePays
+     *
+     * @return string
+     */
+    public function getCodePays()
+    {
+        return $this->codePays;
+    }
+
+    /**
+     * @return string
+     */
+    public function getComplet()
+    {
+        return $this->complet;
+    }
+
+    /**
+     * @param string $complet
+     */
+    public function setComplet($complet)
+    {
+        $this->complet = $complet;
+    }
+
+    public function getGeo()
+    {
+        $lat = $this->lat;
+        $long = $this->long;
+        $geo = $lat.','.$long;
+
+        return $geo;
+    }
+
 }

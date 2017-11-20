@@ -15,6 +15,15 @@ class Discipline
     /**
      * @var integer
      *
+     * @ORM\Column(name="discipline_id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="code", type="integer", nullable=true)
      */
     private $code;
@@ -47,10 +56,10 @@ class Discipline
      */
     private $description;
 
+
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="domaine_id", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="Domaine")
+     * @ORM\JoinColumn(name="domaine_id", referencedColumnName="domaine_id", nullable=true)
      */
     private $domaineId;
 
@@ -60,15 +69,6 @@ class Discipline
      * @ORM\Column(name="timestamp", type="datetime", nullable=false)
      */
     private $timestamp;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="discipline_id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $disciplineId;
 
     /**
      * @var \AppBundle\Entity\Hesamette
@@ -91,12 +91,12 @@ class Discipline
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Labo", inversedBy="discipline")
-     * @ORM\JoinTable(name="discipline_has_labo",
+     * @ORM\JoinTable(name="discipline_has_laboratoire",
      *   joinColumns={
      *     @ORM\JoinColumn(name="discipline_id", referencedColumnName="discipline_id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
+     *     @ORM\JoinColumn(name="laboratoire_id", referencedColumnName="laboratoire_id")
      *   }
      * )
      */
@@ -121,12 +121,12 @@ class Discipline
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Ed", inversedBy="discipline")
-     * @ORM\JoinTable(name="discipline_has_ed",
+     * @ORM\JoinTable(name="discipline_has_ecole_doctorale",
      *   joinColumns={
      *     @ORM\JoinColumn(name="discipline_id", referencedColumnName="discipline_id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="ED_id", referencedColumnName="ED_id")
+     *     @ORM\JoinColumn(name="ecole_doctorale_id", referencedColumnName="ecole_doctorale_id")
      *   }
      * )
      */
@@ -313,13 +313,13 @@ class Discipline
     }
 
     /**
-     * Get disciplineId
+     * Get id
      *
-     * @return integer
+     * @return mixed
      */
-    public function getDisciplineId()
+    public function getId()
     {
-        return $this->disciplineId;
+        return $this->id;
     }
 
     /**

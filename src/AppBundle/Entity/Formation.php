@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Formation
@@ -13,11 +15,25 @@ use Doctrine\ORM\Mapping as ORM;
 class Formation
 {
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="formation_id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255, nullable=true)
+     * @ORM\Column(name="nom", type="string", length=255, nullable=false)
+     *
+     * @Assert\NotBlank(
+     *     message = "Un nom doit être renseigné pour permettre la sauvegarde"
+     * )
      */
     private $nom;
+
 
     /**
      * @var string
@@ -29,7 +45,7 @@ class Formation
     /**
      * @var string
      *
-     * @ORM\Column(name="url", type="string", length=255, nullable=true)
+     * @ORM\Column(name="url", type="string", length=500, nullable=true)
      */
     private $url;
 
@@ -43,9 +59,48 @@ class Formation
     /**
      * @var string
      *
+     * @ORM\Column(name="objet_id", type="string", length=255, nullable=true)
+     */
+    private $objetId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="annee_collecte", type="integer", nullable=true)
+     */
+    private $anneeCollecte;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="niveau", type="string", length=255, nullable=true)
      */
     private $niveau;
+
+    /** @var  \AppBundle\Entity\Thesaurus
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Thesaurus")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="niveau_thesaurus", referencedColumnName="thesaurus_id")
+     * })
+     */
+    private $niveau_thesaurus;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lmd", type="string", length=255, nullable=true)
+     */
+    private $lmd;
+
+    /** @var  \AppBundle\Entity\Thesaurus
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Thesaurus")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="lmd_thesaurus", referencedColumnName="thesaurus_id")
+     * })
+     */
+    private $lmd_thesaurus;
 
     /**
      * @var string
@@ -54,24 +109,41 @@ class Formation
      */
     private $typediplome;
 
+    /** @var  \AppBundle\Entity\Thesaurus
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Thesaurus")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="typediplome_thesaurus", referencedColumnName="thesaurus_id")
+     * })
+     */
+    private $typediplome_thesaurus;
+
     /**
      * @var integer
      *
      * @ORM\Column(name="effectif", type="integer", nullable=true)
+     *
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 1000000,
+     *      minMessage = "Il ne peut y avoir d'effectif négatif",
+     *      maxMessage = "Le nombre d'effectifs entré est (bien) trop élevé"
+     * )
+     *
      */
     private $effectif;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="lien2", type="string", length=255, nullable=true)
+     * @ORM\Column(name="lien2", type="string", length=500, nullable=true)
      */
     private $lien2;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="lien3", type="string", length=255, nullable=true)
+     * @ORM\Column(name="lien3", type="string", length=500, nullable=true)
      */
     private $lien3;
 
@@ -97,34 +169,44 @@ class Formation
     private $last_update;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="formation_id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $formationId;
-
-    /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Localisation", mappedBy="formation")
      */
     private $localisation;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Membre", mappedBy="formation")
-     */
-    private $membre;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag", mappedBy="formation")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Membre", inversedBy="formation", cascade= {"persist"})
+     * @ORM\JoinTable(name="participant_has_formation",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="formation_id", referencedColumnName="formation_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="participant_id", referencedColumnName="participant_id")
+     *   }
+     * )
+     */
+    private $membre;
+
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag", inversedBy="formation", cascade= {"persist"})
+     * @ORM\JoinTable(name="formation_has_tag",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="formation_id", referencedColumnName="formation_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="tag_id", referencedColumnName="tag_id")
+     *   }
+     * )
      */
     private $tag;
+
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -132,6 +214,28 @@ class Formation
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Labo", mappedBy="formation")
      */
     private $labo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ects", type="integer", length=255, nullable=true)
+     */
+    private $ects;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Thesaurus")
+     * @ORM\JoinTable(name="formation_has_modalite",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="formation", referencedColumnName="formation_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="modalite_thesaurus", referencedColumnName="thesaurus_id")
+     *   }
+     * )
+     */
+    private $modalite_thesaurus;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -151,22 +255,89 @@ class Formation
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Etablissement", mappedBy="formation")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Etablissement", mappedBy="formation", cascade={"persist"})
      */
     private $etablissement;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Metier", inversedBy="formation")
-     * @ORM\JoinTable(name="formation_has_metier",
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Discipline")
+     * @ORM\JoinTable(name="formation_has_cnu",
      *   joinColumns={
      *     @ORM\JoinColumn(name="formation_id", referencedColumnName="formation_id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="metier_id", referencedColumnName="metier_id")
+     *     @ORM\JoinColumn(name="discipline_id", referencedColumnName="discipline_id")
      *   }
      * )
+     *
+     * @Assert\Count(
+     *      max = 5,
+     *      minMessage = "Vous devez choisir au moins une discipline CNU",
+     *      maxMessage = "Vous ne pouvez choisir plus de 5 disciplines"
+     * )
+     */
+    private $cnu;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Discipline")
+     * @ORM\JoinTable(name="formation_has_sise",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="formation_id", referencedColumnName="formation_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="discipline_id", referencedColumnName="discipline_id")
+     *   }
+     * )
+     *
+     * @Assert\Count(
+     *      max = 5,
+     *      minMessage = "Vous devez choisir au moins une discipline SISE",
+     *      maxMessage = "Vous ne pouvez choisir plus de 5 disciplines"
+     * )
+     *
+     */
+    private $sise;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Discipline")
+     * @ORM\JoinTable(name="formation_has_hceres",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="formation_id", referencedColumnName="formation_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="discipline_id", referencedColumnName="discipline_id")
+     *   }
+     * )
+     *
+     * @Assert\Count(
+     *      max = 5,
+     *      minMessage = "Vous devez choisir au moins une discipline HCERES",
+     *      maxMessage = "Vous ne pouvez choisir plus de 5 disciplines"
+     * )
+     *
+     */
+    private $hceres;
+
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Metier3")
+     * @ORM\JoinTable(name="formation_has_metier3",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="formation_id", referencedColumnName="formation_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="metier_id", referencedColumnName="id")
+     *   }
+     * )
+     *
      */
     private $metier;
 
@@ -176,6 +347,51 @@ class Formation
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Discipline", mappedBy="formation")
      */
     private $discipline;
+
+    /**
+     *
+     * @ORM\Column(name="check1", type="boolean")
+     */
+    private $check_general = false;
+
+    /**
+     *
+     * @ORM\Column(name="check2", type="boolean")
+     */
+    private $check_effectif = false;
+
+    /**
+     *
+     * @ORM\Column(name="check3", type="boolean")
+     */
+    private $check_index = false;
+
+    /**
+     *
+     * @ORM\Column(name="check4", type="boolean")
+     */
+    private $check_cursus = false;
+
+    /**
+     *
+     * @ORM\Column(name="valide", type="boolean")
+     */
+    private $valide = false;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="code_interne", type="string", length=100, nullable=true)
+     */
+    private $code_interne;
+
+//    /**
+//     * @var string
+//     *
+//     * @ORM\Column(name="code_interne", type="string", length=100, nullable=true)
+//     */
+//    private $geo;
+
 
     /**
      * Constructor
@@ -188,8 +404,9 @@ class Formation
         $this->labo = new \Doctrine\Common\Collections\ArrayCollection();
         $this->ufr = new \Doctrine\Common\Collections\ArrayCollection();
         $this->etablissement = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->metier = new \Doctrine\Common\Collections\ArrayCollection();
         $this->discipline = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->metier = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->modalite_thesaurus = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
@@ -427,6 +644,7 @@ class Formation
      * Get responsable
      *
      * @return string
+     *
      */
     public function getResponsable()
     {
@@ -466,13 +684,13 @@ class Formation
     }
 
     /**
-     * Get formationId
+     * Get id
      *
      * @return integer
      */
-    public function getFormationId()
+    public function getId()
     {
-        return $this->formationId;
+        return $this->id;
     }
 
     /**
@@ -480,11 +698,16 @@ class Formation
      *
      * @param \AppBundle\Entity\Localisation $localisation
      *
-     * @return Formation
+     * @return Localisation
      */
     public function addLocalisation(\AppBundle\Entity\Localisation $localisation)
     {
+        if ($this->localisation->contains($localisation)) {
+            return;
+        }
+
         $this->localisation[] = $localisation;
+        $localisation->addFormation($this);
 
         return $this;
     }
@@ -497,6 +720,7 @@ class Formation
     public function removeLocalisation(\AppBundle\Entity\Localisation $localisation)
     {
         $this->localisation->removeElement($localisation);
+        $localisation->removeFormation($this);
     }
 
     /**
@@ -544,38 +768,21 @@ class Formation
     }
 
     /**
-     * Add tag
-     *
-     * @param \AppBundle\Entity\Tag $tag
-     *
-     * @return Formation
-     */
-    public function addTag(\AppBundle\Entity\Tag $tag)
-    {
-        $this->tag[] = $tag;
-
-        return $this;
-    }
-
-    /**
-     * Remove tag
-     *
-     * @param \AppBundle\Entity\Tag $tag
-     */
-    public function removeTag(\AppBundle\Entity\Tag $tag)
-    {
-        $this->tag->removeElement($tag);
-    }
-
-    /**
-     * Get tag
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getTag()
     {
         return $this->tag;
     }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $tag
+     */
+    public function setTag($tag)
+    {
+        $this->tag = $tag;
+    }
+
 
     /**
      * Add labo
@@ -645,33 +852,8 @@ class Formation
         return $this->ufr;
     }
 
-    /**
-     * Add etablissement
-     *
-     * @param \AppBundle\Entity\Etablissement $etablissement
-     *
-     * @return Formation
-     */
-    public function addEtablissement(\AppBundle\Entity\Etablissement $etablissement)
-    {
-        $this->etablissement[] = $etablissement;
-
-        return $this;
-    }
 
     /**
-     * Remove etablissement
-     *
-     * @param \AppBundle\Entity\Etablissement $etablissement
-     */
-    public function removeEtablissement(\AppBundle\Entity\Etablissement $etablissement)
-    {
-        $this->etablissement->removeElement($etablissement);
-    }
-
-    /**
-     * Get etablissement
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getEtablissement()
@@ -680,37 +862,31 @@ class Formation
     }
 
     /**
-     * Add metier
+     * Add etablissement
      *
-     * @param \AppBundle\Entity\Metier $metier
+     * @param \AppBundle\Entity\Etablissement $etablissement
      *
      * @return Formation
      */
-    public function addMetier(\AppBundle\Entity\Metier $metier)
+    public function addEtablissement(Etablissement $etablissement)
     {
-        $this->metier[] = $metier;
+        if ($this->etablissement->contains($etablissement)) {
+            return;
+        }
 
-        return $this;
+        $this->etablissement[] = $etablissement;
+        $etablissement->addFormation($this);
     }
 
     /**
-     * Remove metier
+     * Remove etablissement
      *
-     * @param \AppBundle\Entity\Metier $metier
+     * @param \AppBundle\Entity\Etablissement etablissement
      */
-    public function removeMetier(\AppBundle\Entity\Metier $metier)
+    public function removeEtablissement(Etablissement $etablissement)
     {
-        $this->metier->removeElement($metier);
-    }
-
-    /**
-     * Get metier
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getMetier()
-    {
-        return $this->metier;
+        $this->etablissement->removeElement($etablissement);
+        $etablissement->removeFormation($this);
     }
 
     /**
@@ -722,7 +898,13 @@ class Formation
      */
     public function addDiscipline(\AppBundle\Entity\Discipline $discipline)
     {
+
+        if ($this->discipline->contains($discipline)) {
+            return;
+        }
+
         $this->discipline[] = $discipline;
+        $discipline->addFormation($this);
 
         return $this;
     }
@@ -735,6 +917,7 @@ class Formation
     public function removeDiscipline(\AppBundle\Entity\Discipline $discipline)
     {
         $this->discipline->removeElement($discipline);
+        $discipline->removeFormation($this);
     }
 
     /**
@@ -746,4 +929,423 @@ class Formation
     {
         return $this->discipline;
     }
+
+    
+    /**
+     * Get Hesamette
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getHesamette()
+    {
+        $mesHesamette = Array();
+        foreach($this->discipline as $disc) {
+            if($disc->getHesamette()) {
+                if(!in_array($disc->getHesamette()->getNom(), $mesHesamette, true)){
+                    array_push($mesHesamette, $disc->getHesamette()->getNom());
+                }
+            }
+
+        }
+        return $mesHesamette;
+    }
+
+    /**
+     * @return Thesaurus
+     */
+    public function getLmdThesaurus()
+    {
+        return $this->lmd_thesaurus;
+    }
+
+    /**
+     * @param Thesaurus $lmd_thesaurus
+     */
+    public function setLmdThesaurus($lmd_thesaurus)
+    {
+        $this->lmd_thesaurus = $lmd_thesaurus;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getLmd()
+    {
+        return $this->lmd;
+    }
+
+    /**
+     * @param string $lmd
+     */
+    public function setLmd($lmd)
+    {
+        $this->lmd = $lmd;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAnneeCollecte()
+    {
+        return $this->anneeCollecte;
+    }
+
+    /**
+     * @param int $anneeCollecte
+     */
+    public function setAnneeCollecte($anneeCollecte)
+    {
+        $this->anneeCollecte = $anneeCollecte;
+    }
+
+    /**
+     * @return string
+     */
+    public function getObjetId()
+    {
+        return $this->objetId;
+    }
+
+    /**
+     * @param string $objetId
+     */
+    public function setObjetId($objetId)
+    {
+        $this->objetId = $objetId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEcts()
+    {
+        return $this->ects;
+    }
+
+    /**
+     * @param string $ects
+     */
+    public function setEcts($ects)
+    {
+        $this->ects = $ects;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCnu()
+    {
+        return $this->cnu;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $cnu
+     */
+    public function setCnu($cnu)
+    {
+        $this->cnu = $cnu;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSise()
+    {
+        return $this->sise;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $sise
+     */
+    public function setSise($sise)
+    {
+        $this->sise = $sise;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getHceres()
+    {
+        return $this->hceres;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $hceres
+     */
+    public function setHceres($hceres)
+    {
+        $this->hceres = $hceres;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCheckGeneral()
+    {
+        return $this->check_general;
+    }
+
+    /**
+     * @param mixed $check_general
+     */
+    public function setCheckGeneral($check_general)
+    {
+        $this->check_general = $check_general;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCheckEffectif()
+    {
+        return $this->check_effectif;
+    }
+
+    /**
+     * @param mixed $check_effectif
+     */
+    public function setCheckEffectif($check_effectif)
+    {
+        $this->check_effectif = $check_effectif;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCheckIndex()
+    {
+        return $this->check_index;
+    }
+
+    /**
+     * @param mixed $check_index
+     */
+    public function setCheckIndex($check_index)
+    {
+        $this->check_index = $check_index;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCheckCursus()
+    {
+        return $this->check_cursus;
+    }
+
+    /**
+     * @param mixed $check_cursus
+     */
+    public function setCheckCursus($check_cursus)
+    {
+        $this->check_cursus = $check_cursus;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getValide()
+    {
+        return $this->valide;
+    }
+
+    /**
+     * @param mixed $valide
+     */
+    public function setValide($valide)
+    {
+        $this->valide = $valide;
+    }
+
+    /**
+     * @return Thesaurus
+     */
+    public function getTypediplomeThesaurus()
+    {
+        return $this->typediplome_thesaurus;
+    }
+
+    /**
+     * @param Thesaurus $typediplome_thesaurus
+     */
+    public function setTypediplomeThesaurus($typediplome_thesaurus)
+    {
+        $this->typediplome_thesaurus = $typediplome_thesaurus;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getModaliteThesaurus()
+    {
+        return $this->modalite_thesaurus;
+    }
+
+    /**
+     * Add modalite_thesaurus
+     *
+     * @param \AppBundle\Entity\Thesaurus $modalite_thesaurus
+     *
+     * @return Formation
+     */
+    public function addModaliteThesaurus(\AppBundle\Entity\Thesaurus $modalite_thesaurus)
+    {
+        $this->modalite_thesaurus[] = $modalite_thesaurus;
+
+        return $this;
+    }
+
+
+    /**
+     * @return Thesaurus
+     */
+    public function getNiveauThesaurus()
+    {
+        return $this->niveau_thesaurus;
+    }
+
+    /**
+     * @param Thesaurus $niveau_thesaurus
+     */
+    public function setNiveauThesaurus($niveau_thesaurus)
+    {
+        $this->niveau_thesaurus = $niveau_thesaurus;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMetier()
+    {
+        return $this->metier;
+    }
+
+    /**
+     * Add metier
+     *
+     * @param \AppBundle\Entity\Metier3 $metier
+     *
+     * @return Formation
+     */
+    public function addMetier(\AppBundle\Entity\Metier3 $metier)
+    {
+        $this->metier[] = $metier;
+
+        return $this;
+    }
+
+    /**
+     * Remove metier
+     *
+     * @param \AppBundle\Entity\Metier3 $metier
+     */
+    public function removeMetier(\AppBundle\Entity\Metier3 $metier)
+    {
+        $this->metier->removeElement($metier);
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $metier
+     */
+    public function setMetier($metier)
+    {
+        $this->metier = $metier;
+    }
+
+    /**
+     * @return code_interne
+     */
+    public function getCodeInterne()
+    {
+        return $this->code_interne;
+    }
+
+    /**
+     * Set code_interne
+     *
+     * @param string $code_interne
+     *
+     * @return Formation
+     */
+    public function setCodeInterne($code_interne)
+    {
+        $this->code_interne = $code_interne;
+    }
+
+    /**
+     * Get localisation mapping
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getGeo()
+    {
+        foreach($this->localisation as $geo) {
+            if ($geo->getLat())
+                return $geo->getLat().",".$geo->getLong();
+        }
+    }
+
+    public function __toString()
+    {
+        return (string) $this->getNom();
+    }
+
+    /**
+ * Add tag
+ *
+ * @param \AppBundle\Entity\Tag $tag
+ *
+ * @return Formation
+ */
+    public function addTag(\AppBundle\Entity\Tag $tag)
+    {
+        $this->tag[] = $tag;
+
+        return $this;
+    }
+
+    /**
+     * Add sise
+     *
+     * @param \AppBundle\Entity\Discipline $sise
+     *
+     * @return Formation
+     */
+    public function addSise(\AppBundle\Entity\Discipline $sise)
+    {
+        $this->sise[] = $sise;
+
+        return $this;
+    }
+
+    /**
+     * Add cnu
+     *
+     * @param \AppBundle\Entity\Discipline $cnu
+     *
+     * @return Formation
+     */
+    public function addCnu(\AppBundle\Entity\Discipline $cnu)
+    {
+        $this->cnu[] = $cnu;
+
+        return $this;
+    }
+
+    /**
+     * Add hceres
+     *
+     * @param \AppBundle\Entity\Discipline $hceres
+     *
+     * @return Formation
+     */
+    public function addHceres(\AppBundle\Entity\Discipline $hceres)
+    {
+        $this->hceres[] = $hceres;
+
+        return $this;
+    }
+
 }

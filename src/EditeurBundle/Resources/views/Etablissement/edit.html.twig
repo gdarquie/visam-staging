@@ -1,0 +1,30 @@
+{% extends 'editeur.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/form.css') }}">
+{% endblock %}
+
+{% block body %}
+
+    <section class="container">
+        <h1>{% if etablissement.sigle %}{{ etablissement.sigle |upper }} - {% else %}{% endif %}Edition</h1>
+
+        {{ form_start(etablissementForm) }}
+        {{ include('EditeurBundle:Etablissement:_form.html.twig') }}
+            <input type="submit" value="Edit" class="btn btn-hesam" formnovalidate/>
+        {{ form_end(etablissementForm) }}
+
+        {{ form_start(delete_form) }}
+            <button disabled value="Supprimer" class="btn btn-hesam right ">Supprimer</button>
+        {{ form_end(delete_form) }}
+
+        {% include "EditeurBundle:modals:_retour.html.twig" %}
+
+    </section>
+{% endblock %}
+
+{%  block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/valorisationForm.js') }}"></script>
+{% endblock %}

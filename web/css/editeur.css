@@ -1,0 +1,56 @@
+@import url("https://fonts.googleapis.com/css?family=Bitter:400,400italic,700");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,300,600");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+body {
+    /*font-family: Bitter, serif;*/
+    font-family: "Open Sans", sans-serif;
+    font-weight: 300;
+}
+h1, h2, h3, h4, h5 {
+    font-family: Bitter, serif;
+}
+
+h4 {
+    font-size: 1.1rem;
+    line-height: 139%;
+}
+
+h5 {
+    font-size: 1.3rem;
+    line-height: 139%;
+}
+
+h6 {
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+@media only screen and (min-width: 993px) {
+    .container.large {
+        width: 90%;
+    }
+}
+
+.collection-item .title{
+    color: #b53127;
+}
+
+.collection .collection-item{
+    overflow: auto;
+}
+
+.sort-menu .sort:not(:last-child){
+    border-right:1px solid black;
+    padding-right:3px;
+}
+
+.sort{
+    font-weight: bold;
+    font-size:0.9em;
+    cursor:pointer;
+}
+
+.collection-item p .description{
+    font-size:0.8em!important;
+}

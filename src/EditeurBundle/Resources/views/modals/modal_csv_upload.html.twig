@@ -1,0 +1,28 @@
+<div id="modal1" class="modal modal-fixed-footer">
+    <form action="{{ path('upload') }}" method="post" id="uploadform"  autocomplete="off" enctype="multipart/form-data" novalidate="novalidate">
+        {{ form_widget(form.etablissement) }}
+    <div class="modal-header">
+        <h6 id="titre" class="valign center-align"></h6>
+    </div>
+    <hr>
+    <div class="modal-content">
+
+        <p>Sélectionner le type et le fichier à télécharger</p>
+        <div class="message-upload"></div>
+        <div id="logList"></div>
+        <fieldset>
+
+
+        <div id="form-type-csv">{{ form_widget(form.type) }}</div>
+        <div id="form-file-csv">{{ form_widget(form.attachment) }}</div>
+        </fieldset>
+        <p>
+            Le document doit impérativement être sous format Excel.
+        </p>
+    </div>
+    <div class="modal-footer right-align">
+        {{ form_widget(form.cancel) }}
+        {{ form_widget(form.upload) }}
+    </div>
+    </form>
+</div>

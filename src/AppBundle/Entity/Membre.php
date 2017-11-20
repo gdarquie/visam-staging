@@ -2,16 +2,27 @@
 
 namespace AppBundle\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Membre
  *
- * @ORM\Table(name="membre")
+ * @ORM\Table(name="participant")
  * @ORM\Entity
  */
 class Membre
 {
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="participant_id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $membre_id;
+
     /**
      * @var string
      *
@@ -34,94 +45,129 @@ class Membre
     private $profession;
 
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(name="timestamp", type="datetime", nullable=false)
+     * @ORM\Column(name="genre", type="string", length=1, nullable=true)
      */
-    private $timestamp;
+    private $genre;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="membre_id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Column(name="mail", type="string", length=500, nullable=true)
+     *
+     * @Assert\Email(
+     *     message = "L'email '{{ value }}' n'est pas une adresse email valide.",
+     *     checkMX = true
+     * )
      */
-    private $membreId;
+    private $mail;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_creation", type="datetime")
+     */
+    private $date_creation;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="last_update", type="datetime")
+     */
+    private $last_update;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Labo", inversedBy="membre")
-     * @ORM\JoinTable(name="membre_has_labo",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="membre_id", referencedColumnName="membre_id")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
-     *   }
-     * )
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Labo", mappedBy="membre")
      */
     private $labo;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Formation", inversedBy="membre")
-     * @ORM\JoinTable(name="membre_has_formation",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="membre_id", referencedColumnName="membre_id")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="formation_id", referencedColumnName="formation_id")
-     *   }
-     * )
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Formation", mappedBy="membre")
      */
     private $formation;
+
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Ed", inversedBy="membre")
-     * @ORM\JoinTable(name="membre_has_ed",
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Axe", inversedBy="membres")
+     * @ORM\JoinTable(name="participant_has_axe",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="membre_id", referencedColumnName="membre_id")
+     *     @ORM\JoinColumn(name="participant_id", referencedColumnName="participant_id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="ED_id", referencedColumnName="ED_id")
+     *     @ORM\JoinColumn(name="axe_id", referencedColumnName="axe_id")
+     *   }
+     * )
+     */
+    private $axe;
+
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Ed", inversedBy="membres")
+     * @ORM\JoinTable(name="participant_has_ecole_doctorale",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="participant_id", referencedColumnName="participant_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="ecole_doctorale_id", referencedColumnName="ecole_doctorale_id")
      *   }
      * )
      */
     private $ed;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag", inversedBy="tag")
+     * @ORM\JoinTable(name="participant_has_tag",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="participant_id", referencedColumnName="participant_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="tag_id", referencedColumnName="tag_id")
+     *   }
+     * )
+     */
+    private $tag;
+
+
+    /**
      * Constructor
      */
     public function __construct()
     {
+        $this->date_creation = new \DateTime();
+        $this->last_update = new \DateTime();
         $this->labo = new \Doctrine\Common\Collections\ArrayCollection();
         $this->formation = new \Doctrine\Common\Collections\ArrayCollection();
         $this->ed = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-
     /**
-     * Set nom
-     *
-     * @param string $nom
-     *
-     * @return Membre
+     * @return int
      */
-    public function setNom($nom)
+    public function getMembreId()
     {
-        $this->nom = $nom;
-
-        return $this;
+        return $this->membre_id;
     }
 
     /**
-     * Get nom
-     *
+     * @param int $membre_id
+     */
+    public function setMembreId($membre_id)
+    {
+        $this->membre_id = $membre_id;
+    }
+
+    /**
      * @return string
      */
     public function getNom()
@@ -130,22 +176,14 @@ class Membre
     }
 
     /**
-     * Set prenom
-     *
-     * @param string $prenom
-     *
-     * @return Membre
+     * @param string $nom
      */
-    public function setPrenom($prenom)
+    public function setNom($nom)
     {
-        $this->prenom = $prenom;
-
-        return $this;
+        $this->nom = $nom;
     }
 
     /**
-     * Get prenom
-     *
      * @return string
      */
     public function getPrenom()
@@ -154,22 +192,14 @@ class Membre
     }
 
     /**
-     * Set profession
-     *
-     * @param string $profession
-     *
-     * @return Membre
+     * @param string $prenom
      */
-    public function setProfession($profession)
+    public function setPrenom($prenom)
     {
-        $this->profession = $profession;
-
-        return $this;
+        $this->prenom = $prenom;
     }
 
     /**
-     * Get profession
-     *
      * @return string
      */
     public function getProfession()
@@ -178,66 +208,78 @@ class Membre
     }
 
     /**
-     * Set timestamp
-     *
-     * @param \DateTime $timestamp
-     *
-     * @return Membre
+     * @param string $profession
      */
-    public function setTimestamp($timestamp)
+    public function setProfession($profession)
     {
-        $this->timestamp = $timestamp;
-
-        return $this;
+        $this->profession = $profession;
     }
 
     /**
-     * Get timestamp
-     *
+     * @return string
+     */
+    public function getGenre()
+    {
+        return $this->genre;
+    }
+
+    /**
+     * @param string $genre
+     */
+    public function setGenre($genre)
+    {
+        $this->genre = $genre;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMail()
+    {
+        return $this->mail;
+    }
+
+    /**
+     * @param string $mail
+     */
+    public function setMail($mail)
+    {
+        $this->mail = $mail;
+    }
+
+    /**
      * @return \DateTime
      */
-    public function getTimestamp()
+    public function getDateCreation()
     {
-        return $this->timestamp;
+        return $this->date_creation;
     }
 
     /**
-     * Get membreId
-     *
-     * @return integer
+     * @param \DateTime $date_creation
      */
-    public function getMembreId()
+    public function setDateCreation($date_creation)
     {
-        return $this->membreId;
+        $this->date_creation = $date_creation;
     }
 
     /**
-     * Add labo
-     *
-     * @param \AppBundle\Entity\Labo $labo
-     *
-     * @return Membre
+     * @return \DateTime
      */
-    public function addLabo(\AppBundle\Entity\Labo $labo)
+    public function getLastUpdate()
     {
-        $this->labo[] = $labo;
-
-        return $this;
+        return $this->last_update;
     }
 
     /**
-     * Remove labo
-     *
-     * @param \AppBundle\Entity\Labo $labo
+     * @param \DateTime $last_update
      */
-    public function removeLabo(\AppBundle\Entity\Labo $labo)
+    public function setLastUpdate($last_update)
     {
-        $this->labo->removeElement($labo);
+        $this->last_update = $last_update;
     }
 
     /**
-     * Get labo
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getLabo()
@@ -246,32 +288,14 @@ class Membre
     }
 
     /**
-     * Add formation
-     *
-     * @param \AppBundle\Entity\Formation $formation
-     *
-     * @return Membre
+     * @param \Doctrine\Common\Collections\Collection $labo
      */
-    public function addFormation(\AppBundle\Entity\Formation $formation)
+    public function setLabo($labo)
     {
-        $this->formation[] = $formation;
-
-        return $this;
+        $this->labo = $labo;
     }
 
     /**
-     * Remove formation
-     *
-     * @param \AppBundle\Entity\Formation $formation
-     */
-    public function removeFormation(\AppBundle\Entity\Formation $formation)
-    {
-        $this->formation->removeElement($formation);
-    }
-
-    /**
-     * Get formation
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getFormation()
@@ -280,36 +304,66 @@ class Membre
     }
 
     /**
-     * Add ed
-     *
-     * @param \AppBundle\Entity\Ed $ed
-     *
-     * @return Membre
+     * @param \Doctrine\Common\Collections\Collection $formation
      */
-    public function addEd(\AppBundle\Entity\Ed $ed)
+    public function setFormation($formation)
     {
-        $this->ed[] = $ed;
-
-        return $this;
+        $this->formation = $formation;
     }
 
     /**
-     * Remove ed
-     *
-     * @param \AppBundle\Entity\Ed $ed
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function removeEd(\AppBundle\Entity\Ed $ed)
+    public function getAxe()
     {
-        $this->ed->removeElement($ed);
+        return $this->axe;
     }
 
     /**
-     * Get ed
-     *
+     * @param \Doctrine\Common\Collections\Collection $axe
+     */
+    public function setAxe($axe)
+    {
+        $this->axe = $axe;
+    }
+
+    /**
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getEd()
     {
         return $this->ed;
     }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $ed
+     */
+    public function setEd($ed)
+    {
+        $this->ed = $ed;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTag()
+    {
+        return $this->tag;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $tag
+     */
+    public function setTag($tag)
+    {
+        $this->tag = $tag;
+    }
+
+    public function __toString()
+    {
+        return (string) $this->getNom();
+    }
+
+
+
 }

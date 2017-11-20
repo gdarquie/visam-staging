@@ -1,0 +1,36 @@
+{% extends 'editeur.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        #collecte_etablissement label{
+            margin-top: 10px;
+            margin-right: 40px;
+            font-size: 1.3em;
+        }
+
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+    <h1>Editer une collecte</h1>
+
+    {{ form_start(edit_form) }}
+
+        {{ include('EditeurBundle:Collecte:_form.html.twig') }}
+
+        <input type="submit" class="btn btn-hesam" value="Edit" formnovalidate />
+    {{ form_end(edit_form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('admin') }}">Retour</a>
+        </li>
+
+    </ul>
+
+    </div>
+
+{% endblock %}

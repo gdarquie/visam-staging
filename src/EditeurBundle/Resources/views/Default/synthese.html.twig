@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block fos_user_content %}{% endblock %}
+
+
+{% block body %}
+<section class="container">
+	<h2>Synthèse</h2>
+	
+	<h3>Les établissements</h3>
+	<table class="striped">
+
+	{% for etab in etabs %}
+	<tr>
+		<td>{{etab.nom}}</td>
+		<td>{{etab.dateCreation|date('Y-m-d')}}</td>
+	</tr>
+	{% endfor %}
+	</table>
+
+
+	<h3>Les laboratoires</h3>
+	<table class="striped">
+
+	{% for labo in labos | slice(1,10) %}
+	<tr>
+{# 		{{dump(labo)}} #}
+		<td>{{labo.nom}}</td>
+		<td>{{labo.dateCreation|date('Y-m-d')}}</td>
+	</tr>
+	{% endfor %}
+	</table>
+
+	<ul class="pagination">
+		<li class="active"><a href="#!">1</a></li>
+		<li class="waves-effect"><a href="#!">2</a></li>
+	    <li class="waves-effect"><a href="#!">3</a></li>
+	    <li class="waves-effect"><a href="#!">4</a></li>
+	    <li class="waves-effect"><a href="#!">5</a></li>
+	</ul>
+
+
+	<h3>Les formations</h3>
+	<table class="striped">
+
+	{% for formation in formations %}
+	<tr>
+		<td>{{formation.nom}}</td>
+		<td>{{formation.dateCreation|date('Y-m-d')}}</td>
+	</tr>
+	{% endfor %}
+	</table>
+
+</section>
+{% endblock %}

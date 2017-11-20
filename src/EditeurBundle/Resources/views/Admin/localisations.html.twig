@@ -1,0 +1,44 @@
+{% extends "editeur.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+{% endblock %}
+
+{% block body %}
+
+    <section class="container">
+        <h1>Toutes les localisations</h1>
+
+        <div class="card">
+            <ul class="collection with-header">
+                {% for item in localisations  %}
+                    <li class="collection-item avatar js-labo-item">
+                        <a href="{{ path('editeur_localisation_edit', {'id': item.localisationId } ) }}" >
+                            <i class="material-icons circle grey">done</i>
+                            <span class="title">
+                                {% if item.nom != '' %}
+                                    {{ item.nom }}
+                                {% else %}
+                                    Sans titre
+                                {% endif %}
+                            </span>
+                            <span class="lastmodif">dernière modification le <i>{{ item.timestamp|date() }}</i></span>
+                        </a>
+                    </li>
+
+                {% endfor %}
+            </ul>
+        </div>
+        <ul class="pagination center">
+            {% for u in 0..(nbPages-1)  %}
+                {% if page == loop.index %}
+                    <li class="active"><a href="{{ path('admin_localisations' , {'page' : loop.index}) }}">{{ loop.index }}</a></li>
+                {% else %}
+                    <li class="waves-effect"><a href="{{ path('admin_localisations' , {'page' : loop.index}) }}">{{ loop.index }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </section>
+
+{% endblock %}

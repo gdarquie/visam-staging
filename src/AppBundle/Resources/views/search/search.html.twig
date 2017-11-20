@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/mehdi.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('js/search/build/static/css/main.30872034.css') }}">
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-xVtrt5MG5-Ym3bZvezFY35Xx1xdEMI4"></script>
+{% endblock %}
+
+{% block body %}
+    <div id="root"></div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('js/search/build/static/js/main.6b095863.js') }}"></script>
+{% endblock %}

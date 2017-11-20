@@ -1,0 +1,76 @@
+{% extends "editeur.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+
+{% endblock %}
+
+
+{% block body %}
+
+    <section class="container">
+
+        <h1>Gestion du thésaurus</h1>
+
+        <article class="card">
+            <h3>Tous les types</h3>
+
+            <div class="row">
+                <div class=" thesaurus col s7">
+                    {% for item in types  %}
+
+                        <div class="description_container">
+                            <a href="{{ path('admin_thesaurus', {'slug': item.slug}) }}">
+                                <span class="description valign-wrapper thesaurus-item">
+                                     {{ item.type }}
+                                    <i class="material-icons">link</i>
+                                </span>
+                            </a>
+                        </div>
+
+                    {% endfor %}
+                </div>
+
+                <div class=" col s5">
+                    <div class="add_item_btn right">
+                        <a href="{{ path('editeur_thesaurus_new') }}"><span class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></span>
+                        </a>
+                        <span class="legend_btn">Ajouter un élément</span>
+                    </div>
+                </div>
+            </div>
+
+        </article>
+
+        <article class="responsive-table card">
+
+            <h3>Liste contrôlée <i>{{ type.titre|capitalize }}</i></h3>
+
+            <p>Cette liste permet de voir tous les items de la liste "{{ type.titre }}".</p>
+
+            <table class="highlight tablesorter">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Type</th>
+                        <th>Modifier</th>
+                        {#<th>Supprimer</th>#}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in thesaurus %}
+                        <tr>
+                            <td>{{ item.nom }}</td>
+                            <td>{{ item.type }}</td>
+                            <td><a href="{{ path('editeur_thesaurus_edit', {'id' : item.thesaurusId} ) }}"><i class="material-icons">edit</i></a></td>
+                            {#<td><a href=""><i class="material-icons">delete</i></a></td>#}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </article>
+
+    </section>
+{% endblock %}

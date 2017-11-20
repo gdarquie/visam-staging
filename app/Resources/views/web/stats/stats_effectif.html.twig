@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+
+    <style>
+        .intertitre{
+            box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+            font-size: 2em;
+            margin-top : 30px;
+        }
+
+        .number{
+            font-size:1.3em;
+            font-weight: bold;
+        }
+
+        h2{
+            padding-top: 60px;
+        }
+
+    </style>
+{% endblock %}
+
+{% block fos_user_content %}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <article>
+                <h2>TEST 2</h2>
+                <div class="intertitre row">
+                    <p>La majeure partie des étudiants et des auditeurs sont inscrits dans le domaine disciplinaire "Sciences pour l'ingénieur"</p>
+                </div>
+                <div id="test">
+                    <svg style="height:500px;"></svg>
+                </div>
+            </article>
+        </div>
+    </div>
+{% endblock %}
+
+{# fin de body #}
+{% block  javascripts %}
+
+    {{ parent() }}
+
+    <!-- D3.JS -->
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="{{ asset('bower_components/nvd3/build/nv.d3.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('/bower_components/nvd3/build/nv.d3.css')}}">
+    <!-- END D3.JS -->
+
+    <script type="text/javascript">
+        //Répartition d'effectif par hesamette
+        nv.addGraph(function() {
+            var chart = nv.models.pieChart()
+                    .x(function(d) { return d.label })
+                    .y(function(d) { return d.value })
+                    .showLabels(true)     //Display pie labels
+                    .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+                    .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+                    .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+                    .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
+                ;
+            d3.select("#test svg")
+                .datum(nbEffParHesametteData ())
+                .transition().duration(350)
+                .call(chart);
+
+            return chart;
+        });
+        //Répartition des effectifs par hesamettes
+        function nbEffParHesametteData() {
+            return [
+                {% for hesamette in effHesamette %}
+                { "label" :"{{hesamette.hesamette|escape('js')}}",
+                    "value" : "{{hesamette.nb}}" },
+                {% endfor %}
+            ];
+        }
+    </script>
+
+{% endblock %}

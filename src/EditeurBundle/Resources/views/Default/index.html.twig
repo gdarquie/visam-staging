@@ -1,0 +1,201 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+
+        table{
+            font-size: 0.7em;
+        }
+
+        #editeur h1{
+            font-size: 2.5em;
+        }
+
+        #editeur h2{
+            font-size: 2em;
+        }
+
+    </style>
+{% endblock %}
+
+
+{% block body %}
+<section class='container' id="editeur">
+
+    <article id="opening">
+        <h1 class="center">Administration de visam</h1>
+        <h2 class="center">[top secret]</h2>
+    </article>
+
+    <article>
+        <h2>Liste des établissements</h2>
+
+        <table class="striped">
+            <tr>
+                <th>Nom</th>
+                <th>description</th>
+                <th>code</th>
+                <th>sigle</th>
+                <th>lien</th>
+                <th>ministère</th>
+                <th>statut</th>
+                <th>etudiants</th>
+                <th>chercheurs</th>
+                <th>date de création</th>
+                <th>dernier changement</th>
+                <th>Modifier</th>
+            </tr>
+            {% for etab in etablissements %}
+                <tr>
+                    <td>{{ etab.nom }}</td>
+                    <td>{{ etab.description |slice(0,100) }} ...</td>
+                    <td>{{ etab.code }}</td>
+                    <td>{{ etab.sigle }}</td>
+                    <td><a href="{{ etab.lien }}" target="_blank">{{ etab.lien }}</a></td>
+                    <td>{{ etab.ministere }}</td>
+                    <td>{{ etab.statut }}</td>
+                    <td>{{ etab.etudiants }}</td>
+                    <td>{{ etab.chercheurs }}</td>
+                    <td>{{ etab.dateCreation |date("d/m/y g:i:s", "Europe/Paris")}}</td>
+                    <td>{{ etab.lastUpdate|date("d/m/y g:i:s", "Europe/Paris")}}</td>
+                    <td>
+                        <a href="{{ path("editeur_etablissement_edit", { "id" : etab.etablissementId }) }}">Modifier</a>
+                        <br />
+                        <a data-target="modal1" href="#modal1" class="modal-trigger" data-id-etablissement="{{ etab.etablissementId }}" data-nom-etablissement="{{ etab.nom }}">import&nbsp;CSV</a>
+                    </td>
+                </tr>
+            {% endfor %}
+
+        </table>
+    </article>
+
+
+    <article>
+        <h2>Derniers laboratoires modifiés ou créés</h2>
+
+        <table class="striped">
+                <tr>
+                    <th>Nom</th>
+                    {#<th>Description</th>#}
+                    <th>Lien</th>
+                    <th>Mail de contact</th>
+                    {#<th>Responsable</th>#}
+                    <th>Etablissement(s)</th>
+                    <td>Dernier changement</td>
+                    <th>Modifier</th>
+                </tr>
+            {% for labo in laboratoires %}
+                <tr>
+                    <td>{{ labo.nom }}</td>
+                    {#<td>{{ labo.description |slice(0,1000) }}...</td>#}
+                    <td><a href="{{ labo.lien }}">{{ labo.lien }}</a></td>
+                    <td>{{ labo.mailContact }}</td>
+                    {#<td>{{ labo.responsable }}</td>#}
+                    <td>{% for etab in labo.etablissement  %}
+                            {{ etab.nom }}{% if loop.last %}{% else %}, {% endif %}
+                        {% endfor %}</td>
+                    <td>{{ labo.lastUpdate |date("d/m/y g:i:s", "Europe/Paris") }}</td>
+                    <td><a href="{{ path('editeur_laboratoire_edit', {'id' : labo.id}) }}">Modifier</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </article>
+
+
+    <article>
+        <h2>Dernières formations modifiées ou créées</h2>
+
+        <table>
+                <tr>
+                    <td>Nom</td>
+                    {#<td>Description</td>#}
+                    <td>Lien</td>
+                    <td>Année</td>
+                    <td>Type de diplôme</td>
+                    <td>Etablissement(s)</td>
+                    <td>Dernier changement</td>
+                    <td>Modifier</td>
+                </tr>
+            {% for formation in formations %}
+                <tr>
+                    <td>{{ formation.nom }}</td>
+                    {#<td>{{ formation.description |slice(0,1000) }}...</td>#}
+                    <td><a href="{{ formation.url }}">{{ formation.url }}</a></td>
+                    <td>{{ formation.annee }}</td>
+                    <td>{{ formation.typeDiplome }}</td>
+                    <td>{% for etab in formation.etablissement  %}
+                            {{ etab.nom }}{% if loop.last %}{% else %}, {% endif %}
+                        {% endfor %}</td>
+                    <td>{{ formation.lastUpdate |date("d/m/y g:i:s", "Europe/Paris") }}</td>
+                    <td><a href="{{ path('editeur_formation_edit', {'id' : formation.id}) }}">Modifier</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </article>
+</section>
+    {{  render (controller("EditeurBundle:Ajax:uploadDocument")) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+<script type="text/javascript">
+    $(document).ready(function(){
+
+    });
+
+    $('.modal-trigger').click(function(){
+        $('.message-upload').html('');
+        $('#block_log').remove();
+        $('.message-upload').removeClass('invalid valid');
+        $('#upload_file_attachment').val(null);
+        $('#upload_file_etablissement').val($(this).attr('data-id-etablissement'));
+        $('.modal-header #titre').html('<strong>'+$(this).attr('data-nom-etablissement')+'</strong>');
+        $('.modal-trigger').leanModal();
+    });
+
+    $("#uploadform").submit(function (event) {
+
+        event.preventDefault();
+        $('#upload_file_upload').html('Uploading...');
+        $('#upload_file_cancel').hide();
+        // Create a new FormData object.
+        //var formData = new FormData();
+
+       // formData.append('type', $('input[type=radio]:checked').val());
+        $.ajax( {
+            url: "{{ path('upload') }}",
+            type: 'POST',
+            data: new FormData( this ),
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                $('#upload_file_upload').html('Importer');
+                $('#upload_file_cancel').show();
+                if (data.success === false) {
+                    var info = '<div id ="block_log" style="overflow:auto; height: 120px; width: 95%; border: 3px solid red;">';
+                    $('.message-upload').html(data.msg);
+                    $('.message-upload').addClass('invalid');
+                    info += '</ul>';
+                    $.each(data.log, function(i,line) {
+                        info += '<li>' + line + '</li>';
+                    });
+                    info += '</ul></div></br>';
+
+                    $('#logList').html(info);
+                } else {
+                    $('.message-upload').html(data.msg);
+                    $('.message-upload').addClass('valid');
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown)
+            {   $('#upload_file_upload').html('Envoyer');
+                $('#upload_file_cancel').show();
+                $('.message-upload').html('Le temps d\'exécution maximum autorisé est dépassé');
+                $('.message-upload').addClass('invalid');
+            },
+            timeout:   50000,
+        } );
+    });
+</script>
+{% endblock %}

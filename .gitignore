@@ -15,6 +15,7 @@
 /vendor/
 /web/bundles/
 .DS_Store
-
-
-
+/upload/*
+/uploads/*
+node_modules
+.idea/*

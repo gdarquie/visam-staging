@@ -1,0 +1,88 @@
+<div>
+    {% if is_granted('ROLE_USER') %}
+        <ul id="menu_editeur" class="dropdown-content">
+
+            <li><a href="{{ path("editeur") }}">Espace Editeur</a></li>
+            <li class="divider"></li>
+            <li><a href="{{ path('editeur_formation_new') }}">Ajout Formation</a></li>
+            <li><a href="{{ path('editeur_laboratoire_new') }}">Ajout Laboratoire</a>
+            <li><a href="{{ path('editeur_ed_new') }}">Ajout Ecole doctorale</a>
+            <li class="divider"></li>
+            <li><a href="{{ path('search_previz') }}">Prévisualiser</a></li>
+
+        </ul>
+    {% endif %}
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <ul id="menu_admin" class="dropdown-content">
+
+            <li><a href="{{ path("admin") }}">Espace Admin</a></li>
+            <li class="divider"></li>
+            <li><a href="{{ path('editeur_etablisement_new') }}">Ajout Etablissement</a></li>
+            <li><a href="{{ path('editeur_thesaurus_new') }}">Ajout Thesaurus</a></li>
+            <li><a href="{{ path('editeur_localisation_new') }}">Ajout Localisation</a></li>
+            <li><a href="/register">Ajout Contributeur</a></li>
+            {#<li><a href="{{ path('editeur_valorisation_new') }}">Valorisation</a></li>#}
+            {#<li><a href="">Equipement</a></li>#}
+
+        </ul>
+    {% endif %}
+
+    <!-- Pour mobile -->
+
+
+        {% if is_granted('ROLE_USER') %}
+        <ul id="mobile-demo" class="side-nav">
+            <h2>Editeur</h2>
+            <li><a href="{{ path("editeur") }}">Espace Editeur</a></li>
+            <li class="divider"></li>
+            <li><a href="{{ path('editeur_formation_new') }}">Ajout Formation</a></li>
+            <li><a href="{{ path('editeur_laboratoire_new') }}">Ajout Laboratoire</a>
+            <li><a href="{{ path('editeur_ed_new') }}">Ajout Ecole doctorale</a>
+            <li class="divider"></li>
+            <li><a href="{{ path('search_previz') }}">Prévisualiser</a></li>
+        </ul>
+        {% endif %}
+        {% if is_granted('ROLE_USER') %}
+            <ul id="mobile-demo" class="side-nav">
+                <h2>Admin</h2>
+                <li class="divider"></li>
+                <li><a href="{{ path("editeur") }}">Espace Editeur</a></li>
+                <li class="divider"></li>
+                <li><a href="{{ path('editeur_formation_new') }}">Ajout Formation</a></li>
+                <li><a href="{{ path('editeur_laboratoire_new') }}">Ajout Laboratoire</a>
+                <li><a href="{{ path('editeur_ed_new') }}">Ajout Ecole doctorale</a>
+                <li><a href="{{ path('editeur_localisation_new') }}">Ajout Localisation</a>
+                <li class="divider"></li>
+                <li><a href="{{ path('search_previz') }}">Prévisualiser</a></li>
+            </ul>
+        {% endif %}
+
+
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper red-hesam">
+                <a href="{{ path('homepage') }}" class="brand-logo">Carto HESAM</a>
+                <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="{{ path('search') }}"><img src="/img/loupe.svg" width="15px">Rechercher</a></li>
+                    <li><a href="{{ path("statistiques") }}"> <img src="/img/stat.svg" width="15px">Statistiques</a></li>
+                    <li><a href="{{ path("apropos") }}"><img src="/img/person.svg" width="15px">A propos</a></li>
+
+                    {% if is_granted('ROLE_USER') %}
+                    <li><a class="dropdown-button" href="#!" data-activates="menu_editeur">Editeur carto HESAM<i class="material-icons right">arrow_drop_down</i></a></li>
+                    {% endif %}
+
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <li><a class="dropdown-button" href="#!" data-activates="menu_admin">Administration<i class="material-icons right">arrow_drop_down</i></a></li>
+                    {% endif %}
+
+
+
+                </ul>
+            </div>
+        </nav>
+
+
+    </div>
+</div>

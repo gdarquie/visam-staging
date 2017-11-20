@@ -3,19 +3,34 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Labo
  *
- * @ORM\Table(name="labo")
+ * @ORM\Table(name="laboratoire")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\LaboRepository")
  */
 class Labo
 {
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="laboratoire_id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255, nullable=true)
+     * @ORM\Column(name="nom", type="string", length=255, nullable=false)
+     *
+     * @Assert\NotBlank(
+     *     message = "Un nom doit être renseigné pour permettre la sauvegarde"
+     * )
      */
     private $nom;
 
@@ -51,6 +66,11 @@ class Labo
      * @var string
      *
      * @ORM\Column(name="description", type="text", length=16777215, nullable=true)
+     *
+     * @Assert\Length(
+     *      max = 2500,
+     *      maxMessage = "La description ne peut dépasser {{ limit }} caractères"
+     * )
      */
     private $description;
 
@@ -68,12 +88,51 @@ class Labo
      */
     private $type;
 
+    /** @var  \AppBundle\Entity\Thesaurus
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Thesaurus")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="type_thesaurus", referencedColumnName="thesaurus_id")
+     * })
+     */
+    private $type_thesaurus;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Thesaurus")
+     * @ORM\JoinTable(name="laboratoire_has_theme",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="laboratoire_id", referencedColumnName="laboratoire_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="thesaurus_id", referencedColumnName="thesaurus_id")
+     *   }
+     * )
+     */
+    private $theme;
+
     /**
      * @var integer
      *
      * @ORM\Column(name="effectif", type="integer", nullable=true)
      */
     private $effectif;
+
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="effectif_hesam", type="integer", nullable=true)
+     */
+    private $effectifHesam;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="objet_id", type="string", length=255, nullable=true)
+     */
+    private $objetId;
 
     /**
      * @var string
@@ -104,6 +163,13 @@ class Labo
     private $uai;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="annee_collecte", type="integer", nullable=true)
+     */
+    private $anneeCollecte;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="date_creation", type="datetime", nullable=false)
@@ -117,26 +183,34 @@ class Labo
      */
     private $last_update;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="labo_id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $laboId;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Membre", mappedBy="labo")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Membre", inversedBy="labo", cascade= {"persist"})
+     * @ORM\JoinTable(name="participant_has_laboratoire",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="laboratoire_id", referencedColumnName="laboratoire_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="participant_id", referencedColumnName="participant_id")
+     *   }
+     * )
      */
     private $membre;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag", mappedBy="labo")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag", inversedBy="labo", cascade= {"persist"})
+     * @ORM\JoinTable(name="laboratoire_has_tag",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="laboratoire_id", referencedColumnName="laboratoire_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="tag_id", referencedColumnName="tag_id")
+     *   }
+     * )
      */
     private $tag;
 
@@ -158,9 +232,9 @@ class Labo
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Formation", inversedBy="labo")
-     * @ORM\JoinTable(name="labo_has_formation",
+     * @ORM\JoinTable(name="laboratoire_has_formation",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
+     *     @ORM\JoinColumn(name="laboratoire_id", referencedColumnName="laboratoire_id")
      *   },
      *   inverseJoinColumns={
      *     @ORM\JoinColumn(name="formation_id", referencedColumnName="formation_id")
@@ -173,8 +247,75 @@ class Labo
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Discipline", mappedBy="labo")
+     *
+     *
      */
     private $discipline;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Discipline")
+     * @ORM\JoinTable(name="laboratoire_has_cnu",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="laboratoire_id", referencedColumnName="laboratoire_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="discipline_id", referencedColumnName="discipline_id")
+     *   }
+     * )
+     *
+     * @Assert\Count(
+     *      max = 5,
+     *      minMessage = "Vous devez choisir au moins une discipline CNU",
+     *      maxMessage = "Vous ne pouvez choisir plus de 5 disciplines"
+     * )
+     */
+    private $cnu;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Discipline")
+     * @ORM\JoinTable(name="laboratoire_has_sise",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="laboratoire_id", referencedColumnName="laboratoire_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="discipline_id", referencedColumnName="discipline_id")
+     *   }
+     * )
+     *
+     * @Assert\Count(
+     *      max = 5,
+     *      minMessage = "Vous devez choisir au moins une discipline SISE",
+     *      maxMessage = "Vous ne pouvez choisir plus de 5 disciplines"
+     * )
+     *
+     */
+    private $sise;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Discipline")
+     * @ORM\JoinTable(name="laboratoire_has_hceres",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="laboratoire_id", referencedColumnName="laboratoire_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="discipline_id", referencedColumnName="discipline_id")
+     *   }
+     * )
+     *
+     * @Assert\Count(
+     *      max = 5,
+     *      minMessage = "Vous devez choisir au moins une discipline HCERES",
+     *      maxMessage = "Vous ne pouvez choisir plus de 5 disciplines"
+     * )
+     *
+     */
+    private $hceres;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -186,10 +327,10 @@ class Labo
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Equipement", inversedBy="labo")
-     * @ORM\JoinTable(name="labo_has_equipement",
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Equipement", inversedBy="labo", cascade= {"persist"})
+     * @ORM\JoinTable(name="laboratoire_has_equipement",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
+     *     @ORM\JoinColumn(name="laboratoire_id", referencedColumnName="laboratoire_id")
      *   },
      *   inverseJoinColumns={
      *     @ORM\JoinColumn(name="equipement_id", referencedColumnName="equipement_id")
@@ -202,21 +343,75 @@ class Labo
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Ed", inversedBy="labo")
-     * @ORM\JoinTable(name="ed_has_labo",
+     * @ORM\JoinTable(name="ecole_doctorale_has_laboratoire",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
+     *     @ORM\JoinColumn(name="laboratoire_id", referencedColumnName="laboratoire_id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="ED_id", referencedColumnName="ED_id")
+     *     @ORM\JoinColumn(name="ecole_doctorale_id", referencedColumnName="ecole_doctorale_id")
      *   }
      * )
      */
     private $ed;
 
+
     /**
-     * @ORM\OneToMany(targetEntity="Axe", mappedBy="labo")
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Axe", inversedBy="labo", cascade= {"persist"})
+     * @ORM\JoinTable(name="laboratoire_has_axe",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="laboratoire_id", referencedColumnName="laboratoire_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="axe_id", referencedColumnName="axe_id")
+     *   }
+     * )
      */
     private $axes;
+
+    /**
+    *
+    * @ORM\Column(name="check1", type="boolean")
+    */
+    private $check_general = false;
+
+    /**
+     *
+     * @ORM\Column(name="check2", type="boolean")
+     */
+    private $check_contact = false;
+
+    /**
+     *
+     * @ORM\Column(name="check3", type="boolean")
+     */
+    private $check_etab = false;
+
+    /**
+     *
+     * @ORM\Column(name="check4", type="boolean")
+     */
+    private $check_description = false;
+
+    /**
+     *
+     * @ORM\Column(name="check5", type="boolean")
+     */
+    private $check_effectifs = false ;
+
+    /**
+     *
+     * @ORM\Column(name="valide", type="boolean")
+     */
+    private $valide = false;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="code_interne", type="string", length=100, nullable=true)
+     */
+    private $code_interne;
 
     /**
      * Constructor
@@ -320,6 +515,22 @@ class Labo
         $this->mailcontact = $mailcontact;
 
         return $this;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTheme()
+    {
+        return $this->theme;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $theme
+     */
+    public function setTheme($theme)
+    {
+        $this->theme = $theme;
     }
 
     /**
@@ -582,13 +793,32 @@ class Labo
 
 
     /**
-     * Get laboId
+     * Get id
      *
      * @return integer
      */
-    public function getLaboId()
+    public function getId()
     {
-        return $this->laboId;
+        return $this->id;
+    }
+
+    /**
+     * Set id
+     *
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * Clean id
+     *
+     * @return integer
+     */
+    public function cleanId()
+    {
+        $this->id = null;
     }
 
     /**
@@ -626,38 +856,21 @@ class Labo
     }
 
     /**
-     * Add tag
-     *
-     * @param \AppBundle\Entity\Tag $tag
-     *
-     * @return Labo
-     */
-    public function addTag(\AppBundle\Entity\Tag $tag)
-    {
-        $this->tag[] = $tag;
-
-        return $this;
-    }
-
-    /**
-     * Remove tag
-     *
-     * @param \AppBundle\Entity\Tag $tag
-     */
-    public function removeTag(\AppBundle\Entity\Tag $tag)
-    {
-        $this->tag->removeElement($tag);
-    }
-
-    /**
-     * Get tag
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getTag()
     {
         return $this->tag;
     }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $tag
+     */
+    public function setTag($tag)
+    {
+        $this->tag = $tag;
+    }
+
 
     /**
      * Add ufr
@@ -698,11 +911,16 @@ class Labo
      *
      * @param \AppBundle\Entity\Localisation $localisation
      *
-     * @return Labo
+     * @return Localisation
      */
     public function addLocalisation(\AppBundle\Entity\Localisation $localisation)
     {
+        if ($this->localisation->contains($localisation)) {
+            return;
+        }
+
         $this->localisation[] = $localisation;
+        $localisation->addLabo($this);
 
         return $this;
     }
@@ -715,6 +933,7 @@ class Labo
     public function removeLocalisation(\AppBundle\Entity\Localisation $localisation)
     {
         $this->localisation->removeElement($localisation);
+        $localisation->removeLabo($this);
     }
 
     /**
@@ -770,7 +989,13 @@ class Labo
      */
     public function addDiscipline(\AppBundle\Entity\Discipline $discipline)
     {
+
+        if ($this->discipline->contains($discipline)) {
+            return;
+        }
+
         $this->discipline[] = $discipline;
+        $discipline->addLabo($this);
 
         return $this;
     }
@@ -783,6 +1008,7 @@ class Labo
     public function removeDiscipline(\AppBundle\Entity\Discipline $discipline)
     {
         $this->discipline->removeElement($discipline);
+        $discipline->removeLabo($this);
     }
 
     /**
@@ -795,6 +1021,36 @@ class Labo
         return $this->discipline;
     }
 
+
+        /**
+     * Get Hesamette
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getHesamette()
+    {
+        $mesHesamette = Array();
+        foreach($this->discipline as $disc) {
+            if($disc->getHesamette()) {
+                if(!in_array($disc->getHesamette()->getNom(), $mesHesamette, true)){
+                    array_push($mesHesamette, $disc->getHesamette()->getNom());
+                }
+            }
+
+        }
+        return $mesHesamette;
+    }
+
+
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEtablissement()
+    {
+        return $this->etablissement;
+    }
+
     /**
      * Add etablissement
      *
@@ -802,32 +1058,27 @@ class Labo
      *
      * @return Labo
      */
-    public function addEtablissement(\AppBundle\Entity\Etablissement $etablissement)
+    public function addEtablissement(Etablissement $etablissement)
     {
-        $this->etablissement[] = $etablissement;
+        if ($this->etablissement->contains($etablissement)) {
+            return;
+        }
 
-        return $this;
+        $this->etablissement[] = $etablissement;
+        $etablissement->addLabo($this);
     }
 
     /**
      * Remove etablissement
      *
-     * @param \AppBundle\Entity\Etablissement $etablissement
+     * @param \AppBundle\Entity\Etablissement etablissement
      */
-    public function removeEtablissement(\AppBundle\Entity\Etablissement $etablissement)
+    public function removeEtablissement(Etablissement $etablissement)
     {
         $this->etablissement->removeElement($etablissement);
+        $etablissement->removeLabo($this);
     }
 
-    /**
-     * Get etablissement
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getEtablissement()
-    {
-        return $this->etablissement;
-    }
 
     /**
      * Add equipement
@@ -898,8 +1149,22 @@ class Labo
     }
 
     /**
-     * Gets the value of axes.
-     *
+     * @return Thesaurus
+     */
+    public function getTypeThesaurus()
+    {
+        return $this->type_thesaurus;
+    }
+
+    /**
+     * @param Thesaurus $type_thesaurus
+     */
+    public function setTypeThesaurus($type_thesaurus)
+    {
+        $this->type_thesaurus = $type_thesaurus;
+    }
+
+    /**
      * @return mixed
      */
     public function getAxes()
@@ -908,19 +1173,243 @@ class Labo
     }
 
     /**
-     * Sets the value of axes.
-     *
-     * @param mixed $axes the axes
-     *
-     * @return self
+     * @param mixed $axes
      */
-    private function setAxes($axes)
+    public function setAxes($axes)
     {
         $this->axes = $axes;
+    }
 
-        return $this;
+    /**
+     * @return int
+     */
+    public function getEffectifHesam()
+    {
+        return $this->effectifHesam;
+    }
+
+    /**
+     * @param int $effectifHesam
+     */
+    public function setEffectifHesam($effectifHesam)
+    {
+        $this->effectifHesam = $effectifHesam;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAnneeCollecte()
+    {
+        return $this->anneeCollecte;
+    }
+
+    /**
+     * @param int $anneeCollecte
+     */
+    public function setAnneeCollecte($anneeCollecte)
+    {
+        $this->anneeCollecte = $anneeCollecte;
+    }
+
+    /**
+     * @return string
+     */
+    public function getObjetId()
+    {
+        return $this->objetId;
+    }
+
+    /**
+     * @param string $objetId
+     */
+    public function setObjetId($objetId)
+    {
+        $this->objetId = $objetId;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCnu()
+    {
+        return $this->cnu;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $cnu
+     */
+    public function setCnu($cnu)
+    {
+        $this->cnu = $cnu;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSise()
+    {
+        return $this->sise;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $sise
+     */
+    public function setSise($sise)
+    {
+        $this->sise = $sise;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getHceres()
+    {
+        return $this->hceres;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $hceres
+     */
+    public function setHceres($hceres)
+    {
+        $this->hceres = $hceres;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCheckGeneral()
+    {
+        return $this->check_general;
+    }
+
+    /**
+     * @param mixed $check_general
+     */
+    public function setCheckGeneral($check_general)
+    {
+        $this->check_general = $check_general;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCheckContact()
+    {
+        return $this->check_contact;
+    }
+
+    /**
+     * @param mixed $check_contact
+     */
+    public function setCheckContact($check_contact)
+    {
+        $this->check_contact = $check_contact;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCheckEtab()
+    {
+        return $this->check_etab;
+    }
+
+    /**
+     * @param mixed $check_etab
+     */
+    public function setCheckEtab($check_etab)
+    {
+        $this->check_etab = $check_etab;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCheckDescription()
+    {
+        return $this->check_description;
+    }
+
+    /**
+     * @param mixed $check_description
+     */
+    public function setCheckDescription($check_description)
+    {
+        $this->check_description = $check_description;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCheckEffectifs()
+    {
+        return $this->check_effectifs;
+    }
+
+    /**
+     * @param mixed $check_effectifs
+     */
+    public function setCheckEffectifs($check_effectifs)
+    {
+        $this->check_effectifs = $check_effectifs;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getValide()
+    {
+        return $this->valide;
+    }
+
+    /**
+     * @param mixed $valide
+     */
+    public function setValide($valide)
+    {
+        $this->valide = $valide;
+    }
+
+    /**
+     * @return code_interne
+     */
+    public function getCodeInterne()
+    {
+        return $this->code_interne;
+    }
+
+    /**
+      * Set code_interne
+      *
+      * @param string $code_interne
+      *
+      * @return Labo
+      */
+
+    public function setCodeInterne($code_interne)
+    {
+        $this->code_interne = $code_interne;
+    }
+
+    /**
+     * Get localisation mapping
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getGeo()
+    {
+        foreach($this->localisation as $geo) {
+            if ($geo->getLat())
+                return $geo->getLat().",".$geo->getLong();
+        }
+    }
+
+    public function __toString()
+    {
+        return (string) $this->getNom();
     }
 
 
-    
 }

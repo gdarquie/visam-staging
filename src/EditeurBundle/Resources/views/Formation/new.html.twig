@@ -1,0 +1,24 @@
+{% extends 'editeur.html.twig' %}
+
+{% block body %}
+
+<div class="container">
+    <h1>Ajouter une formation - {{ year }}</h1>
+
+    {{ form_start(edit_form, {'attr': {'class': 'form-to-check', 'data-parsley-validate' : ''} }) }}
+
+        {{ include('EditeurBundle:Formation:_form.html.twig') }}
+        <input type="submit" class="btn btn-hesam" value="Créer" formnovalidate />
+
+    {{ form_end(edit_form) }}
+
+    {% include "EditeurBundle:modals:_retour.html.twig" %}
+</div>
+
+{% endblock %}
+
+{%  block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/membreForm.js') }}"></script>
+    <script src="{{ asset('js/tagForm.js') }}"></script>
+{% endblock %}

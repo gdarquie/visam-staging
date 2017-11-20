@@ -1,0 +1,56 @@
+{% extends 'editeur.html.twig' %}
+
+{% block body %}
+    <h1>Ed</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Code</th>
+                <td>{{ ed.code }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ ed.nom }}</td>
+            </tr>
+            <tr>
+                <th>Lien</th>
+                <td>{{ ed.lien }}</td>
+            </tr>
+            <tr>
+                <th>Laboext</th>
+                <td>{{ ed.laboExt }}</td>
+            </tr>
+            <tr>
+                <th>Etabext</th>
+                <td>{{ ed.etabExt }}</td>
+            </tr>
+            <tr>
+                <th>Contact</th>
+                <td>{{ ed.contact }}</td>
+            </tr>
+            <tr>
+                <th>Effectif</th>
+                <td>{{ ed.effectif }}</td>
+            </tr>
+            <tr>
+                <th>Edid</th>
+                <td>{{ ed.edId }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('editeur_ed_index') }}">Retour à la liste</a>
+        </li>
+        <li>
+            <a href="{{ path('editeur_ed_edit', { 'id': ed.edId }) }}">Modifier</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

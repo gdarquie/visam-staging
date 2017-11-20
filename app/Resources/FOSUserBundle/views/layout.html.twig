@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+    <!--Import materialize.css-->
+    <link rel="stylesheet"
+          href="{{ asset('assets/vendor/materialize/dist/css/materialize.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/editeur.css') }}">
+{% endblock %}
+
+{% block body %}
+
+    {#<div class="row">#}
+        {#<form class="col s12">#}
+            {#<div class="row">#}
+                {#<div class="input-field col s12">#}
+                    {#<textarea id="textarea1" class="materialize-textarea"></textarea>#}
+                    {#<label for="textarea1">Textarea</label>#}
+                {#</div>#}
+            {#</div>#}
+        {#</form>#}
+    {#</div>#}
+
+
+    <section class="container">
+    {% block fos_user_content %}{% endblock %}
+    </section>
+{% endblock %}
+

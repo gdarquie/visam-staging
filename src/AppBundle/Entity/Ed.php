@@ -5,10 +5,10 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Ed
+ * ed
  *
- * @ORM\Table(name="ED")
- * @ORM\Entity
+ * @ORM\Table(name="ecole_doctorale")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\EdRepository")
  */
 class Ed
 {
@@ -25,6 +25,13 @@ class Ed
      * @ORM\Column(name="nom", type="string", length=255, nullable=true)
      */
     private $nom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="objet_id", type="string", length=255, nullable=true)
+     */
+    private $objetId;
 
     /**
      * @var string
@@ -62,16 +69,9 @@ class Ed
     private $effectif;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="timestamp", type="datetime", nullable=false)
-     */
-    private $timestamp;
-
-    /**
      * @var integer
      *
-     * @ORM\Column(name="ED_id", type="integer")
+     * @ORM\Column(name="ecole_doctorale_id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -94,7 +94,7 @@ class Ed
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Etablissement", mappedBy="ed")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Etablissement", mappedBy="ed", cascade={"persist"})
      */
     private $etablissement;
 
@@ -113,10 +113,39 @@ class Ed
     private $labo;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="annee_collecte", type="integer", nullable=true)
+     */
+    private $anneeCollecte;
+
+    /**
+     *
+     * @ORM\Column(name="valide", type="boolean")
+     */
+    private $valide = false;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_creation", type="datetime")
+     */
+    private $date_creation;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="last_update", type="datetime")
+     */
+    private $last_update;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
+        $this->date_creation = new \DateTime();
+        $this->last_update = new \DateTime();
         $this->membre = new \Doctrine\Common\Collections\ArrayCollection();
         $this->localisation = new \Doctrine\Common\Collections\ArrayCollection();
         $this->etablissement = new \Doctrine\Common\Collections\ArrayCollection();
@@ -402,21 +431,25 @@ class Ed
      *
      * @return Ed
      */
-    public function addEtablissement(\AppBundle\Entity\Etablissement $etablissement)
+    public function addEtablissement(Etablissement $etablissement)
     {
-        $this->etablissement[] = $etablissement;
+        if ($this->etablissement->contains($etablissement)) {
+            return;
+        }
 
-        return $this;
+        $this->etablissement[] = $etablissement;
+        $etablissement->addEd($this);
     }
 
     /**
      * Remove etablissement
      *
-     * @param \AppBundle\Entity\Etablissement $etablissement
+     * @param \AppBundle\Entity\Etablissement etablissement
      */
-    public function removeEtablissement(\AppBundle\Entity\Etablissement $etablissement)
+    public function removeEtablissement(Etablissement $etablissement)
     {
         $this->etablissement->removeElement($etablissement);
+        $etablissement->removeFormation($this);
     }
 
     /**
@@ -501,4 +534,86 @@ class Ed
     {
         return $this->getNom();
     }
+
+    /**
+     * @return int
+     */
+    public function getAnneeCollecte()
+    {
+        return $this->anneeCollecte;
+    }
+
+    /**
+     * @param int $anneeCollecte
+     */
+    public function setAnneeCollecte($anneeCollecte)
+    {
+        $this->anneeCollecte = $anneeCollecte;
+    }
+
+    /**
+     * @return string
+     */
+    public function getObjetId()
+    {
+        return $this->objetId;
+    }
+
+    /**
+     * @param string $objetId
+     */
+    public function setObjetId($objetId)
+    {
+        $this->objetId = $objetId;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateCreation()
+    {
+        return $this->date_creation;
+    }
+
+    /**
+     * @param \DateTime $date_creation
+     */
+    public function setDateCreation($date_creation)
+    {
+        $this->date_creation = $date_creation;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getLastUpdate()
+    {
+        return $this->last_update;
+    }
+
+    /**
+     * @param \DateTime $last_update
+     */
+    public function setLastUpdate($last_update)
+    {
+        $this->last_update = $last_update;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getValide()
+    {
+        return $this->valide;
+    }
+
+    /**
+     * @param mixed $valide
+     */
+    public function setValide($valide)
+    {
+        $this->valide = $valide;
+    }
+
+
 }

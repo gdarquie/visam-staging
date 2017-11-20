@@ -1,0 +1,304 @@
+{% extends "editeur.html.twig" %}
+
+{% block stylesheets %}
+
+    {{ parent() }}
+    <style>
+        h1{
+            font-size: 1.6em;
+        }
+        h2{
+            font-size: 1.3em;
+        }
+        .secondary-content:hover{
+            color:red;
+        }
+        .material-icons:hover{
+            opacity: 0.9;
+        }
+        .collection-item .title{
+           font-size: 1em!important;
+        }
+
+        .collection-item .description{
+            font-size: 0.9em!important;
+        }
+
+        .collection-item .title:hover{
+            text-decoration:underline;
+        }
+
+        .collection-item i{
+            vertical-align: middle!important;
+            padding-right: 8px;
+        }
+
+        .ajout{
+            margin-left : -10px;
+        }
+
+        .chip{
+            color: #FF412C;
+            border-color: #FF412C;
+        }
+
+        .admin_title h1{
+            font-size : 2em;
+        }
+
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    <section class="container large">
+
+        {#<h1>Page éditeur {{ user.user }}</h1>#}
+
+        <div class="card row">
+
+            {% if is_granted('ROLE_ADMIN') %}
+                <div class="col s12">
+
+                    <div class="admin_title">
+                        <h1 class="center">Editeur [vue administrateur]</h1>
+                        <p class="center pointer"><a class="modal-trigger" href="#etabs">Voir les établissements de la collecte en cours</a></p>
+                    </div>
+
+                    <div id="etabs" class="modal">
+                        <div class="modal-content">
+                            <h2 class="center">Etablissements de la collecte en cours</h2>
+                            <div class="col s12">
+                                {% for item in etablissements  %}
+                                    <span class="chip text-black"><a href="{{ path('etablissement' , { 'id' : item.etablissementId }) }}">{{  item.nom }}</a></span>
+                                {% endfor%}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            {% else %}
+            <div class="col s12">
+                <h1 class="center">{% for item in etablissements  %}{{  item.nom }}{% if loop.last %}{% else %} & {% endif %}{% endfor%}</h1>
+            </div>
+            {% endif %}
+        </div>
+
+        {% if formations|length == 0 and laboratoires|length == 0 and eds|length == 0 %}
+        <div class="card row">
+            <div class="col s12">
+                <h2>Import automatisé des données</h2>
+
+                <p>L'import automatique est possible tant qu'il n'y a pas de formation, laboratoire ou école doctorale existante pour le ou les établissements qui vous sont rattachés lors de cette collecte. Si vous créez l'un de ces items, cette option disparaitra automatiquement.</p>
+
+
+                <table class="highlight tablesorter responsive-table">
+                    <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Dernière modification</th>
+                        <th>Importer</th>
+                        <th>Exporter labo</th>
+                        <th>Exporter formations</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in etablissements %}
+                    <tr class="js-etablissement-item">
+                        <span>
+                        <td>{{ item.nom }}</td>
+                            <td>{{ item.lastUpdate|date() }}</td>
+                        <td><a data-target="modal1" href="#modal1" class="modal-trigger" data-id-etablissement="{{ item.etablissementId }}" data-nom-etablissement="{{ item.nom }}">Import&nbsp;CSV</a></td>
+                        <td><a href="{{ path("export_formulaire", { "id" : item.etablissementId, "type" : "L" }) }}">Export des données de labo</a></td>
+                        <td><a href="{{ path("export_formulaire", { "id" : item.etablissementId, "type" : "F" }) }}">Export des données de formation</a></td>
+
+                        </span>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="card row">
+
+
+            <div class="row">
+            <!-- Liste des formations -->
+
+            {%  include '@Editeur/Editeur/_formation.html.twig' %}
+
+
+            <!-- Liste des labos -->
+
+            {%  include '@Editeur/Editeur/_labo.html.twig' %}
+            </div>
+
+            <div class="row">
+
+            <!-- Ecole doctorale -->
+
+            {%  include '@Editeur/Editeur/_ed.html.twig' %}
+
+            </div>
+        </div>
+
+    </section>
+    {{  render (controller("EditeurBundle:Ajax:uploadDocument")) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <!-- list.js -->
+    <script>
+
+        var list_formations_options = {
+            valueNames: [ 'title', 'f-general', 'f-effectif', 'f-indexation', 'f-cursus' ],
+            page: 5,
+            pagination: true
+        };
+
+        var formationsList = new List('formations-list', list_formations_options);
+
+        var list_laboratoires_options = {
+            valueNames: [ 'title', 'f-general', 'f-effectif', 'f-indexation', 'f-cursus' ],
+            page: 5,
+            pagination: true
+        };
+
+        var laboratoiresList = new List('laboratoires-list', list_laboratoires_options);
+
+        var list_eds_options = {
+            valueNames: [ 'title', 'l-general', 'l-contact', 'l-description', 'l-etablissement', 'l-effectif' ],
+            page: 5,
+            pagination: true
+        };
+
+        var edsList = new List('eds-list', list_eds_options);
+
+    </script>
+
+    <script>
+
+        $(document).ready(function() {
+            $('.js-remove-labo').on('click', function(e) {
+                e.preventDefault();
+                var $el = $(this).closest('.js-labo-item');
+                var r = confirm("Etes-vous sûr de vouloir supprimer ce laboratoire?");
+                if (r == true) {
+                    $.ajax({
+                        url: $(this).data('url'),
+                        method: 'DELETE'
+                    }).done(function() {
+                        $el.fadeOut();
+                    });
+                }
+//                $(this).find('.fa-close')
+//                    .removeClass('fa-close')
+//                    .addClass('fa-spinner')
+//                    .addClass('fa-spin');
+
+                e.preventDefault();
+            });
+            $('.js-remove-formation').on('click', function(e) {
+                e.preventDefault();
+                var $el = $(this).closest('.js-formation-item');
+                var r = confirm("Etes-vous sûr de vouloir supprimer cette formation?");
+                if (r == true) {
+                    $.ajax({
+                        url: $(this).data('url'),
+                        method: 'DELETE'
+                    }).done(function() {
+                        $el.fadeOut();
+                    });
+                }
+//                $(this).find('.fa-close')
+//                    .removeClass('fa-close')
+//                    .addClass('fa-spinner')
+//                    .addClass('fa-spin');
+
+                e.preventDefault();
+            });
+
+            $('.modal-trigger').leanModal();
+
+            $('#upload_file_type_0').click(function() {
+                $('.message-upload').html('');
+                $('#logList').html('');
+                $('#upload_file_attachment').val(null);
+            });
+
+            $('#upload_file_type_1').click(function() {
+                $('.message-upload').html('');
+                $('#logList').html('');
+                $('#upload_file_attachment').val(null);
+            });
+
+            $('.modal-trigger').click(function(){
+                $('.message-upload').html('');
+                $('#logList').html('');
+                $('.message-upload').removeClass('invalid valid');
+                $('#upload_file_attachment').val(null);
+                $('#upload_file_etablissement').val($(this).attr('data-id-etablissement'));
+                $('.modal-header #titre').html('<strong>'+$(this).attr('data-nom-etablissement')+'</strong>');
+            });
+        });
+
+
+        $("#uploadform").submit(function (event) {
+
+            event.preventDefault();
+            $('#logList').html('');
+            $('.message-upload').html('');
+            $('#upload_file_upload').html('Uploading...');
+            $('#upload_file_cancel').hide();
+            // Create a new FormData object.
+            //var formData = new FormData();
+
+            // formData.append('type', $('input[type=radio]:checked').val());
+            $.ajax( {
+                url: "{{ path('upload') }}",
+                type: 'POST',
+                data: new FormData( this ),
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    $('#upload_file_upload').html('Importer');
+                    $('#upload_file_cancel').show();
+                    if (data.success === false) {
+                        var info = '<div id ="block_log" style="overflow:auto; height: 120px; width: 95%; border: 3px solid red;">';
+                        //$('.message-upload').html(data.msg);
+                        if (data.log) {
+                            var url = '{{ path("show_log", {'id': 'filename'}) }}';
+                            url = url.replace("filename", data.filename);
+                            $('.message-upload').html(data.msg + '<br /><a id="logpdf" href="' + url + '" target="_blank">Télécharger le fichier en format PDF</a>');
+                        } else {
+                            $('.message-upload').html(data.msg);
+                        }
+                        $('.message-upload').addClass('invalid');
+                        info += '</ul>';
+                        $.each(data.log, function(i,line) {
+                            info += '<li>' + line + '</li>';
+                        });
+                        info += '</ul></div></br>';
+
+                        $('#logList').html(info);
+                    } else {
+                        $('.message-upload').html(data.msg);
+                        $('.message-upload').addClass('valid');
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown)
+                {   $('#upload_file_upload').html('Envoyer');
+                    $('#upload_file_cancel').show();
+                    $('.message-upload').html('Le temps d\'exécution maximum autorisé est dépassé');
+                    $('.message-upload').addClass('invalid');
+                }
+            } );
+        });
+    </script>
+{% endblock %}
+

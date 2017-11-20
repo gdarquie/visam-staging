@@ -7,11 +7,21 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Axe
  *
- * @ORM\Table(name="axe", indexes={@ORM\Index(name="fk_axe_labo1_idx", columns={"labo_id"})})
- * @ORM\Entity
+ * @ORM\Table(name="axe")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\AxeRepository")
  */
 class Axe
 {
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="axe_id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $axeId;
+
     /**
      * @var string
      *
@@ -41,24 +51,20 @@ class Axe
     private $last_update;
 
     /**
-     * @var integer
+     * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\Column(name="axe_id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Labo", mappedBy="axes", cascade= {"persist"})
      */
-    private $axeId;
+    private $labo;
 
     /**
-     * @var \AppBundle\Entity\Labo
-     *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Labo")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
-     * })
+     * Constructor
      */
-    private $labo; //, inversedBy='axes'
-
+    public function __construct()
+    {
+        $this->last_update = new \DateTime();
+        $this->date_creation = new \DateTime();
+    }
 
 
     /**
@@ -174,4 +180,12 @@ class Axe
     {
         return $this->labo;
     }
+
+    public function __toString()
+    {
+        return (string) $this->getNom();
+    }
+
+
 }
+

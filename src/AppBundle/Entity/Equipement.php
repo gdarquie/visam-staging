@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Equipement
  *
  * @ORM\Table(name="equipement")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\EquipementRepository")
  */
 class Equipement
 {
@@ -41,13 +41,6 @@ class Equipement
     private $lien;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="timestamp", type="datetime", nullable=false)
-     */
-    private $timestamp;
-
-    /**
      * @var integer
      *
      * @ORM\Column(name="equipement_id", type="integer")
@@ -64,10 +57,26 @@ class Equipement
     private $labo;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_creation", type="datetime")
+     */
+    private $date_creation;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="last_update", type="datetime")
+     */
+    private $last_update;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
+        $this->date_creation = new \DateTime();
+        $this->last_update = new \DateTime();
         $this->labo = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -235,4 +244,38 @@ class Equipement
     {
         return $this->labo;
     }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateCreation()
+    {
+        return $this->date_creation;
+    }
+
+    /**
+     * @param \DateTime $date_creation
+     */
+    public function setDateCreation($date_creation)
+    {
+        $this->date_creation = $date_creation;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getLastUpdate()
+    {
+        return $this->last_update;
+    }
+
+    /**
+     * @param \DateTime $last_update
+     */
+    public function setLastUpdate($last_update)
+    {
+        $this->last_update = $last_update;
+    }
+
+
 }

@@ -1,0 +1,73 @@
+<article class="card" id="etablissement">
+
+    <h3>Gérer les établissements</h3>
+
+    <input type="text" class="fuzzy-search" />
+
+    <ul class="collection list">
+
+        {% for item in etablissements %}
+
+            <li class="collection-item avatar js-etablissement-item">
+
+                <a href="{{ path('editeur_etablissement_edit', {'id': item.etablissementId } ) }}" >
+
+                    <i class="material-icons circle red darken-2">business_center</i>
+
+                    <div class="col s12">
+                        <span class="title col s11"><span class="titre">{{ item.nom }}</span> <span class="sigle">({{ item.sigle }})</span></span>
+                    </div>
+
+                    <div class="col s12">
+
+                        <p class="row">
+
+                            <div class="col s9">
+
+                                <div class="col s4">
+                                    <a data-target="modal1" href="#modal1" class="modal-trigger" data-id-etablissement="{{ item.etablissementId }}" data-nom-etablissement="{{ item.nom }}">Import&nbsp;CSV</a>
+                                </div>
+
+                                <div class="col s4">
+                                    <a href="{{ path("export_formulaire", { "id" : item.etablissementId, "type" : "L" }) }}">Export des labos</a>
+                                </div>
+
+                                <div class="col s4">
+                                    <a href="{{ path("export_formulaire", { "id" : item.etablissementId, "type" : "F" }) }}">Export des  formations</a>
+                                </div>
+
+                            </div>
+
+                            <div class="col s3">
+
+                                <span class="col s6"><a href="#!" class="js-remove-etablissement" data-url="{{ path('editeur_etablissement_ajax_delete', { etablissementId : item.etablissementId}) }}" ><i class="material-icons">delete</i></a></span>
+
+                                <span class="col s6"><a href="{{ path('editeur_etablissement_edit', {'id' : item.etablissementId}) }}"><i class="material-icons">edit</i></a></span>
+
+                            </div>
+
+                        </p>
+                    </div>
+
+                </a>
+            </li>
+        {% endfor %}
+
+    </ul>
+
+    <ul class="center pagination"></ul>
+
+    <div class="row">
+
+        <div class="col s12">
+            <div class="add_item_btn right">
+
+                <a href="{{ path('editeur_etablisement_new') }}"><span class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></span>
+
+                    <span class="legend_btn">Ajouter un établissement</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</article>

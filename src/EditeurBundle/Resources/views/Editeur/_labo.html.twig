@@ -1,0 +1,95 @@
+{% if laboratoires|length > 0 %}
+    <div class="col s6 row" id="laboratoires-list">
+
+        <div class="col s12">
+
+
+            <div class="row valign-wrapper">
+                <h2>Laboratoires ({{ laboratoires|length }})</h2>
+                <i class="material-icons circle white red-text">add</i>
+                <a href="{{ path('editeur_laboratoire_new') }}" class="red-text ajout col">Ajouter un laboratoire</a>
+            </div>
+
+            <div class="row">
+
+                <div class="col s4">
+                    <input class="search" placeholder="Rechercher un labo"/>
+                </div>
+
+                <div class="col s8 sort-menu">
+                    <span>Ordonner :</span>
+                    <span class="sort" data-sort="title">nom</span>
+                    <span class="sort" data-sort="l-contact">contact</span>
+                    <span class="sort" data-sort="l-description">description</span>
+                    <span class="sort" data-sort="l-etablissement">établissement</span>
+                    <span class="sort" data-sort="l-effectifs">effectifs</span>
+                </div>
+            </div>
+
+            <ul class="collection list">
+
+                {% for item in laboratoires  %}
+                    <li class="collection-item avatar js-labo-item">
+                        <a href="{{ path('editeur_laboratoire_edit', {'id': item.id } ) }}" >
+                            {% if item.checkGeneral and item.checkContact and item.checkEtab and item.checkEtab and item.checkEffectifs and item.checkDescription %}
+                                <i class="material-icons circle green">mode_edit</i>
+                            {% else %}
+                                <i class="material-icons circle red">mode_edit</i>
+                            {% endif %}
+
+                            <div class="col s12">
+                                <span class="title col s11">{{ item.nom }}</span>
+                            </div>
+
+                            <div class="col s12">
+                                <p class="col s12">
+                                <span class="description l-general">général
+                                    {% if item.checkGeneral %}
+                                        <i class="material-icons green-text">done</i>
+                                    {% else %}
+                                        <i class="material-icons red-text">not_interested</i>
+                                    {% endif %}
+                                </span>
+                                <span class="description l-contact">contact
+                                    {% if item.checkContact %}
+                                        <i class="material-icons green-text">done</i>
+                                            {% else %}
+                                        <i class="material-icons red-text">not_interested</i>
+                                    {% endif %}
+                                        </span>
+                                <span class="description l-description">description
+                                    {% if item.checkDescription %}
+                                        <i class="material-icons green-text">done</i>
+                                            {% else %}
+                                        <i class="material-icons red-text">not_interested</i>
+                                    {% endif %}
+                                        </span>
+                                <span class="description l-etablissement">établissement
+                                    {% if item.checkEtab %}
+                                        <i class="material-icons green-text">done</i>
+                                            {% else %}
+                                        <i class="material-icons red-text">not_interested</i>
+                                    {% endif %}
+                                        </span>
+                                <span class="description l-effectifs">effectifs
+                                    {% if item.checkEffectifs %}
+                                        <i class="material-icons green-text">done</i>
+                                            {% else %}
+                                        <i class="material-icons red-text">not_interested</i>
+                                    {% endif %}
+                                        </span>
+                                </p>
+                            </div>
+                        </a>
+                        <a href="#!" class="secondary-content js-remove-labo" data-url="{{ path('editeur_laboratoire_ajax_delete', { id : item.id}) }}" ><i class="material-icons">delete</i>
+                        </a>
+
+                    </li>
+
+                {% endfor %}
+            </ul>
+
+            <ul class="center pagination"></ul>
+        </div>
+    </div>
+{% endif %}

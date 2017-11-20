@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    <section class="container">
+        <h2>Editer un membre</h2>
+
+        {{ form_start(edit_form) }}
+        {{ include('EditeurBundle:Membre:_form.html.twig') }}
+        <input type="submit" value="Créer"  class="btn btn-hesam" formnovalidate/>
+        {{ form_end(edit_form) }}
+
+        {% include "EditeurBundle:modals:_retour.html.twig" %}
+
+    </section>
+{% endblock %}

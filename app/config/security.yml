@@ -4,21 +4,25 @@ security:
         FOS\UserBundle\Model\UserInterface: bcrypt
 
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
+        ROLE_ADMIN:       ROLE_USER # user correspond à un établissement, admin à hesam
         ROLE_SUPER_ADMIN: ROLE_ADMIN
 
     providers:
         fos_userbundle:
             id: fos_user.user_provider.username
 
-    firewalls:
+    firewalls :
         main:
             pattern: ^/
+#            anomymous: ~
+#            logout: ~
             form_login:
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
                 # if you are using Symfony < 2.8, use the following config instead:
                 # csrf_provider: form.csrf_provider
+            remember_me:
+                secret: '%secret%'
 
             logout:       true
             anonymous:    true
@@ -28,4 +32,7 @@ security:
         - { path: ^/register, role: ROLE_ADMIN }
         - { path: ^/resetting, role: ROLE_ADMIN }
         - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/easyadmin/, role: ROLE_ADMIN }
         - { path: ^/editeur, role: ROLE_USER } #changer par la suite par un rôle d'éditeur
+
+

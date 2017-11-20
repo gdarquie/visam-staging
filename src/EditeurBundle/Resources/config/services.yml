@@ -1,0 +1,15 @@
+services:
+#    editeur.example:
+#        class: EditeurBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]
+
+  editeur.import.service:
+        class: EditeurBundle\Services\ImportService
+        arguments: ["@doctrine.orm.entity_manager", "@editeur.logs", "@phpexcel"]
+
+  editeur.logs:
+      class: EditeurBundle\Services\Logs
+
+  editeur.export.service:
+        class: EditeurBundle\Services\ExportService
+        arguments: ["@doctrine.orm.entity_manager", "@editeur.logs", "@phpexcel"]

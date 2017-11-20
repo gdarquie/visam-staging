@@ -8,29 +8,82 @@
 {% block fos_user_content %}{% endblock %}
 
 {% block body %}
-
-    <div class="container">
-
-      <div class="row center rechercher-wrapper">
-
-        <div class="col offset-s3 s6">
-          <img src="img/hesam.jpg" class="responsive-img" id="mainLogo" alt="Logo HESAM Université">
+<section class="recherche-home">
+    <div class="wrapper">
+        <div class="container">
+            <div class="row rechercher-wrapper">
+                <div class="col m12 titre">
+                    <img src="img/hesam-logo.svg" class="responsive-img" id="mainLogo" alt="Logo HESAM Université">
+                    <h1>Cartographie des formations et de la recherche</h1>
+                </div>
+                <div class="col offset-m1 m12" id="recherche">
+                    <form action="rechercher" method="get">
+                        <input type="text" name="search" placeholder="Exemples : Sociologie, urbanisme, industrie, microscope ">
+                        <button class="btn btn-hesam red-hesam btn-floating waves-light" type="submit"><i class="material-icons">search</i></button>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="col s12 middle-titre" id="soustitre">
-          <h3>Cartographie des compétences</h3>
-        </div>
-
-        <div class="low-titre" id="recherche">
-          <form action="rechercher"   method="get">
-            <input type="text" name="search" placeholder="Exemples : Sociologie, urbanisme, industrie, microscope ">
-
-            <button class="btn btn-hesam red-hesam btn-floating waves-light" type="submit"><i class="material-icons">search</i></button>
-          </form>
-        </div>
-
-      </div>
     </div>
+</section>
+<section class="chiffres-home container">
+    <ul class="row">
+        <li class="col offset-s1 s3"><span>{{ stats['nb_laboratoires']['nb'] }}</span>Laboratoires</li>
+        <li class="col s3"><span>{{  stats['nb_formations']['nb'] }}</span>Formations</li>
+        <li class="col s3"><span>{{ stats['nb_eds']['nb'] }}</span>Ecoles doctorales</li>
+    </ul>
+</section>
+<section class="presentation-home">
+    <div class="container row">
+        <p class="col s12">
+            heSam Université rassemble {{ stats['nb_laboratoires']['nb'] }} formations, du bac+1 au doctorat, en formation initiale ou continue, {{  stats['nb_formations']['nb'] }} laboratoires pluridisciplinaires en sciences humaines et sociales, en sciences de l'environnement et en sciences et techniques de l'ingénieur et {{ stats['nb_eds']['nb'] }} écoles doctorales.
+        </p>
+        <div class="col anr s8">
+            <p>
+                Le projet a bénéficié du soutien de l'AMI 2016 sur la transformation pédagogique et numérique.
+            </p>
+        </div>
+        <div class="col s4">
+            <img src="img/MESRIlogo_vert.jpg" class="responsive-img" width="100px" alt="Logo ANR">
+        </div>
+    </div>
+</section>
+<section class="rubrique-home">
+    <div class="container">
+        <div class="row">
+            <p class="col s12">Il est possible de faire la recherche parmi les quinze thématiques Hesam et les disciplines qui leurs sont associées :</p>
 
+            <ul class="col s6">
+                {% for item in hesamettes | slice(0,7) %}
+                    <li><a href="#">{{ item.nom }}</a></li>
+                {% endfor %}
+            </ul>
+
+            <ul class="col s6">
+                {% for item in hesamettes | slice(7,8) %}
+                    <li><a href="#">{{ item.nom }}</a></li>
+                {% endfor %}
+            </ul>
+
+        </div>
+    </div>
+</section>
+<section class='etablissements-home container'>
+    <div class="row">
+        <h2>Établissements</h2>
+        <ul>
+            <li class='col s3'><a href="#"><img class="responsive-img" src="img/logos/cnam-logo.jpg" alt="Logo Cnam"/></a></li>
+            <li class='col s3'><a href="#"><img class="responsive-img" src="img/logos/cnrs.jpg" alt="Logo Cnam"/></a></li>
+            <li class='col s3'><a href="#"><img class="responsive-img" src="img/logos/ENSAM.jpg" alt="Logo Cnam"/></a></li>
+            <li class='col s3'><a href="#"><img class="responsive-img" src="img/logos/INP-image.jpg" alt="Logo Cnam"/></a></li>
+            <li class='col s3'><a href="#"><img class="responsive-img" src="img/logos/cnam-logo.jpg" alt="Logo Cnam"/></a></li>
+            <li class='col s3'><a href="#"><img class="responsive-img" src="img/logos/cnam-logo.jpg" alt="Logo Cnam"/></a></li>
+            <li class='col s3'><a href="#"><img class="responsive-img" src="img/logos/cnam-logo.jpg" alt="Logo Cnam"/></a></li>
+            <li class='col s3'><a href="#"><img class="responsive-img" src="img/logos/cnam-logo.jpg" alt="Logo Cnam"/></a></li>
+        </ul>
+    </div>
+</section>
+<!-- 
       <div class="container row">
         <div class="col offset-l1 offset-m1 offset-s1 s10 m10 l10" id="help-box">
 
@@ -75,7 +128,7 @@
 
         </div>
       </div>
-
+ -->
 
 {% endblock %}
 
@@ -103,7 +156,7 @@
       $("footer").delay(1500).fadeIn(1000);
     }
 
-    accueil();
+  //  accueil();
 
     $("#chercher-general").click(
             function(){

@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 use AppBundle\Entity\Ed;
-use AppBundle\Form\EdType;
+use EditeurBundle\Form\EdType;
 
 
 class DefaultController extends Controller
@@ -27,17 +27,27 @@ class DefaultController extends Controller
         $query = $em->createQuery('SELECT h.nom as hesamette, COUNT(f) as nb, f.nom as formation FROM AppBundle:Discipline d JOIN d.formation f JOIN d.hesamette h GROUP BY h ORDER BY nb DESC');
         $formationsHesamette = $query->getResult();
 
-
         //répartition des hesamettes par labos
         $query = $em->createQuery('SELECT h.nom as hesamette, COUNT(l) as nb, l.nom as labo FROM AppBundle:Discipline d JOIN d.labo l JOIN d.hesamette h GROUP BY h ORDER BY nb DESC');
         $labosHesamette = $query->getResult();
 
+        $stats = array();
+
+        $query = $em->createQuery('SELECT COUNT(f) as nb FROM AppBundle:Formation f');
+        $stats['nb_formations'] = $query->getSingleResult();
+
+        $query = $em->createQuery('SELECT COUNT(l) as nb FROM AppBundle:Labo l');
+        $stats['nb_laboratoires'] = $query->getSingleResult();
+
+        $query = $em->createQuery('SELECT COUNT(e) as nb FROM AppBundle:Ed e');
+        $stats['nb_eds'] = $query->getSingleResult();
 
         return $this->render('web/index.html.twig',  array(
             'hesamettes' => $hesamettes,
             'labosHesamette'=> $labosHesamette,
             'formationsHesamette' => $formationsHesamette,
-            'equipements' => $equipements 
+            'equipements' => $equipements,
+            'stats' => $stats
         ));
 
     }
@@ -60,11 +70,29 @@ class DefaultController extends Controller
         );
     }
 
-
     /**
      * @Route("/rechercher/{string}", name="searchByString")
      */
     public function rechercheByStringAction(Request $request)
+    {
+        return $this->render('rechercher.html.twig'
+        );
+    }
+
+
+    /**
+     * @Route("/previz", name="search_previz")
+     */
+    public function recherchePrevizAction(Request $request)
+    {
+        return $this->render('previz.html.twig'
+        );
+    }
+
+    /**
+     * @Route("/previz/{string}", name="searchByString")
+     */
+    public function recherchePrevizByStringAction(Request $request)
     {
         return $this->render('rechercher.html.twig'
         );
@@ -88,40 +116,47 @@ class DefaultController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $laboratoire = $em->getRepository('AppBundle:Labo')->findOneByLaboId($id);
+        $laboratoire = $em->getRepository('AppBundle:Labo')->findOneById($id);
         // $labos = $em->getRepository('AppBundle:Labo')->findAll();
         $query = $em->createQuery('SELECT l FROM AppBundle:Labo l');
         $labos = $query->setMaxResults(3)->getResult();
 
-        $query = $em->createQuery('SELECT h.nom as nom, COUNT(h) as nb FROM AppBundle:Discipline d JOIN d.labo f JOIN d.hesamette h WHERE f.laboId = :id GROUP BY h.nom ORDER BY nb DESC');
+        $query = $em->createQuery('SELECT h.nom as nom, COUNT(h) as nb FROM AppBundle:Discipline d JOIN d.labo f JOIN d.hesamette h WHERE f.id = :id GROUP BY h.nom ORDER BY nb DESC');
         $query->setParameter('id', $id);
         $hesamettes = $query->getResult();
 
         //$nbEtud = $query->setMaxResults(1)->getOneOrNullResult();
 
-        $query = $em->createQuery('SELECT l FROM AppBundle:Axe l JOIN l.labo a WHERE a.laboId = :labo');
+        $query = $em->createQuery('SELECT l FROM AppBundle:Axe l JOIN l.labo a WHERE a.id = :labo');
         $query->setParameter('labo', $id);
         $axes = $query->getResult();
-
-
 
 
         //Les Rebonds
 
         //Récupération de l'hésamette la plus importante pour le labo en question
 
-        $query = $em->createQuery('SELECT COUNT(h.nom) as nb, h.nom as nom FROM AppBundle:Labo l JOIN l.discipline d JOIN d.hesamette h WHERE l.laboId = :id GROUP BY h.nom ORDER BY nb DESC');
+        $query = $em->createQuery('SELECT COUNT(h.nom) as nb, h.nom as nom FROM AppBundle:Labo l JOIN l.discipline d JOIN d.hesamette h WHERE l.id = :id GROUP BY h.nom ORDER BY nb DESC');
         $query->setParameter('id', $id);
         $hesamettes_rebond = $query->setMaxResults(1)->getResult();
-        $hesamette_rebond = $hesamettes_rebond[0]['nom'];
+//        $hesamette_rebond = $hesamettes_rebond[0]['nom'];
+
+        // Au cas où il n'y a pas de disciplines entrées
+        if(count($hesamettes_rebond) > 0){
+            $hesamette_rebond = $hesamettes_rebond[0]['nom'];
+        }
+        else{
+            $hesamette_rebond = 0;
+        }
 
         //sélection des labos en fonction de l'hesamette principale
-        $query = $em->createQuery('SELECT l FROM AppBundle:Labo l JOIN l.discipline d JOIN d.hesamette h WHERE h.nom = :hesamette');
+        $query = $em->createQuery('SELECT l FROM AppBundle:Labo l JOIN l.discipline d JOIN d.hesamette h WHERE h.nom = :hesamette AND l.id != :id ORDER BY RAND()');
         $query->setParameter('hesamette', $hesamette_rebond);
+        $query->setParameter('id', $id);
         $rebonds_labo = $query->setMaxResults(2)->getResult();
 
         //Sélection des formations
-        $query = $em->createQuery('SELECT f FROM AppBundle:Formation f JOIN f.discipline d JOIN d.hesamette h WHERE h.nom = :hesamette');
+        $query = $em->createQuery('SELECT f FROM AppBundle:Formation f JOIN f.discipline d JOIN d.hesamette h WHERE h.nom = :hesamette ORDER BY RAND()');
         $query->setParameter('hesamette', $hesamette_rebond);
         $rebonds_formation = $query->setMaxResults(1)->getResult();
 
@@ -148,14 +183,59 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $etablissement = $em->getRepository('AppBundle:Etablissement')->findOneByEtablissementId($id);
-        $eds = $em->getRepository('AppBundle:Ed')->findAll(); //récupérer seulement les ed de l'établissement
-        $formations = $em->getRepository('AppBundle:Formation')->findAll();
 
-        
+        $query = $em->createQuery('SELECT f FROM AppBundle:Formation f JOIN f.etablissement e WHERE e.etablissementId = :id');
+        $query->setParameter('id', $id);
+        $formations = $query->getResult();
+
+        $query = $em->createQuery('SELECT l FROM AppBundle:Labo l JOIN l.etablissement e WHERE e.etablissementId = :id');
+        $query->setParameter('id', $id);
+        $labos = $query->getResult();
+
+        $query = $em->createQuery('SELECT f FROM AppBundle:Ed f JOIN f.etablissement e WHERE e.etablissementId = :id');
+        $query->setParameter('id', $id);
+        $eds = $query->getResult();
+
         return $this->render('notice/etablissement.html.twig', array(
             'etablissement' => $etablissement,
             'eds' => $eds,
-            'formations' => $formations
+            'formations' => $formations,
+            'labos' => $labos,
+            'collecte' => 0
+        ));
+    }
+
+    /**
+     * @Route("/etablissement/{id}/{annee}", name="etablissement_collecte")
+     */
+    public function etablissementCollecteAction($id, $annee)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $etablissement = $em->getRepository('AppBundle:Etablissement')->findOneByEtablissementId($id);
+
+        $query = $em->createQuery('SELECT f FROM AppBundle:Formation f JOIN f.etablissement e WHERE e.etablissementId = :id AND f.anneeCollecte = :annee');
+        $query->setParameter('id', $id);
+        $query->setParameter('annee', $annee);
+        $formations = $query->getResult();
+
+        $query = $em->createQuery('SELECT l FROM AppBundle:Labo l JOIN l.etablissement e WHERE e.etablissementId = :id AND l.anneeCollecte = :annee');
+        $query->setParameter('id', $id);
+        $query->setParameter('annee', $annee);
+        $labos = $query->getResult();
+
+        $query = $em->createQuery('SELECT f FROM AppBundle:Ed f JOIN f.etablissement e WHERE e.etablissementId = :id AND f.anneeCollecte = :annee');
+        $query->setParameter('id', $id);
+        $query->setParameter('annee', $annee);
+        $eds = $query->getResult();
+
+        return $this->render('notice/etablissement.html.twig', array(
+            'etablissement' => $etablissement,
+            'eds' => $eds,
+            'formations' => $formations,
+            'labos' => $labos,
+            'collecte' => $annee
         ));
     }
 
@@ -184,31 +264,49 @@ class DefaultController extends Controller
     public function formationAction($id)
     {
         $em = $this->getDoctrine()->getManager();
+//        $query = $em->createQuery('SELECT f FROM AppBundle:Formation f WHERE f.id = :id');
+//        $query->setParameter('id', $id);
+//        $formation = $query->getSingleResult();
 
-        $formation = $em->getRepository('AppBundle:Formation')->findOneByFormationId($id);
+//        dump($formation->getLocalisation());die;
+        $formation = $em->getRepository('AppBundle:Formation')->findOneById($id);
+
+
+
         $query = $em->createQuery('SELECT f FROM AppBundle:Formation f');
         $formations = $query->setMaxResults(3)->getResult();
 
-        $query = $em->createQuery('SELECT h.nom as nom, COUNT(h) as nb FROM AppBundle:Discipline d JOIN d.formation f JOIN d.hesamette h WHERE f.formationId = :id GROUP BY h.nom ORDER BY nb DESC');
+        $query = $em->createQuery('SELECT h.nom as nom, COUNT(h) as nb FROM AppBundle:Discipline d JOIN d.formation f JOIN d.hesamette h WHERE f.id = :id GROUP BY h.nom ORDER BY nb DESC');
         $query->setParameter('id', $id);
         $hesamettes = $query->getResult();
 
 
         //Les rebonds
-        $query = $em->createQuery('SELECT COUNT(h.nom) as nb, h.nom as nom FROM AppBundle:Formation f JOIN f.discipline d JOIN d.hesamette h WHERE f.formationId = :id GROUP BY h.nom ORDER BY nb DESC');
+        $query = $em->createQuery('SELECT COUNT(h.nom) as nb, h.nom as nom FROM AppBundle:Formation f JOIN f.discipline d JOIN d.hesamette h WHERE f.id = :id GROUP BY h.nom ORDER BY nb DESC');
         $query->setParameter('id', $id);
         $hesamettes_rebond = $query->setMaxResults(1)->getResult();
-        $hesamette_rebond = $hesamettes_rebond[0]['nom'];
+
+        //S'il n'y a pas de rebonds associés, hesamette rebond prend une valeur prédéfinie
+        if(isset($hesamettes_rebond) AND count($hesamettes_rebond) > 0 ){
+            $hesamette_rebond = $hesamettes_rebond[0]['nom'];
+        }
+        else{
+            $hesamette_rebond = "inconnu";
+        }
+
 
         //sélection des labos en fonction de l'hesamette principale
-        $query = $em->createQuery('SELECT l FROM AppBundle:Labo l JOIN l.discipline d JOIN d.hesamette h WHERE h.nom = :hesamette');
+        $query = $em->createQuery('SELECT l FROM AppBundle:Labo l JOIN l.discipline d JOIN d.hesamette h WHERE h.nom = :hesamette ORDER BY RAND()');
         $query->setParameter('hesamette', $hesamette_rebond);
         $rebonds_labo = $query->setMaxResults(1)->getResult();
 
+
         //Sélection des formations
-        $query = $em->createQuery('SELECT f FROM AppBundle:Formation f JOIN f.discipline d JOIN d.hesamette h WHERE h.nom = :hesamette');
+        $query = $em->createQuery('SELECT f FROM AppBundle:Formation f JOIN f.discipline d JOIN d.hesamette h WHERE h.nom = :hesamette AND f.id != :id ORDER BY RAND()');
         $query->setParameter('hesamette', $hesamette_rebond);
+        $query->setParameter('id', $id);
         $rebonds_formation = $query->setMaxResults(2)->getResult();
+
 
 
         return $this->render('notice/formation.html.twig', array(
@@ -221,14 +319,31 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/news", name="news")
+     */
+    public function newsAction()
+    {
+        return $this->render('web/news/index.html.twig');
+    }
+
+
+    /**
      * @Route("/secret/2016", name="secret2016")
      */
-    public function secret2016Action(Request $request)
+    public function secret2016Action()
     {
         return $this->render('web/secret/2016.html.twig');
     }
 
     //prochain secret :une petite IF à secret/XYZZY
+
+//    /**
+//     * @Route("secret/annand/", name="annand")
+//     */
+//    public function annandAction()
+//    {
+//        return $this->render('web/secret/annand.html.twig');
+//    }
 
 
 

@@ -1,0 +1,99 @@
+{% if formations|length > 0 %}
+    <div class="col s6 row" id="formations-list">
+        <div class="col s12">
+
+        <div class="row valign-wrapper">
+            <h2 class="col">Formations ({{ formations|length }})</h2>
+            <i class="material-icons circle white red-text">add</i>
+            <a href="{{ path('editeur_formation_new') }}" class="red-text ajout col">Ajouter une formation</a>
+        </div>
+
+        <div class="row">
+            <div class="col s4">
+                <input class="search" placeholder="Rechercher une formation"/>
+            </div>
+            <div class="col s8 sort-menu">
+                <span>Ordonner :</span>
+                <span class="sort" data-sort="title">nom</span>
+                <span class="sort" data-sort="f-general">général</span>
+                <span class="sort" data-sort="f-effectif">effectif</span>
+                <span class="sort" data-sort="f-indexation">indexation</span>
+                <span class="sort" data-sort="f-cursus">cursus</span>
+            </div>
+        </div>
+
+        <ul class="collection list">
+
+            {% for item in formations  %}
+                <li class="collection-item avatar js-formation-item">
+                    <a href="{{ path('editeur_formation_edit', {'id': item.id } ) }}" >
+
+                        {% if item.checkGeneral and item.checkEffectif and item.checkIndex and item.checkCursus %}
+                            <i class="material-icons circle green">mode_edit</i>
+                        {% else %}
+                            <i class="material-icons circle red ">mode_edit</i>
+                        {% endif %}
+
+                        <div class="col s12">
+                            <span class="title col s11">{{ item.nom }}</span>
+                        </div>
+                        {#<div class="update">{{ item.lastUpdate|date() }}</div>#}
+
+                        <div class="col s12">
+                            <p class="col s12">
+
+                                <span class="description f-general">général
+                                    {% if item.checkGeneral %}
+                                        <i class="material-icons green-text">done</i>
+                                    {% else %}
+                                        <i class="material-icons red-text">not_interested</i>
+                                    {% endif %}
+                                </span>
+
+                                <span class="description f-effectif">effectif
+                                    {% if item.checkEffectif %}
+                                        <i class="material-icons green-text">done</i>
+                                                {% else %}
+                                        <i class="material-icons red-text">not_interested</i>
+                                    {% endif %}
+                                </span>
+
+                                <span class="description">indexation
+                                    {% if item.checkIndex %}
+                                        <i class="material-icons green-text">done</i>
+                                                {% else %}
+                                        <i class="material-icons red-text">not_interested</i>
+                                    {% endif %}
+                                </span>
+
+                                <span class="description">cursus
+                                    {% if item.checkCursus %}
+                                        <i class="material-icons green-text">done</i>
+                                                {% else %}
+                                        <i class="material-icons red-text">not_interested</i>
+                                    {% endif %}
+                                </span>
+
+                            </p>
+                        </div>
+
+                    </a>
+                    <a href="#!" class="secondary-content js-remove-formation" data-url="{{ path('editeur_formation_ajax_delete', { id : item.id}) }}" ><i class="material-icons">delete</i>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <ul class="center pagination"></ul>
+        </div>
+    </div>
+
+
+{% else %}
+    <div class="col s6">
+        <h2>Formations</h2>
+        <p>Acutellement, il n'y pas de formations rattachées.</p>
+        <p><a href="#">+ Ajouter une formation</a></p>
+    </div>
+{% endif %}
+

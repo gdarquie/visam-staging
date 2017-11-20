@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Etablissement
@@ -16,6 +17,10 @@ class Etablissement
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=255, nullable=false)
+     *
+     * @Assert\NotBlank(
+     *     message = "Un nom doit être renseigné pour permettre la sauvegarde"
+     * )
      */
     private $nom;
 
@@ -23,6 +28,11 @@ class Etablissement
      * @var string
      *
      * @ORM\Column(name="description", type="text", length=16777215, nullable=true)
+     *
+     * @Assert\Length(
+     *      max = 2500,
+     *      maxMessage = "La description ne peut dépasser {{ limit }} caractères"
+     * )
      */
     private $description;
 
@@ -32,6 +42,13 @@ class Etablissement
      * @ORM\Column(name="code", type="string", length=45, nullable=true)
      */
     private $code;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="objet_id", type="string", length=255, nullable=true)
+     */
+    private $objetId;
 
     /**
      * @var string
@@ -55,11 +72,35 @@ class Etablissement
     private $ministere;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Thesaurus")
+     * @ORM\JoinTable(name="etablissement_has_ministere",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="etablissement_id", referencedColumnName="etablissement_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="thesaurus_id", referencedColumnName="thesaurus_id")
+     *   }
+     * )
+     */
+    private $ministere_thesaurus;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="statut", type="string", length=255, nullable=true)
      */
     private $statut;
+
+    /** @var  \AppBundle\Entity\Thesaurus
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Thesaurus")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="statut_thesaurus_id", referencedColumnName="thesaurus_id")
+     * })
+     */
+    private $statut_thesaurus;
 
     /**
      * @var string
@@ -97,6 +138,20 @@ class Etablissement
     private $chercheurs;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="intervenants", type="integer", nullable=true)
+     */
+    private $intervenants;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="annee_collecte", type="integer", nullable=true)
+     */
+    private $anneeCollecte;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="lien2", type="string", length=255, nullable=true)
@@ -111,16 +166,51 @@ class Etablissement
     private $lien3;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="position", type="string", length=255, nullable=true)
+     */
+    private $position;
+
+    /** @var  \AppBundle\Entity\Thesaurus
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Thesaurus")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="position_thesaurus_id", referencedColumnName="thesaurus_id")
+     * })
+     */
+    private $position_thesaurus;
+
+    /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_creation", type="datetime", nullable=false)
+     * @ORM\Column(name="entree", type="datetime", nullable=true)
+     */
+    private $entree;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="sortie", type="datetime", nullable=true)
+     */
+    private $sortie;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $active;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_creation", type="datetime")
      */
     private $date_creation;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="last_update", type="datetime", nullable=false)
+     * @ORM\Column(name="last_update", type="datetime" , nullable=true)
      */
     private $last_update;
 
@@ -141,9 +231,10 @@ class Etablissement
     private $localisation;
 
     /**
+     *
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Valorisation", inversedBy="etablissement")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Valorisation", inversedBy="etablissement", cascade= {"persist"})
      * @ORM\JoinTable(name="etablissement_has_valorisation",
      *   joinColumns={
      *     @ORM\JoinColumn(name="etablissement_id", referencedColumnName="etablissement_id")
@@ -158,22 +249,23 @@ class Etablissement
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Labo", inversedBy="etablissement")
-     * @ORM\JoinTable(name="etablissement_has_labo",
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Labo", inversedBy="etablissement", cascade= {"persist"})
+     * @ORM\JoinTable(name="etablissement_has_laboratoire",
      *   joinColumns={
      *     @ORM\JoinColumn(name="etablissement_id", referencedColumnName="etablissement_id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="labo_id", referencedColumnName="labo_id")
+     *     @ORM\JoinColumn(name="laboratoire_id", referencedColumnName="laboratoire_id")
      *   }
      * )
      */
     private $labo;
 
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Formation", inversedBy="etablissement")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Formation", inversedBy="etablissement", cascade={"persist"})
      * @ORM\JoinTable(name="etablissement_has_formation",
      *   joinColumns={
      *     @ORM\JoinColumn(name="etablissement_id", referencedColumnName="etablissement_id")
@@ -185,26 +277,45 @@ class Etablissement
      */
     private $formation;
 
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Ed", inversedBy="etablissement")
-     * @ORM\JoinTable(name="etablissement_has_ed",
+     * @ORM\JoinTable(name="etablissement_has_ecole_doctorale",
      *   joinColumns={
      *     @ORM\JoinColumn(name="etablissement_id", referencedColumnName="etablissement_id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="ED_id", referencedColumnName="ED_id")
+     *     @ORM\JoinColumn(name="ecole_doctorale_id", referencedColumnName="ecole_doctorale_id")
      *   }
      * )
      */
     private $ed;
 
     /**
+     * @ORM\Column(type="string", nullable= true)
+     *
+     * @Assert\File(mimeTypes={ "image/png" }, maxSize = "10M")
+     */
+    private $logo;
+
+//         * @Assert\NotBlank(message="Veuillez uploader le logo de l'établissement (les formats acceptés sont : .png)")
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Collecte", mappedBy="etablissement")
+     */
+    private $collecte;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
+        $this->date_creation = new \DateTime();
+        $this->last_update = new \DateTime();
         $this->localisation = new \Doctrine\Common\Collections\ArrayCollection();
         $this->valorisation = new \Doctrine\Common\Collections\ArrayCollection();
         $this->labo = new \Doctrine\Common\Collections\ArrayCollection();
@@ -372,6 +483,23 @@ class Etablissement
     }
 
     /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getStatutThesaurus()
+    {
+        return $this->statut_thesaurus;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $statut_thesaurus
+     */
+    public function setStatutThesaurus($statut_thesaurus)
+    {
+        $this->statut_thesaurus = $statut_thesaurus;
+    }
+
+
+    /**
      * Get statut
      *
      * @return string
@@ -403,6 +531,38 @@ class Etablissement
     public function getImg()
     {
         return $this->img;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMinistereThesaurus()
+    {
+        return $this->ministere_thesaurus;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $ministere_thesaurus
+     */
+    public function setMinistereThesaurus($ministere_thesaurus)
+    {
+        $this->ministere_thesaurus = $ministere_thesaurus;
+    }
+
+    /**
+     * @return Thesaurus
+     */
+    public function getPositionThesaurus()
+    {
+        return $this->position_thesaurus;
+    }
+
+    /**
+     * @param Thesaurus $position_thesaurus
+     */
+    public function setPositionThesaurus($position_thesaurus)
+    {
+        $this->position_thesaurus = $position_thesaurus;
     }
 
     /**
@@ -549,8 +709,6 @@ class Etablissement
         return $this->lien3;
     }
 
-
-
     /**
      * Get etablissementId
      *
@@ -566,11 +724,16 @@ class Etablissement
      *
      * @param \AppBundle\Entity\Localisation $localisation
      *
-     * @return Etablissement
+     * @return Localisation
      */
     public function addLocalisation(\AppBundle\Entity\Localisation $localisation)
     {
+        if ($this->localisation->contains($localisation)) {
+            return;
+        }
+
         $this->localisation[] = $localisation;
+        $localisation->addEtablissement($this);
 
         return $this;
     }
@@ -583,6 +746,7 @@ class Etablissement
     public function removeLocalisation(\AppBundle\Entity\Localisation $localisation)
     {
         $this->localisation->removeElement($localisation);
+        $localisation->removeEtablissement($this);
     }
 
     /**
@@ -673,7 +837,6 @@ class Etablissement
     public function addFormation(\AppBundle\Entity\Formation $formation)
     {
         $this->formation[] = $formation;
-
         return $this;
     }
 
@@ -763,10 +926,156 @@ class Etablissement
         $this->last_update = $last_update;
     }
 
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCollecte()
+    {
+        return $this->collecte;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $collecte
+     */
+    public function setCollecte($collecte)
+    {
+        $this->collecte = $collecte;
+    }
+
+
+    /**
+     * @return int
+     */
+    public function getIntervenants()
+    {
+        return $this->intervenants;
+    }
+
+    /**
+     * @param int $intervenants
+     */
+    public function setIntervenants($intervenants)
+    {
+        $this->intervenants = $intervenants;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAnneeCollecte()
+    {
+        return $this->anneeCollecte;
+    }
+
+    /**
+     * @param int $anneeCollecte
+     */
+    public function setAnneeCollecte($anneeCollecte)
+    {
+        $this->anneeCollecte = $anneeCollecte;
+    }
 
     public function __toString()
     {
         return (string) $this->getNom();
     }
+
+    /**
+     * @return string
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getEntree()
+    {
+        return $this->entree;
+    }
+
+    /**
+     * @param \DateTime $entree
+     */
+    public function setEntree($entree)
+    {
+        $this->entree = $entree;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getSortie()
+    {
+        return $this->sortie;
+    }
+
+    /**
+     * @param \DateTime $sortie
+     */
+    public function setSortie($sortie)
+    {
+        $this->sortie = $sortie;
+    }
+
+    /**
+     * @param string $position
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+    }
+
+    /**
+     * @return string
+     */
+    public function getObjetId()
+    {
+        return $this->objetId;
+    }
+
+    /**
+     * @param string $objetId
+     */
+    public function setObjetId($objetId)
+    {
+        $this->objetId = $objetId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getActive()
+    {
+        return $this->active;
+    }
+
+    /**
+     * @param mixed $active
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLogo()
+    {
+        return $this->logo;
+    }
+
+    /**
+     * @param mixed $logo
+     */
+    public function setLogo($logo)
+    {
+        $this->logo = $logo;
+    }
+
+
 
 }

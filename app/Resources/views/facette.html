@@ -64,7 +64,7 @@
         <article data-ng-repeat="product in filteredProducts | filter:searchTerm | orderBy: sorting.order:sorting.direction" id="{{product.Sku}}" class="product col-sm-4"> 
             <b class="decor" data-ng-hide="!product.Labels[0]">{{product.Labels[0]}}</b>
             <b class="decor" data-ng-show="!product.Labels[0] && product.Callout[0]">{{product.Callout[0]}}</b>
-            <div class="inner-content"> <a class="thumb" data-sku="{{product.Sku}}" data-ng-href="#/product/{{product.Sku}}"> <img src="http://placehold.it/180x180"> </a>
+            <div class="inner-content"> <a class="thumb" data-sku="{{product.Sku}}" data-ng-href="#/product/{{product.Sku}}"> <img src="https://placehold.it/180x180"> </a>
                 <div class="clearfix">
                     <h4 class="productname" name="{{product.Heading}}"><a data-ng-href="#/product/{{product.Sku}}">{{product.Brand}} {{product.Heading}}</a></h4>
                     <div class="price" price="{{product.Price}}"><sup>$</sup><span>{{product.Price}}</span>
@@ -77,7 +77,9 @@
 </div>
     <!-- Facette -->
     <script type="text/javascript" src="js/facette.js"></script>    
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.js" charset="utf-8"></script>
 
 
     <!-- END Facette -->
+
+

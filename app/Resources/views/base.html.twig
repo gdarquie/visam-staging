@@ -11,12 +11,16 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="description" content="Visualisations des compétences de la COMUE hesam">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="robots" content="noindex, nofollow">
 
-        <title>{% block title %}heSam : cartographie des compétences de la COMUE HESAM{% endblock %}</title>
+
+        <title>{% block title %}HESAM : cartographie des formations et de la recherche{% endblock %}</title>
             <link rel="icon" href="{{ asset('favicon.ico') }}" />
             {% block stylesheets %}
-            <!--Import Google Icon Font-->
-            <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+                <!--Import Google Icon Font-->
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 
             <!--Import materialize.css-->
             <link rel="stylesheet"
@@ -31,99 +35,57 @@
         <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
 
 
+        {% include "_menu.html.twig" %}
 
-<!--         <nav class="red darken-2">
-            <div class="nav-wrapper">
-              <a href="/" class="brand-logo">heSam</a>
-              <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="/rechercher">Rechercher</a></li>
-                <li><a href="/stats">Statistiques</a></li>
-                <li><a href="/apropos">A propos</a></li>
-
-                <li>
-              {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
-                <a href="{{ path('fos_user_security_logout') }}">
-                    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-                </a>
-            {% else %}
-                <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
-            {% endif %}
-              </li>
-            </ul>
-            </div>
-        </nav> -->
-
-        {% for type, messages in app.session.flashBag.all %}
-            {% for message in messages %}
-                <div class="{{ type }}">
-                    {{ message|trans({}, 'FOSUserBundle') }}
+        {% for msg in app.session.flashBag.get('success') %}
+            <div class="container">
+                <div class="card-panel">
+                    <span class="teal-text">{{msg}}</span>
                 </div>
-            {% endfor %}
+            </div>
         {% endfor %}
 
-        <div>
+        {% block body %}
 
-        {% block fos_user_content %}{% endblock fos_user_content %}
+            {% block fos_user_content %}{% endblock fos_user_content %}
+        {% endblock %}
 
-            <ul id="menu_add" class="dropdown-content">
-                <li><a href="{{ path('editeur_etablisement_new') }}">Etablissement</a></li>
-                <li><a href="{{ path('editeur_formation_new') }}">Formation</a></li>
-                <li><a href="{{ path('editeur_laboratoire_new') }}">Laboratoire</a></li>
-            </ul>
 
-            <div class="navbar-fixed">
-            <nav>
-                <div class="nav-wrapper red-hesam">
-                    <a href="{{ path('homepage') }}" class="brand-logo">heSam</a>
-                    <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <li><a href="{{ path('search') }}">Rechercher</a></li>
-                        <li><a href="{{ path("statistiques") }}">Statistiques</a></li>
-                        <li><a href="{{ path("apropos") }}">A propos</a></li>
-                        <li><a href="{{ path("aide") }}">Mode d'emploi</a></li>
-                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                            <li><a href="{{ path("editeur") }}">Admin</a></li>
-                            <li><a class="dropdown-button" href="#!" data-activates="menu_add">Ajouter<i class="material-icons right">arrow_drop_down</i></a></li>
-                            <li>connecté : {{ app.user.username }}</li>
-                            <li><a href="{{ path('fos_user_security_logout') }}">logout</a></li>
-                        {% else %}
-                            <li><a href="{{ path('fos_user_security_login') }}">connexion</a></li>
-                        {% endif %}
-                    </ul>
-                </div>
-            </nav>
-            </div>
-
-        {% block body %}{% endblock %}
-
+    <section class='footer-menu'>
+        <ul>
+            <li><a href="{{ path("apropos") }}">A propos</a></li>|
+            <li><a href="#">Mode d'emploi</a></li>|
+            <li><a href="{{ path("statistiques") }}">Statistiques</a></li>|
+            {% if is_granted('ROLE_USER') %}
+                connecté : {{ app.user.username }}
+                <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
+            {% else %}
+                <li><a href="{{ path('fos_user_security_login') }}">Connexion</a></li>
+            {% endif %}        </ul>
+        
+    </section>
         <footer class="page-footer red-hesam">
-
             <div class="container-fluid row">
-
-                <div class="col s7 offset-s1">
-
+                <div class="col s6 offset-s1">
                     <h2>Les établissements membres</h2>
                     <ul>
-                        <li><a class="grey-text text-lighten-4" href="http://www.univ-paris1.fr/" target="_blank">Université Paris 1 Panthéon - Sorbonne</a></li>
-                        <li><a class="grey-text text-lighten-4" href="http://www.cnam.fr/" target="_blank">Conservatoire National des Arts et Métiers (CNAM)</a></li>
-                        <li><a class="grey-text text-lighten-4" href="http://www.escpeurope.eu/fr/campus/paris/campus-paris/escp-europe-paris/" target="_blank">Ecole Supérieure Commerce de Paris (ESCP Europe)</a></li>
-                        <li><a class="grey-text text-lighten-4" href="http://www.ecoledulouvre.fr/" target="_blank">Ecole du Louvre</a></li>
-                        <li><a class="grey-text text-lighten-4" href="http://www.ena.fr/" target="_blank">Ecole Nationale d'Administration (ENA)</a></li>
-                        <li><a class="grey-text text-lighten-4" href="http://www.ensci.com/" target="_blank">Ecole Nationale Supérieure de Création Industrielle (ENSCI les Ateliers)</a></li>
-                        <li><a class="grey-text text-lighten-4" href="http://www.paris-lavillette.archi.fr/" target="_blank">Ecole Nationale Supérieure d'Architecture Paris la Villette (ENSAPLV)</a></li>
-                        <li><a class="grey-text text-lighten-4" href="https://www.ined.fr/" target="_blank">Institut National d'Etudes Démographiques (INED)</a></li>
-                        <li><a class="grey-text text-lighten-4" href="http://www.inp.fr/" target="_blank">Institut National du Patrimoine (INP)</a></li>
-                        <li><a class="grey-text text-lighten-4" href="http://www.ensam.eu/" target="_blank">Arts et Métiers ParisTech (ENSAM)</a></li>
-                        <li><a class="grey-text text-lighten-4" href="http://www.inha.fr/fr/index.html" target="_blank">Institut National d'Histoire de l'Art (INHA)</a></li>
-                        <li><a class="grey-text text-lighten-4" href="http://www.cnrs.fr/" target="_blank">Centre National de la Recherche Scientifique (CNRS)</a></li>
+                        <li><a href="http://www.univ-paris1.fr/" target="_blank">Université Paris 1 Panthéon - Sorbonne</a></li>
+                        <li><a href="http://www.cnam.fr/" target="_blank">Conservatoire National des Arts et Métiers (CNAM)</a></li>
+                        <li><a href="http://www.escpeurope.eu/fr/campus/paris/campus-paris/escp-europe-paris/" target="_blank">Ecole Supérieure Commerce de Paris (ESCP Europe)</a></li>
+                        <li><a href="http://www.ecoledulouvre.fr/" target="_blank">Ecole du Louvre</a></li>
+                        {#<li><a class="grey-text text-lighten-4" href="http://www.ena.fr/" target="_blank">Ecole Nationale d'Administration (ENA)</a></li>#}
+                        <li><a href="http://www.ensci.com/" target="_blank">Ecole Nationale Supérieure de Création Industrielle (ENSCI les Ateliers)</a></li>
+                        <li><a href="http://www.paris-lavillette.archi.fr/" target="_blank">Ecole Nationale Supérieure d'Architecture Paris la Villette (ENSAPLV)</a></li>
+                        <li><a href="https://www.ined.fr/" target="_blank">Institut National d'Etudes Démographiques (INED)</a></li>
+                        <li><a href="http://www.inp.fr/" target="_blank">Institut National du Patrimoine (INP)</a></li>
+                        <li><a href="http://www.ensam.eu/" target="_blank">Arts et Métiers ParisTech (ENSAM)</a></li>
+                        <li><a href="http://www.inha.fr/fr/index.html" target="_blank">Institut National d'Histoire de l'Art (INHA)</a></li>
+                        <li><a href="http://www.cnrs.fr/" target="_blank">Centre National de la Recherche Scientifique (CNRS)</a></li>
                     </ul>
                 </div>
 
-                <div class="col s3">
+                <div class="col s5">
 
-<!--                     <div class="row accueil-liens center">
-                        <p><a class="grey-text text-lighten-4" href="{{ path('editeur') }}">Accès réservé</a></p>
-                    </div> -->
 
                     <div class="row">
                         <h2>Contacts</h2>
@@ -132,34 +94,55 @@
                         <p>15 rue Soufflot</p>
                         <p>75005 Paris</p>
                         <p>01 56 81 20 00</p>
-                        <p><a class="grey-text text-lighten-4" href="mailto:contact@hesam.eu">contact@hesam.eu</a></p>
+                        <p><a href="mailto:contact@hesam.eu">contact@hesam.eu</a></p>
                         </span>
                     </div>
-                    <div>
-                        <p>Le projet a bénéficié du soutien de l’ANR au titre du programme Investissements d’avenir (ANR-11-IDEX-0006).</p>
+                   <div class="col s2">
+                        <br><br>
+                        <img src="img/MESRIlogo_vert.jpg" class="responsive-img" alt="Logo">
                     </div>
+
+                    <div class="col s6">
+                        <p>Le projet a bénéficié du soutien de l’ANR au titre du programme Investissements d’avenir (ANR-11-IDEX-0006)  et de l'AMI 2016 sur la transformation pédagogique et numérique.</p>
+                    </div>
+                </div>
+
+                <div class="col offset-s7 s5">
+
+
+
                 </div>
                 <div class="s1"></div>
 
             </div>
             <div class="footer-copyright">
-                <div class="container"></div>
                 <div class="container">
-                    © 2016 heSam Université - <i>visam</i> version 1.0
-                    <a class="grey-text text-lighten-4 right" href="http://www.hesam.eu" target="_blank">Accéder au site hesam</a>
+                  <span>  © 2016-2017 HESAM Université - <i>visam</i> version 1.6 (<i>editeur V2 - version beta</i>)</span>
+
+                    <a class="right" href="http://www.hesam.eu" target="_blank">Accéder au site hesam</a>
                 </div>
             </div>
 
         </footer>
 
         {% block javascripts %}
-            {#<script type="text/javascript" src="{{ asset("assets/vendor/jquery/dist/jquery.min.js") }}"></script>#}{# problème avec stats si on utilise ce jquery#}
+
+            <!-- Jquery -->
+            <script type="text/javascript" src="{{ asset("assets/vendor/jquery/dist/jquery.min.js") }}"></script>
             <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-            <script type="text/javascript" src="{{ asset("assets/vendor/materialize/dist/js/materialize.min.js") }}"></script>
+
+            <!-- Materialize -->
+            <script type="text/javascript" src="{{asset('assets/vendor/materialize/dist/js/materialize.min.js')}}"></script>
+
+            <!-- tablesorter -->
+            <script type="text/javascript" src="{{ asset("assets/vendor/tablesorter/jquery.tablesorter.js") }}"></script>
+
+            <!-- debug -->
+            <script src='https://s3.amazonaws.com/instabug-pro/sdk_releases/instabugsdk-1.1.2-beta.min.js'></script>
+
             <script type="text/javascript" src="{{ asset("js/function.js") }}"></script>
         {% endblock %}
 
-        </div>
     </body>
 </html>
 

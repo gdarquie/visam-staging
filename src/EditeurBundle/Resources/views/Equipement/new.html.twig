@@ -1,0 +1,16 @@
+{% extends 'editeur.html.twig' %}
+
+{% block body %}
+
+<div class="container">
+    <h1>Ajouter une formation</h1>
+
+    {{ form_start(edit_form) }}
+        {{ include('EditeurBundle:Equipement:_form.html.twig') }}
+        <input type="submit" class="btn btn-hesam" value="Créer" />
+    {{ form_end(edit_form) }}
+
+    {% include "EditeurBundle:modals:_retour.html.twig" %}
+</div>
+
+{% endblock %}

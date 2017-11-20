@@ -1,8 +1,7 @@
 function facette(){
-
+    // var searchVal;
      $(function(){
           var params = getSearchParameters();
-          var searchVal;
           var visam_temlate = 
            '<% if (obj.type == "Formation") {  %><div class="card formation">' +
             '<div class="card-content">'+
@@ -56,7 +55,6 @@ function facette(){
 
 
 
-
           // Launch - Face
             $.get( "/export", function( data ) {
                 settings = { 
@@ -89,8 +87,7 @@ function facette(){
             
               if(params.search) {
                 $("#search-input").val(params.search);
-                  searchInput();
-
+                  searchInput(jQuery.parseJSON(data));
                 $('.surligne').highlight(params.search);
               }
 
@@ -99,9 +96,8 @@ function facette(){
         });
 
                 $('#search-input').keyup(function () { 
-                  searchInput();
+                  searchInput(jQuery.parseJSON(data));
                 });
-
 
                 $(settings.resultSelector).bind("facetedsearchresultupdate", function(){
                     $('.surligne').highlight($("#search-input").val());
@@ -109,21 +105,21 @@ function facette(){
 
             });
 
-
-
-
       });
 }
 
 facette();
 
-var searchInput = function () {
+var searchInput = function (data) {
+
   searchVal = $("#search-input").val();
   if (searchVal) {
     var name = [];
-    var returnedData = $.grep(dataJson, function(element, index){
+      // console.log(data);
+
+      var returnedData = $.grep(data, function(element, index){
       if (element.name.toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
-         name.push(element);
+          return element;
       }
       if (element.hesamette.toString().toLowerCase().indexOf(searchVal.toLowerCase()) >= 0) {
         return element;
@@ -145,10 +141,10 @@ var searchInput = function () {
       } 
     });
 
-
+    console.log(returnedData);
     settings.items = name.concat(returnedData);
   } else {
-    settings.items = dataJson;
+    settings.items = data;
   }
 
 
@@ -177,18 +173,6 @@ var transformToAssocArray = function( prmstr ) {
     return params;
 }
 
-//Tests Gaétan
-
-// function myData(){
-//   return $.getJSON( "/export");
-// }
-
-// function launch(callback){
-//   dataJson = myData();
-//   callback();
-// }
-
-// launch(facette);
 
 
 

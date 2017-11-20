@@ -2,7 +2,7 @@
     [
     {% for formation in formations %}
       {
-      "id" : "{{formation.formationId}}",
+      "id" : "{{formation.id}}",
       "name" : "{{formation.nom|e('html')}}",
       "type" : "Formation",
       "url" : "{{formation.url}}",
@@ -16,7 +16,7 @@
     {% endfor %}
     {% for labo in labos %}
       {
-      "id" : "{{labo.laboId}}",
+      "id" : "{{labo.id}}",
       "name" : "{{labo.nom|e('html')}}",
       "type" : "Laboratoire",
       "url" : "{{labo.lien}}",
