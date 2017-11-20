@@ -10,21 +10,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
-    /**
-     * @Route("/", name="homepage")
-     */
-    public function indexAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $hesamettes = $em->getRepository('AppBundle:Hesamette')->findAll();
-        $stats = (new HandlerStats())->generalStats($em);
-
-        return $this->render('web/index.html.twig',  array(
-            'hesamettes' => $hesamettes,
-            'stats' => $stats
-        ));
-
-    }
 
     /**
      * @Route("/aide", name="aide")
@@ -34,7 +19,7 @@ class DefaultController extends Controller
         return $this->render('web/howto.html.twig'
         );
     }
-
+    
 
     /**
      * @Route("/rechercher/{string}", name="searchByString")

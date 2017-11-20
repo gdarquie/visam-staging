@@ -12,7 +12,7 @@ class SearchController extends Controller
 {
     /**
      *
-     * @Route("/", name="search_v2")
+     * @Route("/", name="search")
      */
     public function indexAction()
     {
