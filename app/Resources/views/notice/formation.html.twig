@@ -132,43 +132,41 @@
 
                 {% for labo in rebonds_labo %}
                     <div class="col m4 l4">
-                        <div class="card laboratoire petit" >
-                            <div class="card-content">
-                                <span class="etablissement"><span>{{labo.type}}</span> - {{labo.code}}</span>
-                                <h5><a href="{{ path('labo' ,{"id" : labo.id}) }}">{{labo.nom}}</a></h5>
-                                {# <span> {{labo.etablissement}}</span> #}
+                                <h4>Laboratoire</h4>
+                                <h3><a href="{{ path('labo' ,{"id" : labo.id}) }}">{{labo.nom}}</a></h3>
+                                {% for etablissement in labo.etablissement %}
+                                  <h2>{{etablissement.nom}}</h2>
+                                {% endfor %}
+
+                                {% if labo.discipline %}
+                                <h4>Discipline</h4>
                                 <ul class="list-thematique" >
                                     {% for discipline in labo.discipline|slice(0,3)%}
                                         <li>{{discipline.nom}}{% if loop.last %}{% else %};{% endif %}</li>
                                     {% endfor%}
-                                    {# les disciplines #}
                                 </ul>
-                            </div>
-                            <div class="card-action">
-                                <a href="{{labo.lien}}"><i class="material-icons">input</i></a>
-                            </div>
-                        </div>
+                                {% endif %}
+                            <a href="{{ path('labo' ,{"id" : labo.id}) }}">+ Découvrir le laboratoire</a>
                     </div>
                 {% endfor %}
 
                 {% for formation in rebonds_formation  %}
                     <div class="col m4 l4">
-                        <div class="card formation petit" >
-                            <div class="card-content">
-                                <span class="etablissement"><span>{{formation.annee}}</span> - <span>{{ formation.niveau }}</span></span>
-                                <h5><a href="{{ path('formation' , {"id" : formation.id}) }}">{{formation.nom}}</a></h5>
-                                {# <span> {{labo.etablissement}}</span> #}
+                                <h4>formation</h4>
+                                <h3><a href="{{ path('formation' ,{"id" : formation.id}) }}">{{formation.nom}}</a></h3>
+                                {% for etablissement in formation.etablissement %}
+                                  <h2>{{etablissement.nom}}</h2>
+                                {% endfor %}
+
+                                {% if formation.discipline %}
+                                <h4>Discipline</h4>
                                 <ul class="list-thematique" >
                                     {% for discipline in formation.discipline|slice(0,3)%}
-                                        <li>{{discipline.nom}}</li>
+                                        <li>{{discipline.nom}}{% if loop.last %}{% else %};{% endif %}</li>
                                     {% endfor%}
-                                    {# les disciplines #}
                                 </ul>
-                            </div>
-                            <div class="card-action">
-                                <a href="{{formation.url}}"><i class="material-icons">input</i></a>
-                            </div>
-                        </div>
+                                {% endif %}
+                            <a href="{{ path('formation' ,{"id" : formation.id}) }}">+ Découvrir la formation</a>
                     </div>
                 {% endfor %}
 
