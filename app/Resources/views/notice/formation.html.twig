@@ -85,11 +85,11 @@
       {% endif %}
 					
       {% if formation.tag | length > 0 %}
-      <section>
+      <section class="motsclefs">
       <h5><i class="material-icons dp48">label</i> Mots clés</h5>
       <ul class="list-thematique" >
           {% for tag in formation.tag %}
-              <li>{{tag.nom}}</li>
+              <li>{{tag.nom}} | </li>
           {% endfor %}
       </ul>
       </section>

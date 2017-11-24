@@ -532,6 +532,11 @@ footer h2, footer h3 {
   text-decoration: none;
 }
 
+.notice .motsclefs li {
+  display: inline-block;
+
+}
+
 .notice .discover {
   background-color: #db0c27;
   font-family: "HKGroteskBold", sans-serif;
