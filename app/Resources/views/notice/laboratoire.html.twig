@@ -2,34 +2,39 @@
 
 {% block body %}
 
-<section class="container">
-      <img src="/img/labo.svg" alt="labo">
-      <h4>Laboratoire</h4>
+<div class="container notice laboratoire">
+  <div class="row background">
+    <div class="col m8">
+      <div class="type"><img src="/img/labo.svg" alt="labo"><h4>Laboratoire</h4></div>
+      
+      
       <h1>{{labo.nom}}</h1>
-      <div>
+
+      {% for etablissement in labo.etablissement %}
+        <h2>{{etablissement.nom}}</h2>
+      {% endfor %}
+    </div>
+    <div class="col m4 infos">
         <h4>+ d'infos</h4>
         <ul>
           {% if labo.type %}
-          <li>Type : {{labo.type}}</li>
+          <li><span>Type :</span> {{labo.type}}</li>
           {% endif %}
           {% if labo.sigle %}
-          <li>Sigle : {{labo.sigle}}</li>
+          <li><span>Sigle :</span> {{labo.sigle}}</li>
           {% endif %}          
           {% if labo.objetId %}
-          <li>Code : {{labo.objetId}}</li>
+          <li><span>Code :</span> {{labo.objetId}}</li>
           {% endif %}
           {% if labo.uai %}
-          <li>Code UAI : {{labo.uai}}</li>
+          <li><span>Code UAI :</span> {{labo.uai}}</li>
           {% endif %}
           {% if labo.anneeCollecte %}
-          <li>Année de collecte : {{labo.anneeCollecte}}</li>
+          <li><span>Année de collecte :</span> {{labo.anneeCollecte}}</li>
           {% endif %}
         </ul>
       </div>
-      
-      {% for etablissement in labo.etablissement %}
-		    <h2>{{etablissement.nom}}</h2>
-		  {% endfor %}
+    <div class="col m12">
 
       {% if labo.description|length > 0 %}
           <p>{{ labo.description }}</p>
@@ -39,33 +44,35 @@
       {% endif %}
 
       <!-- DISCIPLINE -->
+      <section>
       {% if hesamettes %}
-      <h5>Disciplines</h5>
+      <h5><i class="material-icons dp48">label</i>Disciplines</h5>
 	    <ul class="list-thematique" >
 				{% for hesamette in hesamettes %}
-					<li>{{hesamette.nom}}({{hesamette.nb}})</li>
+					<li>{{hesamette.nom}}</li>
 				{% endfor %}
 	    </ul>
       {% endif %}
+      </section>
       <!-- END DISCIPLINE -->
 
       {% if labo.anneeCollecte > 2016 %}
           {% if labo.cnu %}
-          <h5>Disciplines CNU</h5>
+          <h5><i class="material-icons dp48">label</i> Disciplines CNU</h5>
           {% for discipline in labo.cnu %}
               <li><a href="#">{{discipline.nom}}</a></li>
           {% endfor %}
           {% endif %}
 
           {% if labo.hceres %}
-          <h5>Disciplines HCERES</h5>
+          <h5><i class="material-icons dp48">label</i> Disciplines HCERES</h5>
           {% for discipline in labo.hceres %}
               <li><a href="#">{{discipline.nom}}</a></li>
           {% endfor %}
           {% endif %}
 
           {% if labo.sise %}
-          <h5>Disciplines SISE</h5>
+          <h5><i class="material-icons dp48">label</i> Disciplines SISE</h5>
           {% for discipline in labo.sise %}
               <li><a href="#">{{discipline.nom}}</a></li>
           {% endfor %}
@@ -73,41 +80,61 @@
       {% endif %}
 					
       {% if labo.tag | length > 0 %}
-      <h5>Mots clés</h5>
+      <section>
+      <h5><i class="material-icons dp48">label</i> Mots clés</h5>
       <ul class="list-thematique" >
           {% for tag in labo.tag %}
               <li>{{tag.nom}}</li>
           {% endfor %}
       </ul>
+      </section>
       {% endif %}
 
       {% if labo.lien %}
-      <h5>Lien du laboratoire</h5>
-      <a href="{{labo.lien}}" target="_blank">{{labo.lien}}</a>
+      <section>
+      <h5><i class="material-icons dp48">label</i> Lien du laboratoire</h5>
+      <p>
+      <a href="{{labo.lien}}" target="_blank">{{labo.lien}}</a></p>
+      </section>
       {% endif %}
 
       {% if labo.lien2 %}
-      <h5>Autres sites web de la labo</h5>
-      <a href="{{labo.lien2}}" target="_blank">{{labo.lien2}}</a>
-      <a href="{{labo.lien3}}" target="_blank">{{labo.lien3}}</a>
+      <section>
+      <h5><i class="material-icons dp48">label</i> Autres sites web de la labo</h5>
+      <p>
+      <a href="{{labo.lien2}}" target="_blank">{{labo.lien2}}</a></p>
+      <p>
+      <a href="{{labo.lien3}}" target="_blank">{{labo.lien3}}</a></p>
+      </section>
       {% endif %}
 
       {% if labo.localisation %}
-      <h5>Adresse</h5>
+      <section class="adresse">
+      <h5><i class="material-icons dp48">label</i> Adresse</h5>
       {% for loca in labo.localisation %}
-      {{loca.nom}}<br>
-      {{loca.adresse}}<br>
-      {{loca.ville}}<br>
-      <img src="https://maps.googleapis.com/maps/api/staticmap?center={{loca.ville}} {{loca.code}}&zoom=14&size=834x200&maptype=roadmap" alt="Carte réalisée avec Google Static Maps API" />
-      {% endfor %}     
+      {% if loca.nom %}
+      <p>{{loca.nom}}</p>
+      {% endif %}
+      {% if loca.adresse %}
+      <p>{{loca.adresse}}</p>
+      {% endif %}
+      {% if loca.ville %}
+      <p>{{loca.ville}}</p>
+      {% endif %}
+      <img src="https://maps.googleapis.com/maps/api/staticmap?center={{loca.ville}} {{loca.code}}&zoom=14&size=950x250&maptype=roadmap" alt="Carte réalisée avec Google Static Maps API" class="responsive-img" />
+      {% endfor %}
+      </section>
       {% endif %}
 
       {% if labo.mailcontact %}
-      <h5>Contact<h5>
+      <section>
+      <h5><i class="material-icons dp48">label</i> Contact</h5>
       <p>{{labo.mailcontact}}</p>
+      </section>
       {% endif %}
-
-</section>
+      </div>
+  </div>
+</div>
 
     <section id="suggest">
         <div class="container">
@@ -115,46 +142,45 @@
             <h4>Voir aussi...</h4>
                 {% for labo in rebonds_labo %}
                     <div class="col m4 l4">
-                        <div class="card laboratoire petit" >
-                            <div class="card-content">
-                                <span class="etablissement"><span>{{labo.type}}</span> - {{labo.code}}</span>
-                                <h5><a href="{{ path('labo' ,{"id" : labo.id}) }}">{{labo.nom}}</a></h5>
-                                {# <span> {{labo.etablissement}}</span> #}
-                                <ul class="list-thematique" >
-                                    {% for discipline in labo.discipline|slice(0,3)%}
-                                        <li>{{discipline.nom}}{% if loop.last %}{% else %};{% endif %}</li>
-                                    {% endfor%}
-                                    {# les disciplines #}
-                                </ul>
-                            </div>
-                            <div class="card-action">
-                                <a href="{{labo.lien}}"><i class="material-icons">input</i></a>
-                            </div>
+                        <div class="laboratoire notice petit" >
+                          <div class="type"><img src="/img/labo.svg" alt="labo"><h4>Laboratoire</h4></div>
+                          <h2><a href="{{ path('labo' ,{"id" : labo.id}) }}">{{labo.nom}}</a></h2>
+                          {% for etablissement in labo.etablissement %}
+                            <h3>{{etablissement.nom}}</h3>
+                          {% endfor %}
+                          {% if hesamettes %}
+                          <h5><i class="material-icons dp48">label</i>Disciplines</h5>
+                          <ul class="list-thematique" >
+                            {% for hesamette in hesamettes %}
+                              <li>{{hesamette.nom}}</li>
+                            {% endfor %}
+                          </ul>
+                          {% endif %}
+                          <a class="discover" href="{{ path('labo' ,{"id" : labo.id}) }}">+ Découvrir le laboratoire</a>
                         </div>
                     </div>
                 {% endfor %}
 
                 {% for formation in rebonds_formation  %}
                     <div class="col m4 l4">
-                        <div class="card formation petit" >
-                            <div class="card-content">
-                                <span class="etablissement"><span>{{formation.annee}}</span> - <span>{{ formation.niveau }}</span></span>
-                                <h5><a href="{{ path('formation' , {"id" : formation.id}) }}">{{formation.nom}}</a></h5>
-                                {# <span> {{labo.etablissement}}</span> #}
-                                <ul class="list-thematique" >
-                                    {% for discipline in formation.discipline|slice(0,3)%}
-                                        <li>{{discipline.nom}}</li>
-                                    {% endfor%}
-                                    {# les disciplines #}
-                                </ul>
-                            </div>
-                            <div class="card-action">
-                                <a href="{{formation.url}}"><i class="material-icons">input</i></a>
-                            </div>
+                        <div class="formation notice petit" >
+                            <div class="type"><img src="/img/hat.svg" alt="labo"><h4>Formation</h4></div>
+                            <h2><a href="{{ path('formation' , {"id" : formation.id}) }}">{{formation.nom}}</a></h2>
+                               {% for etablissement in formation.etablissement %}
+                            <h3>{{etablissement.nom}}</h3>
+                          {% endfor %}
+                          {% if hesamettes %}
+                          <h5><i class="material-icons dp48">label</i>Disciplines</h5>
+                          <ul class="list-thematique" >
+                            {% for hesamette in hesamettes %}
+                              <li>{{hesamette.nom}}</li>
+                            {% endfor %}
+                          </ul>
+                          {% endif %}
+                          <a class="discover" href="{{ path('formation' ,{"id" : formation.id}) }}">+ Découvrir la formation</a>
                         </div>
                     </div>
                 {% endfor %}
-
                 </div>
             </div>
         </div>

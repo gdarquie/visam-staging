@@ -1,14 +1,86 @@
+/*@font-face {
+    font-family: 'HKGroteskBold';
+        src: url('../fonts/hk-grotesk/HKGroteskBold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+      }
+
+@font-face {
+    font-family: 'HKGroteskBoldItalic';
+        src: url('../fonts/hk-grotesk/HKGroteskBoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+      }
+
+@font-face {
+    font-family: 'HKGroteskItalic';
+        src: url('../fonts/hk-grotesk/HKGroteskItalic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+      }
+
+@font-face {
+    font-family: 'HKGroteskLight';
+        src: url('../fonts/hk-grotesk/HKGroteskLight.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+@font-face {
+    font-family: 'HKGroteskLightItalic';
+        src: url('../fonts/hk-grotesk/HKGroteskLightItalic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+@font-face {
+    font-family: 'HKGroteskMedium';
+        src: url('../fonts/hk-grotesk/HKGroteskMedium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+@font-face {
+    font-family: 'HKGroteskMediumItalic';
+        src: url('../fonts/hk-grotesk/HKGroteskMediumItalic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+@font-face {
+    font-family: 'HKGroteskRegular';
+        src: url('../fonts/hk-grotesk/HKGroteskRegular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+@font-face {
+    font-family: 'HKGroteskSemiBold';
+        src: url('../fonts/hk-grotesk/HKGroteskSemiBold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+@font-face {
+    font-family: 'HKGroteskSemiBoldItalic';
+        src: url('../fonts/hk-grotesk/HKGroteskSemiBoldItalic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+      }*/
+
 @import url("https://fonts.googleapis.com/css?family=Bitter:400,400italic,700");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,300,600");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import url("https://fontlibrary.org/face/hk-grotesk");
 
 body {
-  /*font-family: Bitter, serif;*/
-  font-family: "Open Sans", sans-serif;
+  background-color: #e9e9e9;
+/*  font-family: Bitter, serif;
+*/  font-family: "Open Sans", sans-serif;
   font-weight: 300;
 }
 h1, h2, h3, h4, h5 {
-  font-family: Bitter, serif;
+  font-family: "HKGroteskBold", sans-serif;
 }
 
 
@@ -18,15 +90,36 @@ h1, h2, h3, h4, h5 {
 
 .number {
   font-size: 2.6em;
+  color:#db0c27;
+    font-family: "HKGroteskBold", sans-serif;
+    margin:0px;
+
 }
 
 .number-label {
   font-size: 1.4em;
+  color:black;
+    font-family: "HKGroteskBold", sans-serif;
+}
+
+.background-white {
+  background-color: white;
 }
 
 .max-height {
   max-height: 230px;
   overflow: hidden;
+}
+
+header.etablissement {
+  background: url('../img/louvres.jpg');
+  background-size: cover;
+    padding:5rem;
+
+}
+header.etablissement h1 {
+  margin: 0px;
+  color:white;
 }
 
 .card a {
@@ -102,7 +195,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .redHesam {
-  background-color: #de1d34;
+  background-color: #db0c27;
 }
 
 /* Buttons */
@@ -121,11 +214,6 @@ h1, h2, h3, h4, h5 {
 }
 
 
-/* Header */
-
-header {
-  background-color: #de1d34;
-}
 
 
 /* Homepage  */
@@ -222,7 +310,7 @@ footer .container-fluid {
 }
 
 .red-hesam {
-  background-color: #de1d34;
+  background-color: #db0c27;
 }
 
 .accueil-liens {
@@ -299,4 +387,155 @@ footer h2, footer h3 {
 
 .pagination .active {
   background: #de1d34!important;
+}
+
+.brand-logo {
+  font-family: "HKGroteskBold", sans-serif;
+    color:black !important;
+
+}
+
+.brand-logo span {
+  color:white;
+}
+
+#nav-mobile img {
+  padding-right: 6px;
+
+}
+
+/* Front NOTICE */
+.notice .background {
+  background-color: white;
+}
+.notice section {
+  border-bottom: 1px solid #e3e3e3;
+}
+
+.notice section:last-child {
+  border: none;
+  
+}
+
+.notice a {
+  color:black;
+  text-decoration: underline;
+}
+
+.notice h1, .notice h2, .notice h3 {
+  margin-top: 1rem;
+  margin-bottom: 1rem; 
+}
+.notice h1 {
+  font-size: 2.6rem;
+}
+
+.notice h2 {
+  font-size: 1.7rem;
+  color:#db0c27;
+}
+
+.notice h4 {
+  font-size: 1.2rem;
+}
+
+.notice .type  h4 {
+  display: inline-block;
+}
+.notice h5 .material-icons {
+  color:#db0c27;
+  font-size: 1.2rem;
+}
+
+.notice .infos {
+  background-color: #e3e3e3;
+  margin-top: 3rem;
+}
+.notice .infos h4 {
+  background-color: black;
+  color:white;
+  display: inline-block;
+  padding: 0.4rem;
+  margin-top: -2rem;
+  margin-bottom: 0; 
+}
+.notice .infos span {
+  font-weight:700;
+}
+.notice.petit h2 {
+  font-size: 1.5rem;
+  color:black;
+}
+
+.notice .adresse p {
+  margin:0px; 
+}
+
+.notice.petit h3 {
+  font-size: 1rem;
+  color:#db0c27;
+}
+.notice.petit h4 {
+  margin-top: 4px;
+}
+.notice.petit {
+  background-color: white;
+  padding :1rem;
+}
+.notice.laboratoire .type img {
+  width:30px;
+  vertical-align:middle;
+  padding-right: 6px;
+}
+.notice.laboratoire .type h4 {
+  border: 2px solid #0ac0a8;
+  padding : 4px;
+  vertical-align: middle;
+}
+.notice.formation .type img {
+  width:50px;
+  vertical-align:middle;
+  padding-right: 6px;
+}
+.notice.formation .type h4 {
+  border: 2px solid #f46a05;
+  padding : 4px;
+  vertical-align: middle;
+}
+
+.suggest h4:first-child {
+  font-size: 2.3rem;
+}
+
+.notice.laboratoire.petit .type img {
+  width:24px;
+  vertical-align:middle;
+  padding-right: 6px;
+}
+.notice.laboratoire.petit .type h4 {
+  border: 2px solid #0ac0a8;
+  padding : 4px;
+  vertical-align: middle;
+}
+.notice.formation.petit .type img {
+  width:46px;
+  vertical-align:middle;
+  padding-right: 6px;
+}
+.notice.formation.petit .type h4 {
+  border: 2px solid #f46a05;
+  padding : 4px;
+  vertical-align: middle;
+}
+
+.notice.petit h2 a {
+  text-decoration: none;
+}
+
+.notice .discover {
+  background-color: #db0c27;
+  font-family: "HKGroteskBold", sans-serif;
+  text-decoration: none;
+  color:white;
+  padding:2px 4px;
 }
