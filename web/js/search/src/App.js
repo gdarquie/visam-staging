@@ -171,7 +171,7 @@ const HitsGridItem = (props)=> {
 const HitsListItem = (props)=> {
   const {bemBlocks, result} = props
   const source:any = extend({}, result._source, result.highlight)
-  let url = "http://visam.interlivre.fr/" + result._type + "/" + result._id
+  let url ="/" + result._type + "/" + result._id
   let imagepath = "/img/"+ result._type + ".svg";
   let type = result._type;
   return (
