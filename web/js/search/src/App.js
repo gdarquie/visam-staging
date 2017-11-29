@@ -74,8 +74,8 @@ const HitsGridItem = (props)=> {
   return (
     <div className={type} >
     <div className={bemBlocks.item().mix(bemBlocks.container("_type card"))} data-qa="hit">
-      <div className={bemBlocks.item(" card-content")}>
-          <h2 data-qa="_type" dangerouslySetInnerHTML={{__html:result._type}}></h2>
+      <div className={bemBlocks.item(" notice")}>
+          <h4 data-qa="_type" dangerouslySetInnerHTML={{__html:result._type}}></h4>
         <a href={url} target="_blank">
           <h1 data-qa="nom" className={bemBlocks.item("nom")} dangerouslySetInnerHTML={{__html:source.nom}}></h1>
         </a>
@@ -172,102 +172,34 @@ const HitsListItem = (props)=> {
   const {bemBlocks, result} = props
   const source:any = extend({}, result._source, result.highlight)
   let url = "http://visam.interlivre.fr/" + result._type + "/" + result._id
+  let imagepath = "/img/"+ result._type + ".svg";
   let type = result._type;
   return (
     <div className={type} >
-    <div className={bemBlocks.item().mix(bemBlocks.container("_type card"))} data-qa="hit">
-      <div className={bemBlocks.item(" card-content")}>
-          <h2 data-qa="_type" dangerouslySetInnerHTML={{__html:result._type}}></h2>
+    <div className={bemBlocks.item().mix(bemBlocks.container("_type "))} data-qa="hit">
+      <div className={bemBlocks.item("notice notice petit resultat {type}")}>
+        <div className={bemBlocks.item(" type")}>
+          <img src={imagepath} alt="logo" />
+          <h4 data-qa="_type" dangerouslySetInnerHTML={{__html:result._type}}></h4>
+          {source.niveau &&
+              <span>
+                 - {source.niveau}
+              </span>
+          }
+        </div>
         <a href={url} target="_blank">
           <h1 data-qa="nom" className={bemBlocks.item("nom")} dangerouslySetInnerHTML={{__html:source.nom}}></h1>
         </a>
           <h3 data-qa="etablissement" className={bemBlocks.item("etablissement etablissement-name")} dangerouslySetInnerHTML={{__html:source.etablissement}}>
           </h3>
-          <div data-qa="discipline" className={bemBlocks.item("discipline")} dangerouslySetInnerHTML={{__html:source.discipline}}>
-          </div><br/>
-
+          <section>
+          {source.hesamette > 0 &&
+            <h5><i class="material-icons dp48">label</i> Discipline</h5>
+          }
           <div data-qa="hesamette" className={bemBlocks.item("hesamette")} dangerouslySetInnerHTML={{__html:source.hesamette}}></div>
-
-          <br/>
-        {/* Effectifs : Formation */}
-          {source.niveau &&
-            <div>
-            <strong>
-              Niveau: 
-            </strong>
-              <span>
-                 {source.niveau}
-              </span>
-            </div>
-          }
-        {/* Effectifs : Formation */}
-          {source.annee > 0 &&
-            <div>
-            <strong>
-              Année:
-            </strong>
-              <span>
-                 {source.annee}
-              </span>
-            </div>
-          }
-        {/* Effectifs : Labo & Formation */}
-          {source.effectif > 0 &&
-            <div>
-            <strong>
-              Effectif(s):
-            </strong>
-              <span>
-                 {source.effectif}
-              </span>
-            </div>
-          }
-          {/* Effectifs : Labo */}
-          {source.mailContact &&
-            <div>
-            <strong>
-              Mail :
-            </strong>
-              <span>
-                 {source.mailContact}
-              </span>
-            </div>
-          }
-          {/* Sigle : Labo */}
-          {source.sigle &&
-            <div>
-            <strong>
-              Sigle :
-            </strong>
-              <span>
-                 {source.sigle}
-              </span>
-            </div>
-          }
-          {/* Code : Labo */}
-          {source.code &&
-            <div>
-            <strong>
-              Code :
-            </strong>
-              <span>
-                 {source.code}
-              </span>
-            </div>
-          }
-          <br/>
-
+          </section>
       </div>
-          <div className={bemBlocks.item(" card-action")}>
-          {/* Effectifs : Labo */}
-          {source.lien &&
-            <a href={source.lien} target="_blank">Lien vers le laboratoire</a>
-          }
-          {/* Effectifs : Formation */}
-          {source.url &&
-            <a href={source.url} target="_blank">Lien vers la formation</a>
-          }
-          </div>
+
       </div>
       
     </div>
@@ -289,9 +221,8 @@ class App extends Component {
           <SideBar>
             <RefinementListFilter id="_type" title="Type" field="_type" operator="OR" listComponent={ItemHistogramList}/>
             <RefinementListFilter id="etablissement" title="Établissements" field="etablissement" operator="OR" listComponent={ItemList}/>
-            <RefinementListFilter size="12" id="discipline" title="Disciplines" field="discipline" operator="OR"/>
-            <RefinementListFilter size="12" id="hesamette" title="hesamette" field="hesamette" operator="OR"/>
-            <RefinementListFilter listComponent={PieFilterList} id="annee" title="Annee" field="annee" operator="OR"/>
+            <RefinementListFilter size="12" id="hesamette" title="Disciplines" field="hesamette" operator="OR"/>
+            <RefinementListFilter listComponent={PieFilterList} id="Année" title="Annee" field="annee" operator="OR"/>
             <DynamicRangeFilter field="effectif" id="effectif" title="Effectif"/>
             <GeoMap/>
 
@@ -306,8 +237,7 @@ class App extends Component {
                 <ViewSwitcherToggle/>
                 <SortingSelector options={[
                   {label:"Pertinence", field:"_score", order:"desc"},
-                  {label:"Par année", field:"annee", order:"desc"},
-                  {label:"Par effectif", field:"effectif", order:"desc"}
+                  {label:"Par année", field:"annee", order:"desc"}
                 ]}/>
               </ActionBarRow>
               <ActionBarRow>
@@ -321,7 +251,6 @@ class App extends Component {
                 sourceFilter={["nom", "description", "niveau", "type","discipline","hesamette","etablissement",'geo', 'annee', 'effectif', 'niveau', 'url', 'lien', 'mailContact', 'sigle','code']}
                 hitComponents={[
                   {key:"list", title:"Liste", itemComponent:HitsListItem, defaultOption:true},
-                  {key:"grid", title:"Grille", itemComponent:HitsGridItem},
                 ]}
                 scrollTo="body"
             />

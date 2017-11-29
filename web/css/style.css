@@ -382,6 +382,10 @@ footer h2, footer h3 {
   color: limegreen;
 }
 
+#loader {
+  text-align: center;
+  padding-top: 2.5rem;
+}
 
 /* List js */
 
@@ -482,22 +486,22 @@ footer h2, footer h3 {
   background-color: white;
   padding :1rem;
 }
-.notice.laboratoire .type img {
+.notice.laboratoire .type img, .labo .notice .type img {
   width:30px;
   vertical-align:middle;
   padding-right: 6px;
 }
-.notice.laboratoire .type h4 {
+.notice.laboratoire .type h4, .labo .notice .type h4 {
   border: 2px solid #0ac0a8;
   padding : 4px;
   vertical-align: middle;
 }
-.notice.formation .type img {
+.notice.formation .type img, .formation .notice .type img {
   width:50px;
   vertical-align:middle;
   padding-right: 6px;
 }
-.notice.formation .type h4 {
+.notice.formation .type h4, .formation .notice .type h4 {
   border: 2px solid #f46a05;
   padding : 4px;
   vertical-align: middle;

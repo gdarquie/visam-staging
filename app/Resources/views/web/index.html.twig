@@ -17,8 +17,8 @@
                     <h1>Cartographie des formations et de la recherche</h1>
                 </div>
                 <div class="col offset-m1 m12" id="recherche">
-                    <form action="rechercher" method="get">
-                        <input type="text" name="search" placeholder="Exemples : Sociologie, urbanisme, industrie, microscope ">
+                    <form action="search" method="get">
+                        <input type="text" name="q" placeholder="Exemples : Sociologie, urbanisme, industrie, microscope ">
                         <button class="btn btn-hesam red-hesam btn-floating waves-light" type="submit"><i class="material-icons">search</i></button>
                     </form>
                 </div>
@@ -55,13 +55,13 @@
 
             <ul class="col s6">
                 {% for item in hesamettes | slice(0,7) %}
-                    <li><a href="#">{{ item.nom }}</a></li>
+                    <li><a href="search/?hesamette[0]={{ item.nom }}">{{ item.nom }}</a></li>
                 {% endfor %}
             </ul>
 
             <ul class="col s6">
                 {% for item in hesamettes | slice(7,8) %}
-                    <li><a href="#">{{ item.nom }}</a></li>
+                    <li><a href="search/?hesamette[0]={{ item.nom }}">{{ item.nom }}</a></li>
                 {% endfor %}
             </ul>
 
