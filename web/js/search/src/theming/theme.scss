@@ -1,4 +1,7 @@
 @import "components.scss";
+@import "materialize/components/preloader.scss";
+
+@import "http://127.0.0.1:8000/css/style.css";
 
 body {
   margin:0;
@@ -8,6 +11,11 @@ body {
   box-sizing: inherit;
 }
 
+#root {
+  min-height:300px;
+  background-color:white;
+
+}
 
 /*=== Theme Visam ===*/
 h1 {
@@ -20,41 +28,6 @@ h3 {
   font-size: 1em;
 }
 
-.labo {
-  h2 {
-    background-color: #00bcd4;
-    color:white;
-    display: inline-block;
-    padding:3px;
-    margin:0 0 1rem 0;
-  }
-  h1 {
-    color: #00bcd4;
-    margin-top: 0px;
-  }
-  a {
-    color: #00bcd4 !important;;
-  }
-}
-
-
-.formation {
-  h2 {
-  background-color: #EDA832;
-  color:white;
-  display: inline-block;
-  padding:3px;
-  margin:0 0 1rem 0;
-
-  }
-  h1 {
-    color: #EDA832;
-    margin-top: 0px;
-  }
-  a {
-    color: #EDA832 !important;
-  } 
-}
 
 
 @media print {
@@ -83,6 +56,62 @@ h3 {
 
 .sk-layout__body {
   //margin-top : 130px !important;
+}
+
+.sk-item-list-option__count {
+  font-family:HKGroteskSemiBold;
+}
+.sk-item-list-option__text {
+  font-family:HKGroteskRegular;
+}
+.sk-panel__header {
+  font-size:1.4rem;
+}
+
+.sk-filter-group {
+  background-color:white !important;
+}
+
+.sk-search-box input[placeholder] {
+  color:white !important;
+}
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #909;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #909;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #909;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #909;
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+   color:    #909;
+}
+
+::placeholder { /* Most modern browsers support this now. */
+   color:    #909;
+}
+
+.sk-toggle-option {
+  display:none;
+}
+
+.notice.resultat {
+      a {
+      text-decoration:none;
+    }
+  h1 {
+    font-size : 1.8rem;
+
+  }
+  section {
+    border:none !important;
+  }
 }
 /*=== END Theme Visam ===*/
 
@@ -117,7 +146,6 @@ h3 {
     padding:15px;
     margin:15px 0 15px 15px;
     flex:0 0 346px;
-    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08);
 
     .sk-refinement-list,
     .sk-range-filter,
@@ -145,10 +173,8 @@ h3 {
   }
 
   &__results {
-    background:$sk-layout-panel-background;
     margin:15px 15px 15px 15px;
     flex:auto;
-    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08);
     min-height:600px;
   }
 
@@ -300,6 +326,10 @@ h3 {
 
 .sk-hits-grid, .sk-hits-list {
   margin:0 15px 20px;
+}
+
+.sk-hits-list-hit__notice {
+  margin-bottom:1.5rem;
 }
 
 .sk-hits-grid {

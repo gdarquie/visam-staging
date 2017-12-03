@@ -1,0 +1,142 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div style="background-image:url(img/sorbonne.jpg)">
+
+    <section class="container"
+
+        <div class="first">
+            <div class="card formation">
+              	<div class="card-content">
+                <span class="item-formation">
+                  Formation
+                </span> - {{formation.niveau}} - {{formation.typeDiplome}}
+              		<h3>{{formation.nom}}</h3> 
+              		{% for etablissement in formation.etablissement %}
+						        <span class="etablissement etablissement-name ">{{etablissement.nom}}</span><br/>
+					        {% endfor %}					
+          <div class="row">
+          <div class="col l9">
+
+              {% if formation.description|length > 0 %}
+                  <h5>Description</h5>
+                  <p>{{ formation.description }}</p>
+              {% endif %}
+
+            <h5>Thématique(s)</h5>
+
+	         <ul class="list-thematique" >
+						{% for hesamette in hesamettes %}
+							<li>{{hesamette.nom}}({{hesamette.nb}})</li>
+						{% endfor %}
+	         </ul>
+
+              {% if formation.anneeCollecte > 2016 %}
+
+                  <h5>Disciplines CNU</h5>
+                  {% for discipline in formation.cnu %}
+                      <li><a href="#">{{discipline.nom}}</a> /</li>
+                  {% endfor %}
+
+                  <h5>Disciplines HCERES</h5>
+                  {% for discipline in formation.hceres %}
+                      <li><a href="#">{{discipline.nom}}</a> /</li>
+                  {% endfor %}
+
+                  <h5>Disciplines SISE</h5>
+                  {% for discipline in formation.sise %}
+                      <li><a href="#">{{discipline.nom}}</a> /</li>
+                  {% endfor %}
+
+              {% endif %}
+					
+                {% if formation.tag | length > 0 %}
+                <h5>Mots clés</h5>
+                <ul class="list-thematique" >
+                    {% for tag in formation.tag %}
+                        <li>{{tag.nom}}</li>
+                    {% endfor %}
+                </ul>
+
+	         {% endif %}
+          </div>
+          {% for loca in formation.localisation %}
+                    <h5>Localisation</h5>
+
+          <img src="https://maps.googleapis.com/maps/api/staticmap?center={{loca.ville}} {{loca.code}}&zoom=14&size=200x200&maptype=roadmap" alt="Carte réalisée avec Google Static Maps API" />    {% endfor %}     
+          </div>
+					</div>
+	              <div class="card-action">
+	              <a href="{{formation.url}}" target="_blank"><i class="material-icons">input</i>Lien vers la formation</a>
+
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                  <a href="{{ path('editeur_formation_edit', { id : formation.id }) }}"><i class="material-icons">mode_edit</i>Modifier les données</a>
+                {% endif %}
+
+	              <div style="float:right;">
+Effectif(s) : {{formation.effectif}}|
+					Année {{formation.annee}}
+
+				</div> <!--end card content -->
+
+        	</div>
+       	</div>
+    </section>
+
+</div>
+    <section id="suggest">
+        <div class="container">
+            <div class="suggest row">
+            <h4>Voir aussi...</h4>
+
+                {% for labo in rebonds_labo %}
+                    <div class="col m4 l4">
+                        <div class="card laboratoire petit" >
+                            <div class="card-content">
+                                <span class="etablissement"><span>{{labo.type}}</span> - {{labo.code}}</span>
+                                <h5><a href="{{ path('labo' ,{"id" : labo.id}) }}">{{labo.nom}}</a></h5>
+                                {# <span> {{labo.etablissement}}</span> #}
+                                <ul class="list-thematique" >
+                                    {% for discipline in labo.discipline|slice(0,3)%}
+                                        <li>{{discipline.nom}}{% if loop.last %}{% else %};{% endif %}</li>
+                                    {% endfor%}
+                                    {# les disciplines #}
+                                </ul>
+                            </div>
+                            <div class="card-action">
+                                <a href="{{labo.lien}}"><i class="material-icons">input</i></a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+                {% for formation in rebonds_formation  %}
+                    <div class="col m4 l4">
+                        <div class="card formation petit" >
+                            <div class="card-content">
+                                <span class="etablissement"><span>{{formation.annee}}</span> - <span>{{ formation.niveau }}</span></span>
+                                <h5><a href="{{ path('formation' , {"id" : formation.id}) }}">{{formation.nom}}</a></h5>
+                                {# <span> {{labo.etablissement}}</span> #}
+                                <ul class="list-thematique" >
+                                    {% for discipline in formation.discipline|slice(0,3)%}
+                                        <li>{{discipline.nom}}</li>
+                                    {% endfor%}
+                                    {# les disciplines #}
+                                </ul>
+                            </div>
+                            <div class="card-action">
+                                <a href="{{formation.url}}"><i class="material-icons">input</i></a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+	
+
+
+{% endblock %}
