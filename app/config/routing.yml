@@ -4,7 +4,6 @@ fos_user:
 app_editeur:
     resource: "@EditeurBundle/Controller/"
     type:     annotation
-    prefix:   /
 
 app_web:
     resource: "@AppBundle/Controller/Site"

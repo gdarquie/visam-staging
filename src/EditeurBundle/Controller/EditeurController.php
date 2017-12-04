@@ -2,29 +2,18 @@
 
 namespace EditeurBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use AppBundle\Entity\Ed;
-use AppBundle\Entity\Etablissement;
-use AppBundle\Entity\Formation;
-use AppBundle\Entity\Labo;
 
 
-/**
- * Editeur controller.
- *
- * @Route("/editeur")
- */
 class EditeurController extends Controller
 {
 
     /**
      * Accueil de l'éditeur
      *
-     * @Route("/", name="editeur")
-     * @Method("GET")
+     * @Route("editeur", name="editeur")
      */
     public function indexAction()
     {
@@ -152,40 +141,11 @@ class EditeurController extends Controller
         ));
     }
 
-    /**
-     * Ancien accueil de l'éditeur
-     *
-     * @Route("/oldaccueil", name="editeur_old")
-     * @Method("GET")
-     */
-    public function oldindexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $etablissements = $em->getRepository('AppBundle:Etablissement')->findAll();
-
-        $query = $em->createQuery(
-            'SELECT f FROM AppBundle:Formation f ORDER BY f.last_update DESC'
-        )->setMaxResults(10);
-        $formations = $query->getResult();
-
-        $query = $em->createQuery(
-            'SELECT l FROM AppBundle:Labo l ORDER BY l.last_update DESC'
-        )->setMaxResults(10);
-        $laboratoires = $query->getResult();
-
-        return $this->render('EditeurBundle:Default:index.html.twig', array(
-            'etablissements' => $etablissements,
-            'formations' => $formations,
-            'laboratoires' => $laboratoires
-        ));
-    }
-
 
     /**
      * Synthèse
      *
-     * @Route("/synthese", name="editeur_synthese")
+     * @Route("editeur/synthese", name="editeur_synthese")
      * @Method("GET")
      */
     public function syntheseAction()
