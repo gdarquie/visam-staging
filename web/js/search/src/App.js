@@ -42,8 +42,8 @@ class SimpleMap extends SearchkitComponent {
 }
 
 
-//const host = "http://visam.interlivre.fr/elastic/visam_elastica"
-const host = "http://localhost:9200/visam_elastica"
+const host = "http://visam.interlivre.fr/elastic/visam_elastica"
+//const host = "http://localhost:9200/visam_elastica"
 const searchkit = new SearchkitManager(host)
 searchkit.translateFunction = (key) => {
   let translations = {
