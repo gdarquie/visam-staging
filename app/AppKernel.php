@@ -20,7 +20,6 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
             new EditeurBundle\EditeurBundle(),
-            new ApiBundle\ApiBundle(),
             new Liuggio\ExcelBundle\LiuggioExcelBundle(),
             new Ensepar\Html2pdfBundle\EnseparHtml2pdfBundle(),
             new FOS\ElasticaBundle\FOSElasticaBundle(),

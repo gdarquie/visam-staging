@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Controller\Web;
+namespace AppBundle\Controller\Site;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -12,7 +12,7 @@ class SearchController extends Controller
 {
     /**
      *
-     * @Route("/", name="search_v2")
+     * @Route("/", name="search")
      */
     public function indexAction()
     {

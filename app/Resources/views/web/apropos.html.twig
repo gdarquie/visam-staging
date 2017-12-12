@@ -21,64 +21,47 @@
 
 {% block body %}
 
-	<section class="container-fluid row" id="apropos">
-
-
+	<section class="container row" id="apropos">
 
 		<div class="col s10 offset-s1 card">
 
-			<h1>A propos</h1>
+            <h1 class="center">Visualiser les compétences en recherche et formation d’HESAM Université</h1>
 
-			<p class="chapeau">La cartographie des compétences est une application web destinée à trouver les informations essentielles concernant la formation et la recherche des
-				<a href="http://www.hesam.eu/blog/2015/06/23/qui-sommes-nous/" target="_blank">douze établissements</a> membres d'heSam.</p>
+            <p class="chapeau">La cartographie d’HESAM est une base de données en ligne qui permet de trouver les informations essentielles concernant la formation et la recherche conduites par les établissements membres de notre communauté d’établissement.</p>
 
-			<h2>Un outil d'exploration</h2>
+            <p>En combinant les données fournies par nos membres et des données issues de sources ouvertes, cet outil propose un ensemble d’informations permettant de décrire et de comprendre les synergies entre les fonctions recherche  (thématiques et axes de recherche, équipement spécifique, établissement porteur, site du laboratoire…) et formation ; thématiques et disciplines d’enseignement,  niveau et type de diplôme, localisation, page Web de la formation …).</p>
 
-			<p>L'<a href="{{ path("search") }}">explorateur</a> permet d'effectuer une recherche parmi les formations et les laboratoires d'heSam. La recherche s'effectue par simple mot clé. Il est possible de trier et de filtrer ses recherches selon un établissement, une thématique, etc. </p>
+            <p>En  indexant toutes nos entités à l’aide des mêmes thématiques et disciplines, cette cartographie accompagne ses utilisateurs dans l’identification des laboratoires de recherche et des formations d’HESAM Université ; elle permet également de visualiser le lien qui existe entre le monde de la recherche et celui de la formation.</p>
 
+            <p>Quelques exemples de questions pour lesquelles cet outil vous sera utile : </p>
+            <li>Quel laboratoire d’heSam pourrait accueillir votre projet de thèse ? Et quelle école doctorale ?</li>
+            <li>HESAM Université propose t’elle des formations dans votre région ?</li>
+            <li>HESAM possède-t-elle des compétences en tourisme pour aider votre collectivité à monter un projet dans ce domaine ?</li>
+            <li>Quels établissements de recherche et/ou de formation d’HESAM travaillent sur le même sujet que vous ?</li>
+            <br>
+            <hr>
 
-			<h2>Que peut-on trouver?</h2>
+            <h2 class="center">Carto HESAM v2 - Liste des personnes travaillant sur le projet & remerciements</h2>
+            <br>
+            <li>Cécile Delay-Artous,  responsable du projet</li>
+            <li>Sandra Ziemele, développeuse web</li>
 
-			<p>L'utilisateur de l'<a href={{ path("search") }}>explorateur</a> accède à la sélection des formations, des laboratoires et des équipements en lien avec le mot clé entré.</p>
+            <h3>Comité de suivi :</h3>
+            <li>Jean-Luc Delpeuch, Président d’HESAM Université</li>
+            <li>Hugues Brunet, Délégué général d’HESAM Université</li>
+            <li>Nathalie Tingry, Directrice du numérique d’HESAM Université</li>
+            <li>Clotilde Ferroud, VP recherche d’HESAM Université - Directrice de la recherche du Cnam</li>
+            <li>Philippe Dedieu, VP numérique d’HESAM Université - Directeur national du numérique du Cnam</li>
+            <li>Nazih Mechbal, VP formation d’HESAM Université – Maître de conférences HDR, Arts et Métiers ParisTech</li>
+            <li>Sylvie Coussegal, Coordinatrice de l’offre de formation du Cnam</li>
 
-			<p>Une description plus générale d'heSam et de ses compétences est également consultable via la page <a href="{{ path('statistiques') }}">"statistiques"</a>.</p>
-			<p> </p>
+            <h3>Prestation de développement et maîtrise d’ouvrage :</h3>
+            <li>Gaétan Darquié</li>
+            <li>Mehdi Bourgeois</li>
 
+            <p>Tous nos remerciements à l’ensemble de l’équipe HESAM ainsi qu’à Sonia Litaëm, et aux équipes administratives des établissements membres, qui ont eu la bienveillance et la patience nécessaires pour répondre à nos sollicitations.</p>
 
-			<h2>Mode d'emploi</h2>
-
-			<p>La page <a href="">mode d'emploi</a> propose plusieurs courtes vidéos visant à maîtriser toutes les subtilités de l'explorateur. </p>
-
-			<h2>L'équipe</h2>
-
-			<h3>heSam Université</h3>
-
-			<li>Laurent Carraro, Jean-Luc Delpeuch, Présidents d’heSam Université</li>
-			<li>Hugues Brunet, Délégué Général d’heSam Université</li>
-			<li>Sonia Litaïem, Responsable du projet</li>
-			<li>Cécile Delay, chargée de projet, collecte des données</li>
-			<li>Sandra Ziemele, développeuse web</li>
-
-			<h3>Comité de suivi </h3>
-
-			<li>Clotilde Ferroud, CNAM</li>
-			<li>Ariane Fréhel, CNAM</li>
-			<li>Caroline Moricot, Université Paris 1 Panthéon-Sorbonne</li>
-			<li>Soraya Messai-Bahri, Université Paris 1 Panthéon-Sorbonne</li>
-			<li>Bertrand Wigniolle, Université Paris 1 Panthéon Sorbonne</li>
-
-			<h3>Développement, maîtrise d’ouvrage</h3>
-			<li>Gaétan Darquié</li>
-			<li>Mehdi Bourgeois</li>
-			<li>Pierre Châtel-Innocenti, Shiki Services</li>
-			<li>Sandra Ziemele</li>
-
-			<h3>Remerciements</h3>
-
-			<p>Stéphanie Mermet, Nicolas Houssier, Mathilde Boulay, Anand Balaraman, Manon Fraisse, Philippe Dedieu et toutes les équipes administratives des établissements membres qui ont eu la bienveillance et la patience nécessaires pour répondre à nos sollicitations.</p>
-
-		</div>
-
+        </div>
 
 	</section>
 
