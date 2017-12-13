@@ -224,7 +224,6 @@ class App extends Component {
             <RefinementListFilter size="12" id="hesamette" title="Disciplines" field="hesamette" operator="OR"/>
             <RefinementListFilter listComponent={PieFilterList} id="Année" title="Annee" field="annee" operator="OR"/>
             <DynamicRangeFilter field="effectif" id="effectif" title="Effectif"/>
-            <GeoMap/>
 
 
           </SideBar>
