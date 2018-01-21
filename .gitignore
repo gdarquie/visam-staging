@@ -19,3 +19,8 @@
 /uploads/*
 node_modules
 .idea/*
+.sass-cache/
+/.sass-cache/
+.sass-cache/*/
+/.sass-cache/*/
+/web/js/search/src/.sass-cache/*

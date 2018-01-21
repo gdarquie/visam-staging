@@ -42,14 +42,12 @@ class SimpleMap extends SearchkitComponent {
 }
 
 
-const host = "http://staging.visam.interlivre.fr/elastic/visam_elastica"
-//const host = "http://localhost:9200/visam_elastica"
+//const host = "http://staging.visam.interlivre.fr/elastic/visam_elastica"
+const host = "http://localhost:9200/visam_elastica"
 const searchkit = new SearchkitManager(host)
 searchkit.translateFunction = (key) => {
   let translations = {
     "reset.clear_all": "Supprimer les filtres",
-    "pagination.previous":"Page précédente",
-    "pagination.next":"Page suivante",
     "facets.view_more": "Voir plus",
     "facets.view_less":"Voir moins",
     "facets.view_all" : "Voir tous",
@@ -65,113 +63,10 @@ searchkit.translateFunction = (key) => {
   return translations[key]
 }
 
-
-const HitsGridItem = (props)=> {
-  const {bemBlocks, result} = props
-  const source:any = extend({}, result._source, result.highlight)
-  let url = "http://visam.interlivre.fr/" + result._type + "/" + result._id
-  let type = result._type;
-  return (
-    <div className={type} >
-    <div className={bemBlocks.item().mix(bemBlocks.container("_type card"))} data-qa="hit">
-      <div className={bemBlocks.item(" notice")}>
-          <h4 data-qa="_type" dangerouslySetInnerHTML={{__html:result._type}}></h4>
-        <a href={url} target="_blank">
-          <h1 data-qa="nom" className={bemBlocks.item("nom")} dangerouslySetInnerHTML={{__html:source.nom}}></h1>
-        </a>
-          <h3 data-qa="etablissement" className={bemBlocks.item("etablissement etablissement-name")} dangerouslySetInnerHTML={{__html:source.etablissement}}>
-          </h3>
-          <div data-qa="discipline" className={bemBlocks.item("discipline")} dangerouslySetInnerHTML={{__html:source.discipline}}>
-          </div>
-          <div data-qa="hesamette" className={bemBlocks.item("hesamette")} dangerouslySetInnerHTML={{__html:source.hesamette}}></div>
-          <br/>
-        {/* Effectifs : Formation */}
-          {source.niveau &&
-            <div>
-            <strong>
-              Niveau: 
-            </strong>
-              <span>
-                 {source.niveau}
-              </span>
-            </div>
-          }
-        {/* Effectifs : Formation */}
-          {source.annee > 0 &&
-            <div>
-            <strong>
-              Année:
-            </strong>
-              <span>
-                 {source.annee}
-              </span>
-            </div>
-          }
-        {/* Effectifs : Labo & Formation */}
-          {source.effectif > 0 &&
-            <div>
-            <strong>
-              Effectif(s):
-            </strong>
-              <span>
-                 {source.effectif}
-              </span>
-            </div>
-          }
-          {/* Effectifs : Labo */}
-          {source.mailContact &&
-            <div>
-            <strong>
-              Mail :
-            </strong>
-              <span>
-                 {source.mailContact}
-              </span>
-            </div>
-          }
-          {/* Sigle : Labo */}
-          {source.sigle &&
-            <div>
-            <strong>
-              Sigle :
-            </strong>
-              <span>
-                 {source.sigle}
-              </span>
-            </div>
-          }
-          {/* Code : Labo */}
-          {source.code &&
-            <div>
-            <strong>
-              Code :
-            </strong>
-              <span>
-                 {source.code}
-              </span>
-            </div>
-          }
-          <br/>
-        <div className={bemBlocks.item(" card-action")}>
-          {/* Effectifs : Labo */}
-          {source.lien &&
-            <a href={source.lien} target="_blank">Lien vers le laboratoire</a>
-          }
-          {/* Effectifs : Formation */}
-          {source.url &&
-            <a href={source.url} target="_blank">Lien vers la formation</a>
-          }
-          </div>
-      </div>
-      </div>
-    </div>
-  )
-}
-
 const HitsListItem = (props)=> {
-  const {bemBlocks, result} = props
-  const source:any = extend({}, result._source, result.highlight)
-  let url ="/" + result._type + "/" + result._id
+  const {bemBlocks, result} = props;
+  const source:any = extend({}, result._source, result.highlight);
+  let url ="/" + result._type + "/" + result._id;
   let imagepath = "/img/"+ result._type + ".svg";
   let type = result._type;
   return (
@@ -184,6 +79,11 @@ const HitsListItem = (props)=> {
           {source.niveau &&
               <span>
                  - {source.niveau}
+              </span>
+          }
+          {source.sigle &&
+              <span>
+                 - <span data-qa="_sigle" dangerouslySetInnerHTML={{__html:source.sigle}}></span>
               </span>
           }
         </div>
@@ -206,26 +106,24 @@ const HitsListItem = (props)=> {
   )
 }
 
-
+const highlightCustom = {"fields" : {"_all" : { "pre_tags" : ["<em>"], "post_tags" : ["</em>"] }, "nom" : {"force_source" : true}, "hesamette" : {"force_source" : true},"sigle" : {} }};
+const multiMatch = {"fields": [ "nom", "message" ]};
 class App extends Component {
   render() {
     return (
       <SearchkitProvider searchkit={searchkit}>
         <Layout>
           <TopBar>
-            <SearchBox placeholder="Rechercher" autofocus={true} searchOnChange={true} prefixQueryFields={["nom^2","description","discipline", "hesamette"]}/>
+            <SearchBox placeholder="Rechercher" autofocus={true} searchOnChange={true}  prefixQueryFields={["nom^5", "_all"]}/>
           </TopBar>
 
         <LayoutBody>
 
           <SideBar>
-            <RefinementListFilter id="_type" title="Type" field="_type" operator="OR" listComponent={ItemHistogramList}/>
+            <RefinementListFilter id="_type" title="Type" field="_type" operator="OR" listComponent={ItemList}/>
             <RefinementListFilter id="etablissement" title="Établissements" field="etablissement" operator="OR" listComponent={ItemList}/>
             <RefinementListFilter size="12" id="hesamette" title="Disciplines" field="hesamette" operator="OR"/>
-            <RefinementListFilter listComponent={PieFilterList} id="Année" title="Annee" field="annee" operator="OR"/>
-            <DynamicRangeFilter field="effectif" id="effectif" title="Effectif"/>
-
-
+            <RefinementListFilter size="12" id="geo" title="geo" field="geo" operator="OR"/>
           </SideBar>
 
           <LayoutResults>
@@ -233,7 +131,6 @@ class App extends Component {
             <ActionBar>
               <ActionBarRow>
                 <HitsStats/>
-                <ViewSwitcherToggle/>
                 <SortingSelector options={[
                   {label:"Pertinence", field:"_score", order:"desc"},
                   {label:"Par année", field:"annee", order:"desc"}
@@ -246,7 +143,8 @@ class App extends Component {
             </ActionBar>
 
             <ViewSwitcherHits
-                hitsPerPage={12} highlightFields={["nom","description"]}
+                hitsPerPage={12}
+                customHighlight={highlightCustom}
                 sourceFilter={["nom", "description", "niveau", "type","discipline","hesamette","etablissement",'geo', 'annee', 'effectif', 'niveau', 'url', 'lien', 'mailContact', 'sigle','code']}
                 hitComponents={[
                   {key:"list", title:"Liste", itemComponent:HitsListItem, defaultOption:true},
