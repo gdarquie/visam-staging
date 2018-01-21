@@ -122,6 +122,10 @@ header.etablissement h1 {
   color:white;
 }
 
+.etabissement_description {
+  font-size: 1.4rem;
+}
+
 .card a {
   color: black;
 }

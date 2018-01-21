@@ -11,7 +11,7 @@
 
 	<div class="row background-white">
 		<div class="col s12 m12">
-			  <p class="flow-text">{{etablissement.description}}</p>
+			  <p class="flow-text etabissement_description">{{etablissement.description}}</p>
 		</div>
 
 		<div class="col s12 m4">
@@ -56,7 +56,7 @@
 		      {% for formation in formations|slice(0,3) %}
                     <div class="col m4 l4">
                         <div class="formation notice petit" >
-                            <div class="type"><img src="/img/hat.svg" alt="labo"><h4>Formation</h4></div>
+                            <div class="type"><img src="/img/formation.svg" alt="labo"><h4>Formation</h4></div>
                             <h2><a href="{{ path('formation' , {"id" : formation.id}) }}">{{formation.nom}}</a></h2>
                                {% for etablissement in formation.etablissement %}
                             <h3>{{etablissement.nom}}</h3>

@@ -18,17 +18,17 @@
         <h4>+ d'infos</h4>
         <ul>
           {% if labo.type %}
-          <li><span>Type :</span> {{labo.type}}</li>
+          <li><span>Label de l'unité :</span>{{labo.type}} {{labo.objetId}}</li>
           {% endif %}
           {% if labo.sigle %}
           <li><span>Sigle :</span> {{labo.sigle}}</li>
           {% endif %}          
           {% if labo.objetId %}
-          <li><span>Code :</span> {{labo.objetId}}</li>
+         <!--  <li><span>Code :</span> {{labo.objetId}}</li> -->
           {% endif %}
           {% if labo.uai %}
-          <li><span>Code UAI :</span> {{labo.uai}}</li>
-          {% endif %}
+<!--           <li><span>Code UAI :</span> {{labo.uai}}</li>
+ -->          {% endif %}
           {% if labo.anneeCollecte %}
           <li><span>Année de collecte :</span> {{labo.anneeCollecte}}</li>
           {% endif %}
@@ -92,7 +92,7 @@
 
       {% if labo.lien %}
       <section>
-      <h5><i class="material-icons dp48">label</i> Lien du laboratoire</h5>
+      <h5><i class="material-icons dp48">label</i> Page web du laboratoire</h5>
       <p>
       <a href="{{labo.lien}}" target="_blank">{{labo.lien}}</a></p>
       </section>
@@ -164,7 +164,7 @@
                 {% for formation in rebonds_formation  %}
                     <div class="col m4 l4">
                         <div class="formation notice petit" >
-                            <div class="type"><img src="/img/hat.svg" alt="labo"><h4>Formation</h4></div>
+                            <div class="type"><img src="/img/formation.svg" alt="labo"><h4>Formation</h4></div>
                             <h2><a href="{{ path('formation' , {"id" : formation.id}) }}">{{formation.nom}}</a></h2>
                                {% for etablissement in formation.etablissement %}
                             <h3>{{etablissement.nom}}</h3>

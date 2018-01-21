@@ -5,7 +5,7 @@
 <div class="container notice formation">
     <div class="row background">
     <div class="col m8">
-      <div class="type"><img src="/img/hat.svg" alt="labo"><h4>Formation</h4></div>
+      <div class="type"><img src="/img/formation.svg" alt="Formation"><h4>Formation</h4></div>
       <h1>{{formation.nom}}</h1>
             {% for etablissement in formation.etablissement %}
         <h2>{{etablissement.nom}}</h2>
@@ -33,8 +33,8 @@
           <li>Année de collecte : {{formation.anneeCollecte}}</li>
           {% endif %}
           {% if formation.objetId %}
-          <li>Code : {{formation.objetId}}</li>
-          {% endif %}
+<!--           <li>Code : {{formation.objetId}}</li>
+ -->          {% endif %}
 
         </ul>
       </div>
@@ -108,7 +108,7 @@
 
       {% if formation.url %}
       <section>
-      <h5><i class="material-icons dp48">label</i> Site web de la formation</h5>
+      <h5><i class="material-icons dp48">label</i> Page web de la formation</h5>
       <p>
       <a href="{{formation.url}}" target="_blank">{{formation.url}}</a>
       </p>
@@ -178,7 +178,7 @@
                 {% for formation in rebonds_formation  %}
                     <div class="col m4 l4">
                         <div class="formation notice petit" >
-                            <div class="type"><img src="/img/hat.svg" alt="labo"><h4>Formation</h4></div>
+                            <div class="type"><img src="/img/formation.svg" alt="labo"><h4>Formation</h4></div>
                             <h2><a href="{{ path('formation' , {"id" : formation.id}) }}">{{formation.nom}}</a></h2>
                                {% for etablissement in formation.etablissement %}
                             <h3>{{etablissement.nom}}</h3>
