@@ -32,20 +32,32 @@ h3 {
 
 @media print {
   .sk-layout__filters, .sk-layout__top-bar, .sk-top-bar__content, form, input, .sk-search-box__icon, .sk-toggle-option, .sk-select, .sk-reset-filters  {
-    display: none;
+    display: none !important;
   }
   .sk-layout__top-bar {
-    box-shadow:none;
+    box-shadow:none !important;;
   }
-  h1 {
-    font-size: 1em;
+  .notice h1, .notice h2, .notice h3 {
+    margin-top:0.5rem !important;
+    margin-bottom:0.5rem !important;
+  }
+  .notice.resultat h1 {
+    font-size: 1rem !important;
   }
   h2 {
-    font-size: 0.8em;
+    font-size: 0.8rem !important;;
   }
   h3 {
-    font-size: 0.6em;
-
+    font-size: 0.6rem !important;;
+  }
+  .sk-hits-list-hit__hesamette {
+    font-size: 0.6rem !important;
+  }
+  .sk-hits-list-hit__.type h4, .sk-hits-list-hit__.type span {
+    font-size: 0.6rem !important;
+  }
+  .notice.petit {
+    padding:0 !important;
   }
 
 }
@@ -63,6 +75,7 @@ h3 {
 }
 .sk-item-list-option__text {
   font-family:HKGroteskRegular;
+  text-transform:capitalize;
 }
 .sk-panel__header {
   font-size:1.4rem;
@@ -97,7 +110,7 @@ h3 {
    color:    #909;
 }
 
-.sk-toggle-option {
+.sk-toggle-option .sk-toggle__item .is-active {
   display:none;
 }
 
