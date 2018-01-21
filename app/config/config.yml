@@ -206,16 +206,34 @@ fos_elastica:
                         french_stop:
                             type: stop
                             stopwords:  _french_
+                        worddelimiter :
+                            type: word_delimiter
+                        stopwords:
+                            type:      stop
+                            stopwords: [_french_]
+                            ignore_case : true
+                        snowball:
+                            type:     snowball
+                            language: French
+                    tokenizer:
+                      nGram:
+                        type:     nGram
+                        min_gram: 2
+                        max_gram: 20
                     analyzer:
                         custom_french_analyzer:
                             tokenizer: letter
-                            filter: ["asciifolding", "lowercase", "french_stem", "elision", "stop"]
+                            filter: ["asciifolding", "lowercase", "french_stemmer", "elision", "stop"]
                         french_heavy:
                             tokenizer: standard
                             filter : ["french_elision", "french_stop", "french_synonym","french_stemmer"]
                         french_light:
                             tokenizer: standard
                             filter: ["french_elision", "french_stemmer"]
+                        custom_analyzer :
+                            type     :    custom
+                            tokenizer:    nGram
+                            filter   :    [stopwords, asciifolding ,lowercase, snowball, elision, worddelimiter]                            
             types:
                 labo:
                     mappings:
