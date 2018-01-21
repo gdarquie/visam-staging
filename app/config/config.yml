@@ -258,6 +258,7 @@ fos_elastica:
                             type: float
                         geo:
                             type: geo_point
+
                     persistence:
                      # the driver can be orm, mongodb, phpcr or propel
                      # listener and finder are not supported by
@@ -281,7 +282,9 @@ fos_elastica:
                         effectif:
                             type: float
                         niveau:
-                            type: string
+                            type: keyword
+                        typeDiplome:
+                            type: keyword
                         url:
                             type: string
                         geo:

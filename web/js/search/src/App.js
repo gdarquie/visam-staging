@@ -123,7 +123,9 @@ class App extends Component {
             <RefinementListFilter id="_type" title="Type" field="_type" operator="OR" listComponent={ItemList}/>
             <RefinementListFilter id="etablissement" title="Établissements" field="etablissement" operator="OR" listComponent={ItemList}/>
             <RefinementListFilter size="12" id="hesamette" title="Disciplines" field="hesamette" operator="OR"/>
-            <RefinementListFilter size="12" id="geo" title="geo" field="geo" operator="OR"/>
+            <RefinementListFilter size="12" id="niveau" title="Niveau" field="niveau" orderKey="_term" operator="OR"/>
+            <RefinementListFilter size="12" id="typeDiplome" title="Type de Diplôme" field="typeDiplome" exclude={["","Sans objet","Sans objet "]} orderKey="_term" operator="OR"/>
+            
           </SideBar>
 
           <LayoutResults>
